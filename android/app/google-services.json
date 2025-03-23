@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "936165939091",
+    "project_id": "leukocare-6a1ec",
+    "storage_bucket": "leukocare-6a1ec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936165939091:android:ff0e8d5d94d663907a3a66",
+        "android_client_info": {
+          "package_name": "com.example.leuko_care"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqNwhbyvjPZOW4tuNQjYCMzmqC20uEjKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
