@@ -1,16 +1,27 @@
 # leuko_care
 
-A new Flutter project.
+## System Design 🎨
 
-## Getting Started
+![system design](https://github.com/user-attachments/assets/58875a89-7f3e-41f4-b723-fd22a3d4ecb2)
 
-This project is a starting point for a Flutter application.
+### Commands we used 
 
-A few resources to get you started if this is your first Flutter project:
+1. To run my project structure script, use the following command: ✍️
+```bash
+dart run structure_project.dart
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. To run flutter native splash ( if it outside pubspec.yaml ), use the following command: ✍️
+```bash
+dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. To run flutter native splash ( if it inside pubspec.yaml ), use the following command: ✍️
+```bash
+dart run flutter_native_splash:create
+```
+
+4. If you are using models with the `@JsonSerializable()` or `@Freezed()` or `@RestApi()` annotation, run the following command to generate the necessary code:✍️
+```bash
+   flutter pub run build_runner build --delete-conflicting-outputs
+```
