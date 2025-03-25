@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:leuko_care/feature/login/ui/views/admin_login_screen.dart';
 import 'core/resourses/colors_manager.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/routes.dart';
@@ -12,7 +13,7 @@ class LeukoCare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(MediaQuery.of(context).size.height.h, MediaQuery.of(context).size.width.w),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       child: MaterialApp(
         title: 'Name App',
@@ -21,7 +22,7 @@ class LeukoCare extends StatelessWidget {
           scaffoldBackgroundColor: ColorsManager.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: Routes.adminLoginScreen,
         onGenerateRoute: appRouter.generateRoute,
       )
     );

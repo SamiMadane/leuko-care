@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/feature/login/logic/cubit/admin_login_cubit.dart';
 
-import '../../feature/login/ui/views/login_screen.dart';
-import '../../feature/onboarding/ui/views/onboarding_screen.dart';
-
-
+import '../../feature/login/ui/views/admin_login_screen.dart';
+import '../../feature/home/ui/views/admin_home_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -12,13 +13,15 @@ class AppRouter {
     final arguments = settings.arguments;
 
     switch (settings.name) {
-      case Routes.onBoardingScreen:
+      case Routes.adminHomeScreen:
+        return MaterialPageRoute(builder: (_) => const AdminHomeScreen());
+      case Routes.adminLoginScreen:
         return MaterialPageRoute(
-          builder: (_) => const onBoardingScreen(),
-        );
-      case Routes.loginScreen:
-        return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder:
+              (_) => BlocProvider(
+                create: (context) => getIt<AdminLoginCubit>(),
+                child: const AdminLoginScreen(),
+              ),
         );
       default:
         return null;
