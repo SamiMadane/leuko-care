@@ -59,7 +59,9 @@ class WidthManager {
 }
 
 class HeightManager {
+  static double h0_5 = SizeUtil.setHeight(0.5);
   static double h1 = SizeUtil.setHeight(1.0);
+  static double h1_5 = SizeUtil.setHeight(1.5);
   static double h2 = SizeUtil.setHeight(2.0);
   static double h4 = SizeUtil.setHeight(4.0);
   static double h6 = SizeUtil.setHeight(6.0);

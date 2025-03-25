@@ -1,16 +1,11 @@
-// // GetIt => class dependency injection (files depend on each other).
-// import 'package:dio/dio.dart';
-// import 'package:get_it/get_it.dart';
-// import 'package:leuko_care/core/networking/api_service.dart';
-// import 'package:leuko_care/core/networking/dio_factory.dart';
+// GetIt => class dependency injection (files depend on each other).
+import 'package:get_it/get_it.dart';
+import 'package:leuko_care/feature/login/data/repository/admin_login_repo.dart';
+import 'package:leuko_care/feature/login/logic/cubit/admin_login_cubit.dart';
 
-// final getIt = GetIt.instance;
+final getIt = GetIt.instance;
 
-// Future<void> setupGetIt() async {
-//   // Dio & ApiService
-//   Dio dio = DioFactory.getDio();
-//   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
-
-//   // getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
-//   // getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
-// }
+Future<void> setupGetIt() async {
+  getIt.registerLazySingleton(() => AdminLoginRepository());
+  getIt.registerFactory(() => AdminLoginCubit(getIt<AdminLoginRepository>()));
+}
