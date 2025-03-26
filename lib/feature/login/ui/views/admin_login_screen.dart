@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leuko_care/core/helpers/app_regex.dart';
-import 'package:leuko_care/core/resourses/assets_manager.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
-import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 import 'package:leuko_care/feature/login/logic/cubit/admin_login_cubit.dart';
 import 'package:leuko_care/feature/login/ui/widgets/admin_login_bloc_listener.dart';
 import 'package:leuko_care/feature/login/ui/widgets/email_and_password.dart';
@@ -15,7 +12,7 @@ import 'package:leuko_care/feature/login/ui/widgets/google_auth.dart';
 import 'package:leuko_care/feature/login/ui/widgets/terms_and_conditions_text.dart';
 
 class AdminLoginScreen extends StatelessWidget {
-  const AdminLoginScreen({super.key});
+  const AdminLoginScreen({super.key, required String userType});
 
   @override
   Widget build(BuildContext context) {
