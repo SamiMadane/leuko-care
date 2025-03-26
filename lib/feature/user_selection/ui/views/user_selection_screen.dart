@@ -18,7 +18,7 @@ class UserSelectionScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: WidthManager.w20,
-          vertical: HeightManager.h20,
+          vertical: HeightManager.h40,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -44,7 +44,7 @@ class UserSelectionScreen extends StatelessWidget {
               label: 'ADMIN',
               onTap: () {
                 // انتقل إلى صفحة تسجيل دخول الأدمن
-                context.pushNamed(Routes.adminLoginScreen, arguments: 'admin');
+                context.pushNamed(Routes.loginScreen, arguments: 'admin');
               },
               imageHeight: HeightManager.h130,
               imageWidth: WidthManager.w130,
@@ -58,7 +58,7 @@ class UserSelectionScreen extends StatelessWidget {
               label: "DOCTOR",
               onTap: () {
                 // انتقل إلى شاشة تسجيل الدخول للطبيب
-                context.pushNamed(Routes.adminLoginScreen, arguments: 'doctor');
+                context.pushNamed(Routes.loginScreen, arguments: 'doctor');
               },
             ),
             SizedBox(height: HeightManager.h30),
@@ -69,7 +69,7 @@ class UserSelectionScreen extends StatelessWidget {
               onTap: () {
                 // انتقل إلى شاشة تسجيل الدخول للمريض
                 context.pushNamed(
-                  Routes.adminLoginScreen,
+                  Routes.loginScreen,
                   arguments: 'patient'
             );
               },

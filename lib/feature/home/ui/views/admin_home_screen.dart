@@ -22,12 +22,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () {
-              setState(() async{
-                FirebaseAuth.instance.signOut();
+            onPressed: () async{
+              FirebaseAuth.instance.signOut();
                 await _googleSignIn.signOut();
-                context.pushNamedAndRemoveUntil(Routes.adminLoginScreen, predicate: (route) => false,);
-              });
+                context.pushNamedAndRemoveUntil(Routes.userSelectionScreen, predicate: (route) => false,);
             },
           ),
         ],

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
+import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
-import 'package:leuko_care/feature/login/logic/cubit/admin_login_cubit.dart';
+import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
 import 'package:leuko_care/feature/login/ui/widgets/password_validations.dart';
 
 class EmailAndPassword extends StatefulWidget {
@@ -25,7 +26,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   void initState() {
     super.initState();
-    passwordController = context.read<AdminLoginCubit>().passwordController;
+    passwordController = context.read<LoginCubit>().passwordController;
     setupPasswordControllerListener();
   }
 
@@ -46,11 +47,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<AdminLoginCubit>().formKey,
+      key: context.read<LoginCubit>().formKey,
       child: Column(
         children: [
           AppTextFormField(
-            controller: context.read<AdminLoginCubit>().emailController,
+            controller: context.read<LoginCubit>().emailController,
             hintText: 'Email',
             validator: (value) {
               if (value == null ||
@@ -62,8 +63,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           ),
           SizedBox(height: HeightManager.h18),
           AppTextFormField(
-            controller: context.read<AdminLoginCubit>().passwordController,
+            controller: context.read<LoginCubit>().passwordController,
             hintText: 'Password',
+            backgroundColor: ColorsManager.moreLightGray,
             isObscureText: isObscureText,
             suffixIcon: GestureDetector(
               onTap: () {
