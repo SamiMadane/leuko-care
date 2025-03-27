@@ -25,15 +25,16 @@ class LoginRepository {
       );
       User? user = userCredential.user;
       if (user != null) {
+        bool isVerified = await checkAndUpdateEmailVerification(user);
+
         // التحقق من البريد الإلكتروني
-        if (user.emailVerified) {
+        if (isVerified) {
           // Get user data from Firestore
           DocumentSnapshot userDoc = await _firestoreService.getUserDocument(
             user.uid,
           );
           if (!userDoc.exists) {
             await FirebaseAuth.instance.signOut(); // تسجيل خروج المستخدم
-            await GoogleSignIn().signOut();
             return OperationResult.failure("This user is not registered on our servers.");
           }
 
@@ -59,6 +60,19 @@ class LoginRepository {
       );
     }
   }
+
+
+  Future<bool> checkAndUpdateEmailVerification(User user) async {
+  DocumentSnapshot userDoc = await _firestoreService.getUserDocument(user.uid);
+  bool storedVerificationStatus = userDoc['emailVerified'] ?? false;
+
+  // تحديث الحالة فقط إذا كانت مختلفة
+  if (storedVerificationStatus != user.emailVerified) {
+    await _firestoreService.updateEmailVerificationStatus(user.uid, user.emailVerified);
+  }
+
+  return user.emailVerified;
+}
 
   Future<OperationResult<User?>> signInWithGoogle(String userType) async {
     try {
@@ -130,4 +144,5 @@ class LoginRepository {
       );
     }
   }
+
 }

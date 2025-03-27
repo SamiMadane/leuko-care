@@ -5,11 +5,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class FirestoreService {
-  Future<void> createUserDocument(User user, String userType, {String? name, String? phone, int? age}) async {
+  Future<void> createUserDocument(
+    User user,
+    String userType, {
+    String? name,
+    String? phone,
+    int? age,
+  }) async {
     try {
       Map<String, dynamic> userData = {
         'email': user.email,
         'userType': userType,
+        'emailVerified': user.emailVerified,
       };
 
       // إضافة بيانات المستخدم بناءً على نوعه
@@ -28,7 +35,22 @@ class FirestoreService {
       print("Error creating user document: $e");
     }
   }
-    Future<DocumentSnapshot> getUserDocument(String userId) async {
+
+  Future<DocumentSnapshot> getUserDocument(String userId) async {
     return await _firestore.collection("users").doc(userId).get();
+  }
+
+  Future<void> updateEmailVerificationStatus(
+    String userId,
+    bool isVerified,
+  ) async {
+    try {
+      await _firestore.collection("users").doc(userId).update({
+        'emailVerified': isVerified,
+      });
+      print("Email verification status updated.");
+    } catch (e) {
+      print("Error updating email verification status: $e");
+    }
   }
 }
