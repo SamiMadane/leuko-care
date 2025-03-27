@@ -47,6 +47,7 @@ class WidthManager {
   static double w32 = SizeUtil.setWidth(32.0);
   static double w36 = SizeUtil.setWidth(36.0);
   static double w40 = SizeUtil.setWidth(40.0);
+  static double w42 = SizeUtil.setWidth(42.0);
   static double w48 = SizeUtil.setWidth(48.0);
   static double w49 = SizeUtil.setWidth(49.0);
   static double w50 = SizeUtil.setWidth(50.0);
@@ -68,10 +69,13 @@ class HeightManager {
   static double hm5 = SizeUtil.setHeight(-5.0);
   static double hm4 = SizeUtil.setHeight(-4.0);
   static double h0_5 = SizeUtil.setHeight(0.5);
+  static double h0 = SizeUtil.setHeight(0.0);
   static double h1 = SizeUtil.setHeight(1.0);
+  static double h1_3 = SizeUtil.setHeight(1.3);
   static double h1_5 = SizeUtil.setHeight(1.5);
   static double h2 = SizeUtil.setHeight(2.0);
   static double h4 = SizeUtil.setHeight(4.0);
+  static double h5 = SizeUtil.setHeight(5.0);
   static double h6 = SizeUtil.setHeight(6.0);
   static double h8 = SizeUtil.setHeight(8.0);
   static double h10 = SizeUtil.setHeight(10.0);
@@ -89,6 +93,7 @@ class HeightManager {
   static double h36 = SizeUtil.setHeight(36.0);
   static double h38 = SizeUtil.setHeight(38.0);
   static double h40 = SizeUtil.setHeight(40.0);
+  static double h42 = SizeUtil.setHeight(42.0);
   static double h44 = SizeUtil.setHeight(44.0);
   static double h46 = SizeUtil.setHeight(46.0);
   static double h48 = SizeUtil.setHeight(48.0);
@@ -102,6 +107,8 @@ class HeightManager {
   static double h110 = SizeUtil.setHeight(110.0);
   static double h120 = SizeUtil.setHeight(120.0);
   static double h130 = SizeUtil.setHeight(130.0);
+  static double h165 = SizeUtil.setHeight(165.0);
+  static double h195 = SizeUtil.setHeight(195.0);
   static double h200 = SizeUtil.setHeight(200.0);
   static double h210 = SizeUtil.setHeight(210.0);
   static double h375 = SizeUtil.setHeight(375.0);

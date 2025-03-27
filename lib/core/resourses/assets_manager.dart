@@ -9,9 +9,15 @@ class AssetsManager {
   static const String paitent = '$imagesPath/paitent.png';
   static const String blood = '$imagesPath/blood.png';
   static const String login = '$imagesPath/login.png';
+  static const String homeBluePattern = '$imagesPath/home_blue_pattern.png';
+  static const String homeDoctor = '$imagesPath/home_doctor.png';
 
+  
 
   // svg
+  static const String generalSpeciality = '$svgsPath/general_speciality.svg';
+  static const String notifications = '$svgsPath/notifications.svg';
+
 
 
 }

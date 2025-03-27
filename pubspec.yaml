@@ -72,6 +72,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
    #A build system for Dart code generation and modular compilation
   build_runner: ^2.4.6
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
