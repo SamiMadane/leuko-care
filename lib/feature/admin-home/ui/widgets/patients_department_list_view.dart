@@ -22,7 +22,7 @@ class PatientsDepartmentListView extends StatelessWidget {
                   child: Image.network(
                     width: WidthManager.w110,
                     height: HeightManager.h120,
-                    'https://static.wikia.nocookie.net/five-world-war/images/6/64/Hisoka.jpg/revision/latest?cb=20190313114050',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWjwYSYjlzyrnNwk7mYkNNj2rm04BVlGlQuw&s',
                     fit: BoxFit.cover,
                   ),
                 ),
