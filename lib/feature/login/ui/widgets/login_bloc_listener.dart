@@ -5,31 +5,31 @@ import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-import 'package:leuko_care/feature/login/logic/cubit/admin_login_cubit.dart';
-import 'package:leuko_care/feature/login/logic/cubit/admin_login_state.dart';
+import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
+import 'package:leuko_care/feature/login/logic/cubit/login_state.dart';
 
-class AdminLoginBlocListener extends StatelessWidget {
-  const AdminLoginBlocListener({super.key});
+class LoginBlocListener extends StatelessWidget {
+  const LoginBlocListener({super.key});
 
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AdminLoginCubit, AdminLoginState>(
+    return BlocListener<LoginCubit, LoginState>(
       listenWhen:
           (previous, current) =>
-              current is AdminLoginLoading ||
-              current is AdminLoginSuccess ||
-              current is AdminLoginError,
+              current is LoginLoading ||
+              current is LoginSuccess ||
+              current is LoginError,
       listener: (context, state) {
         state.whenOrNull(
-          adminLoginLoading: () {
+          loginLoading: () {
             setUpLoadingState(context);
           },
-          adminLoginSuccess: (user) {
+          loginSuccess: (user) {
             context.pop();
             context.pushNamed(Routes.adminHomeScreen);
           },
-          adminLoginError: (error) {
+          loginError: (error) {
             context.pop();
             print ('===================== $error');
             setUpErrorState(context, error);

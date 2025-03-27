@@ -5,10 +5,11 @@ import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
-import 'package:leuko_care/feature/login/logic/cubit/admin_login_cubit.dart';
+import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
 
 class GoogleAuth extends StatelessWidget {
-  const GoogleAuth({super.key});
+  final String userType;
+  const GoogleAuth({super.key, required this.userType});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,7 @@ class GoogleAuth extends StatelessWidget {
             ),
           ),
           onTap: (){
-            context.read<AdminLoginCubit>().signInWithGoogle();
+            context.read<LoginCubit>().signInWithGoogle(userType);
           },
         ),
       ],
