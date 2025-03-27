@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resourses/assets_manager.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
@@ -19,10 +20,10 @@ class PatientsDepartmentListView extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
-                  child: Image.network(
+                  child: Image.asset(
+                    AssetsManager.paitent,
                     width: WidthManager.w110,
                     height: HeightManager.h120,
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWjwYSYjlzyrnNwk7mYkNNj2rm04BVlGlQuw&s',
                     fit: BoxFit.cover,
                   ),
                 ),
