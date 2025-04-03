@@ -1,0 +1,99 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
+import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+
+class DoctorCubit extends Cubit<DoctorState> {
+  final DoctorRepository _repository;
+  StreamSubscription? _doctorsSubscription;
+  String appName = 'sami';
+
+  DoctorCubit(this._repository) : super(const DoctorState.doctorStateInitial());
+
+  // ✅ متابعة التحديثات مباشرة من Firestore
+  void getDoctorsStream() {
+    emit(GetDoctorStateLoading());
+    _doctorsSubscription?.cancel(); // إلغاء أي استماع قديم قبل بدء الجديد
+    _doctorsSubscription = _repository.getDoctorsStream().listen(
+      (doctors) {
+        emit(
+          GetDoctorStateSuccess(doctors),
+        ); // 🔹 تحديث الحالة فورًا عند أي تغيير
+      },
+      onError: (error) {
+        emit(GetDoctorStateError(error.toString()));
+      },
+    );
+  }
+
+  // إضافة طبيب
+  Future<void> addDoctor(DoctorModel doctor, String password) async {
+    emit(AddDoctorStateLoading());
+    try {
+      String imageUrl = doctor.profileImage;
+      if (doctor.profileImage.isEmpty) {
+        // استخدام صورة افتراضية إذا لم يكن هناك صورة
+        imageUrl = 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';  // ضع هنا رابط الصورة الافتراضية
+      } else if (doctor.profileImage.contains('http') == false) {
+        // رفع الصورة إلى Cloudinary إذا تم تقديمها
+        imageUrl = await _repository.uploadImageToCloudinary(doctor.profileImage);
+      }
+      // تعديل بيانات الطبيب لإضافة رابط الصورة
+      doctor = doctor.copyWith(profileImage: imageUrl);
+      // ✅ إنشاء الحساب في Firebase Authentication
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: doctor.email,
+            password: password,
+          );
+
+      // ✅ الحصول على UID من Firebase Authentication
+      final uid = userCredential.user!.uid;
+
+      // ✅ تعديل بيانات الطبيب لإضافة UID و userType
+      doctor = doctor.copyWith(id: uid);
+
+      // ✅ تخزين بيانات الطبيب في Firestore عبر Repository
+      await _repository.addDoctor(doctor);
+      // ✅ استدعاء getAllDoctors() مباشرةً بعد الإضافة
+      emit(AddDoctorStateSuccess());
+    } catch (e) {
+      emit(AddDoctorStateError(e.toString()));
+    }
+  }
+
+  // تحديث طبيب
+  Future<void> updateDoctor(DoctorModel doctor) async {
+    emit(UpdateDoctorStateLoading());
+    try {
+       String imageUrl = doctor.profileImage;
+      if (doctor.profileImage.isEmpty) {
+        imageUrl = 'https://example.com/default-avatar.png';  // الصورة الافتراضية
+      } else if (doctor.profileImage.contains('http') == false) {
+        imageUrl = await _repository.uploadImageToCloudinary(doctor.profileImage);
+      }
+      // تحديث بيانات الطبيب في Firestore
+      doctor = doctor.copyWith(profileImage: imageUrl);
+      await _repository.updateDoctor(
+        doctor,
+      ); // التأكد من إضافة دالة التحديث في الـ Repository
+      emit(UpdateDoctorStateSuccess());
+    } catch (e) {
+      emit(UpdateDoctorStateError(e.toString()));
+    }
+  }
+
+  Future<void> deleteDoctor(String doctorId) async {
+    emit(DeleteDoctorStateLoading());
+
+    try {
+      await _repository.deleteDoctor(doctorId);
+      emit(DeleteDoctorStateSuccess());
+    } catch (e) {
+      emit(DeleteDoctorStateError('Error deleting doctor: $e'));
+    }
+  }
+}

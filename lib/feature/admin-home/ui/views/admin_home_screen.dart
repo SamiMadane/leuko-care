@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
@@ -14,6 +15,7 @@ class AdminHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -23,7 +25,7 @@ class AdminHomeScreen extends StatelessWidget {
             WidthManager.w20,
             HeightManager.h16,
             WidthManager.w20,
-            HeightManager.h28,
+            HeightManager.h16,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +36,7 @@ class AdminHomeScreen extends StatelessWidget {
               const DoctorsDepartmentSeeAll(),
               SizedBox(height: HeightManager.h18),
               const DoctorsDepartmentListView(),
+              SizedBox(height: HeightManager.h10),
               Text(
                 'Patients\' Department',
                 style: getSemiBoldTextStyle(

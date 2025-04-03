@@ -1,11 +1,12 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/svg.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/routes/routes.dart';
 
 
 class HomeTopBar extends StatelessWidget {
@@ -33,10 +34,13 @@ class HomeTopBar extends StatelessWidget {
         CircleAvatar(
           radius: RadiusManager.r24,
           backgroundColor: ColorsManager.moreLighterGray,
-          child: SvgPicture.asset(
-            'assets/svgs/notifications.svg',
-          ),
-        )
+          child: IconButton(onPressed: (){
+            context.pushNamed(Routes.userSelectionScreen);
+          }, icon: Icon(Icons.exit_to_app))),
+          // child: SvgPicture.asset(
+          //   'assets/svgs/notifications.svg',
+          // ),
+        
       ],
     );
   }

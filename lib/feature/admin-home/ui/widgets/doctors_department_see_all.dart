@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/routes/routes.dart';
 
 
 class DoctorsDepartmentSeeAll extends StatelessWidget {
@@ -18,11 +20,11 @@ class DoctorsDepartmentSeeAll extends StatelessWidget {
         const Spacer(),
         InkWell(
           onTap: () {
-            
+            context.pushNamed(Routes.allDoctorsScreen);
           },
           child: Text(
             'See All',
-            style: getRegularTextStyle(fontSize: FontSizeManager.s12, color: ColorsManager.primaryColor),
+            style: getRegularTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.primaryColor),
           ),
         ),
       ],
