@@ -22,6 +22,7 @@ class DoctorModel {
     required this.phone,
     required this.profileImage,
     required this.userType,
+
   });
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) => _$DoctorModelFromJson(json);
@@ -46,6 +47,7 @@ class DoctorModel {
       phone: phone ?? this.phone,
       profileImage: profileImage ?? this.profileImage,
       userType: userType?? this.userType,
+
     );
   }
 }

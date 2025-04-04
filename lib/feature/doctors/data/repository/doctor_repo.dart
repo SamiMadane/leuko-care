@@ -13,10 +13,22 @@ class DoctorRepository {
   DoctorRepository(this._firestore); // 🔹 تمرير Firestore عند الإنشاء
 
   // جلب الأطباء
-   Stream<List<DoctorModel>> getDoctorsStream() {
+  Stream<List<DoctorModel>> getDoctorsStream() {
     return _firestore.collection('doctors').snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) => DoctorModel.fromJson(doc.data())).toList();
+      return snapshot.docs
+          .map((doc) => DoctorModel.fromJson(doc.data()))
+          .toList();
     });
+  }
+
+// جلب عدد المرضى لدى كل طبيب 
+  Future<int> getPatientsCountForDoctor(String doctorId) async {
+    final snapshot =
+        await FirebaseFirestore.instance
+            .collection('patients')
+            .where('doctorId', isEqualTo: doctorId)
+            .get();
+    return snapshot.size;
   }
 
   // إضافة طبيب
@@ -35,7 +47,7 @@ class DoctorRepository {
 
   // تحديث طبيب
   Future<void> updateDoctor(DoctorModel doctor) async {
-      try {
+    try {
       doctor = doctor.copyWith(userType: "doctor");
       // ✅ تحديث بيانات الطبيب في Firestore فقط
       await _firestore
@@ -47,7 +59,7 @@ class DoctorRepository {
     }
   }
 
-    Future<void> deleteDoctor(String doctorId) async {
+  Future<void> deleteDoctor(String doctorId) async {
     try {
       // حذف بيانات الطبيب من Firestore
       await _firestore.collection('doctors').doc(doctorId).delete();
@@ -55,17 +67,18 @@ class DoctorRepository {
       // حذف بيانات الطبيب من Firebase Auth
       User? user = _auth.currentUser;
       if (user != null && user.uid == doctorId) {
-        await user.delete();  // حذف المستخدم من Auth
+        await user.delete(); // حذف المستخدم من Auth
       }
     } catch (e) {
       throw Exception('Error deleting doctor: $e');
     }
   }
 
-
-    // دالة لرفع الصورة إلى Cloudinary
+  // دالة لرفع الصورة إلى Cloudinary
   Future<String> uploadImageToCloudinary(String imagePath) async {
-    final url = Uri.parse('https://api.cloudinary.com/v1_1/dmhmhyigi/image/upload');
+    final url = Uri.parse(
+      'https://api.cloudinary.com/v1_1/dmhmhyigi/image/upload',
+    );
     final uploadRequest = http.MultipartRequest('POST', url);
 
     // إعدادات المصادقة
@@ -73,7 +86,11 @@ class DoctorRepository {
 
     // قراءة الصورة
     final imageBytes = await File(imagePath).readAsBytes();
-    final imageFile = http.MultipartFile.fromBytes('file', imageBytes, filename: 'image.jpg');
+    final imageFile = http.MultipartFile.fromBytes(
+      'file',
+      imageBytes,
+      filename: 'image.jpg',
+    );
     uploadRequest.files.add(imageFile);
 
     final response = await uploadRequest.send();

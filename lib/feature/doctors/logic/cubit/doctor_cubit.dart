@@ -9,7 +9,6 @@ import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
 class DoctorCubit extends Cubit<DoctorState> {
   final DoctorRepository _repository;
   StreamSubscription? _doctorsSubscription;
-  String appName = 'sami';
 
   DoctorCubit(this._repository) : super(const DoctorState.doctorStateInitial());
 
@@ -29,6 +28,18 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
   }
 
+  // إضافة دالة لحساب عدد المرضى للطبيب
+  Future<int> getPatientsCountForDoctor(String doctorId) async {
+    try {
+      final count = await _repository.getPatientsCountForDoctor(doctorId);
+      return count; // إعادة العدد مباشرة
+    } catch (e) {
+      throw Exception('Error fetching patient count: $e');
+    }
+  }
+  
+
+  
   // إضافة طبيب
   Future<void> addDoctor(DoctorModel doctor, String password) async {
     emit(AddDoctorStateLoading());
