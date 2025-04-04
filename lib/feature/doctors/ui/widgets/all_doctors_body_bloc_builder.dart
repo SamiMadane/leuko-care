@@ -40,7 +40,7 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
   }
 
   Widget _buildDoctorsSuccessWidget(List<DoctorModel> doctors) {
-    final DoctorRepository _repository ;
+    final DoctorRepository _repository;
     if (doctors.isEmpty) {
       return const Center(child: Text('No doctors available.'));
     }
@@ -67,11 +67,15 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
                 Text(doctor.email),
                 SizedBox(height: HeightManager.h8),
                 FutureBuilder<int>(
-                  future:context.read<DoctorCubit>().getPatientsCountForDoctor(doctor.id!),
+                  future: context.read<DoctorCubit>().getPatientsCountForDoctor(
+                    doctor.id!,
+                  ),
                   builder:
                       (context, snapshot) => Text(
                         'patients: ${snapshot.data ?? "..."}',
-                        style: const TextStyle(color: ColorsManager.primaryColor),
+                        style: const TextStyle(
+                          color: ColorsManager.primaryColor,
+                        ),
                       ),
                 ), // عرض عدد المرضى هنا
               ],
@@ -81,10 +85,14 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
               backgroundImage: NetworkImage(doctor.profileImage),
               radius: RadiusManager.r28,
             ),
-            onTap: () {
+            onTap: () async{
+              final patientsCount = await context.read<DoctorCubit>().getPatientsCountForDoctor(doctor.id!);
               context.pushNamed(
                 Routes.doctorDetailsScreen,
-                arguments: doctor.toJson(),
+                arguments: {
+                  'doctor': doctor.toJson(),
+                  'patientsCount': patientsCount,
+                },
               );
             },
           ),

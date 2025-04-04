@@ -8,9 +8,11 @@ import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
+  final int patientsCount;
 
 
-  const DoctorDetailsScreen({super.key, required this.doctor});
+
+  const DoctorDetailsScreen({super.key, required this.doctor, required this.patientsCount});
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +108,8 @@ class DoctorDetailsScreen extends StatelessWidget {
             Text('Experience: ${doctor.experience} years'),
             const SizedBox(height: 10),
             Text('Description: ${doctor.description}'),
+            const SizedBox(height: 10),
+            Text('Patients Count: ${patientsCount}'),
             const SizedBox(height: 30),
     
             // ✅ زر تعديل بيانات الدكتور

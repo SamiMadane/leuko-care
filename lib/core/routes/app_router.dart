@@ -50,14 +50,17 @@ class AppRouter {
               ),
         );
       case Routes.doctorDetailsScreen:
+        final args = arguments as Map<String, dynamic>;
         final doctorDetails = DoctorModel.fromJson(
-          arguments as Map<String, dynamic>,
+          args['doctor'] as Map<String, dynamic>,
         );
+        final patientsCount = args['patientsCount'] as int;
+
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(
                 value: getIt<DoctorCubit>()..getDoctorsStream(),
-                child: DoctorDetailsScreen(doctor: doctorDetails),
+                child: DoctorDetailsScreen(doctor: doctorDetails,  patientsCount: patientsCount),
               ),
         );
       case Routes.addDoctorScreen:
