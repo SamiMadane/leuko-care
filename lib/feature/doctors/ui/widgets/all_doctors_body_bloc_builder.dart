@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
+import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
@@ -40,7 +42,6 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
   }
 
   Widget _buildDoctorsSuccessWidget(List<DoctorModel> doctors) {
-    final DoctorRepository _repository;
     if (doctors.isEmpty) {
       return const Center(child: Text('No doctors available.'));
     }
@@ -60,19 +61,27 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
               vertical: HeightManager.h18,
               horizontal: WidthManager.w18,
             ),
-            title: Text(doctor.name),
+            title: Text(
+              doctor.name,
+              style: getBoldTextStyle(
+                fontSize: FontSizeManager.s18,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: HeightManager.h6),
                 Text(doctor.email),
-                SizedBox(height: HeightManager.h8),
+                SizedBox(height: HeightManager.h4),
                 FutureBuilder<int>(
                   future: context.read<DoctorCubit>().getPatientsCountForDoctor(
                     doctor.id!,
                   ),
                   builder:
                       (context, snapshot) => Text(
-                        'patients: ${snapshot.data ?? "..."}',
+                        'Number of patients: ${snapshot.data ?? "..."}',
                         style: const TextStyle(
                           color: ColorsManager.primaryColor,
                         ),
@@ -82,7 +91,9 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
             ),
             leading: CircleAvatar(
               backgroundColor: ColorsManager.lightGray,
-              backgroundImage: NetworkImage(doctor.profileImage),
+              backgroundImage: NetworkImage(
+                doctor.profileImage,
+                ),
               radius: RadiusManager.r28,
             ),
             onTap: () async{
