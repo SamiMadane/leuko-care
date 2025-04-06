@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leuko_care/core/routes/app_router.dart';
 
-import 'package:leuko_care/main.dart';
 import 'package:leuko_care/leuko_care.dart';
 
 void main() {

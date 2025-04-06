@@ -52,7 +52,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         children: [
           AppTextFormField(
             controller: context.read<LoginCubit>().emailController,
-            hintText: 'Email',
+            labelText: 'Email',
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
@@ -64,7 +64,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           SizedBox(height: HeightManager.h18),
           AppTextFormField(
             controller: context.read<LoginCubit>().passwordController,
-            hintText: 'Password',
+            labelText: 'Password',
             backgroundColor: ColorsManager.moreLightGray,
             isObscureText: isObscureText,
             suffixIcon: GestureDetector(

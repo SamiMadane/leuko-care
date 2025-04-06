@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
-
 
 class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -10,11 +10,14 @@ class AppTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final TextStyle? inputTextStyle;
   final TextStyle? hintStyle;
-  final String hintText;
+  final String labelText;  // فقط labelText بدون hintText
   final TextEditingController? controller;
   final bool? isObscureText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final Color? backgroundColor;
+  final int? maxLines;
+  final TextInputType? keyboardType;
   final Function(String?) validator;
 
   const AppTextFormField({
@@ -24,43 +27,43 @@ class AppTextFormField extends StatelessWidget {
     this.enabledBorder,
     this.inputTextStyle,
     this.hintStyle,
-    required this.hintText,
+    required this.labelText,  // تغيير من hintText إلى labelText
     this.isObscureText,
     this.suffixIcon,
+    this.prefixIcon,
     this.backgroundColor,
-    required this.validator, this.controller,
+    this.maxLines,
+    this.keyboardType,
+    required this.validator,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      maxLines: maxLines ?? 1,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         isDense: true,
-        contentPadding:
-            contentPadding ??
-            EdgeInsets.symmetric(
-              horizontal: WidthManager.w20,
-              vertical: HeightManager.h18,
-            ),
-        focusedBorder:
-            focusedBorder ??
-            OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: ColorsManager.primaryColor,
-                width: 1.3,
-              ),
-              borderRadius: BorderRadius.circular(RadiusManager.r16),
-            ),
-        enabledBorder:
-            enabledBorder ??
-            OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: ColorsManager.lighterGray,
-                width: 1.3,
-              ),
-              borderRadius: BorderRadius.circular(RadiusManager.r16),
-            ),
+        contentPadding: contentPadding ?? EdgeInsets.symmetric(
+          horizontal: WidthManager.w20,
+          vertical: HeightManager.h18,
+        ),
+        focusedBorder: focusedBorder ?? OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: ColorsManager.primaryColor,
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(RadiusManager.r16),
+        ),
+        enabledBorder: enabledBorder ?? OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: ColorsManager.lighterGray,
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(RadiusManager.r16),
+        ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 1.3),
           borderRadius: BorderRadius.circular(RadiusManager.r16),
@@ -69,16 +72,16 @@ class AppTextFormField extends StatelessWidget {
           borderSide: const BorderSide(color: ColorsManager.red, width: 1.3),
           borderRadius: BorderRadius.circular(RadiusManager.r16),
         ),
-        hintStyle:
-            hintStyle ??
-            getRegularTextStyle(
-              fontSize: IconSizeManager.s14,
-              color: ColorsManager.lightGray,
-            ),
-        hintText: hintText,
+        labelText: labelText,  // النص المثبت في الأعلى
+        labelStyle: getMediumTextStyle(
+          fontSize: FontSizeManager.s14,
+          color: ColorsManager.primaryColor,  // اللون الأزرق دائمًا
+        ),
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         fillColor: backgroundColor ?? ColorsManager.moreLightGray,
         filled: true,
+        floatingLabelBehavior: FloatingLabelBehavior.always,  // هذه الخاصية تضمن ظهور الـ label دائمًا فوق الحقل
       ),
       obscureText: isObscureText ?? false,
       style: getMediumTextStyle(
