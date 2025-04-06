@@ -1,7 +1,6 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';import 'package:image_picker/image_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
@@ -38,30 +37,24 @@ class DoctorCubit extends Cubit<DoctorState> {
       throw Exception('Error fetching patient count: $e');
     }
   }
-  
-    Future<String?> pickDoctorImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      return pickedImage.path;
-    }
-    return null;  }
 
+    // دالة للحصول على URL الصورة
+  Future<String> _getImageUrl(DoctorModel doctor) async {
+    if (doctor.profileImage.isEmpty) {
+      return 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
+    } else if (!doctor.profileImage.contains('http')) {
+      return await _repository.uploadImageToCloudinary(doctor.profileImage);
+    }
+    return doctor.profileImage;
+  }
   
   // إضافة طبيب
   Future<void> addDoctor(DoctorModel doctor, String password) async {
     emit(AddDoctorStateLoading());
     try {
-      String imageUrl = doctor.profileImage;
-      if (doctor.profileImage.isEmpty) {
-        // استخدام صورة افتراضية إذا لم يكن هناك صورة
-        imageUrl = 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';  // ضع هنا رابط الصورة الافتراضية
-      } else if (doctor.profileImage.contains('http') == false) {
-        // رفع الصورة إلى Cloudinary إذا تم تقديمها
-        imageUrl = await _repository.uploadImageToCloudinary(doctor.profileImage);
-      }
-      // تعديل بيانات الطبيب لإضافة رابط الصورة
+      String imageUrl = await _getImageUrl(doctor);
       doctor = doctor.copyWith(profileImage: imageUrl);
+
       // ✅ إنشاء الحساب في Firebase Authentication
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -85,14 +78,9 @@ class DoctorCubit extends Cubit<DoctorState> {
   Future<void> updateDoctor(DoctorModel doctor) async {
     emit(UpdateDoctorStateLoading());
     try {
-       String imageUrl = doctor.profileImage;
-      if (doctor.profileImage.isEmpty) {
-        imageUrl = 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';  // الصورة الافتراضية
-      } else if (doctor.profileImage.contains('http') == false) {
-        imageUrl = await _repository.uploadImageToCloudinary(doctor.profileImage);
-      }
-      // تحديث بيانات الطبيب في Firestore
-      doctor = doctor.copyWith(profileImage: imageUrl);
+       String imageUrl = await _getImageUrl(doctor);
+       doctor = doctor.copyWith(profileImage: imageUrl);
+
       await _repository.updateDoctor(
         doctor,
       ); // التأكد من إضافة دالة التحديث في الـ Repository
@@ -107,10 +95,8 @@ class DoctorCubit extends Cubit<DoctorState> {
 
     try {
       await _repository.deleteDoctor(doctorId);
-      print('Doctor deletion successful in cubit');
       emit(DeleteDoctorStateSuccess());
     } catch (e) {
-      print('Doctor deletion faieled in cubit');
       emit(DeleteDoctorStateError('Error deleting doctor: $e'));
     }
   }
