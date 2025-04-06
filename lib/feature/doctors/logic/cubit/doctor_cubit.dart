@@ -66,10 +66,7 @@ class DoctorCubit extends Cubit<DoctorState> {
 
       // ✅ تعديل بيانات الطبيب لإضافة UID و userType
       doctor = doctor.copyWith(id: uid);
-
-      // ✅ تخزين بيانات الطبيب في Firestore عبر Repository
       await _repository.addDoctor(doctor);
-      // ✅ استدعاء getAllDoctors() مباشرةً بعد الإضافة
       emit(AddDoctorStateSuccess());
     } catch (e) {
       emit(AddDoctorStateError(e.toString()));
@@ -82,7 +79,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     try {
        String imageUrl = doctor.profileImage;
       if (doctor.profileImage.isEmpty) {
-        imageUrl = 'https://example.com/default-avatar.png';  // الصورة الافتراضية
+        imageUrl = 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';  // الصورة الافتراضية
       } else if (doctor.profileImage.contains('http') == false) {
         imageUrl = await _repository.uploadImageToCloudinary(doctor.profileImage);
       }
@@ -102,8 +99,10 @@ class DoctorCubit extends Cubit<DoctorState> {
 
     try {
       await _repository.deleteDoctor(doctorId);
+      print('Doctor deletion successful in cubit');
       emit(DeleteDoctorStateSuccess());
     } catch (e) {
+      print('Doctor deletion faieled in cubit');
       emit(DeleteDoctorStateError('Error deleting doctor: $e'));
     }
   }

@@ -21,6 +21,7 @@ class RadiusManager {
   static double r35 = SizeUtil.setRadius(35.0);
   static double r40 = SizeUtil.setRadius(40.0);
   static double r50 = SizeUtil.setRadius(50.0);
+  static double r60 = SizeUtil.setRadius(60.0);
   static double r80 = SizeUtil.setRadius(80.0);
   static double r100 = SizeUtil.setRadius(100.0);
 }
@@ -125,6 +126,8 @@ class IconSizeManager {
   static double s10 = 10;
   static double s12 = 12;
   static double s14 = 14;
+  static double s32 = 32;
+
 }
 
 class OpacityManager {

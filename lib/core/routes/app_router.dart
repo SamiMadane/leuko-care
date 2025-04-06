@@ -60,11 +60,16 @@ class AppRouter {
           builder:
               (_) => BlocProvider.value(
                 value: getIt<DoctorCubit>()..getDoctorsStream(),
-                child: DoctorDetailsScreen(doctor: doctorDetails,  patientsCount: patientsCount),
+                child: DoctorDetailsScreen(
+                  doctor: doctorDetails,
+                  patientsCount: patientsCount,
+                ),
               ),
         );
       case Routes.addDoctorScreen:
-        final doctorModel = arguments as DoctorModel? ?? null;
+        final doctorModel =
+            arguments as DoctorModel? ?? null;
+            
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(

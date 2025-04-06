@@ -63,7 +63,7 @@ class DoctorRepository {
     try {
       // حذف بيانات الطبيب من Firestore
       await _firestore.collection('doctors').doc(doctorId).delete();
-
+      getDoctorsStream();
       // حذف بيانات الطبيب من Firebase Auth
       User? user = _auth.currentUser;
       if (user != null && user.uid == doctorId) {

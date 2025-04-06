@@ -1,141 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
-import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resourses/fonts_manager.dart';
+import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
+import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/confirmation_dialog.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/delete_doctor_bloc_listener.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_app_bar.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_edit_button.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_info_card.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_profile_image.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
   final int patientsCount;
 
-
-
-  const DoctorDetailsScreen({super.key, required this.doctor, required this.patientsCount});
+  const DoctorDetailsScreen({
+    super.key,
+    required this.doctor,
+    required this.patientsCount,
+  });
 
   @override
   Widget build(BuildContext context) {
-  final doctorCubit = context.read<DoctorCubit>();
+    final doctorCubit = context.read<DoctorCubit>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(doctor.name),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              print('============== show dialog');
-              // عرض رسالة تأكيد قبل الحذف
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Confirm Delete'),
-                    content: const Text(
-                      'Are you sure you want to delete this doctor?',
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          print('============== show dialog yes');
-    
-                          doctorCubit.deleteDoctor(doctor.id!);
-    
-                          context.pop();
-                          context.pop(); // العودة إلى قائمة الأطباء
-                        },
-                        child: const Text('Yes'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          print('============== show dialog no');
-    
-                          context.pop(); // إغلاق نافذة التأكيد
-                        },
-                        child: const Text('No'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
+      appBar: DoctorDetailsAppBar(
+        doctorName: doctor.name,
+        onDeletePressed: () {
+          showDialog(
+            context: context,
+            builder:
+                (context) => ConfirmationDialog(
+                  title: 'Confirm Delete',
+                  message: 'Are you sure you want to delete this doctor?',
+                  onConfirmed: () async {
+                    doctorCubit.deleteDoctor(doctor.id!);
+                    Navigator.of(context).pop();
+                  },
+                ),
+          );
+        },
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child:
-                    doctor.profileImage.isNotEmpty
-                        ? CircleAvatar(
-                          child: Image.network(
-                            doctor.profileImage,
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
-                          radius: 50,
-                          backgroundColor: Colors.grey[300],
-                        )
-                        : CircleAvatar(
-                          child: Image.network(
-                            'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png',
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
-                          radius: 50,
-                          backgroundColor: Colors.grey[300],
-                        ),
-              ),
+      body: Column(
+        children: [
+          const DeleteDoctorBlocListener(),
+          SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              vertical: HeightManager.h20,
+              horizontal: WidthManager.w22,
             ),
-            const SizedBox(height: 20),
-            Text(
-              'Name: ${doctor.name}',
-              style: const TextStyle(fontSize: 20),
-            ),
-            const SizedBox(height: 10),
-            Text('Email: ${doctor.email}'),
-            const SizedBox(height: 10),
-            Text('Phone: ${doctor.phone}'),
-            const SizedBox(height: 10),
-            Text('Experience: ${doctor.experience} years'),
-            const SizedBox(height: 10),
-            Text('Description: ${doctor.description}'),
-            const SizedBox(height: 10),
-            Text('Patients Count: ${patientsCount}'),
-            const SizedBox(height: 30),
-    
-            // ✅ زر تعديل بيانات الدكتور
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  context.pushNamed(
-                    Routes.addDoctorScreen,
-                    arguments: doctor,
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, // لون الزر
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40,
-                    vertical: 15,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                DoctorDetailsProfileImage(profileImageUrl: doctor.profileImage),
+                SizedBox(height: HeightManager.h20),
+                Text(
+                  doctor.name,
+                  style: getBoldTextStyle(
+                    fontSize: FontSizeManager.s24,
+                    color: ColorsManager.blueGrey,
                   ),
                 ),
-                child: const Text(
-                  'Edit Doctor',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                const SizedBox(height: 20),
+                DoctorDetailsInfoCard(
+                  doctor: doctor,
+                  patientsCount: patientsCount,
                 ),
-              ),
+                const SizedBox(height: 30),
+                DoctorDetailsEditButton(doctor: doctor),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

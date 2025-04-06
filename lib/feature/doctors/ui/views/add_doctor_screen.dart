@@ -8,7 +8,7 @@ import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/add_update_doctor_bloc_listener.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/add_doctor_widgets/add_update_doctor_bloc_listener.dart';
 
 class AddDoctorScreen extends StatefulWidget {
   final DoctorModel? doctor;
@@ -39,6 +39,13 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
       _experienceController.text = widget.doctor!.experience;
       _descriptionController.text = widget.doctor!.description;
       profileImageUrl = widget.doctor!.profileImage;
+    }else{
+      _nameController.text = '';
+      _emailController.text = '';
+      _phoneController.text = '';
+      _experienceController.text = '';
+      _descriptionController.text = '';
+      profileImageUrl = 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
     }
   }
 
