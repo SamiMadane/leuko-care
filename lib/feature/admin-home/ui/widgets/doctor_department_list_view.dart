@@ -45,7 +45,7 @@ class DoctorsDepartmentListView extends StatelessWidget {
                   // زر إضافة دكتور جديد
                   return GestureDetector(
                     onTap: () {
-                      context.pushNamed(Routes.addDoctorScreen);
+                      context.pushNamed(Routes.addUpdateDoctorScreen);
                     },
                     child: Padding(
                       padding: EdgeInsetsDirectional.only(
@@ -88,7 +88,6 @@ class DoctorsDepartmentListView extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: RadiusManager.r30,
-                          backgroundColor: ColorsManager.lightBlue,
                           backgroundImage:
                               doctor.profileImage.isNotEmpty
                                   ? NetworkImage(

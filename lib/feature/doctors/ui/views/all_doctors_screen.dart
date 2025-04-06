@@ -25,7 +25,7 @@ class AllDoctorsScreen extends StatelessWidget {
       body: AllDoctorsBodyBlocBuilder(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushNamed(Routes.addDoctorScreen);
+          context.pushNamed(Routes.addUpdateDoctorScreen);
         },
         backgroundColor: ColorsManager.primaryColor,
         child: Icon(Icons.add, color: Colors.white),

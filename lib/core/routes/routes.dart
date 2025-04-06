@@ -5,7 +5,7 @@ class Routes {
   static const String userSelectionScreen = '/userSelectionScreen';
   static const String allDoctorsScreen = '/allDoctorsScreen';
   static const String doctorDetailsScreen = '/doctorDetailsScreen';
-  static const String addDoctorScreen = '/addDoctorScreen';
+  static const String addUpdateDoctorScreen = '/addUpdateDoctorScreen';
   static const String patientDetailsScreen = '/patientDetailsScreen';
   static const String addPatientScreen = '/addPatientScreen';
 

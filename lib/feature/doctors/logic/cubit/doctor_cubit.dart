@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';import 'package:image_picker/image_picker.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
@@ -11,6 +11,7 @@ class DoctorCubit extends Cubit<DoctorState> {
   StreamSubscription? _doctorsSubscription;
 
   DoctorCubit(this._repository) : super(const DoctorState.doctorStateInitial());
+  
 
   // ✅ متابعة التحديثات مباشرة من Firestore
   void getDoctorsStream() {
@@ -38,6 +39,13 @@ class DoctorCubit extends Cubit<DoctorState> {
     }
   }
   
+    Future<String?> pickDoctorImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      return pickedImage.path;
+    }
+    return null;  }
 
   
   // إضافة طبيب

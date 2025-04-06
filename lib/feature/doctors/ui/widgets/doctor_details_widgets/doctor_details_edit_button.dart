@@ -18,7 +18,7 @@ class DoctorDetailsEditButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: () {
-          context.pushNamed(Routes.addDoctorScreen, arguments: doctor);
+          context.pushNamed(Routes.addUpdateDoctorScreen, arguments: doctor);
         },
         icon: const Icon(Icons.edit, color: ColorsManager.white),
         label: Text(

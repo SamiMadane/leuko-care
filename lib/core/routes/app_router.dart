@@ -5,7 +5,7 @@ import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/ui/views/add_doctor_screen.dart';
+import 'package:leuko_care/feature/doctors/ui/views/add_update_doctor_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_details_screen.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
@@ -71,14 +71,14 @@ class AppRouter {
                 ),
               ),
         );
-      case Routes.addDoctorScreen:
+      case Routes.addUpdateDoctorScreen:
         final doctorModel = arguments as DoctorModel? ?? null;
 
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(
                 value: getIt<DoctorCubit>(),
-                child: AddDoctorScreen(doctor: doctorModel),
+                child: AddUpdateDoctorScreen(doctor: doctorModel),
               ),
         );
       default:

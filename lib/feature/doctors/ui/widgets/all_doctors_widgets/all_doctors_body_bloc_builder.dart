@@ -89,7 +89,6 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
               ],
             ),
             leading: CircleAvatar(
-              backgroundColor: ColorsManager.lightGray,
               backgroundImage: NetworkImage(
                 doctor.profileImage,
                 ),
