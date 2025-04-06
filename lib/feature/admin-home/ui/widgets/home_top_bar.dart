@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -7,7 +6,6 @@ import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-
 
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
@@ -21,12 +19,18 @@ class HomeTopBar extends StatelessWidget {
           children: [
             Text(
               'Hi, Admin!',
-              style: getBoldTextStyle(fontSize: FontSizeManager.s18, color: ColorsManager.darkBlue),
+              style: getBoldTextStyle(
+                fontSize: FontSizeManager.s18,
+                color: ColorsManager.darkBlue,
+              ),
             ),
-            SizedBox(height: HeightManager.h6,),
+            SizedBox(height: HeightManager.h6),
             Text(
               'How Are you Today?',
-              style: getRegularTextStyle(fontSize: FontSizeManager.s12, color: ColorsManager.gray),
+              style: getRegularTextStyle(
+                fontSize: FontSizeManager.s12,
+                color: ColorsManager.gray,
+              ),
             ),
           ],
         ),
@@ -34,13 +38,16 @@ class HomeTopBar extends StatelessWidget {
         CircleAvatar(
           radius: RadiusManager.r24,
           backgroundColor: ColorsManager.moreLighterGray,
-          child: IconButton(onPressed: (){
-            context.pushNamed(Routes.userSelectionScreen);
-          }, icon: Icon(Icons.exit_to_app))),
-          // child: SvgPicture.asset(
-          //   'assets/svgs/notifications.svg',
-          // ),
-        
+          child: IconButton(
+            onPressed: () {
+              context.pushNamedAndRemoveUntil(
+                Routes.userSelectionScreen,
+                predicate: (route) => false
+              );
+            },
+            icon: Icon(Icons.exit_to_app),
+          ),
+        ),
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import 'package:leuko_care/core/networking/firebase_error_handler.dart';
 import 'package:leuko_care/core/networking/firestore_service.dart';
 import 'package:leuko_care/core/networking/operation_result.dart';
@@ -35,7 +36,9 @@ class LoginRepository {
           );
           if (!userDoc.exists) {
             await FirebaseAuth.instance.signOut(); // تسجيل خروج المستخدم
-            return OperationResult.failure("This user is not registered on our servers.");
+            return OperationResult.failure(
+              "This user is not registered on our servers.",
+            );
           }
 
           // التحقق من نوع المستخدم
@@ -45,6 +48,8 @@ class LoginRepository {
               "Invalid user type for this login page. go to (${storedUserType}) page.",
             );
           }
+          await SharedPrefHelper.setData('userType', storedUserType);
+          await SharedPrefHelper.setData('uid', user.uid);
           return OperationResult.success(user);
         } else {
           return _handelEmailVerification(user);
@@ -61,18 +66,22 @@ class LoginRepository {
     }
   }
 
-
   Future<bool> checkAndUpdateEmailVerification(User user) async {
-  DocumentSnapshot userDoc = await _firestoreService.getUserDocument(user.uid);
-  bool storedVerificationStatus = userDoc['emailVerified'] ?? false;
+    DocumentSnapshot userDoc = await _firestoreService.getUserDocument(
+      user.uid,
+    );
+    bool storedVerificationStatus = userDoc['emailVerified'] ?? false;
 
-  // تحديث الحالة فقط إذا كانت مختلفة
-  if (storedVerificationStatus != user.emailVerified) {
-    await _firestoreService.updateEmailVerificationStatus(user.uid, user.emailVerified);
+    // تحديث الحالة فقط إذا كانت مختلفة
+    if (storedVerificationStatus != user.emailVerified) {
+      await _firestoreService.updateEmailVerificationStatus(
+        user.uid,
+        user.emailVerified,
+      );
+    }
+
+    return user.emailVerified;
   }
-
-  return user.emailVerified;
-}
 
   Future<OperationResult<User?>> signInWithGoogle(String userType) async {
     try {
@@ -107,16 +116,20 @@ class LoginRepository {
           user.uid,
         );
 
+        String storedUserType = userDoc["userType"] ?? "";
         if (!userDoc.exists) {
-          return OperationResult.failure("This user is not registered on our servers.");
+          return OperationResult.failure(
+            "This user is not registered on our servers.",
+          );
         } else {
-          String storedUserType = userDoc["userType"] ?? "";
           if (storedUserType != userType) {
             return OperationResult.failure(
               "Invalid user type for this login page. go to (${storedUserType}) page.",
             );
           }
         }
+        await SharedPrefHelper.setData('userType', storedUserType);
+        await SharedPrefHelper.setData('uid', user.uid);
         return OperationResult.success(user);
       } else {
         return OperationResult.failure("Failed to sign in with Google.");
@@ -144,5 +157,4 @@ class LoginRepository {
       );
     }
   }
-
 }

@@ -10,6 +10,7 @@ import 'package:leuko_care/feature/doctors/ui/views/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_details_screen.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
 import 'package:leuko_care/feature/user_selection/ui/views/user_selection_screen.dart';
+import 'package:leuko_care/navigation_handler_screen.dart';
 
 import '../../feature/login/ui/views/login_screen.dart';
 
@@ -19,6 +20,10 @@ class AppRouter {
     final arguments = settings.arguments;
 
     switch (settings.name) {
+      case Routes.navigationHandlerScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NavigationHandlerScreen(),
+        );
       case Routes.adminHomeScreen:
         return MaterialPageRoute(
           builder:
@@ -67,9 +72,8 @@ class AppRouter {
               ),
         );
       case Routes.addDoctorScreen:
-        final doctorModel =
-            arguments as DoctorModel? ?? null;
-            
+        final doctorModel = arguments as DoctorModel? ?? null;
+
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(

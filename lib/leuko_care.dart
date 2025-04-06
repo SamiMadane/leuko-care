@@ -21,7 +21,7 @@ class LeukoCare extends StatelessWidget {
           scaffoldBackgroundColor: ColorsManager.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.userSelectionScreen,
+        initialRoute: Routes.navigationHandlerScreen,
         onGenerateRoute: appRouter.generateRoute,
       )
     );
