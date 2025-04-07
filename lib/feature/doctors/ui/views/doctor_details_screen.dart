@@ -8,6 +8,7 @@ import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/confirmation_dialog.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/delete_doctor_bloc_listener.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_add_patient_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_app_bar.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_edit_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_info_card.dart';
@@ -65,13 +66,18 @@ class DoctorDetailsScreen extends StatelessWidget {
                     color: ColorsManager.blueGrey,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: HeightManager.h20),
                 DoctorDetailsInfoCard(
                   doctor: doctor,
                   patientsCount: patientsCount,
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: HeightManager.h30),
                 DoctorDetailsEditButton(doctor: doctor),
+                SizedBox(height: HeightManager.h16),
+                DoctorDetailsViewPatientsButton(doctorId: doctor.id),
+
+
+
               ],
             ),
           ),
