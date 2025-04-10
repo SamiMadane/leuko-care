@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-class DoctorDetailsAppBar extends StatelessWidget implements PreferredSizeWidget{
-  final String doctorName;
+class PatientDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String patientName;
   final VoidCallback onDeletePressed;
-  const DoctorDetailsAppBar({super.key, required this.doctorName, required this.onDeletePressed});
+
+  const PatientDetailsAppBar({
+    super.key,
+    required this.patientName,
+    required this.onDeletePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return  AppBar(
+    return AppBar(
       title: Text(
-        'Dr. ${doctorName}',
+        patientName,
         overflow: TextOverflow.ellipsis,
       ),
       actions: [
@@ -20,6 +25,7 @@ class DoctorDetailsAppBar extends StatelessWidget implements PreferredSizeWidget
       ],
     );
   }
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

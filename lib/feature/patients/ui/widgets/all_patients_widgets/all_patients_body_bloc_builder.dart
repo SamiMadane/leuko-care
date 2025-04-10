@@ -6,49 +6,49 @@ import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
-import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
+import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 
-class AllDoctorsBodyBlocBuilder extends StatelessWidget {
-  const AllDoctorsBodyBlocBuilder({super.key});
+class AllPatientsBodyBlocBuilder extends StatelessWidget {
+  const AllPatientsBodyBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DoctorCubit, DoctorState>(
+    return BlocBuilder<PatientCubit, PatientState>(
       buildWhen:
           (previous, current) =>
-              current is GetDoctorStateLoading ||
-              current is GetDoctorStateSuccess ||
-              current is GetDoctorStateError,
+              current is GetPatientsByDoctorIdStateLoading ||
+              current is GetPatientsByDoctorIdStateSuccess ||
+              current is GetPatientsByDoctorIdStateError,
       builder: (context, state) {
         return state.whenOrNull(
-              getDoctorStateLoading: () => _buildDoctorsLoadingWidget(),
-              getDoctorStateSuccess:
-                  (doctors) => _buildDoctorsSuccessWidget(doctors),
-              getDoctorStateError:
-                  (message) => _buildDoctorsErrorWidget(message: message),
-            ) ??
+              getPatientsByDoctorIdStateLoading: () => _buildPatientsLoadingWidget(),
+              getPatientsByDoctorIdStateSuccess:
+                  (patients) => _buildPatientsSuccessWidget(patients),
+              getPatientsByDoctorIdStateError:
+                  (message) => _buildPatientsErrorWidget(message: message),
+            ) ?? 
             const SizedBox.shrink(); // fallback إذا لم تكن أي حالة
       },
     );
   }
 
-  Widget _buildDoctorsLoadingWidget() {
+  Widget _buildPatientsLoadingWidget() {
     return Center(
       child: CircularProgressIndicator(color: ColorsManager.primaryColor),
     );
   }
 
-  Widget _buildDoctorsSuccessWidget(List<DoctorModel> doctors) {
-    if (doctors.isEmpty) {
-      return const Center(child: Text('No doctors available.'));
+  Widget _buildPatientsSuccessWidget(List<PatientModel> patients) {
+    if (patients.isEmpty) {
+      return const Center(child: Text('No patients available.'));
     }
 
     return ListView.builder(
-      itemCount: doctors.length,
+      itemCount: patients.length,
       itemBuilder: (context, index) {
-        final doctor = doctors[index];
+        final patient = patients[index];
         return Card(
           margin: EdgeInsets.symmetric(
             vertical: HeightManager.h8,
@@ -61,43 +61,29 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
               horizontal: WidthManager.w18,
             ),
             title: Text(
-              doctor.name,
+              patient.name,
               style: getBoldTextStyle(
                 fontSize: FontSizeManager.s18,
                 color: ColorsManager.darkBlue,
               ),
             ),
-
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: HeightManager.h6),
-                Text(doctor.email),
+                Text(patient.email),
                 SizedBox(height: HeightManager.h4),
-                FutureBuilder<int>(
-                  future: context.read<DoctorCubit>().getPatientsCountForDoctor(
-                    doctor.id!,
-                  ),
-                  builder:
-                      (context, snapshot) => Text(
-                        'Number of patients: ${snapshot.data ?? "..."}',
-                        style: const TextStyle(
-                          color: ColorsManager.primaryColor,
-                        ),
-                      ),
-                ), // عرض عدد المرضى هنا
+                // يمكنك إضافة بيانات إضافية مثل الحالة الصحية هنا
               ],
             ),
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                doctor.profileImage,
-                ),
+              backgroundImage: NetworkImage(patient.profileImage),
               radius: RadiusManager.r28,
             ),
-            onTap: () async{
+            onTap: () {
               context.pushNamed(
-                Routes.doctorDetailsScreen,
-                arguments: doctor,
+                Routes.patientDetailsScreen,
+                arguments: patient,
               );
             },
           ),
@@ -106,7 +92,7 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildDoctorsErrorWidget({required String message}) {
+  Widget _buildPatientsErrorWidget({required String message}) {
     return Center(
       child: Text(message, style: const TextStyle(color: Colors.red)),
     );

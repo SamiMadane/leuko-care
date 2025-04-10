@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department_list_view.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctor_department_list_view.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_blue_container.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_department_see_all.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/home_top_bar.dart';
+import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department_see_all.dart';
 
 class AdminHomeScreen extends StatelessWidget {
   const AdminHomeScreen({super.key});
@@ -36,13 +34,7 @@ class AdminHomeScreen extends StatelessWidget {
               SizedBox(height: HeightManager.h18),
               const DoctorsDepartmentListView(),
               SizedBox(height: HeightManager.h10),
-              Text(
-                'Patients\' Department',
-                style: getSemiBoldTextStyle(
-                  fontSize: FontSizeManager.s18,
-                  color: ColorsManager.darkBlue,
-                ),
-              ),
+              const PatientsDepartmentSeeAll(),
               SizedBox(height: HeightManager.h18),
               const PatientsDepartmentListView(),
             ],

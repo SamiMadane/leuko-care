@@ -43,4 +43,5 @@ class DoctorState with _$DoctorState {
 
   // حالة خطأ في حذف دكتور
   const factory DoctorState.deleteDoctorStateError(String message) = DeleteDoctorStateError;
+
 }
