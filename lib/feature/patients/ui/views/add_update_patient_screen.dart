@@ -42,13 +42,16 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
       _birthDateController.text = widget.patient!.birthDate;
       profileImageUrl = widget.patient!.profileImage;
     } else {
-      profileImageUrl = 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
+      profileImageUrl =
+          'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
     }
   }
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedImage = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
     if (pickedImage != null) {
       setState(() {
         profileImageUrl = pickedImage.path;
@@ -57,9 +60,10 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   }
 
   Future<void> _selectBirthDate() async {
-     final DateTime initialDate = _birthDateController.text.isNotEmpty
-      ? DateFormat('yyyy-MM-dd').parse(_birthDateController.text)
-      : DateTime(2000);
+    final DateTime initialDate =
+        _birthDateController.text.isNotEmpty
+            ? DateFormat('yyyy-MM-dd').parse(_birthDateController.text)
+            : DateTime(2000);
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: initialDate,
@@ -81,7 +85,10 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: WidthManager.w20, vertical: HeightManager.h16),
+        padding: EdgeInsets.symmetric(
+          horizontal: WidthManager.w20,
+          vertical: HeightManager.h16,
+        ),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -111,7 +118,8 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                     controller: _passwordController,
                     labelText: 'Password',
                     isObscureText: true,
-                    validator: (value) => value!.isEmpty ? 'Enter Password' : null,
+                    validator:
+                        (value) => value!.isEmpty ? 'Enter Password' : null,
                   ),
                 SizedBox(height: HeightManager.h10),
                 AppTextFormField(
@@ -126,10 +134,13 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                     child: AppTextFormField(
                       controller: _birthDateController,
                       labelText: 'Birth Date',
-                      validator: (value) => value!.isEmpty ? 'Enter Birth Date' : null,
+                      validator:
+                          (value) => value!.isEmpty ? 'Enter Birth Date' : null,
                       keyboardType: TextInputType.datetime,
-                      suffixIcon: Icon(Icons.calendar_today, color: Colors.blue),
-
+                      suffixIcon: Icon(
+                        Icons.calendar_today,
+                        color: Colors.blue,
+                      ),
                     ),
                   ),
                 ),
@@ -170,7 +181,10 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
       if (widget.patient != null) {
         context.read<PatientCubit>().updatePatient(patient);
       } else {
-        context.read<PatientCubit>().addPatient(patient, _passwordController.text);
+        context.read<PatientCubit>().addPatient(
+          patient,
+          _passwordController.text,
+        );
       }
     }
   }

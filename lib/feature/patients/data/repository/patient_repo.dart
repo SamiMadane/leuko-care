@@ -37,6 +37,8 @@ class PatientRepository {
           .collection('patients')
           .doc(patient.id)
           .set(patient.toJson());
+          getPatientsStream();
+
     } catch (e) {
       throw Exception("Error saving patient data: ${e.toString()}");
     }
@@ -51,6 +53,7 @@ class PatientRepository {
           .collection('patients')
           .doc(patient.id)
           .update(patient.toJson());
+          getPatientsStream();
     } catch (e) {
       throw Exception("Error updating patient data: ${e.toString()}");
     }
@@ -62,11 +65,7 @@ class PatientRepository {
       // حذف بيانات المريض من Firestore
       await _firestore.collection('patients').doc(patientId).delete();
       getPatientsStream();
-      // حذف بيانات المريض من Firebase Auth إذا كان مرتبطًا
-      User? user = _auth.currentUser;
-      if (user != null && user.uid == patientId) {
-        await user.delete(); // حذف المستخدم من Auth
-      }
+    
     } catch (e) {
       throw Exception('Error deleting patient: $e');
     }
