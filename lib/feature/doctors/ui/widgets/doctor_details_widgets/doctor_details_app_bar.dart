@@ -9,7 +9,7 @@ class DoctorDetailsAppBar extends StatelessWidget implements PreferredSizeWidget
   Widget build(BuildContext context) {
     return  AppBar(
       title: Text(
-        doctorName,
+        'Dr. ${doctorName}',
         overflow: TextOverflow.ellipsis,
       ),
       actions: [

@@ -36,7 +36,7 @@ class PatientDetailsScreen extends StatelessWidget {
               message: 'Are you sure you want to delete this patient?',
               onConfirmed: () {
                 patientCubit.deletePatient(patient.id!);
-                Navigator.of(context).pop();
+                
               },
             ),
           );

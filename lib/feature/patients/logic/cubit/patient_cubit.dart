@@ -88,4 +88,30 @@ class PatientCubit extends Cubit<PatientState> {
       emit(DeletePatientStateError('Error deleting patient: $e'));
     }
   }
+
+  
+    Future<void> getPatientsByDoctorId(String doctorId) async {
+    try {
+      emit(GetPatientsByDoctorIdStateLoading());
+
+      // تصفية المرضى بناءً على doctorId
+      final patients = await _repository.getPatientsByDoctorId(doctorId);
+
+      emit(GetPatientsByDoctorIdStateSuccess(patients));
+    } catch (e) {
+      emit(GetPatientsByDoctorIdStateError("Failed to load patients"));
+    }
+  }
+
+  int calculateAge(String birthDateString) {
+  final birthDate = DateTime.parse(birthDateString);
+  final today = DateTime.now();
+  int age = today.year - birthDate.year;
+  if (today.month < birthDate.month ||
+      (today.month == birthDate.month && today.day < birthDate.day)) {
+    age--;
+  } // إذا كان اليوم أقل من تاريخ الميلاد في نفس السنة، نخصم سنة واحدة
+  return age;
+}
+
 }

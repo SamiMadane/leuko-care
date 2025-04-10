@@ -95,13 +95,9 @@ class AllDoctorsBodyBlocBuilder extends StatelessWidget {
               radius: RadiusManager.r28,
             ),
             onTap: () async{
-              final patientsCount = await context.read<DoctorCubit>().getPatientsCountForDoctor(doctor.id!);
               context.pushNamed(
                 Routes.doctorDetailsScreen,
-                arguments: {
-                  'doctor': doctor.toJson(),
-                  'patientsCount': patientsCount,
-                },
+                arguments: doctor,
               );
             },
           ),

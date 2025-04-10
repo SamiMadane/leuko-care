@@ -16,5 +16,12 @@ extension Navigation on BuildContext {
         .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
   }
 
+
+  void popUntilTargetScreen(String targetRouteName) {
+    Navigator.popUntil(this, ModalRoute.withName(targetRouteName));
+  }
+
   void pop() => Navigator.of(this).pop();
+
+
 }

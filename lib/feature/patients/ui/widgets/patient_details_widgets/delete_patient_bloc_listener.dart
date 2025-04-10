@@ -14,10 +14,11 @@ class DeletePatientBlocListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PatientCubit, PatientState>(
-      listenWhen: (previous, current) =>
-          current is DeletePatientStateLoading ||
-          current is DeletePatientStateSuccess ||
-          current is DeletePatientStateError,
+      listenWhen:
+          (previous, current) =>
+              current is DeletePatientStateLoading ||
+              current is DeletePatientStateSuccess ||
+              current is DeletePatientStateError,
       listener: (context, state) {
         state.whenOrNull(
           deletePatientStateLoading: () {
@@ -31,16 +32,17 @@ class DeletePatientBlocListener extends StatelessWidget {
             Navigator.pop(context); // Close loading
             showDialog(
               context: context,
-              builder: (context) => SuccessDialog(
-                message: 'The patient has been deleted successfully.',
-                onSuccess: () {
-                  context.pushNamedAndRemoveUntil(
-                    Routes.allPatientsScreen,
-                    predicate: (route) =>
-                        route.settings.name == Routes.adminHomeScreen,
-                  );
-                },
-              ),
+              builder:
+                  (context) => SuccessDialog(
+                    message: 'The patient has been deleted successfully.',
+                    onSuccess: () {
+                      context.pop();
+                      context.pushNamedAndRemoveUntil(
+                        Routes.adminHomeScreen,
+                        predicate: (_) => false,
+                      );
+                    },
+                  ),
             );
           },
           deletePatientStateError: (message) {

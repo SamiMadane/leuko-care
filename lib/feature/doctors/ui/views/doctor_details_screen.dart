@@ -16,12 +16,10 @@ import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doc
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
-  final int patientsCount;
 
   const DoctorDetailsScreen({
     super.key,
     required this.doctor,
-    required this.patientsCount,
   });
 
   @override
@@ -69,12 +67,11 @@ class DoctorDetailsScreen extends StatelessWidget {
                 SizedBox(height: HeightManager.h20),
                 DoctorDetailsInfoCard(
                   doctor: doctor,
-                  patientsCount: patientsCount,
                 ),
                 SizedBox(height: HeightManager.h30),
                 DoctorDetailsEditButton(doctor: doctor),
                 SizedBox(height: HeightManager.h16),
-                DoctorDetailsViewPatientsButton(doctorId: doctor.id),
+                DoctorDetailsViewPatientsButton(doctorId: doctor.id,doctorName: doctor.name),
 
 
 

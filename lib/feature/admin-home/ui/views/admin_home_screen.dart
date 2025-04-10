@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department_list_view.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctor_department_list_view.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_blue_container.dart';

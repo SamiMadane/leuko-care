@@ -6,20 +6,22 @@ import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/all_
 
 class AllPatientsScreen extends StatelessWidget {
   final String doctorId;
+  final String doctorName;
 
-  const AllPatientsScreen({super.key, required this.doctorId});
+
+  const AllPatientsScreen({super.key, required this.doctorId, required this.doctorName});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Patients List'),
+        title: Text('Patients of Dr. $doctorName'),
       ),
       body: AllPatientsBodyBlocBuilder(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.pushNamed(
             Routes.addUpdatePatientScreen,
-            arguments: {doctorId: doctorId},
+            arguments: {'doctorId': doctorId},
           );
         },
         backgroundColor: ColorsManager.primaryColor,

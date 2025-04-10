@@ -43,4 +43,8 @@ class PatientState with _$PatientState {
 
   // حالة خطأ في حذف مريض
   const factory PatientState.deletePatientStateError(String message) = DeletePatientStateError;
+
+    const factory PatientState.getPatientsByDoctorIdStateLoading() = GetPatientsByDoctorIdStateLoading;
+  const factory PatientState.getPatientsByDoctorIdStateSuccess(List<PatientModel> patients) = GetPatientsByDoctorIdStateSuccess;
+  const factory PatientState.getPatientsByDoctorIdStateError(String message) = GetPatientsByDoctorIdStateError;
 }

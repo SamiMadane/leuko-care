@@ -10,7 +10,8 @@ import 'package:leuko_care/core/widgets/app_text_button.dart';
 
 class DoctorDetailsViewPatientsButton extends StatelessWidget {
   final String? doctorId;
-  const DoctorDetailsViewPatientsButton({super.key, this.doctorId});
+  final String? doctorName;
+  const DoctorDetailsViewPatientsButton({super.key, this.doctorId, this.doctorName});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,10 @@ class DoctorDetailsViewPatientsButton extends StatelessWidget {
         onPressed: () {
           context.pushNamed(
             Routes.allPatientsScreen,
-            arguments: doctorId,
+            arguments: {
+              'doctorId': doctorId,
+              'doctorName': doctorName,
+            },
           );
         },
         backgroundColor: ColorsManager.primaryColor,

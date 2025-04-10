@@ -101,4 +101,20 @@ class PatientRepository {
       throw Exception('Error uploading image: ${result['error']}');
     }
   }
+
+  
+  Future<List<PatientModel>> getPatientsByDoctorId(String doctorId) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection('patients')
+          .where('doctorId', isEqualTo: doctorId) // تصفية المرضى حسب doctorId
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => PatientModel.fromJson(doc.data()))
+          .toList();
+    } catch (e) {
+      throw Exception("Failed to load patients");
+    }
+  }
 }

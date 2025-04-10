@@ -18,15 +18,15 @@ class AllPatientsBodyBlocBuilder extends StatelessWidget {
     return BlocBuilder<PatientCubit, PatientState>(
       buildWhen:
           (previous, current) =>
-              current is GetPatientStateLoading ||
-              current is GetPatientStateSuccess ||
-              current is GetPatientStateError,
+              current is GetPatientsByDoctorIdStateLoading ||
+              current is GetPatientsByDoctorIdStateSuccess ||
+              current is GetPatientsByDoctorIdStateError,
       builder: (context, state) {
         return state.whenOrNull(
-              getPatientStateLoading: () => _buildPatientsLoadingWidget(),
-              getPatientStateSuccess:
+              getPatientsByDoctorIdStateLoading: () => _buildPatientsLoadingWidget(),
+              getPatientsByDoctorIdStateSuccess:
                   (patients) => _buildPatientsSuccessWidget(patients),
-              getPatientStateError:
+              getPatientsByDoctorIdStateError:
                   (message) => _buildPatientsErrorWidget(message: message),
             ) ?? 
             const SizedBox.shrink(); // fallback إذا لم تكن أي حالة

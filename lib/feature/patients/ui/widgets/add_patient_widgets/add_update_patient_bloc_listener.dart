@@ -79,12 +79,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   context.pop();
-                  context.pushNamedAndRemoveUntil(
-                    Routes.allPatientsScreen,
-                    predicate:
-                        (route) =>
-                            route.settings.name == Routes.adminHomeScreen,
-                  );
+                  context.pushNamedAndRemoveUntil(Routes.adminHomeScreen, predicate: (_) => false);
                 },
                 child: Text(
                   'Got it',

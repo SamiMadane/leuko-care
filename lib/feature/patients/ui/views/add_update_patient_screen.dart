@@ -57,9 +57,12 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   }
 
   Future<void> _selectBirthDate() async {
+     final DateTime initialDate = _birthDateController.text.isNotEmpty
+      ? DateFormat('yyyy-MM-dd').parse(_birthDateController.text)
+      : DateTime(2000);
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime(2000),
+      initialDate: initialDate,
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );
@@ -78,7 +81,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        padding: EdgeInsets.symmetric(horizontal: WidthManager.w20, vertical: HeightManager.h16),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -124,6 +127,9 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                       controller: _birthDateController,
                       labelText: 'Birth Date',
                       validator: (value) => value!.isEmpty ? 'Enter Birth Date' : null,
+                      keyboardType: TextInputType.datetime,
+                      suffixIcon: Icon(Icons.calendar_today, color: Colors.blue),
+
                     ),
                   ),
                 ),
@@ -152,7 +158,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         name: _nameController.text,
         email: _emailController.text,
         phone: _phoneController.text,
-        profileImage: profileImageUrl!,
+        profileImage: profileImageUrl ?? '',
         doctorId: widget.patient?.doctorId ?? widget.doctorId!,
         userType: 'patient',
         isExamined: false,
