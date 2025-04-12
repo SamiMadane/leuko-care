@@ -21,32 +21,13 @@ class DoctorsDepartmentBlocBuilder extends StatelessWidget {
               current is GetDoctorsStateSuccess,
       builder: (context, state) {
         return switch (state) {
-          GetDoctorsStateLoading() => setupLoading(),
-          GetDoctorsStateError(message: var message) => setupError(message),
-          GetDoctorsStateSuccess(doctors: var doctors) => setupSuccess(doctors),
+          GetDoctorsStateLoading() => const DoctorDepartmentShimmerLoading(),
+          GetDoctorsStateError() => const SizedBox.shrink(),
+          GetDoctorsStateSuccess(doctors: var doctors) => DoctorsDepartmentListView(doctors: doctors),
           _ => const SizedBox.shrink(),
         };
       },
     );
   }
 
-  Widget setupLoading() {
-    return DoctorDepartmentShimmerLoading();
-  }
-
-  Widget setupSuccess(doctors) {
-    return DoctorsDepartmentListView(doctors: doctors);
-  }
-
-  Widget setupError(String? message) {
-    return Center(
-      child: Text(
-        'Error: $message',
-        style: getRegularTextStyle(
-          fontSize: FontSizeManager.s14,
-          color: ColorsManager.darkBlue,
-        ),
-      ),
-    );
-  }
 }
