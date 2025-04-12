@@ -55,6 +55,7 @@ class WidthManager {
   static double w50 = SizeUtil.setWidth(50.0);
   static double w60 = SizeUtil.setWidth(60.0);
   static double w68 = SizeUtil.setWidth(68.0);
+  static double w70 = SizeUtil.setWidth(70.0);
   static double w76 = SizeUtil.setWidth(76.0);
   static double w80 = SizeUtil.setWidth(80.0);
   static double w100 = SizeUtil.setWidth(100.0);
@@ -111,6 +112,10 @@ class HeightManager {
   static double h120 = SizeUtil.setHeight(120.0);
   static double h130 = SizeUtil.setHeight(130.0);
   static double h165 = SizeUtil.setHeight(165.0);
+  static double h170 = SizeUtil.setHeight(170.0);
+  static double h180 = SizeUtil.setHeight(180.0);
+  static double h185 = SizeUtil.setHeight(185.0);
+  static double h190 = SizeUtil.setHeight(190.0);
   static double h195 = SizeUtil.setHeight(195.0);
   static double h200 = SizeUtil.setHeight(200.0);
   static double h210 = SizeUtil.setHeight(210.0);

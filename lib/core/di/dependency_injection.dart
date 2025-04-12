@@ -1,6 +1,7 @@
 // GetIt => class dependency injection (files depend on each other).
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
+import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/login/data/repository/login_repo.dart';
@@ -27,4 +28,11 @@ Future<void> setupGetIt() async {
   // تسجيل Patient Repository & Cubit
   getIt.registerLazySingleton(() => PatientRepository(getIt<FirebaseFirestore>()));
   getIt.registerFactory(() => PatientCubit(getIt<PatientRepository>()));
+
+  // تسجيل AdminHomeCubit
+  getIt.registerFactory(() => AdminHomeCubit(
+    doctorRepository: getIt<DoctorRepository>(),
+    patientRepository: getIt<PatientRepository>(),
+  ));
+
 }

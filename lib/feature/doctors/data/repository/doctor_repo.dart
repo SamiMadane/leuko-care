@@ -21,7 +21,7 @@ class DoctorRepository {
     });
   }
 
-// جلب عدد المرضى لدى كل طبيب 
+  // جلب عدد المرضى لدى كل طبيب
   Future<int> getPatientsCountForDoctor(String doctorId) async {
     final snapshot =
         await FirebaseFirestore.instance

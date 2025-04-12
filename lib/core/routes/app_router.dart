@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/views/add_update_doctor_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_details_screen.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:leuko_care/feature/patients/data/repository/patient_repo.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/views/add_update_patient_screen.dart';
 import 'package:leuko_care/feature/patients/ui/views/all_patients_screen.dart';
@@ -34,9 +37,10 @@ class AppRouter {
           builder:
               (_) => BlocProvider(
                 create:
-                    (context) =>
-                        getIt<DoctorCubit>()
-                          ..getDoctorsStream(), // تمرير DoctorCubit هنا
+                    (context) => AdminHomeCubit(
+                      doctorRepository: getIt<DoctorRepository>(),
+                      patientRepository: getIt<PatientRepository>(),
+                    )..getDoctors(), // تمرير AdminHomeCubit هنا
                 child: const AdminHomeScreen(),
               ),
         );
@@ -65,9 +69,7 @@ class AppRouter {
           builder:
               (_) => BlocProvider.value(
                 value: getIt<DoctorCubit>()..getDoctorsStream(),
-                child: DoctorDetailsScreen(
-                  doctor: doctorDetails,
-                ),
+                child: DoctorDetailsScreen(doctor: doctorDetails),
               ),
         );
       case Routes.addUpdateDoctorScreen:

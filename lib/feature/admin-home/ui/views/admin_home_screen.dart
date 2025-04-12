@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
+import 'package:leuko_care/feature/admin-home/ui/widgets/doctor_department/doctor_department_bloc_builder.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department_list_view.dart';
-import 'package:leuko_care/feature/admin-home/ui/widgets/doctor_department_list_view.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_blue_container.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_department_see_all.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/home_top_bar.dart';
@@ -32,7 +32,7 @@ class AdminHomeScreen extends StatelessWidget {
               SizedBox(height: HeightManager.h24),
               const DoctorsDepartmentSeeAll(),
               SizedBox(height: HeightManager.h18),
-              const DoctorsDepartmentListView(),
+              const DoctorsDepartmentBlocBuilder(),
               SizedBox(height: HeightManager.h10),
               const PatientsDepartmentSeeAll(),
               SizedBox(height: HeightManager.h18),

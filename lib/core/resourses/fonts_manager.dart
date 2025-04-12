@@ -21,6 +21,7 @@ class FontSizeManager {
   static double s14 = SizeUtil.setFontSize(14.0);
   static double s15 = SizeUtil.setFontSize(15.0);
   static double s16 = SizeUtil.setFontSize(16.0);
+  static double s17 = SizeUtil.setFontSize(17.0);
   static double s18 = SizeUtil.setFontSize(18.0);
   static double s20 = SizeUtil.setFontSize(20.0);
   static double s22 = SizeUtil.setFontSize(22.0);
