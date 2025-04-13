@@ -36,10 +36,7 @@ class AdminHomeRepository {
 
     Future<void> signOut() async {
     try {
-      // تسجيل الخروج من Firebase
       await FirebaseAuth.instance.signOut();
-
-      // مسح البيانات المحلية من SharedPreferences
       await SharedPrefHelper.clearAllData();
     } catch (e) {
       throw Exception("Error signing out: $e");

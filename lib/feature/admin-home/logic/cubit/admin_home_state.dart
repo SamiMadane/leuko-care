@@ -5,27 +5,18 @@ part 'admin_home_state.freezed.dart';
 
 @freezed
 class AdminHomeState with _$AdminHomeState {
-  // الحالة الأولية
   const factory AdminHomeState.homeStateInitial() = _HomeStateInitial;
-
-  // حالة تحميل لجلب الدكاترة
+  // Get Doctors States
   const factory AdminHomeState.getDoctorsStateLoading() = GetDoctorsStateLoading;
-
-  // حالة نجاح في جلب الدكاترة
   const factory AdminHomeState.getDoctorsStateSuccess(List<DoctorModel> doctors) = GetDoctorsStateSuccess;
-
-  // حالة خطأ في جلب الدكاترة
   const factory AdminHomeState.getDoctorsStateError(String message) = GetDoctorsStateError;
-
-  // حالة تحميل لجلب المرضى
+  
+  // Get Patient States
   const factory AdminHomeState.getPatientsStateLoading() = GetPatientsStateLoading;
-
-  // حالة نجاح في جلب المرضى بناءً على الدكتور
   const factory AdminHomeState.getPatientsStateSuccess(List<PatientModel> patients) = GetPatientsStateSuccess;
-
-  // حالة خطأ في جلب المرضى
   const factory AdminHomeState.getPatientsStateError(String message) = GetPatientsStateError;
 
+  // SignOut States
   const factory AdminHomeState.signedOutStateLoading() = SignedOutStateLoading;
   const factory AdminHomeState.signedOutStateSuccess() = SignedOutStateSuccess;
   const factory AdminHomeState.signedOutStateError(String message) = SignedOutStateError;
