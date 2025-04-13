@@ -34,16 +34,16 @@ class DoctorsBlueContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: HeightManager.h6),
-                BorderedText(
-                  text: 'Admin Dashboard',
+                Text(
+                   'Admin Dashboard',
                   style: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
                     color: ColorsManager.white,
                   ),
                 ),
                 SizedBox(height: HeightManager.h10),
-                BorderedText(
-                  text: 'Full access\nTo manage\nDoctors & Patients.',
+                Text(
+                  'Full access\nTo manage\nDoctors & Patients.',
                   style: getSemiBoldTextStyle(
                     fontSize: FontSizeManager.s17,
                     color: ColorsManager.white,
