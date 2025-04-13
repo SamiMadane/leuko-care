@@ -27,15 +27,6 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
   }
 
-  Future<int> getPatientsCountForDoctor(String doctorId) async {
-    try {
-      final count = await _repository.getPatientsCountForDoctor(doctorId);
-      return count; 
-    } catch (e) {
-      throw Exception('Error fetching patient count: $e');
-    }
-  }
-
   Future<String> _getImageUrl(DoctorModel doctor) async {
     if (doctor.profileImage.isEmpty) {
       return 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
@@ -93,4 +84,8 @@ class DoctorCubit extends Cubit<DoctorState> {
       emit(DeleteDoctorStateError('Error deleting doctor: $e'));
     }
   }
+
+Stream<int> getPatientsCountStream(String doctorId) {
+  return _repository.getPatientsCountForDoctor(doctorId);
+}
 }

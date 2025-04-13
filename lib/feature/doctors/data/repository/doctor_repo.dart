@@ -8,9 +8,9 @@ import '../models/doctor_model.dart';
 class DoctorRepository {
   final FirebaseFirestore _firestore;
 
-  DoctorRepository(this._firestore); 
+  DoctorRepository(this._firestore);
 
-  // Get all doctors from firestore 
+  // Get all doctors from firestore
   // snapshots its read real time all changes
   Stream<List<DoctorModel>> getDoctorsStream() {
     return _firestore.collection('doctors').snapshots().map((snapshot) {
@@ -21,13 +21,12 @@ class DoctorRepository {
   }
 
   // Get count of patients for each doctor
-  Future<int> getPatientsCountForDoctor(String doctorId) async {
-    final snapshot =
-        await FirebaseFirestore.instance
-            .collection('patients')
-            .where('doctorId', isEqualTo: doctorId)
-            .get();
-    return snapshot.size;
+  Stream<int> getPatientsCountForDoctor(String doctorId) {
+    return _firestore
+        .collection('patients')
+        .where('doctorId', isEqualTo: doctorId)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.length);
   }
 
   Future<void> addDoctor(DoctorModel doctor) async {

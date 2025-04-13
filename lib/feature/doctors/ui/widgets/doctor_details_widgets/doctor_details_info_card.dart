@@ -13,7 +13,7 @@ class DoctorDetailsInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DoctorCubit>().getPatientsCountForDoctor(doctor.id!);
+    // context.read<DoctorCubit>().getPatientsCountForDoctor(doctor.id!);
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -43,17 +43,17 @@ class DoctorDetailsInfoCard extends StatelessWidget {
               doctor.description,
             ),
             const Divider(),
-            FutureBuilder<int>(
-                  future: context.read<DoctorCubit>().getPatientsCountForDoctor(
-                    doctor.id!,
-                  ),
-                  builder:
-                      (context, snapshot) => _buildRowInfo(
-                  Icons.people,
-                  'Patients Count',
-                  '${snapshot.data ?? '...'}',
-                )
-                ),
+            // FutureBuilder<int>(
+            //       future: context.read<DoctorCubit>().getPatientsCountForDoctor(
+            //         doctor.id!,
+            //       ),
+            //       builder:
+            //           (context, snapshot) => _buildRowInfo(
+            //       Icons.people,
+            //       'Patients Count',
+            //       '${snapshot.data ?? '...'}',
+            //     )
+            //     ),
             
           ],
         ),
