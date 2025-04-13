@@ -6,7 +6,6 @@ import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
 
 class DoctorDetailsInfoCard extends StatelessWidget {
   final DoctorModel doctor;

@@ -7,8 +7,8 @@ import 'package:leuko_care/feature/admin-home/ui/widgets/doctor_department/docto
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 
 class DoctorsDepartmentListView extends StatelessWidget {
-  List<DoctorModel> doctors;
-  DoctorsDepartmentListView({super.key,required this.doctors});
+  final List<DoctorModel> doctors;
+  const DoctorsDepartmentListView({super.key,required this.doctors});
 
   @override
   Widget build(BuildContext context) {

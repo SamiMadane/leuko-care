@@ -4,6 +4,7 @@ import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/widgets/borderd_text.dart';
 
 class DoctorsBlueContainer extends StatelessWidget {
   const DoctorsBlueContainer({super.key});
@@ -25,7 +26,7 @@ class DoctorsBlueContainer extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(RadiusManager.r24),
               image: DecorationImage(
-                image: AssetImage(AssetsManager.homeBluePattern),
+                image: AssetImage(AssetsManager.homeBluePatternImage),
                 fit: BoxFit.cover,
               ),
             ),
@@ -33,16 +34,16 @@ class DoctorsBlueContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: HeightManager.h6),
-                Text(
-                  'Admin Dashboard',
+                BorderedText(
+                  text: 'Admin Dashboard',
                   style: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
                     color: ColorsManager.white,
                   ),
                 ),
                 SizedBox(height: HeightManager.h10),
-                Text(
-                  'Full access\nTo manage\nDoctors & Patients.',
+                BorderedText(
+                  text: 'Full access\nTo manage\nDoctors & Patients.',
                   style: getSemiBoldTextStyle(
                     fontSize: FontSizeManager.s17,
                     color: ColorsManager.white,
@@ -56,7 +57,7 @@ class DoctorsBlueContainer extends StatelessWidget {
             right: WidthManager.w1,
             top: HeightManager.h20,
             child: Image.asset(
-              AssetsManager.admin1,
+              AssetsManager.homeAdminImage,
               height: HeightManager.h180,
             ),
           ),

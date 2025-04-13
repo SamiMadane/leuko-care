@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class PatientsDepartmentListViewItem extends StatelessWidget {
   final PatientModel patient;
@@ -18,11 +20,13 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.network(
-              patient.profileImage,
+            child: CachedNetworkImage(
+              imageUrl: patient.profileImage,
               width: WidthManager.w110,
               height: HeightManager.h120,
               fit: BoxFit.cover,
+              placeholder: (context, url) => _buildShimmerLoading(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           SizedBox(width: WidthManager.w16),
@@ -43,11 +47,7 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
                 // الهاتف مع أيقونة
                 Row(
                   children: [
-                    Icon(
-                      Icons.phone,
-                      size: 16,
-                      color: ColorsManager.gray,
-                    ),
+                    Icon(Icons.phone, size: 16, color: ColorsManager.gray),
                     SizedBox(width: 6),
                     Text(
                       patient.phone,
@@ -64,11 +64,7 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
                 // الإيميل مع أيقونة
                 Row(
                   children: [
-                    Icon(
-                      Icons.email,
-                      size: 16,
-                      color: ColorsManager.gray,
-                    ),
+                    Icon(Icons.email, size: 16, color: ColorsManager.gray),
                     SizedBox(width: 6),
                     Expanded(
                       child: Text(
@@ -86,6 +82,22 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildShimmerLoading() {
+    return Shimmer.fromColors(
+      baseColor: ColorsManager.lightGray,
+      highlightColor: Colors.white,
+      child: Container(
+        width: WidthManager.w110,
+        height: HeightManager.h120,
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(12.0),
+          color: Colors.white,
+        ),
       ),
     );
   }

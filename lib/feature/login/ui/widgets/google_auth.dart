@@ -62,7 +62,7 @@ class GoogleAuth extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    AssetsManager.google,
+                    AssetsManager.googleImage,
                     width: WidthManager.w40,
                     height: HeightManager.h40,
                   ),
