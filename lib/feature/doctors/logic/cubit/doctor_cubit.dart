@@ -12,15 +12,14 @@ class DoctorCubit extends Cubit<DoctorState> {
   DoctorCubit(this._repository) : super(const DoctorState.doctorStateInitial());
   
 
-  // ✅ متابعة التحديثات مباشرة من Firestore
   void getDoctorsStream() {
     emit(GetDoctorStateLoading());
-    _doctorsSubscription?.cancel(); // إلغاء أي استماع قديم قبل بدء الجديد
+    _doctorsSubscription?.cancel();
     _doctorsSubscription = _repository.getDoctorsStream().listen(
       (doctors) {
         emit(
           GetDoctorStateSuccess(doctors),
-        ); // 🔹 تحديث الحالة فورًا عند أي تغيير
+        ); 
       },
       onError: (error) {
         emit(GetDoctorStateError(error.toString()));
@@ -28,17 +27,15 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
   }
 
-  // إضافة دالة لحساب عدد المرضى للطبيب
   Future<int> getPatientsCountForDoctor(String doctorId) async {
     try {
       final count = await _repository.getPatientsCountForDoctor(doctorId);
-      return count; // إعادة العدد مباشرة
+      return count; 
     } catch (e) {
       throw Exception('Error fetching patient count: $e');
     }
   }
 
-    // دالة للحصول على URL الصورة
   Future<String> _getImageUrl(DoctorModel doctor) async {
     if (doctor.profileImage.isEmpty) {
       return 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
@@ -48,25 +45,22 @@ class DoctorCubit extends Cubit<DoctorState> {
     return doctor.profileImage;
   }
   
-  // إضافة طبيب
   Future<void> addDoctor(DoctorModel doctor, String password) async {
     emit(AddDoctorStateLoading());
     try {
       String imageUrl = await _getImageUrl(doctor);
       doctor = doctor.copyWith(profileImage: imageUrl);
 
-      // ✅ إنشاء الحساب في Firebase Authentication
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
             email: doctor.email,
             password: password,
           );
 
-      // ✅ الحصول على UID من Firebase Authentication
+      // Get UID from Firebase Authentication
       final uid = userCredential.user!.uid;
-
-      // ✅ تعديل بيانات الطبيب لإضافة UID و userType
       doctor = doctor.copyWith(id: uid);
+
       await _repository.addDoctor(doctor);
       emit(AddDoctorStateSuccess());
     } catch (e) {
@@ -74,7 +68,6 @@ class DoctorCubit extends Cubit<DoctorState> {
     }
   }
 
-  // تحديث طبيب
   Future<void> updateDoctor(DoctorModel doctor) async {
     emit(UpdateDoctorStateLoading());
     try {
@@ -83,7 +76,7 @@ class DoctorCubit extends Cubit<DoctorState> {
 
       await _repository.updateDoctor(
         doctor,
-      ); // التأكد من إضافة دالة التحديث في الـ Repository
+      ); 
       emit(UpdateDoctorStateSuccess());
     } catch (e) {
       emit(UpdateDoctorStateError(e.toString()));
