@@ -22,8 +22,6 @@ class DeleteDoctorBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           deleteDoctorStateLoading: () {
-            print('Doctor deleted loading');
-
             showDialog(
               context: context,
               builder: (context) => const LoadingDialog(),
@@ -31,7 +29,6 @@ class DeleteDoctorBlocListener extends StatelessWidget {
             );
           },
           deleteDoctorStateSuccess: () {
-            print('Doctor deleted successfully');
             Navigator.pop(context);
             showDialog(
               context: context,
@@ -50,8 +47,6 @@ class DeleteDoctorBlocListener extends StatelessWidget {
             );
           },
           deleteDoctorStateError: (message) {
-            print('Doctor deleted faield');
-
             Navigator.pop(context);
             showDialog(
               context: context,
