@@ -27,6 +27,9 @@ mixin _$AdminHomeState {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -37,6 +40,9 @@ mixin _$AdminHomeState {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -47,6 +53,9 @@ mixin _$AdminHomeState {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +72,11 @@ mixin _$AdminHomeState {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -73,6 +87,9 @@ mixin _$AdminHomeState {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -83,6 +100,9 @@ mixin _$AdminHomeState {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -160,6 +180,9 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) {
     return homeStateInitial();
   }
@@ -174,6 +197,9 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) {
     return homeStateInitial?.call();
   }
@@ -188,6 +214,9 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (homeStateInitial != null) {
@@ -211,6 +240,11 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) {
     return homeStateInitial(this);
   }
@@ -225,6 +259,9 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) {
     return homeStateInitial?.call(this);
   }
@@ -239,6 +276,9 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (homeStateInitial != null) {
@@ -304,6 +344,9 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) {
     return getDoctorsStateLoading();
   }
@@ -318,6 +361,9 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) {
     return getDoctorsStateLoading?.call();
   }
@@ -332,6 +378,9 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getDoctorsStateLoading != null) {
@@ -355,6 +404,11 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) {
     return getDoctorsStateLoading(this);
   }
@@ -369,6 +423,9 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) {
     return getDoctorsStateLoading?.call(this);
   }
@@ -383,6 +440,9 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getDoctorsStateLoading != null) {
@@ -485,6 +545,9 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) {
     return getDoctorsStateSuccess(doctors);
   }
@@ -499,6 +562,9 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) {
     return getDoctorsStateSuccess?.call(doctors);
   }
@@ -513,6 +579,9 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getDoctorsStateSuccess != null) {
@@ -536,6 +605,11 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) {
     return getDoctorsStateSuccess(this);
   }
@@ -550,6 +624,9 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) {
     return getDoctorsStateSuccess?.call(this);
   }
@@ -564,6 +641,9 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getDoctorsStateSuccess != null) {
@@ -668,6 +748,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) {
     return getDoctorsStateError(message);
   }
@@ -682,6 +765,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) {
     return getDoctorsStateError?.call(message);
   }
@@ -696,6 +782,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getDoctorsStateError != null) {
@@ -719,6 +808,11 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) {
     return getDoctorsStateError(this);
   }
@@ -733,6 +827,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) {
     return getDoctorsStateError?.call(this);
   }
@@ -747,6 +844,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getDoctorsStateError != null) {
@@ -821,6 +921,9 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) {
     return getPatientsStateLoading();
   }
@@ -835,6 +938,9 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) {
     return getPatientsStateLoading?.call();
   }
@@ -849,6 +955,9 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getPatientsStateLoading != null) {
@@ -872,6 +981,11 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) {
     return getPatientsStateLoading(this);
   }
@@ -886,6 +1000,9 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) {
     return getPatientsStateLoading?.call(this);
   }
@@ -900,6 +1017,9 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getPatientsStateLoading != null) {
@@ -1000,6 +1120,9 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) {
     return getPatientsStateSuccess(patients);
   }
@@ -1014,6 +1137,9 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) {
     return getPatientsStateSuccess?.call(patients);
   }
@@ -1028,6 +1154,9 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getPatientsStateSuccess != null) {
@@ -1051,6 +1180,11 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) {
     return getPatientsStateSuccess(this);
   }
@@ -1065,6 +1199,9 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) {
     return getPatientsStateSuccess?.call(this);
   }
@@ -1079,6 +1216,9 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getPatientsStateSuccess != null) {
@@ -1183,6 +1323,9 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     required TResult Function(List<PatientModel> patients)
     getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
   }) {
     return getPatientsStateError(message);
   }
@@ -1197,6 +1340,9 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult? Function()? getPatientsStateLoading,
     TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
   }) {
     return getPatientsStateError?.call(message);
   }
@@ -1211,6 +1357,9 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult Function()? getPatientsStateLoading,
     TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
     TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getPatientsStateError != null) {
@@ -1234,6 +1383,11 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
     getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
   }) {
     return getPatientsStateError(this);
   }
@@ -1248,6 +1402,9 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
   }) {
     return getPatientsStateError?.call(this);
   }
@@ -1262,6 +1419,9 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
     required TResult orElse(),
   }) {
     if (getPatientsStateError != null) {
@@ -1282,4 +1442,534 @@ abstract class GetPatientsStateError implements AdminHomeState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetPatientsStateErrorImplCopyWith<_$GetPatientsStateErrorImpl>
   get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SignedOutStateLoadingImplCopyWith<$Res> {
+  factory _$$SignedOutStateLoadingImplCopyWith(
+    _$SignedOutStateLoadingImpl value,
+    $Res Function(_$SignedOutStateLoadingImpl) then,
+  ) = __$$SignedOutStateLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignedOutStateLoadingImplCopyWithImpl<$Res>
+    extends _$AdminHomeStateCopyWithImpl<$Res, _$SignedOutStateLoadingImpl>
+    implements _$$SignedOutStateLoadingImplCopyWith<$Res> {
+  __$$SignedOutStateLoadingImplCopyWithImpl(
+    _$SignedOutStateLoadingImpl _value,
+    $Res Function(_$SignedOutStateLoadingImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AdminHomeState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SignedOutStateLoadingImpl implements SignedOutStateLoading {
+  const _$SignedOutStateLoadingImpl();
+
+  @override
+  String toString() {
+    return 'AdminHomeState.signedOutStateLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignedOutStateLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() homeStateInitial,
+    required TResult Function() getDoctorsStateLoading,
+    required TResult Function(List<DoctorModel> doctors) getDoctorsStateSuccess,
+    required TResult Function(String message) getDoctorsStateError,
+    required TResult Function() getPatientsStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientsStateSuccess,
+    required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
+  }) {
+    return signedOutStateLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? homeStateInitial,
+    TResult? Function()? getDoctorsStateLoading,
+    TResult? Function(List<DoctorModel> doctors)? getDoctorsStateSuccess,
+    TResult? Function(String message)? getDoctorsStateError,
+    TResult? Function()? getPatientsStateLoading,
+    TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
+    TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
+  }) {
+    return signedOutStateLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? homeStateInitial,
+    TResult Function()? getDoctorsStateLoading,
+    TResult Function(List<DoctorModel> doctors)? getDoctorsStateSuccess,
+    TResult Function(String message)? getDoctorsStateError,
+    TResult Function()? getPatientsStateLoading,
+    TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
+    TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
+    required TResult orElse(),
+  }) {
+    if (signedOutStateLoading != null) {
+      return signedOutStateLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeStateInitial value) homeStateInitial,
+    required TResult Function(GetDoctorsStateLoading value)
+    getDoctorsStateLoading,
+    required TResult Function(GetDoctorsStateSuccess value)
+    getDoctorsStateSuccess,
+    required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
+    required TResult Function(GetPatientsStateLoading value)
+    getPatientsStateLoading,
+    required TResult Function(GetPatientsStateSuccess value)
+    getPatientsStateSuccess,
+    required TResult Function(GetPatientsStateError value)
+    getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
+  }) {
+    return signedOutStateLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeStateInitial value)? homeStateInitial,
+    TResult? Function(GetDoctorsStateLoading value)? getDoctorsStateLoading,
+    TResult? Function(GetDoctorsStateSuccess value)? getDoctorsStateSuccess,
+    TResult? Function(GetDoctorsStateError value)? getDoctorsStateError,
+    TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
+    TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
+    TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
+  }) {
+    return signedOutStateLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeStateInitial value)? homeStateInitial,
+    TResult Function(GetDoctorsStateLoading value)? getDoctorsStateLoading,
+    TResult Function(GetDoctorsStateSuccess value)? getDoctorsStateSuccess,
+    TResult Function(GetDoctorsStateError value)? getDoctorsStateError,
+    TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
+    TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
+    TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
+    required TResult orElse(),
+  }) {
+    if (signedOutStateLoading != null) {
+      return signedOutStateLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignedOutStateLoading implements AdminHomeState {
+  const factory SignedOutStateLoading() = _$SignedOutStateLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$SignedOutStateSuccessImplCopyWith<$Res> {
+  factory _$$SignedOutStateSuccessImplCopyWith(
+    _$SignedOutStateSuccessImpl value,
+    $Res Function(_$SignedOutStateSuccessImpl) then,
+  ) = __$$SignedOutStateSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignedOutStateSuccessImplCopyWithImpl<$Res>
+    extends _$AdminHomeStateCopyWithImpl<$Res, _$SignedOutStateSuccessImpl>
+    implements _$$SignedOutStateSuccessImplCopyWith<$Res> {
+  __$$SignedOutStateSuccessImplCopyWithImpl(
+    _$SignedOutStateSuccessImpl _value,
+    $Res Function(_$SignedOutStateSuccessImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AdminHomeState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SignedOutStateSuccessImpl implements SignedOutStateSuccess {
+  const _$SignedOutStateSuccessImpl();
+
+  @override
+  String toString() {
+    return 'AdminHomeState.signedOutStateSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignedOutStateSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() homeStateInitial,
+    required TResult Function() getDoctorsStateLoading,
+    required TResult Function(List<DoctorModel> doctors) getDoctorsStateSuccess,
+    required TResult Function(String message) getDoctorsStateError,
+    required TResult Function() getPatientsStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientsStateSuccess,
+    required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
+  }) {
+    return signedOutStateSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? homeStateInitial,
+    TResult? Function()? getDoctorsStateLoading,
+    TResult? Function(List<DoctorModel> doctors)? getDoctorsStateSuccess,
+    TResult? Function(String message)? getDoctorsStateError,
+    TResult? Function()? getPatientsStateLoading,
+    TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
+    TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
+  }) {
+    return signedOutStateSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? homeStateInitial,
+    TResult Function()? getDoctorsStateLoading,
+    TResult Function(List<DoctorModel> doctors)? getDoctorsStateSuccess,
+    TResult Function(String message)? getDoctorsStateError,
+    TResult Function()? getPatientsStateLoading,
+    TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
+    TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
+    required TResult orElse(),
+  }) {
+    if (signedOutStateSuccess != null) {
+      return signedOutStateSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeStateInitial value) homeStateInitial,
+    required TResult Function(GetDoctorsStateLoading value)
+    getDoctorsStateLoading,
+    required TResult Function(GetDoctorsStateSuccess value)
+    getDoctorsStateSuccess,
+    required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
+    required TResult Function(GetPatientsStateLoading value)
+    getPatientsStateLoading,
+    required TResult Function(GetPatientsStateSuccess value)
+    getPatientsStateSuccess,
+    required TResult Function(GetPatientsStateError value)
+    getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
+  }) {
+    return signedOutStateSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeStateInitial value)? homeStateInitial,
+    TResult? Function(GetDoctorsStateLoading value)? getDoctorsStateLoading,
+    TResult? Function(GetDoctorsStateSuccess value)? getDoctorsStateSuccess,
+    TResult? Function(GetDoctorsStateError value)? getDoctorsStateError,
+    TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
+    TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
+    TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
+  }) {
+    return signedOutStateSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeStateInitial value)? homeStateInitial,
+    TResult Function(GetDoctorsStateLoading value)? getDoctorsStateLoading,
+    TResult Function(GetDoctorsStateSuccess value)? getDoctorsStateSuccess,
+    TResult Function(GetDoctorsStateError value)? getDoctorsStateError,
+    TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
+    TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
+    TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
+    required TResult orElse(),
+  }) {
+    if (signedOutStateSuccess != null) {
+      return signedOutStateSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignedOutStateSuccess implements AdminHomeState {
+  const factory SignedOutStateSuccess() = _$SignedOutStateSuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$SignedOutStateErrorImplCopyWith<$Res> {
+  factory _$$SignedOutStateErrorImplCopyWith(
+    _$SignedOutStateErrorImpl value,
+    $Res Function(_$SignedOutStateErrorImpl) then,
+  ) = __$$SignedOutStateErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$SignedOutStateErrorImplCopyWithImpl<$Res>
+    extends _$AdminHomeStateCopyWithImpl<$Res, _$SignedOutStateErrorImpl>
+    implements _$$SignedOutStateErrorImplCopyWith<$Res> {
+  __$$SignedOutStateErrorImplCopyWithImpl(
+    _$SignedOutStateErrorImpl _value,
+    $Res Function(_$SignedOutStateErrorImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AdminHomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? message = null}) {
+    return _then(
+      _$SignedOutStateErrorImpl(
+        null == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$SignedOutStateErrorImpl implements SignedOutStateError {
+  const _$SignedOutStateErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'AdminHomeState.signedOutStateError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignedOutStateErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of AdminHomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignedOutStateErrorImplCopyWith<_$SignedOutStateErrorImpl> get copyWith =>
+      __$$SignedOutStateErrorImplCopyWithImpl<_$SignedOutStateErrorImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() homeStateInitial,
+    required TResult Function() getDoctorsStateLoading,
+    required TResult Function(List<DoctorModel> doctors) getDoctorsStateSuccess,
+    required TResult Function(String message) getDoctorsStateError,
+    required TResult Function() getPatientsStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientsStateSuccess,
+    required TResult Function(String message) getPatientsStateError,
+    required TResult Function() signedOutStateLoading,
+    required TResult Function() signedOutStateSuccess,
+    required TResult Function(String message) signedOutStateError,
+  }) {
+    return signedOutStateError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? homeStateInitial,
+    TResult? Function()? getDoctorsStateLoading,
+    TResult? Function(List<DoctorModel> doctors)? getDoctorsStateSuccess,
+    TResult? Function(String message)? getDoctorsStateError,
+    TResult? Function()? getPatientsStateLoading,
+    TResult? Function(List<PatientModel> patients)? getPatientsStateSuccess,
+    TResult? Function(String message)? getPatientsStateError,
+    TResult? Function()? signedOutStateLoading,
+    TResult? Function()? signedOutStateSuccess,
+    TResult? Function(String message)? signedOutStateError,
+  }) {
+    return signedOutStateError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? homeStateInitial,
+    TResult Function()? getDoctorsStateLoading,
+    TResult Function(List<DoctorModel> doctors)? getDoctorsStateSuccess,
+    TResult Function(String message)? getDoctorsStateError,
+    TResult Function()? getPatientsStateLoading,
+    TResult Function(List<PatientModel> patients)? getPatientsStateSuccess,
+    TResult Function(String message)? getPatientsStateError,
+    TResult Function()? signedOutStateLoading,
+    TResult Function()? signedOutStateSuccess,
+    TResult Function(String message)? signedOutStateError,
+    required TResult orElse(),
+  }) {
+    if (signedOutStateError != null) {
+      return signedOutStateError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeStateInitial value) homeStateInitial,
+    required TResult Function(GetDoctorsStateLoading value)
+    getDoctorsStateLoading,
+    required TResult Function(GetDoctorsStateSuccess value)
+    getDoctorsStateSuccess,
+    required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
+    required TResult Function(GetPatientsStateLoading value)
+    getPatientsStateLoading,
+    required TResult Function(GetPatientsStateSuccess value)
+    getPatientsStateSuccess,
+    required TResult Function(GetPatientsStateError value)
+    getPatientsStateError,
+    required TResult Function(SignedOutStateLoading value)
+    signedOutStateLoading,
+    required TResult Function(SignedOutStateSuccess value)
+    signedOutStateSuccess,
+    required TResult Function(SignedOutStateError value) signedOutStateError,
+  }) {
+    return signedOutStateError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeStateInitial value)? homeStateInitial,
+    TResult? Function(GetDoctorsStateLoading value)? getDoctorsStateLoading,
+    TResult? Function(GetDoctorsStateSuccess value)? getDoctorsStateSuccess,
+    TResult? Function(GetDoctorsStateError value)? getDoctorsStateError,
+    TResult? Function(GetPatientsStateLoading value)? getPatientsStateLoading,
+    TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
+    TResult? Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult? Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult? Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult? Function(SignedOutStateError value)? signedOutStateError,
+  }) {
+    return signedOutStateError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeStateInitial value)? homeStateInitial,
+    TResult Function(GetDoctorsStateLoading value)? getDoctorsStateLoading,
+    TResult Function(GetDoctorsStateSuccess value)? getDoctorsStateSuccess,
+    TResult Function(GetDoctorsStateError value)? getDoctorsStateError,
+    TResult Function(GetPatientsStateLoading value)? getPatientsStateLoading,
+    TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
+    TResult Function(GetPatientsStateError value)? getPatientsStateError,
+    TResult Function(SignedOutStateLoading value)? signedOutStateLoading,
+    TResult Function(SignedOutStateSuccess value)? signedOutStateSuccess,
+    TResult Function(SignedOutStateError value)? signedOutStateError,
+    required TResult orElse(),
+  }) {
+    if (signedOutStateError != null) {
+      return signedOutStateError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignedOutStateError implements AdminHomeState {
+  const factory SignedOutStateError(final String message) =
+      _$SignedOutStateErrorImpl;
+
+  String get message;
+
+  /// Create a copy of AdminHomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SignedOutStateErrorImplCopyWith<_$SignedOutStateErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

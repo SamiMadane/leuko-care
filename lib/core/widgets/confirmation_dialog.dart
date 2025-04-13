@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resourses/fonts_manager.dart';
+import 'package:leuko_care/core/resourses/styles_manager.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;
@@ -15,7 +18,10 @@ class ConfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(title),
-      content: Text(message),
+      content: Text(
+        message,
+       
+      ),
       actions: [
         TextButton(onPressed: onConfirmed, child: const Text('Yes')),
         TextButton(

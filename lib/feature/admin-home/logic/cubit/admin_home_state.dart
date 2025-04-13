@@ -25,4 +25,9 @@ class AdminHomeState with _$AdminHomeState {
 
   // حالة خطأ في جلب المرضى
   const factory AdminHomeState.getPatientsStateError(String message) = GetPatientsStateError;
+
+  const factory AdminHomeState.signedOutStateLoading() = SignedOutStateLoading;
+  const factory AdminHomeState.signedOutStateSuccess() = SignedOutStateSuccess;
+  const factory AdminHomeState.signedOutStateError(String message) = SignedOutStateError;
+
 }

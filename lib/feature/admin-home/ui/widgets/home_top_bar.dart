@@ -1,18 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
-import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
-import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
+import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
+import 'package:leuko_care/feature/admin-home/ui/widgets/signout_bloc_builder.dart';
 
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<AdminHomeCubit>();
     return Row(
       children: [
         Column(
@@ -41,16 +43,23 @@ class HomeTopBar extends StatelessWidget {
           backgroundColor: ColorsManager.moreLighterGray,
           child: IconButton(
             onPressed: () {
-              FirebaseAuth.instance.signOut();
-              SharedPrefHelper.clearAllData();
-              context.pushNamedAndRemoveUntil(
-                Routes.userSelectionScreen,
-                predicate: (route) => false
+              showDialog(
+                context: context,
+                builder:
+                    (context) => ConfirmationDialog(
+                      title: 'Confirm Sign Out',
+                      message: 'Are you sure you want to sign out?',
+                      onConfirmed: () {
+                        cubit.signOut(); // ثم نسجل الخروج
+                        context.pop(); // أولاً نغلق الـ Dialog
+                      },
+                    ),
               );
             },
             icon: Icon(Icons.exit_to_app),
           ),
         ),
+        SignOutBlocListener(),
       ],
     );
   }
