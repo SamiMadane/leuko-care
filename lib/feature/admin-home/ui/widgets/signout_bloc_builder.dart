@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/core/widgets/error_dialog.dart';
 import 'package:leuko_care/core/widgets/loading_dialog.dart';
@@ -55,47 +54,4 @@ class SignOutBlocListener extends StatelessWidget {
     );
   }
 
-  // عرض حالة تحميل (loading)
-  void _showLoadingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder:
-          (context) => const Center(
-            child: CircularProgressIndicator(color: ColorsManager.primaryColor),
-          ),
-    );
-  }
-
-  // عند حدوث خطأ في عملية تسجيل الخروج
-  void _showErrorDialog(BuildContext context, String error) {
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            icon: const Icon(Icons.error, color: Colors.red, size: 32),
-            content: Text(
-              error,
-              style: const TextStyle(fontSize: 16, color: Colors.black),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text(
-                  'Got it',
-                  style: TextStyle(color: ColorsManager.primaryColor),
-                ),
-              ),
-            ],
-          ),
-    );
-  }
-
-  // الانتقال إلى شاشة اختيار المستخدم
-  void _navigateToUserSelectionScreen(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      Routes.userSelectionScreen,
-      (route) => false,
-    );
-  }
 }

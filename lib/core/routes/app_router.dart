@@ -6,14 +6,12 @@ import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.da
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
-import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/views/add_update_doctor_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_details_screen.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
-import 'package:leuko_care/feature/patients/data/repository/patient_repo.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/views/add_update_patient_screen.dart';
 import 'package:leuko_care/feature/patients/ui/views/all_patients_screen.dart';

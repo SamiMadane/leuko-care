@@ -4,7 +4,6 @@ import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
-import 'package:leuko_care/core/widgets/borderd_text.dart';
 
 class DoctorsBlueContainer extends StatelessWidget {
   const DoctorsBlueContainer({super.key});

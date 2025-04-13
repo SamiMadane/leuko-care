@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;
