@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import '../models/patient_model.dart';
 import 'package:intl/intl.dart';
 
 class PatientRepository {
   final FirebaseFirestore _firestore;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   PatientRepository(this._firestore); // 🔹 تمرير Firestore عند الإنشاء
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resourses/assets_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 
@@ -30,11 +31,10 @@ Widget buildSelectionCard(
               vertical: HeightManager.h16,
             ),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(RadiusManager.r30),
-              gradient: const LinearGradient(
-                colors: [Colors.cyanAccent, Colors.lightBlueAccent],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+              borderRadius: BorderRadius.circular(RadiusManager.r24),
+              image: DecorationImage(
+                image: AssetImage(AssetsManager.homeBluePatternImage),
+                fit: BoxFit.cover,
               ),
             ),
             child: Align(

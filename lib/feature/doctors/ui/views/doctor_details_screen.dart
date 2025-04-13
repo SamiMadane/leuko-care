@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/confirmation_dialog.dart';
+import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/delete_doctor_bloc_listener.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_add_patient_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_app_bar.dart';
@@ -38,7 +39,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                   message: 'Are you sure you want to delete this doctor?',
                   onConfirmed: () async {
                     doctorCubit.deleteDoctor(doctor.id!);
-                    Navigator.of(context).pop();
+                    context.pop();
                   },
                 ),
           );

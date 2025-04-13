@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.dart';
+import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
@@ -34,9 +36,9 @@ class AppRouter {
           builder:
               (_) => BlocProvider(
                 create:
-                    (context) =>
-                        getIt<DoctorCubit>()
-                          ..getDoctorsStream(), // تمرير DoctorCubit هنا
+                    (context) => AdminHomeCubit(
+                      adminHomeRepository: getIt<AdminHomeRepository>(),
+                    )..getDoctors(), // تمرير AdminHomeCubit هنا
                 child: const AdminHomeScreen(),
               ),
         );
@@ -65,9 +67,7 @@ class AppRouter {
           builder:
               (_) => BlocProvider.value(
                 value: getIt<DoctorCubit>()..getDoctorsStream(),
-                child: DoctorDetailsScreen(
-                  doctor: doctorDetails,
-                ),
+                child: DoctorDetailsScreen(doctor: doctorDetails),
               ),
         );
       case Routes.addUpdateDoctorScreen:

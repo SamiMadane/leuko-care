@@ -14,7 +14,6 @@ class UserSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.moreLighterGray,
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: WidthManager.w20,
@@ -24,7 +23,7 @@ class UserSelectionScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset(
-                AssetsManager.blood,
+                AssetsManager.bloodImage,
                 height: HeightManager.h200,
                 width: WidthManager.w200,
                 fit: BoxFit.contain,
@@ -40,43 +39,35 @@ class UserSelectionScreen extends StatelessWidget {
             SizedBox(height: HeightManager.h40),
             buildSelectionCard(
               context,
-              imagePath: AssetsManager.admin, // ضع صورة مناسبة للأدمن
+              imagePath: AssetsManager.userSelectionAdminImage, 
               label: 'ADMIN',
               onTap: () {
-                // انتقل إلى صفحة تسجيل دخول الأدمن
                 context.pushNamed(Routes.loginScreen, arguments: 'admin');
               },
-              imageHeight: HeightManager.h130,
-              imageWidth: WidthManager.w130,
-              positionedRight: WidthManager.w16,
-              positionedBottom: HeightManager.hm5,
+      
             ),
             SizedBox(height: HeightManager.h30),
             buildSelectionCard(
               context,
-              imagePath: AssetsManager.doctor,
+              imagePath: AssetsManager.doctorImage,
               label: "DOCTOR",
               onTap: () {
-                // انتقل إلى شاشة تسجيل الدخول للطبيب
                 context.pushNamed(Routes.loginScreen, arguments: 'doctor');
               },
             ),
             SizedBox(height: HeightManager.h30),
             buildSelectionCard(
               context,
-              imagePath: AssetsManager.paitent,
+              imagePath: AssetsManager.paitentImage,
               label: "PATIENT",
               onTap: () {
-                // انتقل إلى شاشة تسجيل الدخول للمريض
                 context.pushNamed(
                   Routes.loginScreen,
                   arguments: 'patient'
             );
               },
-              imageHeight: HeightManager.h130,
-              imageWidth: WidthManager.w130,
-              positionedRight: WidthManager.wm4,
-              positionedBottom: HeightManager.hm4,
+              positionedRight: WidthManager.w10,
+              positionedBottom: HeightManager.h3,
             ),
           ],
         ),
