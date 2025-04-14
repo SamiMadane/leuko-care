@@ -36,7 +36,7 @@ class DoctorDetailsScreen extends StatelessWidget {
             builder:
                 (context) => ConfirmationDialog(
                   title: 'Confirm Delete',
-                  message: 'Are you sure you want to delete this doctor?',
+                  message: 'Are you sure you want to delete this doctor and all of their patients?',
                   onConfirmed: () async {
                     doctorCubit.deleteDoctor(doctor.id!);
                     context.pop();

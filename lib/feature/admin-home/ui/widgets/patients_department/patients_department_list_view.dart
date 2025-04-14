@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
-import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department/patients_department_list_view_item.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -15,26 +12,26 @@ class PatientsDepartmentListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filteredPatients = context.read<AdminHomeCubit>().filteredPatients;
+    final cubit = context.read<AdminHomeCubit>();
+    final filteredPatients = cubit.filteredPatients;
+    final hasDoctors = cubit.doctors.isNotEmpty;
 
     if (filteredPatients.isEmpty) {
       return Expanded(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.person_off, size: 80, color: ColorsManager.gray),
-              SizedBox(height: HeightManager.h16),
-              Text(
-                'No patients found',
-                style: getMediumTextStyle(
-                  fontSize: FontSizeManager.s16,
-                  color: ColorsManager.gray,
+        child:
+            hasDoctors
+                ? const EmptyStateWidget(
+                  icon: Icons.person_off,
+                  title: 'No patients assigned',
+                  message:
+                      'There are currently no patients assigned to this doctor. You can add patients or select a different doctor.',
+                )
+                : const EmptyStateWidget(
+                  icon: Icons.medical_information_outlined,
+                  title: 'No doctors found',
+                  message:
+                      'You haven\'t added any doctors yet. Add a doctor to start managing patients.',
                 ),
-              ),
-            ],
-          ),
-        ),
       );
     }
 

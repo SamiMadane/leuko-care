@@ -46,7 +46,10 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
       } catch (e) {
         emit(GetPatientsStateError(e.toString()));
       }
-    }
+    }else {
+    filteredPatients = [];
+    emit(GetPatientsStateSuccess(filteredPatients));
+  }
   }
 
   void selectDoctor(DoctorModel doctor) {

@@ -34,7 +34,7 @@ class DeleteDoctorBlocListener extends StatelessWidget {
               context: context,
               builder:
                   (context) => SuccessDialog(
-                    message: 'The doctor has been deleted successfully.',
+                    message: 'The doctor and all of their patients have been deleted successfully.',
                     onSuccess: () {
                       context.pop();
                       context.pop();

@@ -55,14 +55,25 @@ class DoctorRepository {
     }
   }
 
-  Future<void> deleteDoctor(String doctorId) async {
-    try {
-      await _firestore.collection('doctors').doc(doctorId).delete();
-      getDoctorsStream();
-    } catch (e) {
-      throw Exception('Error deleting doctor: $e');
+ Future<void> deleteDoctor(String doctorId) async {
+  try {
+    final doctorRef = _firestore.collection('doctors').doc(doctorId);
+
+    // حذف المرضى المرتبطين بهذا الطبيب
+    final patientQuery = await _firestore
+        .collection('patients')
+        .where('doctorId', isEqualTo: doctorId)
+        .get();
+
+    for (final doc in patientQuery.docs) {
+      await doc.reference.delete();
     }
+    await doctorRef.delete();
+  } catch (e) {
+    throw Exception('Error deleting doctor and patients: $e');
   }
+}
+
 
   // upload image to cloudinary to storage it.
   Future<String> uploadImageToCloudinary(String imagePath) async {
