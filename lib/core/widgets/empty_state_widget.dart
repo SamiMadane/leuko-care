@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-class EmptyDoctorsView extends StatelessWidget {
-  const EmptyDoctorsView();
+class EmptyStateWidget extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String message;
+
+  const EmptyStateWidget({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.message,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +20,10 @@ class EmptyDoctorsView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.medical_information_outlined,
-              size: 100,
-              color: Colors.grey.shade400,
-            ),
+            Icon(icon, size: 100, color: Colors.grey.shade400),
             const SizedBox(height: 20),
             Text(
-              'No doctors available.',
+              title,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.grey.shade600,
                     fontWeight: FontWeight.bold,
@@ -27,7 +32,7 @@ class EmptyDoctorsView extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Please add a doctor to get started.',
+              message,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.grey.shade500,
                   ),

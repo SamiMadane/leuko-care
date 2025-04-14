@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -27,9 +28,9 @@ class DoctorListTile extends StatelessWidget {
           horizontal: WidthManager.w18,
         ),
         title: Text(
-          doctor.name,
+          ' Dr.${doctor.name}',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: FontSizeManager.s18,
             fontWeight: FontWeight.bold,
             color: ColorsManager.darkBlue,
           ),
@@ -40,7 +41,11 @@ class DoctorListTile extends StatelessWidget {
             SizedBox(height: HeightManager.h6),
             Row(
               children: [
-                Icon(Icons.email, color: ColorsManager.primaryColor, size: 18),
+                Icon(
+                  Icons.email,
+                  color: ColorsManager.primaryColor,
+                  size: IconSizeManager.s18,
+                ),
                 SizedBox(width: WidthManager.w4),
                 Text(doctor.email),
               ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/all_doctors_widgets/doctor_list_tile.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/all_doctors_widgets/empty_doctor_view.dart';
+import 'package:leuko_care/core/widgets/empty_state_widget.dart';
+
 
 class AllDoctorsListView extends StatelessWidget {
   final List<DoctorModel> doctors;
@@ -10,7 +11,11 @@ class AllDoctorsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (doctors.isEmpty) {
-      return EmptyDoctorsView();
+      return const EmptyStateWidget(
+        icon: Icons.medical_information_outlined,
+        title: 'No doctors available.',
+        message: 'Please add a doctor to get started.',
+      );
     }
 
     return ListView.builder(
