@@ -36,12 +36,9 @@ class DeleteDoctorBlocListener extends StatelessWidget {
                   (context) => SuccessDialog(
                     message: 'The doctor has been deleted successfully.',
                     onSuccess: () {
-                      context.pushNamedAndRemoveUntil(
-                        Routes.allDoctorsScreen,
-                        predicate:
-                            (route) =>
-                                route.settings.name == Routes.adminHomeScreen,
-                      );
+                      context.pop();
+                      context.pop();
+                      context.pushReplacementNamed(Routes.allDoctorsScreen);
                     },
                   ),
             );
