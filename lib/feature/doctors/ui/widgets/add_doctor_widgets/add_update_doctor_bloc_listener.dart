@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/core/widgets/error_dialog.dart';
+import 'package:leuko_care/core/widgets/loading_dialog.dart';
+import 'package:leuko_care/core/widgets/success_dialog.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
 
 class AddUpdateDoctorBlocListener extends StatelessWidget {
   const AddUpdateDoctorBlocListener({super.key});
@@ -27,14 +29,18 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
           updateDoctorStateLoading: () => _showLoadingDialog(context),
           addDoctorStateSuccess: () {
             context.pop();
-            _showSuccessDialog(
+            _showAddSuccessDialog(
               context,
               'The doctor has been added successfully.',
             );
           },
-          updateDoctorStateSuccess: () {
+          updateDoctorStateSuccess: (doctor) {
             context.pop();
-            _showSuccessDialog(context, 'Dr. updated successfully');
+            _showUpdateSuccessDialog(
+              context,
+              'Dr. updated successfully',
+              doctor,
+            );
           },
           addDoctorStateError: (message) {
             Navigator.pop(context);
@@ -53,84 +59,56 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
   void _showLoadingDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder:
-          (context) => const Center(
-            child: CircularProgressIndicator(color: ColorsManager.primaryColor),
-          ),
+      builder: (context) => LoadingDialog(),
       barrierDismissible: false,
     );
   }
 
-  void _showSuccessDialog(BuildContext context, String message) {
+  void _showAddSuccessDialog(BuildContext context, String message) {
     showDialog(
       context: context,
       barrierDismissible: true,
       builder:
-          (context) => AlertDialog(
-            icon: const Icon(Icons.check, color: Colors.green, size: 32),
-            content: Text(
-              message,
-              style: getMediumTextStyle(
-                fontSize: 15,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  context.pop();
-                  context.pushNamedAndRemoveUntil(
-                    Routes.allDoctorsScreen,
-                    predicate:
-                        (route) =>
-                            route.settings.name == Routes.adminHomeScreen,
-                  );
-                },
-                child: Text(
-                  'Got it',
-                  style: getSemiBoldTextStyle(
-                    fontSize: 14,
-                    color: ColorsManager.primaryColor,
-                  ),
-                ),
-              ),
-            ],
+          (context) => SuccessDialog(
+            message: message,
+            onSuccess: () {
+              context.pop();
+              context.pop();
+              context.pushReplacementNamed(
+                Routes.allDoctorsScreen,
+              );
+            },
           ),
-    ).then((_) {
-      // عندما يتم إغلاق الـ Dialog (بما في ذلك الضغط خارج الـ Dialog)
-      context.pushNamedAndRemoveUntil(
-        Routes.allDoctorsScreen,
-        predicate: (route) => route.settings.name == Routes.adminHomeScreen,
-      );
-    });
+    );
+  }
+
+  void _showUpdateSuccessDialog(
+    BuildContext context,
+    String message,
+    DoctorModel doctor,
+  ) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder:
+          (context) => SuccessDialog(
+            message: message,
+            onSuccess: () {
+              context.pop();
+              context.pop();
+              context.pushReplacementNamed(
+                Routes.doctorDetailsScreen,
+                arguments: doctor,
+              );
+            },
+          ),
+    );
   }
 
   void _showErrorDialog(BuildContext context, String message) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            icon: const Icon(Icons.error, color: Colors.red, size: 32),
-            content: Text(
-              message,
-              style: getMediumTextStyle(
-                fontSize: 15,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Got it',
-                  style: getSemiBoldTextStyle(
-                    fontSize: 14,
-                    color: ColorsManager.primaryColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
+      builder: (context) => ErrorDialog(message: message),
     );
   }
 }

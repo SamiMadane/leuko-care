@@ -68,7 +68,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       await _repository.updateDoctor(
         doctor,
       ); 
-      emit(UpdateDoctorStateSuccess());
+      emit(UpdateDoctorStateSuccess(doctor));
     } catch (e) {
       emit(UpdateDoctorStateError(e.toString()));
     }

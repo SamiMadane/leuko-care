@@ -20,7 +20,7 @@ class DoctorState with _$DoctorState {
   
   // Update doctors states
   const factory DoctorState.updateDoctorStateLoading() = UpdateDoctorStateLoading;
-  const factory DoctorState.updateDoctorStateSuccess() = UpdateDoctorStateSuccess;
+  const factory DoctorState.updateDoctorStateSuccess(DoctorModel doctor) = UpdateDoctorStateSuccess;
   const factory DoctorState.updateDoctorStateError(String message) = UpdateDoctorStateError;
 
   // Delete doctors states

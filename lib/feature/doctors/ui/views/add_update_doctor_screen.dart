@@ -41,13 +41,16 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
       _descriptionController.text = widget.doctor!.description;
       profileImageUrl = widget.doctor!.profileImage;
     } else {
-      profileImageUrl = 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
+      profileImageUrl =
+          'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
     }
   }
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedImage = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
     if (pickedImage != null) {
       setState(() {
         profileImageUrl = pickedImage.path;
@@ -61,7 +64,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditMode ? 'Edit Doctor' : 'Add Doctor',),
+        title: Text(isEditMode ? 'Edit Doctor' : 'Add Doctor'),
         elevation: 0,
       ),
       body: Padding(
@@ -78,9 +81,9 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
                   isEditMode: isEditMode,
                   onPickImage: _pickImage,
                 ),
-            
+
                 SizedBox(height: HeightManager.h20),
-            
+
                 // الحقول الخاصة بمعلومات الطبيب
                 AppTextFormField(
                   controller: _nameController,
@@ -94,12 +97,14 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
                   validator: (value) => value!.isEmpty ? 'Enter Email' : null,
                 ),
                 SizedBox(height: HeightManager.h10),
-                if (!isEditMode) AppTextFormField(
-                  controller: _passwordController,
-                  labelText: 'Password',
-                  isObscureText: true,
-                  validator: (value) => value!.isEmpty ? 'Enter Password' : null,
-                ),
+                if (!isEditMode)
+                  AppTextFormField(
+                    controller: _passwordController,
+                    labelText: 'Password',
+                    isObscureText: true,
+                    validator:
+                        (value) => value!.isEmpty ? 'Enter Password' : null,
+                  ),
                 SizedBox(height: HeightManager.h10),
                 AppTextFormField(
                   controller: _phoneController,
@@ -110,22 +115,27 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
                 AppTextFormField(
                   controller: _experienceController,
                   labelText: 'Experience',
-                  validator: (value) => value!.isEmpty ? 'Enter Experience' : null,
+                  validator:
+                      (value) => value!.isEmpty ? 'Enter Experience' : null,
                 ),
                 SizedBox(height: HeightManager.h10),
                 AppTextFormField(
                   controller: _descriptionController,
                   labelText: 'Description',
                   maxLines: 4,
-                  validator: (value) => value!.isEmpty ? 'Enter Description' : null,
+                  validator:
+                      (value) => value!.isEmpty ? 'Enter Description' : null,
                 ),
-            
+
                 const SizedBox(height: 30),
-            
+
                 // زر الإضافة أو التحديث
                 AppTextButton(
                   buttonText: isEditMode ? 'Update Doctor' : 'Add Doctor',
-                  textStyle: getBoldTextStyle(fontSize: FontSizeManager.s18, color: Colors.white),
+                  textStyle: getBoldTextStyle(
+                    fontSize: FontSizeManager.s18,
+                    color: Colors.white,
+                  ),
                   onPressed: _handleSubmit,
                 ),
               ],
@@ -133,10 +143,9 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const AddUpdateDoctorBlocListener(),
+      bottomNavigationBar: AddUpdateDoctorBlocListener(),
     );
   }
-
 
   void _handleSubmit() {
     if (_formKey.currentState!.validate()) {

@@ -32,7 +32,7 @@ class DoctorDetailsProfileImage extends StatelessWidget {
             placeholder:
                 (context, url) => Container(
                   alignment: Alignment.center,
-                  child: const CircularProgressIndicator(),
+                  child: _buildShimmerLoading(),
                 ),
             errorWidget:
                 (context, url, error) => Container(
