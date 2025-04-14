@@ -75,7 +75,7 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
               context.pop();
               context.pop();
               context.pushReplacementNamed(
-                Routes.allDoctorsScreen,
+                Routes.adminHomeScreen,
               );
             },
           ),
