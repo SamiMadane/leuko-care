@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/routes/routes.dart';
 
 class DoctorDetailsAppBar extends StatelessWidget
     implements PreferredSizeWidget {

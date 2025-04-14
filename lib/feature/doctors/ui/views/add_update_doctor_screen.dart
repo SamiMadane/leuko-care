@@ -8,8 +8,8 @@ import 'package:leuko_care/core/widgets/app_text_button.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/add_doctor_widgets/add_update_doctor_bloc_listener.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/add_doctor_widgets/add_update_doctor_profile_image_picker.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/add_update_doctor_widgets/add_update_doctor_bloc_listener.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/add_update_doctor_widgets/add_update_doctor_profile_image_picker.dart';
 
 class AddUpdateDoctorScreen extends StatefulWidget {
   final DoctorModel? doctor;
