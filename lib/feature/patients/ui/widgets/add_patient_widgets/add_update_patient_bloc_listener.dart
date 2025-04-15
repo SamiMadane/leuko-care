@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
 
 class AddUpdatePatientBlocListener extends StatelessWidget {
-  const AddUpdatePatientBlocListener({super.key});
+  final PatientModel? patient;
+  final String? doctorId;
+  final String? doctorName;
+  const AddUpdatePatientBlocListener({
+    super.key,
+    this.patient,
+    this.doctorId,
+    this.doctorName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +36,14 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
           updatePatientStateLoading: () => _showLoadingDialog(context),
           addPatientStateSuccess: () {
             context.pop();
-            _showSuccessDialog(
+            _showAddSuccessDialog(
               context,
               'The patient has been added successfully.',
             );
           },
           updatePatientStateSuccess: () {
             context.pop();
-            _showSuccessDialog(context, 'Patient updated successfully');
+            _showUpdateSuccessDialog(context, 'Patient updated successfully');
           },
           addPatientStateError: (message) {
             Navigator.pop(context);
@@ -61,7 +70,11 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
     );
   }
 
-  void _showSuccessDialog(BuildContext context, String message) {
+  void _showSuccessDialog(
+    BuildContext context,
+    String message,
+    VoidCallback onPressed,
+  ) {
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -77,13 +90,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
             ),
             actions: [
               TextButton(
-                onPressed: () {
-                  context.pop();
-                  context.pushNamedAndRemoveUntil(
-                    Routes.adminHomeScreen,
-                    predicate: (_) => false,
-                  );
-                },
+                onPressed: onPressed,
                 child: Text(
                   'Got it',
                   style: getSemiBoldTextStyle(
@@ -95,6 +102,27 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
             ],
           ),
     );
+  }
+
+  void _showAddSuccessDialog(BuildContext context, String message) {
+    _showSuccessDialog(context, message, () {
+      context.pop();
+      context.pop();
+      context.pushReplacementNamed(
+        Routes.allPatientsScreen,
+        arguments: {'doctorId': doctorId, 'doctorName': doctorName},
+      );
+    });
+  }
+    void _showUpdateSuccessDialog(BuildContext context, String message) {
+    _showSuccessDialog(context, message, () {
+      context.pop();
+      context.pop();
+      context.pushReplacementNamed(
+        Routes.patientDetailsScreen,
+        arguments: {'doctorId': doctorId, 'doctorName': doctorName,'patient':patient},
+      );
+    });
   }
 
   void _showErrorDialog(BuildContext context, String message) {

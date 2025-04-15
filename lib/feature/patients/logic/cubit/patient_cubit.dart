@@ -11,7 +11,7 @@ class PatientCubit extends Cubit<PatientState> {
 
   PatientCubit(this._repository) : super(const PatientState.patientStateInitial());
 
-  // ✅ متابعة التحديثات مباشرة من Firestore
+  
   void getPatientsStream() {
     emit(GetPatientStateLoading());
     _patientsSubscription?.cancel(); // إلغاء أي استماع قديم قبل بدء الجديد
@@ -19,7 +19,7 @@ class PatientCubit extends Cubit<PatientState> {
       (patients) {
         emit(
           GetPatientStateSuccess(patients),
-        ); // 🔹 تحديث الحالة فورًا عند أي تغيير
+        ); 
       },
       onError: (error) {
         emit(GetPatientStateError(error.toString()));
@@ -27,7 +27,6 @@ class PatientCubit extends Cubit<PatientState> {
     );
   }
 
-  // دالة للحصول على URL الصورة
   Future<String> _getImageUrl(PatientModel patient) async {
     if (patient.profileImage.isEmpty) {
       return 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
@@ -37,24 +36,20 @@ class PatientCubit extends Cubit<PatientState> {
     return patient.profileImage;
   }
 
-  // إضافة مريض
   Future<void> addPatient(PatientModel patient, String password) async {
     emit(AddPatientStateLoading());
     try {
       String imageUrl = await _getImageUrl(patient);
       patient = patient.copyWith(profileImage: imageUrl);
 
-      // ✅ إنشاء الحساب في Firebase Authentication
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
             email: patient.email,
             password: password,
           );
 
-      // ✅ الحصول على UID من Firebase Authentication
       final uid = userCredential.user!.uid;
 
-      // ✅ تعديل بيانات المريض لإضافة UID و userType
       patient = patient.copyWith(id: uid);
       await _repository.addPatient(patient);
       emit(AddPatientStateSuccess());
@@ -63,14 +58,13 @@ class PatientCubit extends Cubit<PatientState> {
     }
   }
 
-  // تحديث مريض
   Future<void> updatePatient(PatientModel patient) async {
     emit(UpdatePatientStateLoading());
     try {
       String imageUrl = await _getImageUrl(patient);
       patient = patient.copyWith(profileImage: imageUrl);
 
-      await _repository.updatePatient(patient); // التأكد من إضافة دالة التحديث في الـ Repository
+      await _repository.updatePatient(patient); 
       emit(UpdatePatientStateSuccess());
     } catch (e) {
       emit(UpdatePatientStateError(e.toString()));
@@ -94,7 +88,6 @@ class PatientCubit extends Cubit<PatientState> {
     try {
       emit(GetPatientsByDoctorIdStateLoading());
 
-      // تصفية المرضى بناءً على doctorId
       final patients = await _repository.getPatientsByDoctorId(doctorId);
 
       emit(GetPatientsByDoctorIdStateSuccess(patients));
@@ -110,7 +103,7 @@ class PatientCubit extends Cubit<PatientState> {
   if (today.month < birthDate.month ||
       (today.month == birthDate.month && today.day < birthDate.day)) {
     age--;
-  } // إذا كان اليوم أقل من تاريخ الميلاد في نفس السنة، نخصم سنة واحدة
+  } // if not coming birthday yet decrease one year
   return age;
 }
 

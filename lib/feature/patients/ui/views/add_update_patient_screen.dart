@@ -15,8 +15,10 @@ import 'package:leuko_care/feature/patients/ui/widgets/add_patient_widgets/add_u
 class AddUpdatePatientScreen extends StatefulWidget {
   final PatientModel? patient;
   final String? doctorId;
+  final String? doctorName;
 
-  const AddUpdatePatientScreen({super.key, this.patient, this.doctorId});
+
+  const AddUpdatePatientScreen({super.key, this.patient, this.doctorId, this.doctorName});
 
   @override
   _AddUpdatePatientScreenState createState() => _AddUpdatePatientScreenState();
@@ -173,9 +175,12 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         doctorId: widget.patient?.doctorId ?? widget.doctorId!,
         userType: 'patient',
         isExamined: false,
-        registrationDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        healthStatus: 'unknown', // سيتم تحديده بعد رفع العينة
+        registrationDate:
+            widget.patient?.registrationDate ??
+            DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        healthStatus: 'unknown',
         birthDate: _birthDateController.text,
+        leukemiaType: 'unknown',
       );
 
       if (widget.patient != null) {

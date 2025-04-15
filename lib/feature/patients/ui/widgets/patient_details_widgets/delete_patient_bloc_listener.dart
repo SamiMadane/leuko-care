@@ -9,7 +9,14 @@ import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 
 class DeletePatientBlocListener extends StatelessWidget {
-  const DeletePatientBlocListener({super.key});
+  final String doctorId;
+  final String doctorName;
+
+  const DeletePatientBlocListener({
+    super.key,
+    required this.doctorId,
+    required this.doctorName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +44,20 @@ class DeletePatientBlocListener extends StatelessWidget {
                     message: 'The patient has been deleted successfully.',
                     onSuccess: () {
                       context.pop();
-                      context.pushNamedAndRemoveUntil(
-                        Routes.adminHomeScreen,
-                        predicate: (_) => false,
+                      context.pop();
+                      context.pushReplacementNamed(
+                        Routes.allPatientsScreen,
+                        arguments: {
+                          'doctorId': doctorId,
+                          'doctorName': doctorName,
+                        },
                       );
                     },
                   ),
             );
           },
           deletePatientStateError: (message) {
-            Navigator.pop(context); // Close loading
+            context.pop();
             showDialog(
               context: context,
               builder: (context) => ErrorDialog(message: message),

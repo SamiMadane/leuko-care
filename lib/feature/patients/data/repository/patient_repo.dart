@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import '../models/patient_model.dart';
-import 'package:intl/intl.dart';
 
 class PatientRepository {
   final FirebaseFirestore _firestore;
@@ -21,16 +20,7 @@ class PatientRepository {
 
   
   Future<void> addPatient(PatientModel patient) async {
-    try {
-      String registrationDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-      patient = patient.copyWith(
-        userType: "patient",
-        registrationDate: registrationDate,
-        isExamined: false,
-        leukemiaType: 'unknown'
-      );
-
-      
+    try {      
       await _firestore
           .collection('patients')
           .doc(patient.id)

@@ -15,10 +15,14 @@ import 'package:leuko_care/feature/patients/ui/widgets/patient_details_widgets/p
 
 class PatientDetailsScreen extends StatelessWidget {
   final PatientModel patient;
+  final String doctorId;
+  final String doctorName;
 
   const PatientDetailsScreen({
     super.key,
     required this.patient,
+    required this.doctorId,
+    required this.doctorName,
   });
 
   @override
@@ -31,20 +35,23 @@ class PatientDetailsScreen extends StatelessWidget {
         onDeletePressed: () {
           showDialog(
             context: context,
-            builder: (context) => ConfirmationDialog(
-              title: 'Confirm Delete',
-              message: 'Are you sure you want to delete this patient?',
-              onConfirmed: () {
-                patientCubit.deletePatient(patient.id!);
-                
-              },
-            ),
+            builder:
+                (context) => ConfirmationDialog(
+                  title: 'Confirm Delete',
+                  message: 'Are you sure you want to delete this patient?',
+                  onConfirmed: () {
+                    patientCubit.deletePatient(patient.id!);
+                  },
+                ),
           );
         },
       ),
       body: Column(
         children: [
-          const DeletePatientBlocListener(),
+          DeletePatientBlocListener(
+            doctorId: doctorId,
+            doctorName: doctorName,
+          ),
           SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               vertical: HeightManager.h20,
@@ -53,7 +60,9 @@ class PatientDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                DoctorDetailsProfileImage(profileImageUrl: patient.profileImage),
+                DoctorDetailsProfileImage(
+                  profileImageUrl: patient.profileImage,
+                ),
                 SizedBox(height: HeightManager.h20),
                 Text(
                   patient.name,
@@ -62,9 +71,9 @@ class PatientDetailsScreen extends StatelessWidget {
                     color: ColorsManager.blueGrey,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: HeightManager.h20),
                 PatientDetailsInfoCard(patient: patient),
-                const SizedBox(height: 30),
+                SizedBox(height: HeightManager.h30),
                 PatientDetailsEditButton(patient: patient),
               ],
             ),

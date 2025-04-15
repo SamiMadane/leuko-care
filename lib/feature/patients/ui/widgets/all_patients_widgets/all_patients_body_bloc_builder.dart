@@ -16,20 +16,23 @@ class AllPatientsBodyBlocBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PatientCubit, PatientState>(
-      buildWhen:
-          (previous, current) =>
-              current is GetPatientsByDoctorIdStateLoading ||
-              current is GetPatientsByDoctorIdStateSuccess ||
-              current is GetPatientsByDoctorIdStateError,
+      buildWhen: (previous, current) =>
+          current is GetPatientsByDoctorIdStateLoading ||
+          current is GetPatientsByDoctorIdStateSuccess ||
+          current is GetPatientsByDoctorIdStateError,
       builder: (context, state) {
-        return state.whenOrNull(
-              getPatientsByDoctorIdStateLoading: () => _buildPatientsLoadingWidget(),
-              getPatientsByDoctorIdStateSuccess:
-                  (patients) => _buildPatientsSuccessWidget(patients),
-              getPatientsByDoctorIdStateError:
-                  (message) => _buildPatientsErrorWidget(message: message),
-            ) ?? 
-            const SizedBox.shrink(); // fallback إذا لم تكن أي حالة
+        switch (state.runtimeType) {
+          case GetPatientsByDoctorIdStateLoading:
+            return _buildPatientsLoadingWidget();
+          case GetPatientsByDoctorIdStateSuccess:
+            final successState = state as GetPatientsByDoctorIdStateSuccess;
+            return _buildPatientsSuccessWidget(successState.patients);
+          case GetPatientsByDoctorIdStateError:
+            final errorState = state as GetPatientsByDoctorIdStateError;
+            return _buildPatientsErrorWidget(message: errorState.message);
+          default:
+            return const SizedBox.shrink(); 
+        }
       },
     );
   }
