@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/resourses/assets_manager.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
@@ -41,6 +42,8 @@ class LoginScreen extends StatelessWidget {
                     fontSize: FontSizeManager.s16,
                     color: ColorsManager.white,
                   ),
+                  backgroundImage: AssetsManager.homeBluePatternImage,
+
                   onPressed: () {
                     validateThenDoLogin(context,userType);
                   },

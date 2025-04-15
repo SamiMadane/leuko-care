@@ -22,8 +22,6 @@ class DeleteDoctorBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           deleteDoctorStateLoading: () {
-            print('Doctor deleted loading');
-
             showDialog(
               context: context,
               builder: (context) => const LoadingDialog(),
@@ -31,27 +29,21 @@ class DeleteDoctorBlocListener extends StatelessWidget {
             );
           },
           deleteDoctorStateSuccess: () {
-            print('Doctor deleted successfully');
             Navigator.pop(context);
             showDialog(
               context: context,
               builder:
                   (context) => SuccessDialog(
-                    message: 'The doctor has been deleted successfully.',
+                    message: 'The doctor and all of their patients have been deleted successfully.',
                     onSuccess: () {
-                      context.pushNamedAndRemoveUntil(
-                        Routes.allDoctorsScreen,
-                        predicate:
-                            (route) =>
-                                route.settings.name == Routes.adminHomeScreen,
-                      );
+                      context.pop();
+                      context.pop();
+                      context.pushReplacementNamed(Routes.allDoctorsScreen);
                     },
                   ),
             );
           },
           deleteDoctorStateError: (message) {
-            print('Doctor deleted faield');
-
             Navigator.pop(context);
             showDialog(
               context: context,

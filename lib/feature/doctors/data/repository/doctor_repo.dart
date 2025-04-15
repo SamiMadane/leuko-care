@@ -2,17 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import '../models/doctor_model.dart';
 
 class DoctorRepository {
   final FirebaseFirestore _firestore;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  DoctorRepository(this._firestore); // 🔹 تمرير Firestore عند الإنشاء
+  DoctorRepository(this._firestore);
 
-  // جلب الأطباء
+  // Get all doctors from firestore
+  // snapshots its read real time all changes
   Stream<List<DoctorModel>> getDoctorsStream() {
     return _firestore.collection('doctors').snapshots().map((snapshot) {
       return snapshot.docs
@@ -21,21 +20,19 @@ class DoctorRepository {
     });
   }
 
-  // جلب عدد المرضى لدى كل طبيب
-  Future<int> getPatientsCountForDoctor(String doctorId) async {
-    final snapshot =
-        await FirebaseFirestore.instance
-            .collection('patients')
-            .where('doctorId', isEqualTo: doctorId)
-            .get();
-    return snapshot.size;
+  // Get count of patients for each doctor
+  Stream<int> getPatientsCountForDoctor(String doctorId) {
+    return _firestore
+        .collection('patients')
+        .where('doctorId', isEqualTo: doctorId)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.length);
   }
 
-  // إضافة طبيب
   Future<void> addDoctor(DoctorModel doctor) async {
     try {
+      // After click on add doctor we change userType for doctor.
       doctor = doctor.copyWith(userType: "doctor");
-      // ✅ تخزين بيانات الطبيب في Firestore فقط
       await _firestore
           .collection('doctors')
           .doc(doctor.id)
@@ -45,11 +42,10 @@ class DoctorRepository {
     }
   }
 
-  // تحديث طبيب
   Future<void> updateDoctor(DoctorModel doctor) async {
     try {
+      // After click on update doctor we change userType for doctor.
       doctor = doctor.copyWith(userType: "doctor");
-      // ✅ تحديث بيانات الطبيب في Firestore فقط
       await _firestore
           .collection('doctors')
           .doc(doctor.id)
@@ -59,22 +55,27 @@ class DoctorRepository {
     }
   }
 
-  Future<void> deleteDoctor(String doctorId) async {
-    try {
-      // حذف بيانات الطبيب من Firestore
-      await _firestore.collection('doctors').doc(doctorId).delete();
-      getDoctorsStream();
-      // حذف بيانات الطبيب من Firebase Auth
-      User? user = _auth.currentUser;
-      if (user != null && user.uid == doctorId) {
-        await user.delete(); // حذف المستخدم من Auth
-      }
-    } catch (e) {
-      throw Exception('Error deleting doctor: $e');
-    }
-  }
+ Future<void> deleteDoctor(String doctorId) async {
+  try {
+    final doctorRef = _firestore.collection('doctors').doc(doctorId);
 
-  // دالة لرفع الصورة إلى Cloudinary
+    // حذف المرضى المرتبطين بهذا الطبيب
+    final patientQuery = await _firestore
+        .collection('patients')
+        .where('doctorId', isEqualTo: doctorId)
+        .get();
+
+    for (final doc in patientQuery.docs) {
+      await doc.reference.delete();
+    }
+    await doctorRef.delete();
+  } catch (e) {
+    throw Exception('Error deleting doctor and patients: $e');
+  }
+}
+
+
+  // upload image to cloudinary to storage it.
   Future<String> uploadImageToCloudinary(String imagePath) async {
     final url = Uri.parse(
       'https://api.cloudinary.com/v1_1/dmhmhyigi/image/upload',

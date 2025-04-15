@@ -1,4 +1,3 @@
-// 📁 lib/feature/doctors/ui/screens/all_doctors_screen.dart
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
@@ -9,19 +8,7 @@ class AllDoctorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Doctors List'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              Routes.adminHomeScreen,
-              (route) => false,
-            );
-          },
-        ),
-      ),
+      appBar: AppBar(title: Text('Doctors List')),
       body: AllDoctorsBodyBlocBuilder(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -13,8 +13,6 @@ class DoctorDetailsInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DoctorCubit>().getPatientsCountForDoctor(doctor.id!);
-
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(RadiusManager.r16),
@@ -25,39 +23,45 @@ class DoctorDetailsInfoCard extends StatelessWidget {
           vertical: HeightManager.h16,
           horizontal: WidthManager.w16,
         ),
-        child: Column(
-          children: [
-            _buildRowInfo(Icons.email, 'Email', doctor.email),
-            const Divider(),
-            _buildRowInfo(Icons.phone, 'Phone', doctor.phone),
-            const Divider(),
-            _buildRowInfo(
-              Icons.work,
-              'Experience',
-              '${doctor.experience} years',
-            ),
-            const Divider(),
-            _buildRowInfo(
-              Icons.info_outline,
-              'Description',
-              doctor.description,
-            ),
-            const Divider(),
-            FutureBuilder<int>(
-                  future: context.read<DoctorCubit>().getPatientsCountForDoctor(
-                    doctor.id!,
-                  ),
-                  builder:
-                      (context, snapshot) => _buildRowInfo(
-                  Icons.people,
-                  'Patients Count',
-                  '${snapshot.data ?? '...'}',
-                )
-                ),
-            
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildRowInfo(Icons.email, 'Email', doctor.email),
+              const Divider(),
+              _buildRowInfo(Icons.phone, 'Phone', doctor.phone),
+              const Divider(),
+              _buildRowInfo(
+                Icons.work,
+                'Experience',
+                '${doctor.experience} years',
+              ),
+              const Divider(),
+              _buildPatientCount(context, doctor.id!),
+          
+              const Divider(),
+              _buildRowInfo(
+                Icons.info_outline,
+                'Description',
+                doctor.description,
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildPatientCount(BuildContext context, String doctorId) {
+    return StreamBuilder<int>(
+      stream: context.read<DoctorCubit>().getPatientsCountStream(doctorId),
+      builder: (context, snapshot) {
+        final count = snapshot.data;
+        return _buildRowInfo(
+          Icons.people,
+          'Patients Count',
+          '${count ?? '...'}',
+        );
+      },
     );
   }
 

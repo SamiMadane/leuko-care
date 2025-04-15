@@ -58,7 +58,7 @@ class UserSelectionScreen extends StatelessWidget {
             SizedBox(height: HeightManager.h30),
             buildSelectionCard(
               context,
-              imagePath: AssetsManager.paitentImage,
+              imagePath: AssetsManager.patientImage,
               label: "PATIENT",
               onTap: () {
                 context.pushNamed(
