@@ -8,9 +8,9 @@ import 'package:intl/intl.dart';
 class PatientRepository {
   final FirebaseFirestore _firestore;
 
-  PatientRepository(this._firestore); // 🔹 تمرير Firestore عند الإنشاء
+  PatientRepository(this._firestore); 
 
-  // جلب المرضى
+
   Stream<List<PatientModel>> getPatientsStream() {
     return _firestore.collection('patients').snapshots().map((snapshot) {
       return snapshot.docs
@@ -19,7 +19,7 @@ class PatientRepository {
     });
   }
 
-  // إضافة مريض
+  
   Future<void> addPatient(PatientModel patient) async {
     try {
       String registrationDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
@@ -27,9 +27,10 @@ class PatientRepository {
         userType: "patient",
         registrationDate: registrationDate,
         isExamined: false,
+        leukemiaType: 'unknown'
       );
 
-      // ✅ تخزين بيانات المريض في Firestore
+      
       await _firestore
           .collection('patients')
           .doc(patient.id)
@@ -41,11 +42,8 @@ class PatientRepository {
     }
   }
 
-  // تحديث مريض
   Future<void> updatePatient(PatientModel patient) async {
     try {
-      patient = patient.copyWith(userType: "patient");
-      // ✅ تحديث بيانات المريض في Firestore
       await _firestore
           .collection('patients')
           .doc(patient.id)
@@ -56,10 +54,8 @@ class PatientRepository {
     }
   }
 
-  // حذف مريض
   Future<void> deletePatient(String patientId) async {
     try {
-      // حذف بيانات المريض من Firestore
       await _firestore.collection('patients').doc(patientId).delete();
       getPatientsStream();
     
@@ -68,17 +64,14 @@ class PatientRepository {
     }
   }
 
-  // دالة لرفع الصورة إلى Cloudinary
   Future<String> uploadImageToCloudinary(String imagePath) async {
     final url = Uri.parse(
       'https://api.cloudinary.com/v1_1/dmhmhyigi/image/upload',
     );
     final uploadRequest = http.MultipartRequest('POST', url);
 
-    // إعدادات المصادقة
     uploadRequest.fields['upload_preset'] = 'leuko_care';
 
-    // قراءة الصورة
     final imageBytes = await File(imagePath).readAsBytes();
     final imageFile = http.MultipartFile.fromBytes(
       'file',

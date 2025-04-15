@@ -18,6 +18,7 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
   registrationDate: json['registrationDate'] as String,
   healthStatus: json['healthStatus'] as String,
   birthDate: json['birthDate'] as String,
+  leukemiaType: json['leukemiaType'] as String,
 );
 
 Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
@@ -33,4 +34,5 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
       'registrationDate': instance.registrationDate,
       'healthStatus': instance.healthStatus,
       'birthDate': instance.birthDate,
+      'leukemiaType': instance.leukemiaType,
     };
