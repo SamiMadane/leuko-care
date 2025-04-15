@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:leuko_care/core/resourses/assets_manager.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 
 class AppTextButton extends StatelessWidget {
   final double? borderRadius;
+  final String? backgroundImage; // المسار إلى الصورة
   final Color? backgroundColor;
   final double? horizontalPadding;
   final double? verticalPadding;
@@ -13,9 +15,11 @@ class AppTextButton extends StatelessWidget {
   final String buttonText;
   final TextStyle textStyle;
   final VoidCallback onPressed;
+
   const AppTextButton({
     super.key,
     this.borderRadius,
+    this.backgroundImage,
     this.backgroundColor,
     this.horizontalPadding,
     this.verticalPadding,
@@ -28,31 +32,31 @@ class AppTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        // widgetStateProperty select value based on the state of the widget.
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? RadiusManager.r16),
-          ),
+    return InkWell(
+      borderRadius: BorderRadius.circular(borderRadius ?? RadiusManager.r16),
+      onTap: onPressed,
+      child: Container(
+        width: buttonWidth?.w ?? double.infinity,
+        height: buttonHeight ?? HeightManager.h50,
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding?.w ?? WidthManager.w12,
+          vertical: verticalPadding?.h ?? HeightManager.h14,
         ),
-        backgroundColor: WidgetStatePropertyAll(
-          backgroundColor ?? ColorsManager.primaryColor,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius ?? RadiusManager.r16),
+          color: backgroundImage == null ? backgroundColor ?? ColorsManager.primaryColor : null,
+          image: backgroundImage != null
+              ? DecorationImage(
+                  image: AssetImage(backgroundImage!),
+                  fit: BoxFit.cover,
+                )
+              : null,
         ),
-        padding: WidgetStateProperty.all<EdgeInsets>(
-          EdgeInsets.symmetric(
-            horizontal: horizontalPadding?.w ?? WidthManager.w12,
-            vertical: verticalPadding?.h ?? HeightManager.h14,
-          ),
+        alignment: Alignment.center,
+        child: Text(
+          buttonText,
+          style: textStyle,
         ),
-        fixedSize: WidgetStateProperty.all(
-          Size(buttonWidth?.w ?? double.maxFinite, buttonHeight ?? HeightManager.h50),
-        ),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        buttonText,
-        style: textStyle,
       ),
     );
   }
