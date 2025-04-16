@@ -28,7 +28,7 @@ mixin _$PatientState {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -48,7 +48,7 @@ mixin _$PatientState {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -68,7 +68,7 @@ mixin _$PatientState {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -241,7 +241,7 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -265,7 +265,7 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -289,7 +289,7 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -464,7 +464,7 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -488,7 +488,7 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -512,7 +512,7 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -724,7 +724,7 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -748,7 +748,7 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -772,7 +772,7 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -986,7 +986,7 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -1010,7 +1010,7 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -1034,7 +1034,7 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -1218,7 +1218,7 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -1242,7 +1242,7 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -1266,7 +1266,7 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -1441,7 +1441,7 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -1465,7 +1465,7 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -1489,7 +1489,7 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -1694,7 +1694,7 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -1718,7 +1718,7 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -1742,7 +1742,7 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -1926,7 +1926,7 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -1950,7 +1950,7 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -1974,7 +1974,7 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -2102,6 +2102,8 @@ abstract class _$$UpdatePatientStateSuccessImplCopyWith<$Res> {
     _$UpdatePatientStateSuccessImpl value,
     $Res Function(_$UpdatePatientStateSuccessImpl) then,
   ) = __$$UpdatePatientStateSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PatientModel patient});
 }
 
 /// @nodoc
@@ -2115,27 +2117,53 @@ class __$$UpdatePatientStateSuccessImplCopyWithImpl<$Res>
 
   /// Create a copy of PatientState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? patient = null}) {
+    return _then(
+      _$UpdatePatientStateSuccessImpl(
+        null == patient
+            ? _value.patient
+            : patient // ignore: cast_nullable_to_non_nullable
+                as PatientModel,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
 class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
-  const _$UpdatePatientStateSuccessImpl();
+  const _$UpdatePatientStateSuccessImpl(this.patient);
+
+  @override
+  final PatientModel patient;
 
   @override
   String toString() {
-    return 'PatientState.updatePatientStateSuccess()';
+    return 'PatientState.updatePatientStateSuccess(patient: $patient)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdatePatientStateSuccessImpl);
+            other is _$UpdatePatientStateSuccessImpl &&
+            (identical(other.patient, patient) || other.patient == patient));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, patient);
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdatePatientStateSuccessImplCopyWith<_$UpdatePatientStateSuccessImpl>
+  get copyWith => __$$UpdatePatientStateSuccessImplCopyWithImpl<
+    _$UpdatePatientStateSuccessImpl
+  >(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2149,7 +2177,7 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -2159,7 +2187,7 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
   }) {
-    return updatePatientStateSuccess();
+    return updatePatientStateSuccess(patient);
   }
 
   @override
@@ -2173,7 +2201,7 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -2183,7 +2211,7 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
   }) {
-    return updatePatientStateSuccess?.call();
+    return updatePatientStateSuccess?.call(patient);
   }
 
   @override
@@ -2197,7 +2225,7 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -2209,7 +2237,7 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     required TResult orElse(),
   }) {
     if (updatePatientStateSuccess != null) {
-      return updatePatientStateSuccess();
+      return updatePatientStateSuccess(patient);
     }
     return orElse();
   }
@@ -2316,7 +2344,16 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
 }
 
 abstract class UpdatePatientStateSuccess implements PatientState {
-  const factory UpdatePatientStateSuccess() = _$UpdatePatientStateSuccessImpl;
+  const factory UpdatePatientStateSuccess(final PatientModel patient) =
+      _$UpdatePatientStateSuccessImpl;
+
+  PatientModel get patient;
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdatePatientStateSuccessImplCopyWith<_$UpdatePatientStateSuccessImpl>
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2400,7 +2437,7 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -2424,7 +2461,7 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -2448,7 +2485,7 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -2632,7 +2669,7 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -2656,7 +2693,7 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -2680,7 +2717,7 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -2855,7 +2892,7 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -2879,7 +2916,7 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -2903,7 +2940,7 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -3106,7 +3143,7 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -3130,7 +3167,7 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -3154,7 +3191,7 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -3343,7 +3380,7 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -3367,7 +3404,7 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -3391,7 +3428,7 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -3610,7 +3647,7 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -3634,7 +3671,7 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -3658,7 +3695,7 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,
@@ -3877,7 +3914,7 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     required TResult Function() addPatientStateSuccess,
     required TResult Function(String message) addPatientStateError,
     required TResult Function() updatePatientStateLoading,
-    required TResult Function() updatePatientStateSuccess,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
     required TResult Function(String message) updatePatientStateError,
     required TResult Function() deletePatientStateLoading,
     required TResult Function() deletePatientStateSuccess,
@@ -3901,7 +3938,7 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     TResult? Function()? addPatientStateSuccess,
     TResult? Function(String message)? addPatientStateError,
     TResult? Function()? updatePatientStateLoading,
-    TResult? Function()? updatePatientStateSuccess,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
     TResult? Function(String message)? updatePatientStateError,
     TResult? Function()? deletePatientStateLoading,
     TResult? Function()? deletePatientStateSuccess,
@@ -3925,7 +3962,7 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     TResult Function()? addPatientStateSuccess,
     TResult Function(String message)? addPatientStateError,
     TResult Function()? updatePatientStateLoading,
-    TResult Function()? updatePatientStateSuccess,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
     TResult Function(String message)? updatePatientStateError,
     TResult Function()? deletePatientStateLoading,
     TResult Function()? deletePatientStateSuccess,

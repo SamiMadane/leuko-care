@@ -48,10 +48,7 @@ class PatientDetailsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          DeletePatientBlocListener(
-            doctorId: doctorId,
-            doctorName: doctorName,
-          ),
+          DeletePatientBlocListener(doctorId: doctorId, doctorName: doctorName),
           SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               vertical: HeightManager.h20,

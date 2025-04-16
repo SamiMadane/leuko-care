@@ -45,6 +45,7 @@ class DeletePatientBlocListener extends StatelessWidget {
                     onSuccess: () {
                       context.pop();
                       context.pop();
+                      context.pop();
                       context.pushReplacementNamed(
                         Routes.allPatientsScreen,
                         arguments: {

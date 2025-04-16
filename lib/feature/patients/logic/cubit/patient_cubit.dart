@@ -14,7 +14,6 @@ class PatientCubit extends Cubit<PatientState> {
   
   void getPatientsStream() {
     emit(GetPatientStateLoading());
-    _patientsSubscription?.cancel(); // إلغاء أي استماع قديم قبل بدء الجديد
     _patientsSubscription = _repository.getPatientsStream().listen(
       (patients) {
         emit(
@@ -52,6 +51,7 @@ class PatientCubit extends Cubit<PatientState> {
 
       patient = patient.copyWith(id: uid);
       await _repository.addPatient(patient);
+      getPatientsStream();
       emit(AddPatientStateSuccess());
     } catch (e) {
       emit(AddPatientStateError(e.toString()));
@@ -65,7 +65,8 @@ class PatientCubit extends Cubit<PatientState> {
       patient = patient.copyWith(profileImage: imageUrl);
 
       await _repository.updatePatient(patient); 
-      emit(UpdatePatientStateSuccess());
+      getPatientsStream();
+      emit(UpdatePatientStateSuccess(patient));
     } catch (e) {
       emit(UpdatePatientStateError(e.toString()));
     }
@@ -77,6 +78,7 @@ class PatientCubit extends Cubit<PatientState> {
 
     try {
       await _repository.deletePatient(patientId);
+      getPatientsStream();
       emit(DeletePatientStateSuccess());
     } catch (e) {
       emit(DeletePatientStateError('Error deleting patient: $e'));

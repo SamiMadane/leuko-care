@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/core/widgets/error_dialog.dart';
+import 'package:leuko_care/core/widgets/success_dialog.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
 
 class AddUpdatePatientBlocListener extends StatelessWidget {
   final PatientModel? patient;
@@ -21,6 +22,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<PatientCubit>();
     return BlocListener<PatientCubit, PatientState>(
       listenWhen:
           (previous, current) =>
@@ -41,9 +43,17 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
               'The patient has been added successfully.',
             );
           },
-          updatePatientStateSuccess: () {
+          updatePatientStateSuccess: (patient) {
             context.pop();
-            _showUpdateSuccessDialog(context, 'Patient updated successfully');
+            context.pop();
+            context.pop();
+            context.pop();
+            _showUpdateSuccessDialog(
+              context,
+              'Patient updated successfully',
+              patient,
+              cubit,
+            );
           },
           addPatientStateError: (message) {
             Navigator.pop(context);
@@ -70,84 +80,58 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
     );
   }
 
-  void _showSuccessDialog(
+  void _showAddSuccessDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder:
+          (context) => SuccessDialog(
+            message: message,
+            onSuccess: () {
+              context.pop();
+              context.pop();
+              context.pushReplacementNamed(
+                Routes.allPatientsScreen,
+                arguments: {'doctorId': doctorId, 'doctorName': doctorName},
+              );
+            },
+          ),
+    );
+  }
+
+  void _showUpdateSuccessDialog(
     BuildContext context,
     String message,
-    VoidCallback onPressed,
+    PatientModel Patient,
+    var cubit,
   ) {
     showDialog(
       context: context,
       barrierDismissible: true,
       builder:
-          (context) => AlertDialog(
-            icon: const Icon(Icons.check, color: Colors.green, size: 32),
-            content: Text(
-              message,
-              style: getMediumTextStyle(
-                fontSize: 15,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: onPressed,
-                child: Text(
-                  'Got it',
-                  style: getSemiBoldTextStyle(
-                    fontSize: 14,
-                    color: ColorsManager.primaryColor,
-                  ),
-                ),
-              ),
-            ],
+          (context) => SuccessDialog(
+            message: message,
+            onSuccess: () {
+              cubit.getPatientsStream();
+              context.pop();
+              context.pop();
+              context.pushReplacementNamed(
+                Routes.patientDetailsScreen,
+                arguments: {
+                  'patientDetails': Patient,
+                  'doctorId': doctorId,
+                  'doctorName': doctorName,
+                },
+              );
+            },
           ),
     );
-  }
-
-  void _showAddSuccessDialog(BuildContext context, String message) {
-    _showSuccessDialog(context, message, () {
-      context.pop();
-      context.pop();
-      context.pushReplacementNamed(
-        Routes.allPatientsScreen,
-        arguments: {'doctorId': doctorId, 'doctorName': doctorName},
-      );
-    });
-  }
-    void _showUpdateSuccessDialog(BuildContext context, String message) {
-    _showSuccessDialog(context, message, () {
-      context.pop();
-      context.pop();
-      context.pushReplacementNamed(
-        Routes.patientDetailsScreen,
-        arguments: {'doctorId': doctorId, 'doctorName': doctorName,'patient':patient},
-      );
-    });
   }
 
   void _showErrorDialog(BuildContext context, String message) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text(
-              'Error',
-              style: getBoldTextStyle(fontSize: 20, color: Colors.red),
-            ),
-            content: Text(
-              message,
-              style: getRegularTextStyle(
-                fontSize: 16,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => context.pop(),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
+      builder: (context) => ErrorDialog(message: message),
     );
   }
 }

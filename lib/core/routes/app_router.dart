@@ -96,12 +96,20 @@ class AppRouter {
               ),
         );
       case Routes.patientDetailsScreen:
-        final patientDetails = arguments as PatientModel;
+        final arguments = settings.arguments as Map?;
+        final patientDetails = arguments?['patientDetails'] as PatientModel;
+        final doctorId = arguments?['doctorId'] as String;
+        final doctorName = arguments?['doctorName'] as String;
+
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(
                 value: getIt<PatientCubit>()..getPatientsStream(),
-                child: PatientDetailsScreen(patient: patientDetails),
+                child: PatientDetailsScreen(
+                  patient: patientDetails,
+                  doctorId: doctorId,
+                  doctorName: doctorName,
+                ),
               ),
         );
       case Routes.addUpdatePatientScreen:

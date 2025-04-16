@@ -11,37 +11,44 @@ import 'package:shimmer/shimmer.dart';
 
 class PatientListTile extends StatelessWidget {
   final PatientModel patient;
-  const PatientListTile({super.key, required this.patient});
+  final String doctorId;
+  final String doctorName;
+  const PatientListTile({
+    super.key,
+    required this.patient,
+    required this.doctorId,
+    required this.doctorName,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-          margin: EdgeInsets.symmetric(
-            vertical: HeightManager.h8,
-            horizontal: WidthManager.w16,
+      margin: EdgeInsets.symmetric(
+        vertical: HeightManager.h8,
+        horizontal: WidthManager.w16,
+      ),
+      elevation: 4,
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(
+          vertical: HeightManager.h18,
+          horizontal: WidthManager.w18,
+        ),
+        title: Text(
+          patient.name,
+          style: getBoldTextStyle(
+            fontSize: FontSizeManager.s18,
+            color: ColorsManager.darkBlue,
           ),
-          elevation: 4,
-          child: ListTile(
-            contentPadding: EdgeInsets.symmetric(
-              vertical: HeightManager.h18,
-              horizontal: WidthManager.w18,
-            ),
-            title: Text(
-              patient.name,
-              style: getBoldTextStyle(
-                fontSize: FontSizeManager.s18,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: HeightManager.h6),
-                Text(patient.email),
-                SizedBox(height: HeightManager.h4),
-              ],
-            ),
-            leading:  CircleAvatar(
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: HeightManager.h6),
+            Text(patient.email),
+            SizedBox(height: HeightManager.h4),
+          ],
+        ),
+        leading: CircleAvatar(
           radius: RadiusManager.r32,
           backgroundColor: Colors.grey[200],
           backgroundImage: null,
@@ -54,16 +61,19 @@ class PatientListTile extends StatelessWidget {
             ),
           ),
         ),
-            onTap: () {
-              context.pushNamed(
-                Routes.patientDetailsScreen,
-                arguments: patient,
-              );
+        onTap: () {
+          context.pushNamed(
+            Routes.patientDetailsScreen,
+            arguments: {
+              'patientDetails': patient,
+              'doctorId': doctorId,
+              'doctorName': doctorName,
             },
-          ),
-        );
+          );
+        },
+      ),
+    );
   }
-
 
   Widget _buildShimmerLoading() {
     return Shimmer.fromColors(

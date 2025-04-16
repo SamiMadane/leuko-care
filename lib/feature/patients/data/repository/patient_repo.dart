@@ -7,8 +7,7 @@ import '../models/patient_model.dart';
 class PatientRepository {
   final FirebaseFirestore _firestore;
 
-  PatientRepository(this._firestore); 
-
+  PatientRepository(this._firestore);
 
   Stream<List<PatientModel>> getPatientsStream() {
     return _firestore.collection('patients').snapshots().map((snapshot) {
@@ -18,15 +17,12 @@ class PatientRepository {
     });
   }
 
-  
   Future<void> addPatient(PatientModel patient) async {
-    try {      
+    try {
       await _firestore
           .collection('patients')
           .doc(patient.id)
           .set(patient.toJson());
-          getPatientsStream();
-
     } catch (e) {
       throw Exception("Error saving patient data: ${e.toString()}");
     }
@@ -38,7 +34,6 @@ class PatientRepository {
           .collection('patients')
           .doc(patient.id)
           .update(patient.toJson());
-          getPatientsStream();
     } catch (e) {
       throw Exception("Error updating patient data: ${e.toString()}");
     }
@@ -47,8 +42,6 @@ class PatientRepository {
   Future<void> deletePatient(String patientId) async {
     try {
       await _firestore.collection('patients').doc(patientId).delete();
-      getPatientsStream();
-    
     } catch (e) {
       throw Exception('Error deleting patient: $e');
     }
@@ -81,13 +74,16 @@ class PatientRepository {
     }
   }
 
-  
   Future<List<PatientModel>> getPatientsByDoctorId(String doctorId) async {
     try {
-      final querySnapshot = await _firestore
-          .collection('patients')
-          .where('doctorId', isEqualTo: doctorId) // تصفية المرضى حسب doctorId
-          .get();
+      final querySnapshot =
+          await _firestore
+              .collection('patients')
+              .where(
+                'doctorId',
+                isEqualTo: doctorId,
+              ) // تصفية المرضى حسب doctorId
+              .get();
 
       return querySnapshot.docs
           .map((doc) => PatientModel.fromJson(doc.data()))

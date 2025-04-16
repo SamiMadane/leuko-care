@@ -6,7 +6,11 @@ import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/pati
 
 class AllPaitentListView extends StatelessWidget {
   final List<PatientModel> patients;
-  const AllPaitentListView({super.key, required this.patients});
+  final String doctorId;
+  final String doctorName;
+  
+  
+  const AllPaitentListView({super.key, required this.patients, required this.doctorId, required this.doctorName});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class AllPaitentListView extends StatelessWidget {
       itemCount: patients.length,
       itemBuilder: (context, index) {
         final patient = patients[index];
-        return PatientListTile(patient: patient);
+        return PatientListTile(patient: patient,doctorId:doctorId ,doctorName:doctorName ,);
       },
     );
   }

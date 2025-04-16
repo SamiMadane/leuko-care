@@ -8,15 +8,19 @@ class AllPatientsScreen extends StatelessWidget {
   final String doctorId;
   final String doctorName;
 
-
-  const AllPatientsScreen({super.key, required this.doctorId, required this.doctorName});
+  const AllPatientsScreen({
+    super.key,
+    required this.doctorId,
+    required this.doctorName,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Patients of Dr. $doctorName'),
+      appBar: AppBar(title: Text('Patients of Dr. $doctorName')),
+      body: AllPatientsBodyBlocBuilder(
+        doctorId: doctorId,
+        doctorName: doctorName,
       ),
-      body: AllPatientsBodyBlocBuilder(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.pushNamed(
