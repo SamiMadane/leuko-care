@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
@@ -25,7 +27,9 @@ class AddUpdatePatientProfileImagePicker extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: ColorsManager.profileBackGroundColor.withValues(alpha: 0.4),
+                color: ColorsManager.profileBackGroundColor.withValues(
+                  alpha: 0.4,
+                ),
                 blurRadius: 10,
                 offset: Offset(0, 5),
               ),
@@ -37,18 +41,39 @@ class AddUpdatePatientProfileImagePicker extends StatelessWidget {
             child: Stack(
               children: [
                 ClipOval(
-                  child: CachedNetworkImage(
-                    imageUrl: profileImageUrl!,
-                    fit: BoxFit.cover,
-                    placeholder:
-                        (context, url) => Center(child: _buildShimmerLoading()),
-                    errorWidget:
-                        (context, url, error) => Container(
-                          color: Colors.grey[200],
-                          child: const Icon(Icons.error, color: Colors.red),
-                        ),
-                  ),
+                  child:
+                      profileImageUrl!.startsWith('http')
+                          ? CachedNetworkImage(
+                            imageUrl: profileImageUrl!,
+                            fit: BoxFit.cover,
+                            placeholder:
+                                (context, url) =>
+                                    Center(child: _buildShimmerLoading()),
+                            errorWidget:
+                                (context, url, error) => Container(
+                                  color: Colors.grey[200],
+                                  child: const Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                          )
+                          : Image.file(
+                            File(profileImageUrl!),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: double.infinity,
+                            errorBuilder:
+                                (context, error, stackTrace) => Container(
+                                  color: Colors.grey[200],
+                                  child: const Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                          ),
                 ),
+
                 Align(
                   alignment: Alignment.bottomRight,
                   child: CircleAvatar(
@@ -68,7 +93,8 @@ class AddUpdatePatientProfileImagePicker extends StatelessWidget {
       ),
     );
   }
-    Widget _buildShimmerLoading() {
+
+  Widget _buildShimmerLoading() {
     return Shimmer.fromColors(
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
