@@ -7,18 +7,17 @@ import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 
 class PatientCubit extends Cubit<PatientState> {
   final PatientRepository _repository;
-  StreamSubscription? _patientsSubscription;
+  StreamSubscription<List<PatientModel>>? _patientsSubscription;
 
-  PatientCubit(this._repository) : super(const PatientState.patientStateInitial());
+  PatientCubit(this._repository)
+    : super(const PatientState.patientStateInitial());
 
-  
   void getPatientsStream() {
+    _patientsSubscription?.cancel();
     emit(GetPatientStateLoading());
     _patientsSubscription = _repository.getPatientsStream().listen(
       (patients) {
-        emit(
-          GetPatientStateSuccess(patients),
-        ); 
+        emit(GetPatientStateSuccess(patients));
       },
       onError: (error) {
         emit(GetPatientStateError(error.toString()));
@@ -64,7 +63,7 @@ class PatientCubit extends Cubit<PatientState> {
       String imageUrl = await _getImageUrl(patient);
       patient = patient.copyWith(profileImage: imageUrl);
 
-      await _repository.updatePatient(patient); 
+      await _repository.updatePatient(patient);
       getPatientsStream();
       emit(UpdatePatientStateSuccess(patient));
     } catch (e) {
@@ -85,28 +84,41 @@ class PatientCubit extends Cubit<PatientState> {
     }
   }
 
-  
-    Future<void> getPatientsByDoctorId(String doctorId) async {
-    try {
-      emit(GetPatientsByDoctorIdStateLoading());
+  void getPatientsByDoctorId(String doctorId) {
+    emit(GetPatientsByDoctorIdStateLoading());
 
-      final patients = await _repository.getPatientsByDoctorId(doctorId);
+    _patientsSubscription?.cancel(); // لإلغاء أي اشتراك سابق
 
-      emit(GetPatientsByDoctorIdStateSuccess(patients));
-    } catch (e) {
-      emit(GetPatientsByDoctorIdStateError("Failed to load patients"));
-    }
+    _patientsSubscription = _repository
+        .getPatientsByDoctorIdStream(doctorId)
+        .listen(
+          (patients) {
+            emit(GetPatientsByDoctorIdStateSuccess(patients));
+          },
+          onError: (error) {
+            emit(GetPatientsByDoctorIdStateError("Failed to load patients"));
+          },
+        );
+  }
+
+  Stream<PatientModel> getPatientByIdStream(String patientId) {
+    return _repository.getPatientByIdStream(patientId);
+  }
+
+  @override
+  Future<void> close() {
+    _patientsSubscription?.cancel();
+    return super.close();
   }
 
   int calculateAge(String birthDateString) {
-  final birthDate = DateTime.parse(birthDateString);
-  final today = DateTime.now();
-  int age = today.year - birthDate.year;
-  if (today.month < birthDate.month ||
-      (today.month == birthDate.month && today.day < birthDate.day)) {
-    age--;
-  } // if not coming birthday yet decrease one year
-  return age;
-}
-
+    final birthDate = DateTime.parse(birthDateString);
+    final today = DateTime.now();
+    int age = today.year - birthDate.year;
+    if (today.month < birthDate.month ||
+        (today.month == birthDate.month && today.day < birthDate.day)) {
+      age--;
+    } // if not coming birthday yet decrease one year
+    return age;
+  }
 }

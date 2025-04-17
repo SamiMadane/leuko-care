@@ -44,7 +44,7 @@ class PatientListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: HeightManager.h6),
-            Text(patient.email),
+            _examinedStatus(patient.isExamined),
             SizedBox(height: HeightManager.h4),
           ],
         ),
@@ -65,7 +65,7 @@ class PatientListTile extends StatelessWidget {
           context.pushNamed(
             Routes.patientDetailsScreen,
             arguments: {
-              'patientDetails': patient,
+              'patientId': patient.id,
               'doctorId': doctorId,
               'doctorName': doctorName,
             },
@@ -85,4 +85,23 @@ class PatientListTile extends StatelessWidget {
       ),
     );
   }
+  Widget _examinedStatus(bool isExamined) {
+  return Row(
+    children: [
+      Icon(
+        isExamined ? Icons.check_circle : Icons.cancel,
+        color: isExamined ? Colors.green : Colors.red,
+      ),
+      SizedBox(width: 8),
+      Text(
+        isExamined ? 'Patient has been examined' : 'Not examined yet',
+        style: TextStyle(
+          color: isExamined ? Colors.green[800] : Colors.red[800],
+          fontWeight: FontWeight.w600,
+          fontSize: FontSizeManager.s14,
+        ),
+      ),
+    ],
+  );
+}
 }

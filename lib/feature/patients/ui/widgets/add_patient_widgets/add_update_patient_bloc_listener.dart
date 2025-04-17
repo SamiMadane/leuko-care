@@ -22,7 +22,6 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<PatientCubit>();
     return BlocListener<PatientCubit, PatientState>(
       listenWhen:
           (previous, current) =>
@@ -45,22 +44,18 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
           },
           updatePatientStateSuccess: (patient) {
             context.pop();
-            context.pop();
-            context.pop();
-            context.pop();
             _showUpdateSuccessDialog(
               context,
               'Patient updated successfully',
               patient,
-              cubit,
             );
           },
           addPatientStateError: (message) {
-            Navigator.pop(context);
+            context.pop();
             _showErrorDialog(context, message);
           },
           updatePatientStateError: (message) {
-            Navigator.pop(context);
+            context.pop();
             _showErrorDialog(context, message);
           },
         );
@@ -102,8 +97,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
   void _showUpdateSuccessDialog(
     BuildContext context,
     String message,
-    PatientModel Patient,
-    var cubit,
+    PatientModel patient,
   ) {
     showDialog(
       context: context,
@@ -112,13 +106,12 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
           (context) => SuccessDialog(
             message: message,
             onSuccess: () {
-              cubit.getPatientsStream();
               context.pop();
               context.pop();
               context.pushReplacementNamed(
                 Routes.patientDetailsScreen,
                 arguments: {
-                  'patientDetails': Patient,
+                  'patientId': patient.id,
                   'doctorId': doctorId,
                   'doctorName': doctorName,
                 },

@@ -36,7 +36,7 @@ class DeletePatientBlocListener extends StatelessWidget {
             );
           },
           deletePatientStateSuccess: () {
-            Navigator.pop(context); // Close loading
+            context.pop();
             showDialog(
               context: context,
               builder:
@@ -46,6 +46,7 @@ class DeletePatientBlocListener extends StatelessWidget {
                       context.pop();
                       context.pop();
                       context.pop();
+
                       context.pushReplacementNamed(
                         Routes.allPatientsScreen,
                         arguments: {

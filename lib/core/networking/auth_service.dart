@@ -15,7 +15,6 @@ class AuthService {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('email_sent');
 
-      print("User logged out successfully.");
     } catch (e) {
       print("Error signing out: $e");
     }

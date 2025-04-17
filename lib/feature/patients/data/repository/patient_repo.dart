@@ -74,22 +74,24 @@ class PatientRepository {
     }
   }
 
-  Future<List<PatientModel>> getPatientsByDoctorId(String doctorId) async {
-    try {
-      final querySnapshot =
-          await _firestore
-              .collection('patients')
-              .where(
-                'doctorId',
-                isEqualTo: doctorId,
-              ) // تصفية المرضى حسب doctorId
-              .get();
+Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
+  return _firestore
+      .collection('patients')
+      .where('doctorId', isEqualTo: doctorId)
+      .snapshots()
+      .map((querySnapshot) {
+        return querySnapshot.docs
+            .map((doc) => PatientModel.fromJson(doc.data()))
+            .toList();
+      });
+}
 
-      return querySnapshot.docs
-          .map((doc) => PatientModel.fromJson(doc.data()))
-          .toList();
-    } catch (e) {
-      throw Exception("Failed to load patients");
-    }
-  }
+Stream<PatientModel> getPatientByIdStream(String patientId) {
+  return FirebaseFirestore.instance
+      .collection('patients')
+      .doc(patientId)
+      .snapshots()
+      .map((doc) => PatientModel.fromJson(doc.data()!));
+}
+
 }

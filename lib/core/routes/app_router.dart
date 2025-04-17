@@ -97,16 +97,16 @@ class AppRouter {
         );
       case Routes.patientDetailsScreen:
         final arguments = settings.arguments as Map?;
-        final patientDetails = arguments?['patientDetails'] as PatientModel;
-        final doctorId = arguments?['doctorId'] as String;
-        final doctorName = arguments?['doctorName'] as String;
+        final patientId = arguments?['patientId'] as String;
+  final doctorId = arguments?['doctorId'] as String;
+  final doctorName = arguments?['doctorName'] as String;
 
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(
                 value: getIt<PatientCubit>()..getPatientsStream(),
                 child: PatientDetailsScreen(
-                  patient: patientDetails,
+                  patientId: patientId,
                   doctorId: doctorId,
                   doctorName: doctorName,
                 ),
