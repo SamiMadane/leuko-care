@@ -21,7 +21,8 @@ class AdminHomeRepository {
   Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(List<DoctorModel> doctors) async {
     final doctorWithCounts = await Future.wait(
       doctors.map((doctor) async {
-        final patients = await patientRepository.getPatientsByDoctorId(doctor.id!);
+        // we use .first here to get counts of patients for each doctor (Future<List<PatientModel>> get first)
+        final patients = await patientRepository.getPatientsByDoctorIdStream(doctor.id!).first;
         return MapEntry(doctor, patients.length);
       }),
     );
@@ -30,8 +31,8 @@ class AdminHomeRepository {
     return doctorWithCounts.map((entry) => entry.key).toList();
   }
 
-  Future<List<PatientModel>> getPatientsByDoctorId(String doctorId) {
-    return patientRepository.getPatientsByDoctorId(doctorId);
+  Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
+    return patientRepository.getPatientsByDoctorIdStream(doctorId);
   }
 
     Future<void> signOut() async {

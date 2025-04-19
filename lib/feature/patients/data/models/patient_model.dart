@@ -8,12 +8,13 @@ class PatientModel {
   final String email;
   final String phone;
   final String profileImage;
-  final String doctorId; // الطبيب المعالج
-  final String userType; // نوع المستخدم (مريض، دكتور، أدمن)
-  final bool isExamined; // حالة فحص المريض
-  final String registrationDate; // تاريخ التسجيل (تاريخ اليوم)
-  final String healthStatus; // حالة المريض (سليم، مريض)
-  final String birthDate; // تاريخ ميلاد المريض
+  final String doctorId;
+  final String userType;
+  final bool isExamined;
+  final String registrationDate;
+  final String healthStatus;
+  final String birthDate;
+  final String leukemiaType;
 
   PatientModel({
     required this.id,
@@ -27,9 +28,11 @@ class PatientModel {
     required this.registrationDate,
     required this.healthStatus,
     required this.birthDate,
+    required this.leukemiaType,
   });
 
-  factory PatientModel.fromJson(Map<String, dynamic> json) => _$PatientModelFromJson(json);
+  factory PatientModel.fromJson(Map<String, dynamic> json) =>
+      _$PatientModelFromJson(json);
   Map<String, dynamic> toJson() => _$PatientModelToJson(this);
 
   PatientModel copyWith({
@@ -44,6 +47,7 @@ class PatientModel {
     String? registrationDate,
     String? healthStatus,
     String? birthDate,
+    String? leukemiaType,
   }) {
     return PatientModel(
       id: id ?? this.id,
@@ -57,6 +61,7 @@ class PatientModel {
       registrationDate: registrationDate ?? this.registrationDate,
       healthStatus: healthStatus ?? this.healthStatus,
       birthDate: birthDate ?? this.birthDate,
+      leukemiaType: leukemiaType ?? this.leukemiaType,
     );
   }
 }

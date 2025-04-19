@@ -23,6 +23,7 @@ class RadiusManager {
   static double r40 = SizeUtil.setRadius(40.0);
   static double r50 = SizeUtil.setRadius(50.0);
   static double r60 = SizeUtil.setRadius(60.0);
+  static double r64 = SizeUtil.setRadius(64.0);
   static double r80 = SizeUtil.setRadius(80.0);
   static double r100 = SizeUtil.setRadius(100.0);
 }
@@ -56,6 +57,7 @@ class WidthManager {
   static double w50 = SizeUtil.setWidth(50.0);
   static double w56 = SizeUtil.setWidth(56.0);
   static double w60 = SizeUtil.setWidth(60.0);
+  static double w64 = SizeUtil.setWidth(64.0);
   static double w68 = SizeUtil.setWidth(68.0);
   static double w70 = SizeUtil.setWidth(70.0);
   static double w76 = SizeUtil.setWidth(76.0);
@@ -107,6 +109,7 @@ class HeightManager {
   static double h54 = SizeUtil.setHeight(54.0);
   static double h56 = SizeUtil.setHeight(56.0);
   static double h60 = SizeUtil.setHeight(60.0);
+  static double h64 = SizeUtil.setHeight(64.0);
   static double h70 = SizeUtil.setHeight(70.0);
   static double h80 = SizeUtil.setHeight(80.0);
   static double h88 = SizeUtil.setHeight(88.0);
@@ -115,6 +118,7 @@ class HeightManager {
   static double h110 = SizeUtil.setHeight(110.0);
   static double h120 = SizeUtil.setHeight(120.0);
   static double h130 = SizeUtil.setHeight(130.0);
+  static double h160 = SizeUtil.setHeight(160.0);
   static double h165 = SizeUtil.setHeight(165.0);
   static double h170 = SizeUtil.setHeight(170.0);
   static double h180 = SizeUtil.setHeight(180.0);
@@ -137,6 +141,8 @@ class IconSizeManager {
   static double s14 = 14;
   static double s16 = 16;
   static double s18 = 18;
+  static double s20 = 20;
+  static double s22 = 22;
   static double s32 = 32;
 
 }

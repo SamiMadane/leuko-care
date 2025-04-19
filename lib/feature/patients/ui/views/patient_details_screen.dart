@@ -14,11 +14,15 @@ import 'package:leuko_care/feature/patients/ui/widgets/patient_details_widgets/p
 import 'package:leuko_care/feature/patients/ui/widgets/patient_details_widgets/patient_details_edit_button.dart';
 
 class PatientDetailsScreen extends StatelessWidget {
-  final PatientModel patient;
+  final String patientId;
+  final String doctorId;
+  final String doctorName;
 
   const PatientDetailsScreen({
     super.key,
-    required this.patient,
+    required this.patientId,
+    required this.doctorId,
+    required this.doctorName,
   });
 
   @override
@@ -27,7 +31,7 @@ class PatientDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PatientDetailsAppBar(
-        patientName: patient.name,
+        patientName: 'PatientDetails',
         onDeletePressed: () {
           showDialog(
             context: context,
@@ -35,8 +39,7 @@ class PatientDetailsScreen extends StatelessWidget {
               title: 'Confirm Delete',
               message: 'Are you sure you want to delete this patient?',
               onConfirmed: () {
-                patientCubit.deletePatient(patient.id!);
-                
+                patientCubit.deletePatient(patientId);
               },
             ),
           );
@@ -44,30 +47,54 @@ class PatientDetailsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const DeletePatientBlocListener(),
-          SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-              vertical: HeightManager.h20,
-              horizontal: WidthManager.w22,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                DoctorDetailsProfileImage(profileImageUrl: patient.profileImage),
-                SizedBox(height: HeightManager.h20),
-                Text(
-                  patient.name,
-                  style: getBoldTextStyle(
-                    fontSize: FontSizeManager.s24,
-                    color: ColorsManager.blueGrey,
+          DeletePatientBlocListener(
+            doctorId: doctorId,
+            doctorName: doctorName,
+          ),
+          
+          StreamBuilder<PatientModel>(
+            stream: patientCubit.getPatientByIdStream(patientId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                  return const SizedBox.shrink();
+
+              } else if (snapshot.hasData) {
+                final patient = snapshot.data!;
+
+                return Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      vertical: HeightManager.h20,
+                      horizontal: WidthManager.w22,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        DoctorDetailsProfileImage(
+                          profileImageUrl: patient.profileImage,
+                        ),
+                        SizedBox(height: HeightManager.h20),
+                        Text(
+                          patient.name,
+                          style: getBoldTextStyle(
+                            fontSize: FontSizeManager.s24,
+                            color: ColorsManager.blueGrey,
+                          ),
+                        ),
+                        SizedBox(height: HeightManager.h20),
+                        PatientDetailsInfoCard(patient: patient),
+                        SizedBox(height: HeightManager.h30),
+                        PatientDetailsEditButton(patient: patient),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                PatientDetailsInfoCard(patient: patient),
-                const SizedBox(height: 30),
-                PatientDetailsEditButton(patient: patient),
-              ],
-            ),
+                );
+              } else {
+                return const Center(child: Text('Patient not found'));
+              }
+            },
           ),
         ],
       ),

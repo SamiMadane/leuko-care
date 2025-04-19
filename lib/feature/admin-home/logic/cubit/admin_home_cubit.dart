@@ -7,7 +7,9 @@ import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
 class AdminHomeCubit extends Cubit<AdminHomeState> {
   final AdminHomeRepository adminHomeRepository;
+  StreamSubscription<List<PatientModel>>? _patientsSubscription;
   StreamSubscription? _doctorsSubscription;
+
 
   List<DoctorModel> doctors = [];
   DoctorModel? selectedDoctor;
@@ -39,17 +41,26 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
     emit(GetPatientsStateLoading());
     if (selectedDoctor != null) {
       try {
-        filteredPatients = await adminHomeRepository.getPatientsByDoctorId(
+        // استخدام Stream للمرضى الخاصين بالطبيب المحدد
+        _patientsSubscription?.cancel();
+        _patientsSubscription = adminHomeRepository.getPatientsByDoctorIdStream(
           selectedDoctor!.id!,
+        ).listen(
+          (patients) {
+            filteredPatients = patients;
+            emit(GetPatientsStateSuccess(filteredPatients));
+          },
+          onError: (error) {
+            emit(GetPatientsStateError(error.toString()));
+          },
         );
-        emit(GetPatientsStateSuccess(filteredPatients));
       } catch (e) {
         emit(GetPatientsStateError(e.toString()));
       }
-    }else {
-    filteredPatients = [];
-    emit(GetPatientsStateSuccess(filteredPatients));
-  }
+    } else {
+      filteredPatients = [];
+      emit(GetPatientsStateSuccess(filteredPatients));
+    }
   }
 
   void selectDoctor(DoctorModel doctor) {
@@ -70,7 +81,9 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
 
   @override
   Future<void> close() {
+    _patientsSubscription?.cancel();
     _doctorsSubscription?.cancel();
     return super.close();
   }
 }
+

@@ -9,5 +9,4 @@ class Routes {
   static const String allPatientsScreen = '/allPatientsScreen';
   static const String patientDetailsScreen = '/patientDetailsScreen';
   static const String addUpdatePatientScreen = '/addUpdatePatientScreen';
-
 }

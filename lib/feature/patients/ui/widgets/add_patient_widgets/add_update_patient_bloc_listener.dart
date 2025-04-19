@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/core/widgets/error_dialog.dart';
+import 'package:leuko_care/core/widgets/success_dialog.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
 
 class AddUpdatePatientBlocListener extends StatelessWidget {
-  const AddUpdatePatientBlocListener({super.key});
+  final PatientModel? patient;
+  final String? doctorId;
+  final String? doctorName;
+  const AddUpdatePatientBlocListener({
+    super.key,
+    this.patient,
+    this.doctorId,
+    this.doctorName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +37,25 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
           updatePatientStateLoading: () => _showLoadingDialog(context),
           addPatientStateSuccess: () {
             context.pop();
-            _showSuccessDialog(
+            _showAddSuccessDialog(
               context,
               'The patient has been added successfully.',
             );
           },
-          updatePatientStateSuccess: () {
+          updatePatientStateSuccess: (patient) {
             context.pop();
-            _showSuccessDialog(context, 'Patient updated successfully');
+            _showUpdateSuccessDialog(
+              context,
+              'Patient updated successfully',
+              patient,
+            );
           },
           addPatientStateError: (message) {
-            Navigator.pop(context);
+            context.pop();
             _showErrorDialog(context, message);
           },
           updatePatientStateError: (message) {
-            Navigator.pop(context);
+            context.pop();
             _showErrorDialog(context, message);
           },
         );
@@ -61,38 +75,48 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
     );
   }
 
-  void _showSuccessDialog(BuildContext context, String message) {
+  void _showAddSuccessDialog(BuildContext context, String message) {
     showDialog(
       context: context,
       barrierDismissible: true,
       builder:
-          (context) => AlertDialog(
-            icon: const Icon(Icons.check, color: Colors.green, size: 32),
-            content: Text(
-              message,
-              style: getMediumTextStyle(
-                fontSize: 15,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  context.pop();
-                  context.pushNamedAndRemoveUntil(
-                    Routes.adminHomeScreen,
-                    predicate: (_) => false,
-                  );
+          (context) => SuccessDialog(
+            message: message,
+            onSuccess: () {
+              context.pop();
+              context.pop();
+              context.pushReplacementNamed(
+                Routes.allPatientsScreen,
+                arguments: {'doctorId': doctorId, 'doctorName': doctorName},
+              );
+            },
+          ),
+    );
+  }
+
+  void _showUpdateSuccessDialog(
+    BuildContext context,
+    String message,
+    PatientModel patient,
+  ) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder:
+          (context) => SuccessDialog(
+            message: message,
+            onSuccess: () {
+              context.pop();
+              context.pop();
+              context.pushReplacementNamed(
+                Routes.patientDetailsScreen,
+                arguments: {
+                  'patientId': patient.id,
+                  'doctorId': doctorId,
+                  'doctorName': doctorName,
                 },
-                child: Text(
-                  'Got it',
-                  style: getSemiBoldTextStyle(
-                    fontSize: 14,
-                    color: ColorsManager.primaryColor,
-                  ),
-                ),
-              ),
-            ],
+              );
+            },
           ),
     );
   }
@@ -100,26 +124,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
   void _showErrorDialog(BuildContext context, String message) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text(
-              'Error',
-              style: getBoldTextStyle(fontSize: 20, color: Colors.red),
-            ),
-            content: Text(
-              message,
-              style: getRegularTextStyle(
-                fontSize: 16,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => context.pop(),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
+      builder: (context) => ErrorDialog(message: message),
     );
   }
 }

@@ -36,7 +36,7 @@ class DoctorsBlueContainer extends StatelessWidget {
                 Text(
                    'Admin Dashboard',
                   style: getBoldTextStyle(
-                    fontSize: FontSizeManager.s18,
+                    fontSize: FontSizeManager.s16,
                     color: ColorsManager.white,
                   ),
                 ),
@@ -44,7 +44,7 @@ class DoctorsBlueContainer extends StatelessWidget {
                 Text(
                   'Full access\nTo manage\nDoctors & Patients.',
                   style: getSemiBoldTextStyle(
-                    fontSize: FontSizeManager.s17,
+                    fontSize: FontSizeManager.s15,
                     color: ColorsManager.white,
                     height: HeightManager.h1_5,
                   ),

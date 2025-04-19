@@ -1,18 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
+import 'package:leuko_care/core/resourses/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
-import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
+import 'package:leuko_care/core/widgets/patient_status_widgets.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:shimmer/shimmer.dart';
 
-class DoctorListTile extends StatelessWidget {
-  final DoctorModel doctor;
-  const DoctorListTile({super.key, required this.doctor});
+class PatientListTile extends StatelessWidget {
+  final PatientModel patient;
+  final String doctorId;
+  final String doctorName;
+  const PatientListTile({
+    super.key,
+    required this.patient,
+    required this.doctorId,
+    required this.doctorName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +35,9 @@ class DoctorListTile extends StatelessWidget {
           horizontal: WidthManager.w18,
         ),
         title: Text(
-          ' Dr.${doctor.name}',
-          style: TextStyle(
+          patient.name,
+          style: getBoldTextStyle(
             fontSize: FontSizeManager.s18,
-            fontWeight: FontWeight.bold,
             color: ColorsManager.darkBlue,
           ),
         ),
@@ -41,57 +47,50 @@ class DoctorListTile extends StatelessWidget {
             SizedBox(height: HeightManager.h6),
             Row(
               children: [
-                Icon(
-                  Icons.email,
-                  color: ColorsManager.primaryColor,
-                  size: IconSizeManager.s18,
+                Icon(Icons.email, size: IconSizeManager.s16, color: ColorsManager.gray),
+                SizedBox(width: WidthManager.w6),
+                Expanded(
+                  child: Text(
+                    patient.email,
+                    style: getMediumTextStyle(
+                      fontSize: FontSizeManager.s14,
+                      color: ColorsManager.gray,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                SizedBox(width: WidthManager.w4),
-                Text(doctor.email),
               ],
             ),
-            SizedBox(height: HeightManager.h4),
-            _buildPatientCount(context, doctor.id!),
+            SizedBox(height: HeightManager.h6),
+            ExaminedStatusWidget(isExamined: patient.isExamined),
           ],
         ),
         leading: CircleAvatar(
           radius: RadiusManager.r40,
-          backgroundColor: Colors.grey[300],
+          backgroundColor: Colors.grey[200],
+          backgroundImage: null,
           child: ClipOval(
             child: CachedNetworkImage(
-              imageUrl: doctor.profileImage,
-              height: 60,
+              imageUrl: patient.profileImage,
               width: 60,
+              height: 60,
               fit: BoxFit.cover,
               placeholder: (context, url) => _buildShimmerLoading(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),
-
         onTap: () {
-          context.pushNamed(Routes.doctorDetailsScreen, arguments: doctor);
+          context.pushNamed(
+            Routes.patientDetailsScreen,
+            arguments: {
+              'patientId': patient.id,
+              'doctorId': doctorId,
+              'doctorName': doctorName,
+            },
+          );
         },
       ),
-    );
-  }
-
-  Widget _buildPatientCount(BuildContext context, String doctorId) {
-    return StreamBuilder<int>(
-      stream: context.read<DoctorCubit>().getPatientsCountStream(doctorId),
-      builder: (context, snapshot) {
-        final count = snapshot.data;
-        return Row(
-          children: [
-            Icon(Icons.group, color: ColorsManager.primaryColor, size: 18),
-            SizedBox(width: WidthManager.w4),
-            Text(
-              'Number of patients: ${count ?? "..."}',
-              style: const TextStyle(color: ColorsManager.primaryColor),
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -100,9 +99,10 @@ class DoctorListTile extends StatelessWidget {
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(
-        radius: RadiusManager.r40,
+        radius: RadiusManager.r28,
         backgroundColor: Colors.white,
       ),
     );
   }
+
 }
