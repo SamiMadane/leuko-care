@@ -49,12 +49,14 @@ class PatientListTile extends StatelessWidget {
           ],
         ),
         leading: CircleAvatar(
-          radius: RadiusManager.r32,
+          radius: RadiusManager.r40,
           backgroundColor: Colors.grey[200],
           backgroundImage: null,
           child: ClipOval(
             child: CachedNetworkImage(
               imageUrl: patient.profileImage,
+              width: 60,
+              height: 60,
               fit: BoxFit.cover,
               placeholder: (context, url) => _buildShimmerLoading(),
               errorWidget: (context, url, error) => const Icon(Icons.error),

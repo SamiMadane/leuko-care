@@ -42,36 +42,40 @@ class AddUpdatePatientProfileImagePicker extends StatelessWidget {
               children: [
                 ClipOval(
                   child:
-                      profileImageUrl!.startsWith('http')
-                          ? CachedNetworkImage(
-                            imageUrl: profileImageUrl!,
-                            fit: BoxFit.cover,
-                            placeholder:
-                                (context, url) =>
-                                    Center(child: _buildShimmerLoading()),
-                            errorWidget:
-                                (context, url, error) => Container(
-                                  color: Colors.grey[200],
-                                  child: const Icon(
-                                    Icons.error,
-                                    color: Colors.red,
+                      SizedBox(
+                        width: WidthManager.w160 ,
+                        height: HeightManager.h160,
+                        child: profileImageUrl!.startsWith('http')
+                            ? CachedNetworkImage(
+                              imageUrl: profileImageUrl!,
+                              fit: BoxFit.cover,
+                              placeholder:
+                                  (context, url) =>
+                                      Center(child: _buildShimmerLoading()),
+                              errorWidget:
+                                  (context, url, error) => Container(
+                                    color: Colors.grey[200],
+                                    child: const Icon(
+                                      Icons.error,
+                                      color: Colors.red,
+                                    ),
                                   ),
-                                ),
-                          )
-                          : Image.file(
-                            File(profileImageUrl!),
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
-                            errorBuilder:
-                                (context, error, stackTrace) => Container(
-                                  color: Colors.grey[200],
-                                  child: const Icon(
-                                    Icons.error,
-                                    color: Colors.red,
+                            )
+                            : Image.file(
+                              File(profileImageUrl!),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                              errorBuilder:
+                                  (context, error, stackTrace) => Container(
+                                    color: Colors.grey[200],
+                                    child: const Icon(
+                                      Icons.error,
+                                      color: Colors.red,
+                                    ),
                                   ),
-                                ),
-                          ),
+                            ),
+                      ),
                 ),
 
                 Align(

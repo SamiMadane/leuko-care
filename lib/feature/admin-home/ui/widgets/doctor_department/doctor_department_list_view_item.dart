@@ -41,15 +41,19 @@ class DoctorDepartmentListViewItem extends StatelessWidget {
                     child: CircleAvatar(
                       radius: RadiusManager.r32,
                       backgroundColor: Colors.grey[200],
-                      backgroundImage: null,
                       child: ClipOval(
-                        child: CachedNetworkImage(
-                          imageUrl: doctor.profileImage,
-                          fit: BoxFit.cover,
-                          placeholder:
-                              (context, url) => _buildShimmerLoading(),
-                          errorWidget:
-                              (context, url, error) => const Icon(Icons.error),
+                        child: SizedBox(
+                          width: WidthManager.w64,
+                          height: HeightManager.h64,
+                          child: CachedNetworkImage(
+                            imageUrl: doctor.profileImage,
+                            fit: BoxFit.cover,
+                            placeholder:
+                                (context, url) => _buildShimmerLoading(),
+                            errorWidget:
+                                (context, url, error) =>
+                                    const Icon(Icons.error),
+                          ),
                         ),
                       ),
                     ),
@@ -59,13 +63,16 @@ class DoctorDepartmentListViewItem extends StatelessWidget {
                     backgroundColor: Colors.grey[200],
                     backgroundImage: null,
                     child: ClipOval(
-                      child: CachedNetworkImage(
-                        imageUrl: doctor.profileImage,
-                        fit: BoxFit.cover,
-                        placeholder:
-                            (context, url) =>  _buildShimmerLoading(),
-                        errorWidget:
-                            (context, url, error) => const Icon(Icons.error),
+                      child: SizedBox(
+                        width: WidthManager.w60,
+                        height: HeightManager.h60,
+                        child: CachedNetworkImage(
+                          imageUrl: doctor.profileImage,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => _buildShimmerLoading(),
+                          errorWidget:
+                              (context, url, error) => const Icon(Icons.error),
+                        ),
                       ),
                     ),
                   ),

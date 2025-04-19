@@ -31,6 +31,8 @@ class DoctorDetailsProfileImage extends StatelessWidget {
           child:
               profileImageUrl.startsWith('http')
                   ? CachedNetworkImage(
+                    width: HeightManager.h120,
+                    height: WidthManager.w120,
                     imageUrl: profileImageUrl,
                     fit: BoxFit.cover,
                     placeholder:

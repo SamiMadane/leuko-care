@@ -28,6 +28,8 @@ class DoctorDetailsProfileImage extends StatelessWidget {
         child: ClipOval(
           child: CachedNetworkImage(
             imageUrl: profileImageUrl,
+            width: WidthManager.w120,
+            height: HeightManager.h120,
             fit: BoxFit.cover,
             placeholder:
                 (context, url) => Container(

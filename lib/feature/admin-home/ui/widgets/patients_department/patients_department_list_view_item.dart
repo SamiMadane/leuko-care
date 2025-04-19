@@ -19,10 +19,10 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(RadiusManager.r20),
             child: CachedNetworkImage(
               imageUrl: patient.profileImage,
-              width: WidthManager.w110,
+              width: WidthManager.w120,
               height: HeightManager.h120,
               fit: BoxFit.cover,
               placeholder: (context, url) => _buildShimmerLoading(),
@@ -47,7 +47,7 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
                 // الهاتف مع أيقونة
                 Row(
                   children: [
-                    Icon(Icons.phone, size: 16, color: ColorsManager.gray),
+                    Icon(Icons.phone, size: IconSizeManager.s16, color: ColorsManager.gray),
                     SizedBox(width: 6),
                     Text(
                       patient.phone,

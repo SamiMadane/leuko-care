@@ -55,18 +55,20 @@ class DoctorListTile extends StatelessWidget {
           ],
         ),
         leading: CircleAvatar(
-          radius: RadiusManager.r32,
-          backgroundColor: Colors.grey[200],
-          backgroundImage: null,
+          radius: RadiusManager.r40,
+          backgroundColor: Colors.grey[300],
           child: ClipOval(
             child: CachedNetworkImage(
               imageUrl: doctor.profileImage,
+              height: 60,
+              width: 60,
               fit: BoxFit.cover,
               placeholder: (context, url) => _buildShimmerLoading(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),
+
         onTap: () {
           context.pushNamed(Routes.doctorDetailsScreen, arguments: doctor);
         },
@@ -98,7 +100,7 @@ class DoctorListTile extends StatelessWidget {
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(
-        radius: RadiusManager.r28,
+        radius: RadiusManager.r40,
         backgroundColor: Colors.white,
       ),
     );
