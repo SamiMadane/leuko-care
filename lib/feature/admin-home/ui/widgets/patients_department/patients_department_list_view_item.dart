@@ -4,6 +4,7 @@ import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/widgets/patient_status_widgets.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -23,7 +24,7 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: patient.profileImage,
               width: WidthManager.w120,
-              height: HeightManager.h120,
+              height: HeightManager.h110,
               fit: BoxFit.cover,
               placeholder: (context, url) => _buildShimmerLoading(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -43,34 +44,19 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: HeightManager.h5),
-
-                // الهاتف مع أيقونة
                 Row(
                   children: [
-                    Icon(Icons.phone, size: IconSizeManager.s16, color: ColorsManager.gray),
-                    SizedBox(width: 6),
-                    Text(
-                      patient.phone,
-                      style: getMediumTextStyle(
-                        fontSize: FontSizeManager.s12,
-                        color: ColorsManager.gray,
-                      ),
+                    Icon(
+                      Icons.email,
+                      size: IconSizeManager.s16,
+                      color: ColorsManager.gray,
                     ),
-                  ],
-                ),
-
-                SizedBox(height: HeightManager.h5),
-
-                // الإيميل مع أيقونة
-                Row(
-                  children: [
-                    Icon(Icons.email, size: 16, color: ColorsManager.gray),
-                    SizedBox(width: 6),
+                    SizedBox(width: WidthManager.w6),
                     Expanded(
                       child: Text(
                         patient.email,
                         style: getMediumTextStyle(
-                          fontSize: FontSizeManager.s12,
+                          fontSize: FontSizeManager.s14,
                           color: ColorsManager.gray,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -78,6 +64,8 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: HeightManager.h8),
+                ExaminedStatusWidget(isExamined: patient.isExamined),
               ],
             ),
           ),

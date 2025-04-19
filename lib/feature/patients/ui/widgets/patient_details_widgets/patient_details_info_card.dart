@@ -5,6 +5,7 @@ import 'package:leuko_care/core/resourses/colors_manager.dart';
 import 'package:leuko_care/core/resourses/fonts_manager.dart';
 import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
 import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/widgets/patient_status_widgets.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 
@@ -29,27 +30,27 @@ class PatientDetailsInfoCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            _buildRowInfo(Icons.email, 'Email', patient.email),
+            _buildPatientInfoRow(Icons.email, 'Email', patient.email),
             const Divider(),
-            _buildRowInfo(Icons.phone, 'Phone', patient.phone),
+            _buildPatientInfoRow(Icons.phone, 'Phone', patient.phone),
             const Divider(),
-            _buildRowInfo(Icons.calendar_today, 'Age', '$age years'),
+            _buildPatientInfoRow(Icons.calendar_today, 'Age', '$age years'),
             const Divider(),
-            _buildRowInfo(
+            _buildPatientInfoRow(
               Icons.health_and_safety,
               'Health Status',
-              patient.healthStatus == 'unknown'
-                  ? 'Health status not determined yet'
-                  : patient.healthStatus,
+              HealthStatusWidget(
+                status: patient.healthStatus,
+              ),
             ),
             const Divider(),
-            _buildRowInfo(
+            _buildPatientInfoRow(
               Icons.check_circle_outline,
               'Examined',
-              _examinedStatus(patient.isExamined),
+              ExaminedStatusWidget(isExamined: patient.isExamined),
             ),
             const Divider(),
-            _buildRowInfo(
+            _buildPatientInfoRow(
               Icons.date_range,
               'Registration Date',
               _buildRegistrationDate(patient.registrationDate),
@@ -60,7 +61,7 @@ class PatientDetailsInfoCard extends StatelessWidget {
     );
   }
 
-  Widget _buildRowInfo(IconData icon, String title, dynamic value) {
+  Widget _buildPatientInfoRow(IconData icon, String title, dynamic value) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: HeightManager.h2),
       child: Row(
@@ -97,46 +98,23 @@ class PatientDetailsInfoCard extends StatelessWidget {
     );
   }
 
-Widget _examinedStatus(bool isExamined) {
-  return Row(
-    children: [
-      Icon(
-        isExamined ? Icons.check_circle : Icons.cancel,
-        color: isExamined ? Colors.green : Colors.red,
+  Widget _buildRegistrationDate(String date) {
+    final formattedDate = _formatDate(date);
+    return Text(
+      formattedDate,
+      style: getRegularTextStyle(
+        fontSize: FontSizeManager.s14,
+        color: ColorsManager.black87,
       ),
-      SizedBox(width: 8),
-      Text(
-        isExamined ? 'Patient has been examined' : 'Not examined yet',
-        style: TextStyle(
-          color: isExamined ? Colors.green[800] : Colors.red[800],
-          fontWeight: FontWeight.w600,
-          fontSize: FontSizeManager.s14,
-        ),
-      ),
-    ],
-  );
-}
-
-
-Widget _buildRegistrationDate(String date) {
-  final formattedDate = _formatDate(date);
-  return Text(
-    formattedDate,
-    style: getRegularTextStyle(
-      fontSize: FontSizeManager.s14,
-      color: ColorsManager.black87,
-    ),
-  );
-}
-
-String _formatDate(String dateString) {
-  try {
-    final date = DateTime.parse(dateString);
-    return DateFormat.yMMMMd().format(date); 
-  } catch (e) {
-    return dateString; 
+    );
   }
-}
 
-
+  String _formatDate(String dateString) {
+    try {
+      final date = DateTime.parse(dateString);
+      return DateFormat.yMMMMd().format(date);
+    } catch (e) {
+      return dateString;
+    }
+  }
 }
