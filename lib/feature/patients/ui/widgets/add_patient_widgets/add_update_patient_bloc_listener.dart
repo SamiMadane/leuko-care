@@ -7,7 +7,7 @@ import 'package:leuko_care/core/widgets/success_dialog.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
 
 class AddUpdatePatientBlocListener extends StatelessWidget {
   final PatientModel? patient;

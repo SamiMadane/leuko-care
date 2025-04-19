@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/all_patients_body_bloc_builder.dart';

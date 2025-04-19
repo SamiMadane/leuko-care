@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/all_doctors_widgets/all_doctors_list_view.dart';

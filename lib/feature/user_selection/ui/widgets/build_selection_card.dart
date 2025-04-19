@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/assets_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
-import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
 Widget buildSelectionCard(
   BuildContext context, {
