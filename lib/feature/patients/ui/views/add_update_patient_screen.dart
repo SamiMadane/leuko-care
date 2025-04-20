@@ -9,16 +9,21 @@ import 'package:leuko_care/core/widgets/app_text_button.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/add_patient_widgets/add_update_patient_bloc_listener.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/add_patient_widgets/add_update_patient_profile_image_picker.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/add_update_patient_widgets/add_update_patient_bloc_listener.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/add_update_patient_widgets/add_update_patient_form_field.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/add_update_patient_widgets/add_update_patient_profile_image_picker.dart';
 
 class AddUpdatePatientScreen extends StatefulWidget {
   final PatientModel? patient;
   final String? doctorId;
   final String? doctorName;
 
-
-  const AddUpdatePatientScreen({super.key, this.patient, this.doctorId, this.doctorName});
+  const AddUpdatePatientScreen({
+    super.key,
+    this.patient,
+    this.doctorId,
+    this.doctorName,
+  });
 
   @override
   _AddUpdatePatientScreenState createState() => _AddUpdatePatientScreenState();
@@ -103,50 +108,16 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                   onPickImage: _pickImage,
                 ),
                 SizedBox(height: HeightManager.h20),
-                AppTextFormField(
-                  controller: _nameController,
-                  labelText: 'Name',
-                  validator: (value) => value!.isEmpty ? 'Enter Name' : null,
+                AddUpdatePatientFormFields(
+                  nameController: _nameController,
+                  emailController: _emailController,
+                  phoneController: _phoneController,
+                  passwordController: _passwordController,
+                  birthDateController: _birthDateController,
+                  isEditMode: isEditMode,
+                  selectBirthDate: _selectBirthDate,
                 ),
-                SizedBox(height: HeightManager.h10),
-                AppTextFormField(
-                  controller: _emailController,
-                  labelText: 'Email',
-                  validator: (value) => value!.isEmpty ? 'Enter Email' : null,
-                ),
-                SizedBox(height: HeightManager.h10),
-                if (!isEditMode)
-                  AppTextFormField(
-                    controller: _passwordController,
-                    labelText: 'Password',
-                    isObscureText: true,
-                    validator:
-                        (value) => value!.isEmpty ? 'Enter Password' : null,
-                  ),
-                SizedBox(height: HeightManager.h10),
-                AppTextFormField(
-                  controller: _phoneController,
-                  labelText: 'Phone',
-                  validator: (value) => value!.isEmpty ? 'Enter Phone' : null,
-                ),
-                SizedBox(height: HeightManager.h10),
-                GestureDetector(
-                  onTap: _selectBirthDate,
-                  child: AbsorbPointer(
-                    child: AppTextFormField(
-                      controller: _birthDateController,
-                      labelText: 'Birth Date',
-                      validator:
-                          (value) => value!.isEmpty ? 'Enter Birth Date' : null,
-                      keyboardType: TextInputType.datetime,
-                      suffixIcon: Icon(
-                        Icons.calendar_today,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30),
+                SizedBox(height: HeightManager.h30),
                 AppTextButton(
                   buttonText: isEditMode ? 'Update Patient' : 'Add Patient',
                   textStyle: getBoldTextStyle(
