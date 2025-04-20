@@ -19,10 +19,7 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
       margin: EdgeInsets.only(bottom: HeightManager.h16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildPatientRow(),
-          _buildDivider(),
-        ],
+        children: [_buildPatientRow(), _buildDivider()],
       ),
     );
   }
@@ -37,32 +34,32 @@ class PatientsDepartmentListViewItem extends StatelessWidget {
     );
   }
 
-Widget _buildPatientImage() {
-  return Container(
-    decoration: BoxDecoration(
-      color: ColorsManager.profileBackGroundColor,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.3),
-          blurRadius: 8,
-          offset: Offset(1, 3),
-        ),
-      ],
-      borderRadius: BorderRadius.circular(RadiusManager.r20),
-    ),
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(RadiusManager.r20),
-      child: CachedNetworkImage(
-        imageUrl: patient.profileImage,
-        width: WidthManager.w120,
-        height: HeightManager.h110,
-        fit: BoxFit.cover,
-        placeholder: (context, url) => _buildShimmerLoading(),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+  Widget _buildPatientImage() {
+    return Container(
+      decoration: BoxDecoration(
+        color: ColorsManager.profileBackGroundColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 6,
+            offset: Offset(1, 3),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(RadiusManager.r20),
       ),
-    ),
-  );
-}
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(RadiusManager.r20),
+        child: CachedNetworkImage(
+          imageUrl: patient.profileImage,
+          width: WidthManager.w120,
+          height: HeightManager.h110,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => _buildShimmerLoading(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
+      ),
+    );
+  }
 
   Widget _buildPatientDetails() {
     return Expanded(
@@ -89,11 +86,7 @@ Widget _buildPatientImage() {
   Widget _buildPatientEmail() {
     return Row(
       children: [
-        Icon(
-          Icons.email,
-          size: IconSizeManager.s16,
-          color: ColorsManager.gray,
-        ),
+        Icon(Icons.email, size: IconSizeManager.s16, color: ColorsManager.gray),
         SizedBox(width: WidthManager.w6),
         Expanded(
           child: Text(
@@ -125,11 +118,11 @@ Widget _buildPatientImage() {
     );
   }
 
-Widget _buildDivider() {
-  return Divider(
-    color: ColorsManager.lightGray.withValues(alpha: 0.6),
-    thickness: 1,
-    indent: WidthManager.w120 + WidthManager.w16, 
-  );
-}
+  Widget _buildDivider() {
+    return Divider(
+      color: ColorsManager.lightGray.withValues(alpha: 0.6),
+      thickness: 1,
+      indent: WidthManager.w120 + WidthManager.w16,
+    );
+  }
 }
