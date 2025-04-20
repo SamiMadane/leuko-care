@@ -27,9 +27,7 @@ class AddUpdateDoctorProfileImagePicker extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: ColorsManager.profileBackGroundColor.withValues(
-                  alpha: 0.4,
-                ),
+                color: ColorsManager.black87.withValues(alpha: 0.4),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
