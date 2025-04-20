@@ -74,8 +74,6 @@ class DoctorDetailsScreen extends StatelessWidget {
                 SizedBox(height: HeightManager.h16),
                 DoctorDetailsViewPatientsButton(doctorId: doctor.id,doctorName: doctor.name),
 
-
-
               ],
             ),
           ),

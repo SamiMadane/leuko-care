@@ -18,7 +18,7 @@ class DoctorDetailsProfileImage extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: ColorsManager.profileBackGroundColor.withValues(alpha: 0.4),
+            color: ColorsManager.black87.withValues(alpha: 0.4),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -26,7 +26,7 @@ class DoctorDetailsProfileImage extends StatelessWidget {
       ),
       child: CircleAvatar(
         radius: RadiusManager.r60,
-        backgroundColor: Colors.grey[200],
+        backgroundColor: ColorsManager.profileBackGroundColor,
         child: ClipOval(
           child:
               profileImageUrl.startsWith('http')
@@ -39,18 +39,18 @@ class DoctorDetailsProfileImage extends StatelessWidget {
                         (context, url) => Center(child: _buildShimmerLoading()),
                     errorWidget:
                         (context, url, error) => Container(
-                          color: Colors.grey[200],
+                          color: ColorsManager.profileBackGroundColor,
                           child: const Icon(Icons.error, color: Colors.red),
                         ),
                   )
                   : Image.file(
                     File(profileImageUrl),
                     fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
+                    width: HeightManager.h120,
+                    height: WidthManager.w120,
                     errorBuilder:
                         (context, error, stackTrace) => Container(
-                          color: Colors.grey[200],
+                          color: ColorsManager.profileBackGroundColor,
                           child: const Icon(Icons.error, color: Colors.red),
                         ),
                   ),
