@@ -48,8 +48,8 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
           labelText: 'Name',
           validator: (value) => value == null || value.isEmpty
               ? 'Enter Name'
-              : value.length < 3
-                  ? 'Name is too short'
+              : !AppRegex.isNameValid(value)
+                  ? 'Name must be at least 3 letters and contain letters only'
                   : null,
         ),
         SizedBox(height: HeightManager.h10),
@@ -65,7 +65,6 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
         SizedBox(height: HeightManager.h10),
 
         if (!widget.isEditMode) ...[
-          // كلمة المرور
           AppTextFormField(
             controller: widget.passwordController,
             labelText: 'Password',
