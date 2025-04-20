@@ -53,13 +53,13 @@ class DoctorImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: RadiusManager.r40,
+      radius: RadiusManager.r35,
       backgroundColor: ColorsManager.profileBackGroundColor,
       child: ClipOval(
         child: CachedNetworkImage(
           imageUrl: profileImage,
-          height: HeightManager.h80,
-          width: WidthManager.w80,
+          height: HeightManager.h70,
+          width: WidthManager.w70,
           fit: BoxFit.cover,
           placeholder: (context, url) => _buildShimmerLoading(),
           errorWidget: (context, url, error) => Image.asset('assets/images/default_avatar.png'),
@@ -73,7 +73,7 @@ class DoctorImage extends StatelessWidget {
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(
-        radius: RadiusManager.r40,
+        radius: RadiusManager.r35,
         backgroundColor: Colors.white,
       ),
     );
