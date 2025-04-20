@@ -5,6 +5,7 @@ import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
@@ -35,9 +36,7 @@ class DoctorListTile extends StatelessWidget {
             children: [
               DoctorImage(profileImage: doctor.profileImage),
               SizedBox(width: WidthManager.w16),
-              Expanded(
-                child: DoctorDetails(doctor: doctor),
-              ),
+              DoctorDetails(doctor: doctor),
             ],
           ),
         ),
@@ -86,35 +85,28 @@ class DoctorDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Dr. ${doctor.name}',
-          style: TextStyle(
-            fontSize: FontSizeManager.s18,
-            fontWeight: FontWeight.bold,
-            color: ColorsManager.darkBlue,
-          ),
-        ),
-        SizedBox(height: HeightManager.h6),
-        Row(
-          children: [
-            Icon(
-              Icons.email,
-              color: ColorsManager.primaryColor,
-              size: IconSizeManager.s18,
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Dr. ${doctor.name}',
+            style: TextStyle(
+              fontSize: FontSizeManager.s18,
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.darkBlue,
             ),
-            SizedBox(width: WidthManager.w4),
-            Text(doctor.email),
-          ],
-        ),
-        SizedBox(height: HeightManager.h4),
-        _buildPatientCount(context, doctor.id!),
-      ],
+          ),
+          SizedBox(height: HeightManager.h6),
+          _EmailRow(email: doctor.email),
+          SizedBox(height: HeightManager.h6),
+          _buildPatientCount(context, doctor.id!),
+        ],
+      ),
     );
   }
 
+  
   Widget _buildPatientCount(BuildContext context, String doctorId) {
     return StreamBuilder<int>(
       stream: context.read<DoctorCubit>().getPatientsCountStream(doctorId),
@@ -122,15 +114,46 @@ class DoctorDetails extends StatelessWidget {
         final count = snapshot.data;
         return Row(
           children: [
-            Icon(Icons.group, color: ColorsManager.primaryColor, size: 18),
+            Icon(Icons.group, color: ColorsManager.primaryColor, size: IconSizeManager.s22),
             SizedBox(width: WidthManager.w4),
             Text(
               'Number of patients: ${count ?? "..."}',
-              style: const TextStyle(color: ColorsManager.primaryColor),
+              style: getBoldTextStyle(fontSize: FontSizeManager.s15, color: ColorsManager.primaryColor)
             ),
           ],
         );
       },
+    );
+  }
+}
+class _EmailRow extends StatelessWidget {
+  final String email;
+
+  const _EmailRow({
+    required this.email,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          Icons.email,
+          size: IconSizeManager.s16,
+          color: ColorsManager.gray,
+        ),
+        SizedBox(width: WidthManager.w6),
+        Expanded(
+          child: Text(
+            email,
+            style: getMediumTextStyle(
+              fontSize: FontSizeManager.s14,
+              color: ColorsManager.gray,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
     );
   }
 }

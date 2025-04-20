@@ -49,7 +49,7 @@ class PatientListTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-              _PatientAvatar(profileImage: patient.profileImage),
+              _PatientImage(profileImage: patient.profileImage),
               SizedBox(width: WidthManager.w16),
               _PatientInfo(patient: patient),
             ],
@@ -60,10 +60,10 @@ class PatientListTile extends StatelessWidget {
   }
 }
 
-class _PatientAvatar extends StatelessWidget {
+class _PatientImage extends StatelessWidget {
   final String profileImage;
 
-  const _PatientAvatar({
+  const _PatientImage({
     required this.profileImage,
   });
 
