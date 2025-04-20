@@ -22,57 +22,96 @@ class DoctorListTile extends StatelessWidget {
         horizontal: WidthManager.w16,
       ),
       elevation: 4,
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(
-          vertical: HeightManager.h18,
-          horizontal: WidthManager.w18,
+      child: InkWell(
+        onTap: () {
+          context.pushNamed(Routes.doctorDetailsScreen, arguments: doctor);
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: HeightManager.h18,
+            horizontal: WidthManager.w18,
+          ),
+          child: Row(
+            children: [
+              DoctorImage(profileImage: doctor.profileImage),
+              SizedBox(width: WidthManager.w16),
+              Expanded(
+                child: DoctorDetails(doctor: doctor),
+              ),
+            ],
+          ),
         ),
-        title: Text(
-          ' Dr.${doctor.name}',
+      ),
+    );
+  }
+}
+
+class DoctorImage extends StatelessWidget {
+  final String profileImage;
+  const DoctorImage({super.key, required this.profileImage});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: RadiusManager.r40,
+      backgroundColor: ColorsManager.profileBackGroundColor,
+      child: ClipOval(
+        child: CachedNetworkImage(
+          imageUrl: profileImage,
+          height: HeightManager.h80,
+          width: WidthManager.w80,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => _buildShimmerLoading(),
+          errorWidget: (context, url, error) => Image.asset('assets/images/default_avatar.png'),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildShimmerLoading() {
+    return Shimmer.fromColors(
+      baseColor: ColorsManager.lightGray,
+      highlightColor: Colors.white,
+      child: CircleAvatar(
+        radius: RadiusManager.r40,
+        backgroundColor: Colors.white,
+      ),
+    );
+  }
+}
+
+class DoctorDetails extends StatelessWidget {
+  final DoctorModel doctor;
+  const DoctorDetails({super.key, required this.doctor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Dr. ${doctor.name}',
           style: TextStyle(
             fontSize: FontSizeManager.s18,
             fontWeight: FontWeight.bold,
             color: ColorsManager.darkBlue,
           ),
         ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        SizedBox(height: HeightManager.h6),
+        Row(
           children: [
-            SizedBox(height: HeightManager.h6),
-            Row(
-              children: [
-                Icon(
-                  Icons.email,
-                  color: ColorsManager.primaryColor,
-                  size: IconSizeManager.s18,
-                ),
-                SizedBox(width: WidthManager.w4),
-                Text(doctor.email),
-              ],
+            Icon(
+              Icons.email,
+              color: ColorsManager.primaryColor,
+              size: IconSizeManager.s18,
             ),
-            SizedBox(height: HeightManager.h4),
-            _buildPatientCount(context, doctor.id!),
+            SizedBox(width: WidthManager.w4),
+            Text(doctor.email),
           ],
         ),
-        leading: CircleAvatar(
-          radius: RadiusManager.r40,
-          backgroundColor: Colors.grey[300],
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: doctor.profileImage,
-              height: 60,
-              width: 60,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => _buildShimmerLoading(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
-          ),
-        ),
-
-        onTap: () {
-          context.pushNamed(Routes.doctorDetailsScreen, arguments: doctor);
-        },
-      ),
+        SizedBox(height: HeightManager.h4),
+        _buildPatientCount(context, doctor.id!),
+      ],
     );
   }
 
@@ -92,17 +131,6 @@ class DoctorListTile extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-
-  Widget _buildShimmerLoading() {
-    return Shimmer.fromColors(
-      baseColor: ColorsManager.lightGray,
-      highlightColor: Colors.white,
-      child: CircleAvatar(
-        radius: RadiusManager.r40,
-        backgroundColor: Colors.white,
-      ),
     );
   }
 }

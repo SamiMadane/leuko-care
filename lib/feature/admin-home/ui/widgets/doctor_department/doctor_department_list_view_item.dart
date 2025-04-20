@@ -40,7 +40,7 @@ class DoctorDepartmentListViewItem extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       radius: RadiusManager.r32,
-                      backgroundColor: Colors.grey[200],
+                      backgroundColor: ColorsManager.profileBackGroundColor,
                       child: ClipOval(
                         child: SizedBox(
                           width: WidthManager.w64,
@@ -60,7 +60,7 @@ class DoctorDepartmentListViewItem extends StatelessWidget {
                   )
                   : CircleAvatar(
                     radius: RadiusManager.r30,
-                    backgroundColor: Colors.grey[200],
+                    backgroundColor: ColorsManager.profileBackGroundColor,
                     backgroundImage: null,
                     child: ClipOval(
                       child: SizedBox(
@@ -78,7 +78,7 @@ class DoctorDepartmentListViewItem extends StatelessWidget {
                   ),
               SizedBox(height: HeightManager.h8),
               Text(
-                doctor.name,
+                'Dr.${doctor.name}',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style:
