@@ -12,6 +12,7 @@ class ColorsManager {
   static const Color profileBackGroundColor = Color(0xFFEEEEEE);
   static const Color darkGreen = Color(0xFF2E7D32);
   static const Color darkRed = Color(0xFFC62828);
+  static const Color darkOrange = Color(0xFFFF6E40);
 
   static const Color white = Colors.white;
   static const Color black = Colors.black;

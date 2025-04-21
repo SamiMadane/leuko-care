@@ -30,7 +30,7 @@ class PatientListTile extends StatelessWidget {
         horizontal: WidthManager.w16,
       ),
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RadiusManager.r12)),
       child: InkWell(
         onTap: () {
           context.pushNamed(
@@ -71,7 +71,7 @@ class _PatientImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: RadiusManager.r35,
-      backgroundColor: Colors.grey[200],
+      backgroundColor: ColorsManager.profileBackGroundColor,
       child: ClipOval(
         child: CachedNetworkImage(
           imageUrl: profileImage,
@@ -120,7 +120,14 @@ class _PatientInfo extends StatelessWidget {
           SizedBox(height: HeightManager.h6),
           _EmailRow(email: patient.email),
           SizedBox(height: HeightManager.h6),
-          ExaminedStatusWidget(isExamined: patient.isExamined),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ExaminedStatusWidget(isExamined: patient.isExamined),
+              patient.isExamined ? HealthStatusWidget(status: patient.healthStatus) : const SizedBox.shrink(),
+            ],
+          ),
+          
         ],
       ),
     );
