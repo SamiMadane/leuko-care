@@ -42,6 +42,7 @@ class _AllPatientsScreenState extends State<AllPatientsScreen> {
             arguments: {'doctorId': widget.doctorId},
           );
         },
+        
         backgroundColor: ColorsManager.primaryColor,
         child: Icon(Icons.add, color: Colors.white),
       ),

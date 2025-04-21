@@ -12,6 +12,7 @@ class PatientCubit extends Cubit<PatientState> {
   PatientCubit(this._repository)
     : super(const PatientState.patientStateInitial());
 
+
   void getPatientsStream() {
     _patientsSubscription?.cancel();
     emit(GetPatientStateLoading());
