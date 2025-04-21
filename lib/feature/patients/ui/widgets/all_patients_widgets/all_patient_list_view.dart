@@ -4,7 +4,8 @@ import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_filter_bottom_sheet.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_filter_helper.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_list_tile.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_list_view_section.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_search_and_filter_bar.dart';
 
 class AllPaitentListView extends StatefulWidget {
   final List<PatientModel> patients;
@@ -36,17 +37,17 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
     _searchController.addListener(_filterPatients);
   }
 
-void _filterPatients() {
-  final searchKeyword = _searchController.text;
-  setState(() {
-    _filteredPatients = PatientFilterHelper.filterPatients(
-      patients: widget.patients,
-      searchKeyword: searchKeyword,
-      filterBy: _filterBy,
-      selectedFilterValue: _selectedFilterValue,
-    );
-  });
-}
+  void _filterPatients() {
+    final searchKeyword = _searchController.text;
+    setState(() {
+      _filteredPatients = PatientFilterHelper.filterPatients(
+        patients: widget.patients,
+        searchKeyword: searchKeyword,
+        filterBy: _filterBy,
+        selectedFilterValue: _selectedFilterValue,
+      );
+    });
+  }
 
   @override
   void dispose() {
@@ -54,93 +55,50 @@ void _filterPatients() {
     super.dispose();
   }
 
-Future<void> _showFilterDialog() async {
-  await showModalBottomSheet(
-    context: context,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(RadiusManager.r20)),
-    ),
-    builder: (context) => PatientFilterBottomSheet(
-      onFilterSelected: (filterBy, value) {
-        setState(() {
-          _filterBy = filterBy;
-          _selectedFilterValue = value;
-          _filterPatients();
-        });
-      },
-    ),
-  );
-}
+  Future<void> _showFilterDialog() async {
+    await showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(RadiusManager.r20),
+        ),
+      ),
+      builder:
+          (context) => PatientFilterBottomSheet(
+            onFilterSelected: (filterBy, value) {
+              setState(() {
+                _filterBy = filterBy;
+                _selectedFilterValue = value;
+                _filterPatients();
+              });
+            },
+          ),
+    );
+  }
 
-
+  @override
   @override
   Widget build(BuildContext context) {
     return widget.patients.isEmpty
-        ? EmptyStateWidget(
-          icon: Icons.person_outline_sharp,
-          title: 'No Found patients.',
-          message: 'Try add patients',
+        ? const EmptyStateWidget(
+          icon: Icons.group_outlined,
+          title: 'No patients found.',
+          message: 'There are no patients added yet. Try adding a new patient.',
         )
         : SafeArea(
           bottom: true,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _searchController,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.search),
-                          hintText: 'Search by name or email',
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Material(
-                      color: Theme.of(context).primaryColor,
-                      shape: const CircleBorder(),
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.filter_list,
-                          color: Colors.white,
-                        ),
-                        onPressed: _showFilterDialog,
-                      ),
-                    ),
-                  ],
-                ),
+              PatientSearchAndFilterBar(
+                searchController: _searchController,
+                onFilterPressed: _showFilterDialog,
               ),
               Expanded(
-                child:
-                    _filteredPatients.isEmpty
-                        ? const EmptyStateWidget(
-                          icon: Icons.person_outline_sharp,
-                          title: 'No matching patients.',
-                          message: 'Try adjusting your search or filter.',
-                        )
-                        : ListView.builder(
-                          itemCount: _filteredPatients.length,
-                          itemBuilder: (context, index) {
-                            final patient = _filteredPatients[index];
-                            return PatientListTile(
-                              patient: patient,
-                              doctorId: widget.doctorId,
-                              doctorName: widget.doctorName,
-                            );
-                          },
-                        ),
+                child: PatientListViewSection(
+                  patients: _filteredPatients,
+                  doctorId: widget.doctorId,
+                  doctorName: widget.doctorName,
+                ),
               ),
             ],
           ),
