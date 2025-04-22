@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
-class PatientSearchAndFilterBar extends StatelessWidget {
+class CommonSearchAndFilterBar extends StatelessWidget {
   final TextEditingController searchController;
-  final VoidCallback onFilterPressed;
+  final VoidCallback onActionPressed;
+  final IconData actionIcon;
+  final String hintText;
 
-  const PatientSearchAndFilterBar({
+  const CommonSearchAndFilterBar({
     super.key,
     required this.searchController,
-    required this.onFilterPressed,
+    required this.onActionPressed,
+    required this.actionIcon,
+    this.hintText = 'Search by name or email',
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: WidthManager.w16 ,vertical: HeightManager.h16),
+      padding: EdgeInsets.symmetric(horizontal: WidthManager.w16, vertical: HeightManager.h16),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: searchController,
               decoration: InputDecoration(
-                prefixIcon:  Icon(Icons.search),
-                hintText: 'Search by name or email',
+                prefixIcon: const Icon(Icons.search),
+                hintText: hintText,
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: WidthManager.w16,
                   vertical: HeightManager.h12,
@@ -40,8 +44,8 @@ class PatientSearchAndFilterBar extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             shape: const CircleBorder(),
             child: IconButton(
-              icon: const Icon(Icons.filter_list, color: Colors.white),
-              onPressed: onFilterPressed,
+              icon: Icon(actionIcon, color: Colors.white),
+              onPressed: onActionPressed,
             ),
           ),
         ],

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/common_search_and_filter_bar.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_filter_bottom_sheet.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_filter_helper.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_list_view_section.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/patient_search_and_filter_bar.dart';
 
 class AllPaitentListView extends StatefulWidget {
   final List<PatientModel> patients;
@@ -88,9 +88,10 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
           bottom: true,
           child: Column(
             children: [
-              PatientSearchAndFilterBar(
+              CommonSearchAndFilterBar(
                 searchController: _searchController,
-                onFilterPressed: _showFilterDialog,
+                onActionPressed: _showFilterDialog,
+                actionIcon: Icons.filter_list,
               ),
               Expanded(
                 child: PatientListViewSection(

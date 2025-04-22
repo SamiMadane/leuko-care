@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/widgets/common_search_and_filter_bar.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/all_doctors_widgets/doctor_filter_helper.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/all_doctors_widgets/doctor_list_view_section.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/all_doctors_widgets/doctor_search_and_filter_bar.dart';
 
 class AllDoctorsListView extends StatefulWidget {
   final List<DoctorModel> doctors;
@@ -56,12 +56,12 @@ class _AllDoctorsListViewState extends State<AllDoctorsListView> {
           bottom: true,
           child: Column(
             children: [
-              DoctorSearchAndFilterBar(
+              CommonSearchAndFilterBar(
                 searchController: _searchController,
-                isAscending: isAscending,
-                onToggleSortOrder: () {
+                onActionPressed: () {
                   context.read<DoctorCubit>().toggleSortOrder();
                 },
+                actionIcon: isAscending ? Icons.arrow_upward : Icons.arrow_downward,
               ),
               Expanded(child: DoctorListViewSection(doctors: _filtereddoctors)),
             ],
