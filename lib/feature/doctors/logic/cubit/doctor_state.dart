@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
-
 part 'doctor_state.freezed.dart';
 
 @freezed
@@ -27,5 +26,7 @@ class DoctorState with _$DoctorState {
   const factory DoctorState.deleteDoctorStateLoading() = DeleteDoctorStateLoading;
   const factory DoctorState.deleteDoctorStateSuccess() = DeleteDoctorStateSuccess;
   const factory DoctorState.deleteDoctorStateError(String message) = DeleteDoctorStateError;
+
+
 
 }

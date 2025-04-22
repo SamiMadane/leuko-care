@@ -77,7 +77,6 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return widget.patients.isEmpty
         ? const EmptyStateWidget(

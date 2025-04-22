@@ -8,23 +8,38 @@ import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
 class DoctorCubit extends Cubit<DoctorState> {
   final DoctorRepository _repository;
   StreamSubscription? _doctorsSubscription;
+  bool isAscending = false;
 
   DoctorCubit(this._repository) : super(const DoctorState.doctorStateInitial());
-  
 
-  void getDoctorsStream() {
+  void getDoctorsStream() async {
+    print('pressed and iam in loading');
     emit(GetDoctorStateLoading());
-    _doctorsSubscription?.cancel();
+    await _doctorsSubscription?.cancel();
     _doctorsSubscription = _repository.getDoctorsStream().listen(
-      (doctors) {
-        emit(
-          GetDoctorStateSuccess(doctors),
-        ); 
+      (doctors) async {
+        print(
+          'isAscending send in getDoctorsStream in DoctorCubit $isAscending',
+        );
+
+        final sortedDoctors = await _repository
+            .getDoctorsOrderedByPatientsCount(doctors, isAscending);
+        doctors = sortedDoctors;
+        print('pressed and iam in success');
+
+        emit(GetDoctorStateSuccess(doctors));
       },
       onError: (error) {
+        print('pressed and iam in error');
+
         emit(GetDoctorStateError(error.toString()));
       },
     );
+  }
+
+  void toggleSortOrder() {
+    isAscending = !isAscending;
+    getDoctorsStream();
   }
 
   Future<String> _getImageUrl(DoctorModel doctor) async {
@@ -35,7 +50,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     }
     return doctor.profileImage;
   }
-  
+
   Future<void> addDoctor(DoctorModel doctor, String password) async {
     emit(AddDoctorStateLoading());
     try {
@@ -62,12 +77,10 @@ class DoctorCubit extends Cubit<DoctorState> {
   Future<void> updateDoctor(DoctorModel doctor) async {
     emit(UpdateDoctorStateLoading());
     try {
-       String imageUrl = await _getImageUrl(doctor);
-       doctor = doctor.copyWith(profileImage: imageUrl);
+      String imageUrl = await _getImageUrl(doctor);
+      doctor = doctor.copyWith(profileImage: imageUrl);
 
-      await _repository.updateDoctor(
-        doctor,
-      ); 
+      await _repository.updateDoctor(doctor);
       emit(UpdateDoctorStateSuccess(doctor));
     } catch (e) {
       emit(UpdateDoctorStateError(e.toString()));
@@ -85,7 +98,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     }
   }
 
-Stream<int> getPatientsCountStream(String doctorId) {
-  return _repository.getPatientsCountForDoctor(doctorId);
-}
+  Stream<int> getPatientsCountStream(String doctorId) {
+    return _repository.getPatientsCountForDoctor(doctorId);
+  }
 }

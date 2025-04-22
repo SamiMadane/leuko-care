@@ -18,14 +18,14 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
   AdminHomeCubit({required this.adminHomeRepository})
     : super(const AdminHomeState.homeStateInitial());
 
-  void getDoctors() async {
+  void getDoctors({bool isAscending = false}) async {
     emit(GetDoctorsStateLoading());
 
     _doctorsSubscription?.cancel();
     _doctorsSubscription = adminHomeRepository.getDoctorsStream().listen(
       (doctorList) async {
         final sortedDoctors = await adminHomeRepository
-            .getDoctorsOrderedByPatientsCount(doctorList);
+            .getDoctorsOrderedByPatientsCount(doctorList,isAscending);
         doctors = sortedDoctors;
         selectedDoctor = doctors.isNotEmpty ? doctors.first : null;
         await _filterPatientsByDoctor();
