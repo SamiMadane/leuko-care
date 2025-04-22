@@ -37,17 +37,16 @@ class PatientDetailsInfoCard extends StatelessWidget {
             _buildPatientInfoRow(Icons.calendar_today, 'Age', '$age years'),
             const Divider(),
             _buildPatientInfoRow(
-              Icons.health_and_safety,
-              'Health Status',
-              HealthStatusWidget(
-                status: patient.healthStatus,
-              ),
-            ),
-            const Divider(),
-            _buildPatientInfoRow(
               Icons.check_circle_outline,
               'Examined',
               ExaminedStatusWidget(isExamined: patient.isExamined),
+            ),
+
+            const Divider(),
+            _buildPatientInfoRow(
+              Icons.health_and_safety,
+              'Health Status',
+              HealthStatusWidget(status: patient.healthStatus),
             ),
             const Divider(),
             _buildPatientInfoRow(
