@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AddUpdateDoctorProfileImagePicker extends StatelessWidget {
@@ -27,9 +27,7 @@ class AddUpdateDoctorProfileImagePicker extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: ColorsManager.profileBackGroundColor.withValues(
-                  alpha: 0.4,
-                ),
+                color: ColorsManager.black87.withValues(alpha: 0.4),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),

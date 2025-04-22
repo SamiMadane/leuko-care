@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leuko_care/core/resourses/assets_manager.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/feature/login/data/repository/login_repo.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_state.dart';
 

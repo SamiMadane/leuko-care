@@ -3,26 +3,37 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
 import '../models/doctor_model.dart';
 
 class DoctorRepository {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore firestore;
+  final GetDoctorsOrderedByPatientsCountUseCase
+  getDoctorsOrderedByPatientsCountUseCase;
 
-  DoctorRepository(this._firestore);
+  DoctorRepository({
+    required this.firestore,
+    required this.getDoctorsOrderedByPatientsCountUseCase,
+  });
 
   // Get all doctors from firestore
   // snapshots its read real time all changes
   Stream<List<DoctorModel>> getDoctorsStream() {
-    return _firestore.collection('doctors').snapshots().map((snapshot) {
+    return firestore.collection('doctors').snapshots().map((snapshot) {
       return snapshot.docs
           .map((doc) => DoctorModel.fromJson(doc.data()))
           .toList();
     });
   }
 
+    Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(List<DoctorModel> doctors,bool isAscending) async {
+    return getDoctorsOrderedByPatientsCountUseCase.call(doctors,isAscending);
+  }
+
+
   // Get count of patients for each doctor
   Stream<int> getPatientsCountForDoctor(String doctorId) {
-    return _firestore
+    return firestore
         .collection('patients')
         .where('doctorId', isEqualTo: doctorId)
         .snapshots()
@@ -33,7 +44,7 @@ class DoctorRepository {
     try {
       // After click on add doctor we change userType for doctor.
       doctor = doctor.copyWith(userType: "doctor");
-      await _firestore
+      await firestore
           .collection('doctors')
           .doc(doctor.id)
           .set(doctor.toJson());
@@ -46,7 +57,7 @@ class DoctorRepository {
     try {
       // After click on update doctor we change userType for doctor.
       doctor = doctor.copyWith(userType: "doctor");
-      await _firestore
+      await firestore
           .collection('doctors')
           .doc(doctor.id)
           .update(doctor.toJson());
@@ -55,25 +66,25 @@ class DoctorRepository {
     }
   }
 
- Future<void> deleteDoctor(String doctorId) async {
-  try {
-    final doctorRef = _firestore.collection('doctors').doc(doctorId);
+  Future<void> deleteDoctor(String doctorId) async {
+    try {
+      final doctorRef = firestore.collection('doctors').doc(doctorId);
 
-    // حذف المرضى المرتبطين بهذا الطبيب
-    final patientQuery = await _firestore
-        .collection('patients')
-        .where('doctorId', isEqualTo: doctorId)
-        .get();
+      // حذف المرضى المرتبطين بهذا الطبيب
+      final patientQuery =
+          await firestore
+              .collection('patients')
+              .where('doctorId', isEqualTo: doctorId)
+              .get();
 
-    for (final doc in patientQuery.docs) {
-      await doc.reference.delete();
+      for (final doc in patientQuery.docs) {
+        await doc.reference.delete();
+      }
+      await doctorRef.delete();
+    } catch (e) {
+      throw Exception('Error deleting doctor and patients: $e');
     }
-    await doctorRef.delete();
-  } catch (e) {
-    throw Exception('Error deleting doctor and patients: $e');
   }
-}
-
 
   // upload image to cloudinary to storage it.
   Future<String> uploadImageToCloudinary(String imagePath) async {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
-import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/patient_status_widgets.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
@@ -37,17 +37,16 @@ class PatientDetailsInfoCard extends StatelessWidget {
             _buildPatientInfoRow(Icons.calendar_today, 'Age', '$age years'),
             const Divider(),
             _buildPatientInfoRow(
-              Icons.health_and_safety,
-              'Health Status',
-              HealthStatusWidget(
-                status: patient.healthStatus,
-              ),
-            ),
-            const Divider(),
-            _buildPatientInfoRow(
               Icons.check_circle_outline,
               'Examined',
               ExaminedStatusWidget(isExamined: patient.isExamined),
+            ),
+
+            const Divider(),
+            _buildPatientInfoRow(
+              Icons.health_and_safety,
+              'Health Status',
+              HealthStatusWidget(status: patient.healthStatus),
             ),
             const Divider(),
             _buildPatientInfoRow(

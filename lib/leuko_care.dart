@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'core/resourses/colors_manager.dart';
+import 'core/resources/colors_manager.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/routes.dart';
 

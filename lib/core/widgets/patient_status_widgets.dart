@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
-import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 
 class ExaminedStatusWidget extends StatelessWidget {
   final bool isExamined;
@@ -20,7 +20,7 @@ class ExaminedStatusWidget extends StatelessWidget {
         ),
         SizedBox(width: WidthManager.w6),
         Text(
-          isExamined ? 'Patient has been examined' : 'Not examined yet',
+          isExamined ? 'Examined' : 'Not examined yet',
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s15,
             color: isExamined
@@ -42,24 +42,39 @@ class HealthStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String displayText;
     Color color;
+    IconData icon;
 
+    // تحديد الحالة وتعيين النص واللون
     if (status.toLowerCase() == 'unknown') {
-      displayText = 'Health status not determined yet';
-      color = ColorsManager.black87;
+      displayText = 'Status not determined yet';
+      color = ColorsManager.darkOrange;
+      icon = Icons.help_outline;
     } else if (status.toLowerCase() == 'healthy') {
       displayText = 'Healthy';
-      color = ColorsManager.green;
+      color = ColorsManager.darkGreen;
+      icon = Icons.check_circle_outline; 
     } else {
-      displayText = status; 
+      displayText = status;
       color = ColorsManager.darkRed;
+      icon = Icons.cancel_outlined; 
     }
 
-    return Text(
-      displayText,
-      style: getMediumTextStyle(
-        fontSize: FontSizeManager.s14,
-        color: color,
-      ),
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: color,
+          size: IconSizeManager.s20,
+        ),
+        SizedBox(width: WidthManager.w8),
+        Text(
+          displayText,
+          style: getMediumTextStyle(
+            fontSize: FontSizeManager.s16,
+            color: color,
+          ),
+        ),
+      ],
     );
   }
 }

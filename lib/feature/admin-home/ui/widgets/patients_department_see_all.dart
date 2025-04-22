@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 

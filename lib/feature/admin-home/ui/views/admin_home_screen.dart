@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctor_department/doctor_department_bloc_builder.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department/patients_department_bloc_builder.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_blue_container.dart';

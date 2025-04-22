@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
-import 'package:leuko_care/core/resourses/colors_manager.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
-import 'package:leuko_care/core/resourses/sizes_util_manager.dart';
-import 'package:leuko_care/core/resourses/styles_manager.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/core/widgets/patient_status_widgets.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -14,6 +14,7 @@ class PatientListTile extends StatelessWidget {
   final PatientModel patient;
   final String doctorId;
   final String doctorName;
+
   const PatientListTile({
     super.key,
     required this.patient,
@@ -29,57 +30,8 @@ class PatientListTile extends StatelessWidget {
         horizontal: WidthManager.w16,
       ),
       elevation: 4,
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(
-          vertical: HeightManager.h18,
-          horizontal: WidthManager.w18,
-        ),
-        title: Text(
-          patient.name,
-          style: getBoldTextStyle(
-            fontSize: FontSizeManager.s18,
-            color: ColorsManager.darkBlue,
-          ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: HeightManager.h6),
-            Row(
-              children: [
-                Icon(Icons.email, size: IconSizeManager.s16, color: ColorsManager.gray),
-                SizedBox(width: WidthManager.w6),
-                Expanded(
-                  child: Text(
-                    patient.email,
-                    style: getMediumTextStyle(
-                      fontSize: FontSizeManager.s14,
-                      color: ColorsManager.gray,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: HeightManager.h6),
-            ExaminedStatusWidget(isExamined: patient.isExamined),
-          ],
-        ),
-        leading: CircleAvatar(
-          radius: RadiusManager.r40,
-          backgroundColor: Colors.grey[200],
-          backgroundImage: null,
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: patient.profileImage,
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => _buildShimmerLoading(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
-          ),
-        ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RadiusManager.r12)),
+      child: InkWell(
         onTap: () {
           context.pushNamed(
             Routes.patientDetailsScreen,
@@ -90,6 +42,45 @@ class PatientListTile extends StatelessWidget {
             },
           );
         },
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: HeightManager.h18,
+            horizontal: WidthManager.w18,
+          ),
+          child: Row(
+            children: [
+              _PatientImage(profileImage: patient.profileImage),
+              SizedBox(width: WidthManager.w16),
+              _PatientInfo(patient: patient),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PatientImage extends StatelessWidget {
+  final String profileImage;
+
+  const _PatientImage({
+    required this.profileImage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: RadiusManager.r35,
+      backgroundColor: ColorsManager.profileBackGroundColor,
+      child: ClipOval(
+        child: CachedNetworkImage(
+          imageUrl: profileImage,
+          width: WidthManager.w70,
+          height: HeightManager.h70,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => _buildShimmerLoading(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
       ),
     );
   }
@@ -99,10 +90,78 @@ class PatientListTile extends StatelessWidget {
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(
-        radius: RadiusManager.r28,
+        radius: RadiusManager.r35,
         backgroundColor: Colors.white,
       ),
     );
   }
+}
 
+class _PatientInfo extends StatelessWidget {
+  final PatientModel patient;
+
+  const _PatientInfo({
+    required this.patient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            patient.name,
+            style: getBoldTextStyle(
+              fontSize: FontSizeManager.s18,
+              color: ColorsManager.darkBlue,
+            ),
+          ),
+          SizedBox(height: HeightManager.h6),
+          _EmailRow(email: patient.email),
+          SizedBox(height: HeightManager.h6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ExaminedStatusWidget(isExamined: patient.isExamined),
+              patient.isExamined ? HealthStatusWidget(status: patient.healthStatus) : const SizedBox.shrink(),
+            ],
+          ),
+          
+        ],
+      ),
+    );
+  }
+}
+
+class _EmailRow extends StatelessWidget {
+  final String email;
+
+  const _EmailRow({
+    required this.email,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          Icons.email,
+          size: IconSizeManager.s16,
+          color: ColorsManager.gray,
+        ),
+        SizedBox(width: WidthManager.w6),
+        Expanded(
+          child: Text(
+            email,
+            style: getMediumTextStyle(
+              fontSize: FontSizeManager.s14,
+              color: ColorsManager.gray,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
 }

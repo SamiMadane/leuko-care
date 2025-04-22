@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resourses/fonts_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
 
 TextStyle _getTextStyle(
   double fontSize,
