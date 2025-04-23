@@ -21,19 +21,6 @@ class AdminHomeRepository {
     return doctorRepository.getDoctorsStream();
   }
 
-  // Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(List<DoctorModel> doctors) async {
-  //   final doctorWithCounts = await Future.wait(
-  //     doctors.map((doctor) async {
-  //       // we use .first here to get counts of patients for each doctor (Future<List<PatientModel>> get first)
-  //       final patients = await patientRepository.getPatientsByDoctorIdStream(doctor.id!).first;
-  //       return MapEntry(doctor, patients.length);
-  //     }),
-  //   );
-
-  //   doctorWithCounts.sort((a, b) => b.value.compareTo(a.value));
-  //   return doctorWithCounts.map((entry) => entry.key).toList();
-  // }
-
   Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(List<DoctorModel> doctors,bool isAscending) async {
     return getDoctorsOrderedByPatientsCountUseCase.call(doctors,isAscending);
   }

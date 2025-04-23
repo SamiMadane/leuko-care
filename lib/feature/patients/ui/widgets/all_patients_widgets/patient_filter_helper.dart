@@ -1,7 +1,7 @@
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
 class PatientFilterHelper {
-    // Filter patients based on search keyword and selected filter criteria
+  // Filter patients based on search keyword and selected filter criteria
   static List<PatientModel> filterPatients({
     required List<PatientModel> patients,
     required String searchKeyword,
@@ -10,7 +10,8 @@ class PatientFilterHelper {
   }) {
     //First, we filter by search keyword if contains the keyword in name or email.
     return patients.where((patient) {
-      final matchesSearch = patient.name.toLowerCase().contains(searchKeyword.toLowerCase()) ||
+      final matchesSearch =
+          patient.name.toLowerCase().contains(searchKeyword.toLowerCase()) ||
           patient.email.toLowerCase().contains(searchKeyword.toLowerCase());
 
       //Then, we filter by the selected filter criteria.
@@ -19,10 +20,10 @@ class PatientFilterHelper {
         matchesFilter =
             selectedFilterValue == 'All' ||
             (selectedFilterValue == 'Sick' &&
-                patient.healthStatus != 'Not Sick' &&
+                patient.healthStatus == 'sick' &&
                 patient.isExamined) ||
             (selectedFilterValue == 'Healthy' &&
-                patient.healthStatus == 'Not Sick' &&
+                patient.healthStatus == 'healthy' &&
                 patient.isExamined) ||
             (selectedFilterValue == 'Unknown' && !patient.isExamined);
       } else if (filterBy == 'Examined Status') {
