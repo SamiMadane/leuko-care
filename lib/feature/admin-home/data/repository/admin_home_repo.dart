@@ -41,7 +41,7 @@ class AdminHomeRepository {
   }
 
 
-Future<AdminStatisticsModel> getAllStats() async {
+Future<AdminStatisticsModel> getAllStatistics() async {
   final patients = await patientRepository.getPatientsStream().first;
   final doctors = await doctorRepository.getDoctorsStream().first;
 

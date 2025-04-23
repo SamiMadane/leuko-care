@@ -79,6 +79,18 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
     }
   }
 
+   Future<void> getAdminStatistics() async {
+    try {
+      emit(GetStatisticsStateLoading());
+      
+      final statistics = await adminHomeRepository.getAllStatistics();
+      
+      emit(GetStatisticsStateSuccess(statistics));
+    } catch (e) {
+      emit(GetStatisticsStateError(e.toString()));
+    }
+  }
+
   @override
   Future<void> close() {
     _patientsSubscription?.cancel();

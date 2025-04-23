@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 part 'admin_home_state.freezed.dart';
@@ -20,5 +21,10 @@ class AdminHomeState with _$AdminHomeState {
   const factory AdminHomeState.signedOutStateLoading() = SignedOutStateLoading;
   const factory AdminHomeState.signedOutStateSuccess() = SignedOutStateSuccess;
   const factory AdminHomeState.signedOutStateError(String message) = SignedOutStateError;
+
+  // Get Statistics States
+  const factory AdminHomeState.getStatisticsStateLoading() = GetStatisticsStateLoading;
+  const factory AdminHomeState.getStatisticsStateSuccess(AdminStatisticsModel statistics) = GetStatisticsStateSuccess;
+  const factory AdminHomeState.getStatisticsStateError(String message) = GetStatisticsStateError;
 
 }
