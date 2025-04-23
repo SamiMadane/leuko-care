@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
+import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -38,4 +39,43 @@ class AdminHomeRepository {
       throw Exception("Error signing out: $e");
     }
   }
+
+
+Future<AdminStatisticsModel> getAllStats() async {
+  final patients = await patientRepository.getPatientsStream().first;
+  final doctors = await doctorRepository.getDoctorsStream().first;
+
+  // تحليل البيانات
+  int examined = 0;
+  int unexamined = 0;
+  final Map<String, int> healthStatusCounts = {};
+  final Map<String, int> patientsPerDoctor = {};
+
+  // examined and unexamined counts
+  for (var patient in patients) {
+    if (patient.isExamined) {
+      examined++;
+    } else {
+      unexamined++;
+    }
+
+    // health status counts.
+    healthStatusCounts[patient.healthStatus] =
+        (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
+
+    // patients per doctor counts.
+    patientsPerDoctor[patient.doctorId] =
+        (patientsPerDoctor[patient.doctorId] ?? 0) + 1;
+  }
+
+  return AdminStatisticsModel(
+    totalPatients: patients.length,
+    totalDoctors: doctors.length,
+    healthStatusCounts: healthStatusCounts,
+    patientsPerDoctor: patientsPerDoctor,
+    examinedCount: examined,
+    unexaminedCount: unexamined,
+  );
+}
+
 }
