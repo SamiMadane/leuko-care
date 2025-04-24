@@ -43,7 +43,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
       profileImageUrl = widget.doctor!.profileImage;
     } else {
       profileImageUrl =
-          'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_kruo7j.png';
+          'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_wnyo6c.png';
     }
   }
 

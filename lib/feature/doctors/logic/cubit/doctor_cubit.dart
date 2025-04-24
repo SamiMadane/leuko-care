@@ -44,7 +44,7 @@ class DoctorCubit extends Cubit<DoctorState> {
 
   Future<String> _getImageUrl(DoctorModel doctor) async {
     if (doctor.profileImage.isEmpty) {
-      return 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_kruo7j.png';
+      return 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_wnyo6c.png';
     } else if (!doctor.profileImage.contains('http')) {
       return await _repository.uploadImageToCloudinary(doctor.profileImage);
     }
