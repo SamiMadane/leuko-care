@@ -43,7 +43,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
       profileImageUrl = widget.doctor!.profileImage;
     } else {
       profileImageUrl =
-          'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
+          'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_kruo7j.png';
     }
   }
 

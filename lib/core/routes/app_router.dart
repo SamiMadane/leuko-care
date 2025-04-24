@@ -5,6 +5,7 @@ import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
+import 'package:leuko_care/feature/admin-home/ui/views/admin_statistics_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/views/add_update_doctor_screen.dart';
@@ -125,6 +126,15 @@ class AppRouter {
                   patient: patientModel,
                   doctorId: doctorId,
                 ),
+              ),
+        );
+
+        case Routes.adminStatisticsScreen:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider.value(
+                value: getIt<AdminHomeCubit>()..getAdminStatistics(),
+                child: AdminStatisticsScreen(),
               ),
         );
       default:
