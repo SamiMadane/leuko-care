@@ -14,6 +14,7 @@ class AllDoctorsScreen extends StatelessWidget {
         onPressed: () {
           context.pushNamed(Routes.addUpdateDoctorScreen);
         },
+       shape: const CircleBorder(),
         backgroundColor: ColorsManager.primaryColor,
         child: Icon(Icons.add, color: Colors.white),
       ),
