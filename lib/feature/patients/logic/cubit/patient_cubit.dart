@@ -28,7 +28,7 @@ class PatientCubit extends Cubit<PatientState> {
 
   Future<String> _getImageUrl(PatientModel patient) async {
     if (patient.profileImage.isEmpty) {
-      return 'https://static.vecteezy.com/system/resources/previews/041/408/858/non_2x/ai-generated-a-smiling-doctor-with-glasses-and-a-white-lab-coat-isolated-on-transparent-background-free-png.png';
+      return 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png';
     } else if (!patient.profileImage.contains('http')) {
       return await _repository.uploadImageToCloudinary(patient.profileImage);
     }
