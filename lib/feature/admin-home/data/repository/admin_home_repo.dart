@@ -47,7 +47,6 @@ class AdminHomeRepository {
     final patients = await patientRepository.getPatientsStream().first;
     final doctors = await doctorRepository.getDoctorsStream().first;
 
-    // تحليل البيانات
     int examined = 0;
     int unexamined = 0;
     final Map<String, int> healthStatusCounts = {};
@@ -56,10 +55,6 @@ class AdminHomeRepository {
       for (var doctor in doctors) doctor.id!: doctor.name,
     };
 
-    for (var doctor in doctors) {
-      patientsPerDoctor[doctor.name] =
-          0; // تعيين عدد المرضى للطبيب إلى صفر إذا لم يكن له مرضى
-    }
     // examined and unexamined counts
     for (var patient in patients) {
       if (patient.isExamined) {
@@ -73,13 +68,12 @@ class AdminHomeRepository {
           (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
 
       // patients per doctor counts.
+      for (var doctor in doctors) {
+        patientsPerDoctor[doctor.name] = 0; // Initialize with 0 for each doctor
+      }
       final doctorName = doctorNames[patient.doctorId] ?? "Unknown Doctor";
       patientsPerDoctor[doctorName] = (patientsPerDoctor[doctorName] ?? 0) + 1;
     }
-    print("examined: $examined, unexamined: $unexamined");
-    print("healthStatusCounts: $healthStatusCounts");
-    print("patientsPerDoctor: $patientsPerDoctor");
-    print("totalPatients: ${patients.length}, totalDoctors: ${doctors.length}");
     return AdminStatisticsModel(
       totalPatients: patients.length,
       totalDoctors: doctors.length,

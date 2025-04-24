@@ -1,6 +1,10 @@
 // ExaminationPieChart Widget
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 
 class ExaminationPieChart extends StatelessWidget {
   final Map<String, int> data;
@@ -10,7 +14,7 @@ class ExaminationPieChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 240,
+      height: HeightManager.h230,
       child: PieChart(
         PieChartData(
           sections: data.entries.map((entry) {
@@ -18,12 +22,8 @@ class ExaminationPieChart extends StatelessWidget {
               value: entry.value.toDouble(),
               title: '${entry.key}: ${entry.value}',
               color: _getPieChartColor(entry.key),
-              radius: 70,
-              titleStyle: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              radius: RadiusManager.r64,
+              titleStyle: getBoldTextStyle(fontSize: FontSizeManager.s12, color: ColorsManager.white)
             );
           }).toList(),
           borderData: FlBorderData(show: false),
@@ -36,12 +36,6 @@ class ExaminationPieChart extends StatelessWidget {
 
   Color _getPieChartColor(String status) {
     switch (status) {
-      case "Healthy":
-        return Colors.green;
-      case "Sick":
-        return Colors.red;
-      case "Critical":
-        return Colors.orange;
       case "Examined":
         return Colors.green;
       case "Unexamined":

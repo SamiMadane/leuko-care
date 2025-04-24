@@ -2,6 +2,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 
 class HealthStatusBarChart extends StatelessWidget {
   final Map<String, int> data;
@@ -11,7 +15,7 @@ class HealthStatusBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: HeightManager.h270,
       child: BarChart(
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
@@ -19,7 +23,7 @@ class HealthStatusBarChart extends StatelessWidget {
           barTouchData: BarTouchData(
             enabled: true,
             touchTooltipData: BarTouchTooltipData(
-              getTooltipColor: (group) => Colors.black87,
+              getTooltipColor: (group) => ColorsManager.darkBlue,
               getTooltipItem: (group, groupIndex, rod, rodIndex) {
                 final label = data.keys.elementAt(group.x.toInt());
                 return BarTooltipItem(
@@ -33,7 +37,7 @@ class HealthStatusBarChart extends StatelessWidget {
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 30,
+                reservedSize: WidthManager.w28,
                 getTitlesWidget: (value, _) => Text(value.toInt().toString(), style: const TextStyle(fontSize: 10)),
               ),
             ),
@@ -45,7 +49,7 @@ class HealthStatusBarChart extends StatelessWidget {
                   if (index < 0 || index >= data.keys.length) return const SizedBox.shrink();
                   return SideTitleWidget(
                     meta: meta,
-                    child: Text(data.keys.elementAt(index), style: const TextStyle(fontSize: 10)),
+                    child: Text(data.keys.elementAt(index), style: getMediumTextStyle(fontSize: FontSizeManager.s11, color: ColorsManager.darkBlue)),
                   );
                 },
               ),
@@ -61,13 +65,13 @@ class HealthStatusBarChart extends StatelessWidget {
               barRods: [
                 BarChartRodData(
                   toY: entry.value.toDouble(),
-                  width: 16,
+                  width: WidthManager.w16,
                   gradient: LinearGradient(
-                    colors: [Colors.blue, Colors.lightBlueAccent],
+                    colors: [ColorsManager.primaryColor, ColorsManager.lightBlueAccent, ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(RadiusManager.r4),
                 ),
               ],
             );
