@@ -10,7 +10,8 @@ import 'package:leuko_care/feature/patients/data/repository/patient_repo.dart';
 class AdminHomeRepository {
   final DoctorRepository doctorRepository;
   final PatientRepository patientRepository;
-  final GetDoctorsOrderedByPatientsCountUseCase getDoctorsOrderedByPatientsCountUseCase;
+  final GetDoctorsOrderedByPatientsCountUseCase
+  getDoctorsOrderedByPatientsCountUseCase;
 
   AdminHomeRepository({
     required this.doctorRepository,
@@ -22,16 +23,18 @@ class AdminHomeRepository {
     return doctorRepository.getDoctorsStream();
   }
 
-  Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(List<DoctorModel> doctors,bool isAscending) async {
-    return getDoctorsOrderedByPatientsCountUseCase.call(doctors,isAscending);
+  Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(
+    List<DoctorModel> doctors,
+    bool isAscending,
+  ) async {
+    return getDoctorsOrderedByPatientsCountUseCase.call(doctors, isAscending);
   }
-
 
   Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
     return patientRepository.getPatientsByDoctorIdStream(doctorId);
   }
 
-    Future<void> signOut() async {
+  Future<void> signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
       await SharedPrefHelper.clearAllData();
@@ -40,42 +43,50 @@ class AdminHomeRepository {
     }
   }
 
+  Future<AdminStatisticsModel> getAllStatistics() async {
+    final patients = await patientRepository.getPatientsStream().first;
+    final doctors = await doctorRepository.getDoctorsStream().first;
 
-Future<AdminStatisticsModel> getAllStatistics() async {
-  final patients = await patientRepository.getPatientsStream().first;
-  final doctors = await doctorRepository.getDoctorsStream().first;
+    // تحليل البيانات
+    int examined = 0;
+    int unexamined = 0;
+    final Map<String, int> healthStatusCounts = {};
+    final Map<String, int> patientsPerDoctor = {};
+    final Map<String, String> doctorNames = {
+      for (var doctor in doctors) doctor.id!: doctor.name,
+    };
 
-  // تحليل البيانات
-  int examined = 0;
-  int unexamined = 0;
-  final Map<String, int> healthStatusCounts = {};
-  final Map<String, int> patientsPerDoctor = {};
-
-  // examined and unexamined counts
-  for (var patient in patients) {
-    if (patient.isExamined) {
-      examined++;
-    } else {
-      unexamined++;
+    for (var doctor in doctors) {
+      patientsPerDoctor[doctor.name] =
+          0; // تعيين عدد المرضى للطبيب إلى صفر إذا لم يكن له مرضى
     }
+    // examined and unexamined counts
+    for (var patient in patients) {
+      if (patient.isExamined) {
+        examined++;
+      } else {
+        unexamined++;
+      }
 
-    // health status counts.
-    healthStatusCounts[patient.healthStatus] =
-        (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
+      // health status counts.
+      healthStatusCounts[patient.healthStatus] =
+          (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
 
-    // patients per doctor counts.
-    patientsPerDoctor[patient.doctorId] =
-        (patientsPerDoctor[patient.doctorId] ?? 0) + 1;
+      // patients per doctor counts.
+      final doctorName = doctorNames[patient.doctorId] ?? "Unknown Doctor";
+      patientsPerDoctor[doctorName] = (patientsPerDoctor[doctorName] ?? 0) + 1;
+    }
+    print("examined: $examined, unexamined: $unexamined");
+    print("healthStatusCounts: $healthStatusCounts");
+    print("patientsPerDoctor: $patientsPerDoctor");
+    print("totalPatients: ${patients.length}, totalDoctors: ${doctors.length}");
+    return AdminStatisticsModel(
+      totalPatients: patients.length,
+      totalDoctors: doctors.length,
+      healthStatusCounts: healthStatusCounts,
+      patientsPerDoctor: patientsPerDoctor,
+      examinedCount: examined,
+      unexaminedCount: unexamined,
+    );
   }
-
-  return AdminStatisticsModel(
-    totalPatients: patients.length,
-    totalDoctors: doctors.length,
-    healthStatusCounts: healthStatusCounts,
-    patientsPerDoctor: patientsPerDoctor,
-    examinedCount: examined,
-    unexaminedCount: unexamined,
-  );
-}
-
 }

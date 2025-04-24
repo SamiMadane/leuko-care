@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/routes/routes.dart';
 
 class DoctorsBlueContainer extends StatelessWidget {
   const DoctorsBlueContainer({super.key});
@@ -11,13 +13,13 @@ class DoctorsBlueContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: HeightManager.h200,
+      height: HeightManager.h220,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Container(
             width: double.infinity,
-            height: HeightManager.h170,
+            height: HeightManager.h190,
             padding: EdgeInsets.symmetric(
               horizontal: WidthManager.w16,
               vertical: HeightManager.h16,
@@ -49,15 +51,36 @@ class DoctorsBlueContainer extends StatelessWidget {
                     height: HeightManager.h1_5,
                   ),
                 ),
+                Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorsManager.white,
+                    foregroundColor: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(RadiusManager.r12),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: WidthManager.w18,
+                      vertical: HeightManager.h10,
+                    ),
+                  ),
+                  onPressed: () {
+                    context.pushNamed(Routes.adminStatisticsScreen);
+                  },
+                  child: Text(
+                    'View Statistics',
+                    style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkBlue),
+                  ),
+                ),
               ],
             ),
           ),
           Positioned(
-            right: WidthManager.w1,
+            right: WidthManager.wm4,
             top: HeightManager.h20,
             child: Image.asset(
               AssetsManager.homeAdminImage,
-              height: HeightManager.h180,
+              height: HeightManager.h200,
             ),
           ),
         ],

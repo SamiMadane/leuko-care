@@ -127,6 +127,8 @@ class HeightManager {
   static double h195 = SizeUtil.setHeight(195.0);
   static double h200 = SizeUtil.setHeight(200.0);
   static double h210 = SizeUtil.setHeight(210.0);
+  static double h220 = SizeUtil.setHeight(220.0);
+  static double h230 = SizeUtil.setHeight(230.0);
   static double h375 = SizeUtil.setHeight(375.0);
 
 }
