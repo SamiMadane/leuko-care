@@ -54,6 +54,10 @@ class AdminHomeRepository {
     final Map<String, String> doctorNames = {
       for (var doctor in doctors) doctor.id!: doctor.name,
     };
+    // patients per doctor counts.
+    for (var doctor in doctors) {
+      patientsPerDoctor[doctor.name] = 0; // Initialize with 0 for each doctor
+    }
 
     // examined and unexamined counts
     for (var patient in patients) {
@@ -67,10 +71,6 @@ class AdminHomeRepository {
       healthStatusCounts[patient.healthStatus] =
           (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
 
-      // patients per doctor counts.
-      for (var doctor in doctors) {
-        patientsPerDoctor[doctor.name] = 0; // Initialize with 0 for each doctor
-      }
       final doctorName = doctorNames[patient.doctorId] ?? "Unknown Doctor";
       patientsPerDoctor[doctorName] = (patientsPerDoctor[doctorName] ?? 0) + 1;
     }
