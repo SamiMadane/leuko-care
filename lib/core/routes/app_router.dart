@@ -12,6 +12,8 @@ import 'package:leuko_care/feature/doctors/ui/views/add_update_doctor_screen.dar
 import 'package:leuko_care/feature/doctors/ui/views/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_details_screen.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
+import 'package:leuko_care/feature/onboarding/logic/onboarding_cubit.dart';
+import 'package:leuko_care/feature/onboarding/ui/views/onboarding_screen.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/views/add_update_patient_screen.dart';
@@ -31,6 +33,14 @@ class AppRouter {
       case Routes.navigationHandlerScreen:
         return MaterialPageRoute(
           builder: (_) => const NavigationHandlerScreen(),
+        );
+      case Routes.onboardingScreen:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => OnboardingCubit(),
+                child: const OnboardingScreen(),
+              ),
         );
       case Routes.adminHomeScreen:
         return MaterialPageRoute(
@@ -99,8 +109,8 @@ class AppRouter {
       case Routes.patientDetailsScreen:
         final arguments = settings.arguments as Map?;
         final patientId = arguments?['patientId'] as String;
-  final doctorId = arguments?['doctorId'] as String;
-  final doctorName = arguments?['doctorName'] as String;
+        final doctorId = arguments?['doctorId'] as String;
+        final doctorName = arguments?['doctorName'] as String;
 
         return MaterialPageRoute(
           builder:
@@ -129,7 +139,7 @@ class AppRouter {
               ),
         );
 
-        case Routes.adminStatisticsScreen:
+      case Routes.adminStatisticsScreen:
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(

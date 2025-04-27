@@ -80,6 +80,8 @@ dependencies:
   # for showing charts
   fl_chart: ^0.71.0
   collection: ^1.18.0
+  # smooth page indicator for onboarding screen
+  smooth_page_indicator: ^1.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -27,7 +27,7 @@ class _NavigationHandlerScreenState extends State<NavigationHandlerScreen> {
     } else if (userType == 'patient') {
       Navigator.pushReplacementNamed(context, Routes.adminHomeScreen);
     } else {
-      Navigator.pushReplacementNamed(context, Routes.userSelectionScreen);
+      Navigator.pushReplacementNamed(context, Routes.onboardingScreen);
     }
   }
 
