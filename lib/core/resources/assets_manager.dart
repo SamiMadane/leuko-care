@@ -13,6 +13,12 @@ class AssetsManager {
   static const String doctorLoginImage = '$imagesPath/doctor_login.png';
   static const String patientLoginImage = '$imagesPath/patient_login.png';
   static const String adminLoginImage = '$imagesPath/admin_login.png';
+  static const String onboarding1Image= '$imagesPath/onboarding1.png';
+  static const String onboarding2Image= '$imagesPath/onboarding2.png';
+  static const String onboarding3Image= '$imagesPath/onboarding3.png';
+
+
+
 
 
   static const String homeBluePatternImage = '$imagesPath/home_blue_pattern.png';
