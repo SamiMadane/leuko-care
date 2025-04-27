@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/all_patients_widgets/all_patient_list_view.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/admin_user/all_patients_widgets/all_patient_list_view.dart';
 
 class AllPatientsBodyBlocBuilder extends StatelessWidget {
   final String doctorId;

@@ -8,9 +8,9 @@ import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/add_update_patient_widgets/add_update_patient_bloc_listener.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/add_update_patient_widgets/add_update_patient_form_field.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/add_update_patient_widgets/add_update_patient_profile_image_picker.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/admin_user/add_update_patient_widgets/add_update_patient_bloc_listener.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/admin_user/add_update_patient_widgets/add_update_patient_form_field.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/admin_user/add_update_patient_widgets/add_update_patient_profile_image_picker.dart';
 
 class AddUpdatePatientScreen extends StatefulWidget {
   final PatientModel? patient;

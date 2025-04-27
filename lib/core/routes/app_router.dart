@@ -16,9 +16,9 @@ import 'package:leuko_care/feature/onboarding/logic/onboarding_cubit.dart';
 import 'package:leuko_care/feature/onboarding/ui/views/onboarding_screen.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
-import 'package:leuko_care/feature/patients/ui/views/add_update_patient_screen.dart';
-import 'package:leuko_care/feature/patients/ui/views/all_patients_screen.dart';
-import 'package:leuko_care/feature/patients/ui/views/patient_details_screen.dart';
+import 'package:leuko_care/feature/patients/ui/views/admin_user/add_update_patient_screen.dart';
+import 'package:leuko_care/feature/patients/ui/views/admin_user/all_patients_screen.dart';
+import 'package:leuko_care/feature/patients/ui/views/admin_user/patient_details_screen.dart';
 import 'package:leuko_care/feature/user_selection/ui/views/user_selection_screen.dart';
 import 'package:leuko_care/navigation_handler_screen.dart';
 
