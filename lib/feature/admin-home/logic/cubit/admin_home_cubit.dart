@@ -69,15 +69,7 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
     emit(GetDoctorsStateSuccess(doctors));
   }
 
-  Future<void> signOut() async {
-    emit(SignedOutStateLoading());
-    try {
-      await adminHomeRepository.signOut();
-      emit(SignedOutStateSuccess());
-    } catch (e) {
-      emit(SignedOutStateError(e.toString()));
-    }
-  }
+
 
    Future<void> getAdminStatistics() async {
     try {

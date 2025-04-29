@@ -46,14 +46,20 @@ class AppRouter {
       case Routes.adminHomeScreen:
         return MaterialPageRoute(
           builder:
-              (_) => BlocProvider(
-                create:
-                    (context) => AdminHomeCubit(
-                      adminHomeRepository: getIt<AdminHomeRepository>(),
-                    )..getDoctors(), // تمرير AdminHomeCubit هنا
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => AdminHomeCubit(
+                          adminHomeRepository: getIt<AdminHomeRepository>(),
+                        )..getDoctors(),
+                  ),
+                  BlocProvider(create: (context) => getIt<LoginCubit>()),
+                ],
                 child: const AdminHomeScreen(),
               ),
         );
+
       case Routes.loginScreen:
         final userType = arguments as String? ?? 'unknown';
         return MaterialPageRoute(
@@ -149,14 +155,20 @@ class AppRouter {
               ),
         );
 
-         case Routes.patientHomeScreen:
+      case Routes.patientHomeScreen:
         return MaterialPageRoute(
           builder:
-              (_) => BlocProvider.value(
-                value: getIt<PatientCubit>()..getPatientsStream(),
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (_) => getIt<PatientCubit>()..getPatientsStream(),
+                  ),
+                  BlocProvider(create: (_) => getIt<LoginCubit>()),
+                ],
                 child: PatientHomeScreen(),
               ),
         );
+
       default:
         return null;
     }

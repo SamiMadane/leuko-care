@@ -55,4 +55,13 @@ class LoginCubit extends Cubit<LoginState> {
         }
       );
   }
+    Future<void> signOut() async {
+    emit(SignedOutStateLoading());
+    try {
+      await loginRepository.signOut();
+      emit(SignedOutStateSuccess());
+    } catch (e) {
+      emit(SignedOutStateError(e.toString()));
+    }
+  }
 }

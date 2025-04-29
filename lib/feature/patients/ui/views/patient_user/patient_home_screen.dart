@@ -1,14 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as context;
+import 'package:leuko_care/core/helpers/extensions.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
+import 'package:leuko_care/core/widgets/signout_bloc_builder.dart';
+import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 
 class PatientHomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<LoginCubit>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Patient Home'),
+        actions: [
+        CircleAvatar(
+          radius: RadiusManager.r24,
+          backgroundColor: ColorsManager.moreLighterGray,
+          child: IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder:
+                    (context) => ConfirmationDialog(
+                      title: 'Confirm Sign Out',
+                      message: 'Are you sure you want to sign out?',
+                      onConfirmed: () {
+                        cubit.signOut(); // ثم نسجل الخروج
+                        context.pop(); // أولاً نغلق الـ Dialog
+                      },
+                    ),
+              );
+            },
+            icon: Icon(Icons.exit_to_app),
+          ),
+        ),
+        SignOutBlocListener(),
+        ],
       ),
       body: BlocBuilder<PatientCubit, PatientState>(
         builder: (context, state) {

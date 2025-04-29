@@ -34,14 +34,7 @@ class AdminHomeRepository {
     return patientRepository.getPatientsByDoctorIdStream(doctorId);
   }
 
-  Future<void> signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      await SharedPrefHelper.clearAllData();
-    } catch (e) {
-      throw Exception("Error signing out: $e");
-    }
-  }
+
 
   Future<AdminStatisticsModel> getAllStatistics() async {
     final patients = await patientRepository.getPatientsStream().first;

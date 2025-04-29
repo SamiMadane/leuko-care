@@ -167,6 +167,15 @@ class LoginRepository {
     }
   }
 
+    Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      await SharedPrefHelper.clearAllData();
+    } catch (e) {
+      throw Exception("Error signing out: $e");
+    }
+  }
+  
   Future<OperationResult<User?>> _handleEmailVerification(User user) async {
     final prefs = await SharedPreferences.getInstance();
     bool emailSent = prefs.getBool('email_sent') ?? false;
