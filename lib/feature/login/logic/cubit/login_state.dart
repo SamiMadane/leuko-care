@@ -8,6 +8,6 @@ class LoginState<T> with _$LoginState<T> {
   const factory LoginState.initial() = _LoginInitial;
 
   const factory LoginState.loginLoading() = LoginLoading;
-  const factory LoginState.loginSuccess(User user) = LoginSuccess;
+  const factory LoginState.loginSuccess(User user,String userType) = LoginSuccess;
   const factory LoginState.loginError(String error) = LoginError;
 }

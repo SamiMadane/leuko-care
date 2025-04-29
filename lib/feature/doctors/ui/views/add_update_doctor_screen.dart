@@ -28,7 +28,6 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
   String? profileImageUrl;
 
   @override
@@ -90,7 +89,6 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
                   experienceController: _experienceController,
                   descriptionController: _descriptionController,
                   passwordController: _passwordController,
-                  
                 ),
                 SizedBox(height: HeightManager.h30),
                 AppTextButton(

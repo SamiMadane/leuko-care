@@ -19,6 +19,7 @@ import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/views/admin_user/add_update_patient_screen.dart';
 import 'package:leuko_care/feature/patients/ui/views/admin_user/all_patients_screen.dart';
 import 'package:leuko_care/feature/patients/ui/views/admin_user/patient_details_screen.dart';
+import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_home_screen.dart';
 import 'package:leuko_care/feature/user_selection/ui/views/user_selection_screen.dart';
 import 'package:leuko_care/navigation_handler_screen.dart';
 
@@ -145,6 +146,15 @@ class AppRouter {
               (_) => BlocProvider.value(
                 value: getIt<AdminHomeCubit>()..getAdminStatistics(),
                 child: AdminStatisticsScreen(),
+              ),
+        );
+
+         case Routes.patientHomeScreen:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider.value(
+                value: getIt<PatientCubit>()..getPatientsStream(),
+                child: PatientHomeScreen(),
               ),
         );
       default:

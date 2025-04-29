@@ -28,11 +28,11 @@ class LoginCubit extends Cubit<LoginState> {
 
   void checkAdmin(String userType) async {
     emit(const LoginLoading());
-    final result = await loginRepository.adminLogin(emailController.text, passwordController.text,userType);
+    final result = await loginRepository.login(emailController.text, passwordController.text,userType);
     result.when(
       success: (user) {
         user != null
-            ? emit(LoginSuccess(user))
+            ? emit(LoginSuccess(user,userType))
             : emit(LoginError("User not found"));
       },
       failure: (error) => emit(LoginError(error)),
@@ -46,7 +46,7 @@ class LoginCubit extends Cubit<LoginState> {
         success: (user) => {
           print ("signInWithGoogle success and user is $user"), 
             user != null
-            ? emit(LoginSuccess(user))
+            ? emit(LoginSuccess(user,userType))
             : emit(LoginError("Failed to sign in with Google"))
         },
         failure: (error) {

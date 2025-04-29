@@ -5,6 +5,7 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/core/widgets/loading_dialog.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
 import 'package:leuko_care/feature/login/logic/cubit/login_state.dart';
 
@@ -25,13 +26,18 @@ class LoginBlocListener extends StatelessWidget {
           loginLoading: () {
             setUpLoadingState(context);
           },
-          loginSuccess: (user) {
+          loginSuccess: (user,userType) {
             context.pop();
-            context.pushNamed(Routes.adminHomeScreen);
+             if (userType == 'admin') {
+              context.pushReplacementNamed(Routes.adminHomeScreen);
+            } else if (userType == 'doctor') {
+              context.pushReplacementNamed(Routes.adminHomeScreen);
+            } else if (userType == 'patient') {
+              context.pushReplacementNamed(Routes.patientHomeScreen);
+            }
           },
           loginError: (error) {
             context.pop();
-            print ('===================== $error');
             setUpErrorState(context, error);
           },
         );
@@ -45,14 +51,12 @@ class LoginBlocListener extends StatelessWidget {
     showDialog(
       context: context,
       builder:
-          (context) => const Center(
-            child: CircularProgressIndicator(color: ColorsManager.primaryColor),
-          ),
+          (context) => LoadingDialog(),
     );
   }
 
   setUpErrorState(BuildContext context, String error) {
-    print ('========================= $error');
+    print('error is $error');
     showDialog(
       context: context,
       builder:
