@@ -1,5 +1,6 @@
 const String imagesPath = 'assets/images';
-const String svgsPath = 'assets/svgs';
+const String iconsPath = 'assets/icons';
+
 
 class AssetsManager {
   // png
@@ -16,16 +17,15 @@ class AssetsManager {
   static const String onboarding1Image= '$imagesPath/onboarding1.png';
   static const String onboarding2Image= '$imagesPath/onboarding2.png';
   static const String onboarding3Image= '$imagesPath/onboarding3.png';
-
-
-
-
-
   static const String homeBluePatternImage = '$imagesPath/home_blue_pattern.png';
 
   
 
-  // svg
+  // icons
+  static const String homeIcon = '$iconsPath/home.png';
+  static const String chatIcon = '$iconsPath/chat.png';
+  static const String profileIcon = '$iconsPath/profile.png';
+
 
 
 
