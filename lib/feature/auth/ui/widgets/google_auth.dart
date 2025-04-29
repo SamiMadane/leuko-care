@@ -5,7 +5,7 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 
 class GoogleAuth extends StatelessWidget {
   final String userType;
@@ -79,7 +79,7 @@ class GoogleAuth extends StatelessWidget {
             ),
           ),
           onTap: (){
-            context.read<LoginCubit>().signInWithGoogle(userType);
+            context.read<AuthCubit>().signInWithGoogle(userType);
           },
         ),
       ],

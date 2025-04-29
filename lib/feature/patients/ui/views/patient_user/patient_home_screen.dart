@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as context;
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
 import 'package:leuko_care/core/widgets/signout_bloc_builder.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 
@@ -14,7 +13,7 @@ class PatientHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<LoginCubit>();
+    var cubit = context.read<AuthCubit>();
 
     return Scaffold(
       appBar: AppBar(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
-import 'package:leuko_care/feature/login/data/repository/login_repo.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_state.dart';
+import 'package:leuko_care/feature/auth/data/repository/auth_repo.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  final LoginRepository loginRepository;
-  LoginCubit(this.loginRepository) : super(LoginState.initial());
+class AuthCubit extends Cubit<AuthState> {
+  final AuthRepository loginRepository;
+  AuthCubit(this.loginRepository) : super(AuthState.initial());
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

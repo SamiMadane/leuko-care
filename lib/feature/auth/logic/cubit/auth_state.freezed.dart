@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login_state.dart';
+part of 'auth_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$LoginState<T> {
+mixin _$AuthState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -84,24 +84,24 @@ mixin _$LoginState<T> {
 }
 
 /// @nodoc
-abstract class $LoginStateCopyWith<T, $Res> {
-  factory $LoginStateCopyWith(
-    LoginState<T> value,
-    $Res Function(LoginState<T>) then,
-  ) = _$LoginStateCopyWithImpl<T, $Res, LoginState<T>>;
+abstract class $AuthStateCopyWith<T, $Res> {
+  factory $AuthStateCopyWith(
+    AuthState<T> value,
+    $Res Function(AuthState<T>) then,
+  ) = _$AuthStateCopyWithImpl<T, $Res, AuthState<T>>;
 }
 
 /// @nodoc
-class _$LoginStateCopyWithImpl<T, $Res, $Val extends LoginState<T>>
-    implements $LoginStateCopyWith<T, $Res> {
-  _$LoginStateCopyWithImpl(this._value, this._then);
+class _$AuthStateCopyWithImpl<T, $Res, $Val extends AuthState<T>>
+    implements $AuthStateCopyWith<T, $Res> {
+  _$AuthStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,14 +115,14 @@ abstract class _$$LoginInitialImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$LoginInitialImplCopyWithImpl<T, $Res>
-    extends _$LoginStateCopyWithImpl<T, $Res, _$LoginInitialImpl<T>>
+    extends _$AuthStateCopyWithImpl<T, $Res, _$LoginInitialImpl<T>>
     implements _$$LoginInitialImplCopyWith<T, $Res> {
   __$$LoginInitialImplCopyWithImpl(
     _$LoginInitialImpl<T> _value,
     $Res Function(_$LoginInitialImpl<T>) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -133,7 +133,7 @@ class _$LoginInitialImpl<T> implements _LoginInitial<T> {
 
   @override
   String toString() {
-    return 'LoginState<$T>.initial()';
+    return 'AuthState<$T>.initial()';
   }
 
   @override
@@ -240,7 +240,7 @@ class _$LoginInitialImpl<T> implements _LoginInitial<T> {
   }
 }
 
-abstract class _LoginInitial<T> implements LoginState<T> {
+abstract class _LoginInitial<T> implements AuthState<T> {
   const factory _LoginInitial() = _$LoginInitialImpl<T>;
 }
 
@@ -254,14 +254,14 @@ abstract class _$$LoginLoadingImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$LoginLoadingImplCopyWithImpl<T, $Res>
-    extends _$LoginStateCopyWithImpl<T, $Res, _$LoginLoadingImpl<T>>
+    extends _$AuthStateCopyWithImpl<T, $Res, _$LoginLoadingImpl<T>>
     implements _$$LoginLoadingImplCopyWith<T, $Res> {
   __$$LoginLoadingImplCopyWithImpl(
     _$LoginLoadingImpl<T> _value,
     $Res Function(_$LoginLoadingImpl<T>) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -272,7 +272,7 @@ class _$LoginLoadingImpl<T> implements LoginLoading<T> {
 
   @override
   String toString() {
-    return 'LoginState<$T>.loginLoading()';
+    return 'AuthState<$T>.loginLoading()';
   }
 
   @override
@@ -379,7 +379,7 @@ class _$LoginLoadingImpl<T> implements LoginLoading<T> {
   }
 }
 
-abstract class LoginLoading<T> implements LoginState<T> {
+abstract class LoginLoading<T> implements AuthState<T> {
   const factory LoginLoading() = _$LoginLoadingImpl<T>;
 }
 
@@ -395,14 +395,14 @@ abstract class _$$LoginSuccessImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$LoginSuccessImplCopyWithImpl<T, $Res>
-    extends _$LoginStateCopyWithImpl<T, $Res, _$LoginSuccessImpl<T>>
+    extends _$AuthStateCopyWithImpl<T, $Res, _$LoginSuccessImpl<T>>
     implements _$$LoginSuccessImplCopyWith<T, $Res> {
   __$$LoginSuccessImplCopyWithImpl(
     _$LoginSuccessImpl<T> _value,
     $Res Function(_$LoginSuccessImpl<T>) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -434,7 +434,7 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
 
   @override
   String toString() {
-    return 'LoginState<$T>.loginSuccess(user: $user, userType: $userType)';
+    return 'AuthState<$T>.loginSuccess(user: $user, userType: $userType)';
   }
 
   @override
@@ -450,7 +450,7 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
   @override
   int get hashCode => Object.hash(runtimeType, user, userType);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -556,14 +556,14 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
   }
 }
 
-abstract class LoginSuccess<T> implements LoginState<T> {
+abstract class LoginSuccess<T> implements AuthState<T> {
   const factory LoginSuccess(final User user, final String userType) =
       _$LoginSuccessImpl<T>;
 
   User get user;
   String get userType;
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoginSuccessImplCopyWith<T, _$LoginSuccessImpl<T>> get copyWith =>
@@ -582,14 +582,14 @@ abstract class _$$LoginErrorImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$LoginErrorImplCopyWithImpl<T, $Res>
-    extends _$LoginStateCopyWithImpl<T, $Res, _$LoginErrorImpl<T>>
+    extends _$AuthStateCopyWithImpl<T, $Res, _$LoginErrorImpl<T>>
     implements _$$LoginErrorImplCopyWith<T, $Res> {
   __$$LoginErrorImplCopyWithImpl(
     _$LoginErrorImpl<T> _value,
     $Res Function(_$LoginErrorImpl<T>) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -615,7 +615,7 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
 
   @override
   String toString() {
-    return 'LoginState<$T>.loginError(error: $error)';
+    return 'AuthState<$T>.loginError(error: $error)';
   }
 
   @override
@@ -629,7 +629,7 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -732,12 +732,12 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
   }
 }
 
-abstract class LoginError<T> implements LoginState<T> {
+abstract class LoginError<T> implements AuthState<T> {
   const factory LoginError(final String error) = _$LoginErrorImpl<T>;
 
   String get error;
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoginErrorImplCopyWith<T, _$LoginErrorImpl<T>> get copyWith =>
@@ -754,14 +754,14 @@ abstract class _$$SignedOutStateLoadingImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$SignedOutStateLoadingImplCopyWithImpl<T, $Res>
-    extends _$LoginStateCopyWithImpl<T, $Res, _$SignedOutStateLoadingImpl<T>>
+    extends _$AuthStateCopyWithImpl<T, $Res, _$SignedOutStateLoadingImpl<T>>
     implements _$$SignedOutStateLoadingImplCopyWith<T, $Res> {
   __$$SignedOutStateLoadingImplCopyWithImpl(
     _$SignedOutStateLoadingImpl<T> _value,
     $Res Function(_$SignedOutStateLoadingImpl<T>) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -772,7 +772,7 @@ class _$SignedOutStateLoadingImpl<T> implements SignedOutStateLoading<T> {
 
   @override
   String toString() {
-    return 'LoginState<$T>.signedOutStateLoading()';
+    return 'AuthState<$T>.signedOutStateLoading()';
   }
 
   @override
@@ -880,7 +880,7 @@ class _$SignedOutStateLoadingImpl<T> implements SignedOutStateLoading<T> {
   }
 }
 
-abstract class SignedOutStateLoading<T> implements LoginState<T> {
+abstract class SignedOutStateLoading<T> implements AuthState<T> {
   const factory SignedOutStateLoading() = _$SignedOutStateLoadingImpl<T>;
 }
 
@@ -894,14 +894,14 @@ abstract class _$$SignedOutStateSuccessImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$SignedOutStateSuccessImplCopyWithImpl<T, $Res>
-    extends _$LoginStateCopyWithImpl<T, $Res, _$SignedOutStateSuccessImpl<T>>
+    extends _$AuthStateCopyWithImpl<T, $Res, _$SignedOutStateSuccessImpl<T>>
     implements _$$SignedOutStateSuccessImplCopyWith<T, $Res> {
   __$$SignedOutStateSuccessImplCopyWithImpl(
     _$SignedOutStateSuccessImpl<T> _value,
     $Res Function(_$SignedOutStateSuccessImpl<T>) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -912,7 +912,7 @@ class _$SignedOutStateSuccessImpl<T> implements SignedOutStateSuccess<T> {
 
   @override
   String toString() {
-    return 'LoginState<$T>.signedOutStateSuccess()';
+    return 'AuthState<$T>.signedOutStateSuccess()';
   }
 
   @override
@@ -1020,7 +1020,7 @@ class _$SignedOutStateSuccessImpl<T> implements SignedOutStateSuccess<T> {
   }
 }
 
-abstract class SignedOutStateSuccess<T> implements LoginState<T> {
+abstract class SignedOutStateSuccess<T> implements AuthState<T> {
   const factory SignedOutStateSuccess() = _$SignedOutStateSuccessImpl<T>;
 }
 
@@ -1036,14 +1036,14 @@ abstract class _$$SignedOutStateErrorImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$SignedOutStateErrorImplCopyWithImpl<T, $Res>
-    extends _$LoginStateCopyWithImpl<T, $Res, _$SignedOutStateErrorImpl<T>>
+    extends _$AuthStateCopyWithImpl<T, $Res, _$SignedOutStateErrorImpl<T>>
     implements _$$SignedOutStateErrorImplCopyWith<T, $Res> {
   __$$SignedOutStateErrorImplCopyWithImpl(
     _$SignedOutStateErrorImpl<T> _value,
     $Res Function(_$SignedOutStateErrorImpl<T>) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1069,7 +1069,7 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
 
   @override
   String toString() {
-    return 'LoginState<$T>.signedOutStateError(message: $message)';
+    return 'AuthState<$T>.signedOutStateError(message: $message)';
   }
 
   @override
@@ -1083,7 +1083,7 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1190,13 +1190,13 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
   }
 }
 
-abstract class SignedOutStateError<T> implements LoginState<T> {
+abstract class SignedOutStateError<T> implements AuthState<T> {
   const factory SignedOutStateError(final String message) =
       _$SignedOutStateErrorImpl<T>;
 
   String get message;
 
-  /// Create a copy of LoginState
+  /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignedOutStateErrorImplCopyWith<T, _$SignedOutStateErrorImpl<T>>

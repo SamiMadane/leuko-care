@@ -6,11 +6,11 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
-import 'package:leuko_care/feature/login/ui/widgets/login_bloc_listener.dart';
-import 'package:leuko_care/feature/login/ui/widgets/email_and_password.dart';
-import 'package:leuko_care/feature/login/ui/widgets/google_auth.dart';
-import 'package:leuko_care/feature/login/ui/widgets/image_and_title.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/login_bloc_listener.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/email_and_password.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/google_auth.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/image_and_title.dart';
 
 class LoginScreen extends StatelessWidget {
   final String userType;
@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<LoginCubit>();
+    var cubit = context.read<AuthCubit>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 void validateThenDoLogin(BuildContext context,String userType) {
-  if (context.read<LoginCubit>().formKey.currentState!.validate()) {
-    context.read<LoginCubit>().checkAdmin(userType);
+  if (context.read<AuthCubit>().formKey.currentState!.validate()) {
+    context.read<AuthCubit>().checkAdmin(userType);
   }
 }

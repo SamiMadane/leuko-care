@@ -7,14 +7,14 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
 import 'package:leuko_care/core/widgets/signout_bloc_builder.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<LoginCubit>();
+    var cubit = context.read<AuthCubit>();
     return Row(
       children: [
         Column(

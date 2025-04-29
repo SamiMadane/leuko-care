@@ -4,8 +4,8 @@ import 'package:leuko_care/core/helpers/app_regex.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
-import 'package:leuko_care/feature/login/ui/widgets/password_validations.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/password_validations.dart';
 
 class EmailAndPassword extends StatefulWidget {
   const EmailAndPassword({super.key});
@@ -26,7 +26,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   void initState() {
     super.initState();
-    passwordController = context.read<LoginCubit>().passwordController;
+    passwordController = context.read<AuthCubit>().passwordController;
     setupPasswordControllerListener();
   }
 
@@ -47,11 +47,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<LoginCubit>().formKey,
+      key: context.read<AuthCubit>().formKey,
       child: Column(
         children: [
           AppTextFormField(
-            controller: context.read<LoginCubit>().emailController,
+            controller: context.read<AuthCubit>().emailController,
             labelText: 'Email',
             validator: (value) {
               if (value == null ||
@@ -63,7 +63,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           ),
           SizedBox(height: HeightManager.h18),
           AppTextFormField(
-            controller: context.read<LoginCubit>().passwordController,
+            controller: context.read<AuthCubit>().passwordController,
             labelText: 'Password',
             backgroundColor: ColorsManager.moreLightGray,
             isObscureText: isObscureText,

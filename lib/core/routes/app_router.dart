@@ -11,7 +11,7 @@ import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/views/add_update_doctor_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_details_screen.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:leuko_care/feature/onboarding/logic/onboarding_cubit.dart';
 import 'package:leuko_care/feature/onboarding/ui/views/onboarding_screen.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -23,7 +23,7 @@ import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_home_s
 import 'package:leuko_care/feature/user_selection/ui/views/user_selection_screen.dart';
 import 'package:leuko_care/navigation_handler_screen.dart';
 
-import '../../feature/login/ui/views/login_screen.dart';
+import '../../feature/auth/ui/views/login_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -54,7 +54,7 @@ class AppRouter {
                           adminHomeRepository: getIt<AdminHomeRepository>(),
                         )..getDoctors(),
                   ),
-                  BlocProvider(create: (context) => getIt<LoginCubit>()),
+                  BlocProvider(create: (context) => getIt<AuthCubit>()),
                 ],
                 child: const AdminHomeScreen(),
               ),
@@ -65,7 +65,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
-                create: (context) => getIt<LoginCubit>(),
+                create: (context) => getIt<AuthCubit>(),
                 child: LoginScreen(userType: userType),
               ),
         );
@@ -163,7 +163,7 @@ class AppRouter {
                   BlocProvider(
                     create: (_) => getIt<PatientCubit>()..getPatientsStream(),
                   ),
-                  BlocProvider(create: (_) => getIt<LoginCubit>()),
+                  BlocProvider(create: (_) => getIt<AuthCubit>()),
                 ],
                 child: PatientHomeScreen(),
               ),

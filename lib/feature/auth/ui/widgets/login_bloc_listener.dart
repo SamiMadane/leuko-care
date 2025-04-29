@@ -6,8 +6,8 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/core/widgets/loading_dialog.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_state.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_state.dart';
 
 class LoginBlocListener extends StatelessWidget {
   const LoginBlocListener({super.key});
@@ -15,7 +15,7 @@ class LoginBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<AuthCubit, AuthState>(
       listenWhen:
           (previous, current) =>
               current is LoginLoading ||

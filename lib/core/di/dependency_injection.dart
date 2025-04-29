@@ -6,8 +6,8 @@ import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.da
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/login/data/repository/login_repo.dart';
-import 'package:leuko_care/feature/login/logic/cubit/login_cubit.dart';
+import 'package:leuko_care/feature/auth/data/repository/auth_repo.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:leuko_care/feature/patients/data/repository/patient_repo.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 
@@ -18,8 +18,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton(() => FirebaseFirestore.instance);
 
   // تسجيل Login Repository & Cubit
-  getIt.registerLazySingleton(() => LoginRepository());
-  getIt.registerFactory(() => LoginCubit(getIt<LoginRepository>()));
+  getIt.registerLazySingleton(() => AuthRepository());
+  getIt.registerFactory(() => AuthCubit(getIt<AuthRepository>()));
 
   // تسجيل Doctor Repository & Cubit
   getIt.registerLazySingleton(
