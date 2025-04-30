@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/di/dependency_injection.dart';
@@ -156,12 +157,13 @@ class AppRouter {
         );
 
       case Routes.patientHomeScreen:
+      final patientId = FirebaseAuth.instance.currentUser?.uid;
         return MaterialPageRoute(
           builder:
               (_) => MultiBlocProvider(
                 providers: [
                   BlocProvider(
-                    create: (_) => getIt<PatientCubit>()..getPatientsStream(),
+                    create: (_) => getIt<PatientCubit>()..getPatientAndDoctor(patientId!),
                   ),
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                 ],

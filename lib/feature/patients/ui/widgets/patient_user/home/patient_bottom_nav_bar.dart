@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
 
@@ -42,8 +43,8 @@ class PatientBottomNavBar extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             selectedItemColor: ColorsManager.primaryColor,
             unselectedItemColor: ColorsManager.darkBlue,
-            selectedFontSize: 14,
-            unselectedFontSize: 12,
+            selectedFontSize: FontSizeManager.s14,
+            unselectedFontSize: FontSizeManager.s12,
             selectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -77,8 +78,8 @@ class PatientBottomNavBar extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: Image.asset(
         assetPath,
-        width: isSelected ? 28 : 24,
-        height: isSelected ? 28 : 24,
+        width: isSelected ? WidthManager.w26 : WidthManager.w22,
+        height: isSelected ? HeightManager.h26 : HeightManager.h22,
         color: color,
       ),
       label: label,

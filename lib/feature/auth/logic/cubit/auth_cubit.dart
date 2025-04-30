@@ -11,6 +11,7 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
   Map<String, Map<String, dynamic>> userTypeData = {
       'admin': {
         'title': 'Admin Login',

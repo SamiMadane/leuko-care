@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
 part 'patient_state.freezed.dart';
@@ -26,4 +27,9 @@ class PatientState with _$PatientState {
     const factory PatientState.getPatientsByDoctorIdStateLoading() = GetPatientsByDoctorIdStateLoading;
   const factory PatientState.getPatientsByDoctorIdStateSuccess(List<PatientModel> patients) = GetPatientsByDoctorIdStateSuccess;
   const factory PatientState.getPatientsByDoctorIdStateError(String message) = GetPatientsByDoctorIdStateError;
+
+  
+    const factory PatientState.getPatientAndDoctorStateLoading() = GetPatientAndDoctorStateLoading;
+  const factory PatientState.getPatientAndDoctorStateSuccess(DoctorModel doctor,PatientModel patient) = GetPatientAndDoctorStateSuccess;
+  const factory PatientState.getPatientAndDoctorStateError(String message) = GetPatientAndDoctorStateError;
 }

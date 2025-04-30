@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/data/repository/patient_repo.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
@@ -8,6 +9,7 @@ import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 class PatientCubit extends Cubit<PatientState> {
   final PatientRepository _repository;
   StreamSubscription<List<PatientModel>>? _patientsSubscription;
+  StreamSubscription<List<DoctorModel>>? _doctorSubscription;
 
   PatientCubit(this._repository)
     : super(const PatientState.patientStateInitial());
@@ -102,13 +104,32 @@ class PatientCubit extends Cubit<PatientState> {
         );
   }
 
+  
+ 
+
+
   Stream<PatientModel> getPatientByIdStream(String patientId) {
     return _repository.getPatientByIdStream(patientId);
   }
 
+ Future<void> getPatientAndDoctor(String patientId) async {
+    emit(GetPatientAndDoctorStateLoading());
+    try {
+      // جلب المريض
+      final patient = await _repository.getPatientByIdStream(patientId).first;
+      
+      // جلب الطبيب المرتبط بالمريض
+      final doctor = await _repository.getDoctorByDoctorId(patient.doctorId);
+      
+      emit(GetPatientAndDoctorStateSuccess(doctor, patient));
+    } catch (e) {
+      emit(GetPatientAndDoctorStateError(e.toString()));
+    }
+  }
   @override
   Future<void> close() {
     _patientsSubscription?.cancel();
+    _doctorSubscription?.cancel();
     return super.close();
   }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import '../models/patient_model.dart';
 
 class PatientRepository {
@@ -74,24 +75,33 @@ class PatientRepository {
     }
   }
 
-Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
-  return _firestore
-      .collection('patients')
-      .where('doctorId', isEqualTo: doctorId)
-      .snapshots()
-      .map((querySnapshot) {
-        return querySnapshot.docs
-            .map((doc) => PatientModel.fromJson(doc.data()))
-            .toList();
-      });
-}
+  Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
+    return _firestore
+        .collection('patients')
+        .where('doctorId', isEqualTo: doctorId)
+        .snapshots()
+        .map((querySnapshot) {
+          return querySnapshot.docs
+              .map((doc) => PatientModel.fromJson(doc.data()))
+              .toList();
+        });
+  }
 
-Stream<PatientModel> getPatientByIdStream(String patientId) {
-  return FirebaseFirestore.instance
-      .collection('patients')
-      .doc(patientId)
-      .snapshots()
-      .map((doc) => PatientModel.fromJson(doc.data()!));
-}
+  Future<DoctorModel> getDoctorByDoctorId(String doctorId) async {
+    try {
+      final docSnapshot =
+          await _firestore.collection('doctors').doc(doctorId).get();
+      return DoctorModel.fromJson(docSnapshot.data()!);
+    } catch (e) {
+      throw Exception('Error fetching doctor: $e');
+    }
+  }
 
+  Stream<PatientModel> getPatientByIdStream(String patientId) {
+    return FirebaseFirestore.instance
+        .collection('patients')
+        .doc(patientId)
+        .snapshots()
+        .map((doc) => PatientModel.fromJson(doc.data()!));
+  }
 }

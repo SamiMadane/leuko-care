@@ -37,6 +37,10 @@ mixin _$PatientState {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -57,6 +61,10 @@ mixin _$PatientState {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -77,6 +85,10 @@ mixin _$PatientState {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +122,12 @@ mixin _$PatientState {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -136,6 +154,12 @@ mixin _$PatientState {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -162,6 +186,12 @@ mixin _$PatientState {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -250,6 +280,10 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return patientStateInitial();
   }
@@ -274,6 +308,10 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return patientStateInitial?.call();
   }
@@ -298,6 +336,10 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (patientStateInitial != null) {
@@ -338,6 +380,12 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return patientStateInitial(this);
   }
@@ -368,6 +416,12 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return patientStateInitial?.call(this);
   }
@@ -398,6 +452,12 @@ class _$PatientStateInitialImpl implements _PatientStateInitial {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (patientStateInitial != null) {
@@ -473,6 +533,10 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return getPatientStateLoading();
   }
@@ -497,6 +561,10 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return getPatientStateLoading?.call();
   }
@@ -521,6 +589,10 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientStateLoading != null) {
@@ -561,6 +633,12 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return getPatientStateLoading(this);
   }
@@ -591,6 +669,12 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return getPatientStateLoading?.call(this);
   }
@@ -621,6 +705,12 @@ class _$GetPatientStateLoadingImpl implements GetPatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientStateLoading != null) {
@@ -733,6 +823,10 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return getPatientStateSuccess(patients);
   }
@@ -757,6 +851,10 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return getPatientStateSuccess?.call(patients);
   }
@@ -781,6 +879,10 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientStateSuccess != null) {
@@ -821,6 +923,12 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return getPatientStateSuccess(this);
   }
@@ -851,6 +959,12 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return getPatientStateSuccess?.call(this);
   }
@@ -881,6 +995,12 @@ class _$GetPatientStateSuccessImpl implements GetPatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientStateSuccess != null) {
@@ -995,6 +1115,10 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return getPatientStateError(message);
   }
@@ -1019,6 +1143,10 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return getPatientStateError?.call(message);
   }
@@ -1043,6 +1171,10 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientStateError != null) {
@@ -1083,6 +1215,12 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return getPatientStateError(this);
   }
@@ -1113,6 +1251,12 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return getPatientStateError?.call(this);
   }
@@ -1143,6 +1287,12 @@ class _$GetPatientStateErrorImpl implements GetPatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientStateError != null) {
@@ -1227,6 +1377,10 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return addPatientStateLoading();
   }
@@ -1251,6 +1405,10 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return addPatientStateLoading?.call();
   }
@@ -1275,6 +1433,10 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (addPatientStateLoading != null) {
@@ -1315,6 +1477,12 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return addPatientStateLoading(this);
   }
@@ -1345,6 +1513,12 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return addPatientStateLoading?.call(this);
   }
@@ -1375,6 +1549,12 @@ class _$AddPatientStateLoadingImpl implements AddPatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (addPatientStateLoading != null) {
@@ -1450,6 +1630,10 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return addPatientStateSuccess();
   }
@@ -1474,6 +1658,10 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return addPatientStateSuccess?.call();
   }
@@ -1498,6 +1686,10 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (addPatientStateSuccess != null) {
@@ -1538,6 +1730,12 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return addPatientStateSuccess(this);
   }
@@ -1568,6 +1766,12 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return addPatientStateSuccess?.call(this);
   }
@@ -1598,6 +1802,12 @@ class _$AddPatientStateSuccessImpl implements AddPatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (addPatientStateSuccess != null) {
@@ -1703,6 +1913,10 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return addPatientStateError(message);
   }
@@ -1727,6 +1941,10 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return addPatientStateError?.call(message);
   }
@@ -1751,6 +1969,10 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (addPatientStateError != null) {
@@ -1791,6 +2013,12 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return addPatientStateError(this);
   }
@@ -1821,6 +2049,12 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return addPatientStateError?.call(this);
   }
@@ -1851,6 +2085,12 @@ class _$AddPatientStateErrorImpl implements AddPatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (addPatientStateError != null) {
@@ -1935,6 +2175,10 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return updatePatientStateLoading();
   }
@@ -1959,6 +2203,10 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return updatePatientStateLoading?.call();
   }
@@ -1983,6 +2231,10 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (updatePatientStateLoading != null) {
@@ -2023,6 +2275,12 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return updatePatientStateLoading(this);
   }
@@ -2053,6 +2311,12 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return updatePatientStateLoading?.call(this);
   }
@@ -2083,6 +2347,12 @@ class _$UpdatePatientStateLoadingImpl implements UpdatePatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (updatePatientStateLoading != null) {
@@ -2186,6 +2456,10 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return updatePatientStateSuccess(patient);
   }
@@ -2210,6 +2484,10 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return updatePatientStateSuccess?.call(patient);
   }
@@ -2234,6 +2512,10 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (updatePatientStateSuccess != null) {
@@ -2274,6 +2556,12 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return updatePatientStateSuccess(this);
   }
@@ -2304,6 +2592,12 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return updatePatientStateSuccess?.call(this);
   }
@@ -2334,6 +2628,12 @@ class _$UpdatePatientStateSuccessImpl implements UpdatePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (updatePatientStateSuccess != null) {
@@ -2446,6 +2746,10 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return updatePatientStateError(message);
   }
@@ -2470,6 +2774,10 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return updatePatientStateError?.call(message);
   }
@@ -2494,6 +2802,10 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (updatePatientStateError != null) {
@@ -2534,6 +2846,12 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return updatePatientStateError(this);
   }
@@ -2564,6 +2882,12 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return updatePatientStateError?.call(this);
   }
@@ -2594,6 +2918,12 @@ class _$UpdatePatientStateErrorImpl implements UpdatePatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (updatePatientStateError != null) {
@@ -2678,6 +3008,10 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return deletePatientStateLoading();
   }
@@ -2702,6 +3036,10 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return deletePatientStateLoading?.call();
   }
@@ -2726,6 +3064,10 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (deletePatientStateLoading != null) {
@@ -2766,6 +3108,12 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return deletePatientStateLoading(this);
   }
@@ -2796,6 +3144,12 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return deletePatientStateLoading?.call(this);
   }
@@ -2826,6 +3180,12 @@ class _$DeletePatientStateLoadingImpl implements DeletePatientStateLoading {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (deletePatientStateLoading != null) {
@@ -2901,6 +3261,10 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return deletePatientStateSuccess();
   }
@@ -2925,6 +3289,10 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return deletePatientStateSuccess?.call();
   }
@@ -2949,6 +3317,10 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (deletePatientStateSuccess != null) {
@@ -2989,6 +3361,12 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return deletePatientStateSuccess(this);
   }
@@ -3019,6 +3397,12 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return deletePatientStateSuccess?.call(this);
   }
@@ -3049,6 +3433,12 @@ class _$DeletePatientStateSuccessImpl implements DeletePatientStateSuccess {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (deletePatientStateSuccess != null) {
@@ -3152,6 +3542,10 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return deletePatientStateError(message);
   }
@@ -3176,6 +3570,10 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return deletePatientStateError?.call(message);
   }
@@ -3200,6 +3598,10 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (deletePatientStateError != null) {
@@ -3240,6 +3642,12 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return deletePatientStateError(this);
   }
@@ -3270,6 +3678,12 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return deletePatientStateError?.call(this);
   }
@@ -3300,6 +3714,12 @@ class _$DeletePatientStateErrorImpl implements DeletePatientStateError {
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (deletePatientStateError != null) {
@@ -3389,6 +3809,10 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateLoading();
   }
@@ -3413,6 +3837,10 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateLoading?.call();
   }
@@ -3437,6 +3865,10 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientsByDoctorIdStateLoading != null) {
@@ -3477,6 +3909,12 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateLoading(this);
   }
@@ -3507,6 +3945,12 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateLoading?.call(this);
   }
@@ -3537,6 +3981,12 @@ class _$GetPatientsByDoctorIdStateLoadingImpl
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientsByDoctorIdStateLoading != null) {
@@ -3656,6 +4106,10 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateSuccess(patients);
   }
@@ -3680,6 +4134,10 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateSuccess?.call(patients);
   }
@@ -3704,6 +4162,10 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientsByDoctorIdStateSuccess != null) {
@@ -3744,6 +4206,12 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateSuccess(this);
   }
@@ -3774,6 +4242,12 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateSuccess?.call(this);
   }
@@ -3804,6 +4278,12 @@ class _$GetPatientsByDoctorIdStateSuccessImpl
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientsByDoctorIdStateSuccess != null) {
@@ -3923,6 +4403,10 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     required TResult Function(List<PatientModel> patients)
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateError(message);
   }
@@ -3947,6 +4431,10 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     TResult? Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateError?.call(message);
   }
@@ -3971,6 +4459,10 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     TResult Function(List<PatientModel> patients)?
     getPatientsByDoctorIdStateSuccess,
     TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientsByDoctorIdStateError != null) {
@@ -4011,6 +4503,12 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     getPatientsByDoctorIdStateSuccess,
     required TResult Function(GetPatientsByDoctorIdStateError value)
     getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateError(this);
   }
@@ -4041,6 +4539,12 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     getPatientsByDoctorIdStateSuccess,
     TResult? Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
   }) {
     return getPatientsByDoctorIdStateError?.call(this);
   }
@@ -4071,6 +4575,12 @@ class _$GetPatientsByDoctorIdStateErrorImpl
     getPatientsByDoctorIdStateSuccess,
     TResult Function(GetPatientsByDoctorIdStateError value)?
     getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
     required TResult orElse(),
   }) {
     if (getPatientsByDoctorIdStateError != null) {
@@ -4091,6 +4601,864 @@ abstract class GetPatientsByDoctorIdStateError implements PatientState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetPatientsByDoctorIdStateErrorImplCopyWith<
     _$GetPatientsByDoctorIdStateErrorImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetPatientAndDoctorStateLoadingImplCopyWith<$Res> {
+  factory _$$GetPatientAndDoctorStateLoadingImplCopyWith(
+    _$GetPatientAndDoctorStateLoadingImpl value,
+    $Res Function(_$GetPatientAndDoctorStateLoadingImpl) then,
+  ) = __$$GetPatientAndDoctorStateLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetPatientAndDoctorStateLoadingImplCopyWithImpl<$Res>
+    extends
+        _$PatientStateCopyWithImpl<$Res, _$GetPatientAndDoctorStateLoadingImpl>
+    implements _$$GetPatientAndDoctorStateLoadingImplCopyWith<$Res> {
+  __$$GetPatientAndDoctorStateLoadingImplCopyWithImpl(
+    _$GetPatientAndDoctorStateLoadingImpl _value,
+    $Res Function(_$GetPatientAndDoctorStateLoadingImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GetPatientAndDoctorStateLoadingImpl
+    implements GetPatientAndDoctorStateLoading {
+  const _$GetPatientAndDoctorStateLoadingImpl();
+
+  @override
+  String toString() {
+    return 'PatientState.getPatientAndDoctorStateLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetPatientAndDoctorStateLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() patientStateInitial,
+    required TResult Function() getPatientStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientStateSuccess,
+    required TResult Function(String message) getPatientStateError,
+    required TResult Function() addPatientStateLoading,
+    required TResult Function() addPatientStateSuccess,
+    required TResult Function(String message) addPatientStateError,
+    required TResult Function() updatePatientStateLoading,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
+    required TResult Function(String message) updatePatientStateError,
+    required TResult Function() deletePatientStateLoading,
+    required TResult Function() deletePatientStateSuccess,
+    required TResult Function(String message) deletePatientStateError,
+    required TResult Function() getPatientsByDoctorIdStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientsByDoctorIdStateSuccess,
+    required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? patientStateInitial,
+    TResult? Function()? getPatientStateLoading,
+    TResult? Function(List<PatientModel> patients)? getPatientStateSuccess,
+    TResult? Function(String message)? getPatientStateError,
+    TResult? Function()? addPatientStateLoading,
+    TResult? Function()? addPatientStateSuccess,
+    TResult? Function(String message)? addPatientStateError,
+    TResult? Function()? updatePatientStateLoading,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
+    TResult? Function(String message)? updatePatientStateError,
+    TResult? Function()? deletePatientStateLoading,
+    TResult? Function()? deletePatientStateSuccess,
+    TResult? Function(String message)? deletePatientStateError,
+    TResult? Function()? getPatientsByDoctorIdStateLoading,
+    TResult? Function(List<PatientModel> patients)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? patientStateInitial,
+    TResult Function()? getPatientStateLoading,
+    TResult Function(List<PatientModel> patients)? getPatientStateSuccess,
+    TResult Function(String message)? getPatientStateError,
+    TResult Function()? addPatientStateLoading,
+    TResult Function()? addPatientStateSuccess,
+    TResult Function(String message)? addPatientStateError,
+    TResult Function()? updatePatientStateLoading,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
+    TResult Function(String message)? updatePatientStateError,
+    TResult Function()? deletePatientStateLoading,
+    TResult Function()? deletePatientStateSuccess,
+    TResult Function(String message)? deletePatientStateError,
+    TResult Function()? getPatientsByDoctorIdStateLoading,
+    TResult Function(List<PatientModel> patients)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
+    required TResult orElse(),
+  }) {
+    if (getPatientAndDoctorStateLoading != null) {
+      return getPatientAndDoctorStateLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PatientStateInitial value) patientStateInitial,
+    required TResult Function(GetPatientStateLoading value)
+    getPatientStateLoading,
+    required TResult Function(GetPatientStateSuccess value)
+    getPatientStateSuccess,
+    required TResult Function(GetPatientStateError value) getPatientStateError,
+    required TResult Function(AddPatientStateLoading value)
+    addPatientStateLoading,
+    required TResult Function(AddPatientStateSuccess value)
+    addPatientStateSuccess,
+    required TResult Function(AddPatientStateError value) addPatientStateError,
+    required TResult Function(UpdatePatientStateLoading value)
+    updatePatientStateLoading,
+    required TResult Function(UpdatePatientStateSuccess value)
+    updatePatientStateSuccess,
+    required TResult Function(UpdatePatientStateError value)
+    updatePatientStateError,
+    required TResult Function(DeletePatientStateLoading value)
+    deletePatientStateLoading,
+    required TResult Function(DeletePatientStateSuccess value)
+    deletePatientStateSuccess,
+    required TResult Function(DeletePatientStateError value)
+    deletePatientStateError,
+    required TResult Function(GetPatientsByDoctorIdStateLoading value)
+    getPatientsByDoctorIdStateLoading,
+    required TResult Function(GetPatientsByDoctorIdStateSuccess value)
+    getPatientsByDoctorIdStateSuccess,
+    required TResult Function(GetPatientsByDoctorIdStateError value)
+    getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PatientStateInitial value)? patientStateInitial,
+    TResult? Function(GetPatientStateLoading value)? getPatientStateLoading,
+    TResult? Function(GetPatientStateSuccess value)? getPatientStateSuccess,
+    TResult? Function(GetPatientStateError value)? getPatientStateError,
+    TResult? Function(AddPatientStateLoading value)? addPatientStateLoading,
+    TResult? Function(AddPatientStateSuccess value)? addPatientStateSuccess,
+    TResult? Function(AddPatientStateError value)? addPatientStateError,
+    TResult? Function(UpdatePatientStateLoading value)?
+    updatePatientStateLoading,
+    TResult? Function(UpdatePatientStateSuccess value)?
+    updatePatientStateSuccess,
+    TResult? Function(UpdatePatientStateError value)? updatePatientStateError,
+    TResult? Function(DeletePatientStateLoading value)?
+    deletePatientStateLoading,
+    TResult? Function(DeletePatientStateSuccess value)?
+    deletePatientStateSuccess,
+    TResult? Function(DeletePatientStateError value)? deletePatientStateError,
+    TResult? Function(GetPatientsByDoctorIdStateLoading value)?
+    getPatientsByDoctorIdStateLoading,
+    TResult? Function(GetPatientsByDoctorIdStateSuccess value)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult? Function(GetPatientsByDoctorIdStateError value)?
+    getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PatientStateInitial value)? patientStateInitial,
+    TResult Function(GetPatientStateLoading value)? getPatientStateLoading,
+    TResult Function(GetPatientStateSuccess value)? getPatientStateSuccess,
+    TResult Function(GetPatientStateError value)? getPatientStateError,
+    TResult Function(AddPatientStateLoading value)? addPatientStateLoading,
+    TResult Function(AddPatientStateSuccess value)? addPatientStateSuccess,
+    TResult Function(AddPatientStateError value)? addPatientStateError,
+    TResult Function(UpdatePatientStateLoading value)?
+    updatePatientStateLoading,
+    TResult Function(UpdatePatientStateSuccess value)?
+    updatePatientStateSuccess,
+    TResult Function(UpdatePatientStateError value)? updatePatientStateError,
+    TResult Function(DeletePatientStateLoading value)?
+    deletePatientStateLoading,
+    TResult Function(DeletePatientStateSuccess value)?
+    deletePatientStateSuccess,
+    TResult Function(DeletePatientStateError value)? deletePatientStateError,
+    TResult Function(GetPatientsByDoctorIdStateLoading value)?
+    getPatientsByDoctorIdStateLoading,
+    TResult Function(GetPatientsByDoctorIdStateSuccess value)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult Function(GetPatientsByDoctorIdStateError value)?
+    getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
+    required TResult orElse(),
+  }) {
+    if (getPatientAndDoctorStateLoading != null) {
+      return getPatientAndDoctorStateLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetPatientAndDoctorStateLoading implements PatientState {
+  const factory GetPatientAndDoctorStateLoading() =
+      _$GetPatientAndDoctorStateLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$GetPatientAndDoctorStateSuccessImplCopyWith<$Res> {
+  factory _$$GetPatientAndDoctorStateSuccessImplCopyWith(
+    _$GetPatientAndDoctorStateSuccessImpl value,
+    $Res Function(_$GetPatientAndDoctorStateSuccessImpl) then,
+  ) = __$$GetPatientAndDoctorStateSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DoctorModel doctor, PatientModel patient});
+}
+
+/// @nodoc
+class __$$GetPatientAndDoctorStateSuccessImplCopyWithImpl<$Res>
+    extends
+        _$PatientStateCopyWithImpl<$Res, _$GetPatientAndDoctorStateSuccessImpl>
+    implements _$$GetPatientAndDoctorStateSuccessImplCopyWith<$Res> {
+  __$$GetPatientAndDoctorStateSuccessImplCopyWithImpl(
+    _$GetPatientAndDoctorStateSuccessImpl _value,
+    $Res Function(_$GetPatientAndDoctorStateSuccessImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? doctor = null, Object? patient = null}) {
+    return _then(
+      _$GetPatientAndDoctorStateSuccessImpl(
+        null == doctor
+            ? _value.doctor
+            : doctor // ignore: cast_nullable_to_non_nullable
+                as DoctorModel,
+        null == patient
+            ? _value.patient
+            : patient // ignore: cast_nullable_to_non_nullable
+                as PatientModel,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$GetPatientAndDoctorStateSuccessImpl
+    implements GetPatientAndDoctorStateSuccess {
+  const _$GetPatientAndDoctorStateSuccessImpl(this.doctor, this.patient);
+
+  @override
+  final DoctorModel doctor;
+  @override
+  final PatientModel patient;
+
+  @override
+  String toString() {
+    return 'PatientState.getPatientAndDoctorStateSuccess(doctor: $doctor, patient: $patient)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetPatientAndDoctorStateSuccessImpl &&
+            (identical(other.doctor, doctor) || other.doctor == doctor) &&
+            (identical(other.patient, patient) || other.patient == patient));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, doctor, patient);
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetPatientAndDoctorStateSuccessImplCopyWith<
+    _$GetPatientAndDoctorStateSuccessImpl
+  >
+  get copyWith => __$$GetPatientAndDoctorStateSuccessImplCopyWithImpl<
+    _$GetPatientAndDoctorStateSuccessImpl
+  >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() patientStateInitial,
+    required TResult Function() getPatientStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientStateSuccess,
+    required TResult Function(String message) getPatientStateError,
+    required TResult Function() addPatientStateLoading,
+    required TResult Function() addPatientStateSuccess,
+    required TResult Function(String message) addPatientStateError,
+    required TResult Function() updatePatientStateLoading,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
+    required TResult Function(String message) updatePatientStateError,
+    required TResult Function() deletePatientStateLoading,
+    required TResult Function() deletePatientStateSuccess,
+    required TResult Function(String message) deletePatientStateError,
+    required TResult Function() getPatientsByDoctorIdStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientsByDoctorIdStateSuccess,
+    required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateSuccess(doctor, patient);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? patientStateInitial,
+    TResult? Function()? getPatientStateLoading,
+    TResult? Function(List<PatientModel> patients)? getPatientStateSuccess,
+    TResult? Function(String message)? getPatientStateError,
+    TResult? Function()? addPatientStateLoading,
+    TResult? Function()? addPatientStateSuccess,
+    TResult? Function(String message)? addPatientStateError,
+    TResult? Function()? updatePatientStateLoading,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
+    TResult? Function(String message)? updatePatientStateError,
+    TResult? Function()? deletePatientStateLoading,
+    TResult? Function()? deletePatientStateSuccess,
+    TResult? Function(String message)? deletePatientStateError,
+    TResult? Function()? getPatientsByDoctorIdStateLoading,
+    TResult? Function(List<PatientModel> patients)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateSuccess?.call(doctor, patient);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? patientStateInitial,
+    TResult Function()? getPatientStateLoading,
+    TResult Function(List<PatientModel> patients)? getPatientStateSuccess,
+    TResult Function(String message)? getPatientStateError,
+    TResult Function()? addPatientStateLoading,
+    TResult Function()? addPatientStateSuccess,
+    TResult Function(String message)? addPatientStateError,
+    TResult Function()? updatePatientStateLoading,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
+    TResult Function(String message)? updatePatientStateError,
+    TResult Function()? deletePatientStateLoading,
+    TResult Function()? deletePatientStateSuccess,
+    TResult Function(String message)? deletePatientStateError,
+    TResult Function()? getPatientsByDoctorIdStateLoading,
+    TResult Function(List<PatientModel> patients)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
+    required TResult orElse(),
+  }) {
+    if (getPatientAndDoctorStateSuccess != null) {
+      return getPatientAndDoctorStateSuccess(doctor, patient);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PatientStateInitial value) patientStateInitial,
+    required TResult Function(GetPatientStateLoading value)
+    getPatientStateLoading,
+    required TResult Function(GetPatientStateSuccess value)
+    getPatientStateSuccess,
+    required TResult Function(GetPatientStateError value) getPatientStateError,
+    required TResult Function(AddPatientStateLoading value)
+    addPatientStateLoading,
+    required TResult Function(AddPatientStateSuccess value)
+    addPatientStateSuccess,
+    required TResult Function(AddPatientStateError value) addPatientStateError,
+    required TResult Function(UpdatePatientStateLoading value)
+    updatePatientStateLoading,
+    required TResult Function(UpdatePatientStateSuccess value)
+    updatePatientStateSuccess,
+    required TResult Function(UpdatePatientStateError value)
+    updatePatientStateError,
+    required TResult Function(DeletePatientStateLoading value)
+    deletePatientStateLoading,
+    required TResult Function(DeletePatientStateSuccess value)
+    deletePatientStateSuccess,
+    required TResult Function(DeletePatientStateError value)
+    deletePatientStateError,
+    required TResult Function(GetPatientsByDoctorIdStateLoading value)
+    getPatientsByDoctorIdStateLoading,
+    required TResult Function(GetPatientsByDoctorIdStateSuccess value)
+    getPatientsByDoctorIdStateSuccess,
+    required TResult Function(GetPatientsByDoctorIdStateError value)
+    getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PatientStateInitial value)? patientStateInitial,
+    TResult? Function(GetPatientStateLoading value)? getPatientStateLoading,
+    TResult? Function(GetPatientStateSuccess value)? getPatientStateSuccess,
+    TResult? Function(GetPatientStateError value)? getPatientStateError,
+    TResult? Function(AddPatientStateLoading value)? addPatientStateLoading,
+    TResult? Function(AddPatientStateSuccess value)? addPatientStateSuccess,
+    TResult? Function(AddPatientStateError value)? addPatientStateError,
+    TResult? Function(UpdatePatientStateLoading value)?
+    updatePatientStateLoading,
+    TResult? Function(UpdatePatientStateSuccess value)?
+    updatePatientStateSuccess,
+    TResult? Function(UpdatePatientStateError value)? updatePatientStateError,
+    TResult? Function(DeletePatientStateLoading value)?
+    deletePatientStateLoading,
+    TResult? Function(DeletePatientStateSuccess value)?
+    deletePatientStateSuccess,
+    TResult? Function(DeletePatientStateError value)? deletePatientStateError,
+    TResult? Function(GetPatientsByDoctorIdStateLoading value)?
+    getPatientsByDoctorIdStateLoading,
+    TResult? Function(GetPatientsByDoctorIdStateSuccess value)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult? Function(GetPatientsByDoctorIdStateError value)?
+    getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PatientStateInitial value)? patientStateInitial,
+    TResult Function(GetPatientStateLoading value)? getPatientStateLoading,
+    TResult Function(GetPatientStateSuccess value)? getPatientStateSuccess,
+    TResult Function(GetPatientStateError value)? getPatientStateError,
+    TResult Function(AddPatientStateLoading value)? addPatientStateLoading,
+    TResult Function(AddPatientStateSuccess value)? addPatientStateSuccess,
+    TResult Function(AddPatientStateError value)? addPatientStateError,
+    TResult Function(UpdatePatientStateLoading value)?
+    updatePatientStateLoading,
+    TResult Function(UpdatePatientStateSuccess value)?
+    updatePatientStateSuccess,
+    TResult Function(UpdatePatientStateError value)? updatePatientStateError,
+    TResult Function(DeletePatientStateLoading value)?
+    deletePatientStateLoading,
+    TResult Function(DeletePatientStateSuccess value)?
+    deletePatientStateSuccess,
+    TResult Function(DeletePatientStateError value)? deletePatientStateError,
+    TResult Function(GetPatientsByDoctorIdStateLoading value)?
+    getPatientsByDoctorIdStateLoading,
+    TResult Function(GetPatientsByDoctorIdStateSuccess value)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult Function(GetPatientsByDoctorIdStateError value)?
+    getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
+    required TResult orElse(),
+  }) {
+    if (getPatientAndDoctorStateSuccess != null) {
+      return getPatientAndDoctorStateSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetPatientAndDoctorStateSuccess implements PatientState {
+  const factory GetPatientAndDoctorStateSuccess(
+    final DoctorModel doctor,
+    final PatientModel patient,
+  ) = _$GetPatientAndDoctorStateSuccessImpl;
+
+  DoctorModel get doctor;
+  PatientModel get patient;
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetPatientAndDoctorStateSuccessImplCopyWith<
+    _$GetPatientAndDoctorStateSuccessImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetPatientAndDoctorStateErrorImplCopyWith<$Res> {
+  factory _$$GetPatientAndDoctorStateErrorImplCopyWith(
+    _$GetPatientAndDoctorStateErrorImpl value,
+    $Res Function(_$GetPatientAndDoctorStateErrorImpl) then,
+  ) = __$$GetPatientAndDoctorStateErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$GetPatientAndDoctorStateErrorImplCopyWithImpl<$Res>
+    extends
+        _$PatientStateCopyWithImpl<$Res, _$GetPatientAndDoctorStateErrorImpl>
+    implements _$$GetPatientAndDoctorStateErrorImplCopyWith<$Res> {
+  __$$GetPatientAndDoctorStateErrorImplCopyWithImpl(
+    _$GetPatientAndDoctorStateErrorImpl _value,
+    $Res Function(_$GetPatientAndDoctorStateErrorImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? message = null}) {
+    return _then(
+      _$GetPatientAndDoctorStateErrorImpl(
+        null == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$GetPatientAndDoctorStateErrorImpl
+    implements GetPatientAndDoctorStateError {
+  const _$GetPatientAndDoctorStateErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'PatientState.getPatientAndDoctorStateError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetPatientAndDoctorStateErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetPatientAndDoctorStateErrorImplCopyWith<
+    _$GetPatientAndDoctorStateErrorImpl
+  >
+  get copyWith => __$$GetPatientAndDoctorStateErrorImplCopyWithImpl<
+    _$GetPatientAndDoctorStateErrorImpl
+  >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() patientStateInitial,
+    required TResult Function() getPatientStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientStateSuccess,
+    required TResult Function(String message) getPatientStateError,
+    required TResult Function() addPatientStateLoading,
+    required TResult Function() addPatientStateSuccess,
+    required TResult Function(String message) addPatientStateError,
+    required TResult Function() updatePatientStateLoading,
+    required TResult Function(PatientModel patient) updatePatientStateSuccess,
+    required TResult Function(String message) updatePatientStateError,
+    required TResult Function() deletePatientStateLoading,
+    required TResult Function() deletePatientStateSuccess,
+    required TResult Function(String message) deletePatientStateError,
+    required TResult Function() getPatientsByDoctorIdStateLoading,
+    required TResult Function(List<PatientModel> patients)
+    getPatientsByDoctorIdStateSuccess,
+    required TResult Function(String message) getPatientsByDoctorIdStateError,
+    required TResult Function() getPatientAndDoctorStateLoading,
+    required TResult Function(DoctorModel doctor, PatientModel patient)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(String message) getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? patientStateInitial,
+    TResult? Function()? getPatientStateLoading,
+    TResult? Function(List<PatientModel> patients)? getPatientStateSuccess,
+    TResult? Function(String message)? getPatientStateError,
+    TResult? Function()? addPatientStateLoading,
+    TResult? Function()? addPatientStateSuccess,
+    TResult? Function(String message)? addPatientStateError,
+    TResult? Function()? updatePatientStateLoading,
+    TResult? Function(PatientModel patient)? updatePatientStateSuccess,
+    TResult? Function(String message)? updatePatientStateError,
+    TResult? Function()? deletePatientStateLoading,
+    TResult? Function()? deletePatientStateSuccess,
+    TResult? Function(String message)? deletePatientStateError,
+    TResult? Function()? getPatientsByDoctorIdStateLoading,
+    TResult? Function(List<PatientModel> patients)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult? Function(String message)? getPatientsByDoctorIdStateError,
+    TResult? Function()? getPatientAndDoctorStateLoading,
+    TResult? Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(String message)? getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? patientStateInitial,
+    TResult Function()? getPatientStateLoading,
+    TResult Function(List<PatientModel> patients)? getPatientStateSuccess,
+    TResult Function(String message)? getPatientStateError,
+    TResult Function()? addPatientStateLoading,
+    TResult Function()? addPatientStateSuccess,
+    TResult Function(String message)? addPatientStateError,
+    TResult Function()? updatePatientStateLoading,
+    TResult Function(PatientModel patient)? updatePatientStateSuccess,
+    TResult Function(String message)? updatePatientStateError,
+    TResult Function()? deletePatientStateLoading,
+    TResult Function()? deletePatientStateSuccess,
+    TResult Function(String message)? deletePatientStateError,
+    TResult Function()? getPatientsByDoctorIdStateLoading,
+    TResult Function(List<PatientModel> patients)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult Function(String message)? getPatientsByDoctorIdStateError,
+    TResult Function()? getPatientAndDoctorStateLoading,
+    TResult Function(DoctorModel doctor, PatientModel patient)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(String message)? getPatientAndDoctorStateError,
+    required TResult orElse(),
+  }) {
+    if (getPatientAndDoctorStateError != null) {
+      return getPatientAndDoctorStateError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PatientStateInitial value) patientStateInitial,
+    required TResult Function(GetPatientStateLoading value)
+    getPatientStateLoading,
+    required TResult Function(GetPatientStateSuccess value)
+    getPatientStateSuccess,
+    required TResult Function(GetPatientStateError value) getPatientStateError,
+    required TResult Function(AddPatientStateLoading value)
+    addPatientStateLoading,
+    required TResult Function(AddPatientStateSuccess value)
+    addPatientStateSuccess,
+    required TResult Function(AddPatientStateError value) addPatientStateError,
+    required TResult Function(UpdatePatientStateLoading value)
+    updatePatientStateLoading,
+    required TResult Function(UpdatePatientStateSuccess value)
+    updatePatientStateSuccess,
+    required TResult Function(UpdatePatientStateError value)
+    updatePatientStateError,
+    required TResult Function(DeletePatientStateLoading value)
+    deletePatientStateLoading,
+    required TResult Function(DeletePatientStateSuccess value)
+    deletePatientStateSuccess,
+    required TResult Function(DeletePatientStateError value)
+    deletePatientStateError,
+    required TResult Function(GetPatientsByDoctorIdStateLoading value)
+    getPatientsByDoctorIdStateLoading,
+    required TResult Function(GetPatientsByDoctorIdStateSuccess value)
+    getPatientsByDoctorIdStateSuccess,
+    required TResult Function(GetPatientsByDoctorIdStateError value)
+    getPatientsByDoctorIdStateError,
+    required TResult Function(GetPatientAndDoctorStateLoading value)
+    getPatientAndDoctorStateLoading,
+    required TResult Function(GetPatientAndDoctorStateSuccess value)
+    getPatientAndDoctorStateSuccess,
+    required TResult Function(GetPatientAndDoctorStateError value)
+    getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PatientStateInitial value)? patientStateInitial,
+    TResult? Function(GetPatientStateLoading value)? getPatientStateLoading,
+    TResult? Function(GetPatientStateSuccess value)? getPatientStateSuccess,
+    TResult? Function(GetPatientStateError value)? getPatientStateError,
+    TResult? Function(AddPatientStateLoading value)? addPatientStateLoading,
+    TResult? Function(AddPatientStateSuccess value)? addPatientStateSuccess,
+    TResult? Function(AddPatientStateError value)? addPatientStateError,
+    TResult? Function(UpdatePatientStateLoading value)?
+    updatePatientStateLoading,
+    TResult? Function(UpdatePatientStateSuccess value)?
+    updatePatientStateSuccess,
+    TResult? Function(UpdatePatientStateError value)? updatePatientStateError,
+    TResult? Function(DeletePatientStateLoading value)?
+    deletePatientStateLoading,
+    TResult? Function(DeletePatientStateSuccess value)?
+    deletePatientStateSuccess,
+    TResult? Function(DeletePatientStateError value)? deletePatientStateError,
+    TResult? Function(GetPatientsByDoctorIdStateLoading value)?
+    getPatientsByDoctorIdStateLoading,
+    TResult? Function(GetPatientsByDoctorIdStateSuccess value)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult? Function(GetPatientsByDoctorIdStateError value)?
+    getPatientsByDoctorIdStateError,
+    TResult? Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult? Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult? Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
+  }) {
+    return getPatientAndDoctorStateError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PatientStateInitial value)? patientStateInitial,
+    TResult Function(GetPatientStateLoading value)? getPatientStateLoading,
+    TResult Function(GetPatientStateSuccess value)? getPatientStateSuccess,
+    TResult Function(GetPatientStateError value)? getPatientStateError,
+    TResult Function(AddPatientStateLoading value)? addPatientStateLoading,
+    TResult Function(AddPatientStateSuccess value)? addPatientStateSuccess,
+    TResult Function(AddPatientStateError value)? addPatientStateError,
+    TResult Function(UpdatePatientStateLoading value)?
+    updatePatientStateLoading,
+    TResult Function(UpdatePatientStateSuccess value)?
+    updatePatientStateSuccess,
+    TResult Function(UpdatePatientStateError value)? updatePatientStateError,
+    TResult Function(DeletePatientStateLoading value)?
+    deletePatientStateLoading,
+    TResult Function(DeletePatientStateSuccess value)?
+    deletePatientStateSuccess,
+    TResult Function(DeletePatientStateError value)? deletePatientStateError,
+    TResult Function(GetPatientsByDoctorIdStateLoading value)?
+    getPatientsByDoctorIdStateLoading,
+    TResult Function(GetPatientsByDoctorIdStateSuccess value)?
+    getPatientsByDoctorIdStateSuccess,
+    TResult Function(GetPatientsByDoctorIdStateError value)?
+    getPatientsByDoctorIdStateError,
+    TResult Function(GetPatientAndDoctorStateLoading value)?
+    getPatientAndDoctorStateLoading,
+    TResult Function(GetPatientAndDoctorStateSuccess value)?
+    getPatientAndDoctorStateSuccess,
+    TResult Function(GetPatientAndDoctorStateError value)?
+    getPatientAndDoctorStateError,
+    required TResult orElse(),
+  }) {
+    if (getPatientAndDoctorStateError != null) {
+      return getPatientAndDoctorStateError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetPatientAndDoctorStateError implements PatientState {
+  const factory GetPatientAndDoctorStateError(final String message) =
+      _$GetPatientAndDoctorStateErrorImpl;
+
+  String get message;
+
+  /// Create a copy of PatientState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetPatientAndDoctorStateErrorImplCopyWith<
+    _$GetPatientAndDoctorStateErrorImpl
   >
   get copyWith => throw _privateConstructorUsedError;
 }
