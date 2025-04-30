@@ -5,7 +5,7 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_profile_image.dart';
+import 'package:leuko_care/core/widgets/doctor_details_profile_image.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/delete_patient_bloc_listener.dart';

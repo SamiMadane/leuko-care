@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:shimmer/shimmer.dart';
@@ -31,7 +33,7 @@ class DoctorInfoWidget extends StatelessWidget {
         SizedBox(height: HeightManager.h16),
         InkWell(
           onTap: () {
-            // Navigate to Doctor Details screen
+            context.pushNamed(Routes.doctorDetailsScreenForPatient,arguments: doctor);
           },
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -105,8 +107,9 @@ class DoctorInfoWidget extends StatelessWidget {
       ],
     );
   }
-  _buildShimmerLoading(){
-     return Shimmer.fromColors(
+
+  _buildShimmerLoading() {
+    return Shimmer.fromColors(
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(

@@ -15,6 +15,7 @@ class Routes {
   static const String adminStatisticsScreen = '/AdminStatisticsScreen';
   // This for patient routes
   static const String patientHomeScreen = '/PatientHomeScreen';
+  static const String doctorDetailsScreenForPatient = '/DoctorDetailsScreenForPatient';
 
 
 
