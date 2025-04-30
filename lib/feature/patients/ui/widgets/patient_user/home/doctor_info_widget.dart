@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -5,11 +6,16 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DoctorInfoWidget extends StatelessWidget {
   final PatientModel patient;
-  final DoctorModel doctor; 
-  const DoctorInfoWidget({super.key, required  this.patient, required this.doctor});
+  final DoctorModel doctor;
+  const DoctorInfoWidget({
+    super.key,
+    required this.patient,
+    required this.doctor,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,7 +23,7 @@ class DoctorInfoWidget extends StatelessWidget {
       children: [
         Text(
           "Doctor Who Examined You:",
-         style: getSemiBoldTextStyle(
+          style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
           ),
@@ -46,9 +52,27 @@ class DoctorInfoWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: RadiusManager.r28,
-                  backgroundImage: NetworkImage(doctor.profileImage),
+                Material(
+                  elevation: 4,
+                  shape: const CircleBorder(),
+                  shadowColor: ColorsManager.black87,
+                  child: CircleAvatar(
+                    radius: RadiusManager.r30,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: null,
+                    child: ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl: doctor.profileImage,
+                        width: WidthManager.w60,
+                        height: HeightManager.h60,
+                        fit: BoxFit.cover,
+                        placeholder: (_, __) => _buildShimmerLoading(),
+                        errorWidget:
+                            (_, __, ___) =>
+                                const Icon(Icons.error, color: Colors.red),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(width: WidthManager.w12),
                 Expanded(
@@ -57,7 +81,10 @@ class DoctorInfoWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Dr. ${doctor.name}',
-                        style: getBoldTextStyle(fontSize: FontSizeManager.s16, color: ColorsManager.darkBlue),
+                        style: getBoldTextStyle(
+                          fontSize: FontSizeManager.s16,
+                          color: ColorsManager.darkBlue,
+                        ),
                       ),
                       SizedBox(height: HeightManager.h4),
                       Text(
@@ -67,7 +94,6 @@ class DoctorInfoWidget extends StatelessWidget {
                           color: ColorsManager.darkBlue,
                         ),
                       ),
-                      
                     ],
                   ),
                 ),
@@ -77,6 +103,16 @@ class DoctorInfoWidget extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+  _buildShimmerLoading(){
+     return Shimmer.fromColors(
+      baseColor: ColorsManager.lightGray,
+      highlightColor: Colors.white,
+      child: CircleAvatar(
+        radius: RadiusManager.r30,
+        backgroundColor: Colors.white,
+      ),
     );
   }
 }
