@@ -109,7 +109,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
           (context) => SuccessDialog(
             message: message,
             onSuccess: () {
-              if (isPatientUser!) {
+              if (!isPatientUser!) {
                 context.pop();
                 context.pop();
                 context.pushReplacementNamed(

@@ -22,10 +22,9 @@ class PatientProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Profile',
+          '    My profile',
         ),
         backgroundColor: Colors.white,
-        elevation: 0,
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
       ),
       body: SingleChildScrollView(
