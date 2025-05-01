@@ -16,6 +16,7 @@ class Routes {
   // This for patient routes
   static const String patientHomeScreen = '/PatientHomeScreen';
   static const String doctorDetailsScreenForPatient = '/DoctorDetailsScreenForPatient';
+  static const String patientProfileScreen = '/PatientProfileScreen';
 
 
 
