@@ -22,7 +22,6 @@ import 'package:leuko_care/feature/patients/ui/views/admin_user/all_patients_scr
 import 'package:leuko_care/feature/patients/ui/views/admin_user/patient_details_screen.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/doctor_details_screen_for_patient.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_home_screen.dart';
-import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_profile_screen.dart';
 import 'package:leuko_care/feature/user_selection/ui/views/user_selection_screen.dart';
 import 'package:leuko_care/navigation_handler_screen.dart';
 
