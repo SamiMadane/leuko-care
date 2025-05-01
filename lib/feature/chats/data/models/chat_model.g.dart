@@ -11,8 +11,8 @@ ChatModel _$ChatModelFromJson(Map<String, dynamic> json) => ChatModel(
   senderId: json['senderId'] as String,
   receiverId: json['receiverId'] as String,
   text: json['text'] as String,
-  timestamp: DateTime.parse(json['timestamp'] as String),
-  attachmentUrl: json['attachmentUrl'] as String?,
+  timestamp: const TimestampConverter().fromJson(json['timestamp']),
+  attachmentUrl: json['attachmentUrl'] as String,
 );
 
 Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
@@ -20,6 +20,6 @@ Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
   'senderId': instance.senderId,
   'receiverId': instance.receiverId,
   'text': instance.text,
-  'timestamp': instance.timestamp.toIso8601String(),
+  'timestamp': const TimestampConverter().toJson(instance.timestamp),
   'attachmentUrl': instance.attachmentUrl,
 };

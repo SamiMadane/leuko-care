@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_profile_screen.dart';
@@ -22,10 +23,11 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<PatientCubit, PatientState>(
-          buildWhen: (previous, current) =>
-              current is GetPatientAndDoctorStateLoading ||
-              current is GetPatientAndDoctorStateError ||
-              current is GetPatientAndDoctorStateSuccess,
+          buildWhen:
+              (previous, current) =>
+                  current is GetPatientAndDoctorStateLoading ||
+                  current is GetPatientAndDoctorStateError ||
+                  current is GetPatientAndDoctorStateSuccess,
           builder: (context, state) {
             if (state is GetPatientAndDoctorStateLoading) {
               return const PatientHomeShimmer();
@@ -37,14 +39,14 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
                   patient: state.patient,
                   doctor: state.doctor,
                 ),
-                PatientProfileScreen(patient: state.patient,),
+                ChatScreen(
+                  currentUserId: state.patient.id!,
+                  otherUserId: state.doctor.id!,
+                ),
                 PatientProfileScreen(patient: state.patient),
               ];
 
-              return IndexedStack(
-                index: _selectedIndex,
-                children: pages,
-              );
+              return IndexedStack(index: _selectedIndex, children: pages);
             } else {
               return const SizedBox.shrink();
             }

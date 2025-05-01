@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
-
+import 'package:leuko_care/feature/chats/data/models/timestamp_converter.dart';
 part 'chat_model.g.dart';
 
 @JsonSerializable()
@@ -8,8 +9,11 @@ class ChatModel {
   final String senderId;
   final String receiverId;
   final String text;
-  final DateTime timestamp; 
-  final String? attachmentUrl; 
+
+  @TimestampConverter()
+  final Timestamp timestamp;
+
+  final String attachmentUrl;
 
   ChatModel({
     required this.id,
@@ -17,10 +21,11 @@ class ChatModel {
     required this.receiverId,
     required this.text,
     required this.timestamp,
-    this.attachmentUrl, 
+    required this.attachmentUrl,
   });
 
-  factory ChatModel.fromJson(Map<String, dynamic> json) => _$ChatModelFromJson(json);
+  factory ChatModel.fromJson(Map<String, dynamic> json) =>
+      _$ChatModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChatModelToJson(this);
 }
