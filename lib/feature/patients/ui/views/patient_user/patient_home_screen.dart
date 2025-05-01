@@ -17,12 +17,6 @@ class PatientHomeScreen extends StatefulWidget {
 class _PatientHomeScreenState extends State<PatientHomeScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    PatientHomeScreen(),  // الصفحة الرئيسية
-    PatientHomeScreen(), // صفحة الدردشة
-    PatientProfileScreen(), // الصفحة الشخصية
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,15 +27,27 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
               current is GetPatientAndDoctorStateError ||
               current is GetPatientAndDoctorStateSuccess,
           builder: (context, state) {
-            return switch (state) {
-              GetPatientAndDoctorStateLoading() => const PatientHomeShimmer(),
-              GetPatientAndDoctorStateError() => const SizedBox.shrink(),
-              GetPatientAndDoctorStateSuccess() => PatientHomeSuccessContent(
-                patient: state.patient,
-                doctor: state.doctor,
-              ),
-              _ => const SizedBox.shrink(),
-            };
+            if (state is GetPatientAndDoctorStateLoading) {
+              return const PatientHomeShimmer();
+            } else if (state is GetPatientAndDoctorStateError) {
+              return const Center(child: Text("Error loading data"));
+            } else if (state is GetPatientAndDoctorStateSuccess) {
+              final pages = [
+                PatientHomeSuccessContent(
+                  patient: state.patient,
+                  doctor: state.doctor,
+                ),
+                PatientProfileScreen(patient: state.patient,),
+                PatientProfileScreen(patient: state.patient),
+              ];
+
+              return IndexedStack(
+                index: _selectedIndex,
+                children: pages,
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
           },
         ),
       ),
@@ -51,7 +57,6 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
           setState(() {
             _selectedIndex = index;
           });
-          _pages[index];
         },
       ),
     );

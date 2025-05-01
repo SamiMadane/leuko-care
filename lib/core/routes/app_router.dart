@@ -189,15 +189,7 @@ class AppRouter {
               ),
         );
 
-      case Routes.patientProfileScreen:
-
-        return MaterialPageRoute(
-          builder:
-              (_) => BlocProvider(
-                create: (context) => getIt<PatientCubit>()..getPatientsStream(),
-                child: PatientProfileScreen(),
-              ),
-        );
+     
 
       default:
         return null;

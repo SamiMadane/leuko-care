@@ -6,7 +6,7 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/core/widgets/doctor_details_profile_image.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/doctor_details/doctor_info_card.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/info_card.dart';
 
 class DoctorDetailsScreenForPatient extends StatelessWidget {
   final DoctorModel doctor;
@@ -49,22 +49,22 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
             ),
             SizedBox(height: HeightManager.h20),
 
-            DoctorInfoCard(
+            InfoCard(
               icon: Icons.email,
               title: 'Email',
               value: doctor.email,
             ),
-            DoctorInfoCard(
+            InfoCard(
               icon: Icons.phone,
               title: 'Phone',
               value: doctor.phone,
             ),
-            DoctorInfoCard(
+            InfoCard(
               icon: Icons.work_outline,
               title: 'Experience',
               value: '${doctor.experience} years',
             ),
-            DoctorInfoCard(
+            InfoCard(
               icon: Icons.description,
               title: 'Description',
               value: doctor.description,

@@ -12,6 +12,7 @@ import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_detail
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_app_bar.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_edit_button.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_info_card.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_profile_image.dart';
 
 
 class PatientDetailsScreen extends StatelessWidget {
@@ -73,7 +74,7 @@ class PatientDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        DoctorDetailsProfileImage(
+                        PatientDetailsProfileImage(
                           profileImageUrl: patient.profileImage,
                         ),
                         SizedBox(height: HeightManager.h20),
