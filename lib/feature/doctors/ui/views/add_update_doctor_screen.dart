@@ -4,11 +4,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/widgets/add_update_profile_image_picker.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/add_update_doctor_widgets/add_update_doctor_bloc_listener.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/add_update_doctor_widgets/add_update_doctor_profile_image_picker.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/add_update_doctor_widgets/add_update_doctor_form_fields.dart';
 
 class AddUpdateDoctorScreen extends StatefulWidget {
@@ -33,6 +33,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
   @override
   void initState() {
     super.initState();
+
     if (widget.doctor != null) {
       _nameController.text = widget.doctor!.name;
       _emailController.text = widget.doctor!.email;
@@ -75,7 +76,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AddUpdateDoctorProfileImagePicker(
+                AddUpdateProfileImagePicker(
                   profileImageUrl: profileImageUrl!,
                   isEditMode: isEditMode,
                   onPickImage: _pickImage,

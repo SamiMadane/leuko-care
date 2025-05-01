@@ -4,13 +4,13 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 
-class DoctorInfoCard extends StatelessWidget {
+class InfoCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final String value;
   final bool isMultiline;
 
-  const DoctorInfoCard({
+  const InfoCard({
     super.key,
     required this.icon,
     required this.title,

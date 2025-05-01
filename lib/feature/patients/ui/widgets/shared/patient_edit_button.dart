@@ -7,10 +7,11 @@ import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
-class PatientDetailsEditButton extends StatelessWidget {
+class PatientEditButton extends StatelessWidget {
+    final String userType;
   final PatientModel patient;
 
-  const PatientDetailsEditButton({super.key, required this.patient});
+  const PatientEditButton({super.key, required this.patient, required this.userType});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,14 @@ class PatientDetailsEditButton extends StatelessWidget {
         onPressed: () {
           context.pushNamed(Routes.addUpdatePatientScreen, arguments: {
             'patientModel': patient,
+            'userType': userType,
           });
         },
         icon: const Icon(Icons.edit, color: ColorsManager.white),
         label: Text(
-          'Edit Patient',
+          userType == 'admin'
+              ? 'Edit Patient'
+              : 'Edit Profile',
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s14,
             color: Colors.white,

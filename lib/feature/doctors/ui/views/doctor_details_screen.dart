@@ -13,7 +13,7 @@ import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doc
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_app_bar.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_edit_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_info_card.dart';
-import 'package:leuko_care/core/widgets/doctor_details_profile_image.dart';
+import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
@@ -56,7 +56,7 @@ class DoctorDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                DoctorDetailsProfileImage(profileImageUrl: doctor.profileImage),
+                ProfileImageWidget(profileImageUrl: doctor.profileImage),
                 SizedBox(height: HeightManager.h20),
                 Text(
                   doctor.name,

@@ -2,26 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/add_update_patient_widgets/add_update_patient_bloc_listener.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/add_update_patient_widgets/add_update_patient_form_field.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/add_update_patient_widgets/add_update_patient_profile_image_picker.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/shared/add_update_patient_bloc_listener.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/shared/add_update_patient_form_field.dart';
+import 'package:leuko_care/core/widgets/add_update_profile_image_picker.dart';
 
 class AddUpdatePatientScreen extends StatefulWidget {
   final PatientModel? patient;
   final String? doctorId;
   final String? doctorName;
+  final String? userType;
 
   const AddUpdatePatientScreen({
     super.key,
     this.patient,
     this.doctorId,
     this.doctorName,
+    this.userType,
   });
 
   @override
@@ -84,11 +87,21 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   @override
   Widget build(BuildContext context) {
     final isEditMode = widget.patient != null;
+    final isPatientUser = widget.userType == 'patient';
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditMode ? 'Edit Patient' : 'Add Patient'),
+        title: Text(
+          isEditMode
+              ? (isPatientUser ? 'Edit Profile' : 'Edit Patient')
+              : 'Add Patient',
+          style: getMediumTextStyle(
+            fontSize: FontSizeManager.s20,
+            color: ColorsManager.darkBlue,
+          ),
+        ),
         elevation: 0,
+        backgroundColor: isPatientUser ? Colors.white : null,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -101,7 +114,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AddUpdatePatientProfileImagePicker(
+                AddUpdateProfileImagePicker(
                   profileImageUrl: profileImageUrl!,
                   isEditMode: isEditMode,
                   onPickImage: _pickImage,
@@ -115,10 +128,16 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                   birthDateController: _birthDateController,
                   isEditMode: isEditMode,
                   selectBirthDate: _selectBirthDate,
+                  isPatientUser: isPatientUser,
                 ),
                 SizedBox(height: HeightManager.h30),
                 AppTextButton(
-                  buttonText: isEditMode ? 'Update Patient' : 'Add Patient',
+                  buttonText:
+                      isEditMode
+                          ? (isPatientUser
+                              ? 'Update Profile'
+                              : 'Update Patient')
+                          : 'Add Patient',
                   textStyle: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
                     color: Colors.white,
@@ -130,7 +149,9 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const AddUpdatePatientBlocListener(),
+      bottomNavigationBar: AddUpdatePatientBlocListener(
+        isPatientUser: isPatientUser,
+      ),
     );
   }
 
@@ -144,13 +165,13 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         profileImage: profileImageUrl ?? '',
         doctorId: widget.patient?.doctorId ?? widget.doctorId!,
         userType: 'patient',
-        isExamined: false,
+        isExamined: widget.patient?.isExamined ?? false,
         registrationDate:
             widget.patient?.registrationDate ??
             DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        healthStatus: 'unknown',
+        healthStatus: widget.patient?.healthStatus ?? 'unknown',
         birthDate: _birthDateController.text,
-        leukemiaType: 'unknown',
+        leukemiaType: widget.patient?.leukemiaType ?? 'unknown',
       );
 
       if (widget.patient != null) {
