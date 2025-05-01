@@ -137,6 +137,8 @@ class AppRouter {
         final arguments = settings.arguments as Map?;
         final patientModel = arguments?['patientModel'] as PatientModel?;
         final doctorId = arguments?['doctorId'] as String?;
+        final userType = arguments?['userType'] as String?;
+
 
         return MaterialPageRoute(
           builder:
@@ -145,6 +147,7 @@ class AppRouter {
                 child: AddUpdatePatientScreen(
                   patient: patientModel,
                   doctorId: doctorId,
+                  userType:userType,
                 ),
               ),
         );

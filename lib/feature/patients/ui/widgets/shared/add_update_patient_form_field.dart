@@ -11,6 +11,7 @@ class AddUpdatePatientFormFields extends StatefulWidget {
   final TextEditingController birthDateController;
   final bool isEditMode;
   final VoidCallback selectBirthDate;
+  final bool isPatientUser;
 
   const AddUpdatePatientFormFields({
     super.key,
@@ -21,6 +22,7 @@ class AddUpdatePatientFormFields extends StatefulWidget {
     required this.birthDateController,
     required this.isEditMode,
     required this.selectBirthDate,
+    required this.isPatientUser,
   });
 
   @override
@@ -56,18 +58,21 @@ class _AddUpdateDoctorFormFieldsState
                       ? 'Name must be at least 3 letters and contain letters only'
                       : null,
         ),
-        SizedBox(height: HeightManager.h10),
-        AppTextFormField(
-          controller: widget.emailController,
-          labelText: 'Email',
-          validator:
-              (value) =>
-                  value == null || value.isEmpty
-                      ? 'Enter Email'
-                      : !AppRegex.isEmailValid(value)
-                      ? 'Invalid email format'
-                      : null,
-        ),
+        if (!widget.isPatientUser) ...[
+          SizedBox(height: HeightManager.h10),
+          AppTextFormField(
+            controller: widget.emailController,
+            labelText: 'Email',
+            validator:
+                (value) =>
+                    value == null || value.isEmpty
+                        ? 'Enter Email'
+                        : !AppRegex.isEmailValid(value)
+                        ? 'Invalid email format'
+                        : null,
+          ),
+        ],
+
         SizedBox(height: HeightManager.h10),
 
         if (!widget.isEditMode) ...[
@@ -133,25 +138,28 @@ class _AddUpdateDoctorFormFieldsState
                       ? 'Invalid phone number'
                       : null,
         ),
-        SizedBox(height: HeightManager.h10),
-        GestureDetector(
-          onTap: widget.selectBirthDate,
-          child: AbsorbPointer(
-            child: AppTextFormField(
-              controller: widget.birthDateController,
-              labelText: 'Birth Date',
-              validator:
-                  (value) =>
-                      value == null || value.isEmpty
-                          ? 'Enter Birth Date'
-                          : !AppRegex.isBirthDateValid(value)
-                          ? 'Invalid Birth Date'
-                          : null,
-              keyboardType: TextInputType.datetime,
-              suffixIcon: Icon(Icons.calendar_today, color: Colors.blue),
+
+        if (!widget.isPatientUser) ...[
+          SizedBox(height: HeightManager.h10),
+          GestureDetector(
+            onTap: widget.selectBirthDate,
+            child: AbsorbPointer(
+              child: AppTextFormField(
+                controller: widget.birthDateController,
+                labelText: 'Birth Date',
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? 'Enter Birth Date'
+                            : !AppRegex.isBirthDateValid(value)
+                            ? 'Invalid Birth Date'
+                            : null,
+                keyboardType: TextInputType.datetime,
+                suffixIcon: Icon(Icons.calendar_today, color: Colors.blue),
+              ),
             ),
           ),
-        ),
+        ],
       ],
     );
   }

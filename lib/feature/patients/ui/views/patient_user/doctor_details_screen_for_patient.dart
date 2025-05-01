@@ -5,7 +5,7 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
-import 'package:leuko_care/core/widgets/doctor_details_profile_image.dart';
+import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/info_card.dart';
 
 class DoctorDetailsScreenForPatient extends StatelessWidget {
@@ -37,7 +37,7 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            DoctorDetailsProfileImage(profileImageUrl: doctor.profileImage),
+            ProfileImageWidget(profileImageUrl: doctor.profileImage),
             SizedBox(height: HeightManager.h20),
 
             Text(

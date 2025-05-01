@@ -6,11 +6,11 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:shimmer/shimmer.dart';
 
-class AddUpdatePatientProfileImagePicker extends StatelessWidget {
+class AddUpdateProfileImagePicker extends StatelessWidget {
   final String? profileImageUrl;
   final bool isEditMode;
   final VoidCallback onPickImage;
-  const AddUpdatePatientProfileImagePicker({
+  const AddUpdateProfileImagePicker({
     super.key,
     this.profileImageUrl,
     required this.isEditMode,

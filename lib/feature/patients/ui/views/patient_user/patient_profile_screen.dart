@@ -4,10 +4,10 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_edit_button.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_profile_image.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/shared/patient_edit_button.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/info_card.dart';
 
 class PatientProfileScreen extends StatelessWidget {
@@ -23,10 +23,6 @@ class PatientProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'My Profile',
-          style: getMediumTextStyle(
-            fontSize: FontSizeManager.s20,
-            color: ColorsManager.darkBlue,
-          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -40,7 +36,7 @@ class PatientProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            PatientDetailsProfileImage(profileImageUrl: patient.profileImage),
+            ProfileImageWidget(profileImageUrl: patient.profileImage),
             SizedBox(height: HeightManager.h20),
             Text(
               patient.name,
@@ -61,7 +57,7 @@ class PatientProfileScreen extends StatelessWidget {
             InfoCard(title: 'Age', value: age.toString(), icon: Icons.cake),
 
             SizedBox(height: HeightManager.h30),
-            PatientDetailsEditButton(patient: patient),
+            PatientEditButton(patient: patient, userType: 'patient',),
           ],
         ),
       ),

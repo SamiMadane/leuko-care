@@ -6,10 +6,10 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:shimmer/shimmer.dart';
 
-class DoctorDetailsProfileImage extends StatelessWidget {
+class ProfileImageWidget extends StatelessWidget {
   final String profileImageUrl;
 
-  const DoctorDetailsProfileImage({super.key, required this.profileImageUrl});
+  const ProfileImageWidget({super.key, required this.profileImageUrl});
 
   @override
   Widget build(BuildContext context) {
