@@ -1,0 +1,68 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
+import 'package:leuko_care/feature/auth/data/repository/auth_repo.dart';
+import 'package:leuko_care/feature/auth/logic/cubit/auth_state.dart';
+
+class AuthCubit extends Cubit<AuthState> {
+  final AuthRepository loginRepository;
+  AuthCubit(this.loginRepository) : super(AuthState.initial());
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  Map<String, Map<String, dynamic>> userTypeData = {
+      'admin': {
+        'title': 'Admin Login',
+        'image': AssetsManager.adminLoginImage,
+      },
+      'doctor': {
+        'title': 'Doctor Login',
+        'image':  AssetsManager.doctorLoginImage,
+      },
+      'patient': {
+        'title': 'Patient Login',
+        'image':  AssetsManager.patientLoginImage,
+      },
+    };
+
+  void checkAdmin(String userType) async {
+    emit(const LoginLoading());
+    final result = await loginRepository.login(emailController.text, passwordController.text,userType);
+    result.when(
+      success: (user) {
+        user != null
+            ? emit(LoginSuccess(user,userType))
+            : emit(LoginError("User not found"));
+      },
+      failure: (error) => emit(LoginError(error)),
+    );
+  }
+
+    Future<void> signInWithGoogle(String userType) async {
+    emit(const LoginLoading());
+      final result = await loginRepository.signInWithGoogle(userType);
+      result.when(
+        success: (user) => {
+          print ("signInWithGoogle success and user is $user"), 
+            user != null
+            ? emit(LoginSuccess(user,userType))
+            : emit(LoginError("Failed to sign in with Google"))
+        },
+        failure: (error) {
+          print ("signInWithGoogle failure and error is $error");
+          emit(LoginError(error));
+        }
+      );
+  }
+    Future<void> signOut() async {
+    emit(SignedOutStateLoading());
+    try {
+      await loginRepository.signOut();
+      emit(SignedOutStateSuccess());
+    } catch (e) {
+      emit(SignedOutStateError(e.toString()));
+    }
+  }
+}

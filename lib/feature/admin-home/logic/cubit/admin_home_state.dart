@@ -17,10 +17,7 @@ class AdminHomeState with _$AdminHomeState {
   const factory AdminHomeState.getPatientsStateSuccess(List<PatientModel> patients) = GetPatientsStateSuccess;
   const factory AdminHomeState.getPatientsStateError(String message) = GetPatientsStateError;
 
-  // SignOut States
-  const factory AdminHomeState.signedOutStateLoading() = SignedOutStateLoading;
-  const factory AdminHomeState.signedOutStateSuccess() = SignedOutStateSuccess;
-  const factory AdminHomeState.signedOutStateError(String message) = SignedOutStateError;
+
 
   // Get Statistics States
   const factory AdminHomeState.getStatisticsStateLoading() = GetStatisticsStateLoading;

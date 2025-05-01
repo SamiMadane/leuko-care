@@ -37,7 +37,7 @@ class OnboardingButtons extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 if (state.isLastPage) {
-                  context.pushNamed(Routes.userSelectionScreen);
+                  context.pushReplacementNamed(Routes.userSelectionScreen);
                 } else {
                   context.read<OnboardingCubit>().nextPage();
                   controller.nextPage(

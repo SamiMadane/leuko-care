@@ -1,5 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
+
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
 import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -34,14 +33,7 @@ class AdminHomeRepository {
     return patientRepository.getPatientsByDoctorIdStream(doctorId);
   }
 
-  Future<void> signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      await SharedPrefHelper.clearAllData();
-    } catch (e) {
-      throw Exception("Error signing out: $e");
-    }
-  }
+
 
   Future<AdminStatisticsModel> getAllStatistics() async {
     final patients = await patientRepository.getPatientsStream().first;

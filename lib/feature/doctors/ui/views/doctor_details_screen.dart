@@ -13,7 +13,7 @@ import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doc
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_app_bar.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_edit_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_info_card.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/doctor_details_widgets/doctor_details_profile_image.dart';
+import 'package:leuko_care/core/widgets/doctor_details_profile_image.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
