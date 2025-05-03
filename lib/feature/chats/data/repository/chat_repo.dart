@@ -85,4 +85,19 @@ class ChatRepository {
   }
 }
 
+  Future<void> deleteMessage(String senderId, String receiverId, String messageId) async {
+    final chatId = _getChatId(senderId, receiverId);
+    
+    try {
+      await _firestore
+          .collection('chats')
+          .doc(chatId)
+          .collection('messages')
+          .doc(messageId)
+          .delete(); // حذف الرسالة بالكامل
+    } catch (e) {
+      rethrow; // إعادة الرمي في حالة حدوث خطأ
+    }
+  }
 }
+

@@ -10,4 +10,5 @@ class ChatState with _$ChatState {
   const factory ChatState.chatSuccess(List<ChatModel> messages) = ChatSuccess;
   const factory ChatState.chatError(String message) = ChatError;
   const factory ChatState.chatMessageSentSuccessfully() = ChatMessageSentSuccessfully;
+  const factory ChatState.chatMessageDeleteSuccessfully() = ChatMessageDeleteSuccessfully;
 }
