@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import '../../data/models/chat_model.dart';
 
@@ -82,11 +83,11 @@ void _showFullImage(BuildContext context, String imageUrl) {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Container( // لتعديل حجم الصورة والحد من المساحة حولها
-                    margin: const EdgeInsets.only(top: 4),  // إضافة هامش أعلى الصورة
+                    margin:  EdgeInsets.only(top: 4),  // إضافة هامش أعلى الصورة
                     child: Image.network(
                       message.attachmentUrl,
-                      height: 200,
-                      width: 200,
+                      height: HeightManager.h270,
+                      width: HeightManager.h200,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) =>
                           const Icon(Icons.broken_image, size: 100),

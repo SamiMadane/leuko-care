@@ -42,11 +42,11 @@ class _ChatInputFieldState extends State<ChatInputField> {
     if (text.isEmpty && _selectedImagePath == null) return;
 
     context.read<ChatCubit>().sendMessageWithOptionalImageAndText(
-          senderId: widget.currentUserId,
-          receiverId: widget.receiverId,
-          text: text,
-          imagePath: _selectedImagePath,
-        );
+      senderId: widget.currentUserId,
+      receiverId: widget.receiverId,
+      text: text,
+      imagePath: _selectedImagePath,
+    );
 
     _controller.clear();
     setState(() {
@@ -56,147 +56,167 @@ class _ChatInputFieldState extends State<ChatInputField> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (_selectedImagePath != null)
-              Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                alignment: Alignment.centerLeft,
-                child: Stack(
-                  children: [
-                    Image.file(
-                      File(_selectedImagePath!),
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
+    return WillPopScope(
+      onWillPop: () async {
+        if (_showEmojiPicker) {
+          setState(() {
+            _showEmojiPicker = false;
+          });
+          return false;
+        }
+        return true;
+      },
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_selectedImagePath != null)
+                Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  alignment: Alignment.centerLeft,
+                  child: Stack(
+                    children: [
+                      Image.file(
+                        File(_selectedImagePath!),
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap:
+                              () => setState(() => _selectedImagePath = null),
+                          child: const CircleAvatar(
+                            radius: 12,
+                            backgroundColor: Colors.black54,
+                            child: Icon(
+                              Icons.close,
+                              size: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Choose an option'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  leading: const Icon(Icons.camera_alt),
+                                  title: const Text('Camera'),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    _pickImage(ImageSource.camera);
+                                  },
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.image),
+                                  title: const Text('Gallery'),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    _pickImage(ImageSource.gallery);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: ColorsManager.primaryColor,
                     ),
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: GestureDetector(
-                        onTap: () => setState(() => _selectedImagePath = null),
-                        child: const CircleAvatar(
-                          radius: 12,
-                          backgroundColor: Colors.black54,
-                          child: Icon(Icons.close, size: 16, color: Colors.white),
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        hintText: "Type a message...",
+                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        filled: true,
+                        fillColor: Colors.grey.shade100,
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: const Icon(
+                            Icons.emoji_emotions,
+                            color: ColorsManager.primaryColor,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _showEmojiPicker = !_showEmojiPicker;
+                            });
+                          },
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            Row(
-              children: [
-                // + Button to open image options
-                IconButton(
-                  onPressed: () {
-                    // Show options directly above the text input field
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Choose an option'),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ListTile(
-                                leading: const Icon(Icons.camera_alt),
-                                title: const Text('Camera'),
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  _pickImage(ImageSource.camera);
-                                },
-                              ),
-                              ListTile(
-                                leading: const Icon(Icons.image),
-                                title: const Text('Gallery'),
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  _pickImage(ImageSource.gallery);
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  icon: const Icon(Icons.add, color: ColorsManager.primaryColor),
-                ),
-                // Custom TextFormField
-                Expanded(
-                  child: TextFormField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      hintText: "Type a message...",
-                      hintStyle: TextStyle(color: Colors.grey.shade600),
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.emoji_emotions, color: ColorsManager.primaryColor),
-                        onPressed: () {
-                          setState(() {
-                            _showEmojiPicker = !_showEmojiPicker;
-                          });
-                        },
-                      ),
+                  ),
+                  const SizedBox(width: 8),
+                  IconButton(
+                    onPressed: _sendMessage,
+                    icon: const Icon(
+                      Icons.send,
+                      color: ColorsManager.primaryColor,
                     ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                IconButton(
-                  onPressed: _sendMessage,
-                  icon: const Icon(Icons.send, color: ColorsManager.primaryColor),
-                ),
-              ],
-            ),
-            // Show emoji picker if flag is true
-            if (_showEmojiPicker)
-              SizedBox(
-                height: 256, // Set height of the emoji picker
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 16), // Keep padding for better alignment
+                ],
+              ),
+              if (_showEmojiPicker) ...[
+                const SizedBox(height: 8),
+                SizedBox(
+                  height: 256,
                   child: EmojiPicker(
                     onEmojiSelected: (category, emoji) {
                       setState(() {
                         _controller.text += emoji.emoji;
                       });
                     },
-                    onBackspacePressed: () {
-                      // Optional: Handle backspace press
-                    },
                     textEditingController: _controller,
                     config: Config(
                       height: 256,
                       checkPlatformCompatibility: true,
                       emojiViewConfig: EmojiViewConfig(
-                        emojiSizeMax: 28 * (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                            ? 1.20
-                            : 1.0),
+                        emojiSizeMax:
+                            28 *
+                            (foundation.defaultTargetPlatform ==
+                                    TargetPlatform.iOS
+                                ? 1.20
+                                : 1.0),
                       ),
                       viewOrderConfig: const ViewOrderConfig(
                         top: EmojiPickerItem.categoryBar,
                         middle: EmojiPickerItem.emojiView,
-                        bottom: EmojiPickerItem.searchBar,
                       ),
                       skinToneConfig: const SkinToneConfig(),
                       categoryViewConfig: const CategoryViewConfig(),
-                      bottomActionBarConfig: const BottomActionBarConfig(),
-                      searchViewConfig: const SearchViewConfig(),
                     ),
                   ),
                 ),
-              ),
-          ],
+              ],
+            ],
+          ),
         ),
       ),
     );
