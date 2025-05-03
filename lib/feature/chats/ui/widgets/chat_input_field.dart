@@ -1,8 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
-import '../../data/models/chat_model.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/foundation.dart' as foundation;
 
 class ChatInputField extends StatefulWidget {
   final String currentUserId;
@@ -20,23 +24,34 @@ class ChatInputField extends StatefulWidget {
 
 class _ChatInputFieldState extends State<ChatInputField> {
   final TextEditingController _controller = TextEditingController();
+  String? _selectedImagePath;
+  bool _showEmojiPicker = false;
+
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImagePath = pickedFile.path;
+      });
+    }
+  }
 
   void _sendMessage() {
     final text = _controller.text.trim();
-    if (text.isEmpty) return;
 
-    final message = ChatModel(
-      id: '', // سيتم إنشاؤه تلقائيًا عند الإضافة
-      senderId: widget.currentUserId,
-      receiverId: widget.receiverId,
-      text: text,
-      timestamp: Timestamp.now(),
+    if (text.isEmpty && _selectedImagePath == null) return;
 
-      attachmentUrl: '', // في حال أردت دعم الصور لاحقًا
-    );
+    context.read<ChatCubit>().sendMessageWithOptionalImageAndText(
+          senderId: widget.currentUserId,
+          receiverId: widget.receiverId,
+          text: text,
+          imagePath: _selectedImagePath,
+        );
 
-    context.read<ChatCubit>().sendMessage(message);
     _controller.clear();
+    setState(() {
+      _selectedImagePath = null;
+    });
   }
 
   @override
@@ -44,19 +59,143 @@ class _ChatInputFieldState extends State<ChatInputField> {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
-              child: TextField(
-                controller: _controller,
-                decoration: const InputDecoration(
-                  hintText: "Type a message...",
-                  border: OutlineInputBorder(),
+            if (_selectedImagePath != null)
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                alignment: Alignment.centerLeft,
+                child: Stack(
+                  children: [
+                    Image.file(
+                      File(_selectedImagePath!),
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () => setState(() => _selectedImagePath = null),
+                        child: const CircleAvatar(
+                          radius: 12,
+                          backgroundColor: Colors.black54,
+                          child: Icon(Icons.close, size: 16, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+            Row(
+              children: [
+                // + Button to open image options
+                IconButton(
+                  onPressed: () {
+                    // Show options directly above the text input field
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Choose an option'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                leading: const Icon(Icons.camera_alt),
+                                title: const Text('Camera'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  _pickImage(ImageSource.camera);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.image),
+                                title: const Text('Gallery'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  _pickImage(ImageSource.gallery);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(Icons.add, color: ColorsManager.primaryColor),
+                ),
+                // Custom TextFormField
+                Expanded(
+                  child: TextFormField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      hintText: "Type a message...",
+                      hintStyle: TextStyle(color: Colors.grey.shade600),
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.emoji_emotions, color: ColorsManager.primaryColor),
+                        onPressed: () {
+                          setState(() {
+                            _showEmojiPicker = !_showEmojiPicker;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                IconButton(
+                  onPressed: _sendMessage,
+                  icon: const Icon(Icons.send, color: ColorsManager.primaryColor),
+                ),
+              ],
             ),
-            const SizedBox(width: 8),
-            IconButton(onPressed: _sendMessage, icon: const Icon(Icons.send)),
+            // Show emoji picker if flag is true
+            if (_showEmojiPicker)
+              SizedBox(
+                height: 256, // Set height of the emoji picker
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16), // Keep padding for better alignment
+                  child: EmojiPicker(
+                    onEmojiSelected: (category, emoji) {
+                      setState(() {
+                        _controller.text += emoji.emoji;
+                      });
+                    },
+                    onBackspacePressed: () {
+                      // Optional: Handle backspace press
+                    },
+                    textEditingController: _controller,
+                    config: Config(
+                      height: 256,
+                      checkPlatformCompatibility: true,
+                      emojiViewConfig: EmojiViewConfig(
+                        emojiSizeMax: 28 * (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                            ? 1.20
+                            : 1.0),
+                      ),
+                      viewOrderConfig: const ViewOrderConfig(
+                        top: EmojiPickerItem.categoryBar,
+                        middle: EmojiPickerItem.emojiView,
+                        bottom: EmojiPickerItem.searchBar,
+                      ),
+                      skinToneConfig: const SkinToneConfig(),
+                      categoryViewConfig: const CategoryViewConfig(),
+                      bottomActionBarConfig: const BottomActionBarConfig(),
+                      searchViewConfig: const SearchViewConfig(),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

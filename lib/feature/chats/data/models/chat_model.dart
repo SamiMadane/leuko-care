@@ -28,4 +28,22 @@ class ChatModel {
       _$ChatModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChatModelToJson(this);
+
+  ChatModel copyWith({
+    String? id,
+    String? senderId,
+    String? receiverId,
+    String? text,
+    Timestamp? timestamp,
+    String? attachmentUrl,
+  }) {
+    return ChatModel(
+      id: id ?? this.id,
+      senderId: senderId ?? this.senderId,
+      receiverId: receiverId ?? this.receiverId,
+      text: text ?? this.text,
+      timestamp: timestamp ?? this.timestamp,
+      attachmentUrl: attachmentUrl ?? this.attachmentUrl,
+    );
+  }
 }

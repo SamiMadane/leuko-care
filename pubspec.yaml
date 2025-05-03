@@ -82,6 +82,8 @@ dependencies:
   collection: ^1.18.0
   # smooth page indicator for onboarding screen
   smooth_page_indicator: ^1.2.1
+  # for showing emojis in text field
+  emoji_picker_flutter: ^4.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
