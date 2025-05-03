@@ -146,6 +146,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                   Expanded(
                     child: TextFormField(
                       controller: _controller,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         hintText: "Type a message...",
                         hintStyle: TextStyle(color: Colors.grey.shade600),
