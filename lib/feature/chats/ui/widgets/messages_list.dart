@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import '../../data/models/chat_model.dart';
 import 'message_bubble/message_bubble.dart';
 
@@ -16,7 +17,7 @@ class MessagesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       reverse: true,
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(RadiusManager.r12),
       itemCount: messages.length,
       itemBuilder: (context, index) {
         final message = messages[messages.length - 1 - index]; // reverse
