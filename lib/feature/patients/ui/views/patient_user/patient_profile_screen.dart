@@ -21,12 +21,17 @@ class PatientProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '    My profile',
-           style: getMediumTextStyle(
-            fontSize: FontSizeManager.s20,
-            color: ColorsManager.darkBlue,
-          ),
+        title: Row(
+          children: [
+            SizedBox(width: WidthManager.w8),
+            Text(
+              'My Profile',
+              style: getSemiBoldTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
         ),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
@@ -34,7 +39,7 @@ class PatientProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           vertical: HeightManager.h20,
-          horizontal: WidthManager.w22,
+          horizontal: WidthManager.w20,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,7 +53,7 @@ class PatientProfileScreen extends StatelessWidget {
                 color: ColorsManager.darkBlue,
               ),
             ),
-            SizedBox(height: HeightManager.h30),
+            SizedBox(height: HeightManager.h20),
 
             InfoCard(title: 'Email', value: patient.email, icon: Icons.email),
             InfoCard(title: 'Phone', value: patient.phone, icon: Icons.phone),
@@ -58,9 +63,8 @@ class PatientProfileScreen extends StatelessWidget {
               icon: Icons.date_range,
             ),
             InfoCard(title: 'Age', value: age.toString(), icon: Icons.cake),
-
-            SizedBox(height: HeightManager.h30),
-            PatientEditButton(patient: patient, userType: 'patient',),
+            SizedBox(height: HeightManager.h20),
+            PatientEditButton(patient: patient, userType: 'patient'),
           ],
         ),
       ),

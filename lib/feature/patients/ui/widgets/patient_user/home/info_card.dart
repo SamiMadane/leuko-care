@@ -27,7 +27,7 @@ class InfoCard extends StatelessWidget {
       elevation: 2,
       margin: EdgeInsets.only(bottom: HeightManager.h16),
       child: Padding(
-        padding: EdgeInsets.all(HeightManager.h16),
+        padding: EdgeInsets.symmetric(vertical: HeightManager.h16,horizontal:WidthManager.w16 ),
         child: Row(
           crossAxisAlignment: isMultiline ? CrossAxisAlignment.start : CrossAxisAlignment.center,
           children: [
@@ -35,7 +35,7 @@ class InfoCard extends StatelessWidget {
               padding: EdgeInsets.all(HeightManager.h8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: ColorsManager.primaryColor.withOpacity(0.1),
+                color: ColorsManager.primaryColor.withValues(alpha: .1),
               ),
               child: Icon(icon, color: ColorsManager.primaryColor, size: FontSizeManager.s20),
             ),
