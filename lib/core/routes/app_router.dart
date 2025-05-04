@@ -7,6 +7,8 @@ import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.da
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_statistics_screen.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
+import 'package:leuko_care/feature/chats/ui/views/image_preview_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/views/add_update_doctor_screen.dart';
@@ -173,6 +175,8 @@ class AppRouter {
                               ..getPatientAndDoctor(patientId!),
                   ),
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
+                  BlocProvider(create: (_) => getIt<ChatCubit>()),
+
                 ],
                 child: PatientHomeScreen(),
               ),
@@ -191,6 +195,15 @@ class AppRouter {
               ),
         );
 
+ case Routes.imagePreviewScreen:
+        final Image = arguments as String;
+
+        return MaterialPageRoute(
+          builder:
+              (_) => ImagePreviewScreen(
+                 imageUrl: Image,
+              ),
+        );
      
 
       default:

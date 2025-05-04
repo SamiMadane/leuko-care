@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
 import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
+import 'package:leuko_care/feature/chats/data/repository/chat_repo.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/auth/data/repository/auth_repo.dart';
@@ -55,4 +57,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<GetDoctorsOrderedByPatientsCountUseCase>(
     () => GetDoctorsOrderedByPatientsCountUseCase(getIt<PatientRepository>()),
   );
+  getIt.registerLazySingleton(() => ChatRepository(getIt<FirebaseFirestore>()));
+  getIt.registerFactory(() => ChatCubit(getIt<ChatRepository>()));
+
 }
