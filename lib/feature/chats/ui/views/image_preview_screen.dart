@@ -24,7 +24,6 @@ class ImagePreviewScreen extends StatelessWidget {
         child: InteractiveViewer(
           maxScale: 5,
           minScale: 1,
-          panEnabled: true,
           child: CachedNetworkImage(
             imageUrl: imageUrl,
             fit: BoxFit.contain,
