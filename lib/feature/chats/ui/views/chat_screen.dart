@@ -7,7 +7,7 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_state.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
-import '../widgets/chat_input_field.dart';
+import '../widgets/chat_input_field/chat_input_field.dart';
 import '../widgets/messages_list.dart';
 
 class ChatScreen extends StatefulWidget {
