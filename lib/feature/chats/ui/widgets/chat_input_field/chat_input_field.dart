@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
-import 'package:leuko_care/feature/chats/ui/widgets/chat_input_field/image_preview.dart';
+import 'package:leuko_care/feature/chats/ui/widgets/chat_input_field/image_preview_thumbnail.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/chat_input_field/message_text_field.dart';
 
 
@@ -68,7 +68,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (_selectedImagePath != null)
-                ImagePreview(
+                ImagePreviewThumbnail(
                   imagePath: _selectedImagePath!,
                   onRemove: () => setState(() => _selectedImagePath = null),
                 ),

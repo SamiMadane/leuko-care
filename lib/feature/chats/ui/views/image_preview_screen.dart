@@ -5,15 +5,7 @@ class ImagePreviewScreen extends StatelessWidget {
 
   const ImagePreviewScreen({super.key, required this.imageUrl});
 
-  // منطق حفظ الصورة في المعرض
-  // Future<void> _saveImage(BuildContext context) async {
-  //   try {
-  //     await ImageGallerySaver.saveFile(imageUrl);
-  //     print( "Image saved to gallery!");
-  //   } catch (e) {
-  //     print( "Failed to save image");
-  //   }
-  // }
+
 
   @override
   Widget build(BuildContext context) {

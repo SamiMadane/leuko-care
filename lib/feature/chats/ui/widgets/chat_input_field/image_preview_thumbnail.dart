@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
-class ImagePreview extends StatelessWidget {
+class ImagePreviewThumbnail extends StatelessWidget {
   final String imagePath;
   final VoidCallback onRemove;
 
-  const ImagePreview({
+  const ImagePreviewThumbnail({
     super.key,
     required this.imagePath,
     required this.onRemove,
