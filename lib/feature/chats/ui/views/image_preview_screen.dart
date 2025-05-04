@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class ImagePreviewScreen extends StatelessWidget {
   final String imageUrl;
@@ -7,14 +6,14 @@ class ImagePreviewScreen extends StatelessWidget {
   const ImagePreviewScreen({super.key, required this.imageUrl});
 
   // منطق حفظ الصورة في المعرض
-  Future<void> _saveImage(BuildContext context) async {
-    try {
-      final result = await ImageGallerySaver.saveFile(imageUrl);
-      print( "Image saved to gallery!");
-    } catch (e) {
-      print( "Failed to save image");
-    }
-  }
+  // Future<void> _saveImage(BuildContext context) async {
+  //   try {
+  //     await ImageGallerySaver.saveFile(imageUrl);
+  //     print( "Image saved to gallery!");
+  //   } catch (e) {
+  //     print( "Failed to save image");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,9 @@ class ImagePreviewScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.save_alt),
-            onPressed: () => _saveImage(context), // حفظ الصورة عند الضغط على زر الحفظ
+            onPressed: () {
+              
+            } // حفظ الصورة عند الضغط على زر الحفظ
           ),
         ],
       ),

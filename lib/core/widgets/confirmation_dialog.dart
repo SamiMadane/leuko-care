@@ -4,26 +4,40 @@ class ConfirmationDialog extends StatelessWidget {
   final String title;
   final String message;
   final VoidCallback onConfirmed;
+  final IconData? icon;
+
   const ConfirmationDialog({
     super.key,
     required this.title,
     required this.message,
     required this.onConfirmed,
+    this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title),
-      content: Text(
-        message,
-       
+      title: Row(
+        children: [
+          if (icon != null) ...[
+            Icon(icon, color: Colors.red),
+            const SizedBox(width: 8),
+          ],
+          Expanded(
+            child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          ),
+        ],
       ),
+      content: Text(message),
       actions: [
-        TextButton(onPressed: onConfirmed, child: const Text('Yes')),
+        TextButton.icon(
+          icon: const Icon(Icons.delete_forever, color: Colors.red),
+          label: const Text("Delete"),
+          onPressed: onConfirmed,
+        ),
         TextButton(
+          child: const Text("Cancel"),
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('No'),
         ),
       ],
     );

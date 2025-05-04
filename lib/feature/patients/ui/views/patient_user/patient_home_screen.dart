@@ -25,7 +25,7 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
       ),
 
       child: Scaffold(

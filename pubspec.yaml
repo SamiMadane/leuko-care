@@ -85,7 +85,7 @@ dependencies:
   # for showing emojis in text field
   emoji_picker_flutter: ^4.3.0
   # save image to gallery
-  image_gallery_saver: ^2.0.3
+  #image_gallery_saver: ^2.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
