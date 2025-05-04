@@ -17,7 +17,7 @@ class MessagesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       reverse: true,
-      padding: EdgeInsets.all(RadiusManager.r12),
+      padding: EdgeInsets.symmetric(horizontal: WidthManager.w12),
       itemCount: messages.length,
       itemBuilder: (context, index) {
         final message = messages[messages.length - 1 - index]; // reverse

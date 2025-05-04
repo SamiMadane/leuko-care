@@ -84,8 +84,6 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   # for showing emojis in text field
   emoji_picker_flutter: ^4.3.0
-  # save image to gallery
-  #image_gallery_saver: ^2.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

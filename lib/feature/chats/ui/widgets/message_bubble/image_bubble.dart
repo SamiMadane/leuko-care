@@ -34,7 +34,7 @@ class ImageBubble extends StatelessWidget {
           borderRadius: BorderRadius.circular(RadiusManager.r18),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.3),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 6,
               offset: const Offset(2, 2),
             ),

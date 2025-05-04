@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ImagePreviewScreen extends StatelessWidget {
   final String imageUrl;
 
   const ImagePreviewScreen({super.key, required this.imageUrl});
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +18,40 @@ class ImagePreviewScreen extends StatelessWidget {
           'Image Preview',
           style: TextStyle(color: Colors.white),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.save_alt),
-            onPressed: () {
-              
-            } // حفظ الصورة عند الضغط على زر الحفظ
-          ),
-        ],
       ),
       body: Center(
         child: InteractiveViewer(
           child: Image.network(
             imageUrl,
             fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) =>
-                const Icon(Icons.broken_image, size: 100, color: Colors.white),
+            loadingBuilder:
+                (context, child, loadingProgress) => loadingProgress != null ? _buildShimmerLoading() : child,
+            errorBuilder:
+                (context, error, stackTrace) => const Icon(
+                  Icons.broken_image,
+                  size: 100,
+                  color: Colors.white,
+                ),
           ),
+        ),
+      ),
+    );
+  }
+
+
+
+  _buildShimmerLoading() {
+    return Padding(
+      padding:  EdgeInsets.symmetric(
+        vertical: HeightManager.h30
+      ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[800]!,
+        highlightColor: Colors.grey[600]!,
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.grey[800],
         ),
       ),
     );
