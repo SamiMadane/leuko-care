@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,18 +10,20 @@ import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_shimmer.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_success_content.dart';
 
-class PatientHomeScreen extends StatefulWidget {
-  const PatientHomeScreen({super.key});
+class PatientScreen extends StatefulWidget {
+  const PatientScreen({super.key});
 
   @override
-  State<PatientHomeScreen> createState() => _PatientHomeScreenState();
+  State<PatientScreen> createState() => _PatientScreenState();
 }
 
-class _PatientHomeScreenState extends State<PatientHomeScreen> {
+class _PatientScreenState extends State<PatientScreen> {
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final patientId = FirebaseAuth.instance.currentUser?.uid;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.white,
@@ -40,7 +43,7 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
               if (state is GetPatientAndDoctorStateLoading) {
                 return const PatientHomeShimmer();
               } else if (state is GetPatientAndDoctorStateError) {
-                return const Center(child: Text("Error loading data"));
+                return _buildErrorWidget(patientId);
               } else if (state is GetPatientAndDoctorStateSuccess) {
                 final pages = [
                   PatientHomeSuccessContent(
@@ -70,6 +73,23 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
             });
           },
         ),
+      ),
+    );
+  }
+
+  _buildErrorWidget(patientId) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text("Error loading data"),
+          ElevatedButton(
+            onPressed: () {
+              context.read<PatientCubit>().getPatientAndDoctor(patientId!);
+            },
+            child: const Text("Retry"),
+          ),
+        ],
       ),
     );
   }

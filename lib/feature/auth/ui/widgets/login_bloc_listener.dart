@@ -33,7 +33,7 @@ class LoginBlocListener extends StatelessWidget {
             } else if (userType == 'doctor') {
               context.pushReplacementNamed(Routes.adminHomeScreen);
             } else if (userType == 'patient') {
-              context.pushReplacementNamed(Routes.patientHomeScreen);
+              context.pushReplacementNamed(Routes.patientScreen);
             }
           },
           loginError: (error) {
