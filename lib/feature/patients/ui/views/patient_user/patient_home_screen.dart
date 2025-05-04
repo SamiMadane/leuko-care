@@ -9,10 +9,10 @@ import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/home_to
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/patient_examined_section.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_not_examined/examination_pending_widget.dart';
 
-class PatientHomeSuccessContent extends StatelessWidget {
+class PatientHomeScreen extends StatelessWidget {
   final PatientModel patient;
   final DoctorModel doctor;
-  const PatientHomeSuccessContent({super.key,  required this.patient, required this.doctor});
+  const PatientHomeScreen({super.key,  required this.patient, required this.doctor});
 
   @override
   Widget build(BuildContext context) {

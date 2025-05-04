@@ -8,7 +8,7 @@ import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_profile_screen.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_bottom_nav_bar.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_shimmer.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_success_content.dart';
+import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_home_screen.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -46,7 +46,7 @@ class _PatientScreenState extends State<PatientScreen> {
                 return _buildErrorWidget(patientId);
               } else if (state is GetPatientAndDoctorStateSuccess) {
                 final pages = [
-                  PatientHomeSuccessContent(
+                  PatientHomeScreen(
                     patient: state.patient,
                     doctor: state.doctor,
                   ),
