@@ -26,18 +26,18 @@ class HomeTopWidget extends StatelessWidget {
         Row(
           children: [
             Material(
-              elevation: 4,
+              elevation: 2,
               shape: const CircleBorder(),
               shadowColor: ColorsManager.black87,
               child: CircleAvatar(
-                radius: RadiusManager.r34,
+                radius: RadiusManager.r30,
                 backgroundColor: Colors.transparent,
                 backgroundImage: null,
                 child: ClipOval(
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
-                    width: WidthManager.w68,
-                    height: HeightManager.h68,
+                    width: WidthManager.w60,
+                    height: HeightManager.h60,
                     fit: BoxFit.cover,
                     placeholder: (_, __) => _buildShimmerLoading(),
                     errorWidget:
@@ -71,7 +71,7 @@ class HomeTopWidget extends StatelessWidget {
               ),
             ),
             CircleAvatar(
-              radius: RadiusManager.r24,
+              radius: RadiusManager.r22,
               backgroundColor: ColorsManager.moreLighterGray,
               child: IconButton(
                 icon: const Icon(Icons.exit_to_app),
@@ -94,7 +94,7 @@ class HomeTopWidget extends StatelessWidget {
             const SignOutBlocListener(),
           ],
         ),
-        SizedBox(height: HeightManager.h10),
+        SizedBox(height: HeightManager.h6),
         Padding(
           padding: EdgeInsets.only(
             left: WidthManager.w80,
