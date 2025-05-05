@@ -22,13 +22,13 @@ class OnboardingPage extends StatelessWidget {
               Text(
                 model.title,
                 textAlign: TextAlign.center,
-                style: getBoldTextStyle(fontSize: FontSizeManager.s24, color: ColorsManager.darkBlue)
+                style: getBoldTextStyle(fontSize: FontSizeManager.s22, color: ColorsManager.darkBlue)
               ),
               SizedBox(height: HeightManager.h12),
               Text(
                 model.subtitle,
                 textAlign: TextAlign.center,
-                style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.gray)
+                style: getMediumTextStyle(fontSize: FontSizeManager.s13, color: ColorsManager.gray)
               ),
             ],
           ),

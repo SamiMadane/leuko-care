@@ -17,7 +17,7 @@ class ChatTopBar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: WidthManager.w20,
-        vertical: HeightManager.h6,
+        vertical: HeightManager.h16,
       ),
       child: Row(
         children: [
