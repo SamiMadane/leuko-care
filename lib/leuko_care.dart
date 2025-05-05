@@ -5,9 +5,9 @@ import 'core/routes/app_router.dart';
 import 'core/routes/routes.dart';
 
 
-class LeukoCare extends StatelessWidget {
+class LeukoAi extends StatelessWidget {
   final AppRouter appRouter;
-  const LeukoCare({super.key, required this.appRouter});
+  const LeukoAi({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class LeukoCare extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       child: MaterialApp(
-        title: 'Leuko Care',
+        title: 'Leuko AI',
         theme: ThemeData(
           primaryColor: ColorsManager.primaryColor,
           scaffoldBackgroundColor: ColorsManager.white,
