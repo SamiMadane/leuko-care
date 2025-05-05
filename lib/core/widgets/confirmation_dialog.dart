@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;
@@ -21,7 +23,7 @@ class ConfirmationDialog extends StatelessWidget {
         children: [
           if (icon != null) ...[
             Icon(icon, color: Colors.red),
-            const SizedBox(width: 8),
+            SizedBox(width: WidthManager.w8),
           ],
           Expanded(
             child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -37,7 +39,7 @@ class ConfirmationDialog extends StatelessWidget {
         ),
         TextButton(
           child: const Text("Cancel"),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.pop(),
         ),
       ],
     );

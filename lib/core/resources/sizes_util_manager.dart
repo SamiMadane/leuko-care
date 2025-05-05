@@ -15,6 +15,7 @@ class RadiusManager {
   static double r20 = SizeUtil.setRadius(20.0);
   static double r22 = SizeUtil.setRadius(22.0);
   static double r24 = SizeUtil.setRadius(24.0);
+  static double r25 = SizeUtil.setRadius(25.0);
   static double r26 = SizeUtil.setRadius(26.0);
   static double r28 = SizeUtil.setRadius(28.0);
   static double r30 = SizeUtil.setRadius(30.0);

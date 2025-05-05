@@ -80,7 +80,7 @@ class HomeTopShimmer extends StatelessWidget {
                 baseColor: ColorsManager.lightGray,
                 highlightColor: Colors.white,
                 child: CircleAvatar(
-                  radius: RadiusManager.r34,
+                  radius: RadiusManager.r30,
                   backgroundColor: Colors.white,
                 ),
               ),
