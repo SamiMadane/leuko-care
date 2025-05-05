@@ -156,6 +156,8 @@ class IconSizeManager {
   static double s20 = 20;
   static double s22 = 22;
   static double s32 = 32;
+  static double s28 = 28;
+
 
 }
 
