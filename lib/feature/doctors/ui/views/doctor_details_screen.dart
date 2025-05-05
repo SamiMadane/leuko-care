@@ -18,10 +18,7 @@ import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
 
-  const DoctorDetailsScreen({
-    super.key,
-    required this.doctor,
-  });
+  const DoctorDetailsScreen({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,10 @@ class DoctorDetailsScreen extends StatelessWidget {
             builder:
                 (context) => ConfirmationDialog(
                   title: 'Confirm Delete',
-                  message: 'Are you sure you want to delete this doctor and all of their patients?',
+                  message:
+                      'Are you sure you want to delete this doctor and all of their patients?',
+                  confirmText: 'Delete',
+                  icon: Icons.delete,
                   onConfirmed: () async {
                     doctorCubit.deleteDoctor(doctor.id!);
                     context.pop();
@@ -66,14 +66,14 @@ class DoctorDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: HeightManager.h20),
-                DoctorDetailsInfoCard(
-                  doctor: doctor,
-                ),
+                DoctorDetailsInfoCard(doctor: doctor),
                 SizedBox(height: HeightManager.h30),
                 DoctorDetailsEditButton(doctor: doctor),
                 SizedBox(height: HeightManager.h16),
-                DoctorDetailsViewPatientsButton(doctorId: doctor.id,doctorName: doctor.name),
-
+                DoctorDetailsViewPatientsButton(
+                  doctorId: doctor.id,
+                  doctorName: doctor.name,
+                ),
               ],
             ),
           ),

@@ -23,14 +23,14 @@ class HomeTopBar extends StatelessWidget {
             Text(
               'Hi, Admin!',
               style: getBoldTextStyle(
-                fontSize: FontSizeManager.s18,
+                fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
               ),
             ),
             SizedBox(height: HeightManager.h6),
             Text(
               'How Are you Today?',
-              style: getRegularTextStyle(
+              style: getSemiBoldTextStyle(
                 fontSize: FontSizeManager.s12,
                 color: ColorsManager.gray,
               ),
@@ -49,6 +49,7 @@ class HomeTopBar extends StatelessWidget {
                     (context) => ConfirmationDialog(
                       title: 'Confirm Sign Out',
                       message: 'Are you sure you want to sign out?',
+                      confirmText: 'SignOut',
                       onConfirmed: () {
                         cubit.signOut(); // ثم نسجل الخروج
                         context.pop(); // أولاً نغلق الـ Dialog

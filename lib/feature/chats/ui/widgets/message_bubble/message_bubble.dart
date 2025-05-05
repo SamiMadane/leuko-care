@@ -23,6 +23,8 @@ class MessageBubble extends StatelessWidget {
             title: 'Delete Message',
             message:
                 'Are you sure you want to delete this message for everyone?',
+            confirmText: 'Delete',
+            icon: Icons.delete,
             onConfirmed: () {
               context.read<ChatCubit>().deleteMessage(
                 senderId: message.senderId,

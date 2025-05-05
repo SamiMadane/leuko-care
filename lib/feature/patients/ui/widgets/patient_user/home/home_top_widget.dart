@@ -82,6 +82,7 @@ class HomeTopWidget extends StatelessWidget {
                         (_) => ConfirmationDialog(
                           title: 'Confirm Sign Out',
                           message: 'Are you sure you want to sign out?',
+                          confirmText: 'SignOut',
                           onConfirmed: () {
                             cubit.signOut();
                             context.pop();
