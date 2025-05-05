@@ -25,7 +25,7 @@ class PatientHomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HomeTopWidget(name: patient.name, imageUrl: patient.profileImage),
-          SizedBox(height: HeightManager.h24),
+          SizedBox(height: HeightManager.h20),
           Row(
             children: [
               Icon(
@@ -35,15 +35,15 @@ class PatientHomeScreen extends StatelessWidget {
               ),
               SizedBox(width: WidthManager.w8),
               Text(
-                "Your Current Health",
+                "Current Health Status",
                 style: getBoldTextStyle(
-                  fontSize: FontSizeManager.s20,
+                  fontSize: FontSizeManager.s18,
                   color: ColorsManager.darkBlue,
                 ),
               ),
             ],
           ),
-          SizedBox(height: HeightManager.h24),
+          SizedBox(height: HeightManager.h20),
           patient.isExamined
               ? PatientExaminedSection(patient: patient, doctor: doctor)
               : const ExaminationPendingWidget(),

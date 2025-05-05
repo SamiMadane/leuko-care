@@ -13,11 +13,13 @@ import 'package:leuko_care/feature/chats/ui/widgets/chat_input_field/message_tex
 class ChatInputField extends StatefulWidget {
   final String currentUserId;
   final String receiverId;
+  final String? initialMessage;
+
 
   const ChatInputField({
     super.key,
     required this.currentUserId,
-    required this.receiverId,
+    required this.receiverId, this.initialMessage,
   });
 
   @override
@@ -81,6 +83,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                   Expanded(
                     child: MessageTextField(
                       controller: _controller,
+                      initialMessage: widget.initialMessage,
                       onEmojiToggle: () {
                         setState(() => _showEmojiPicker = !_showEmojiPicker);
                       },

@@ -13,12 +13,14 @@ class ChatScreen extends StatefulWidget {
   final String currentUserId;
   final String otherUserId;
   final DoctorModel doctor;
+  final String? initialMessage;
 
   const ChatScreen({
     super.key,
     required this.currentUserId,
     required this.otherUserId,
     required this.doctor,
+    this.initialMessage,
   });
 
   @override
@@ -60,6 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ChatInputField(
               currentUserId: widget.currentUserId,
               receiverId: widget.otherUserId,
+              initialMessage: widget.initialMessage,
             ),
             SizedBox(height: HeightManager.h4),
           ],
@@ -67,5 +70,4 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
-
 }

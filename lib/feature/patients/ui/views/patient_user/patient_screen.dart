@@ -10,29 +10,22 @@ import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_shimmer.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_home_screen.dart';
 
-class PatientScreen extends StatefulWidget {
+class PatientScreen extends StatelessWidget {
   const PatientScreen({super.key});
-
-  @override
-  State<PatientScreen> createState() => _PatientScreenState();
-}
-
-class _PatientScreenState extends State<PatientScreen> {
-  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final patientId = FirebaseAuth.instance.currentUser?.uid;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
+      value: const SystemUiOverlayStyle(
         statusBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.dark,
       ),
-
       child: Scaffold(
         body: SafeArea(
+          // Main BlocBuilder: handles loading, error, and success states when fetching patient and doctor data.
           child: BlocBuilder<PatientCubit, PatientState>(
             buildWhen:
                 (previous, current) =>
@@ -43,41 +36,54 @@ class _PatientScreenState extends State<PatientScreen> {
               if (state is GetPatientAndDoctorStateLoading) {
                 return const PatientHomeShimmer();
               } else if (state is GetPatientAndDoctorStateError) {
-                return _buildErrorWidget(patientId);
+                return _buildErrorWidget(context, patientId);
               } else if (state is GetPatientAndDoctorStateSuccess) {
-                final pages = [
-                  PatientHomeScreen(
-                    patient: state.patient,
-                    doctor: state.doctor,
-                  ),
-                  ChatScreen(
-                    currentUserId: state.patient.id!,
-                    otherUserId: state.doctor.id!,
-                    doctor: state.doctor,
-                  ),
-                  PatientProfileScreen(patient: state.patient),
-                ];
+                // Inner BlocBuilder (inside success state): manages selected page and initial message logic.
+                return BlocBuilder<PatientCubit, PatientState>(
+                  builder: (context, _) {
+                    final cubit = context.read<PatientCubit>();
 
-                return IndexedStack(index: _selectedIndex, children: pages);
+                    final pages = [
+                      PatientHomeScreen(
+                        patient: state.patient,
+                        doctor: state.doctor,
+                      ),
+                      ChatScreen(
+                        currentUserId: state.patient.id!,
+                        otherUserId: state.doctor.id!,
+                        doctor: state.doctor,
+                        initialMessage: cubit.initialChatMessage,
+                      ),
+                      PatientProfileScreen(patient: state.patient),
+                    ];
+
+                    return IndexedStack(
+                      index: cubit.selectedIndex,
+                      children: pages,
+                    );
+                  },
+                );
               } else {
                 return const SizedBox.shrink();
               }
             },
           ),
         ),
-        bottomNavigationBar: PatientBottomNavBar(
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+        // BottomNavBar BlocBuilder: rebuilds UI when selected index changes to update the active tab.
+        bottomNavigationBar: BlocBuilder<PatientCubit, PatientState>(
+          builder: (context, state) {
+            final cubit = context.read<PatientCubit>();
+            return PatientBottomNavBar(
+              currentIndex: cubit.selectedIndex,
+              onTap: (index) => cubit.changeSelectedIndex(index),
+            );
           },
         ),
       ),
     );
   }
 
-  _buildErrorWidget(patientId) {
+  Widget _buildErrorWidget(BuildContext context, String? patientId) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

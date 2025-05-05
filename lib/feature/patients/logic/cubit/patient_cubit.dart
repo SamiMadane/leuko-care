@@ -10,6 +10,10 @@ class PatientCubit extends Cubit<PatientState> {
   final PatientRepository _repository;
   StreamSubscription<List<PatientModel>>? _patientsSubscription;
   StreamSubscription<List<DoctorModel>>? _doctorSubscription;
+  int selectedIndex = 0;
+  String? initialChatMessage;
+bool shouldInjectInitialMessage = false;
+
 
   PatientCubit(this._repository)
     : super(const PatientState.patientStateInitial());
@@ -104,10 +108,6 @@ class PatientCubit extends Cubit<PatientState> {
         );
   }
 
-  
- 
-
-
   Stream<PatientModel> getPatientByIdStream(String patientId) {
     return _repository.getPatientByIdStream(patientId);
   }
@@ -120,7 +120,6 @@ class PatientCubit extends Cubit<PatientState> {
       
       // جلب الطبيب المرتبط بالمريض
       final doctor = await _repository.getDoctorByDoctorId(patient.doctorId);
-      
       emit(GetPatientAndDoctorStateSuccess(doctor, patient));
     } catch (e) {
       emit(GetPatientAndDoctorStateError(e.toString()));
@@ -143,4 +142,25 @@ class PatientCubit extends Cubit<PatientState> {
     } // if not coming birthday yet decrease one year
     return age;
   }
+
+  
+void changeSelectedIndex(int index) {
+  selectedIndex = index;
+  emit(PatientBottomNavChanged(index));
+}
+
+void setInitialMessage(String message) {
+  initialChatMessage = message;
+  shouldInjectInitialMessage = true;
+
+  final currentState = state;
+  if (currentState is GetPatientAndDoctorStateSuccess) {
+    emit(GetPatientAndDoctorStateSuccess(
+      currentState.doctor,
+      currentState.patient,
+    ));
+  }
+}
+
+
 }
