@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -49,16 +48,8 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
             ),
             SizedBox(height: HeightManager.h20),
 
-            InfoCard(
-              icon: Icons.email,
-              title: 'Email',
-              value: doctor.email,
-            ),
-            InfoCard(
-              icon: Icons.phone,
-              title: 'Phone',
-              value: doctor.phone,
-            ),
+            InfoCard(icon: Icons.email, title: 'Email', value: doctor.email),
+            InfoCard(icon: Icons.phone, title: 'Phone', value: doctor.phone),
             InfoCard(
               icon: Icons.work_outline,
               title: 'Experience',
@@ -80,19 +71,14 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
           color: ColorsManager.primaryColor,
           child: InkWell(
             onTap: () {
-              // TODO: navigate to chat or ask doctor
+              Navigator.pop(context, true);
             },
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: HeightManager.h14,
                 horizontal: WidthManager.w14,
               ),
-              child: Image.asset(
-                AssetsManager.chatIcon, // تأكد من أن المسار صحيح
-                width: WidthManager.w28,
-                height: HeightManager.h28,
-                color: Colors.white,
-              ),
+              child: Icon(Icons.message, color: ColorsManager.white),
             ),
           ),
         ),
