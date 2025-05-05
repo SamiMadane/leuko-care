@@ -20,13 +20,13 @@ class HealthOverviewWidget extends StatelessWidget {
           "Health Overview:",
           style: getSemiBoldTextStyle(fontSize: FontSizeManager.s18, color: ColorsManager.darkBlue)
         ),
-        SizedBox(height: HeightManager.h16),
+        SizedBox(height: HeightManager.h14),
         HealthCard(
           title: "Leukemia Type",
           value: patient.leukemiaType,
           icon: Icons.biotech,
         ),
-        SizedBox(height: HeightManager.h16,),
+        SizedBox(height: HeightManager.h14,),
         HealthCard(
           title: "Health Status",
           value: patient.healthStatus,
