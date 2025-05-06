@@ -39,7 +39,7 @@ class ExaminationPieChart extends StatelessWidget {
       case "Examined":
         return Colors.green;
       case "Unexamined":
-        return Colors.red;
+        return Colors.orange;
       default:
         return Colors.grey;
     }

@@ -7,7 +7,7 @@ import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart'
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_state.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/examination_pie_chart_widget.dart';
-import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/health_status_bar_chart_widget.dart';
+import 'package:leuko_care/core/widgets/health_status_bar_chart_widget.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/patients_per_doctor_list.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/statistic_card.dart';
 
@@ -31,9 +31,7 @@ class AdminStatisticsScreen extends StatelessWidget {
                 ),
               );
             case GetStatisticsStateSuccess _:
-              return _buildStatisticsUI(
-                state.statistics,
-              );
+              return _buildStatisticsUI(state.statistics);
             default:
               return const SizedBox();
           }
@@ -51,13 +49,6 @@ class AdminStatisticsScreen extends StatelessWidget {
           StatisticCard(text: "Total Patients: ${stats.totalPatients}"),
           StatisticCard(text: "Total Doctors: ${stats.totalDoctors}"),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Health Status Distribution"),
-          SizedBox(height: HeightManager.h20),
-          HealthStatusBarChart(data: stats.healthStatusCounts),
-          SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Patients Per Doctor"),
-          PatientsPerDoctorList(data: stats.patientsPerDoctor),
-          SizedBox(height: HeightManager.h20),
           _buildSectionTitle("Examination Status"),
           ExaminationPieChart(
             data: {
@@ -65,6 +56,13 @@ class AdminStatisticsScreen extends StatelessWidget {
               "Unexamined": stats.unexaminedCount,
             },
           ),
+          SizedBox(height: HeightManager.h20),
+          _buildSectionTitle("Health Status Distribution"),
+          SizedBox(height: HeightManager.h20),
+          HealthStatusBarChart(data: stats.healthStatusCounts),
+          SizedBox(height: HeightManager.h20),
+          _buildSectionTitle("Patients Per Doctor"),
+          PatientsPerDoctorList(data: stats.patientsPerDoctor),
         ],
       ),
     );
@@ -73,7 +71,10 @@ class AdminStatisticsScreen extends StatelessWidget {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: getBoldTextStyle(fontSize: IconSizeManager.s18, color: ColorsManager.darkBlue)
+      style: getBoldTextStyle(
+        fontSize: IconSizeManager.s18,
+        color: ColorsManager.darkBlue,
+      ),
     );
   }
 }
