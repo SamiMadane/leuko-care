@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import '../models/doctor_model.dart';
 
 class DoctorRepository {
@@ -26,10 +27,12 @@ class DoctorRepository {
     });
   }
 
-    Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(List<DoctorModel> doctors,bool isAscending) async {
-    return getDoctorsOrderedByPatientsCountUseCase.call(doctors,isAscending);
+  Future<List<DoctorModel>> getDoctorsOrderedByPatientsCount(
+    List<DoctorModel> doctors,
+    bool isAscending,
+  ) async {
+    return getDoctorsOrderedByPatientsCountUseCase.call(doctors, isAscending);
   }
-
 
   // Get count of patients for each doctor
   Stream<int> getPatientsCountForDoctor(String doctorId) {
@@ -44,10 +47,7 @@ class DoctorRepository {
     try {
       // After click on add doctor we change userType for doctor.
       doctor = doctor.copyWith(userType: "doctor");
-      await firestore
-          .collection('doctors')
-          .doc(doctor.id)
-          .set(doctor.toJson());
+      await firestore.collection('doctors').doc(doctor.id).set(doctor.toJson());
     } catch (e) {
       throw Exception("Error saving doctor data: ${e.toString()}");
     }
@@ -114,5 +114,27 @@ class DoctorRepository {
     } else {
       throw Exception('Error uploading image: ${result['error']}');
     }
+  }
+
+  // Doctor User
+  Stream<DoctorModel> getDoctorByDoctorIdStream(String doctorId) {
+    return FirebaseFirestore.instance
+        .collection('doctors')
+        .doc(doctorId)
+        .snapshots()
+        .map((doc) => DoctorModel.fromJson(doc.data()!));
+  }
+
+  Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
+    return FirebaseFirestore.instance
+        .collection('patients')
+        .where('doctorId', isEqualTo: doctorId)
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs
+                  .map((doc) => PatientModel.fromJson(doc.data()))
+                  .toList(),
+        );
   }
 }
