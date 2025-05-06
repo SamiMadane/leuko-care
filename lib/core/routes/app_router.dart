@@ -23,7 +23,7 @@ import 'package:leuko_care/feature/patients/ui/views/admin_user/add_update_patie
 import 'package:leuko_care/feature/patients/ui/views/admin_user/all_patients_screen.dart';
 import 'package:leuko_care/feature/patients/ui/views/admin_user/patient_details_screen.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/doctor_details_screen_for_patient.dart';
-import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_home_screen.dart';
+import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_screen.dart';
 import 'package:leuko_care/feature/user_selection/ui/views/user_selection_screen.dart';
 import 'package:leuko_care/navigation_handler_screen.dart';
 
@@ -162,7 +162,7 @@ class AppRouter {
               ),
         );
 
-      case Routes.patientHomeScreen:
+      case Routes.patientScreen:
         final patientId = FirebaseAuth.instance.currentUser?.uid;
         return MaterialPageRoute(
           builder:
@@ -178,7 +178,7 @@ class AppRouter {
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
 
                 ],
-                child: PatientHomeScreen(),
+                child: PatientScreen(),
               ),
         );
 

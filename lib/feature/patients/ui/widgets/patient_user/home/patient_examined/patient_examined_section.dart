@@ -18,9 +18,9 @@ class PatientExaminedSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HealthOverviewWidget(patient: patient,),
-        SizedBox(height: HeightManager.h24),
+        SizedBox(height: HeightManager.h20),
         HealthTipsWidget(patient: patient),
-        SizedBox(height:  HeightManager.h24),
+        SizedBox(height:  HeightManager.h20),
         DoctorInfoWidget(patient: patient, doctor: doctor),
       ],
     );

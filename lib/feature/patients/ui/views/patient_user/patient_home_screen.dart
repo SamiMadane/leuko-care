@@ -1,75 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
-import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
-import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
-import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_profile_screen.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_bottom_nav_bar.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_shimmer.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_success_content.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/home_top_widget.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/patient_examined_section.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_not_examined/examination_pending_widget.dart';
 
-class PatientHomeScreen extends StatefulWidget {
-  const PatientHomeScreen({super.key});
-
-  @override
-  State<PatientHomeScreen> createState() => _PatientHomeScreenState();
-}
-
-class _PatientHomeScreenState extends State<PatientHomeScreen> {
-  int _selectedIndex = 0;
+class PatientHomeScreen extends StatelessWidget {
+  final PatientModel patient;
+  final DoctorModel doctor;
+  const PatientHomeScreen({super.key,  required this.patient, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.dark,
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(
+        horizontal: WidthManager.w20,
+        vertical: HeightManager.h16,
       ),
-
-      child: Scaffold(
-        body: SafeArea(
-          child: BlocBuilder<PatientCubit, PatientState>(
-            buildWhen:
-                (previous, current) =>
-                    current is GetPatientAndDoctorStateLoading ||
-                    current is GetPatientAndDoctorStateError ||
-                    current is GetPatientAndDoctorStateSuccess,
-            builder: (context, state) {
-              if (state is GetPatientAndDoctorStateLoading) {
-                return const PatientHomeShimmer();
-              } else if (state is GetPatientAndDoctorStateError) {
-                return const Center(child: Text("Error loading data"));
-              } else if (state is GetPatientAndDoctorStateSuccess) {
-                final pages = [
-                  PatientHomeSuccessContent(
-                    patient: state.patient,
-                    doctor: state.doctor,
-                  ),
-                  ChatScreen(
-                    currentUserId: state.patient.id!,
-                    otherUserId: state.doctor.id!,
-                    doctor: state.doctor,
-                  ),
-                  PatientProfileScreen(patient: state.patient),
-                ];
-
-                return IndexedStack(index: _selectedIndex, children: pages);
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HomeTopWidget(name: patient.name, imageUrl: patient.profileImage),
+          SizedBox(height: HeightManager.h20),
+          Row(
+            children: [
+              Icon(
+                Icons.perm_device_information,
+                color: ColorsManager.primaryColor,
+                size: FontSizeManager.s24,
+              ),
+              SizedBox(width: WidthManager.w8),
+              Text(
+                "Current Health Status",
+                style: getBoldTextStyle(
+                  fontSize: FontSizeManager.s18,
+                  color: ColorsManager.darkBlue,
+                ),
+              ),
+            ],
           ),
-        ),
-        bottomNavigationBar: PatientBottomNavBar(
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-        ),
+          SizedBox(height: HeightManager.h20),
+          patient.isExamined
+              ? PatientExaminedSection(patient: patient, doctor: doctor)
+              : const ExaminationPendingWidget(),
+          SizedBox(height: HeightManager.h20),
+        ],
       ),
     );
   }

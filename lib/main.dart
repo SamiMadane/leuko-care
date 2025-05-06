@@ -15,7 +15,7 @@ void main() async{
   // );
   await ScreenUtil.ensureScreenSize();  
   setupGetIt();
-  runApp(LeukoCare(
+  runApp(LeukoAi(
     appRouter: AppRouter(),
   ));
 }

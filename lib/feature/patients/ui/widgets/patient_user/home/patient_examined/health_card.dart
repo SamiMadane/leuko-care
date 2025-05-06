@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 
 class HealthCard extends StatelessWidget {
   final String title;
@@ -26,7 +27,7 @@ class HealthCard extends StatelessWidget {
         color: ColorsManager.moreLighterGray,
         borderRadius: BorderRadius.circular(RadiusManager.r16),
         boxShadow: [
-          BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2)),
+          BoxShadow(color: Colors.black26, blurRadius: 3, offset: Offset(0, 2)),
         ],
       ),
       child: Row(
@@ -38,13 +39,10 @@ class HealthCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontSize: FontSizeManager.s14,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: getSemiBoldTextStyle(fontSize: FontSizeManager.s15, color: ColorsManager.darkBlue)
               ),
-              SizedBox(height: HeightManager.h4),
-              Text(value, style: TextStyle(fontSize: FontSizeManager.s16)),
+              SizedBox(height: HeightManager.h8),
+              Text(value, style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkBlue)),
             ],
           ),
         ],

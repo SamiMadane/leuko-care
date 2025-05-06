@@ -10,6 +10,12 @@ class PatientCubit extends Cubit<PatientState> {
   final PatientRepository _repository;
   StreamSubscription<List<PatientModel>>? _patientsSubscription;
   StreamSubscription<List<DoctorModel>>? _doctorSubscription;
+    StreamSubscription<PatientModel>? _onePatientSubscription;
+
+  int selectedIndex = 0;
+  String? initialChatMessage;
+bool shouldInjectInitialMessage = false;
+
 
   PatientCubit(this._repository)
     : super(const PatientState.patientStateInitial());
@@ -104,24 +110,21 @@ class PatientCubit extends Cubit<PatientState> {
         );
   }
 
-  
- 
-
-
   Stream<PatientModel> getPatientByIdStream(String patientId) {
     return _repository.getPatientByIdStream(patientId);
   }
-
- Future<void> getPatientAndDoctor(String patientId) async {
+  Future<void> getPatientAndDoctor(String patientId) async {
     emit(GetPatientAndDoctorStateLoading());
+
     try {
-      // جلب المريض
-      final patient = await _repository.getPatientByIdStream(patientId).first;
-      
-      // جلب الطبيب المرتبط بالمريض
-      final doctor = await _repository.getDoctorByDoctorId(patient.doctorId);
-      
-      emit(GetPatientAndDoctorStateSuccess(doctor, patient));
+      // اشتراك في التحديثات المستمرة للمريض
+      _onePatientSubscription = _repository
+          .getPatientByIdStream(patientId)
+          .listen((patient) async {
+            // عند الحصول على المريض، قم بجلب الطبيب المرتبط
+            final doctor = await _repository.getDoctorByDoctorId(patient.doctorId);
+            emit(GetPatientAndDoctorStateSuccess(doctor, patient));
+          });
     } catch (e) {
       emit(GetPatientAndDoctorStateError(e.toString()));
     }
@@ -130,6 +133,7 @@ class PatientCubit extends Cubit<PatientState> {
   Future<void> close() {
     _patientsSubscription?.cancel();
     _doctorSubscription?.cancel();
+    _onePatientSubscription?.cancel();
     return super.close();
   }
 
@@ -143,4 +147,25 @@ class PatientCubit extends Cubit<PatientState> {
     } // if not coming birthday yet decrease one year
     return age;
   }
+
+  
+void changeSelectedIndex(int index) {
+  selectedIndex = index;
+  emit(PatientBottomNavChanged(index));
+}
+
+void setInitialMessage(String message) {
+  initialChatMessage = message;
+  shouldInjectInitialMessage = true;
+
+  final currentState = state;
+  if (currentState is GetPatientAndDoctorStateSuccess) {
+    emit(GetPatientAndDoctorStateSuccess(
+      currentState.doctor,
+      currentState.patient,
+    ));
+  }
+}
+
+
 }

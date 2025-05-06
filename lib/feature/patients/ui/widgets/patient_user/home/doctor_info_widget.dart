@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -8,6 +9,7 @@ import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DoctorInfoWidget extends StatelessWidget {
@@ -30,15 +32,21 @@ class DoctorInfoWidget extends StatelessWidget {
             color: ColorsManager.darkBlue,
           ),
         ),
-        SizedBox(height: HeightManager.h16),
+        SizedBox(height: HeightManager.h14),
         InkWell(
-          onTap: () {
-            context.pushNamed(Routes.doctorDetailsScreenForPatient,arguments: doctor);
+          onTap: () async{
+            final shouldOpenChat = await context.pushNamed(
+              Routes.doctorDetailsScreenForPatient,
+              arguments: doctor,
+            );
+            if (shouldOpenChat == true) {
+              context.read<PatientCubit>().changeSelectedIndex(1);
+            }
           },
           child: Container(
             padding: EdgeInsets.symmetric(
-              vertical: HeightManager.h16,
-              horizontal: WidthManager.w16,
+              vertical: HeightManager.h14,
+              horizontal: WidthManager.w14,
             ),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
@@ -83,7 +91,7 @@ class DoctorInfoWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Dr. ${doctor.name}',
-                        style: getBoldTextStyle(
+                        style: getSemiBoldTextStyle(
                           fontSize: FontSizeManager.s16,
                           color: ColorsManager.darkBlue,
                         ),

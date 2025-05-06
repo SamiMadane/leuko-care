@@ -24,12 +24,16 @@ class PatientState with _$PatientState {
   const factory PatientState.deletePatientStateSuccess() = DeletePatientStateSuccess;
   const factory PatientState.deletePatientStateError(String message) = DeletePatientStateError;
 
-    const factory PatientState.getPatientsByDoctorIdStateLoading() = GetPatientsByDoctorIdStateLoading;
+  const factory PatientState.getPatientsByDoctorIdStateLoading() = GetPatientsByDoctorIdStateLoading;
   const factory PatientState.getPatientsByDoctorIdStateSuccess(List<PatientModel> patients) = GetPatientsByDoctorIdStateSuccess;
   const factory PatientState.getPatientsByDoctorIdStateError(String message) = GetPatientsByDoctorIdStateError;
 
   
-    const factory PatientState.getPatientAndDoctorStateLoading() = GetPatientAndDoctorStateLoading;
+  const factory PatientState.getPatientAndDoctorStateLoading() = GetPatientAndDoctorStateLoading;
   const factory PatientState.getPatientAndDoctorStateSuccess(DoctorModel doctor,PatientModel patient) = GetPatientAndDoctorStateSuccess;
   const factory PatientState.getPatientAndDoctorStateError(String message) = GetPatientAndDoctorStateError;
+
+  const factory PatientState.patientBottomNavChanged(int index) = PatientBottomNavChanged;
+  
 }
+

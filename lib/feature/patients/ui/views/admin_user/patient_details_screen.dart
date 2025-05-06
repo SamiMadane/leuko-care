@@ -13,7 +13,6 @@ import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_detail
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_info_card.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/shared/patient_edit_button.dart';
 
-
 class PatientDetailsScreen extends StatelessWidget {
   final String patientId;
   final String doctorId;
@@ -36,31 +35,30 @@ class PatientDetailsScreen extends StatelessWidget {
         onDeletePressed: () {
           showDialog(
             context: context,
-            builder: (context) => ConfirmationDialog(
-              title: 'Confirm Delete',
-              message: 'Are you sure you want to delete this patient?',
-              onConfirmed: () {
-                patientCubit.deletePatient(patientId);
-              },
-            ),
+            builder:
+                (context) => ConfirmationDialog(
+                  title: 'Confirm Delete',
+                  message: 'Are you sure you want to delete this patient?',
+                  confirmText: 'Delete',
+                  icon: Icons.delete,
+                  onConfirmed: () {
+                    patientCubit.deletePatient(patientId);
+                  },
+                ),
           );
         },
       ),
       body: Column(
         children: [
-          DeletePatientBlocListener(
-            doctorId: doctorId,
-            doctorName: doctorName,
-          ),
-          
+          DeletePatientBlocListener(doctorId: doctorId, doctorName: doctorName),
+
           StreamBuilder<PatientModel>(
             stream: patientCubit.getPatientByIdStream(patientId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
-                  return const SizedBox.shrink();
-
+                return const SizedBox.shrink();
               } else if (snapshot.hasData) {
                 final patient = snapshot.data!;
 
@@ -87,7 +85,7 @@ class PatientDetailsScreen extends StatelessWidget {
                         SizedBox(height: HeightManager.h20),
                         PatientDetailsInfoCard(patient: patient),
                         SizedBox(height: HeightManager.h30),
-                        PatientEditButton(patient: patient, userType: 'admin',),
+                        PatientEditButton(patient: patient, userType: 'admin'),
                       ],
                     ),
                   ),

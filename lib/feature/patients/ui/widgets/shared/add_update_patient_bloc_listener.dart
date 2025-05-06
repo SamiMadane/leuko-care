@@ -124,7 +124,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
                 context.pop();
                 context.pop();
                 context.pushReplacementNamed(
-                  Routes.patientHomeScreen,
+                  Routes.patientScreen,
                 );
                   
               }

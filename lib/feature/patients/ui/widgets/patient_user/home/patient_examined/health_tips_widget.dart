@@ -12,7 +12,7 @@ class HealthTipsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isSick = patient.isExamined && patient.healthStatus != "Healthy";
+    final bool isSick = patient.isExamined && patient.healthStatus.toLowerCase() == "sick";
     final tips = isSick ? _getLeukemiaTips() : _getGeneralTips();
 
     final bgColor = isSick ? Colors.purple.shade50 : Colors.green.shade50;
@@ -29,7 +29,7 @@ class HealthTipsWidget extends StatelessWidget {
             color: ColorsManager.darkBlue,
           ),
         ),
-        SizedBox(height: HeightManager.h16),
+        SizedBox(height: HeightManager.h14),
         Container(
           padding: EdgeInsets.symmetric(
             vertical: HeightManager.h16,
@@ -42,7 +42,7 @@ class HealthTipsWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
-                blurRadius: 4,
+                blurRadius: 3,
                 offset: Offset(0, 2),
               ),
             ],
@@ -54,12 +54,12 @@ class HealthTipsWidget extends StatelessWidget {
                 isSick
                     ? 'Tips for Managing Leukemia:'
                     : 'Congratulations! Stay Healthy:',
-                style: getBoldTextStyle(
+                style: getSemiBoldTextStyle(
                   fontSize: FontSizeManager.s16,
                   color: titleColor,
                 ),
               ),
-              SizedBox(height: HeightManager.h12),
+              SizedBox(height: HeightManager.h6),
               ...tips.map(
                 (tip) => Padding(
                   padding: EdgeInsets.symmetric(vertical: HeightManager.h6),
@@ -68,14 +68,14 @@ class HealthTipsWidget extends StatelessWidget {
                     children: [
                       Icon(
                         tip.icon,
-                        size: IconSizeManager.s20,
+                        size: IconSizeManager.s22,
                         color: titleColor,
                       ),
                       SizedBox(width: WidthManager.w8),
                       Expanded(
                         child: Text(
                           tip.text,
-                          style: TextStyle(fontSize: FontSizeManager.s14),
+                          style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkBlue,height: HeightManager.h1_3),
                         ),
                       ),
                     ],
@@ -89,34 +89,34 @@ class HealthTipsWidget extends StatelessWidget {
     );
   }
 
-  List<_TipItem> _getGeneralTips() {
+  List<HealthTipItem> _getGeneralTips() {
     return [
-      _TipItem(Icons.emoji_events, "You are healthy! Keep it up!"),
-      _TipItem(Icons.local_drink, "Drink plenty of water every day."),
-      _TipItem(
+      HealthTipItem(Icons.emoji_events, "You are healthy! Keep it up!"),
+      HealthTipItem(Icons.local_drink, "Drink plenty of water every day."),
+      HealthTipItem(
         Icons.restaurant,
         "Eat a balanced diet full of vegetables and fruits.",
       ),
-      _TipItem(Icons.directions_run, "Exercise regularly and sleep well."),
+      HealthTipItem(Icons.directions_run, "Exercise regularly and sleep well."),
     ];
   }
 
-  List<_TipItem> _getLeukemiaTips() {
+  List<HealthTipItem> _getLeukemiaTips() {
     return [
-      _TipItem(
+      HealthTipItem(
         Icons.health_and_safety,
         "Take your medications on time and avoid skipping doses.",
       ),
-      _TipItem(
+      HealthTipItem(
         Icons.food_bank,
         "Consume high-protein, high-calorie meals to maintain energy.",
       ),
-      _TipItem(
+      HealthTipItem(
         Icons.clean_hands,
         "Wash your hands frequently to avoid infections.",
       ),
-      _TipItem(Icons.masks, "Avoid crowded areas and wear a mask when needed."),
-      _TipItem(
+      HealthTipItem(Icons.masks, "Avoid crowded areas and wear a mask when needed."),
+      HealthTipItem(
         Icons.support,
         "Stay in contact with your doctor and report any new symptoms.",
       ),
@@ -124,9 +124,9 @@ class HealthTipsWidget extends StatelessWidget {
   }
 }
 
-class _TipItem {
+class HealthTipItem {
   final IconData icon;
   final String text;
 
-  _TipItem(this.icon, this.text);
+  HealthTipItem(this.icon, this.text);
 }

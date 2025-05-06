@@ -14,9 +14,8 @@ class Routes {
   static const String addUpdatePatientScreen = '/addUpdatePatientScreen';
   static const String adminStatisticsScreen = '/AdminStatisticsScreen';
   // This for patient routes
-  static const String patientHomeScreen = '/PatientHomeScreen';
+  static const String patientScreen = '/PatientScreen';
   static const String doctorDetailsScreenForPatient = '/DoctorDetailsScreenForPatient';
-  static const String patientProfileScreen = '/PatientProfileScreen';
   static const String imagePreviewScreen = '/ImagePreviewScreen';
 
 

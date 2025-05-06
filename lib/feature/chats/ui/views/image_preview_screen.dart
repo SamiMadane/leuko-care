@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:shimmer/shimmer.dart';
@@ -21,13 +22,14 @@ class ImagePreviewScreen extends StatelessWidget {
       ),
       body: Center(
         child: InteractiveViewer(
-          child: Image.network(
-            imageUrl,
+          maxScale: 5,
+          minScale: 1,
+          child: CachedNetworkImage(
+            imageUrl: imageUrl,
             fit: BoxFit.contain,
-            loadingBuilder:
-                (context, child, loadingProgress) => loadingProgress != null ? _buildShimmerLoading() : child,
-            errorBuilder:
-                (context, error, stackTrace) => const Icon(
+            placeholder: (context, url) => _buildShimmerLoading(),
+            errorWidget:
+                (context, url, error) => const Icon(
                   Icons.broken_image,
                   size: 100,
                   color: Colors.white,
@@ -38,13 +40,9 @@ class ImagePreviewScreen extends StatelessWidget {
     );
   }
 
-
-
   _buildShimmerLoading() {
     return Padding(
-      padding:  EdgeInsets.symmetric(
-        vertical: HeightManager.h30
-      ),
+      padding: EdgeInsets.symmetric(vertical: HeightManager.h30),
       child: Shimmer.fromColors(
         baseColor: Colors.grey[800]!,
         highlightColor: Colors.grey[600]!,
