@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/home_top_widget.dart';
-import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/examination_pie_chart_widget.dart';
+import 'package:leuko_care/core/widgets/examined_status_progress_widget.dart';
 import 'package:leuko_care/core/widgets/health_status_bar_chart_widget.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/statistic_card.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -45,15 +47,14 @@ class DoctorHomeScreen extends StatelessWidget {
 
             // Examination Pie Chart (ExaminationPieChart)
             Text(
-              "Examination Stats",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+              "Examination Stats:",
+              style: getBoldTextStyle(
+                fontSize: IconSizeManager.s18,
                 color: ColorsManager.darkBlue,
               ),
             ),
-            const SizedBox(height: 12),
-            ExaminationPieChart(
+            SizedBox(height: HeightManager.h14),
+            ExaminedStatusProgressWidget(
               data: {
                 "Examined": totalPatients - pending,
                 "Unexamined": pending,
@@ -64,20 +65,18 @@ class DoctorHomeScreen extends StatelessWidget {
 
             // Health Status Bar Chart (HealthStatusBarChart)
             Text(
-              "Health Status",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+              "Health Status:",
+              style: getBoldTextStyle(
+                fontSize: IconSizeManager.s18,
                 color: ColorsManager.darkBlue,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: HeightManager.h20),
             HealthStatusBarChart(
               data: {
                 'healthy':
                     patients.where((p) => p.healthStatus == "healthy").length,
-                'sick':
-                    patients.where((p) => p.healthStatus == "sick").length,
+                'sick': patients.where((p) => p.healthStatus == "sick").length,
               },
             ),
           ],

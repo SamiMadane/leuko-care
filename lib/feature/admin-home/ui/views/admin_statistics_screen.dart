@@ -6,7 +6,7 @@ import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_state.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
-import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/examination_pie_chart_widget.dart';
+import 'package:leuko_care/core/widgets/examined_status_progress_widget.dart';
 import 'package:leuko_care/core/widgets/health_status_bar_chart_widget.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/patients_per_doctor_list.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/statistic_card.dart';
@@ -42,26 +42,31 @@ class AdminStatisticsScreen extends StatelessWidget {
 
   Widget _buildStatisticsUI(AdminStatisticsModel stats) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(WidthManager.w16),
+      padding: EdgeInsets.symmetric(
+        horizontal: WidthManager.w16,
+        vertical: HeightManager.h16,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           StatisticCard(text: "Total Patients: ${stats.totalPatients}"),
           StatisticCard(text: "Total Doctors: ${stats.totalDoctors}"),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Examination Status"),
-          ExaminationPieChart(
+          _buildSectionTitle("Examination Status:"),
+          SizedBox(height: HeightManager.h14),
+          ExaminedStatusProgressWidget(
             data: {
               "Examined": stats.examinedCount,
               "Unexamined": stats.unexaminedCount,
             },
           ),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Health Status Distribution"),
+          _buildSectionTitle("Health Status Distribution:"),
           SizedBox(height: HeightManager.h20),
           HealthStatusBarChart(data: stats.healthStatusCounts),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Patients Per Doctor"),
+          _buildSectionTitle("Patients Per Doctor:"),
+          SizedBox(height: HeightManager.h14),
           PatientsPerDoctorList(data: stats.patientsPerDoctor),
         ],
       ),
