@@ -6,8 +6,10 @@ class DoctorProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(children: [Center(child: Text('Doctor Profile Screen'))]),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [Center(child: Text('Doctor Profile Screen'))],
+      ),
     );
   }
 }

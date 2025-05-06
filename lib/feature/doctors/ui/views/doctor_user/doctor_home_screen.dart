@@ -5,10 +5,9 @@ import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/home_top_widget.dart';
 import 'package:leuko_care/core/widgets/examined_status_progress_widget.dart';
 import 'package:leuko_care/core/widgets/health_status_bar_chart_widget.dart';
-import 'package:leuko_care/feature/admin-home/ui/widgets/admin_statistics/statistic_card.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/medical_tips_section.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
-import 'package:fl_chart/fl_chart.dart'; // For Horizontal Bar Chart
 
 class DoctorHomeScreen extends StatelessWidget {
   final DoctorModel doctor;
@@ -23,8 +22,7 @@ class DoctorHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final totalPatients = patients.length;
-    final pending = patients.where((p) => p.isExamined == false).length;
-    final leukemias = patients.where((p) => p.healthStatus == "sick").length;
+    final pending = patients.where((p) => !p.isExamined).length;
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -32,64 +30,46 @@ class DoctorHomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Widget with doctor details
             HomeTopWidget(
               name: "Dr. ${doctor.name}",
               imageUrl: doctor.profileImage,
               subMessage: "Your patients at a glance.",
             ),
             const SizedBox(height: 24),
-
-            // Stats Cards (Total and Pending)
-            _buildStatsCards(totalPatients, pending),
-
+            _StatsCardsSection(
+              total: totalPatients,
+              pending: pending,
+            ),
             const SizedBox(height: 24),
-
-            // Examination Pie Chart (ExaminationPieChart)
-            Text(
-              "Examination Stats:",
-              style: getBoldTextStyle(
-                fontSize: IconSizeManager.s18,
-                color: ColorsManager.darkBlue,
-              ),
+            _ExaminationChartSection(
+              total: totalPatients,
+              pending: pending,
             ),
-            SizedBox(height: HeightManager.h14),
-            ExaminedStatusProgressWidget(
-              data: {
-                "Examined": totalPatients - pending,
-                "Unexamined": pending,
-              },
-            ),
-
             const SizedBox(height: 24),
-
-            // Health Status Bar Chart (HealthStatusBarChart)
-            Text(
-              "Health Status:",
-              style: getBoldTextStyle(
-                fontSize: IconSizeManager.s18,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-            SizedBox(height: HeightManager.h20),
-            HealthStatusBarChart(
-              data: {
-                'healthy':
-                    patients.where((p) => p.healthStatus == "healthy").length,
-                'sick': patients.where((p) => p.healthStatus == "sick").length,
-              },
-            ),
+            _HealthStatusSection(patients: patients),
+            const SizedBox(height: 24),
+            const MedicalTipsSection(),
           ],
         ),
       ),
     );
   }
+}
+class _StatsCardsSection extends StatelessWidget {
+  final int total;
+  final int pending;
 
-  Widget _buildStatsCards(int total, int pending) {
+  const _StatsCardsSection({
+    required this.total,
+    required this.pending,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: _buildStatCard(
+          child: _StatCard(
             label: "Total Patients",
             value: "$total",
             icon: Icons.groups,
@@ -98,7 +78,7 @@ class DoctorHomeScreen extends StatelessWidget {
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _buildStatCard(
+          child: _StatCard(
             label: "Pending Samples",
             value: "$pending",
             icon: Icons.hourglass_empty,
@@ -108,13 +88,23 @@ class DoctorHomeScreen extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildStatCard({
-    required String label,
-    required String value,
-    required IconData icon,
-    required Color color,
-  }) {
+class _StatCard extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+  final Color color;
+
+  const _StatCard({
+    required this.label,
+    required this.value,
+    required this.icon,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -141,71 +131,71 @@ class DoctorHomeScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildHealthStatusBarChart(int leukemias, int healthy) {
-    return SizedBox(
-      height: 200,
-      child: BarChart(
-        BarChartData(
-          alignment: BarChartAlignment.spaceAround,
-          barGroups: [
-            BarChartGroupData(
-              x: 0,
-              barRods: [
-                BarChartRodData(
-                  toY: leukemias.toDouble(),
-                  width: 20,
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ],
-            ),
-            BarChartGroupData(
-              x: 1,
-              barRods: [
-                BarChartRodData(
-                  toY: healthy.toDouble(),
-                  width: 20,
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ],
-            ),
-          ],
-          titlesData: FlTitlesData(
-            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true)),
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: (value, meta) {
-                  switch (value.toInt()) {
-                    case 0:
-                      return Text(
-                        "Leukemia",
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );
-                    case 1:
-                      return Text(
-                        "Healthy",
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );
-                    default:
-                      return const SizedBox.shrink();
-                  }
-                },
-              ),
-            ),
+class _ExaminationChartSection extends StatelessWidget {
+  final int total;
+  final int pending;
+
+  const _ExaminationChartSection({
+    required this.total,
+    required this.pending,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Examination Stats:",
+          style: getBoldTextStyle(
+            fontSize: IconSizeManager.s18,
+            color: ColorsManager.darkBlue,
           ),
-          gridData: FlGridData(show: true),
-          borderData: FlBorderData(show: false),
         ),
-      ),
+        SizedBox(height: HeightManager.h14),
+        ExaminedStatusProgressWidget(
+          data: {
+            "Examined": total - pending,
+            "Unexamined": pending,
+          },
+        ),
+      ],
     );
   }
 }
+
+class _HealthStatusSection extends StatelessWidget {
+  final List<PatientModel> patients;
+
+  const _HealthStatusSection({required this.patients});
+
+  @override
+  Widget build(BuildContext context) {
+    final healthy = patients.where((p) => p.healthStatus == "healthy").length;
+    final sick = patients.where((p) => p.healthStatus == "sick").length;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Health Status:",
+          style: getBoldTextStyle(
+            fontSize: IconSizeManager.s18,
+            color: ColorsManager.darkBlue,
+          ),
+        ),
+        SizedBox(height: HeightManager.h20),
+        HealthStatusBarChart(
+          data: {
+            'healthy': healthy,
+            'sick': sick,
+          },
+        ),
+      ],
+    );
+  }
+}
+
+
