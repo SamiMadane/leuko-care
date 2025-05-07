@@ -11,6 +11,7 @@ class AddUpdateDoctorFormFields extends StatefulWidget {
   final TextEditingController descriptionController;
   final TextEditingController passwordController;
   final bool isEditMode;
+  final bool isDoctorUser;
 
   const AddUpdateDoctorFormFields({
     super.key,
@@ -21,6 +22,7 @@ class AddUpdateDoctorFormFields extends StatefulWidget {
     required this.descriptionController,
     required this.passwordController,
     required this.isEditMode,
+    required this.isDoctorUser,
   });
 
   @override
@@ -29,7 +31,8 @@ class AddUpdateDoctorFormFields extends StatefulWidget {
 }
 
 class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
@@ -46,22 +49,29 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
         AppTextFormField(
           controller: widget.nameController,
           labelText: 'Name',
-          validator: (value) => value == null || value.isEmpty
-              ? 'Enter Name'
-              : !AppRegex.isNameValid(value)
-                  ? 'Name must be at least 3 letters and contain letters only'
-                  : null,
+          validator:
+              (value) =>
+                  value == null || value.isEmpty
+                      ? 'Enter Name'
+                      : !AppRegex.isNameValid(value)
+                      ? 'Name must be at least 3 letters and contain letters only'
+                      : null,
         ),
-        SizedBox(height: HeightManager.h10),
-        AppTextFormField(
-          controller: widget.emailController,
-          labelText: 'Email',
-          validator: (value) => value == null || value.isEmpty
-              ? 'Enter Email'
-              : !AppRegex.isEmailValid(value)
-                  ? 'Invalid email format'
-                  : null,
-        ),
+        if (!widget.isDoctorUser) ...[
+          SizedBox(height: HeightManager.h10),
+          AppTextFormField(
+            controller: widget.emailController,
+            labelText: 'Email',
+            validator:
+                (value) =>
+                    value == null || value.isEmpty
+                        ? 'Enter Email'
+                        : !AppRegex.isEmailValid(value)
+                        ? 'Invalid email format'
+                        : null,
+          ),
+        ],
+
         SizedBox(height: HeightManager.h10),
 
         if (!widget.isEditMode) ...[
@@ -79,11 +89,13 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
                 });
               },
             ),
-            validator: (value) => value == null || value.isEmpty
-                ? 'Password is required'
-                : !AppRegex.isPasswordValid(value)
-                    ? 'Weak password (min 8 chars, A-Z, a-z, number, special)'
-                    : null,
+            validator:
+                (value) =>
+                    value == null || value.isEmpty
+                        ? 'Password is required'
+                        : !AppRegex.isPasswordValid(value)
+                        ? 'Weak password (min 8 chars, A-Z, a-z, number, special)'
+                        : null,
           ),
           SizedBox(height: HeightManager.h10),
 
@@ -94,7 +106,9 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
             isObscureText: !_isConfirmPasswordVisible,
             suffixIcon: IconButton(
               icon: Icon(
-                _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                _isConfirmPasswordVisible
+                    ? Icons.visibility
+                    : Icons.visibility_off,
               ),
               onPressed: () {
                 setState(() {
@@ -102,11 +116,13 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
                 });
               },
             ),
-            validator: (value) => value == null || value.isEmpty
-                ? 'Please confirm password'
-                : value != widget.passwordController.text
-                    ? 'Passwords do not match'
-                    : null,
+            validator:
+                (value) =>
+                    value == null || value.isEmpty
+                        ? 'Please confirm password'
+                        : value != widget.passwordController.text
+                        ? 'Passwords do not match'
+                        : null,
           ),
           SizedBox(height: HeightManager.h10),
         ],
@@ -114,32 +130,38 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
         AppTextFormField(
           controller: widget.phoneController,
           labelText: 'Phone',
-          validator: (value) => value == null || value.isEmpty
-              ? 'Enter Phone'
-              : !AppRegex.isPhoneNumberValid(value)
-                  ? 'Invalid phone number'
-                  : null,
+          validator:
+              (value) =>
+                  value == null || value.isEmpty
+                      ? 'Enter Phone'
+                      : !AppRegex.isPhoneNumberValid(value)
+                      ? 'Invalid phone number'
+                      : null,
         ),
         SizedBox(height: HeightManager.h10),
         AppTextFormField(
           controller: widget.experienceController,
           labelText: 'Experience',
-          validator: (value) => value == null || value.isEmpty
-              ? 'Enter Experience'
-              : int.tryParse(value) == null
-                  ? 'Must be a number'
-                  : null,
+          validator:
+              (value) =>
+                  value == null || value.isEmpty
+                      ? 'Enter Experience'
+                      : int.tryParse(value) == null
+                      ? 'Must be a number'
+                      : null,
         ),
         SizedBox(height: HeightManager.h10),
         AppTextFormField(
           controller: widget.descriptionController,
           labelText: 'Description',
           maxLines: 4,
-          validator: (value) => value == null || value.isEmpty
-              ? 'Enter Description'
-              : value.length < 10
-                  ? 'Description too short'
-                  : null,
+          validator:
+              (value) =>
+                  value == null || value.isEmpty
+                      ? 'Enter Description'
+                      : value.length < 10
+                      ? 'Description too short'
+                      : null,
         ),
       ],
     );

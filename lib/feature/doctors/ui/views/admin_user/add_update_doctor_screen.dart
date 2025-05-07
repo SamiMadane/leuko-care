@@ -8,12 +8,13 @@ import 'package:leuko_care/core/widgets/add_update_profile_image_picker.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/add_update_doctor_widgets/add_update_doctor_bloc_listener.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/add_update_doctor_widgets/add_update_doctor_form_fields.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/shared/add_update_doctor_bloc_listener.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/shared/add_update_doctor_form_fields.dart';
 
 class AddUpdateDoctorScreen extends StatefulWidget {
   final DoctorModel? doctor;
-  const AddUpdateDoctorScreen({super.key, this.doctor});
+  final String? userType;
+  const AddUpdateDoctorScreen({super.key, this.doctor, this.userType});
 
   @override
   _AddUpdateDoctorScreenState createState() => _AddUpdateDoctorScreenState();
@@ -62,10 +63,15 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
   @override
   Widget build(BuildContext context) {
     final isEditMode = widget.doctor != null;
+    final isDoctorUser = widget.userType == 'doctor';
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditMode ? 'Edit Doctor' : 'Add Doctor'),
+        title: Text(
+          isEditMode
+              ? (isDoctorUser ? 'Edit Profile' : 'Edit Doctor')
+              : 'Add Doctor',
+        ),
         elevation: 0,
       ),
       body: Padding(
@@ -90,10 +96,15 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
                   experienceController: _experienceController,
                   descriptionController: _descriptionController,
                   passwordController: _passwordController,
+                  isDoctorUser: isDoctorUser,
                 ),
                 SizedBox(height: HeightManager.h30),
                 AppTextButton(
-                  buttonText: isEditMode ? 'Update Doctor' : 'Add Doctor',
+                  buttonText:isEditMode
+                          ? (isDoctorUser
+                              ? 'Update Profile'
+                              : 'Update Doctor')
+                          : 'Add Doctor',
                   textStyle: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
                     color: Colors.white,

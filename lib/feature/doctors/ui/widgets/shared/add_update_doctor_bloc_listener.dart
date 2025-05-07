@@ -10,7 +10,9 @@ import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
 
 class AddUpdateDoctorBlocListener extends StatelessWidget {
-  const AddUpdateDoctorBlocListener({super.key});
+  final bool? isDoctorUser;
+
+  const AddUpdateDoctorBlocListener({super.key, this.isDoctorUser});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,9 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
             context.pop();
             _showUpdateSuccessDialog(
               context,
-              'Dr. updated successfully',
+              (isDoctorUser!)
+                  ? 'Your information updated successfully'
+                  : 'Dr. updated successfully',
               doctor,
             );
           },
@@ -74,9 +78,7 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
             onSuccess: () {
               context.pop();
               context.pop();
-              context.pushReplacementNamed(
-                Routes.adminHomeScreen,
-              );
+              context.pushReplacementNamed(Routes.adminHomeScreen);
             },
           ),
     );
@@ -94,12 +96,20 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
           (context) => SuccessDialog(
             message: message,
             onSuccess: () {
-              context.pop();
-              context.pop();
-              context.pushReplacementNamed(
-                Routes.doctorDetailsScreen,
-                arguments: doctor,
-              );
+              if (!isDoctorUser!) {
+                context.pop();
+                context.pop();
+                context.pushReplacementNamed(
+                  Routes.doctorDetailsScreen,
+                  arguments: doctor,
+                );
+              } else {
+                context.pop();
+                context.pop();
+                context.pushReplacementNamed(
+                  Routes.doctorScreen,
+                );
+              }
             },
           ),
     );

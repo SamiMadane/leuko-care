@@ -83,10 +83,10 @@ class _DoctorBodyBuilder extends StatelessWidget {
 
     final pages = [
       DoctorHomeScreen(doctor: doctor, patients: patients,),
-      const DoctorPatientsScreen(),
-      const UploadSampleScreen(),
-      const UploadSampleScreen(),
-      const DoctorProfileScreen(),
+      DoctorPatientsScreen(),
+      UploadSampleScreen(),
+      UploadSampleScreen(),
+      DoctorProfileScreen(doctor: doctor,),
     ];
 
     return BlocBuilder<DoctorCubit, DoctorState>(

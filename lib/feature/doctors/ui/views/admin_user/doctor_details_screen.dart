@@ -11,7 +11,7 @@ import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/doctor_details_widgets/delete_doctor_bloc_listener.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/doctor_details_widgets/doctor_details_add_patient_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/doctor_details_widgets/doctor_details_app_bar.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/doctor_details_widgets/doctor_details_edit_button.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/shared/doctor_details_edit_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/doctor_details_widgets/doctor_details_info_card.dart';
 import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 
@@ -68,7 +68,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                 SizedBox(height: HeightManager.h20),
                 DoctorDetailsInfoCard(doctor: doctor),
                 SizedBox(height: HeightManager.h30),
-                DoctorDetailsEditButton(doctor: doctor),
+                DoctorEditButton(doctor: doctor, userType: 'admin',),
                 SizedBox(height: HeightManager.h16),
                 DoctorDetailsViewPatientsButton(
                   doctorId: doctor.id,

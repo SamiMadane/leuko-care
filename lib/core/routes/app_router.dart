@@ -94,13 +94,18 @@ class AppRouter {
               ),
         );
       case Routes.addUpdateDoctorScreen:
-        final doctorModel = arguments as DoctorModel? ?? null;
+        final arguments = settings.arguments as Map?;
+        final doctorModel = arguments?['doctorModel'] as DoctorModel?;
+        final userType = arguments?['userType'] as String?;
 
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(
                 value: getIt<DoctorCubit>(),
-                child: AddUpdateDoctorScreen(doctor: doctorModel),
+                child: AddUpdateDoctorScreen(
+                  doctor: doctorModel,
+                  userType: userType,
+                ),
               ),
         );
       case Routes.allPatientsScreen:
@@ -141,7 +146,6 @@ class AppRouter {
         final doctorId = arguments?['doctorId'] as String?;
         final userType = arguments?['userType'] as String?;
 
-
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(
@@ -149,7 +153,7 @@ class AppRouter {
                 child: AddUpdatePatientScreen(
                   patient: patientModel,
                   doctorId: doctorId,
-                  userType:userType,
+                  userType: userType,
                 ),
               ),
         );
@@ -177,7 +181,6 @@ class AppRouter {
                   ),
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
-
                 ],
                 child: PatientScreen(),
               ),
@@ -196,18 +199,15 @@ class AppRouter {
               ),
         );
 
- case Routes.imagePreviewScreen:
+      case Routes.imagePreviewScreen:
         final Image = arguments as String;
 
         return MaterialPageRoute(
-          builder:
-              (_) => ImagePreviewScreen(
-                 imageUrl: Image,
-              ),
+          builder: (_) => ImagePreviewScreen(imageUrl: Image),
         );
-     
-      // Doctor User 
-            case Routes.doctorScreen:
+
+      // Doctor User
+      case Routes.doctorScreen:
         final doctorId = FirebaseAuth.instance.currentUser?.uid;
         return MaterialPageRoute(
           builder:
@@ -221,7 +221,6 @@ class AppRouter {
                   ),
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
-
                 ],
                 child: DoctorScreen(),
               ),
