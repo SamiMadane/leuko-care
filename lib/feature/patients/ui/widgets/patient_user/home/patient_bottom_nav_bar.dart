@@ -60,7 +60,7 @@ class PatientBottomNavBar extends StatelessWidget {
                 1,
               ),
               _buildNavItem(
-                AssetsManager.profileIcon,
+                AssetsManager.patientProfileIcon,
                 'Profile',
                 2,
               ),

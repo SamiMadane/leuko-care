@@ -24,7 +24,14 @@ class AssetsManager {
   // icons
   static const String homeIcon = '$iconsPath/home.png';
   static const String chatIcon = '$iconsPath/chat.png';
-  static const String profileIcon = '$iconsPath/profile.png';
+  static const String patientProfileIcon = '$iconsPath/patient_profile.png';
+  static const String patientsIcon = '$iconsPath/patients.png';
+  static const String doctorProfileIcon = '$iconsPath/doctor_profile.png';
+  static const String doctorProfileIconIcon = '$iconsPath/doctor_profile_icon.png';
+
+  static const String bloodTest = '$iconsPath/blood_test.png';
+  static const String chemicalAnalysisIcon = '$iconsPath/chemical_analysis.png';
+  static const String medicalDevicesIcon = '$iconsPath/medical_devices.png';
 
 
 

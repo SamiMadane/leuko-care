@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/all_doctors_widgets/doctor_list_tile.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/admin_user/all_doctors_widgets/doctor_list_tile.dart';
 
 class DoctorListViewSection extends StatelessWidget {
   final List<DoctorModel> doctors;
