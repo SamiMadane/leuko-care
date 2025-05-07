@@ -72,8 +72,9 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
               ? (isDoctorUser ? 'Edit Profile' : 'Edit Doctor')
               : 'Add Doctor',
         ),
+        backgroundColor: isDoctorUser ? Colors.white : null,  
         elevation: 0,
-      ),
+     ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: SingleChildScrollView(
@@ -116,7 +117,9 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: AddUpdateDoctorBlocListener(),
+      bottomNavigationBar: AddUpdateDoctorBlocListener(
+        isDoctorUser: isDoctorUser,
+      ),
     );
   }
 
