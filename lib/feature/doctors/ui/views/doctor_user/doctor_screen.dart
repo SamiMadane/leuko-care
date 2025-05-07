@@ -8,6 +8,7 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_chats_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_home_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_patients_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_profile_screen.dart';
@@ -85,7 +86,7 @@ class _DoctorBodyBuilder extends StatelessWidget {
       DoctorHomeScreen(doctor: doctor, patients: patients,),
       DoctorPatientsScreen(doctor: doctor,patients: patients,),
       UploadSampleScreen(),
-      UploadSampleScreen(),
+      DoctorChatsScreen(patients: patients),
       DoctorProfileScreen(doctor: doctor,),
     ];
 

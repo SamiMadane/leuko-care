@@ -46,7 +46,7 @@ class DoctorProfileScreen extends StatelessWidget {
             Text(
               'Dr. ${doctor.name}',
               style: getBoldTextStyle(
-                fontSize: FontSizeManager.s22,
+                fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
               ),
             ),

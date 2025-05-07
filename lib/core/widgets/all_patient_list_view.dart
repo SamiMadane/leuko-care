@@ -11,12 +11,13 @@ class AllPaitentListView extends StatefulWidget {
   final List<PatientModel> patients;
   final String doctorId;
   final String doctorName;
+  final String? userType;
 
   const AllPaitentListView({
     super.key,
     required this.patients,
     required this.doctorId,
-    required this.doctorName,
+    required this.doctorName, this.userType,
   });
 
   @override
@@ -79,10 +80,10 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
   @override
   Widget build(BuildContext context) {
     return widget.patients.isEmpty
-        ? const EmptyStateWidget(
+        ? EmptyStateWidget(
           icon: Icons.group_outlined,
           title: 'No patients found.',
-          message: 'There are no patients added yet. Try adding a new patient.',
+          message: widget.userType == 'doctor' ? 'There are no patients assigned to you yet.':'There are no patients added yet. Try adding a new patient.',
         )
         : SafeArea(
           bottom: true,
