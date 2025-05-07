@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/all_patients_widgets/patient_list_tile.dart';
+import 'package:leuko_care/core/widgets/patient_list_tile.dart';
 
 class PatientListViewSection extends StatelessWidget {
   final List<PatientModel> patients;

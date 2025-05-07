@@ -1,81 +1,137 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
+import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
 class DoctorChatsScreen extends StatelessWidget {
+  final DoctorModel doctor;
   final List<PatientModel> patients;
 
-  const DoctorChatsScreen({super.key, required this.patients});
+  const DoctorChatsScreen({
+    super.key,
+    required this.patients,
+    required this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Patient Chats',
-          style: getBoldTextStyle(
-            fontSize: FontSizeManager.s20,
-            color: ColorsManager.darkBlue,
-          ),
+        title: Row(
+          children: [
+            SizedBox(width: WidthManager.w8,),
+            Text(
+              'Your Patients',
+              style: getBoldTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
         ),
         elevation: 0,
         backgroundColor: ColorsManager.white,
       ),
-      body:
-          patients.isEmpty
-              ? const Center(child: Text('No patients available for chat'))
-              : ListView.builder(
-                itemCount: patients.length,
-                itemBuilder: (context, index) {
-                  final patient = patients[index];
-                  return _buildPatientChatItem(patient, context);
-                },
+      body: Padding(
+        padding: EdgeInsets.all(HeightManager.h16),
+        child:
+            patients.isEmpty
+                ? const Center(child: Text('No patients available for chat'))
+                : ListView.separated(
+                  itemCount: patients.length,
+                  separatorBuilder:
+                      (_, __) => SizedBox(height: HeightManager.h12),
+                  itemBuilder: (context, index) {
+                    final patient = patients[index];
+                    return _buildPatientCard(patient, context);
+                  },
+                ),
+      ),
+    );
+  }
+
+  Widget _buildPatientCard(PatientModel patient, BuildContext context) {
+    return Material(
+      color: ColorsManager.white,
+      elevation: 2,
+      borderRadius: BorderRadius.circular(RadiusManager.r16),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder:
+              // Reuse the existing ChatCubit instance from the widget tree
+                  (_) => BlocProvider.value(
+                    value: context.read<ChatCubit>(),
+                    child: ChatScreen(
+                      currentUserId: doctor.id!,
+                      otherUserId: patient.id!,
+                      patient: patient,
+                    ),
+                  ),
+            ),
+          );
+        },
+        borderRadius: BorderRadius.circular(RadiusManager.r16),
+        child: Padding(
+          padding: EdgeInsets.all(HeightManager.h12),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: HeightManager.h28,
+                backgroundImage: NetworkImage(patient.profileImage),
               ),
-    );
-  }
-
-  Widget _buildPatientChatItem(PatientModel patient, BuildContext context) {
-    return ListTile(
-      onTap: () {
-        // Navigate to the chat screen with the selected patient
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ChatScreen(patient: patient)),
-        );
-      },
-      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(patient.profileImage), // صورة المريض
-        radius: 30,
+              SizedBox(width: WidthManager.w12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      patient.name,
+                      style: getBoldTextStyle(
+                        fontSize: FontSizeManager.s16,
+                        color: ColorsManager.darkBlue,
+                      ),
+                    ),
+                    SizedBox(height: HeightManager.h4),
+                    Text(
+                      patient.email,
+                      style: getRegularTextStyle(
+                        fontSize: FontSizeManager.s14,
+                        color: ColorsManager.gray,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Icon(
+                    Icons.chat_outlined,
+                    color: ColorsManager.primaryColor,
+                    size: HeightManager.h24,
+                  ),
+                  SizedBox(height: HeightManager.h6),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: HeightManager.h16,
+                    color: ColorsManager.gray,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
-      title: Text(
-        patient.name,
-        style: const TextStyle(fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(patient.email),
-      trailing: const Icon(Icons.chat_bubble_outline),
-    );
-  }
-}
-
-class ChatScreen extends StatelessWidget {
-  final PatientModel patient;
-
-  const ChatScreen({super.key, required this.patient});
-
-  @override
-  Widget build(BuildContext context) {
-    // تصميم المحادثة مع المريض
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat with ${patient.name}'),
-        elevation: 0,
-        backgroundColor: ColorsManager.white,
-        foregroundColor: ColorsManager.primaryColor,
-      ),
-      body: Center(child: Text('Chat UI with ${patient.name} here')),
     );
   }
 }

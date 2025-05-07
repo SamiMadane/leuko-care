@@ -6,21 +6,24 @@ import 'package:leuko_care/feature/chats/logic/cubit/chat_state.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/chat_top_bar.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/messages_shimmer.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import '../widgets/chat_input_field/chat_input_field.dart';
 import '../widgets/messages_list.dart';
 
 class ChatScreen extends StatefulWidget {
   final String currentUserId;
   final String otherUserId;
-  final DoctorModel doctor;
+  final DoctorModel? doctor;
+  final PatientModel? patient;
   final String? initialMessage;
 
   const ChatScreen({
     super.key,
     required this.currentUserId,
     required this.otherUserId,
-    required this.doctor,
+    this.doctor,
     this.initialMessage,
+    this.patient,
   });
 
   @override
@@ -39,11 +42,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
-            ChatTopBar(doctor: widget.doctor),
+            ChatTopBar(doctor: widget.doctor, patient: widget.patient),
             Expanded(
               child: BlocBuilder<ChatCubit, ChatState>(
                 builder: (context, state) {

@@ -99,6 +99,7 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
                   patients: _filteredPatients,
                   doctorId: widget.doctorId,
                   doctorName: widget.doctorName,
+                  
                 ),
               ),
             ],

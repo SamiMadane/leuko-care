@@ -86,7 +86,7 @@ class _DoctorBodyBuilder extends StatelessWidget {
       DoctorHomeScreen(doctor: doctor, patients: patients,),
       DoctorPatientsScreen(doctor: doctor,patients: patients,),
       UploadSampleScreen(),
-      DoctorChatsScreen(patients: patients),
+      DoctorChatsScreen(doctor: doctor,patients: patients,),
       DoctorProfileScreen(doctor: doctor,),
     ];
 
