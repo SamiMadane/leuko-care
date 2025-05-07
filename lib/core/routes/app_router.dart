@@ -221,6 +221,7 @@ class AppRouter {
                   ),
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
+                  BlocProvider(create: (_) => getIt<PatientCubit>()),
                 ],
                 child: DoctorScreen(),
               ),
