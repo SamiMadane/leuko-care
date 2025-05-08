@@ -31,7 +31,7 @@ class ChatTopBar extends StatelessWidget {
               onPressed: () => Navigator.pop(context),
             ),
 
-          if (!canPop) SizedBox(width: WidthManager.w8),
+          if (!canPop) SizedBox(width: WidthManager.w20),
 
           CircleAvatar(
             radius: RadiusManager.r28,
