@@ -7,12 +7,13 @@ class PatientListViewSection extends StatelessWidget {
   final List<PatientModel> patients;
   final String doctorId;
   final String doctorName;
+  final String? userType;
 
   const PatientListViewSection({
     super.key,
     required this.patients,
     required this.doctorId,
-    required this.doctorName,
+    required this.doctorName, this.userType,
   });
 
   @override
@@ -33,6 +34,7 @@ class PatientListViewSection extends StatelessWidget {
           patient: patient,
           doctorId: doctorId,
           doctorName: doctorName,
+          userType:userType,
         );
       },
     );

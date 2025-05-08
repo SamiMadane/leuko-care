@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -7,6 +8,7 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/core/widgets/patient_status_widgets.dart';
+import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -14,12 +16,14 @@ class PatientListTile extends StatelessWidget {
   final PatientModel patient;
   final String doctorId;
   final String doctorName;
+  final String? userType;
 
   const PatientListTile({
     super.key,
     required this.patient,
     required this.doctorId,
     required this.doctorName,
+    this.userType,
   });
 
   @override
@@ -30,18 +34,24 @@ class PatientListTile extends StatelessWidget {
         horizontal: WidthManager.w16,
       ),
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RadiusManager.r12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(RadiusManager.r12),
+      ),
       child: InkWell(
-        onTap: () {
-          context.pushNamed(
-            Routes.patientDetailsScreen,
-            arguments: {
+         onTap: () async{
+            final shouldOpenChat = await context.pushNamed(
+              Routes.patientDetailsScreen,
+              arguments: {
               'patientId': patient.id,
               'doctorId': doctorId,
               'doctorName': doctorName,
+              'userType':userType,
             },
-          );
-        },
+            );
+            if (shouldOpenChat == true) {
+              context.read<DoctorCubit>().changeSelectedIndex(2);
+            }
+          },
         child: Padding(
           padding: EdgeInsets.symmetric(
             vertical: HeightManager.h18,
@@ -63,9 +73,7 @@ class PatientListTile extends StatelessWidget {
 class _PatientImage extends StatelessWidget {
   final String profileImage;
 
-  const _PatientImage({
-    required this.profileImage,
-  });
+  const _PatientImage({required this.profileImage});
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +108,7 @@ class _PatientImage extends StatelessWidget {
 class _PatientInfo extends StatelessWidget {
   final PatientModel patient;
 
-  const _PatientInfo({
-    required this.patient,
-  });
+  const _PatientInfo({required this.patient});
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +130,11 @@ class _PatientInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ExaminedStatusWidget(isExamined: patient.isExamined),
-              patient.isExamined ? HealthStatusWidget(status: patient.healthStatus) : const SizedBox.shrink(),
+              patient.isExamined
+                  ? HealthStatusWidget(status: patient.healthStatus)
+                  : const SizedBox.shrink(),
             ],
           ),
-          
         ],
       ),
     );
@@ -137,19 +144,13 @@ class _PatientInfo extends StatelessWidget {
 class _EmailRow extends StatelessWidget {
   final String email;
 
-  const _EmailRow({
-    required this.email,
-  });
+  const _EmailRow({required this.email});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
-          Icons.email,
-          size: IconSizeManager.s16,
-          color: ColorsManager.gray,
-        ),
+        Icon(Icons.email, size: IconSizeManager.s16, color: ColorsManager.gray),
         SizedBox(width: WidthManager.w6),
         Expanded(
           child: Text(
