@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -8,6 +9,7 @@ import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DoctorChatsScreen extends StatelessWidget {
   final DoctorModel doctor;
@@ -25,7 +27,7 @@ class DoctorChatsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            SizedBox(width: WidthManager.w8,),
+            SizedBox(width: WidthManager.w8),
             Text(
               'Your Patients',
               style: getBoldTextStyle(
@@ -58,8 +60,8 @@ class DoctorChatsScreen extends StatelessWidget {
 
   Widget _buildPatientCard(PatientModel patient, BuildContext context) {
     return Material(
-      color: ColorsManager.white,
-      elevation: 2,
+      color: ColorsManager.moreLighterGray,
+      elevation: 4,
       borderRadius: BorderRadius.circular(RadiusManager.r16),
       child: InkWell(
         onTap: () {
@@ -67,7 +69,6 @@ class DoctorChatsScreen extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder:
-              // Reuse the existing ChatCubit instance from the widget tree
                   (_) => BlocProvider.value(
                     value: context.read<ChatCubit>(),
                     child: ChatScreen(
@@ -81,12 +82,28 @@ class DoctorChatsScreen extends StatelessWidget {
         },
         borderRadius: BorderRadius.circular(RadiusManager.r16),
         child: Padding(
-          padding: EdgeInsets.all(HeightManager.h12),
+          padding: EdgeInsets.all(HeightManager.h16),
           child: Row(
             children: [
-              CircleAvatar(
-                radius: HeightManager.h28,
-                backgroundImage: NetworkImage(patient.profileImage),
+              ClipOval(
+                child: CachedNetworkImage(
+                  width: HeightManager.h60,
+                  height: HeightManager.h60,
+                  fit: BoxFit.cover,
+                  imageUrl: patient.profileImage,
+                  placeholder:
+                      (context, url) => Shimmer.fromColors(
+                        baseColor: ColorsManager.lightGray,
+                        highlightColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: RadiusManager.r34,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                  errorWidget:
+                      (context, url, error) =>
+                          Icon(Icons.person, size: HeightManager.h56),
+                ),
               ),
               SizedBox(width: WidthManager.w12),
               Expanded(
@@ -100,7 +117,7 @@ class DoctorChatsScreen extends StatelessWidget {
                         color: ColorsManager.darkBlue,
                       ),
                     ),
-                    SizedBox(height: HeightManager.h4),
+                    SizedBox(height: HeightManager.h6),
                     Text(
                       patient.email,
                       style: getRegularTextStyle(

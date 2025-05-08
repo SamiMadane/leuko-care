@@ -26,6 +26,7 @@ class InfoCard extends StatelessWidget {
       ),
       elevation: 2,
       margin: EdgeInsets.only(bottom: HeightManager.h16),
+      color: ColorsManager.moreLighterGray,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: HeightManager.h16,horizontal:WidthManager.w16 ),
         child: Row(

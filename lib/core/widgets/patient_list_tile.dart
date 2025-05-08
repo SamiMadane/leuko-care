@@ -37,6 +37,7 @@ class PatientListTile extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(RadiusManager.r12),
       ),
+      color: ColorsManager.moreLighterGray,
       child: InkWell(
          onTap: () async{
             final shouldOpenChat = await context.pushNamed(
