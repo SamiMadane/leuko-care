@@ -61,6 +61,7 @@ class DoctorScreen extends StatelessWidget {
             return DoctorBottomNavBar(
               currentIndex: cubit.selectedIndex,
               onTap: cubit.changeSelectedIndex,
+              
             );
           },
         ),
@@ -85,7 +86,7 @@ class _DoctorBodyBuilder extends StatelessWidget {
     final pages = [
       DoctorHomeScreen(doctor: doctor, patients: patients,),
       DoctorPatientsScreen(doctor: doctor,patients: patients,),
-      UploadSampleScreen(),
+      UploadSampleScreen(patients: patients,),
       DoctorChatsScreen(doctor: doctor,patients: patients,),
       DoctorProfileScreen(doctor: doctor,),
     ];
