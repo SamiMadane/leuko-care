@@ -1,15 +1,20 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
+import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:screenshot/screenshot.dart';
 
 class SampleResultScreen extends StatefulWidget {
   final PatientModel patient;
+  final DoctorModel doctor;
   final String result;
   final String diseaseType;
   final double? confidence;
@@ -23,7 +28,7 @@ class SampleResultScreen extends StatefulWidget {
     required this.diseaseType,
     required this.confidence,
     required this.aiMessage,
-    required this.sampleImageUrl,
+    required this.sampleImageUrl, required this.doctor,
   });
 
   @override
@@ -61,9 +66,21 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  // TODO: هنا ضع منطق رفع الصورة أو إرسالها
-                  print('✅ Image ready to send to patient');
                   Navigator.pop(context);
+                   Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (_) => BlocProvider.value(
+                    value: context.read<ChatCubit>(),
+                    child: ChatScreen(
+                      currentUserId: widget.doctor.id!,
+                      otherUserId: widget.patient.id!,
+                      patient: widget.patient,
+                    ),
+                  ),
+            ),
+          );
                 },
                 icon: Icon(Icons.send, color: ColorsManager.white),
                 label: Text(

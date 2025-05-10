@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -16,6 +18,7 @@ class ChatScreen extends StatefulWidget {
   final DoctorModel? doctor;
   final PatientModel? patient;
   final String? initialMessage;
+  final Uint8List? initialImage;
 
   const ChatScreen({
     super.key,
@@ -23,7 +26,7 @@ class ChatScreen extends StatefulWidget {
     required this.otherUserId,
     this.doctor,
     this.initialMessage,
-    this.patient,
+    this.patient, this.initialImage,
   });
 
   @override
@@ -66,6 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
               currentUserId: widget.currentUserId,
               receiverId: widget.otherUserId,
               initialMessage: widget.initialMessage,
+              initialImage: widget.initialImage,
             ),
             SizedBox(height: HeightManager.h4),
           ],

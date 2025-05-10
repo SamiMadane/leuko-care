@@ -2,19 +2,27 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/routes/routes.dart';
+
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
-import 'package:leuko_care/feature/doctors/ui/views/doctor_user/sample_result_screen.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
 class UploadSampleScreen extends StatefulWidget {
   final List<PatientModel> patients;
-  const UploadSampleScreen({super.key, required this.patients});
+  final DoctorModel doctor;
+  const UploadSampleScreen({
+    super.key,
+    required this.patients,
+    required this.doctor,
+  });
 
   @override
   State<UploadSampleScreen> createState() => _UploadSampleScreenState();
@@ -42,21 +50,19 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
 
     setState(() => _isLoading = false);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:
-            (_) => SampleResultScreen(
-              patient: selectedPatient!,
-              result: 'Positive',
-              diseaseType: 'Acute Lymphoblastic Leukemia',
-              confidence: 92.5,
-              aiMessage:
-                  'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.',
-              sampleImageUrl:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
-            ),
-      ),
+    context.pushNamed(
+      Routes.sampleResultScreen,
+      arguments: {
+        'patient': selectedPatient!,
+        'doctor': widget.doctor,
+        'result': 'sick',
+        'diseaseType': 'Acute Lymphoblastic Leukemia',
+        'confidence': 92.5,
+        'aiMessage':
+            'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.',
+        'sampleImageUrl':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
+      },
     );
   }
 
@@ -237,22 +243,20 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
                           height: HeightManager.h30,
                           color: ColorsManager.white,
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (_) => SampleResultScreen(
-                                    patient: selectedPatient!,
-                                    result: 'Positive',
-                                    diseaseType: 'Acute Lymphoblastic Leukemia',
-                                    confidence: 92.5,
-                                    aiMessage:
-                                        'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.',
-                                    sampleImageUrl:
-                                        'https://upload.wikimedia.org/wikipedia/commons/0/0e/Acute_leukemia-ALL.jpg',
-                                  ),
-                            ),
+                        onPressed: () async {
+                          context.pushNamed(
+                            Routes.sampleResultScreen,
+                            arguments: {
+                              'patient': selectedPatient!,
+                              'doctor': widget.doctor,
+                              'result': 'sick',
+                              'diseaseType': 'Acute Lymphoblastic Leukemia',
+                              'confidence': 92.5,
+                              'aiMessage':
+                                  'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.',
+                              'sampleImageUrl':
+                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
+                            },
                           );
                         },
                       ),

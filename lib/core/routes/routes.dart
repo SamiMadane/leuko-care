@@ -20,6 +20,7 @@ class Routes {
 
   // Tihs for Doctor routes
   static const String doctorScreen = '/DoctorScreen';
+  static const String sampleResultScreen = '/SampleResultScreen';
 
 
 

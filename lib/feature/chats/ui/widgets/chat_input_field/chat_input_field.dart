@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,12 +16,12 @@ class ChatInputField extends StatefulWidget {
   final String currentUserId;
   final String receiverId;
   final String? initialMessage;
-
+  final Uint8List? initialImage;
 
   const ChatInputField({
     super.key,
     required this.currentUserId,
-    required this.receiverId, this.initialMessage,
+    required this.receiverId, this.initialMessage, this.initialImage,
   });
 
   @override
