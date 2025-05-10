@@ -66,10 +66,9 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
       children: [
         BlocListener<DoctorCubit, DoctorState>(
           listenWhen: (previous, current) {
-            return current is DoctorBottomNavChanged && current.index != 1;
+            return current is DoctorBottomNavChanged && current.index != 2;
           },
           listener: (context, state) {
-            // لما نخرج من الصفحة رقم 1، نحذف البيانات
             setState(() {
               _image = null;
               selectedPatient = null;
