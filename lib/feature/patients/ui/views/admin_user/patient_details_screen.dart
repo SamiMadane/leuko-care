@@ -107,18 +107,6 @@ class PatientDetailsScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton:
-          userType == 'doctor'
-              ? ClipOval(
-                child: FloatingActionButton(
-                  backgroundColor: ColorsManager.primaryColor,
-                  onPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                  child: Icon(Icons.upload_file, color: ColorsManager.white),
-                ),
-              )
-              : null,
     );
   }
 }

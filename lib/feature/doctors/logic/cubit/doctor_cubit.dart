@@ -7,17 +7,18 @@ import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
 
 class DoctorCubit extends Cubit<DoctorState> {
   final DoctorRepository _repository;
+  DoctorCubit(this._repository) : super(const DoctorState.doctorStateInitial());
+
   StreamSubscription? _doctorsSubscription;
   bool isAscending = false;
   int selectedIndex = 0;
-  DoctorCubit(this._repository) : super(const DoctorState.doctorStateInitial());
+  bool shouldInjectPatient = false;
 
   void getDoctorsStream() async {
     emit(GetDoctorStateLoading());
     await _doctorsSubscription?.cancel();
     _doctorsSubscription = _repository.getDoctorsStream().listen(
       (doctors) async {
-      
         final sortedDoctors = await _repository
             .getDoctorsOrderedByPatientsCount(doctors, isAscending);
         doctors = sortedDoctors;
@@ -25,7 +26,6 @@ class DoctorCubit extends Cubit<DoctorState> {
         emit(GetDoctorStateSuccess(doctors));
       },
       onError: (error) {
-
         emit(GetDoctorStateError(error.toString()));
       },
     );
@@ -96,42 +96,47 @@ class DoctorCubit extends Cubit<DoctorState> {
     return _repository.getPatientsCountForDoctor(doctorId);
   }
 
-
   // Doctor User
 
   void changeSelectedIndex(int index) {
-  selectedIndex = index;
-  emit(DoctorBottomNavChanged(index));
-}
-
-
- void getDoctorAndPatients(String doctorId) {
-  emit(const GetDoctorAndPatientsStateLoading());
-
-  try {
-    // 1. جلب الدكتور الحالي باستخدام Stream
-    final doctorStream = _repository.getDoctorByDoctorIdStream(doctorId);
-
-    // 2. جلب المرضى المرتبطين به باستخدام Stream
-    final patientsStream = _repository.getPatientsByDoctorIdStream(doctorId);
-
-    // استخدام StreamSubscription للاستماع للتغييرات المستمرة
-    doctorStream.listen((doctor) {
-      patientsStream.listen((patients) {
-        emit(GetDoctorAndPatientsStateSuccess(
-          doctor: doctor,
-          patients: patients,
-        ));
-      }, onError: (error) {
-        emit(GetDoctorAndPatientsStateError(error.toString()));
-      });
-    }, onError: (error) {
-      emit(GetDoctorAndPatientsStateError(error.toString()));
-    });
-  } catch (e) {
-    emit(GetDoctorAndPatientsStateError(e.toString()));
+    selectedIndex = index;
+    emit(DoctorBottomNavChanged(index));
   }
-}
 
+  void getDoctorAndPatients(String doctorId) {
+    emit(const GetDoctorAndPatientsStateLoading());
+
+    try {
+      // 1. جلب الدكتور الحالي باستخدام Stream
+      final doctorStream = _repository.getDoctorByDoctorIdStream(doctorId);
+
+      // 2. جلب المرضى المرتبطين به باستخدام Stream
+      final patientsStream = _repository.getPatientsByDoctorIdStream(doctorId);
+
+      // استخدام StreamSubscription للاستماع للتغييرات المستمرة
+      doctorStream.listen(
+        (doctor) {
+          patientsStream.listen(
+            (patients) {
+              emit(
+                GetDoctorAndPatientsStateSuccess(
+                  doctor: doctor,
+                  patients: patients,
+                ),
+              );
+            },
+            onError: (error) {
+              emit(GetDoctorAndPatientsStateError(error.toString()));
+            },
+          );
+        },
+        onError: (error) {
+          emit(GetDoctorAndPatientsStateError(error.toString()));
+        },
+      );
+    } catch (e) {
+      emit(GetDoctorAndPatientsStateError(e.toString()));
+    }
+  }
 
 }

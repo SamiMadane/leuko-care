@@ -32,9 +32,13 @@ class DoctorState with _$DoctorState {
   const factory DoctorState.getDoctorAndPatientsStateSuccess({
     required DoctorModel doctor,
     required List<PatientModel> patients,
+    PatientModel? selectedPatientForSampleUpload,
   }) = GetDoctorAndPatientsStateSuccess;
   const factory DoctorState.getDoctorAndPatientsStateError(String error) = GetDoctorAndPatientsStateError;
 
   const factory DoctorState.doctorBottomNavChanged(int index) = DoctorBottomNavChanged;
+
+
+
 
 }
