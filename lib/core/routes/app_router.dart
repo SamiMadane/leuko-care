@@ -16,6 +16,7 @@ import 'package:leuko_care/feature/doctors/ui/views/admin_user/all_doctors_scree
 import 'package:leuko_care/feature/doctors/ui/views/admin_user/doctor_details_screen.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_screen.dart';
+import 'package:leuko_care/feature/doctors/ui/views/doctor_user/sample_result_screen.dart';
 import 'package:leuko_care/feature/onboarding/logic/onboarding_cubit.dart';
 import 'package:leuko_care/feature/onboarding/ui/views/onboarding_screen.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -128,6 +129,7 @@ class AppRouter {
         final patientId = arguments?['patientId'] as String;
         final doctorId = arguments?['doctorId'] as String;
         final doctorName = arguments?['doctorName'] as String;
+        final userType = arguments?['userType'] as String;
 
         return MaterialPageRoute(
           builder:
@@ -137,6 +139,7 @@ class AppRouter {
                   patientId: patientId,
                   doctorId: doctorId,
                   doctorName: doctorName,
+                  userType: userType,
                 ),
               ),
         );
@@ -221,8 +224,36 @@ class AppRouter {
                   ),
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
+                  BlocProvider(create: (_) => getIt<PatientCubit>()),
                 ],
                 child: DoctorScreen(),
+              ),
+        );
+      case Routes.sampleResultScreen:
+        final arguments = settings.arguments as Map?;
+        final patient = arguments?['patient'] as PatientModel;
+        final doctor = arguments?['doctor'] as DoctorModel;
+        final result = arguments?['result'] as String;
+        final diseaseType = arguments?['diseaseType'] as String;
+        final confidence = arguments?['confidence'] as double;
+        final aiMessage = arguments?['aiMessage'] as String;
+        final sampleImageUrl = arguments?['sampleImageUrl'] as String;
+        return MaterialPageRoute(
+          builder:
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(create: (context) => getIt<DoctorCubit>()),
+                  BlocProvider(create: (_) => getIt<ChatCubit>()),
+                ],
+                child: SampleResultScreen(
+                  patient: patient,
+                  doctor: doctor,
+                  result: result,
+                  diseaseType: diseaseType,
+                  confidence: confidence,
+                  aiMessage: aiMessage,
+                  sampleImageUrl: sampleImageUrl,
+                ),
               ),
         );
 

@@ -1,15 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:leuko_care/core/widgets/all_patient_list_view.dart';
 
 class DoctorPatientsScreen extends StatelessWidget {
-  const DoctorPatientsScreen({super.key});
+  final DoctorModel doctor;
+  final List<PatientModel> patients;
+
+  const DoctorPatientsScreen({
+    super.key,
+    required this.doctor,
+    required this.patients,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-
-        children: [Center(child: Text('Doctor Patients Screen'))]),
+      appBar: AppBar(
+        title: Text(
+          'Patients of Dr. ${doctor.name}',
+          style: getBoldTextStyle(
+            fontSize: FontSizeManager.s20,
+            color: ColorsManager.darkBlue,
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: ColorsManager.white,
+      ),
+      body: AllPaitentListView(
+        patients: patients,
+        doctorId: doctor.id!,
+        doctorName: doctor.name,
+        userType: 'doctor',
+      ),
     );
   }
 }

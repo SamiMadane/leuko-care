@@ -5,43 +5,54 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ChatTopBar extends StatelessWidget {
-  final DoctorModel doctor;
+  final DoctorModel? doctor;
+  final PatientModel? patient;
 
-  const ChatTopBar({super.key, required this.doctor});
+  const ChatTopBar({super.key, required this.doctor, this.patient});
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl = patient?.profileImage ?? doctor?.profileImage;
+    final name = patient?.name ?? 'Dr. ${doctor?.name}';
+    final canPop = Navigator.canPop(context);
+
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: WidthManager.w20,
-        vertical: HeightManager.h16,
-      ),
+      padding: EdgeInsets.symmetric(vertical: HeightManager.h10),
       child: Row(
         children: [
-           CircleAvatar(
-                radius: RadiusManager.r25,
-                backgroundColor: Colors.transparent,
-                backgroundImage: null,
-                child: ClipOval(
-                  child: CachedNetworkImage(
-                    imageUrl: doctor.profileImage,
-                    width: WidthManager.w50,
-                    height: HeightManager.h50,
-                    fit: BoxFit.cover,
-                    placeholder: (_, __) => _buildShimmerLoading(),
-                    errorWidget:
-                        (_, __, ___) =>
-                            const Icon(Icons.error, color: Colors.red),
-                  ),
-                ),
+          if (canPop)
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              color: ColorsManager.darkBlue,
+              onPressed: () => Navigator.pop(context),
+            ),
+
+          if (!canPop) SizedBox(width: WidthManager.w20),
+
+          CircleAvatar(
+            radius: RadiusManager.r28,
+            backgroundColor: Colors.transparent,
+            backgroundImage: null,
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: imageUrl!,
+                width: WidthManager.w56,
+                height: HeightManager.h56,
+                fit: BoxFit.cover,
+                placeholder: (_, __) => _buildShimmerLoading(),
+                errorWidget:
+                    (_, __, ___) => const Icon(Icons.error, color: Colors.red),
               ),
+            ),
+          ),
           SizedBox(width: WidthManager.w12),
           Expanded(
             child: Text(
-              'Dr. ${doctor.name}',
+              name,
               style: getSemiBoldTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -53,12 +64,13 @@ class ChatTopBar extends StatelessWidget {
       ),
     );
   }
-    Widget _buildShimmerLoading() {
+
+  Widget _buildShimmerLoading() {
     return Shimmer.fromColors(
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(
-        radius: RadiusManager.r25,
+        radius: RadiusManager.r28,
         backgroundColor: Colors.white,
       ),
     );

@@ -23,6 +23,7 @@ class PatientDetailsInfoCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(RadiusManager.r16),
       ),
       elevation: 4,
+      color: ColorsManager.moreLighterGray,
       child: Padding(
         padding: EdgeInsets.symmetric(
           vertical: HeightManager.h16,

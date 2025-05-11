@@ -1,16 +1,19 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
 class ImagePreviewThumbnail extends StatelessWidget {
-  final String imagePath;
+  final String? imagePath;
   final VoidCallback onRemove;
+  final Uint8List? initialDoctorImage;
 
   const ImagePreviewThumbnail({
     super.key,
-    required this.imagePath,
+    this.imagePath,
     required this.onRemove,
+    this.initialDoctorImage,
   });
 
   @override
@@ -20,12 +23,19 @@ class ImagePreviewThumbnail extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Stack(
         children: [
-          Image.file(
-            File(imagePath),
-            width: WidthManager.w100,
-            height: HeightManager.h100,
-            fit: BoxFit.cover,
-          ),
+          imagePath != null
+              ? Image.file(
+                File(imagePath!),
+                width: WidthManager.w100,
+                height: HeightManager.h100,
+                fit: BoxFit.cover,
+              )
+              : Image.memory(
+                initialDoctorImage!,
+                width: WidthManager.w100,
+                height: HeightManager.h100,
+                fit: BoxFit.cover,
+              ),
           Positioned(
             top: 2,
             right: 2,
@@ -34,7 +44,11 @@ class ImagePreviewThumbnail extends StatelessWidget {
               child: CircleAvatar(
                 radius: RadiusManager.r12,
                 backgroundColor: Colors.black54,
-                child: Icon(Icons.close, size: IconSizeManager.s16, color: ColorsManager.white),
+                child: Icon(
+                  Icons.close,
+                  size: IconSizeManager.s16,
+                  color: ColorsManager.white,
+                ),
               ),
             ),
           ),

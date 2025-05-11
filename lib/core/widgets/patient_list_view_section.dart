@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/all_patients_widgets/patient_list_tile.dart';
+import 'package:leuko_care/core/widgets/patient_list_tile.dart';
 
 class PatientListViewSection extends StatelessWidget {
   final List<PatientModel> patients;
   final String doctorId;
   final String doctorName;
+  final String? userType;
 
   const PatientListViewSection({
     super.key,
     required this.patients,
     required this.doctorId,
-    required this.doctorName,
+    required this.doctorName, this.userType,
   });
 
   @override
@@ -33,6 +34,7 @@ class PatientListViewSection extends StatelessWidget {
           patient: patient,
           doctorId: doctorId,
           doctorName: doctorName,
+          userType:userType,
         );
       },
     );

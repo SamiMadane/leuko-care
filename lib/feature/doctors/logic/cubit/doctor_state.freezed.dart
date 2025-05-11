@@ -33,7 +33,11 @@ mixin _$DoctorState {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -54,7 +58,11 @@ mixin _$DoctorState {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -75,7 +83,11 @@ mixin _$DoctorState {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -243,7 +255,11 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -268,7 +284,11 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -293,7 +313,11 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -464,7 +488,11 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -489,7 +517,11 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -514,7 +546,11 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -722,7 +758,11 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -747,7 +787,11 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -772,7 +816,11 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -981,7 +1029,11 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -1006,7 +1058,11 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -1031,7 +1087,11 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -1211,7 +1271,11 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -1236,7 +1300,11 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -1261,7 +1329,11 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -1432,7 +1504,11 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -1457,7 +1533,11 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -1482,7 +1562,11 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -1682,7 +1766,11 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -1707,7 +1795,11 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -1732,7 +1824,11 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -1912,7 +2008,11 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -1937,7 +2037,11 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -1962,7 +2066,11 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -2161,7 +2269,11 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -2186,7 +2298,11 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -2211,7 +2327,11 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -2421,7 +2541,11 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -2446,7 +2570,11 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -2471,7 +2599,11 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -2651,7 +2783,11 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -2676,7 +2812,11 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -2701,7 +2841,11 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -2872,7 +3016,11 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -2897,7 +3045,11 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -2922,7 +3074,11 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -3123,7 +3279,11 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -3148,7 +3308,11 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -3173,7 +3337,11 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -3355,7 +3523,11 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -3380,7 +3552,11 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -3405,7 +3581,11 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -3526,7 +3706,11 @@ abstract class _$$GetDoctorAndPatientsStateSuccessImplCopyWith<$Res> {
     $Res Function(_$GetDoctorAndPatientsStateSuccessImpl) then,
   ) = __$$GetDoctorAndPatientsStateSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DoctorModel doctor, List<PatientModel> patients});
+  $Res call({
+    DoctorModel doctor,
+    List<PatientModel> patients,
+    PatientModel? selectedPatientForSampleUpload,
+  });
 }
 
 /// @nodoc
@@ -3543,7 +3727,11 @@ class __$$GetDoctorAndPatientsStateSuccessImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? doctor = null, Object? patients = null}) {
+  $Res call({
+    Object? doctor = null,
+    Object? patients = null,
+    Object? selectedPatientForSampleUpload = freezed,
+  }) {
     return _then(
       _$GetDoctorAndPatientsStateSuccessImpl(
         doctor:
@@ -3556,6 +3744,11 @@ class __$$GetDoctorAndPatientsStateSuccessImplCopyWithImpl<$Res>
                 ? _value._patients
                 : patients // ignore: cast_nullable_to_non_nullable
                     as List<PatientModel>,
+        selectedPatientForSampleUpload:
+            freezed == selectedPatientForSampleUpload
+                ? _value.selectedPatientForSampleUpload
+                : selectedPatientForSampleUpload // ignore: cast_nullable_to_non_nullable
+                    as PatientModel?,
       ),
     );
   }
@@ -3568,6 +3761,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
   const _$GetDoctorAndPatientsStateSuccessImpl({
     required this.doctor,
     required final List<PatientModel> patients,
+    this.selectedPatientForSampleUpload,
   }) : _patients = patients;
 
   @override
@@ -3581,8 +3775,11 @@ class _$GetDoctorAndPatientsStateSuccessImpl
   }
 
   @override
+  final PatientModel? selectedPatientForSampleUpload;
+
+  @override
   String toString() {
-    return 'DoctorState.getDoctorAndPatientsStateSuccess(doctor: $doctor, patients: $patients)';
+    return 'DoctorState.getDoctorAndPatientsStateSuccess(doctor: $doctor, patients: $patients, selectedPatientForSampleUpload: $selectedPatientForSampleUpload)';
   }
 
   @override
@@ -3591,7 +3788,13 @@ class _$GetDoctorAndPatientsStateSuccessImpl
         (other.runtimeType == runtimeType &&
             other is _$GetDoctorAndPatientsStateSuccessImpl &&
             (identical(other.doctor, doctor) || other.doctor == doctor) &&
-            const DeepCollectionEquality().equals(other._patients, _patients));
+            const DeepCollectionEquality().equals(other._patients, _patients) &&
+            (identical(
+                  other.selectedPatientForSampleUpload,
+                  selectedPatientForSampleUpload,
+                ) ||
+                other.selectedPatientForSampleUpload ==
+                    selectedPatientForSampleUpload));
   }
 
   @override
@@ -3599,6 +3802,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     runtimeType,
     doctor,
     const DeepCollectionEquality().hash(_patients),
+    selectedPatientForSampleUpload,
   );
 
   /// Create a copy of DoctorState
@@ -3630,12 +3834,20 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
   }) {
-    return getDoctorAndPatientsStateSuccess(doctor, patients);
+    return getDoctorAndPatientsStateSuccess(
+      doctor,
+      patients,
+      selectedPatientForSampleUpload,
+    );
   }
 
   @override
@@ -3655,12 +3867,20 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
   }) {
-    return getDoctorAndPatientsStateSuccess?.call(doctor, patients);
+    return getDoctorAndPatientsStateSuccess?.call(
+      doctor,
+      patients,
+      selectedPatientForSampleUpload,
+    );
   }
 
   @override
@@ -3680,14 +3900,22 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
     required TResult orElse(),
   }) {
     if (getDoctorAndPatientsStateSuccess != null) {
-      return getDoctorAndPatientsStateSuccess(doctor, patients);
+      return getDoctorAndPatientsStateSuccess(
+        doctor,
+        patients,
+        selectedPatientForSampleUpload,
+      );
     }
     return orElse();
   }
@@ -3793,10 +4021,12 @@ abstract class GetDoctorAndPatientsStateSuccess implements DoctorState {
   const factory GetDoctorAndPatientsStateSuccess({
     required final DoctorModel doctor,
     required final List<PatientModel> patients,
+    final PatientModel? selectedPatientForSampleUpload,
   }) = _$GetDoctorAndPatientsStateSuccessImpl;
 
   DoctorModel get doctor;
   List<PatientModel> get patients;
+  PatientModel? get selectedPatientForSampleUpload;
 
   /// Create a copy of DoctorState
   /// with the given fields replaced by the non-null parameter values.
@@ -3897,7 +4127,11 @@ class _$GetDoctorAndPatientsStateErrorImpl
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -3922,7 +4156,11 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -3947,7 +4185,11 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,
@@ -4159,7 +4401,11 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     required TResult Function() deleteDoctorStateSuccess,
     required TResult Function(String message) deleteDoctorStateError,
     required TResult Function() getDoctorAndPatientsStateLoading,
-    required TResult Function(DoctorModel doctor, List<PatientModel> patients)
+    required TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )
     getDoctorAndPatientsStateSuccess,
     required TResult Function(String error) getDoctorAndPatientsStateError,
     required TResult Function(int index) doctorBottomNavChanged,
@@ -4184,7 +4430,11 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult? Function()? deleteDoctorStateSuccess,
     TResult? Function(String message)? deleteDoctorStateError,
     TResult? Function()? getDoctorAndPatientsStateLoading,
-    TResult? Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult? Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult? Function(String error)? getDoctorAndPatientsStateError,
     TResult? Function(int index)? doctorBottomNavChanged,
@@ -4209,7 +4459,11 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult Function()? deleteDoctorStateSuccess,
     TResult Function(String message)? deleteDoctorStateError,
     TResult Function()? getDoctorAndPatientsStateLoading,
-    TResult Function(DoctorModel doctor, List<PatientModel> patients)?
+    TResult Function(
+      DoctorModel doctor,
+      List<PatientModel> patients,
+      PatientModel? selectedPatientForSampleUpload,
+    )?
     getDoctorAndPatientsStateSuccess,
     TResult Function(String error)? getDoctorAndPatientsStateError,
     TResult Function(int index)? doctorBottomNavChanged,

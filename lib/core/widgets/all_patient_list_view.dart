@@ -5,18 +5,19 @@ import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/all_patients_widgets/patient_filter_bottom_sheet.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/all_patients_widgets/patient_filter_helper.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/all_patients_widgets/patient_list_view_section.dart';
+import 'package:leuko_care/core/widgets/patient_list_view_section.dart';
 
 class AllPaitentListView extends StatefulWidget {
   final List<PatientModel> patients;
   final String doctorId;
   final String doctorName;
+  final String? userType;
 
   const AllPaitentListView({
     super.key,
     required this.patients,
     required this.doctorId,
-    required this.doctorName,
+    required this.doctorName, this.userType,
   });
 
   @override
@@ -79,10 +80,10 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
   @override
   Widget build(BuildContext context) {
     return widget.patients.isEmpty
-        ? const EmptyStateWidget(
+        ? EmptyStateWidget(
           icon: Icons.group_outlined,
           title: 'No patients found.',
-          message: 'There are no patients added yet. Try adding a new patient.',
+          message: widget.userType == 'doctor' ? 'There are no patients assigned to you yet.':'There are no patients added yet. Try adding a new patient.',
         )
         : SafeArea(
           bottom: true,
@@ -98,6 +99,7 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
                   patients: _filteredPatients,
                   doctorId: widget.doctorId,
                   doctorName: widget.doctorName,
+                  userType:widget.userType,
                 ),
               ),
             ],

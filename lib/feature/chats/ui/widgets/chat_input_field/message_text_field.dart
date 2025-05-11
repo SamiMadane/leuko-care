@@ -8,12 +8,14 @@ class MessageTextField extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback onEmojiToggle;
   final String? initialMessage;
+  final String? initialDoctorMessage;
 
   const MessageTextField({
     super.key,
     required this.controller,
     required this.onEmojiToggle,
     this.initialMessage,
+    this.initialDoctorMessage,
   });
 
   @override
@@ -21,6 +23,8 @@ class MessageTextField extends StatefulWidget {
 }
 
 class _MessageTextFieldState extends State<MessageTextField> {
+    bool _doctorMessageInjected = false;
+
   @override
   Widget build(BuildContext context) {
     final shouldInject =
@@ -35,6 +39,15 @@ class _MessageTextFieldState extends State<MessageTextField> {
       );
 
       context.read<PatientCubit>().shouldInjectInitialMessage = false;
+    }
+    if (widget.initialDoctorMessage != null &&
+        !_doctorMessageInjected &&
+        widget.controller.text.isEmpty) {
+      widget.controller.text = widget.initialDoctorMessage!;
+      widget.controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: widget.controller.text.length),
+      );
+      _doctorMessageInjected = true;
     }
 
     return ConstrainedBox(

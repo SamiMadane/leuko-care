@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/chats/data/repository/chat_repo.dart';
@@ -28,13 +30,21 @@ class ChatCubit extends Cubit<ChatState> {
     required String receiverId,
     String? text,
     String? imagePath,
+    Uint8List? imageBytes,
   }) async {
     try {
       emit(ChatLoading());
 
       String imageUrl = '';
+
       if (imagePath != null && imagePath.isNotEmpty) {
-        imageUrl = await _chatRepository.uploadImageToCloudinary(imagePath);
+        imageUrl = await _chatRepository.uploadImageToCloudinary(
+          imagePath: imagePath,
+        );
+      } else if (imageBytes != null) {
+        imageUrl = await _chatRepository.uploadImageToCloudinary(
+          imageBytes: imageBytes,
+        );
       }
 
       final message = ChatModel(

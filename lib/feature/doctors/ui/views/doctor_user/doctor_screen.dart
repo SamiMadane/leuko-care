@@ -8,6 +8,7 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_chats_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_home_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_patients_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/doctor_user/doctor_profile_screen.dart';
@@ -60,6 +61,7 @@ class DoctorScreen extends StatelessWidget {
             return DoctorBottomNavBar(
               currentIndex: cubit.selectedIndex,
               onTap: cubit.changeSelectedIndex,
+              
             );
           },
         ),
@@ -83,9 +85,9 @@ class _DoctorBodyBuilder extends StatelessWidget {
 
     final pages = [
       DoctorHomeScreen(doctor: doctor, patients: patients,),
-      DoctorPatientsScreen(),
-      UploadSampleScreen(),
-      UploadSampleScreen(),
+      DoctorPatientsScreen(doctor: doctor,patients: patients,),
+      UploadSampleScreen(patients: patients,doctor:doctor),
+      DoctorChatsScreen(doctor: doctor,patients: patients,),
       DoctorProfileScreen(doctor: doctor,),
     ];
 
