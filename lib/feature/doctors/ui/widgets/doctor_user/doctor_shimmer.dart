@@ -3,8 +3,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
-class PatientHomeShimmer extends StatelessWidget {
-  const PatientHomeShimmer({super.key});
+class DoctorShimmer extends StatelessWidget {
+  const DoctorShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,43 +13,38 @@ class PatientHomeShimmer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const HomeTopShimmer(),
-      
-          // تعديل مساحة الشِّمر لملء الشاشة
-          Shimmer.fromColors(
-            baseColor: ColorsManager.lightGray,
-            highlightColor: Colors.white,
-            child: Container(
-              height: HeightManager.h30, // زيادة الارتفاع لملء المساحة
-              width: double.infinity, // ملء عرض الشاشة
-              margin: EdgeInsets.symmetric(
-                vertical: HeightManager.h16,
-                horizontal: WidthManager.w16,
-              ),
-              color: Colors.white,
-            ),
+          SizedBox(height: HeightManager.h24),
+          Row(
+            children: [
+              Expanded(child: _shimmerBox(height: HeightManager.h120,width: WidthManager.w180)),
+              Expanded(child: _shimmerBox(height: HeightManager.h120,width: WidthManager.w180)),
+            ],
           ),
-      
-          // زيادة المسافة لتناسب المساحة المحجوزة
-          SizedBox(height: HeightManager.h20),
-      
-          // إعادة تكبير الأبعاد لتملأ الشاشة
-          _shimmerBox(height: HeightManager.h140),
-          SizedBox(height: HeightManager.h20),
-          _shimmerBox(height: HeightManager.h190),
-          SizedBox(height: HeightManager.h20),
-          _shimmerBox(height: HeightManager.h140),
-          SizedBox(height: HeightManager.h20),
+          SizedBox(height: HeightManager.h24),
+          _shimmerBox(height: HeightManager.h26, width: WidthManager.w180),
+          SizedBox(height: HeightManager.h12),
+          _shimmerBox(height: HeightManager.h26, width: double.infinity),
+          SizedBox(height: HeightManager.h24),
+          _shimmerBox(height: HeightManager.h26, width: WidthManager.w180),
+          SizedBox(height: HeightManager.h12),
+          _shimmerBox(height: HeightManager.h160,width: double.infinity),
+            SizedBox(height: HeightManager.h24),
+          _shimmerBox(height: HeightManager.h26, width: WidthManager.w180),
+          SizedBox(height: HeightManager.h12),
+          _shimmerBox(height: HeightManager.h60,width: double.infinity),
+            SizedBox(height: HeightManager.h12),
+          _shimmerBox(height: HeightManager.h60,width: double.infinity),
         ],
       ),
     );
   }
 
-  Widget _shimmerBox({required double height}) {
+  Widget _shimmerBox({required double height,required double width}) {
     return Shimmer.fromColors(
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: Container(
-        width: double.infinity,
+        width: width,
         height: height,
         margin: EdgeInsets.symmetric(horizontal: WidthManager.w12),
         decoration: BoxDecoration(
@@ -59,6 +54,7 @@ class PatientHomeShimmer extends StatelessWidget {
       ),
     );
   }
+  
 }
 
 class HomeTopShimmer extends StatelessWidget {
@@ -85,7 +81,7 @@ class HomeTopShimmer extends StatelessWidget {
                 ),
               ),
               SizedBox(width: WidthManager.w12),
-    
+
               Expanded(
                 child: Shimmer.fromColors(
                   baseColor: ColorsManager.lightGray,
@@ -95,20 +91,20 @@ class HomeTopShimmer extends StatelessWidget {
                     children: [
                       Container(
                         height: HeightManager.h16,
-                        width: WidthManager.w130, 
+                        width: WidthManager.w130,
                         color: Colors.white,
                       ),
                       SizedBox(height: HeightManager.h8),
                       Container(
                         height: HeightManager.h14,
-                        width: WidthManager.w200, 
+                        width: WidthManager.w200,
                         color: Colors.white,
                       ),
                     ],
                   ),
                 ),
               ),
-    
+
               Shimmer.fromColors(
                 baseColor: ColorsManager.lightGray,
                 highlightColor: Colors.white,
@@ -122,7 +118,7 @@ class HomeTopShimmer extends StatelessWidget {
             left: WidthManager.w80,
             right: WidthManager.w20,
           ),
-    
+
           child: Divider(color: ColorsManager.lightGray, thickness: 1),
         ),
       ],

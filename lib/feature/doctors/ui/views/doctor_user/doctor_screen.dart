@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_shimmer.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_screen/doctor_bottom_nav_bar.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_screen/doctor_body_builder.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_screen/doctor_error_widget.dart';
@@ -32,7 +33,7 @@ class DoctorScreen extends StatelessWidget {
                     current is GetDoctorAndPatientsStateSuccess,
             builder: (context, state) {
               if (state is GetDoctorAndPatientsStateLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return DoctorShimmer();
               } else if (state is GetDoctorAndPatientsStateError) {
                 return DoctorErrorWidget(doctorId: doctorId);
               } else if (state is GetDoctorAndPatientsStateSuccess) {

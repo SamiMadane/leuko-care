@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
-import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/home_top_widget.dart';
-import 'package:leuko_care/core/widgets/examined_status_progress_widget.dart';
-import 'package:leuko_care/core/widgets/health_status_bar_chart_widget.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_home_screen/examination_chart_section.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_home_screen/health_status_section.dart';
+import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_home_screen/stats_cards_section.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/medical_tips_section.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
@@ -25,7 +24,10 @@ class DoctorHomeScreen extends StatelessWidget {
     final pending = patients.where((p) => !p.isExamined).length;
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: WidthManager.w16,
+        vertical: HeightManager.h16,
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,19 +37,13 @@ class DoctorHomeScreen extends StatelessWidget {
               imageUrl: doctor.profileImage,
               subMessage: "Your patients at a glance.",
             ),
-            const SizedBox(height: 24),
-            _StatsCardsSection(
-              total: totalPatients,
-              pending: pending,
-            ),
-            const SizedBox(height: 24),
-            _ExaminationChartSection(
-              total: totalPatients,
-              pending: pending,
-            ),
-            const SizedBox(height: 24),
-            _HealthStatusSection(patients: patients),
-            const SizedBox(height: 24),
+            SizedBox(height: HeightManager.h24),
+            StatsCardsSection(total: totalPatients, pending: pending),
+            SizedBox(height: HeightManager.h24),
+            ExaminationChartSection(total: totalPatients, pending: pending),
+            SizedBox(height: HeightManager.h24),
+            HealthStatusSection(patients: patients),
+            SizedBox(height: HeightManager.h24),
             const MedicalTipsSection(),
           ],
         ),
@@ -55,147 +51,3 @@ class DoctorHomeScreen extends StatelessWidget {
     );
   }
 }
-class _StatsCardsSection extends StatelessWidget {
-  final int total;
-  final int pending;
-
-  const _StatsCardsSection({
-    required this.total,
-    required this.pending,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: _StatCard(
-            label: "Total Patients",
-            value: "$total",
-            icon: Icons.groups,
-            color: ColorsManager.primaryColor,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _StatCard(
-            label: "Pending Samples",
-            value: "$pending",
-            icon: Icons.hourglass_empty,
-            color: Colors.orange,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _StatCard extends StatelessWidget {
-  final String label;
-  final String value;
-  final IconData icon;
-  final Color color;
-
-  const _StatCard({
-    required this.label,
-    required this.value,
-    required this.icon,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: color, size: 20),
-          const SizedBox(height: 8),
-          Text(label, style: TextStyle(fontSize: 14, color: color)),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ExaminationChartSection extends StatelessWidget {
-  final int total;
-  final int pending;
-
-  const _ExaminationChartSection({
-    required this.total,
-    required this.pending,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Examination Stats:",
-          style: getBoldTextStyle(
-            fontSize: IconSizeManager.s18,
-            color: ColorsManager.darkBlue,
-          ),
-        ),
-        SizedBox(height: HeightManager.h14),
-        ExaminedStatusProgressWidget(
-          data: {
-            "Examined": total - pending,
-            "Unexamined": pending,
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class _HealthStatusSection extends StatelessWidget {
-  final List<PatientModel> patients;
-
-  const _HealthStatusSection({required this.patients});
-
-  @override
-  Widget build(BuildContext context) {
-    final healthy = patients.where((p) => p.healthStatus == "healthy").length;
-    final sick = patients.where((p) => p.healthStatus == "sick").length;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Health Status:",
-          style: getBoldTextStyle(
-            fontSize: IconSizeManager.s18,
-            color: ColorsManager.darkBlue,
-          ),
-        ),
-        SizedBox(height: HeightManager.h20),
-        HealthStatusBarChart(
-          data: {
-            'healthy': healthy,
-            'sick': sick,
-          },
-        ),
-      ],
-    );
-  }
-}
-
-
