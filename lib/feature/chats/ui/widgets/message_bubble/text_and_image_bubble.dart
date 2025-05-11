@@ -56,7 +56,7 @@ class TextAndImageBubble extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: message.attachmentUrl,
                 width: double.infinity,
-                height: HeightManager.h250,
+                height: HeightManager.h300,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => _buildShimmerLoading(),
                 errorWidget: (context, url, error) => const Icon(Icons.broken_image, size: 100),
