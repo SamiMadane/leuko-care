@@ -11,7 +11,7 @@ import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/ui/views/image_preview_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/ui/views/admin_user/add_update_doctor_screen.dart';
+import 'package:leuko_care/feature/doctors/ui/views/shared/add_update_doctor_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/admin_user/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/admin_user/doctor_details_screen.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
