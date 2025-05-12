@@ -158,20 +158,26 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   void _handleSubmit() {
     if (_formKey.currentState!.validate()) {
       final patient = PatientModel(
-        id: widget.patient?.id,
-        name: _nameController.text,
-        email: _emailController.text,
-        phone: _phoneController.text,
-        profileImage: profileImageUrl ?? '',
-        doctorId: widget.patient?.doctorId ?? widget.doctorId!,
-        userType: 'patient',
-        isExamined: widget.patient?.isExamined ?? false,
-        registrationDate:
-            widget.patient?.registrationDate ??
-            DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        healthStatus: widget.patient?.healthStatus ?? 'unknown',
-        birthDate: _birthDateController.text,
-        leukemiaType: widget.patient?.leukemiaType ?? 'unknown',
+      id: widget.patient?.id, 
+      name: _nameController.text,
+      email: _emailController.text,
+      phone: _phoneController.text,
+      profileImage: profileImageUrl ?? '',
+      doctorId: widget.patient?.doctorId ?? widget.doctorId!,
+      userType: 'patient',
+      isExamined: widget.patient?.isExamined ?? false,
+      registrationDate:
+          widget.patient?.registrationDate ?? DateFormat('yyyy-MM-dd').format(DateTime.now()),
+      healthStatus: widget.patient?.healthStatus ?? 'unknown',
+      birthDate: _birthDateController.text,
+      leukemiaType: widget.patient?.leukemiaType ?? 'unknown',  
+      diseaseConfidence: widget.patient?.diseaseConfidence ?? 0.0,  
+      aiNote: widget.patient?.aiNote,  
+      latestSampleImageUrl: widget.patient?.latestSampleImageUrl,  
+      lastExamDate: widget.patient?.lastExamDate,  
+      hasUnreadMessages: widget.patient?.hasUnreadMessages ?? false, 
+      lastMessageTime: widget.patient?.lastMessageTime,  
+      gender: widget.patient?.gender, 
       );
 
       if (widget.patient != null) {

@@ -19,6 +19,13 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
   healthStatus: json['healthStatus'] as String,
   birthDate: json['birthDate'] as String,
   leukemiaType: json['leukemiaType'] as String,
+  diseaseConfidence: (json['diseaseConfidence'] as num).toDouble(),
+  aiNote: json['aiNote'] as String?,
+  latestSampleImageUrl: json['latestSampleImageUrl'] as String?,
+  lastExamDate: json['lastExamDate'] as String?,
+  hasUnreadMessages: json['hasUnreadMessages'] as bool?,
+  lastMessageTime: json['lastMessageTime'] as String?,
+  gender: json['gender'] as String?,
 );
 
 Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
@@ -35,4 +42,11 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
       'healthStatus': instance.healthStatus,
       'birthDate': instance.birthDate,
       'leukemiaType': instance.leukemiaType,
+      'diseaseConfidence': instance.diseaseConfidence,
+      'aiNote': instance.aiNote,
+      'latestSampleImageUrl': instance.latestSampleImageUrl,
+      'lastExamDate': instance.lastExamDate,
+      'hasUnreadMessages': instance.hasUnreadMessages,
+      'lastMessageTime': instance.lastMessageTime,
+      'gender': instance.gender,
     };

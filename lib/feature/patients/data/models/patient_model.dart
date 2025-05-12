@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'patient_model.g.dart';
 
 @JsonSerializable()
@@ -12,9 +13,16 @@ class PatientModel {
   final String userType;
   final bool isExamined;
   final String registrationDate;
-  final String healthStatus;
+  final String healthStatus; 
   final String birthDate;
   final String leukemiaType;
+  final double diseaseConfidence;
+  final String? aiNote; 
+  final String? latestSampleImageUrl;
+  final String? lastExamDate;
+  final bool? hasUnreadMessages;
+  final String? lastMessageTime;
+  final String? gender;
 
   PatientModel({
     required this.id,
@@ -29,10 +37,18 @@ class PatientModel {
     required this.healthStatus,
     required this.birthDate,
     required this.leukemiaType,
+    required this.diseaseConfidence,
+    this.aiNote,
+    this.latestSampleImageUrl,
+    this.lastExamDate,
+    this.hasUnreadMessages,
+    this.lastMessageTime,
+    this.gender,
   });
 
   factory PatientModel.fromJson(Map<String, dynamic> json) =>
       _$PatientModelFromJson(json);
+
   Map<String, dynamic> toJson() => _$PatientModelToJson(this);
 
   PatientModel copyWith({
@@ -47,7 +63,14 @@ class PatientModel {
     String? registrationDate,
     String? healthStatus,
     String? birthDate,
-    String? leukemiaType,
+    String? diseaseType,
+    double? diseaseConfidence,
+    String? aiNote,
+    String? latestSampleImageUrl,
+    String? lastExamDate,
+    bool? hasUnreadMessages,
+    String? lastMessageTime,
+    String? gender,
   }) {
     return PatientModel(
       id: id ?? this.id,
@@ -61,7 +84,14 @@ class PatientModel {
       registrationDate: registrationDate ?? this.registrationDate,
       healthStatus: healthStatus ?? this.healthStatus,
       birthDate: birthDate ?? this.birthDate,
-      leukemiaType: leukemiaType ?? this.leukemiaType,
+      leukemiaType: diseaseType ?? this.leukemiaType,
+      diseaseConfidence: diseaseConfidence ?? this.diseaseConfidence,
+      aiNote: aiNote ?? this.aiNote,
+      latestSampleImageUrl: latestSampleImageUrl ?? this.latestSampleImageUrl,
+      lastExamDate: lastExamDate ?? this.lastExamDate,
+      hasUnreadMessages: hasUnreadMessages ?? this.hasUnreadMessages,
+      lastMessageTime: lastMessageTime ?? this.lastMessageTime,
+      gender: gender ?? this.gender,
     );
   }
 }
