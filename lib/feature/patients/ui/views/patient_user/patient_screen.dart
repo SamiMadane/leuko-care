@@ -7,7 +7,7 @@ import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_profile_screen.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_bottom_nav_bar.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_home_shimmer.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_shimmer.dart';
 import 'package:leuko_care/feature/patients/ui/views/patient_user/patient_home_screen.dart';
 
 class PatientScreen extends StatelessWidget {
@@ -34,7 +34,7 @@ class PatientScreen extends StatelessWidget {
                     current is GetPatientAndDoctorStateSuccess,
             builder: (context, state) {
               if (state is GetPatientAndDoctorStateLoading) {
-                return const PatientHomeShimmer();
+                return const PatientShimmer();
               } else if (state is GetPatientAndDoctorStateError) {
                 return _buildErrorWidget(context, patientId);
               } else if (state is GetPatientAndDoctorStateSuccess) {
