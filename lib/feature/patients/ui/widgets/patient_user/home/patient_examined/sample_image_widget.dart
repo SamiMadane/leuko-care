@@ -36,36 +36,38 @@ class SampleImageWidget extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            SizedBox(width: WidthManager.w16),
-            Expanded(
-              child: Text(
-                "Latest Sample Image",
-                style: getSemiBoldTextStyle(
-                  fontSize: FontSizeManager.s15,
-                  color: ColorsManager.darkBlue,
+        child: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: WidthManager.w8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Latest Sample Image",
+                  style: getSemiBoldTextStyle(
+                    fontSize: FontSizeManager.s15,
+                    color: ColorsManager.darkBlue,
+                  ),
                 ),
               ),
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(RadiusManager.r8),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                width: 80,
-                height: 80,
-                fit: BoxFit.contain,
-                placeholder: (context, url) => _buildShimmerPlaceholder(),
-                errorWidget: (context, url, error) => const Icon(
-                  Icons.broken_image,
-                  size: 40,
-                  color: ColorsManager.white,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(RadiusManager.r8),
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.contain,
+                  placeholder: (context, url) => _buildShimmerPlaceholder(),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.broken_image,
+                    size: 40,
+                    color: ColorsManager.white,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: WidthManager.w16),
-            Icon(Icons.touch_app_outlined, color: ColorsManager.primaryColor),
-          ],
+              SizedBox(width: WidthManager.w16),
+              Icon(Icons.touch_app_outlined, color: ColorsManager.primaryColor),
+            ],
+          ),
         ),
       ),
     );
