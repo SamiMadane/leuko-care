@@ -34,7 +34,9 @@ class PatientCubit extends Cubit<PatientState> {
 
   Future<String> _getImageUrl(PatientModel patient) async {
     if (patient.profileImage.isEmpty) {
-      return 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png';
+      return patient.gender.toLowerCase() == 'male'
+          ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png'
+          : 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_image_nut3m4';
     } else if (!patient.profileImage.contains('http')) {
       return await _repository.uploadImageToCloudinary(patient.profileImage);
     }

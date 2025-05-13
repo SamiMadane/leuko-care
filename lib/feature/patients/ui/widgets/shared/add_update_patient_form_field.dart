@@ -13,7 +13,8 @@ class AddUpdatePatientFormFields extends StatefulWidget {
   final bool isEditMode;
   final VoidCallback selectBirthDate;
   final bool isPatientUser;
-  final TextEditingController genderController; // إضافة حقل الجنس
+  final TextEditingController genderController;
+  final void Function(String)? onGenderChanged;
 
   const AddUpdatePatientFormFields({
     super.key,
@@ -25,7 +26,8 @@ class AddUpdatePatientFormFields extends StatefulWidget {
     required this.isEditMode,
     required this.selectBirthDate,
     required this.isPatientUser,
-    required this.genderController, // إضافة حقل الجنس
+    required this.genderController,
+    this.onGenderChanged,
   });
 
   @override
@@ -175,6 +177,7 @@ class _AddUpdatePatientFormFieldsState
               setState(() {
                 _selectedGender = value;
                 widget.genderController.text = value!;
+                widget.onGenderChanged?.call(value);
               });
             },
             validator: (value) => value == null ? 'Please select gender' : null,

@@ -39,7 +39,6 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
-  
 
   String? profileImageUrl;
 
@@ -69,6 +68,16 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         profileImageUrl = pickedImage.path;
       });
     }
+  }
+
+  void _handleGenderChanged(String gender) {
+    setState(() {
+      _genderController.text = gender;
+      profileImageUrl =
+          gender.toLowerCase() == 'male'
+              ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png'
+              : 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_image_nut3m4';
+    });
   }
 
   Future<void> _selectBirthDate() async {
@@ -133,6 +142,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                   isEditMode: isEditMode,
                   selectBirthDate: _selectBirthDate,
                   isPatientUser: isPatientUser,
+                  onGenderChanged: _handleGenderChanged,
                 ),
                 SizedBox(height: HeightManager.h30),
                 AppTextButton(
@@ -165,26 +175,27 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   void _handleSubmit() {
     if (_formKey.currentState!.validate()) {
       final patient = PatientModel(
-      id: widget.patient?.id, 
-      name: _nameController.text,
-      email: _emailController.text,
-      phone: _phoneController.text,
-      profileImage: profileImageUrl ?? '',
-      doctorId: widget.patient?.doctorId ?? widget.doctorId!,
-      userType: 'patient',
-      isExamined: widget.patient?.isExamined ?? false,
-      registrationDate:
-          widget.patient?.registrationDate ?? DateFormat('yyyy-MM-dd').format(DateTime.now()),
-      healthStatus: widget.patient?.healthStatus ?? 'unknown',
-      birthDate: _birthDateController.text,
-      leukemiaType: widget.patient?.leukemiaType ?? 'unknown',  
-      diseaseConfidence: widget.patient?.diseaseConfidence ?? 0.0,  
-      aiNote: widget.patient?.aiNote,  
-      latestSampleImageUrl: widget.patient?.latestSampleImageUrl,  
-      lastExamDate: widget.patient?.lastExamDate,  
-      hasUnreadMessages: widget.patient?.hasUnreadMessages ?? false, 
-      lastMessageTime: widget.patient?.lastMessageTime,  
-      gender:  _genderController.text, 
+        id: widget.patient?.id,
+        name: _nameController.text,
+        email: _emailController.text,
+        phone: _phoneController.text,
+        profileImage: profileImageUrl ?? '',
+        doctorId: widget.patient?.doctorId ?? widget.doctorId!,
+        userType: 'patient',
+        isExamined: widget.patient?.isExamined ?? false,
+        registrationDate:
+            widget.patient?.registrationDate ??
+            DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        healthStatus: widget.patient?.healthStatus ?? 'unknown',
+        birthDate: _birthDateController.text,
+        leukemiaType: widget.patient?.leukemiaType ?? 'unknown',
+        diseaseConfidence: widget.patient?.diseaseConfidence ?? 0.0,
+        aiNote: widget.patient?.aiNote,
+        latestSampleImageUrl: widget.patient?.latestSampleImageUrl,
+        lastExamDate: widget.patient?.lastExamDate,
+        hasUnreadMessages: widget.patient?.hasUnreadMessages ?? false,
+        lastMessageTime: widget.patient?.lastMessageTime,
+        gender: _genderController.text,
       );
 
       if (widget.patient != null) {
