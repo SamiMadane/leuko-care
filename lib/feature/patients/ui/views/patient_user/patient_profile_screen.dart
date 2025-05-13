@@ -63,6 +63,8 @@ class PatientProfileScreen extends StatelessWidget {
               icon: Icons.date_range,
             ),
             InfoCard(title: 'Age', value: age.toString(), icon: Icons.cake),
+            InfoCard(title: 'Gender', value: patient.gender, icon: Icons.person),
+
             SizedBox(height: HeightManager.h20),
             PatientEditButton(patient: patient, userType: 'patient'),
           ],
