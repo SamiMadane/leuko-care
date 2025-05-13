@@ -29,11 +29,11 @@ class LoginBlocListener extends StatelessWidget {
           loginSuccess: (user,userType) {
             context.pop();
              if (userType == 'admin') {
-              context.pushReplacementNamed(Routes.adminHomeScreen);
+              context.pushNamedAndRemoveUntil(Routes.adminHomeScreen,predicate: (route) => false,);
             } else if (userType == 'doctor') {
-              context.pushReplacementNamed(Routes.doctorScreen);
+              context.pushNamedAndRemoveUntil(Routes.doctorScreen,predicate: (route) => false,);
             } else if (userType == 'patient') {
-              context.pushReplacementNamed(Routes.patientScreen);
+              context.pushNamedAndRemoveUntil(Routes.patientScreen,predicate: (route) => false,);
             }
           },
           loginError: (error) {
