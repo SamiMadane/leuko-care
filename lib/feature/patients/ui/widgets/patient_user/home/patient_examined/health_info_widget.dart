@@ -25,10 +25,10 @@ class HealthInfoWidget extends StatelessWidget {
         horizontal: WidthManager.w16,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorsManager.white,
         borderRadius: BorderRadius.circular(RadiusManager.r12),
         boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(1, 3)),
         ],
       ),
       child: Row(

@@ -41,8 +41,8 @@ class HealthTipsWidget extends StatelessWidget {
             border: Border.all(color: borderColor),
             boxShadow: [
               BoxShadow(
-                color: Colors.black26,
-                blurRadius: 3,
+                color: Colors.black12,
+                blurRadius: 4,
                 offset: Offset(0, 2),
               ),
             ],
@@ -59,29 +59,38 @@ class HealthTipsWidget extends StatelessWidget {
                   color: titleColor,
                 ),
               ),
-              SizedBox(height: HeightManager.h6),
-              ...tips.map(
-                (tip) => Padding(
-                  padding: EdgeInsets.symmetric(vertical: HeightManager.h6),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        tip.icon,
-                        size: IconSizeManager.s22,
-                        color: titleColor,
+              SizedBox(height: HeightManager.h8),
+              ...tips.mapIndexed((index, tip) {
+                return Column(
+                  children: [
+                    if (index > 0) Divider(color: borderColor.withOpacity(0.3), height: HeightManager.h12),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: HeightManager.h6),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            tip.icon,
+                            size: IconSizeManager.s22,
+                            color: titleColor,
+                          ),
+                          SizedBox(width: WidthManager.w10),
+                          Expanded(
+                            child: Text(
+                              tip.text,
+                              style: getMediumTextStyle(
+                                fontSize: FontSizeManager.s14,
+                                color: ColorsManager.darkBlue,
+                                height: HeightManager.h1_3,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: WidthManager.w8),
-                      Expanded(
-                        child: Text(
-                          tip.text,
-                          style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkBlue,height: HeightManager.h1_3),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                    ),
+                  ],
+                );
+              }).toList(),
             ],
           ),
         ),
@@ -93,33 +102,18 @@ class HealthTipsWidget extends StatelessWidget {
     return [
       HealthTipItem(Icons.emoji_events, "You are healthy! Keep it up!"),
       HealthTipItem(Icons.local_drink, "Drink plenty of water every day."),
-      HealthTipItem(
-        Icons.restaurant,
-        "Eat a balanced diet full of vegetables and fruits.",
-      ),
+      HealthTipItem(Icons.restaurant, "Eat a balanced diet full of vegetables and fruits."),
       HealthTipItem(Icons.directions_run, "Exercise regularly and sleep well."),
     ];
   }
 
   List<HealthTipItem> _getLeukemiaTips() {
     return [
-      HealthTipItem(
-        Icons.health_and_safety,
-        "Take your medications on time and avoid skipping doses.",
-      ),
-      HealthTipItem(
-        Icons.food_bank,
-        "Consume high-protein, high-calorie meals to maintain energy.",
-      ),
-      HealthTipItem(
-        Icons.clean_hands,
-        "Wash your hands frequently to avoid infections.",
-      ),
+      HealthTipItem(Icons.health_and_safety, "Take your medications on time and avoid skipping doses."),
+      HealthTipItem(Icons.food_bank, "Consume high-protein, high-calorie meals to maintain energy."),
+      HealthTipItem(Icons.clean_hands, "Wash your hands frequently to avoid infections."),
       HealthTipItem(Icons.masks, "Avoid crowded areas and wear a mask when needed."),
-      HealthTipItem(
-        Icons.support,
-        "Stay in contact with your doctor and report any new symptoms.",
-      ),
+      HealthTipItem(Icons.support, "Stay in contact with your doctor and report any new symptoms."),
     ];
   }
 }
@@ -129,4 +123,12 @@ class HealthTipItem {
   final String text;
 
   HealthTipItem(this.icon, this.text);
+}
+
+// Helper extension for indexing in map
+extension IterableExtension<E> on Iterable<E> {
+  Iterable<T> mapIndexed<T>(T Function(int index, E item) f) {
+    var i = 0;
+    return map((e) => f(i++, e));
+  }
 }

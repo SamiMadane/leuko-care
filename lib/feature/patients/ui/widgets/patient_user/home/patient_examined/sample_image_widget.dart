@@ -26,13 +26,13 @@ class SampleImageWidget extends StatelessWidget {
         margin: EdgeInsets.only(bottom: HeightManager.h12),
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
+        color: ColorsManager.white,
           borderRadius: BorderRadius.circular(RadiusManager.r12),
           boxShadow: [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 6,
-              offset: Offset(0, 3),
+              offset: Offset(1, 3),
             ),
           ],
         ),

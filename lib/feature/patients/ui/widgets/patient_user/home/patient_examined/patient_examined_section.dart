@@ -10,18 +10,22 @@ class PatientExaminedSection extends StatelessWidget {
   final PatientModel patient;
   final DoctorModel doctor;
 
-  const PatientExaminedSection({super.key, required this.patient, required this.doctor});
+  const PatientExaminedSection({
+    super.key,
+    required this.patient,
+    required this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HealthOverviewWidget(patient: patient,),
+        HealthOverviewWidget(patient: patient),
+        SizedBox(height: HeightManager.h20),
+        DoctorInfoWidget(patient: patient, doctor: doctor),
         SizedBox(height: HeightManager.h20),
         HealthTipsWidget(patient: patient),
-        SizedBox(height:  HeightManager.h20),
-        DoctorInfoWidget(patient: patient, doctor: doctor),
       ],
     );
   }
