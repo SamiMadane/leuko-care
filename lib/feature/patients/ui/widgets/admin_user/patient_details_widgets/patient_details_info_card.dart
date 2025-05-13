@@ -42,18 +42,43 @@ class PatientDetailsInfoCard extends StatelessWidget {
               'Examined',
               ExaminedStatusWidget(isExamined: patient.isExamined),
             ),
-
             const Divider(),
-            _buildPatientInfoRow(
-              Icons.health_and_safety,
-              'Health Status',
-              HealthStatusWidget(status: patient.healthStatus),
-            ),
-            const Divider(),
+            if (patient.isExamined) ...[
+              _buildPatientInfoRow(
+                Icons.health_and_safety,
+                'Health Status',
+                HealthStatusWidget(status: patient.healthStatus),
+              ),
+              const Divider(),
+              _buildPatientInfoRow(
+                Icons.bloodtype,
+                'Leukemia Type',
+                patient.leukemiaType,
+              ),
+              const Divider(),
+              _buildPatientInfoRow(
+                Icons.percent,
+                'Disease Confidence',
+                '${patient.diseaseConfidence.toStringAsFixed(1)}%',
+              ),
+              const Divider(),
+              _buildPatientInfoRow(
+                Icons.medical_services_outlined,
+                'Last Exam Date',
+                _buildRegistrationDate(patient.lastExamDate!),
+              ),
+              const Divider(),
+            ],
             _buildPatientInfoRow(
               Icons.date_range,
               'Registration Date',
               _buildRegistrationDate(patient.registrationDate),
+            ),
+            const Divider(),
+            _buildPatientInfoRow(
+              Icons.person_outline,
+              'Gender',
+              patient.gender,
             ),
           ],
         ),

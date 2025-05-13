@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/all_patients_widgets/all_patients_body_bloc_builder.dart';
@@ -22,16 +23,29 @@ class AllPatientsScreen extends StatefulWidget {
 }
 
 class _AllPatientsScreenState extends State<AllPatientsScreen> {
-    @override
+  @override
   void initState() {
     super.initState();
+    print ('sami in AllPatientsScreen');
+
     context.read<PatientCubit>().getPatientsByDoctorId(widget.doctorId);
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Patients of Dr. ${widget.doctorName}')),
+      appBar: AppBar(
+        title: Text(
+          'Patients of Dr. ${widget.doctorName}',
+          style: getSemiBoldTextStyle(
+            fontSize: FontSizeManager.s20,
+            color: ColorsManager.darkBlue,
+          ),
+        ),
+        backgroundColor: ColorsManager.appBarColor,
+      ),
       body: AllPatientsBodyBlocBuilder(
         doctorId: widget.doctorId,
         doctorName: widget.doctorName,
@@ -40,15 +54,14 @@ class _AllPatientsScreenState extends State<AllPatientsScreen> {
         onPressed: () {
           context.pushNamed(
             Routes.addUpdatePatientScreen,
-            arguments: {'doctorId': widget.doctorId},
+            arguments: {'doctorId': widget.doctorId,'doctorName':widget.doctorName},
           );
         },
-       shape: const CircleBorder(),
-        
+        shape: const CircleBorder(),
+
         backgroundColor: ColorsManager.primaryColor,
         child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
-  
 }

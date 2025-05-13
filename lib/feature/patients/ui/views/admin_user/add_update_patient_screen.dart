@@ -38,6 +38,8 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  
 
   String? profileImageUrl;
 
@@ -49,6 +51,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
       _emailController.text = widget.patient!.email;
       _phoneController.text = widget.patient!.phone;
       _birthDateController.text = widget.patient!.birthDate;
+      _genderController.text = widget.patient!.gender;
       profileImageUrl = widget.patient!.profileImage;
     } else {
       profileImageUrl =
@@ -101,7 +104,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
           ),
         ),
         elevation: 0,
-        backgroundColor: isPatientUser ? Colors.white : null,
+        backgroundColor: ColorsManager.appBarColor,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -126,6 +129,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                   phoneController: _phoneController,
                   passwordController: _passwordController,
                   birthDateController: _birthDateController,
+                  genderController: _genderController,
                   isEditMode: isEditMode,
                   selectBirthDate: _selectBirthDate,
                   isPatientUser: isPatientUser,
@@ -150,6 +154,9 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         ),
       ),
       bottomNavigationBar: AddUpdatePatientBlocListener(
+        doctorId: widget.doctorId,
+        doctorName: widget.doctorName,
+        patient: widget.patient,
         isPatientUser: isPatientUser,
       ),
     );
@@ -177,7 +184,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
       lastExamDate: widget.patient?.lastExamDate,  
       hasUnreadMessages: widget.patient?.hasUnreadMessages ?? false, 
       lastMessageTime: widget.patient?.lastMessageTime,  
-      gender: widget.patient?.gender, 
+      gender:  _genderController.text, 
       );
 
       if (widget.patient != null) {

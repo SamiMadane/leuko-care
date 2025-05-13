@@ -22,7 +22,7 @@ class PatientModel {
   final String? lastExamDate;
   final bool? hasUnreadMessages;
   final String? lastMessageTime;
-  final String? gender;
+  final String gender;
 
   PatientModel({
     required this.id,
@@ -43,7 +43,7 @@ class PatientModel {
     this.lastExamDate,
     this.hasUnreadMessages,
     this.lastMessageTime,
-    this.gender,
+    required this.gender,
   });
 
   factory PatientModel.fromJson(Map<String, dynamic> json) =>

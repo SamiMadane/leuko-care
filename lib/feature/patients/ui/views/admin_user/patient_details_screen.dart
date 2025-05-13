@@ -9,7 +9,7 @@ import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/delete_patient_bloc_listener.dart';
-import 'package:leuko_care/core/widgets/patient_details_app_bar.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_app_bar.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_info_card.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/shared/patient_edit_button.dart';
 
@@ -80,11 +80,8 @@ class PatientDetailsScreen extends StatelessWidget {
                         Text(
                           patient.name,
                           style: getBoldTextStyle(
-                            fontSize: FontSizeManager.s24,
-                            color:
-                                userType == 'doctor'
-                                    ? ColorsManager.darkBlue
-                                    : ColorsManager.blueGrey,
+                            fontSize: FontSizeManager.s22,
+                            color:ColorsManager.darkBlue,
                           ),
                         ),
                         SizedBox(height: HeightManager.h20),
@@ -95,6 +92,8 @@ class PatientDetailsScreen extends StatelessWidget {
                             : PatientEditButton(
                               patient: patient,
                               userType: 'admin',
+                              doctorName : doctorName,
+                              
                             ),
                       ],
                     ),

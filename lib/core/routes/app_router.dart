@@ -147,6 +147,8 @@ class AppRouter {
         final arguments = settings.arguments as Map?;
         final patientModel = arguments?['patientModel'] as PatientModel?;
         final doctorId = arguments?['doctorId'] as String?;
+        final doctorName = arguments?['doctorName'] as String?;
+
         final userType = arguments?['userType'] as String?;
 
         return MaterialPageRoute(
@@ -157,6 +159,7 @@ class AppRouter {
                   patient: patientModel,
                   doctorId: doctorId,
                   userType: userType,
+                  doctorName:doctorName,
                 ),
               ),
         );

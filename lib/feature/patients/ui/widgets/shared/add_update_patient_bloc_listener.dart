@@ -49,7 +49,9 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
             context.pop();
             _showUpdateSuccessDialog(
               context,
-              (isPatientUser!)?'Your information updated successfully' : 'Patient updated successfully',
+              (isPatientUser!)
+                  ? 'Your information updated successfully'
+                  : 'Patient updated successfully',
               patient,
             );
           },
@@ -110,6 +112,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
             message: message,
             onSuccess: () {
               if (!isPatientUser!) {
+                print('patientId:${patient.id} ,doctorId:$doctorId ,doctorName:$doctorName ');
                 context.pop();
                 context.pop();
                 context.pushReplacementNamed(
@@ -123,10 +126,7 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
               } else {
                 context.pop();
                 context.pop();
-                context.pushReplacementNamed(
-                  Routes.patientScreen,
-                );
-                  
+                context.pushReplacementNamed(Routes.patientScreen);
               }
             },
           ),

@@ -26,7 +26,7 @@ class AllPatientsBodyBlocBuilder extends StatelessWidget {
             return _buildPatientsLoadingWidget();
 
           case GetPatientsByDoctorIdStateSuccess():
-            return AllPaitentListView(patients: state.patients,doctorId: doctorId,doctorName: doctorName,);
+            return AllPaitentListView(patients: state.patients,doctorId: doctorId,doctorName: doctorName,userType: 'admin',);
 
           case GetPatientsByDoctorIdStateError():
             return _buildPatientsErrorWidget(message: state.message);

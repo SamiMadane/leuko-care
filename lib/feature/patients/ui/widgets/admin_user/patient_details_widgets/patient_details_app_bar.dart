@@ -22,13 +22,10 @@ class PatientDetailsAppBar extends StatelessWidget
       title: Text(
         patientName,
         overflow: TextOverflow.ellipsis,
-        style:
-            userType == 'doctor'
-                ? getSemiBoldTextStyle(
-                  fontSize: FontSizeManager.s20,
-                  color: ColorsManager.darkBlue,
-                )
-                : null,
+        style: getSemiBoldTextStyle(
+          fontSize: FontSizeManager.s20,
+          color: ColorsManager.darkBlue,
+        ),
       ),
       actions: [
         userType == 'doctor'
@@ -38,7 +35,7 @@ class PatientDetailsAppBar extends StatelessWidget
               onPressed: onDeletePressed,
             ),
       ],
-      backgroundColor: userType == 'doctor' ? ColorsManager.white : null,
+      backgroundColor: ColorsManager.appBarColor,
       elevation: 0,
     );
   }

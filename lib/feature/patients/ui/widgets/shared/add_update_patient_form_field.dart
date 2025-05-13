@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/app_drobdown_form_field.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 
 class AddUpdatePatientFormFields extends StatefulWidget {
@@ -12,6 +13,7 @@ class AddUpdatePatientFormFields extends StatefulWidget {
   final bool isEditMode;
   final VoidCallback selectBirthDate;
   final bool isPatientUser;
+  final TextEditingController genderController; // إضافة حقل الجنس
 
   const AddUpdatePatientFormFields({
     super.key,
@@ -23,19 +25,33 @@ class AddUpdatePatientFormFields extends StatefulWidget {
     required this.isEditMode,
     required this.selectBirthDate,
     required this.isPatientUser,
+    required this.genderController, // إضافة حقل الجنس
   });
 
   @override
   State<AddUpdatePatientFormFields> createState() =>
-      _AddUpdateDoctorFormFieldsState();
+      _AddUpdatePatientFormFieldsState();
 }
 
-class _AddUpdateDoctorFormFieldsState
+class _AddUpdatePatientFormFieldsState
     extends State<AddUpdatePatientFormFields> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
+
+  // خيارات الجنس
+  String? _selectedGender = "Male"; // القيمة الافتراضية
+
+  @override
+  void initState() {
+    super.initState();
+
+    // ضبط القيمة الافتراضية في الـ Controller
+    if (!widget.isEditMode) {
+      widget.genderController.text = _selectedGender!;
+    }
+  }
 
   @override
   void dispose() {
@@ -58,6 +74,7 @@ class _AddUpdateDoctorFormFieldsState
                       ? 'Name must be at least 3 letters and contain letters only'
                       : null,
         ),
+
         if (!widget.isPatientUser) ...[
           SizedBox(height: HeightManager.h10),
           AppTextFormField(
@@ -138,6 +155,33 @@ class _AddUpdateDoctorFormFieldsState
                       ? 'Invalid phone number'
                       : null,
         ),
+
+        // إضافة حقل الجنس
+        if (!widget.isEditMode) ...[
+          SizedBox(height: HeightManager.h10),
+          AppDropdownFormField<String>(
+            value: _selectedGender,
+            labelText: 'Gender',
+            items:
+                ['Male', 'Female']
+                    .map(
+                      (gender) => DropdownMenuItem<String>(
+                        value: gender,
+                        child: Text(gender),
+                      ),
+                    )
+                    .toList(),
+            onChanged: (value) {
+              setState(() {
+                _selectedGender = value;
+                widget.genderController.text = value!;
+              });
+            },
+            validator: (value) => value == null ? 'Please select gender' : null,
+          ),
+
+          SizedBox(height: HeightManager.h10),
+        ],
 
         if (!widget.isPatientUser) ...[
           SizedBox(height: HeightManager.h10),

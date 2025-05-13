@@ -25,7 +25,7 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
   lastExamDate: json['lastExamDate'] as String?,
   hasUnreadMessages: json['hasUnreadMessages'] as bool?,
   lastMessageTime: json['lastMessageTime'] as String?,
-  gender: json['gender'] as String?,
+  gender: json['gender'] as String,
 );
 
 Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>

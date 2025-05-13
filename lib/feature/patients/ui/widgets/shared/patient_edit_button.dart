@@ -10,8 +10,9 @@ import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 class PatientEditButton extends StatelessWidget {
     final String userType;
   final PatientModel patient;
+  final String? doctorName;
 
-  const PatientEditButton({super.key, required this.patient, required this.userType});
+  const PatientEditButton({super.key, required this.patient, required this.userType, this.doctorName});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,8 @@ class PatientEditButton extends StatelessWidget {
           context.pushNamed(Routes.addUpdatePatientScreen, arguments: {
             'patientModel': patient,
             'userType': userType,
+            'doctorId': patient.doctorId,
+            'doctorName':doctorName,
           });
         },
         icon: const Icon(Icons.edit, color: ColorsManager.white),

@@ -10,6 +10,7 @@ class ColorsManager {
   static const Color lighterGray = Color(0xFFEDEDED);
   static const Color moreLightGray = Color(0xFFFDFDFF);
   static const Color moreLighterGray = Color(0xFFF5F5F5);
+  static const Color appBarColor = Color(0xFFF5F5F5);
   static const Color profileBackGroundColor = Color.fromRGBO(238, 238, 238, 1);
   static const Color darkGreen = Color(0xFF2E7D32);
   static const Color lightGreen = Color(0xFFE8F5E9);
