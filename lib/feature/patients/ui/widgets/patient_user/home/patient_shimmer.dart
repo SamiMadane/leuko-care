@@ -13,42 +13,45 @@ class PatientShimmer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const HomeTopShimmer(),
-      
-          Shimmer.fromColors(
-            baseColor: ColorsManager.lightGray,
-            highlightColor: Colors.white,
-            child: Container(
-              height: HeightManager.h30, // زيادة الارتفاع لملء المساحة
-              width: double.infinity, // ملء عرض الشاشة
-              margin: EdgeInsets.symmetric(
-                vertical: HeightManager.h16,
-                horizontal: WidthManager.w16,
-              ),
-              color: Colors.white,
-            ),
-          ),
-      
-          // زيادة المسافة لتناسب المساحة المحجوزة
           SizedBox(height: HeightManager.h20),
+
+          _shimmerBox(height: HeightManager.h26, width: WidthManager.w260),
+          SizedBox(height: HeightManager.h12),
+          _shimmerBox(height: HeightManager.h26, width: WidthManager.w180),
+      
+          SizedBox(height: HeightManager.h30),
       
           // إعادة تكبير الأبعاد لتملأ الشاشة
-          _shimmerBox(height: HeightManager.h140),
-          SizedBox(height: HeightManager.h20),
-          _shimmerBox(height: HeightManager.h190),
-          SizedBox(height: HeightManager.h20),
-          _shimmerBox(height: HeightManager.h140),
-          SizedBox(height: HeightManager.h20),
+          _shimmerBox(height: HeightManager.h80, width: double.infinity),
+          SizedBox(height: HeightManager.h14),
+          _shimmerBox(height: HeightManager.h54, width: double.infinity),
+          SizedBox(height: HeightManager.h14),
+          _shimmerBox(height: HeightManager.h54, width: double.infinity),
+          SizedBox(height: HeightManager.h14),
+           _shimmerBox(height: HeightManager.h54, width: double.infinity),
+          SizedBox(height: HeightManager.h14),
+           _shimmerBox(height: HeightManager.h54, width: double.infinity),
+          SizedBox(height: HeightManager.h30),
+          _shimmerBox(height: HeightManager.h28, width: WidthManager.w260),
+          SizedBox(height: HeightManager.h12),
+           _shimmerBox(height: HeightManager.h80, width: double.infinity),
+  SizedBox(height: HeightManager.h30),
+          _shimmerBox(height: HeightManager.h28, width: WidthManager.w260),
+          SizedBox(height: HeightManager.h12),
+           _shimmerBox(height: HeightManager.h300, width: double.infinity),
+
+          
         ],
       ),
     );
   }
 
-  Widget _shimmerBox({required double height}) {
+  Widget _shimmerBox({required double height,required double width}) {
     return Shimmer.fromColors(
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: Container(
-        width: double.infinity,
+        width: width,
         height: height,
         margin: EdgeInsets.symmetric(horizontal: WidthManager.w12),
         decoration: BoxDecoration(
