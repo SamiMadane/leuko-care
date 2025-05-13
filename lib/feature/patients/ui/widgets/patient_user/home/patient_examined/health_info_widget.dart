@@ -46,7 +46,7 @@ class HealthInfoWidget extends StatelessWidget {
           ),
           Text(
             value,
-            style: getRegularTextStyle(
+            style: getMediumTextStyle(
               fontSize: FontSizeManager.s15,
               color: ColorsManager.primaryColor,
             ),

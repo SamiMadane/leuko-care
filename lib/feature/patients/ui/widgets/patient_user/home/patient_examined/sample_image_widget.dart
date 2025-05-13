@@ -42,7 +42,7 @@ class SampleImageWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 "Latest Sample Image",
-                style: getMediumTextStyle(
+                style: getSemiBoldTextStyle(
                   fontSize: FontSizeManager.s15,
                   color: ColorsManager.darkBlue,
                 ),
