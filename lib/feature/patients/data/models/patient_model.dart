@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:leuko_care/core/helpers/timestamp_converter.dart';
 
 part 'patient_model.g.dart';
 
@@ -21,7 +23,8 @@ class PatientModel {
   final String? latestSampleImageUrl;
   final String? lastExamDate;
   final bool? hasUnreadMessages;
-  final String? lastMessageTime;
+  @TimestampConverter()
+  final Timestamp? lastMessageTime;
   final String gender;
 
   PatientModel({
@@ -69,7 +72,7 @@ class PatientModel {
     String? latestSampleImageUrl,
     String? lastExamDate,
     bool? hasUnreadMessages,
-    String? lastMessageTime,
+    Timestamp? lastMessageTime,
     String? gender,
   }) {
     return PatientModel(

@@ -5,15 +5,25 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/core/widgets/profile_image_widget.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/info_card.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/info_card.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/message_status_card.dart';
 
 class DoctorDetailsScreenForPatient extends StatelessWidget {
   final DoctorModel doctor;
+  final PatientModel patient;
 
-  const DoctorDetailsScreenForPatient({super.key, required this.doctor});
+  const DoctorDetailsScreenForPatient({
+    super.key,
+    required this.doctor,
+    required this.patient,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final hasUnread = patient.hasUnreadMessages ?? false;
+    final lastMessage = patient.lastMessageTime?.toDate();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -27,7 +37,6 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
         elevation: 0,
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
       ),
-
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           vertical: HeightManager.h20,
@@ -37,15 +46,23 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ProfileImageWidget(profileImageUrl: doctor.profileImage),
-            SizedBox(height: HeightManager.h20),
+            SizedBox(height: HeightManager.h16),
 
             Text(
-              'Dr.${doctor.name}',
+              'Dr. ${doctor.name}',
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s24,
                 color: ColorsManager.darkBlue,
               ),
             ),
+            SizedBox(height: HeightManager.h10),
+
+            if (lastMessage != null)
+              MessageStatusCard(
+                lastMessageTime: lastMessage,
+                hasUnread: hasUnread,
+              ),
+
             SizedBox(height: HeightManager.h20),
 
             InfoCard(icon: Icons.email, title: 'Email', value: doctor.email),
@@ -61,28 +78,19 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
               value: doctor.description,
               isMultiline: true,
             ),
-            SizedBox(height: HeightManager.h16),
           ],
         ),
       ),
 
-      floatingActionButton: ClipOval(
-        child: Material(
-          color: ColorsManager.primaryColor,
-          child: InkWell(
-            onTap: () {
-              Navigator.pop(context, true);
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: HeightManager.h14,
-                horizontal: WidthManager.w14,
-              ),
-              child: Icon(Icons.message, color: ColorsManager.white),
-            ),
-          ),
-        ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorsManager.primaryColor,
+        onPressed: () {
+          Navigator.pop(context, true); // لاحقًا توجه إلى شاشة الدردشة
+        },
+        child: Icon(Icons.message, color: Colors.white),
       ),
     );
   }
 }
+
+

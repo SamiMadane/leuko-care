@@ -104,4 +104,12 @@ class PatientRepository {
         .snapshots()
         .map((doc) => PatientModel.fromJson(doc.data()!));
   }
+
+    Future<void> markMessagesAsRead(String patientId) async {
+    final docRef = FirebaseFirestore.instance.collection('patients').doc(patientId);
+
+    await docRef.update({
+      'hasUnreadMessages': false,
+    });
+  }
 }

@@ -6,7 +6,7 @@ import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/shared/doctor_details_edit_button.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/info_card.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/info_card.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   final DoctorModel doctor;

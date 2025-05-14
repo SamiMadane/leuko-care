@@ -75,7 +75,12 @@ class PatientScreen extends StatelessWidget {
             final cubit = context.read<PatientCubit>();
             return PatientBottomNavBar(
               currentIndex: cubit.selectedIndex,
-              onTap: (index) => cubit.changeSelectedIndex(index),
+              onTap: (index) {
+                cubit.changeSelectedIndex(index);
+                if (index == 1) {
+                  cubit.markMessagesAsRead(patientId!);
+                }
+              },
             );
           },
         ),

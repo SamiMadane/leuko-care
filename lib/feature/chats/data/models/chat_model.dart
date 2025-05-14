@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:leuko_care/feature/chats/data/models/timestamp_converter.dart';
+import 'package:leuko_care/core/helpers/timestamp_converter.dart';
 part 'chat_model.g.dart';
 
 @JsonSerializable()

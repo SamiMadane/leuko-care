@@ -8,7 +8,7 @@ import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/shared/patient_edit_button.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/info_card.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/info_card.dart';
 
 class PatientProfileScreen extends StatelessWidget {
   final PatientModel patient;

@@ -24,7 +24,7 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
   latestSampleImageUrl: json['latestSampleImageUrl'] as String?,
   lastExamDate: json['lastExamDate'] as String?,
   hasUnreadMessages: json['hasUnreadMessages'] as bool?,
-  lastMessageTime: json['lastMessageTime'] as String?,
+  lastMessageTime: const TimestampConverter().fromJson(json['lastMessageTime']),
   gender: json['gender'] as String,
 );
 
@@ -47,6 +47,14 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
       'latestSampleImageUrl': instance.latestSampleImageUrl,
       'lastExamDate': instance.lastExamDate,
       'hasUnreadMessages': instance.hasUnreadMessages,
-      'lastMessageTime': instance.lastMessageTime,
+      'lastMessageTime': _$JsonConverterToJson<dynamic, Timestamp>(
+        instance.lastMessageTime,
+        const TimestampConverter().toJson,
+      ),
       'gender': instance.gender,
     };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

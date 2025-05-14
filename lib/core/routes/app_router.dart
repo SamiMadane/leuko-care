@@ -193,14 +193,16 @@ class AppRouter {
         );
 
       case Routes.doctorDetailsScreenForPatient:
-        final doctorDetailsForPatientScreen = arguments as DoctorModel;
+        final arguments = settings.arguments as Map?;
+        final doctor = arguments?['doctor'] as DoctorModel;
+        final patient = arguments?['patient'] as PatientModel;
 
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
                 create: (context) => getIt<PatientCubit>(),
                 child: DoctorDetailsScreenForPatient(
-                  doctor: doctorDetailsForPatientScreen,
+                  doctor: doctor, patient: patient,
                 ),
               ),
         );

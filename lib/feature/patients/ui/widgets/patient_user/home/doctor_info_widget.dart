@@ -26,7 +26,7 @@ class DoctorInfoWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Doctor Who Examined You:",
+          "Doctor Who Examined You",
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
@@ -34,12 +34,16 @@ class DoctorInfoWidget extends StatelessWidget {
         ),
         SizedBox(height: HeightManager.h14),
         InkWell(
-          onTap: () async{
+          onTap: () async {
             final shouldOpenChat = await context.pushNamed(
               Routes.doctorDetailsScreenForPatient,
-              arguments: doctor,
+              arguments: {
+                'doctor':doctor,
+                'patient':patient,
+              },
             );
             if (shouldOpenChat == true) {
+              context.read<PatientCubit>().markMessagesAsRead(patient.id!);
               context.read<PatientCubit>().changeSelectedIndex(1);
             }
           },
@@ -107,6 +111,9 @@ class DoctorInfoWidget extends StatelessWidget {
                     ],
                   ),
                 ),
+                if (patient.hasUnreadMessages ??
+                    false) // هنا يمكن إضافة شرط لإظهار علامة غير مقروءة
+                  Icon(Icons.notification_important, color: Colors.red),
                 Icon(Icons.arrow_forward_ios, color: Colors.blue),
               ],
             ),

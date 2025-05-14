@@ -23,7 +23,7 @@ class HealthTipsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Helpful Health Tips:",
+          "Helpful Health Tips",
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
