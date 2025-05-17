@@ -73,6 +73,11 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
               value: '${doctor.experience} years',
             ),
             InfoCard(
+              icon: doctor.gender.toLowerCase() == 'male' ?Icons.male : Icons.female,
+              title: 'Gender',
+              value: doctor.gender,
+            ),
+            InfoCard(
               icon: Icons.description,
               title: 'Description',
               value: doctor.description,

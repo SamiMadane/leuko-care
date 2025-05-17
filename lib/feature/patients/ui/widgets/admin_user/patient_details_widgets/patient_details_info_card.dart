@@ -76,7 +76,7 @@ class PatientDetailsInfoCard extends StatelessWidget {
             ),
             const Divider(),
             _buildPatientInfoRow(
-              Icons.person_outline,
+              patient.gender.toLowerCase() == 'male' ?Icons.male : Icons.female,
               'Gender',
               patient.gender,
             ),

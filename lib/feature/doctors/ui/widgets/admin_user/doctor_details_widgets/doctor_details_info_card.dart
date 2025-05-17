@@ -38,13 +38,15 @@ class DoctorDetailsInfoCard extends StatelessWidget {
               ),
               const Divider(),
               _buildPatientCount(context, doctor.id!),
-          
+
               const Divider(),
               _buildRowInfo(
                 Icons.info_outline,
                 'Description',
                 doctor.description,
               ),
+              const Divider(),
+              _buildRowInfo(doctor.gender.toLowerCase() == 'male' ?Icons.male : Icons.female, 'Gender', doctor.gender),
             ],
           ),
         ),

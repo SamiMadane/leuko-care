@@ -60,6 +60,11 @@ class DoctorProfileScreen extends StatelessWidget {
               icon: Icons.work,
             ),
             InfoCard(
+              title: 'Gender',
+              value: doctor.gender,
+              icon: doctor.gender.toLowerCase() == 'male' ?Icons.male : Icons.female,
+            ),
+            InfoCard(
               title: 'Description',
               value: doctor.description,
               icon: Icons.info_outline,
