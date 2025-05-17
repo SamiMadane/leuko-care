@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -151,9 +150,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
         description: _descriptionController.text,
         profileImage: profileImageUrl ?? '',
         userType: '',
-        hasUnreadMessages: widget.doctor?.hasUnreadMessages ?? false,
         gender: _genderController.text,
-        lastMessageTime: widget.doctor?.lastMessageTime ?? Timestamp(0, 0),
         fcmToken: widget.doctor?.fcmToken,
       );
 
