@@ -118,6 +118,8 @@ class PatientCubit extends Cubit<PatientState> {
     emit(GetPatientAndDoctorStateLoading());
 
     try {
+      await _repository.updateFcmTokenIfNeeded();
+
       // اشتراك في التحديثات المستمرة للمريض
       _onePatientSubscription = _repository
           .getPatientByIdStream(patientId)
@@ -172,21 +174,20 @@ class PatientCubit extends Cubit<PatientState> {
     }
   }
 
-Future<void> markMessagesAsRead(String patientId) async {
-  // تحديث الرسالة كـ "مقروءة"
-  await _repository.markMessagesAsRead(patientId);
+  Future<void> markMessagesAsRead(String patientId) async {
+    // تحديث الرسالة كـ "مقروءة"
+    await _repository.markMessagesAsRead(patientId);
 
-  // هنا نستخدم copyWith لإعادة بناء الحالة مع تعديل الرسالة
-  final updatedPatient = state.maybeMap(
-    updatePatientStateSuccess: (state) {
-      return state.copyWith(patient: state.patient.copyWith(hasUnreadMessages: false));
-    },
-    orElse: () => state,
-  );
+    // هنا نستخدم copyWith لإعادة بناء الحالة مع تعديل الرسالة
+    final updatedPatient = state.maybeMap(
+      updatePatientStateSuccess: (state) {
+        return state.copyWith(
+          patient: state.patient.copyWith(hasUnreadMessages: false),
+        );
+      },
+      orElse: () => state,
+    );
 
-  emit(updatedPatient);
-}
-
-
-
+    emit(updatedPatient);
+  }
 }

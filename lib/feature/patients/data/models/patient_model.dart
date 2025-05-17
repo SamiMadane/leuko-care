@@ -26,6 +26,8 @@ class PatientModel {
   @TimestampConverter()
   final Timestamp? lastMessageTime;
   final String gender;
+  final String? fcmToken; 
+
 
   PatientModel({
     required this.id,
@@ -46,6 +48,7 @@ class PatientModel {
     this.lastExamDate,
     this.hasUnreadMessages,
     this.lastMessageTime,
+    this.fcmToken,
     required this.gender,
   });
 
@@ -74,6 +77,7 @@ class PatientModel {
     bool? hasUnreadMessages,
     Timestamp? lastMessageTime,
     String? gender,
+    String? fcmToken
   }) {
     return PatientModel(
       id: id ?? this.id,
@@ -95,6 +99,7 @@ class PatientModel {
       hasUnreadMessages: hasUnreadMessages ?? this.hasUnreadMessages,
       lastMessageTime: lastMessageTime ?? this.lastMessageTime,
       gender: gender ?? this.gender,
+      fcmToken: fcmToken ?? this.fcmToken,
     );
   }
 }

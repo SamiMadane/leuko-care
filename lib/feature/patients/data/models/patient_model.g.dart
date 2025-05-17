@@ -25,6 +25,7 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
   lastExamDate: json['lastExamDate'] as String?,
   hasUnreadMessages: json['hasUnreadMessages'] as bool?,
   lastMessageTime: const TimestampConverter().fromJson(json['lastMessageTime']),
+  fcmToken: json['fcmToken'] as String?,
   gender: json['gender'] as String,
 );
 
@@ -52,6 +53,7 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
         const TimestampConverter().toJson,
       ),
       'gender': instance.gender,
+      'fcmToken': instance.fcmToken,
     };
 
 Json? _$JsonConverterToJson<Json, Value>(
