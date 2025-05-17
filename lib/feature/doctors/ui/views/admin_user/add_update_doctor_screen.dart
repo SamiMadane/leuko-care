@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,6 +29,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
   final TextEditingController _experienceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
 
   String? profileImageUrl;
 
@@ -41,6 +43,8 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
       _phoneController.text = widget.doctor!.phone;
       _experienceController.text = widget.doctor!.experience;
       _descriptionController.text = widget.doctor!.description;
+      _genderController.text = widget.doctor!.gender;
+
       profileImageUrl = widget.doctor!.profileImage;
     } else {
       profileImageUrl =
@@ -60,6 +64,16 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
     }
   }
 
+  void _handleGenderChanged(String gender) {
+    setState(() {
+      _genderController.text = gender;
+      profileImageUrl =
+          gender.toLowerCase() == 'male'
+              ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_wnyo6c.png'
+              : 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_femail_rq9yqv';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final isEditMode = widget.doctor != null;
@@ -72,9 +86,9 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
               ? (isDoctorUser ? 'Edit Profile' : 'Edit Doctor')
               : 'Add Doctor',
         ),
-        backgroundColor: isDoctorUser ? Colors.white : null,  
+        backgroundColor: isDoctorUser ? Colors.white : null,
         elevation: 0,
-     ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: SingleChildScrollView(
@@ -98,13 +112,14 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
                   descriptionController: _descriptionController,
                   passwordController: _passwordController,
                   isDoctorUser: isDoctorUser,
+                  genderController: _genderController,
+                  onGenderChanged: _handleGenderChanged,
                 ),
                 SizedBox(height: HeightManager.h30),
                 AppTextButton(
-                  buttonText:isEditMode
-                          ? (isDoctorUser
-                              ? 'Update Profile'
-                              : 'Update Doctor')
+                  buttonText:
+                      isEditMode
+                          ? (isDoctorUser ? 'Update Profile' : 'Update Doctor')
                           : 'Add Doctor',
                   textStyle: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
@@ -134,6 +149,10 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
         description: _descriptionController.text,
         profileImage: profileImageUrl ?? '',
         userType: '',
+        hasUnreadMessages: widget.doctor?.hasUnreadMessages ?? false,
+        gender: _genderController.text,
+        lastMessageTime: widget.doctor?.lastMessageTime ?? Timestamp(0, 0),
+        fcmToken: widget.doctor?.fcmToken,
       );
 
       if (widget.doctor != null) {

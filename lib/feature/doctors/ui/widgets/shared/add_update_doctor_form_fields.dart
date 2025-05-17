@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/app_drobdown_form_field.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 
 class AddUpdateDoctorFormFields extends StatefulWidget {
@@ -12,6 +13,8 @@ class AddUpdateDoctorFormFields extends StatefulWidget {
   final TextEditingController passwordController;
   final bool isEditMode;
   final bool isDoctorUser;
+  final TextEditingController genderController;
+  final void Function(String)? onGenderChanged;
 
   const AddUpdateDoctorFormFields({
     super.key,
@@ -23,6 +26,8 @@ class AddUpdateDoctorFormFields extends StatefulWidget {
     required this.passwordController,
     required this.isEditMode,
     required this.isDoctorUser,
+    required this.genderController,
+    this.onGenderChanged,
   });
 
   @override
@@ -35,6 +40,18 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
       TextEditingController();
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
+    // خيارات الجنس
+  String? _selectedGender = "Male"; // القيمة الافتراضية
+
+  @override
+  void initState() {
+    super.initState();
+
+    // ضبط القيمة الافتراضية في الـ Controller
+    if (!widget.isEditMode) {
+      widget.genderController.text = _selectedGender!;
+    }
+  }
 
   @override
   void dispose() {
@@ -139,6 +156,33 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
                       : null,
         ),
         SizedBox(height: HeightManager.h10),
+         // إضافة حقل الجنس
+        if (!widget.isEditMode) ...[
+          SizedBox(height: HeightManager.h10),
+          AppDropdownFormField<String>(
+            value: _selectedGender,
+            labelText: 'Gender',
+            items:
+                ['Male', 'Female']
+                    .map(
+                      (gender) => DropdownMenuItem<String>(
+                        value: gender,
+                        child: Text(gender),
+                      ),
+                    )
+                    .toList(),
+            onChanged: (value) {
+              setState(() {
+                _selectedGender = value;
+                widget.genderController.text = value!;
+                widget.onGenderChanged?.call(value);
+              });
+            },
+            validator: (value) => value == null ? 'Please select gender' : null,
+          ),
+
+          SizedBox(height: HeightManager.h10),
+        ],
         AppTextFormField(
           controller: widget.experienceController,
           labelText: 'Experience',
