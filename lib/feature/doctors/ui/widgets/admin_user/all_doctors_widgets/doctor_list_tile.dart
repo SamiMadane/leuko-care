@@ -23,6 +23,7 @@ class DoctorListTile extends StatelessWidget {
         horizontal: WidthManager.w16,
       ),
       elevation: 4,
+      color: ColorsManager.moreLighterGray,
       child: InkWell(
         onTap: () {
           context.pushNamed(Routes.doctorDetailsScreen, arguments: doctor);

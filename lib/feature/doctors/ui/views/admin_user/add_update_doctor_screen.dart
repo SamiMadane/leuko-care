@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
@@ -85,8 +86,9 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
           isEditMode
               ? (isDoctorUser ? 'Edit Profile' : 'Edit Doctor')
               : 'Add Doctor',
+              style: getMediumTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue),
         ),
-        backgroundColor: isDoctorUser ? Colors.white : null,
+        backgroundColor: ColorsManager.appBarColor,
         elevation: 0,
       ),
       body: Padding(

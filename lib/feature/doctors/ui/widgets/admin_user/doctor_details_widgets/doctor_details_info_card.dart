@@ -17,6 +17,7 @@ class DoctorDetailsInfoCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(RadiusManager.r16),
       ),
+      color: ColorsManager.moreLighterGray,
       elevation: 4,
       child: Padding(
         padding: EdgeInsets.symmetric(
