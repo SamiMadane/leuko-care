@@ -32,34 +32,95 @@ class ChatRepository {
         );
   }
 
-  // إرسال رسالة
+  Future<void> _updateOrCreateConversation(ChatModel message) async {
+    final senderRef =
+        await _firestore.collection('patients').doc(message.senderId).get();
+
+    if (!senderRef.exists) return; // المرسل ليس مريضًا، لا داعي للتحديث
+
+    final conversationId = _getChatId(message.senderId, message.receiverId);
+    final conversationRef = _firestore
+        .collection('conversations')
+        .doc(conversationId);
+
+    final conversationSnapshot = await conversationRef.get();
+
+    if (conversationSnapshot.exists) {
+      await conversationRef.update({
+        'lastMessage': message.text,
+        'lastMessageTime': message.timestamp,
+        'hasUnreadMessagesByParticipant.${message.receiverId}': true,
+      });
+    } else {
+      await conversationRef.set({
+        'id': conversationId,
+        'participantAId': message.senderId,
+        'participantBId': message.receiverId,
+        'lastMessage': message.text,
+        'lastMessageTime': message.timestamp,
+        'hasUnreadMessagesByParticipant': {
+          message.senderId: false,
+          message.receiverId: true,
+        },
+      });
+    }
+  }
+
   Future<void> sendMessage(ChatModel message) async {
     final chatId = _getChatId(message.senderId, message.receiverId);
 
     try {
-      // إضافة الرسالة إلى Firestore
       final docRef = await _firestore
           .collection('chats')
           .doc(chatId)
           .collection('messages')
           .add(message.toJson());
 
-      // بعد إضافة الرسالة، يتم تحديث الـ id في الرسالة
-      final updatedMessage = message.copyWith(id: docRef.id);
+      // تحديث بيانات المريض فقط إذا كان المستقبل فعلاً مريض
+      final receiverSnapshot =
+          await _firestore.collection('patients').doc(message.receiverId).get();
 
-       // إذا كان المرسل هو = (الطرف الآخر)
-    if (message.senderId != message.receiverId) {
-      // تحديث بيانات المريض فقط إذا كان الطرف الاخر هو المرسل
-      await _firestore.collection('patients').doc(message.receiverId).update({
-        'hasUnreadMessages': true,
-        'lastMessageTime': message.timestamp,
-      });
-    }
+      if (receiverSnapshot.exists) {
+        await _firestore.collection('patients').doc(message.receiverId).update({
+          'hasUnreadMessages': true,
+          'lastMessageTime': message.timestamp,
+        });
+      }
 
-      print("Message sent with id: ${updatedMessage.id}");
+      await _updateOrCreateConversation(message);
+
+      print("Message sent with id: ${docRef.id}");
     } catch (e) {
       print('Error sending message: $e');
       throw Exception('Failed to send message');
+    }
+  }
+
+  Future<void> markMessagesAsReadByDoctor(
+    String doctorId,
+    String patientId,
+  ) async {
+    final chatId = _getChatId(doctorId, patientId);
+
+    try {
+      final conversationRef = _firestore
+          .collection('conversations')
+          .doc(chatId);
+
+      // تحقق من وجود المحادثة أولاً
+      final conversationSnapshot = await conversationRef.get();
+      if (!conversationSnapshot.exists) return;
+
+      await conversationRef.update({
+        'hasUnreadMessagesByParticipant.$doctorId': false,
+      });
+
+      print(
+        'Marked messages as read for doctor $doctorId in conversation $chatId',
+      );
+    } catch (e) {
+      print('Error marking messages as read: $e');
+      throw Exception('Failed to mark messages as read');
     }
   }
 

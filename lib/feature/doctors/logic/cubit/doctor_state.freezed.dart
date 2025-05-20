@@ -36,6 +36,7 @@ mixin _$DoctorState {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -61,6 +62,7 @@ mixin _$DoctorState {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -86,6 +88,7 @@ mixin _$DoctorState {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -258,6 +261,7 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -287,6 +291,7 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -316,6 +321,7 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -491,6 +497,7 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -520,6 +527,7 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -549,6 +557,7 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -761,6 +770,7 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -790,6 +800,7 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -819,6 +830,7 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1032,6 +1044,7 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -1061,6 +1074,7 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1090,6 +1104,7 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1274,6 +1289,7 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -1303,6 +1319,7 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1332,6 +1349,7 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1507,6 +1525,7 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -1536,6 +1555,7 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1565,6 +1585,7 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1769,6 +1790,7 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -1798,6 +1820,7 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -1827,6 +1850,7 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2011,6 +2035,7 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -2040,6 +2065,7 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2069,6 +2095,7 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2272,6 +2299,7 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -2301,6 +2329,7 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2330,6 +2359,7 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2544,6 +2574,7 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -2573,6 +2604,7 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2602,6 +2634,7 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2786,6 +2819,7 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -2815,6 +2849,7 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -2844,6 +2879,7 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3019,6 +3055,7 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -3048,6 +3085,7 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3077,6 +3115,7 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3282,6 +3321,7 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -3311,6 +3351,7 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3340,6 +3381,7 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3526,6 +3568,7 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -3555,6 +3598,7 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3584,6 +3628,7 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3709,6 +3754,7 @@ abstract class _$$GetDoctorAndPatientsStateSuccessImplCopyWith<$Res> {
   $Res call({
     DoctorModel doctor,
     List<PatientModel> patients,
+    Map<String, ConversationModel> conversationsByPatientId,
     PatientModel? selectedPatientForSampleUpload,
   });
 }
@@ -3730,6 +3776,7 @@ class __$$GetDoctorAndPatientsStateSuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? doctor = null,
     Object? patients = null,
+    Object? conversationsByPatientId = null,
     Object? selectedPatientForSampleUpload = freezed,
   }) {
     return _then(
@@ -3744,6 +3791,11 @@ class __$$GetDoctorAndPatientsStateSuccessImplCopyWithImpl<$Res>
                 ? _value._patients
                 : patients // ignore: cast_nullable_to_non_nullable
                     as List<PatientModel>,
+        conversationsByPatientId:
+            null == conversationsByPatientId
+                ? _value._conversationsByPatientId
+                : conversationsByPatientId // ignore: cast_nullable_to_non_nullable
+                    as Map<String, ConversationModel>,
         selectedPatientForSampleUpload:
             freezed == selectedPatientForSampleUpload
                 ? _value.selectedPatientForSampleUpload
@@ -3761,8 +3813,10 @@ class _$GetDoctorAndPatientsStateSuccessImpl
   const _$GetDoctorAndPatientsStateSuccessImpl({
     required this.doctor,
     required final List<PatientModel> patients,
+    required final Map<String, ConversationModel> conversationsByPatientId,
     this.selectedPatientForSampleUpload,
-  }) : _patients = patients;
+  }) : _patients = patients,
+       _conversationsByPatientId = conversationsByPatientId;
 
   @override
   final DoctorModel doctor;
@@ -3774,12 +3828,21 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     return EqualUnmodifiableListView(_patients);
   }
 
+  final Map<String, ConversationModel> _conversationsByPatientId;
+  @override
+  Map<String, ConversationModel> get conversationsByPatientId {
+    if (_conversationsByPatientId is EqualUnmodifiableMapView)
+      return _conversationsByPatientId;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_conversationsByPatientId);
+  }
+
   @override
   final PatientModel? selectedPatientForSampleUpload;
 
   @override
   String toString() {
-    return 'DoctorState.getDoctorAndPatientsStateSuccess(doctor: $doctor, patients: $patients, selectedPatientForSampleUpload: $selectedPatientForSampleUpload)';
+    return 'DoctorState.getDoctorAndPatientsStateSuccess(doctor: $doctor, patients: $patients, conversationsByPatientId: $conversationsByPatientId, selectedPatientForSampleUpload: $selectedPatientForSampleUpload)';
   }
 
   @override
@@ -3789,6 +3852,10 @@ class _$GetDoctorAndPatientsStateSuccessImpl
             other is _$GetDoctorAndPatientsStateSuccessImpl &&
             (identical(other.doctor, doctor) || other.doctor == doctor) &&
             const DeepCollectionEquality().equals(other._patients, _patients) &&
+            const DeepCollectionEquality().equals(
+              other._conversationsByPatientId,
+              _conversationsByPatientId,
+            ) &&
             (identical(
                   other.selectedPatientForSampleUpload,
                   selectedPatientForSampleUpload,
@@ -3802,6 +3869,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     runtimeType,
     doctor,
     const DeepCollectionEquality().hash(_patients),
+    const DeepCollectionEquality().hash(_conversationsByPatientId),
     selectedPatientForSampleUpload,
   );
 
@@ -3837,6 +3905,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -3846,6 +3915,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     return getDoctorAndPatientsStateSuccess(
       doctor,
       patients,
+      conversationsByPatientId,
       selectedPatientForSampleUpload,
     );
   }
@@ -3870,6 +3940,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3879,6 +3950,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     return getDoctorAndPatientsStateSuccess?.call(
       doctor,
       patients,
+      conversationsByPatientId,
       selectedPatientForSampleUpload,
     );
   }
@@ -3903,6 +3975,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -3914,6 +3987,7 @@ class _$GetDoctorAndPatientsStateSuccessImpl
       return getDoctorAndPatientsStateSuccess(
         doctor,
         patients,
+        conversationsByPatientId,
         selectedPatientForSampleUpload,
       );
     }
@@ -4021,11 +4095,13 @@ abstract class GetDoctorAndPatientsStateSuccess implements DoctorState {
   const factory GetDoctorAndPatientsStateSuccess({
     required final DoctorModel doctor,
     required final List<PatientModel> patients,
+    required final Map<String, ConversationModel> conversationsByPatientId,
     final PatientModel? selectedPatientForSampleUpload,
   }) = _$GetDoctorAndPatientsStateSuccessImpl;
 
   DoctorModel get doctor;
   List<PatientModel> get patients;
+  Map<String, ConversationModel> get conversationsByPatientId;
   PatientModel? get selectedPatientForSampleUpload;
 
   /// Create a copy of DoctorState
@@ -4130,6 +4206,7 @@ class _$GetDoctorAndPatientsStateErrorImpl
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -4159,6 +4236,7 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -4188,6 +4266,7 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -4404,6 +4483,7 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     required TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )
     getDoctorAndPatientsStateSuccess,
@@ -4433,6 +4513,7 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult? Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,
@@ -4462,6 +4543,7 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult Function(
       DoctorModel doctor,
       List<PatientModel> patients,
+      Map<String, ConversationModel> conversationsByPatientId,
       PatientModel? selectedPatientForSampleUpload,
     )?
     getDoctorAndPatientsStateSuccess,

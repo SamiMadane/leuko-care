@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:rxdart/rxdart.dart';
 
 class DoctorCubit extends Cubit<DoctorState> {
   final DoctorRepository _repository;
@@ -103,40 +106,50 @@ class DoctorCubit extends Cubit<DoctorState> {
     emit(DoctorBottomNavChanged(index));
   }
 
-  void getDoctorAndPatients(String doctorId) {
-    emit(const GetDoctorAndPatientsStateLoading());
+void getDoctorAndPatients(String doctorId) {
+  emit(const GetDoctorAndPatientsStateLoading());
 
-    try {
-      // 1. جلب الدكتور الحالي باستخدام Stream
-      final doctorStream = _repository.getDoctorByDoctorIdStream(doctorId);
+  try {
+    // 1. جلب ستريم الدكتور
+    final doctorStream = _repository.getDoctorByDoctorIdStream(doctorId);
 
-      // 2. جلب المرضى المرتبطين به باستخدام Stream
-      final patientsStream = _repository.getPatientsByDoctorIdStream(doctorId);
+    // 2. جلب ستريم المرضى المرتبطين به
+    final patientsStream = _repository.getPatientsByDoctorIdStream(doctorId);
 
-      // استخدام StreamSubscription للاستماع للتغييرات المستمرة
-      doctorStream.listen(
-        (doctor) {
-          patientsStream.listen(
-            (patients) {
-              emit(
-                GetDoctorAndPatientsStateSuccess(
-                  doctor: doctor,
-                  patients: patients,
-                ),
-              );
-            },
-            onError: (error) {
-              emit(GetDoctorAndPatientsStateError(error.toString()));
-            },
-          );
-        },
-        onError: (error) {
-          emit(GetDoctorAndPatientsStateError(error.toString()));
-        },
-      );
-    } catch (e) {
-      emit(GetDoctorAndPatientsStateError(e.toString()));
-    }
+    // 3. جلب ستريم المحادثات الخاصة به
+    final conversationsStream = _repository.getConversationsForDoctorStream(doctorId);
+
+    // استخدام Rx.combineLatest3 للجمع بين الثلاثة Streams
+    Rx.combineLatest3(
+      doctorStream,
+      patientsStream,
+      conversationsStream,
+      (
+        DoctorModel doctor,
+        List<PatientModel> patients,
+        Map<String, ConversationModel> conversationsMap,
+      ) {
+            // يتم تنفيذ هذا عندما تتوفر القيم الثلاثة.
+        return GetDoctorAndPatientsStateSuccess(
+          doctor: doctor,
+          patients: patients,
+          conversationsByPatientId: conversationsMap,
+        );
+      },
+      //final state = GetDoctorAndPatientsStateSuccess(...);
+      //  emit(state);
+    ).listen(
+      (state) {
+        emit(state); // this will emit the combined state getDoctorAndPatientsStateSuccess
+      },
+      onError: (error) {
+        emit(GetDoctorAndPatientsStateError(error.toString()));
+      },
+    );
+  } catch (e) {
+    emit(GetDoctorAndPatientsStateError(e.toString()));
   }
+}
+
 
 }

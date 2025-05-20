@@ -85,6 +85,7 @@ dependencies:
   # for showing emojis in text field
   emoji_picker_flutter: ^4.3.0
   screenshot: ^3.0.0
+  rxdart: ^0.28.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

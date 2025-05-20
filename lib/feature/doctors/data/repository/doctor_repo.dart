@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:rxdart/rxdart.dart';
 import '../models/doctor_model.dart';
 
 class DoctorRepository {
@@ -137,4 +139,48 @@ class DoctorRepository {
                   .toList(),
         );
   }
+
+ Stream<Map<String, ConversationModel>> getConversationsForDoctorStream(String doctorId) {
+  final streamA = FirebaseFirestore.instance
+      .collection('conversations')
+      .where('participantAId', isEqualTo: doctorId)
+      .snapshots();
+
+  final streamB = FirebaseFirestore.instance
+      .collection('conversations')
+      .where('participantBId', isEqualTo: doctorId)
+      .snapshots();
+
+  return Rx.combineLatest2<QuerySnapshot, QuerySnapshot, Map<String, ConversationModel>>(
+    streamA,
+    streamB,
+    (snapshotA, snapshotB) {
+      final allDocs = [...snapshotA.docs, ...snapshotB.docs];
+
+      final Map<String, ConversationModel> map = {};
+
+      for (final doc in allDocs) {
+        try {
+          final data = doc.data() as Map<String, dynamic>;
+          final conv = ConversationModel.fromJson(data);
+
+          final patientId = conv.participantAId == doctorId
+              ? conv.participantBId
+              : conv.participantAId;
+
+          if (patientId.isNotEmpty) {
+            map[patientId] = conv;
+          }
+        } catch (e, stackTrace) {
+          print('Error parsing conversation: $e');
+          print(stackTrace);
+          continue;
+        }
+      }
+
+      print('Total conversations updated for doctor: ${map.length}');
+      return map;
+    },
+  );
+}
 }

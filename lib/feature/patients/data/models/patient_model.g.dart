@@ -48,15 +48,9 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
       'latestSampleImageUrl': instance.latestSampleImageUrl,
       'lastExamDate': instance.lastExamDate,
       'hasUnreadMessages': instance.hasUnreadMessages,
-      'lastMessageTime': _$JsonConverterToJson<dynamic, Timestamp>(
+      'lastMessageTime': const TimestampConverter().toJson(
         instance.lastMessageTime,
-        const TimestampConverter().toJson,
       ),
       'gender': instance.gender,
       'fcmToken': instance.fcmToken,
     };
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) => value == null ? null : toJson(value);

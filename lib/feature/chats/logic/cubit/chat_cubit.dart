@@ -85,4 +85,14 @@ class ChatCubit extends Cubit<ChatState> {
       emit(ChatError(e.toString())); // في حالة حدوث خطأ
     }
   }
+
+  Future<void> markMessagesAsReadForDoctor(
+    String doctorId,
+    String patientId,
+  ) async {
+    await _chatRepository.markMessagesAsReadByDoctor(doctorId, patientId);
+    getMessages(senderId: doctorId, receiverId: patientId);
+    emit(MessagesMarkedAsReadSuccessfully());
+  }
+  
 }

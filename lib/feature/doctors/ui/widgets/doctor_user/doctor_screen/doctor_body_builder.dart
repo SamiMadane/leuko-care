@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
@@ -13,7 +14,9 @@ import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 class DoctorBodyBuilder extends StatelessWidget {
     final DoctorModel doctor;
   final List<PatientModel> patients;
-  const DoctorBodyBuilder({super.key, required this.doctor, required this.patients});
+  final Map<String, ConversationModel> conversationsByPatientId;
+
+  const DoctorBodyBuilder({super.key, required this.doctor, required this.patients, required this.conversationsByPatientId});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class DoctorBodyBuilder extends StatelessWidget {
       DoctorHomeScreen(doctor: doctor, patients: patients,),
       DoctorPatientsScreen(doctor: doctor,patients: patients,),
       UploadSampleScreen(patients: patients,doctor:doctor),
-      DoctorChatsScreen(doctor: doctor,patients: patients,),
+      DoctorChatsScreen(doctor: doctor,patients: patients, conversationsByPatientId:conversationsByPatientId ,),
       DoctorProfileScreen(doctor: doctor,),
     ];
 

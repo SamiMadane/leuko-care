@@ -11,7 +11,7 @@ class ChatModel {
   final String text;
 
   @TimestampConverter()
-  final Timestamp timestamp;
+  final Timestamp? timestamp;
 
   final String attachmentUrl;
 
@@ -20,7 +20,7 @@ class ChatModel {
     required this.senderId,
     required this.receiverId,
     required this.text,
-    required this.timestamp,
+    this.timestamp,
     required this.attachmentUrl,
   });
 
