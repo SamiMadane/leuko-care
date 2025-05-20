@@ -33,22 +33,22 @@ class ChatRepository {
   }
 
   Future<void> _updateOrCreateConversation(ChatModel message) async {
-    final senderRef =
-        await _firestore.collection('patients').doc(message.senderId).get();
-
-    if (!senderRef.exists) return; // المرسل ليس مريضًا، لا داعي للتحديث
-
     final conversationId = _getChatId(message.senderId, message.receiverId);
     final conversationRef = _firestore
         .collection('conversations')
         .doc(conversationId);
 
+    final isImageMessage = message.text.trim().isEmpty;
+
+    final lastMessageContent =
+        isImageMessage ? message.attachmentUrl : message.text;
     final conversationSnapshot = await conversationRef.get();
 
     if (conversationSnapshot.exists) {
       await conversationRef.update({
-        'lastMessage': message.text,
+        'lastMessage': lastMessageContent,
         'lastMessageTime': message.timestamp,
+        'hasUnreadMessagesByParticipant.${message.senderId}': false,
         'hasUnreadMessagesByParticipant.${message.receiverId}': true,
       });
     } else {
@@ -56,7 +56,7 @@ class ChatRepository {
         'id': conversationId,
         'participantAId': message.senderId,
         'participantBId': message.receiverId,
-        'lastMessage': message.text,
+        'lastMessage': lastMessageContent,
         'lastMessageTime': message.timestamp,
         'hasUnreadMessagesByParticipant': {
           message.senderId: false,
@@ -76,7 +76,13 @@ class ChatRepository {
           .collection('messages')
           .add(message.toJson());
 
-      // تحديث بيانات المريض فقط إذا كان المستقبل فعلاً مريض
+    // بعد إضافة الرسالة، يتم تحديث الـ id في الرسالة
+    final updatedMessage = message.copyWith(id: docRef.id);
+
+    // تحديث الرسالة بـ id الجديد
+    await docRef.update(updatedMessage.toJson());
+
+      // تحديث بيانات المريض إذا كان المستقبل مريضًا
       final receiverSnapshot =
           await _firestore.collection('patients').doc(message.receiverId).get();
 
@@ -87,7 +93,7 @@ class ChatRepository {
         });
       }
 
-      await _updateOrCreateConversation(message);
+      await _updateOrCreateConversation(updatedMessage);
 
       print("Message sent with id: ${docRef.id}");
     } catch (e) {
@@ -180,22 +186,44 @@ class ChatRepository {
     }
   }
 
-  Future<void> deleteMessage(
-    String senderId,
-    String receiverId,
-    String messageId,
-  ) async {
-    final chatId = _getChatId(senderId, receiverId);
+Future<void> deleteMessage(
+  String senderId,
+  String receiverId,
+  String messageId,
+) async {
+  final chatId = _getChatId(senderId, receiverId);
+  final messagesRef = _firestore.collection('chats').doc(chatId).collection('messages');
 
-    try {
-      await _firestore
-          .collection('chats')
-          .doc(chatId)
-          .collection('messages')
-          .doc(messageId)
-          .delete(); // حذف الرسالة بالكامل
-    } catch (e) {
-      rethrow; // إعادة الرمي في حالة حدوث خطأ
+  try {
+    // حذف الرسالة
+    await messagesRef.doc(messageId).delete();
+
+    // التحقق إن كان لا توجد أي رسائل بعد الحذف
+    final remainingMessages = await messagesRef.limit(1).get();
+
+    if (remainingMessages.docs.isEmpty) {
+      // حذف المحادثة من conversations
+      await _firestore.collection('conversations').doc(chatId).delete();
+      print('Conversation deleted because it became empty');
+    } else {
+      // تحديث آخر رسالة في المحادثة
+      final lastMessageSnapshot = await messagesRef
+          .orderBy('timestamp', descending: true)
+          .limit(1)
+          .get();
+
+      final lastMessage = lastMessageSnapshot.docs.first.data();
+      final isImage = (lastMessage['text'] ?? '').toString().trim().isEmpty;
+
+      await _firestore.collection('conversations').doc(chatId).update({
+        'lastMessage': isImage ? lastMessage['attachmentUrl'] : lastMessage['text'],
+        'lastMessageTime': lastMessage['timestamp'],
+      });
     }
+  } catch (e) {
+    print('Error deleting message: $e');
+    rethrow;
   }
+}
+
 }
