@@ -11,6 +11,7 @@ class PatientCubit extends Cubit<PatientState> {
   StreamSubscription<List<PatientModel>>? _patientsSubscription;
   StreamSubscription<List<DoctorModel>>? _doctorSubscription;
   StreamSubscription<PatientModel>? _onePatientSubscription;
+  StreamSubscription? _conversationSubscription;
 
   int selectedIndex = 0;
   String? initialChatMessage;
@@ -114,25 +115,41 @@ class PatientCubit extends Cubit<PatientState> {
     return _repository.getPatientByIdStream(patientId);
   }
 
-  Future<void> getPatientAndDoctor(String patientId) async {
-    emit(GetPatientAndDoctorStateLoading());
 
-    try {
-      // اشتراك في التحديثات المستمرة للمريض
-      _onePatientSubscription = _repository
-          .getPatientByIdStream(patientId)
-          .listen((patient) async {
-            // عند الحصول على المريض، قم بجلب الطبيب المرتبط
-            final doctor = await _repository.getDoctorByDoctorId(
-              patient.doctorId,
-            );
-            _repository.updateFcmTokenIfNeeded();
-            emit(GetPatientAndDoctorStateSuccess(doctor, patient));
-          });
-    } catch (e) {
-      emit(GetPatientAndDoctorStateError(e.toString()));
-    }
+
+Future<void> getPatientAndDoctor(String patientId) async {
+  emit(GetPatientAndDoctorStateLoading());
+
+  try {
+    // الاشتراك في Stream للمريض
+    _onePatientSubscription = _repository
+        .getPatientByIdStream(patientId)
+        .listen((patient) async {
+      // نبدأ بالاشتراك في Stream المحادثات
+      _conversationSubscription?.cancel(); // إلغاء أي اشتراك سابق
+      _conversationSubscription = _repository
+          .getConversationsForPatientStream(patientId)
+          .listen((conversationMap) async {
+        try {
+          final doctor = await _repository.getDoctorByDoctorId(
+            patient.doctorId,
+          );
+
+          final conversation = conversationMap[doctor.id];
+
+          _repository.updateFcmTokenIfNeeded();
+
+          emit(GetPatientAndDoctorStateSuccess(doctor, patient, conversation));
+        } catch (e) {
+          emit(GetPatientAndDoctorStateError(e.toString()));
+        }
+      });
+    });
+  } catch (e) {
+    emit(GetPatientAndDoctorStateError(e.toString()));
   }
+}
+
 
   @override
   Future<void> close() {
@@ -168,25 +185,12 @@ class PatientCubit extends Cubit<PatientState> {
         GetPatientAndDoctorStateSuccess(
           currentState.doctor,
           currentState.patient,
+          currentState.conversation,
         ),
       );
     }
   }
 
-Future<void> markMessagesAsRead(String patientId) async {
-  // تحديث الرسالة كـ "مقروءة"
-  await _repository.markMessagesAsRead(patientId);
-
-  // هنا نستخدم copyWith لإعادة بناء الحالة مع تعديل الرسالة
-  final updatedPatient = state.maybeMap(
-    updatePatientStateSuccess: (state) {
-      return state.copyWith(patient: state.patient.copyWith(hasUnreadMessages: false));
-    },
-    orElse: () => state,
-  );
-
-  emit(updatedPatient);
-}
 
 
 

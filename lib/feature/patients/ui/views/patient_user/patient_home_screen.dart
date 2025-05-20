@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/widgets/home_top_widget.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -12,7 +13,8 @@ import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient
 class PatientHomeScreen extends StatelessWidget {
   final PatientModel patient;
   final DoctorModel doctor;
-  const PatientHomeScreen({super.key,  required this.patient, required this.doctor});
+  final ConversationModel? conversation;
+  const PatientHomeScreen({super.key,  required this.patient, required this.doctor,  this.conversation});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class PatientHomeScreen extends StatelessWidget {
           ),
           SizedBox(height: HeightManager.h20),
           patient.isExamined
-              ? PatientExaminedSection(patient: patient, doctor: doctor)
+              ? PatientExaminedSection(patient: patient, doctor: doctor,conversation: conversation)
               : const ExaminationPendingWidget(),
           SizedBox(height: HeightManager.h20),
         ],

@@ -7,6 +7,7 @@ import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.da
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_statistics_screen.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/core/widgets/image_preview_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -196,13 +197,14 @@ class AppRouter {
         final arguments = settings.arguments as Map?;
         final doctor = arguments?['doctor'] as DoctorModel;
         final patient = arguments?['patient'] as PatientModel;
+        final conversation = arguments?['conversation'] as ConversationModel?;
 
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
                 create: (context) => getIt<PatientCubit>(),
                 child: DoctorDetailsScreenForPatient(
-                  doctor: doctor, patient: patient,
+                  doctor: doctor, patient: patient,conversation: conversation,
                 ),
               ),
         );

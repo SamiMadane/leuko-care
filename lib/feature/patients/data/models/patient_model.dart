@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:leuko_care/core/helpers/timestamp_converter.dart';
-
 part 'patient_model.g.dart';
 
 @JsonSerializable()
@@ -22,9 +19,6 @@ class PatientModel {
   final String? aiNote; 
   final String? latestSampleImageUrl;
   final String? lastExamDate;
-  final bool? hasUnreadMessages;
-  @TimestampConverter()
-  final Timestamp? lastMessageTime;
   final String gender;
   final String? fcmToken; 
 
@@ -46,8 +40,6 @@ class PatientModel {
     this.aiNote,
     this.latestSampleImageUrl,
     this.lastExamDate,
-    this.hasUnreadMessages,
-    this.lastMessageTime,
     this.fcmToken,
     required this.gender,
   });
@@ -74,8 +66,6 @@ class PatientModel {
     String? aiNote,
     String? latestSampleImageUrl,
     String? lastExamDate,
-    bool? hasUnreadMessages,
-    Timestamp? lastMessageTime,
     String? gender,
     String? fcmToken
   }) {
@@ -96,8 +86,6 @@ class PatientModel {
       aiNote: aiNote ?? this.aiNote,
       latestSampleImageUrl: latestSampleImageUrl ?? this.latestSampleImageUrl,
       lastExamDate: lastExamDate ?? this.lastExamDate,
-      hasUnreadMessages: hasUnreadMessages ?? this.hasUnreadMessages,
-      lastMessageTime: lastMessageTime ?? this.lastMessageTime,
       gender: gender ?? this.gender,
       fcmToken: fcmToken ?? this.fcmToken,
     );

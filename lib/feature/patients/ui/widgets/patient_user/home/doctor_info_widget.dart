@@ -7,6 +7,8 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
@@ -15,10 +17,12 @@ import 'package:shimmer/shimmer.dart';
 class DoctorInfoWidget extends StatelessWidget {
   final PatientModel patient;
   final DoctorModel doctor;
+  final ConversationModel? conversation;
   const DoctorInfoWidget({
     super.key,
     required this.patient,
     required this.doctor,
+    this.conversation,
   });
   @override
   Widget build(BuildContext context) {
@@ -38,12 +42,16 @@ class DoctorInfoWidget extends StatelessWidget {
             final shouldOpenChat = await context.pushNamed(
               Routes.doctorDetailsScreenForPatient,
               arguments: {
-                'doctor':doctor,
-                'patient':patient,
+                'doctor': doctor,
+                'patient': patient,
+                'conversation': conversation,
               },
             );
             if (shouldOpenChat == true) {
-              context.read<PatientCubit>().markMessagesAsRead(patient.id!);
+              context.read<ChatCubit>().markMessagesAsReadForPatient(
+                patient.id!,
+                doctor.id!,
+              );
               context.read<PatientCubit>().changeSelectedIndex(1);
             }
           },
@@ -111,8 +119,7 @@ class DoctorInfoWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (patient.hasUnreadMessages ??
-                    false) // هنا يمكن إضافة شرط لإظهار علامة غير مقروءة
+                if (conversation?.hasUnreadMessagesFor(patient.id!) ?? false)
                   Icon(Icons.notification_important, color: Colors.red),
                 Icon(Icons.arrow_forward_ios, color: Colors.blue),
               ],

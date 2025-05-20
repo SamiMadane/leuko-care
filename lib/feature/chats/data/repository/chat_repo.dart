@@ -129,6 +129,33 @@ class ChatRepository {
       throw Exception('Failed to mark messages as read');
     }
   }
+  Future<void> markMessagesAsReadByPatient(
+  String patientId,
+  String doctorId,
+) async {
+  final chatId = _getChatId(doctorId, patientId);
+
+  try {
+    final conversationRef = _firestore
+        .collection('conversations')
+        .doc(chatId);
+
+    final conversationSnapshot = await conversationRef.get();
+    if (!conversationSnapshot.exists) return;
+
+    await conversationRef.update({
+      'hasUnreadMessagesByParticipant.$patientId': false,
+    });
+
+    print(
+      'Marked messages as read for patient $patientId in conversation $chatId',
+    );
+  } catch (e) {
+    print('Error marking messages as read: $e');
+    throw Exception('Failed to mark messages as read');
+  }
+}
+
 
   // توليد ID للمحادثة بين المرسل والمستقبل
   String _getChatId(String uid1, String uid2) {

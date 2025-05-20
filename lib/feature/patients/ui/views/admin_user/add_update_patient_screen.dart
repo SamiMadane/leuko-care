@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -194,8 +193,6 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         aiNote: widget.patient?.aiNote,
         latestSampleImageUrl: widget.patient?.latestSampleImageUrl,
         lastExamDate: widget.patient?.lastExamDate,
-        hasUnreadMessages: widget.patient?.hasUnreadMessages ?? false,
-        lastMessageTime: widget.patient?.lastMessageTime ?? Timestamp(0, 0),
         fcmToken: widget.patient?.fcmToken,
         gender: _genderController.text,
       );

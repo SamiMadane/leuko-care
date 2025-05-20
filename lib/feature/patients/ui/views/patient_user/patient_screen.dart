@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
@@ -47,6 +48,7 @@ class PatientScreen extends StatelessWidget {
                       PatientHomeScreen(
                         patient: state.patient,
                         doctor: state.doctor,
+                        conversation: state.conversation,
                       ),
                       ChatScreen(
                         currentUserId: state.patient.id!,
@@ -73,14 +75,30 @@ class PatientScreen extends StatelessWidget {
         bottomNavigationBar: BlocBuilder<PatientCubit, PatientState>(
           builder: (context, state) {
             final cubit = context.read<PatientCubit>();
+
+            // قيم افتراضية أو nullables
+            final patientId =
+                (state is GetPatientAndDoctorStateSuccess)
+                    ? state.patient.id
+                    : null;
+            final doctorId =
+                (state is GetPatientAndDoctorStateSuccess)
+                    ? state.doctor.id
+                    : null;
+
             return PatientBottomNavBar(
               currentIndex: cubit.selectedIndex,
               onTap: (index) {
                 cubit.changeSelectedIndex(index);
-                if (index == 1) {
-                  cubit.markMessagesAsRead(patientId!);
+                if (index == 1 && patientId != null && doctorId != null) {
+                  context.read<ChatCubit>().markMessagesAsReadForPatient(
+                    patientId,
+                    doctorId,
+                  );
                 }
               },
+              // يمكنك تعديل PatientBottomNavBar ليأخذ مثلاً enabled: patientId != null && doctorId != null
+              // ليعطل التفاعل إذا أردت.
             );
           },
         ),

@@ -23,8 +23,6 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
   aiNote: json['aiNote'] as String?,
   latestSampleImageUrl: json['latestSampleImageUrl'] as String?,
   lastExamDate: json['lastExamDate'] as String?,
-  hasUnreadMessages: json['hasUnreadMessages'] as bool?,
-  lastMessageTime: const TimestampConverter().fromJson(json['lastMessageTime']),
   fcmToken: json['fcmToken'] as String?,
   gender: json['gender'] as String,
 );
@@ -47,10 +45,6 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
       'aiNote': instance.aiNote,
       'latestSampleImageUrl': instance.latestSampleImageUrl,
       'lastExamDate': instance.lastExamDate,
-      'hasUnreadMessages': instance.hasUnreadMessages,
-      'lastMessageTime': const TimestampConverter().toJson(
-        instance.lastMessageTime,
-      ),
       'gender': instance.gender,
       'fcmToken': instance.fcmToken,
     };

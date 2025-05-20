@@ -3,6 +3,7 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/core/widgets/profile_image_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -12,17 +13,18 @@ import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient
 class DoctorDetailsScreenForPatient extends StatelessWidget {
   final DoctorModel doctor;
   final PatientModel patient;
+  final ConversationModel? conversation;
 
   const DoctorDetailsScreenForPatient({
     super.key,
     required this.doctor,
-    required this.patient,
+    required this.patient, this.conversation,
   });
 
   @override
   Widget build(BuildContext context) {
-    final hasUnread = patient.hasUnreadMessages ?? false;
-    final lastMessage = patient.lastMessageTime?.toDate();
+    final hasUnread = conversation?.hasUnreadMessagesFor(patient.id!) ?? false;
+final lastMessage = conversation?.lastMessageTime?.toDate();
 
     return Scaffold(
       appBar: AppBar(

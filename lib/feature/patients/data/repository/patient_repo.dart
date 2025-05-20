@@ -4,7 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:rxdart/rxdart.dart';
 import '../models/patient_model.dart';
 
 class PatientRepository {
@@ -107,13 +109,7 @@ class PatientRepository {
         .map((doc) => PatientModel.fromJson(doc.data()!));
   }
 
-    Future<void> markMessagesAsRead(String patientId) async {
-    final docRef = _firestore.collection('patients').doc(patientId);
 
-    await docRef.update({
-      'hasUnreadMessages': false,
-    });
-  }
 
   Future<void> updateFcmTokenIfNeeded() async {
   final user = FirebaseAuth.instance.currentUser;
@@ -135,4 +131,47 @@ class PatientRepository {
     print('ℹ️ FCM token already up to date.');
   }
 }
+
+Stream<Map<String, ConversationModel>> getConversationsForPatientStream(String patientId) {
+
+  final streamA = FirebaseFirestore.instance
+      .collection('conversations')
+      .where('participantAId', isEqualTo: patientId)
+      .snapshots();
+
+  final streamB = FirebaseFirestore.instance
+      .collection('conversations')
+      .where('participantBId', isEqualTo: patientId)
+      .snapshots();
+
+  return Rx.combineLatest2<QuerySnapshot, QuerySnapshot, Map<String, ConversationModel>>(
+    streamA,
+    streamB,
+    (snapshotA, snapshotB) {
+      final allDocs = [...snapshotA.docs, ...snapshotB.docs];
+
+      final Map<String, ConversationModel> map = {};
+
+      for (final doc in allDocs) {
+        try {
+          final data = doc.data() as Map<String, dynamic>;
+          final conv = ConversationModel.fromJson(data);
+
+          final doctorId = conv.participantAId == patientId
+              ? conv.participantBId
+              : conv.participantAId;
+
+          if (doctorId.isNotEmpty) {
+            map[doctorId] = conv;
+          }
+        } catch (e) {
+          print('Error parsing conversation: $e');
+          continue;
+        }
+      }
+      return map;
+    },
+  );
+}
+
 }
