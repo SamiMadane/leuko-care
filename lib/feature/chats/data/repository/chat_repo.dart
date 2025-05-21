@@ -48,6 +48,7 @@ class ChatRepository {
       await conversationRef.update({
         'lastMessage': lastMessageContent,
         'lastMessageTime': message.timestamp,
+         'lastMessageSenderId': message.senderId,
         'hasUnreadMessagesByParticipant.${message.senderId}': false,
         'hasUnreadMessagesByParticipant.${message.receiverId}': true,
       });
@@ -58,6 +59,7 @@ class ChatRepository {
         'participantBId': message.receiverId,
         'lastMessage': lastMessageContent,
         'lastMessageTime': message.timestamp,
+        'lastMessageSenderId': message.senderId,
         'hasUnreadMessagesByParticipant': {
           message.senderId: false,
           message.receiverId: true,

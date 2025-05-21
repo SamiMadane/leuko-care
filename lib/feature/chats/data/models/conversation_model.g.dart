@@ -19,6 +19,7 @@ ConversationModel _$ConversationModelFromJson(Map<String, dynamic> json) =>
           (json['hasUnreadMessagesByParticipant'] as Map<String, dynamic>?)
               ?.map((k, e) => MapEntry(k, e as bool)) ??
           {},
+      lastMessageSenderId: json['lastMessageSenderId'] as String,
     );
 
 Map<String, dynamic> _$ConversationModelToJson(ConversationModel instance) =>
@@ -30,5 +31,6 @@ Map<String, dynamic> _$ConversationModelToJson(ConversationModel instance) =>
       'lastMessageTime': const TimestampConverter().toJson(
         instance.lastMessageTime,
       ),
+      'lastMessageSenderId': instance.lastMessageSenderId,
       'hasUnreadMessagesByParticipant': instance.hasUnreadMessagesByParticipant,
     };

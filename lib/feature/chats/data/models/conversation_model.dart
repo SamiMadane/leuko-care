@@ -12,9 +12,9 @@ class ConversationModel {
   final String participantBId;
   @JsonKey(defaultValue: '')
   final String lastMessage;
-
   @TimestampConverter()
   final Timestamp? lastMessageTime;
+  final String lastMessageSenderId;
 
   /// يخزن حالة الرسائل غير المقروءة لكل مشارك بناءً على معرفه
   @JsonKey(defaultValue: {})
@@ -27,6 +27,7 @@ class ConversationModel {
     required this.lastMessage,
     this.lastMessageTime,
     required this.hasUnreadMessagesByParticipant,
+    required this.lastMessageSenderId,
   });
 
   factory ConversationModel.fromJson(Map<String, dynamic> json) =>
@@ -46,6 +47,7 @@ class ConversationModel {
     String? lastMessage,
     Timestamp? lastMessageTime,
     Map<String, bool>? hasUnreadMessagesByParticipant,
+    String? lastMessageSenderId,
   }) {
     return ConversationModel(
       conversationId: conversationId ?? this.conversationId,
@@ -53,7 +55,9 @@ class ConversationModel {
       participantBId: participantBId ?? this.participantBId,
       lastMessage: lastMessage ?? this.lastMessage,
       lastMessageTime: lastMessageTime ?? this.lastMessageTime,
-      hasUnreadMessagesByParticipant: hasUnreadMessagesByParticipant ?? this.hasUnreadMessagesByParticipant,
+      hasUnreadMessagesByParticipant:
+          hasUnreadMessagesByParticipant ?? this.hasUnreadMessagesByParticipant,
+      lastMessageSenderId: lastMessageSenderId ?? this.lastMessageSenderId,
     );
   }
 }

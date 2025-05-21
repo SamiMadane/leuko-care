@@ -31,7 +31,7 @@ class PatientChatCard extends StatelessWidget {
     final hasUnreadForPatient = conversation.hasUnreadMessagesFor(patient.id!);
     final lastMessage = conversation.lastMessage;
     final isImageMessage = lastMessage.startsWith('https://res.cloudinary.com');
-    final isLastMessageFromDoctor = conversation.participantAId == doctor.id;
+    final isLastMessageFromDoctor = conversation.lastMessageSenderId == doctor.id ;
 
     final lastMessageTime = conversation.lastMessageTime?.toDate();
     final bool hasValidTime = lastMessageTime != null && lastMessageTime.year > 1970;
@@ -133,16 +133,18 @@ class PatientChatCard extends StatelessWidget {
                         ),
                       ],
                     )
-                  : Text(
-                      lastMessage,
-                      style: TextStyle(
-                        fontSize: FontSizeManager.s14,
-                        fontWeight: hasUnreadForDoctor ? FontWeight.bold : FontWeight.normal,
-                        color: hasUnreadForDoctor ? ColorsManager.primaryColor : ColorsManager.gray,
+                  : Expanded(
+                    child: Text(
+                        lastMessage,
+                        style: TextStyle(
+                          fontSize: FontSizeManager.s14,
+                          fontWeight: hasUnreadForDoctor ? FontWeight.bold : FontWeight.normal,
+                          color: hasUnreadForDoctor ? ColorsManager.primaryColor : ColorsManager.gray,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  ),
             ],
           ),
         ],

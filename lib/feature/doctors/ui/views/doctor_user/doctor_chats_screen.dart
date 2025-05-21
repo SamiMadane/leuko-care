@@ -64,7 +64,7 @@ class DoctorChatsScreen extends StatelessWidget {
                           conversationId: '',
                           participantAId: '',
                           participantBId: '',
-                          hasUnreadMessagesByParticipant: {},
+                          hasUnreadMessagesByParticipant: {}, lastMessageSenderId: '',
                         );
                     return PatientChatCard(
                       patient:patient,
