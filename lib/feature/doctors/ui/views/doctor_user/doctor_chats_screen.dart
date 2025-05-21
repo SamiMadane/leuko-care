@@ -56,8 +56,6 @@ class DoctorChatsScreen extends StatelessWidget {
                       (_, __) => SizedBox(height: HeightManager.h12),
                   itemBuilder: (context, index) {
                     final patient = sortedPatients[index];
-                    print('Building item for patient ID: ${patient.id}');
-
                     final conversation =
                         conversationsByPatientId[patient.id] ??
                         ConversationModel(

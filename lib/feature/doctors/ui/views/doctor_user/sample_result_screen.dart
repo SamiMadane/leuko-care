@@ -63,7 +63,7 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Result for ${widget.patient.name}', style: getBoldTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue)),
+        title: Text('Result for ${widget.patient.name}', style: getMediumTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue)),
         backgroundColor: ColorsManager.white,
       ),
       body: SingleChildScrollView(

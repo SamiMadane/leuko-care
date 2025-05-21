@@ -23,6 +23,8 @@ class SampleFAB extends StatelessWidget {
 
     return ClipOval(
       child: FloatingActionButton(
+          heroTag: 'upload_sample_fab',
+
         backgroundColor: ColorsManager.primaryColor,
         child: Image.asset(
           AssetsManager.chemicalAnalysisIcon,

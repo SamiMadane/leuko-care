@@ -12,16 +12,15 @@ class PatientModel {
   final String userType;
   final bool isExamined;
   final String registrationDate;
-  final String healthStatus; 
+  final String healthStatus;
   final String birthDate;
   final String leukemiaType;
   final double diseaseConfidence;
-  final String? aiNote; 
+  final String? aiNote;
   final String? latestSampleImageUrl;
   final String? lastExamDate;
   final String gender;
-  final String? fcmToken; 
-
+  final String? fcmToken;
 
   PatientModel({
     required this.id,
@@ -67,7 +66,7 @@ class PatientModel {
     String? latestSampleImageUrl,
     String? lastExamDate,
     String? gender,
-    String? fcmToken
+    String? fcmToken,
   }) {
     return PatientModel(
       id: id ?? this.id,
@@ -90,4 +89,17 @@ class PatientModel {
       fcmToken: fcmToken ?? this.fcmToken,
     );
   }
+
+  // Override equality to compare PatientModel objects by their ID only.
+  // This is needed for DropdownButton in UploadSampleScreen to correctly
+  // recognize the selected patient after navigating between screens.
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PatientModel &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

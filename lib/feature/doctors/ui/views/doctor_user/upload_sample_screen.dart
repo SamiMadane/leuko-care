@@ -72,19 +72,20 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
     return Stack(
       children: [
         BlocListener<DoctorCubit, DoctorState>(
-          listenWhen: (previous, current) =>
-              current is DoctorBottomNavChanged && current.index != 2,
+          listenWhen:
+              (previous, current) =>
+                  current is DoctorBottomNavChanged && current.index != 2,
           listener: (context, state) {
             setState(() {
+               selectedPatient = null;
               _image = null;
-              selectedPatient = null;
             });
           },
           child: Scaffold(
             appBar: AppBar(
               title: Text(
                 'Upload Blood Sample',
-                style: getBoldTextStyle(
+                style: getMediumTextStyle(
                   fontSize: FontSizeManager.s20,
                   color: ColorsManager.darkBlue,
                 ),
@@ -100,9 +101,10 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
                   PatientDropdown(
                     patients: widget.patients,
                     selected: selectedPatient,
-                    onChanged: (value) => setState(() {
-                      selectedPatient = value;
-                    }),
+                    onChanged:
+                        (value) => setState(() {
+                          selectedPatient = value;
+                        }),
                   ),
                   SizedBox(height: HeightManager.h24),
                   SampleImagePreview(image: _image),
