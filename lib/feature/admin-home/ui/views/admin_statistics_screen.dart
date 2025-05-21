@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
@@ -17,7 +18,7 @@ class AdminStatisticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Admin Statistics')),
+      appBar: AppBar(title:  Text('Admin Statistics',style: getMediumTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue),),backgroundColor: ColorsManager.appBarColor,),
       body: BlocBuilder<AdminHomeCubit, AdminHomeState>(
         builder: (context, state) {
           switch (state) {
