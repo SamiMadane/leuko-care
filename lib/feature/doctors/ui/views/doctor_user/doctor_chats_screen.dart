@@ -35,18 +35,23 @@ class DoctorChatsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Your Patients',
-          style: getBoldTextStyle(
-            fontSize: FontSizeManager.s20,
-            color: ColorsManager.darkBlue,
-          ),
+        title: Row(
+          children: [
+            SizedBox(width: WidthManager.w8),
+            Text(
+              'Chat with Patients',
+              style: getMediumTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
         ),
         elevation: 0,
-        backgroundColor: ColorsManager.white,
+        backgroundColor: ColorsManager.appBarColor,
       ),
       body: Padding(
-        padding: EdgeInsets.all(HeightManager.h16),
+        padding: EdgeInsets.symmetric(vertical:HeightManager.h10,horizontal: WidthManager.w16),
         child:
             patients.isEmpty
                 ? const Center(child: Text('No patients available for chat'))

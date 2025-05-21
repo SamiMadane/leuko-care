@@ -29,7 +29,8 @@ class SampleResultScreen extends StatefulWidget {
     required this.diseaseType,
     required this.confidence,
     required this.aiMessage,
-    required this.sampleImageUrl, required this.doctor,
+    required this.sampleImageUrl,
+    required this.doctor,
   });
 
   @override
@@ -55,7 +56,13 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
     setState(() => _hideButtons = false);
 
     if (image != null) {
-      showPreviewDialog(context, image, widget.doctor, widget.patient, _getInitialDoctorMessage());
+      showPreviewDialog(
+        context,
+        image,
+        widget.doctor,
+        widget.patient,
+        _getInitialDoctorMessage(),
+      );
     }
   }
 
@@ -63,7 +70,19 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Result for ${widget.patient.name}', style: getMediumTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue)),
+        title: Row(
+          children: [
+            SizedBox(width: WidthManager.w8),
+
+            Text(
+              'Result for ${widget.patient.name}',
+              style: getMediumTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
+        ),
         backgroundColor: ColorsManager.white,
       ),
       body: SingleChildScrollView(
@@ -78,16 +97,28 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: ColorsManager.primaryColor, width: 2),
+                  border: Border.all(
+                    color: ColorsManager.primaryColor,
+                    width: 2,
+                  ),
                   boxShadow: [
-                    BoxShadow(color: Colors.grey.shade300, blurRadius: 8, offset: const Offset(0, 4)),
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     patientInfoWidget(widget.patient),
-                    aiAnalysisWidget(widget.result, widget.diseaseType, widget.confidence, widget.aiMessage),
+                    aiAnalysisWidget(
+                      widget.result,
+                      widget.diseaseType,
+                      widget.confidence,
+                      widget.aiMessage,
+                    ),
                     sampleImageWidget(widget.sampleImageUrl),
                   ],
                 ),
@@ -95,17 +126,28 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
             ),
             if (!_hideButtons) ...[
               SizedBox(height: HeightManager.h20),
-              confirmationButtonsWidget(() {
-                // Update patient data
-              }, () {
-                Navigator.pop(context);
-              }),
+              confirmationButtonsWidget(
+                () {
+                  // Update patient data
+                },
+                () {
+                  Navigator.pop(context);
+                },
+              ),
               SizedBox(height: HeightManager.h20),
               ElevatedButton.icon(
                 onPressed: _captureAndPreview,
                 icon: Icon(Icons.send, color: ColorsManager.white),
-                label: Text("Send to Patient", style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.white)),
-                style: ElevatedButton.styleFrom(backgroundColor: ColorsManager.primaryColor),
+                label: Text(
+                  "Send to Patient",
+                  style: getMediumTextStyle(
+                    fontSize: FontSizeManager.s14,
+                    color: ColorsManager.white,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsManager.primaryColor,
+                ),
               ),
             ],
           ],

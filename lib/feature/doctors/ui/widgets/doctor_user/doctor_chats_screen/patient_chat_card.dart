@@ -37,9 +37,10 @@ class PatientChatCard extends StatelessWidget {
     final bool hasValidTime = lastMessageTime != null && lastMessageTime.year > 1970;
 
     return Material(
-      color: ColorsManager.moreLighterGray,
-      elevation: 4,
-      borderRadius: BorderRadius.circular(RadiusManager.r16),
+        color: hasUnreadForDoctor 
+      ? ColorsManager.moreLighterGray
+      : Colors.white,
+  borderRadius: BorderRadius.circular(RadiusManager.r16),
       child: InkWell(
         onTap: () {
           context.read<ChatCubit>().markMessagesAsReadForDoctor(doctor.id!, patient.id!);
@@ -59,7 +60,7 @@ class PatientChatCard extends StatelessWidget {
         },
         borderRadius: BorderRadius.circular(RadiusManager.r16),
         child: Padding(
-          padding: EdgeInsets.all(HeightManager.h16),
+          padding: EdgeInsets.symmetric(vertical: HeightManager.h12, horizontal: WidthManager.w16),
           child: Row(
             children: [
               _buildAvatar(),

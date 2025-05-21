@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -20,12 +21,18 @@ class DoctorPatientsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Patients of Dr. ${doctor.name}',
-          style: getBoldTextStyle(
-            fontSize: FontSizeManager.s20,
-            color: ColorsManager.darkBlue,
-          ),
+        title: Row(
+          children: [
+            SizedBox(width: WidthManager.w8),
+
+            Text(
+              'Patients of Dr. ${doctor.name}',
+              style: getMediumTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
         ),
         elevation: 0,
         backgroundColor: ColorsManager.white,

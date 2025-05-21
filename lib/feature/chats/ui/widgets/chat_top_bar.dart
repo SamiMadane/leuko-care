@@ -21,7 +21,7 @@ class ChatTopBar extends StatelessWidget {
     final canPop = Navigator.canPop(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: HeightManager.h10),
+      padding: EdgeInsets.symmetric(vertical: HeightManager.h8),
       child: Row(
         children: [
           if (canPop)
@@ -53,7 +53,7 @@ class ChatTopBar extends StatelessWidget {
           Expanded(
             child: Text(
               name,
-              style: getSemiBoldTextStyle(
+              style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
               ),

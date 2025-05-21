@@ -77,18 +77,24 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
                   current is DoctorBottomNavChanged && current.index != 2,
           listener: (context, state) {
             setState(() {
-               selectedPatient = null;
+              selectedPatient = null;
               _image = null;
             });
           },
           child: Scaffold(
             appBar: AppBar(
-              title: Text(
-                'Upload Blood Sample',
-                style: getMediumTextStyle(
-                  fontSize: FontSizeManager.s20,
-                  color: ColorsManager.darkBlue,
-                ),
+              title: Row(
+                children: [
+                  SizedBox(width: WidthManager.w8),
+
+                  Text(
+                    'Upload Blood Sample',
+                    style: getMediumTextStyle(
+                      fontSize: FontSizeManager.s20,
+                      color: ColorsManager.darkBlue,
+                    ),
+                  ),
+                ],
               ),
               backgroundColor: ColorsManager.white,
               elevation: 0,
