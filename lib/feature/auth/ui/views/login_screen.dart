@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -19,7 +20,16 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<AuthCubit>();
+
+    // ضبط لون أيقونات status bar (غامقة)
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // شفاف لو تحب
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ));
+
     return Scaffold(
+      backgroundColor: ColorsManager.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -29,13 +39,13 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-               ImageAndTitle(
+                ImageAndTitle(
                   imagePath: cubit.userTypeData[userType]!['image'],
                   title: cubit.userTypeData[userType]!['title'],
                 ),
-                SizedBox(height: HeightManager.h30),
-                EmailAndPassword(),
                 SizedBox(height: HeightManager.h40),
+                EmailAndPassword(),
+                SizedBox(height: HeightManager.h50),
                 AppTextButton(
                   buttonText: "Login",
                   textStyle: getSemiBoldTextStyle(
@@ -43,9 +53,8 @@ class LoginScreen extends StatelessWidget {
                     color: ColorsManager.white,
                   ),
                   backgroundImage: AssetsManager.homeBluePatternImage,
-
                   onPressed: () {
-                    validateThenDoLogin(context,userType);
+                    validateThenDoLogin(context, userType);
                   },
                 ),
                 SizedBox(height: HeightManager.h40),
@@ -61,7 +70,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-void validateThenDoLogin(BuildContext context,String userType) {
+void validateThenDoLogin(BuildContext context, String userType) {
   if (context.read<AuthCubit>().formKey.currentState!.validate()) {
     context.read<AuthCubit>().checkAdmin(userType);
   }

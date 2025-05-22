@@ -11,26 +11,31 @@ class ImageAndTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: Image.asset(
-            imagePath,
-            height: HeightManager.h210,
-            width: WidthManager.w210,
-            fit: BoxFit.contain,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: WidthManager.w10
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Image.asset(
+              imagePath,
+              height: HeightManager.h210,
+              width: WidthManager.w210,
+              fit: BoxFit.contain,
+            ),
           ),
-        ),
-        SizedBox(height: HeightManager.h10),
-        Text(
-          title,
-          style: getSemiBoldTextStyle(
-            fontSize: FontSizeManager.s22,
-            color: ColorsManager.black,
+          SizedBox(height: HeightManager.h10),
+          Text(
+            title,
+            style: getSemiBoldTextStyle(
+              fontSize: FontSizeManager.s22,
+              color: ColorsManager.black,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

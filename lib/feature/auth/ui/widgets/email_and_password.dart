@@ -21,8 +21,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool hasSpecialCharacters = false;
   bool hasNumber = false;
   bool hasMinLength = false;
+  bool showPasswordValidations = false; // ✅ نتحكم بالظهور هنا
 
   late TextEditingController passwordController;
+
   @override
   void initState() {
     super.initState();
@@ -32,14 +34,15 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   void setupPasswordControllerListener() {
     passwordController.addListener(() {
+      final text = passwordController.text;
+
       setState(() {
-        hasLowercase = AppRegex.hasLowerCase(passwordController.text);
-        hasUppercase = AppRegex.hasUpperCase(passwordController.text);
-        hasSpecialCharacters = AppRegex.hasSpecialCharacter(
-          passwordController.text,
-        );
-        hasNumber = AppRegex.hasNumber(passwordController.text);
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+        showPasswordValidations = text.isNotEmpty; // ✅ شرط العرض
+        hasLowercase = AppRegex.hasLowerCase(text);
+        hasUppercase = AppRegex.hasUpperCase(text);
+        hasSpecialCharacters = AppRegex.hasSpecialCharacter(text);
+        hasNumber = AppRegex.hasNumber(text);
+        hasMinLength = AppRegex.hasMinLength(text);
       });
     });
   }
@@ -59,6 +62,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                   !AppRegex.isEmailValid(value)) {
                 return 'Please enter a valid email';
               }
+              return null;
             },
           ),
           SizedBox(height: HeightManager.h18),
@@ -78,19 +82,24 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               ),
             ),
             validator: (value) {
-              if (value == null || value.isEmpty || !AppRegex.isPasswordValid(value)) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !AppRegex.isPasswordValid(value)) {
                 return 'Please enter a valid password';
               }
+              return null;
             },
           ),
-          SizedBox(height: HeightManager.h24),
-          PasswordValidations(
-            hasLowerCase: hasLowercase,
-            hasUpperCase: hasUppercase,
-            hasSpecialCharacters: hasSpecialCharacters,
-            hasNumber: hasNumber,
-            hasMinLength: hasMinLength,
-          ),
+          if (showPasswordValidations) ...[
+            SizedBox(height: HeightManager.h24),
+            PasswordValidations(
+              hasLowerCase: hasLowercase,
+              hasUpperCase: hasUppercase,
+              hasSpecialCharacters: hasSpecialCharacters,
+              hasNumber: hasNumber,
+              hasMinLength: hasMinLength,
+            ),
+          ],
         ],
       ),
     );

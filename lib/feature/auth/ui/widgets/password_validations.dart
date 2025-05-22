@@ -41,21 +41,26 @@ class PasswordValidations extends StatelessWidget {
     );
   }
 
-  Widget buildValidationRow(String text, bool hasValidated) {
-    return Row(
-      children: [
-        const CircleAvatar(radius: 2.5, backgroundColor: ColorsManager.gray),
-        SizedBox(width: WidthManager.w6),
-        Text(
-          text,
-          style: getRegularTextStyle(fontSize: FontSizeManager.s13,color: ColorsManager.darkBlue).copyWith(
-            decoration: hasValidated ? TextDecoration.lineThrough : null,
-            decorationColor: Colors.green,
-            decorationThickness: 2,
-            color: hasValidated ? ColorsManager.gray : ColorsManager.darkBlue,
-          ),
+Widget buildValidationRow(String text, bool hasValidated) {
+  return Row(
+    children: [
+      hasValidated
+          ? Icon(Icons.check_circle, color: ColorsManager.green, size: 14)
+          : CircleAvatar(radius: 2.5, backgroundColor: ColorsManager.gray),
+      SizedBox(width: WidthManager.w6),
+      Text(
+        text,
+        style: getRegularTextStyle(
+          fontSize: FontSizeManager.s13,
+          color: hasValidated ? ColorsManager.gray : ColorsManager.darkBlue,
+        ).copyWith(
+          decoration: hasValidated ? TextDecoration.lineThrough : null,
+          decorationColor: ColorsManager.green,
+          decorationThickness: 2,
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+}
+
 }
