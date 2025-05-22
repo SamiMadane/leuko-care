@@ -14,42 +14,57 @@ class HealthOverviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final healthItems = [
+      HealthInfoData(Icons.health_and_safety, "Health Status", patient.healthStatus),
+      HealthInfoData(Icons.biotech, "Leukemia Type", patient.leukemiaType),
+      HealthInfoData(Icons.check_circle_outline, "Diagnosis Confidence", "${patient.diseaseConfidence}%"),
+      HealthInfoData(Icons.date_range, "Last Exam Date", patient.lastExamDate ?? "N/A"),
+    ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Health Overview",
-          style: getBoldTextStyle(
+          style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
           ),
         ),
         SizedBox(height: HeightManager.h20),
-        if (patient.latestSampleImageUrl != null &&
-            patient.latestSampleImageUrl!.isNotEmpty)
+        if (patient.latestSampleImageUrl != null && patient.latestSampleImageUrl!.isNotEmpty)
           SampleImageWidget(imageUrl: patient.latestSampleImageUrl!),
+        SizedBox(height: HeightManager.h20),
 
-        HealthInfoWidget(
-          icon: Icons.health_and_safety,
-          label: "Health Status",
-          value: patient.healthStatus,
-        ),
-        HealthInfoWidget(
-          icon: Icons.biotech,
-          label: "Leukemia Type",
-          value: patient.leukemiaType,
-        ),
-        HealthInfoWidget(
-          icon: Icons.check_circle_outline,
-          label: "Diagnosis Confidence",
-          value: "${patient.diseaseConfidence}%",
-        ),
-        HealthInfoWidget(
-          icon: Icons.date_range,
-          label: "Last Exam Date",
-          value: patient.lastExamDate ?? "N/A",
+        GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: healthItems.length,
+          padding: EdgeInsets.symmetric(horizontal: WidthManager.w8),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: HeightManager.h16,
+            crossAxisSpacing: WidthManager.w16,
+            childAspectRatio: 1,
+          ),
+          itemBuilder: (context, index) {
+            final item = healthItems[index];
+            return HealthInfoWidget(
+              icon: item.icon,
+              label: item.label,
+              value: item.value,
+            );
+          },
         ),
       ],
     );
   }
+}
+
+class HealthInfoData {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  HealthInfoData(this.icon, this.label, this.value);
 }

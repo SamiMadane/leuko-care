@@ -89,7 +89,10 @@ class _DoctorCard extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.symmetric(
+              vertical: HeightManager.h12,
+              horizontal: WidthManager.w16,
+            ),
             decoration: BoxDecoration(
               color: ColorsManager.lightBlue,
               borderRadius: BorderRadius.circular(16),

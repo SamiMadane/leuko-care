@@ -24,20 +24,27 @@ class SampleImageWidget extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(bottom: HeightManager.h12),
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.symmetric(
+          vertical: HeightManager.h12,
+          horizontal: WidthManager.w16,
+        ),
         decoration: BoxDecoration(
-        color: ColorsManager.white,
-          borderRadius: BorderRadius.circular(RadiusManager.r12),
+          color: ColorsManager.white,
+          borderRadius: BorderRadius.circular(RadiusManager.r16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6,
-              offset: Offset(1, 3),
+              color: ColorsManager.primaryColor.withOpacity(0.2),
+              blurRadius: 5,
+              offset: Offset(1, 1),
             ),
           ],
+          border: Border.all(
+            color: ColorsManager.primaryColor.withOpacity(0.3),
+            width: 1,
+          ),
         ),
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: WidthManager.w8),
+          padding: EdgeInsets.symmetric(horizontal: WidthManager.w8),
           child: Row(
             children: [
               Expanded(
@@ -50,17 +57,22 @@ class SampleImageWidget extends StatelessWidget {
                 ),
               ),
               ClipRRect(
-                borderRadius: BorderRadius.circular(RadiusManager.r8),
+                borderRadius: BorderRadius.circular(RadiusManager.r12),
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   width: 80,
                   height: 80,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   placeholder: (context, url) => _buildShimmerPlaceholder(),
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.broken_image,
-                    size: 40,
-                    color: ColorsManager.white,
+                  errorWidget: (context, url, error) => Container(
+                    width: 80,
+                    height: 80,
+                    color: ColorsManager.primaryColor.withOpacity(0.1),
+                    child: const Icon(
+                      Icons.broken_image,
+                      size: 40,
+                      color: ColorsManager.primaryColor,
+                    ),
                   ),
                 ),
               ),
@@ -77,7 +89,7 @@ class SampleImageWidget extends StatelessWidget {
     return Container(
       width: 80,
       height: 80,
-      color: ColorsManager.lightGray,
+      color: ColorsManager.primaryColor.withOpacity(0.1),
     );
   }
 }

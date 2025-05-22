@@ -19,37 +19,59 @@ class HealthInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: HeightManager.h12),
-      padding: EdgeInsets.symmetric(
-        vertical: HeightManager.h16,
-        horizontal: WidthManager.w16,
-      ),
+      padding: EdgeInsets.all(WidthManager.w16),
       decoration: BoxDecoration(
         color: ColorsManager.white,
-        borderRadius: BorderRadius.circular(RadiusManager.r12),
+        borderRadius: BorderRadius.circular(RadiusManager.r16),
         boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(1, 3)),
+          BoxShadow(
+            color: ColorsManager.lightBlue,
+            blurRadius: 5,
+            offset: Offset(1, 1),
+          ),
         ],
+        border: Border.all(
+          color: ColorsManager.primaryColor.withOpacity(0.3),
+          width: 1,
+        ),
       ),
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,  // لتوسيط المحتوى
         children: [
-          Icon(icon, size: 24, color: ColorsManager.primaryColor),
-          SizedBox(width: WidthManager.w12),
-          Expanded(
-            child: Text(
-              label,
-              style: getSemiBoldTextStyle(
-                fontSize: FontSizeManager.s15,
-                color: ColorsManager.darkBlue,
-              ),
+          Container(
+            decoration: BoxDecoration(
+              color: ColorsManager.lightBlue,
+              shape: BoxShape.circle,
+            ),
+            padding: EdgeInsets.all(WidthManager.w12),
+            child: Icon(
+              icon,
+              size: IconSizeManager.s28,
+              color: ColorsManager.primaryColor,
             ),
           ),
+          SizedBox(height: HeightManager.h12),
+          Text(
+            label,
+            style: getSemiBoldTextStyle(
+              fontSize: FontSizeManager.s16,
+              color: ColorsManager.darkBlue,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: HeightManager.h6),
           Text(
             value,
             style: getMediumTextStyle(
-              fontSize: FontSizeManager.s15,
+              fontSize: FontSizeManager.s16,
               color: ColorsManager.primaryColor,
             ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
