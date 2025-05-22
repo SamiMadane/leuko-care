@@ -94,42 +94,47 @@ class _DoctorCard extends StatelessWidget {
               horizontal: WidthManager.w16,
             ),
             decoration: BoxDecoration(
-              color: ColorsManager.lightBlue,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: ColorsManager.primaryColor),
+              color: ColorsManager.white,
+              borderRadius: BorderRadius.circular(RadiusManager.r16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
+                  color: ColorsManager.lightBlue,
+                  blurRadius: 5,
+                  offset: Offset(1, 1),
                 ),
               ],
+              border: Border.all(
+                color: ColorsManager.primaryColor.withOpacity(0.3),
+                width: 1,
+              ),
             ),
             child: Row(
               children: [
                 _DoctorAvatar(imageUrl: doctor.profileImage),
                 const SizedBox(width: 16),
                 _DoctorInfo(name: doctor.name, email: doctor.email),
-                const Icon(Icons.arrow_forward_ios,
-                    size: 18, color: ColorsManager.primaryColor),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 18,
+                  color: ColorsManager.primaryColor,
+                ),
               ],
             ),
           ),
+
           if (hasUnread)
             Positioned(
               top: HeightManager.h10,
               right: WidthManager.w14,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: Colors.redAccent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: const [
-                    Icon(Icons.mark_chat_unread,
-                        color: Colors.white, size: 12),
+                    Icon(Icons.mark_chat_unread, color: Colors.white, size: 12),
                     SizedBox(width: 4),
                     Text(
                       "New",
@@ -166,8 +171,8 @@ class _DoctorAvatar extends StatelessWidget {
           height: HeightManager.h64,
           fit: BoxFit.cover,
           placeholder: (_, __) => _buildShimmerLoading(),
-          errorWidget: (_, __, ___) =>
-              const Icon(Icons.error, color: Colors.red),
+          errorWidget:
+              (_, __, ___) => const Icon(Icons.error, color: Colors.red),
         ),
       ),
     );

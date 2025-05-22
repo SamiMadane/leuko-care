@@ -21,10 +21,20 @@ class MessageStatusCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: WidthManager.w20),
       child: Container(
         decoration: BoxDecoration(
-          color: ColorsManager.lightBlue,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: ColorsManager.primaryColor, width: 1),
-        ),
+              color: ColorsManager.white,
+              borderRadius: BorderRadius.circular(RadiusManager.r12),
+              boxShadow: [
+                BoxShadow(
+                  color: ColorsManager.lightBlue,
+                  blurRadius: 5,
+                  offset: Offset(1, 1),
+                ),
+              ],
+              border: Border.all(
+                color: ColorsManager.primaryColor.withOpacity(0.3),
+                width: 1,
+              ),
+            ),
         padding: EdgeInsets.symmetric(
           horizontal: WidthManager.w16,
           vertical: HeightManager.h12,
@@ -48,7 +58,7 @@ class MessageStatusCard extends StatelessWidget {
                   Text(
                     'Last message: ${_formatDateTime(lastMessageTime)}',
                     style: getRegularTextStyle(
-                      fontSize: FontSizeManager.s12,
+                      fontSize: FontSizeManager.s13,
                       color: ColorsManager.gray
                     ),
                   ),
