@@ -18,35 +18,49 @@ class PatientShimmer extends StatelessWidget {
           _shimmerBox(height: HeightManager.h26, width: WidthManager.w260),
           SizedBox(height: HeightManager.h12),
           _shimmerBox(height: HeightManager.h26, width: WidthManager.w180),
-      
-          SizedBox(height: HeightManager.h30),
-      
-          // إعادة تكبير الأبعاد لتملأ الشاشة
-          _shimmerBox(height: HeightManager.h80, width: double.infinity),
-          SizedBox(height: HeightManager.h14),
-          _shimmerBox(height: HeightManager.h54, width: double.infinity),
-          SizedBox(height: HeightManager.h14),
-          _shimmerBox(height: HeightManager.h54, width: double.infinity),
-          SizedBox(height: HeightManager.h14),
-           _shimmerBox(height: HeightManager.h54, width: double.infinity),
-          SizedBox(height: HeightManager.h14),
-           _shimmerBox(height: HeightManager.h54, width: double.infinity),
-          SizedBox(height: HeightManager.h30),
-          _shimmerBox(height: HeightManager.h28, width: WidthManager.w260),
-          SizedBox(height: HeightManager.h12),
-           _shimmerBox(height: HeightManager.h80, width: double.infinity),
-  SizedBox(height: HeightManager.h30),
-          _shimmerBox(height: HeightManager.h28, width: WidthManager.w260),
-          SizedBox(height: HeightManager.h12),
-           _shimmerBox(height: HeightManager.h300, width: double.infinity),
 
-          
+          SizedBox(height: HeightManager.h30),
+
+          Row(
+            children: [
+              _shimmerBox(
+                height: HeightManager.h160,
+                width: WidthManager.w160,
+              ),
+              _shimmerBox(
+                height: HeightManager.h160,
+                width: WidthManager.w160,
+              ),
+            ],
+          ),
+          SizedBox(height: HeightManager.h20),
+           Row(
+             children: [
+               _shimmerBox(
+                 height: HeightManager.h160,
+                 width: WidthManager.w160,
+               ),
+               _shimmerBox(
+                 height: HeightManager.h160,
+                 width: WidthManager.w160,
+               ),
+          ],
+
+           ),
+          SizedBox(height: HeightManager.h30),
+          _shimmerBox(height: HeightManager.h28, width: WidthManager.w260),
+          SizedBox(height: HeightManager.h12),
+          _shimmerBox(height: HeightManager.h80, width: double.infinity),
+          SizedBox(height: HeightManager.h30),
+          _shimmerBox(height: HeightManager.h28, width: WidthManager.w260),
+          SizedBox(height: HeightManager.h12),
+          _shimmerBox(height: HeightManager.h300, width: double.infinity),
         ],
       ),
     );
   }
 
-  Widget _shimmerBox({required double height,required double width}) {
+  Widget _shimmerBox({required double height, required double width}) {
     return Shimmer.fromColors(
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
@@ -87,7 +101,7 @@ class HomeTopShimmer extends StatelessWidget {
                 ),
               ),
               SizedBox(width: WidthManager.w12),
-    
+
               Expanded(
                 child: Shimmer.fromColors(
                   baseColor: ColorsManager.lightGray,
@@ -97,20 +111,20 @@ class HomeTopShimmer extends StatelessWidget {
                     children: [
                       Container(
                         height: HeightManager.h16,
-                        width: WidthManager.w130, 
+                        width: WidthManager.w130,
                         color: Colors.white,
                       ),
                       SizedBox(height: HeightManager.h8),
                       Container(
                         height: HeightManager.h14,
-                        width: WidthManager.w200, 
+                        width: WidthManager.w200,
                         color: Colors.white,
                       ),
                     ],
                   ),
                 ),
               ),
-    
+
               Shimmer.fromColors(
                 baseColor: ColorsManager.lightGray,
                 highlightColor: Colors.white,
@@ -124,7 +138,7 @@ class HomeTopShimmer extends StatelessWidget {
             left: WidthManager.w80,
             right: WidthManager.w20,
           ),
-    
+
           child: Divider(color: ColorsManager.lightGray, thickness: 1),
         ),
       ],
