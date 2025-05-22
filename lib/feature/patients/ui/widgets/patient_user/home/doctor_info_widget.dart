@@ -40,7 +40,7 @@ class DoctorInfoWidget extends StatelessWidget {
             color: ColorsManager.darkBlue,
           ),
         ),
-        const SizedBox(height: 12),
+         SizedBox(height: HeightManager.h12),
         _DoctorCard(
           doctor: doctor,
           patient: patient,

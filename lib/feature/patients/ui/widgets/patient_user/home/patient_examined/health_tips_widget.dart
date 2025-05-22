@@ -32,7 +32,7 @@ class HealthTipsWidget extends StatelessWidget {
             color: ColorsManager.darkBlue,
           ),
         ),
-        SizedBox(height: HeightManager.h20),
+        SizedBox(height: HeightManager.h12),
 
         /// الكارد الرئيسي
         ClipRRect(
@@ -52,7 +52,7 @@ class HealthTipsWidget extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: HeightManager.h20,
+                vertical: HeightManager.h16,
                 horizontal: WidthManager.w12,
               ),
               child: Column(

@@ -34,7 +34,7 @@ class HealthOverviewWidget extends StatelessWidget {
         SizedBox(height: HeightManager.h20),
         if (patient.latestSampleImageUrl != null && patient.latestSampleImageUrl!.isNotEmpty)
           SampleImageWidget(imageUrl: patient.latestSampleImageUrl!),
-        SizedBox(height: HeightManager.h20),
+        SizedBox(height: HeightManager.h12),
 
         GridView.builder(
           shrinkWrap: true,

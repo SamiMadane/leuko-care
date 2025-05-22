@@ -23,12 +23,17 @@ class PatientProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          'My Profile',
-          style: getMediumTextStyle(
-            fontSize: FontSizeManager.s20,
-            color: ColorsManager.darkBlue,
-          ),
+        title: Row(
+          children: [
+            SizedBox(width: WidthManager.w8),
+            Text(
+              'My Profile',
+              style: getMediumTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
         ),
         backgroundColor: ColorsManager.appBarColor,
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
