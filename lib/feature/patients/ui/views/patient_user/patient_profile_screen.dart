@@ -1,72 +1,109 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/core/widgets/profile_image_widget.dart';
+import 'package:leuko_care/core/widgets/profile_info_row.dart';
+import 'package:leuko_care/core/widgets/section_title.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/shared/patient_edit_button.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/info_card.dart';
 
 class PatientProfileScreen extends StatelessWidget {
   final PatientModel patient;
 
   const PatientProfileScreen({super.key, required this.patient});
-
   @override
   Widget build(BuildContext context) {
     final age = context.read<PatientCubit>().calculateAge(patient.birthDate);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Row(
-          children: [
-            SizedBox(width: WidthManager.w8),
-            Text(
-              'My Profile',
-              style: getSemiBoldTextStyle(
-                fontSize: FontSizeManager.s20,
-                color: ColorsManager.darkBlue,
-              ),
-            ),
-          ],
+        title: Text(
+          'My Profile',
+          style: getMediumTextStyle(
+            fontSize: FontSizeManager.s20,
+            color: ColorsManager.darkBlue,
+          ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: ColorsManager.appBarColor,
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit, color: ColorsManager.primaryColor),
+            onPressed: () {
+              context.pushNamed(
+                Routes.addUpdatePatientScreen,
+                arguments: {
+                  'patientModel': patient,
+                  'userType': 'patient',
+                  'doctorId': patient.doctorId,
+                  'doctorName': '',
+                },
+              );
+            },
+          ),
+        ],
       ),
+
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-          vertical: HeightManager.h20,
-          horizontal: WidthManager.w20,
-        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ProfileImageWidget(profileImageUrl: patient.profileImage),
-            SizedBox(height: HeightManager.h20),
-            Text(
-              patient.name,
-              style: getBoldTextStyle(
-                fontSize: FontSizeManager.s22,
-                color: ColorsManager.darkBlue,
+            // Header
+            Container(
+              padding: EdgeInsets.symmetric(vertical: HeightManager.h24),
+              child: Column(
+                children: [
+                  ProfileImageWidget(profileImageUrl: patient.profileImage),
+                  SizedBox(height: HeightManager.h12),
+                  Text(
+                    patient.name,
+                    style: getBoldTextStyle(
+                      fontSize: FontSizeManager.s20,
+                      color: ColorsManager.darkBlue,
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: HeightManager.h20),
 
-            InfoCard(title: 'Email', value: patient.email, icon: Icons.email),
-            InfoCard(title: 'Phone', value: patient.phone, icon: Icons.phone),
-            InfoCard(
+            SectionTitle(title: 'Contact Info'),
+            ProfileInfoRow(
+              icon: Icons.email,
+              title: 'Email',
+              value: patient.email,
+            ),
+            ProfileInfoRow(
+              icon: Icons.phone,
+              title: 'Phone',
+              value: patient.phone,
+            ),
+
+            SectionTitle( title: 'Personal Info',),
+            ProfileInfoRow(
+              icon: Icons.date_range,
               title: 'Birth Date',
               value: patient.birthDate,
-              icon: Icons.date_range,
             ),
-            InfoCard(title: 'Age', value: age.toString(), icon: Icons.cake),
-            InfoCard(title: 'Gender', value: patient.gender, icon: patient.gender.toLowerCase() == 'male' ?Icons.male : Icons.female),
+            ProfileInfoRow(
+              icon: Icons.cake,
+              title: 'Age',
+              value: age.toString(),
+            ),
+            ProfileInfoRow(
+              icon:
+                  patient.gender.toLowerCase() == 'male'
+                      ? Icons.male
+                      : Icons.female,
+              title: 'Gender',
+              value: patient.gender,
+            ),
 
-            SizedBox(height: HeightManager.h20),
-            PatientEditButton(patient: patient, userType: 'patient'),
+            SizedBox(height: HeightManager.h24),
           ],
         ),
       ),

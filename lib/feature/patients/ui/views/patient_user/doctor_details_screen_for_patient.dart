@@ -4,10 +4,11 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/profile_image_widget.dart';
+import 'package:leuko_care/core/widgets/section_title.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_profile_screen/info_row_widget.dart';
+import 'package:leuko_care/core/widgets/profile_info_row.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_profile_screen/about_box_widget.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/message_status_card.dart';
 
@@ -74,26 +75,26 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
               ),
 
             // Section: Contact Info
-            _buildSectionTitle('Contact Info'),
-            InfoRowWidget(
+            SectionTitle(title: 'Contact Info'),
+            ProfileInfoRow(
               icon: Icons.email,
               title: 'Email',
               value: doctor.email,
             ),
-            InfoRowWidget(
+            ProfileInfoRow(
               icon: Icons.phone,
               title: 'Phone',
               value: doctor.phone,
             ),
 
             // Section: Professional Info
-            _buildSectionTitle('Professional Info'),
-            InfoRowWidget(
+            SectionTitle(title: 'Professional Info'),
+            ProfileInfoRow(
               icon: Icons.work_outline,
               title: 'Experience',
               value: '${doctor.experience} years',
             ),
-            InfoRowWidget(
+            ProfileInfoRow(
               icon:
                   doctor.gender.toLowerCase() == 'male'
                       ? Icons.male
@@ -103,7 +104,7 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
             ),
 
             // Section: About
-            _buildSectionTitle('About'),
+            SectionTitle(title: 'About'),
             AboutBoxWidget(description: doctor.description),
 
             SizedBox(height: HeightManager.h24),
@@ -129,7 +130,7 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
               child: Container(
                 padding:  EdgeInsets.symmetric(
                   vertical: HeightManager.h6,
-                  horizontal: WidthManager.w60,
+                  horizontal: WidthManager.w6,
                 ),
                 decoration: const BoxDecoration(
                   color: Colors.red,
@@ -143,20 +144,4 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        vertical: HeightManager.h8,
-        horizontal: WidthManager.w20,
-      ),
-      child: Text(
-        title,
-        style: getSemiBoldTextStyle(
-          fontSize: FontSizeManager.s16,
-          color: ColorsManager.darkBlue,
-        ),
-      ),
-    );
-  }
 }

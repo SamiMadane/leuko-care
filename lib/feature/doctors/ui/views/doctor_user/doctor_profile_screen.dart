@@ -6,9 +6,10 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/core/widgets/profile_image_widget.dart';
+import 'package:leuko_care/core/widgets/section_title.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_profile_screen/about_box_widget.dart';
-import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_profile_screen/info_row_widget.dart';
+import 'package:leuko_care/core/widgets/profile_info_row.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   final DoctorModel doctor;
@@ -70,33 +71,35 @@ class DoctorProfileScreen extends StatelessWidget {
             ),
 
             // Section: Contact Info
-            _buildSectionTitle('Contact Info'),
-            InfoRowWidget(
+            SectionTitle(title: 'Contact Info'),
+            ProfileInfoRow(
               icon: Icons.email,
               title: 'Email',
               value: doctor.email,
             ),
-            InfoRowWidget(
+            ProfileInfoRow(
               icon: Icons.phone,
               title: 'Phone',
               value: doctor.phone,
             ),
 
             // Section: Professional Info
-            _buildSectionTitle('Professional Info'),
-            InfoRowWidget(
+            SectionTitle(title: 'Professional Info'),
+            ProfileInfoRow(
               icon: Icons.work_outline,
               title: 'Experience',
               value: doctor.experience,
             ),
-            InfoRowWidget(
-              icon: Icons.person,
+            ProfileInfoRow(
+              icon: doctor.gender.toLowerCase() == 'male'
+                      ? Icons.male
+                      : Icons.female,
               title: 'Gender',
               value: doctor.gender,
             ),
 
             // Section: About
-            _buildSectionTitle('About'),
+            SectionTitle(title:'About'),
             AboutBoxWidget(description: doctor.description),
 
             SizedBox(height: HeightManager.h24),
@@ -106,20 +109,4 @@ class DoctorProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        vertical: HeightManager.h8,
-        horizontal: WidthManager.w20,
-      ),
-      child: Text(
-        title,
-        style: getSemiBoldTextStyle(
-          fontSize: FontSizeManager.s16,
-          color: ColorsManager.darkBlue,
-        ),
-      ),
-    );
-  }
 }

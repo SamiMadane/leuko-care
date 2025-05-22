@@ -4,11 +4,11 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 
-class InfoRowWidget extends StatelessWidget {
+class ProfileInfoRow extends StatelessWidget {
   final IconData icon;
   final String title;
   final String value;
-  const InfoRowWidget({super.key, required this.icon, required this.title, required this.value});
+  const ProfileInfoRow({super.key, required this.icon, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
