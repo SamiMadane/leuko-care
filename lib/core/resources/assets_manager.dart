@@ -18,6 +18,8 @@ class AssetsManager {
   static const String onboarding2Image= '$imagesPath/onboarding2.png';
   static const String onboarding3Image= '$imagesPath/onboarding3.png';
   static const String homeBluePatternImage = '$imagesPath/home_blue_pattern.png';
+  static const String logoImage = '$imagesPath/logo.png';
+  static const String logosImage = '$imagesPath/logos.png';
 
   
 

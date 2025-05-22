@@ -14,14 +14,9 @@ class UserSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsManager.white,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [ColorsManager.primaryColor, ColorsManager.lightBlue],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -32,17 +27,17 @@ class UserSelectionScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  AssetsManager.bloodImage,
-                  height: HeightManager.h200,
-                  width: WidthManager.w200,
+                  AssetsManager.logoImage,
+                  height: HeightManager.h180,
+                  width: WidthManager.w180,
                   fit: BoxFit.contain,
                 ),
-                SizedBox(height: HeightManager.h10),
+                SizedBox(height: HeightManager.h30),
                 Text(
                   "User Selection",
                   style: getBoldTextStyle(
                     fontSize: FontSizeManager.s26,
-                    color: Colors.white,
+                    color: ColorsManager.black,
                   ),
                 ),
                 SizedBox(height: HeightManager.h10),
@@ -50,7 +45,7 @@ class UserSelectionScreen extends StatelessWidget {
                   "Please select your role to continue",
                   style: getSemiBoldTextStyle(
                     fontSize: FontSizeManager.s16,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                   textAlign: TextAlign.center,
                 ),

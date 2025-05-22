@@ -24,6 +24,7 @@ Widget buildSelectionCard(
           onTap: onTap,
           borderRadius: BorderRadius.circular(RadiusManager.r30),
           child: Container(
+            margin: EdgeInsets.only(bottom: HeightManager.h12), // هامش لتفادي قطع الظل
             width: double.infinity,
             height: HeightManager.h88,
             padding: EdgeInsets.symmetric(
@@ -36,6 +37,13 @@ Widget buildSelectionCard(
                 image: AssetImage(AssetsManager.homeBluePatternImage),
                 fit: BoxFit.cover,
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black87,
+                  blurRadius: 8,
+                  offset: const Offset(4, 3),
+                ),
+              ],
             ),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -44,18 +52,18 @@ Widget buildSelectionCard(
                 style: TextStyle(
                   fontSize: FontSizeManager.s20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.black87,
                 ),
               ),
             ),
           ),
         ),
         Positioned(
-          right: positionedRight ?? WidthManager.w8, // لإخراج جزء من الصورة خارج الزر
+          right: positionedRight ?? WidthManager.w8,
           bottom: positionedBottom ?? HeightManager.h6,
           child: Image.asset(
             imagePath,
-            height: imageHeight ?? HeightManager.h120, // تكبير الصورة
+            height: imageHeight ?? HeightManager.h120,
             width: imageWidth ?? WidthManager.w120,
             fit: BoxFit.fill,
           ),
