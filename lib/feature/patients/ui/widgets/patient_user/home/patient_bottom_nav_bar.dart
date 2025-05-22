@@ -37,7 +37,7 @@ class PatientBottomNavBar extends StatelessWidget {
             highlightColor: Colors.transparent,
           ),
           child: BottomNavigationBar(
-            backgroundColor: ColorsManager.moreLighterGray,
+            backgroundColor: ColorsManager.white,
             currentIndex: currentIndex,
             onTap: onTap,
             type: BottomNavigationBarType.fixed,
@@ -71,18 +71,31 @@ class PatientBottomNavBar extends StatelessWidget {
     );
   }
 
-  BottomNavigationBarItem _buildNavItem(String assetPath, String label, int index) {
-    final isSelected = currentIndex == index;
-    final color = isSelected ? ColorsManager.primaryColor : ColorsManager.darkBlue;
+ BottomNavigationBarItem _buildNavItem(String assetPath, String label, int index) {
+  final isSelected = currentIndex == index;
+  final color = isSelected ? ColorsManager.primaryColor : ColorsManager.darkBlue;
 
-    return BottomNavigationBarItem(
-      icon: Image.asset(
+  return BottomNavigationBarItem(
+    icon: Container(
+      padding: EdgeInsets.symmetric(
+        vertical: isSelected ? HeightManager.h8 : HeightManager.h4,
+        horizontal: isSelected ? WidthManager.w8 : WidthManager.w4,
+      ),  
+      decoration: isSelected
+          ? BoxDecoration(
+              color: ColorsManager.lightBlue,  // لون خلفية شفاف
+              shape: BoxShape.circle,
+            )
+          : null,
+      child: Image.asset(
         assetPath,
         width: isSelected ? WidthManager.w26 : WidthManager.w22,
         height: isSelected ? HeightManager.h26 : HeightManager.h22,
         color: color,
       ),
-      label: label,
-    );
-  }
+    ),
+    label: label,
+  );
+}
+
 }

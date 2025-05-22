@@ -31,7 +31,7 @@ class PatientHomeScreen extends StatelessWidget {
           Row(
             children: [
               Icon(
-                Icons.perm_device_information,
+                Icons.health_and_safety,
                 color: ColorsManager.primaryColor,
                 size: FontSizeManager.s24,
               ),
