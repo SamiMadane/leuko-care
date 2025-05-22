@@ -18,14 +18,18 @@ class DoctorInfoWidget extends StatelessWidget {
   final PatientModel patient;
   final DoctorModel doctor;
   final ConversationModel? conversation;
+
   const DoctorInfoWidget({
     super.key,
     required this.patient,
     required this.doctor,
     this.conversation,
   });
+
   @override
   Widget build(BuildContext context) {
+    final hasUnread = conversation?.hasUnreadMessagesFor(patient.id!) ?? false;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -36,107 +40,178 @@ class DoctorInfoWidget extends StatelessWidget {
             color: ColorsManager.darkBlue,
           ),
         ),
-        SizedBox(height: HeightManager.h14),
-        InkWell(
-          onTap: () async {
-            final shouldOpenChat = await context.pushNamed(
-              Routes.doctorDetailsScreenForPatient,
-              arguments: {
-                'doctor': doctor,
-                'patient': patient,
-                'conversation': conversation,
-              },
-            );
-            if (shouldOpenChat == true) {
-              context.read<ChatCubit>().markMessagesAsReadForPatient(
-                patient.id!,
-                doctor.id!,
-              );
-              context.read<PatientCubit>().changeSelectedIndex(1);
-            }
+        const SizedBox(height: 12),
+        _DoctorCard(
+          doctor: doctor,
+          patient: patient,
+          hasUnread: hasUnread,
+          conversation: conversation,
+        ),
+      ],
+    );
+  }
+}
+
+class _DoctorCard extends StatelessWidget {
+  final DoctorModel doctor;
+  final PatientModel patient;
+  final ConversationModel? conversation;
+  final bool hasUnread;
+
+  const _DoctorCard({
+    required this.doctor,
+    required this.patient,
+    required this.conversation,
+    required this.hasUnread,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () async {
+        final shouldOpenChat = await context.pushNamed(
+          Routes.doctorDetailsScreenForPatient,
+          arguments: {
+            'doctor': doctor,
+            'patient': patient,
+            'conversation': conversation,
           },
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: HeightManager.h14,
-              horizontal: WidthManager.w14,
-            ),
+        );
+        if (shouldOpenChat == true) {
+          context.read<ChatCubit>().markMessagesAsReadForPatient(
+            patient.id!,
+            doctor.id!,
+          );
+          context.read<PatientCubit>().changeSelectedIndex(1);
+        }
+      },
+      borderRadius: BorderRadius.circular(16),
+      child: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(RadiusManager.r12),
-              border: Border.all(color: ColorsManager.lightBlueAccent),
+              color: ColorsManager.lightBlue,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: ColorsManager.primaryColor),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 4,
-                  offset: Offset(0, 2),
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
             child: Row(
               children: [
-                Material(
-                  elevation: 4,
-                  shape: const CircleBorder(),
-                  shadowColor: ColorsManager.black87,
-                  child: CircleAvatar(
-                    radius: RadiusManager.r30,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: null,
-                    child: ClipOval(
-                      child: CachedNetworkImage(
-                        imageUrl: doctor.profileImage,
-                        width: WidthManager.w60,
-                        height: HeightManager.h60,
-                        fit: BoxFit.cover,
-                        placeholder: (_, __) => _buildShimmerLoading(),
-                        errorWidget:
-                            (_, __, ___) =>
-                                const Icon(Icons.error, color: Colors.red),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: WidthManager.w12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Dr. ${doctor.name}',
-                        style: getSemiBoldTextStyle(
-                          fontSize: FontSizeManager.s16,
-                          color: ColorsManager.darkBlue,
-                        ),
-                      ),
-                      SizedBox(height: HeightManager.h4),
-                      Text(
-                        doctor.email,
-                        style: getMediumTextStyle(
-                          fontSize: FontSizeManager.s14,
-                          color: ColorsManager.darkBlue,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                if (conversation?.hasUnreadMessagesFor(patient.id!) ?? false)
-                  Icon(Icons.notification_important, color: Colors.red),
-                Icon(Icons.arrow_forward_ios, color: Colors.blue),
+                _DoctorAvatar(imageUrl: doctor.profileImage),
+                const SizedBox(width: 16),
+                _DoctorInfo(name: doctor.name, email: doctor.email),
+                const Icon(Icons.arrow_forward_ios,
+                    size: 18, color: ColorsManager.primaryColor),
               ],
             ),
           ),
+          if (hasUnread)
+            Positioned(
+              top: HeightManager.h10,
+              right: WidthManager.w14,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: const [
+                    Icon(Icons.mark_chat_unread,
+                        color: Colors.white, size: 12),
+                    SizedBox(width: 4),
+                    Text(
+                      "New",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DoctorAvatar extends StatelessWidget {
+  final String imageUrl;
+
+  const _DoctorAvatar({required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: RadiusManager.r32,
+      backgroundColor: Colors.grey.shade200,
+      child: ClipOval(
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          width: WidthManager.w64,
+          height: HeightManager.h64,
+          fit: BoxFit.cover,
+          placeholder: (_, __) => _buildShimmerLoading(),
+          errorWidget: (_, __, ___) =>
+              const Icon(Icons.error, color: Colors.red),
         ),
-      ],
+      ),
     );
   }
 
-  _buildShimmerLoading() {
+  Widget _buildShimmerLoading() {
     return Shimmer.fromColors(
-      baseColor: ColorsManager.lightGray,
-      highlightColor: Colors.white,
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
       child: CircleAvatar(
-        radius: RadiusManager.r30,
+        radius: RadiusManager.r32,
         backgroundColor: Colors.white,
+      ),
+    );
+  }
+}
+
+class _DoctorInfo extends StatelessWidget {
+  final String name;
+  final String email;
+
+  const _DoctorInfo({required this.name, required this.email});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Dr. $name',
+            style: getSemiBoldTextStyle(
+              fontSize: FontSizeManager.s16,
+              color: ColorsManager.darkBlue,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            email,
+            style: getRegularTextStyle(
+              fontSize: FontSizeManager.s14,
+              color: ColorsManager.gray,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }

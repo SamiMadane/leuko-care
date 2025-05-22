@@ -4,80 +4,84 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
-
 class MessageStatusCard extends StatelessWidget {
   final DateTime lastMessageTime;
   final bool hasUnread;
+  final String doctorName;
 
   const MessageStatusCard({
     super.key,
     required this.lastMessageTime,
-    required this.hasUnread,
+    required this.hasUnread, required this.doctorName,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.only(top: HeightManager.h12),
-      padding: EdgeInsets.symmetric(
-        horizontal: WidthManager.w14,
-        vertical: HeightManager.h10,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(RadiusManager.r12),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.chat_bubble_outline, size: 20, color: ColorsManager.primaryColor),
-          SizedBox(width: WidthManager.w10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Last message: ${_formatElapsedTime(lastMessageTime)}',
-                  style: getRegularTextStyle(
-                    fontSize: FontSizeManager.s14,
-                    color: ColorsManager.darkBlue,
-                  ),
-                ),
-                if (hasUnread)
-                  Padding(
-                    padding: EdgeInsets.only(top: HeightManager.h6),
-                    child: Row(
-                      children: [
-                        Icon(Icons.circle, color: Colors.red, size: 8),
-                        SizedBox(width: WidthManager.w6),
-                        Text(
-                          'You have unread messages',
-                          style: getRegularTextStyle(
-                            fontSize: FontSizeManager.s12,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: WidthManager.w20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorsManager.lightBlue,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: ColorsManager.primaryColor, width: 1),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: WidthManager.w16,
+          vertical: HeightManager.h12,
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.chat_bubble_outline, color: ColorsManager.primaryColor),
+            SizedBox(width: WidthManager.w12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    hasUnread ? 'You have unread messages from Dr.$doctorName' : 'All messages are read',
+                    style: getMediumTextStyle(
+                      fontSize: FontSizeManager.s14,
+                      color: ColorsManager.darkBlue,
                     ),
                   ),
-              ],
+                  SizedBox(height: HeightManager.h4),
+                  Text(
+                    'Last message: ${_formatDateTime(lastMessageTime)}',
+                    style: getRegularTextStyle(
+                      fontSize: FontSizeManager.s12,
+                      color: ColorsManager.gray
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  /// 🔧 Elapsed time formatting logic
-  String _formatElapsedTime(DateTime dt) {
-    final now = DateTime.now();
-    final diff = now.difference(dt);
+String _formatDateTime(DateTime dateTime) {
+  final now = DateTime.now();
+  final difference = now.difference(dateTime);
 
-    if (diff.inMinutes < 1) return 'Just now';
-    if (diff.inMinutes < 60) return '${diff.inMinutes} min ago';
-    if (diff.inHours < 24) return '${diff.inHours} hours ago';
-    if (diff.inDays < 7) return '${diff.inDays} days ago';
-    return DateFormat('d MMM y, h:mm a').format(dt);
+  if (difference.inSeconds < 60) {
+    return 'just now';
+  } else if (difference.inMinutes < 60) {
+    final m = difference.inMinutes;
+    return '$m minute${m == 1 ? '' : 's'} ago';
+  } else if (difference.inHours < 24) {
+    final h = difference.inHours;
+    return '$h hour${h == 1 ? '' : 's'} ago';
+  } else if (difference.inDays == 1) {
+    return 'yesterday';
+  } else if (difference.inDays < 7) {
+    final d = difference.inDays;
+    return '$d day${d == 1 ? '' : 's'} ago';
+  } else {
+    return DateFormat('dd/MM/yyyy').format(dateTime);
   }
+}
+
+
 }

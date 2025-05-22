@@ -21,7 +21,7 @@ class PatientBottomNavBar extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
-            blurRadius: 10,
+            blurRadius: 5,
             offset: const Offset(0, -2),
           ),
         ],
