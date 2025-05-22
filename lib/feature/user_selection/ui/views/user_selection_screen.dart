@@ -17,7 +17,7 @@ class UserSelectionScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [ColorsManager.primaryColor.withOpacity(0.7), ColorsManager.lightBlue],
+            colors: [ColorsManager.primaryColor, ColorsManager.lightBlue],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -50,7 +50,7 @@ class UserSelectionScreen extends StatelessWidget {
                   "Please select your role to continue",
                   style: getSemiBoldTextStyle(
                     fontSize: FontSizeManager.s16,
-                    color: Colors.white70,
+                    color: Colors.white,
                   ),
                   textAlign: TextAlign.center,
                 ),
