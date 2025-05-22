@@ -14,62 +14,78 @@ class UserSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: WidthManager.w20,
-          vertical: HeightManager.h40,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [ColorsManager.primaryColor.withOpacity(0.7), ColorsManager.lightBlue],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset(
-                AssetsManager.bloodImage,
-                height: HeightManager.h200,
-                width: WidthManager.w200,
-                fit: BoxFit.contain,
-              ),
-              SizedBox(height: HeightManager.h30),
-            Text(
-              "User selection",
-              style: getBoldTextStyle(
-                fontSize: FontSizeManager.s22,
-                color: ColorsManager.darkBlue,
-              ),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: WidthManager.w20,
+              vertical: HeightManager.h20,
             ),
-            SizedBox(height: HeightManager.h40),
-            buildSelectionCard(
-              context,
-              imagePath: AssetsManager.userSelectionAdminImage, 
-              label: 'ADMIN',
-              onTap: () {
-                context.pushNamed(Routes.loginScreen, arguments: 'admin');
-              },
-      
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(
+                  AssetsManager.bloodImage,
+                  height: HeightManager.h200,
+                  width: WidthManager.w200,
+                  fit: BoxFit.contain,
+                ),
+                SizedBox(height: HeightManager.h10),
+                Text(
+                  "User Selection",
+                  style: getBoldTextStyle(
+                    fontSize: FontSizeManager.s26,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: HeightManager.h10),
+                Text(
+                  "Please select your role to continue",
+                  style: getSemiBoldTextStyle(
+                    fontSize: FontSizeManager.s16,
+                    color: Colors.white70,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: HeightManager.h40),
+                buildSelectionCard(
+                  context,
+                  imagePath: AssetsManager.userSelectionAdminImage,
+                  label: 'ADMIN',
+                  onTap: () {
+                    context.pushNamed(Routes.loginScreen, arguments: 'admin');
+                  },
+                ),
+                SizedBox(height: HeightManager.h30),
+                buildSelectionCard(
+                  context,
+                  imagePath: AssetsManager.doctorImage,
+                  label: "DOCTOR",
+                  onTap: () {
+                    context.pushNamed(Routes.loginScreen, arguments: 'doctor');
+                  },
+                ),
+                SizedBox(height: HeightManager.h30),
+                buildSelectionCard(
+                  context,
+                  imagePath: AssetsManager.patientImage,
+                  label: "PATIENT",
+                  onTap: () {
+                    context.pushNamed(Routes.loginScreen, arguments: 'patient');
+                  },
+                  positionedRight: WidthManager.w10,
+                  positionedBottom: HeightManager.h3,
+                ),
+              ],
             ),
-            SizedBox(height: HeightManager.h30),
-            buildSelectionCard(
-              context,
-              imagePath: AssetsManager.doctorImage,
-              label: "DOCTOR",
-              onTap: () {
-                context.pushNamed(Routes.loginScreen, arguments: 'doctor');
-              },
-            ),
-            SizedBox(height: HeightManager.h30),
-            buildSelectionCard(
-              context,
-              imagePath: AssetsManager.patientImage,
-              label: "PATIENT",
-              onTap: () {
-                context.pushNamed(
-                  Routes.loginScreen,
-                  arguments: 'patient'
-            );
-              },
-              positionedRight: WidthManager.w10,
-              positionedBottom: HeightManager.h3,
-            ),
-          ],
+          ),
         ),
       ),
     );
