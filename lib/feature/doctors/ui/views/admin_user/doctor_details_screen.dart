@@ -57,7 +57,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                     ProfileImageWidget(profileImageUrl: doctor.profileImage),
                     SizedBox(height: HeightManager.h20),
                     Text(
-                      doctor.name,
+                      'Dr. ${doctor.name}',
                       style: getBoldTextStyle(
                         fontSize: FontSizeManager.s24,
                         color: ColorsManager.darkBlue,
