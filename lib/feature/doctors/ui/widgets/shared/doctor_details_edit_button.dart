@@ -27,7 +27,7 @@ class DoctorEditButton extends StatelessWidget {
         icon: const Icon(Icons.edit, color: ColorsManager.white),
         label: Text(
           userType == 'admin'
-              ? 'Edit Patient'
+              ? 'Edit Doctor'
               : 'Edit Profile',
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s14,

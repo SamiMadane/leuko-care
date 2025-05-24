@@ -45,15 +45,15 @@ class DoctorDetailsScreen extends StatelessWidget {
           );
         },
       ),
-      body: Column(
-        children: [
-          const DeleteDoctorBlocListener(),
-          SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-              vertical: HeightManager.h20,
-              horizontal: WidthManager.w22,
-            ),
-            child: Column(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: WidthManager.w20,
+          vertical: HeightManager.h20,
+        ),
+        child: Column(
+          children: [
+            const DeleteDoctorBlocListener(),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ProfileImageWidget(profileImageUrl: doctor.profileImage),
@@ -76,8 +76,8 @@ class DoctorDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
