@@ -7,21 +7,26 @@ import 'package:leuko_care/core/resources/styles_manager.dart';
 class InfoTile extends StatelessWidget {
   final IconData icon;
   final String label;
-  final String value;
+  final String? value;
+  final Widget? valueWidget;
   final bool isMultiLine;
 
   const InfoTile({
     super.key,
     required this.icon,
     required this.label,
-    required this.value,
+    this.value,
+    this.valueWidget,
     this.isMultiLine = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: HeightManager.h12, horizontal: WidthManager.w16),
+      padding: EdgeInsets.symmetric(
+        vertical: HeightManager.h12,
+        horizontal: WidthManager.w16,
+      ),
       decoration: BoxDecoration(
         color: ColorsManager.moreLighterGray,
         borderRadius: BorderRadius.circular(RadiusManager.r16),
@@ -35,7 +40,7 @@ class InfoTile extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment:
-            isMultiLine ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+            isMultiLine || valueWidget != null ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           Icon(icon, color: ColorsManager.primaryColor, size: 26),
           SizedBox(width: WidthManager.w16),
@@ -51,15 +56,18 @@ class InfoTile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: HeightManager.h4),
-                Text(
-                  value,
-                  style: getRegularTextStyle(
-                    fontSize: FontSizeManager.s13,
-                    color: ColorsManager.black87,
-                  ),
-                  maxLines: isMultiLine ? null : 1,
-                  overflow: isMultiLine ? TextOverflow.visible : TextOverflow.ellipsis,
-                ),
+                valueWidget ??
+                    Text(
+                      value ?? '',
+                      style: getRegularTextStyle(
+                        fontSize: FontSizeManager.s13,
+                        color: ColorsManager.black87,
+                      ),
+                      maxLines: isMultiLine ? null : 1,
+                      overflow: isMultiLine
+                          ? TextOverflow.visible
+                          : TextOverflow.ellipsis,
+                    ),
               ],
             ),
           ),

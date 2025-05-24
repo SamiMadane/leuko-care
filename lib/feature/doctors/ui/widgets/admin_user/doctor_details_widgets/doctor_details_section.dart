@@ -24,8 +24,6 @@ class DoctorDetailsSection extends StatelessWidget {
         borderRadius: BorderRadius.only(
           topLeft: Radius.zero,
           topRight: Radius.circular(RadiusManager.r20),
-          bottomLeft: Radius.zero,
-          bottomRight: Radius.zero,
         ),
         boxShadow: [
           BoxShadow(

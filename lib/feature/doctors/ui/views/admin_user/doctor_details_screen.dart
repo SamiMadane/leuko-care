@@ -75,7 +75,6 @@ class DoctorDetailsScreen extends StatelessWidget {
                 horizontal: WidthManager.w20,
               ),
               child: Row(
-                
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // زر تعديل الدكتور

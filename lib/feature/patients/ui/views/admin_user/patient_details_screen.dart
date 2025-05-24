@@ -10,7 +10,7 @@ import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/delete_patient_bloc_listener.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_app_bar.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_info_card.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/admin_user/patient_details_widgets/patient_details_section.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/shared/patient_edit_button.dart';
 
 class PatientDetailsScreen extends StatelessWidget {
@@ -18,6 +18,7 @@ class PatientDetailsScreen extends StatelessWidget {
   final String doctorId;
   final String doctorName;
   final String? userType;
+
   const PatientDetailsScreen({
     super.key,
     required this.patientId,
@@ -32,7 +33,7 @@ class PatientDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PatientDetailsAppBar(
-        patientName: 'PatientDetails',
+        patientName: 'Patient Details',
         userType: userType,
         onDeletePressed: () {
           showDialog(
@@ -50,29 +51,34 @@ class PatientDetailsScreen extends StatelessWidget {
           );
         },
       ),
-      body: Column(
-        children: [
-          DeletePatientBlocListener(doctorId: doctorId, doctorName: doctorName),
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: HeightManager.h20),
+        child: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder<PatientModel>(
+                stream: patientCubit.getPatientByIdStream(patientId),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Error loading patient data.'),
+                    );
+                  } else if (!snapshot.hasData) {
+                    return const Center(child: Text('Patient not found.'));
+                  }
 
-          StreamBuilder<PatientModel>(
-            stream: patientCubit.getPatientByIdStream(patientId),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return const SizedBox.shrink();
-              } else if (snapshot.hasData) {
-                final patient = snapshot.data!;
+                  final patient = snapshot.data!;
 
-                return Expanded(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(
-                      vertical: HeightManager.h20,
-                      horizontal: WidthManager.w22,
-                    ),
+                  return SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        DeletePatientBlocListener(
+                          doctorId: doctorId,
+                          doctorName: doctorName,
+                        ),
                         ProfileImageWidget(
                           profileImageUrl: patient.profileImage,
                         ),
@@ -81,30 +87,41 @@ class PatientDetailsScreen extends StatelessWidget {
                           patient.name,
                           style: getBoldTextStyle(
                             fontSize: FontSizeManager.s22,
-                            color:ColorsManager.darkBlue,
+                            color: ColorsManager.darkBlue,
                           ),
                         ),
                         SizedBox(height: HeightManager.h20),
-                        PatientDetailsInfoCard(patient: patient),
-                        SizedBox(height: HeightManager.h30),
-                        userType == 'doctor'
-                            ? SizedBox.shrink()
-                            : PatientEditButton(
-                              patient: patient,
-                              userType: 'admin',
-                              doctorName : doctorName,
-                              
-                            ),
+                        PatientDetailsSection(patient: patient),
+                      
                       ],
                     ),
-                  ),
-                );
-              } else {
-                return const Center(child: Text('Patient not found'));
-              }
-            },
-          ),
-        ],
+                  );
+                },
+              ),
+            ),
+            if (userType != 'doctor')
+              StreamBuilder<PatientModel>(
+                stream: patientCubit.getPatientByIdStream(patientId),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const SizedBox.shrink();
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: WidthManager.w20,vertical: HeightManager.h10),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: PatientEditButton(
+                            patient: snapshot.data!,
+                            userType: 'admin',
+                            doctorName: doctorName,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+          ],
+        ),
       ),
     );
   }

@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/info_tile.dart';
+import 'package:leuko_care/core/widgets/patient_status_widgets.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
+
+class PatientDetailsSection extends StatelessWidget {
+  final PatientModel patient;
+
+  const PatientDetailsSection({super.key, required this.patient});
+
+  @override
+  Widget build(BuildContext context) {
+    final age = context.read<PatientCubit>().calculateAge(patient.birthDate);
+
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: HeightManager.h20,
+        horizontal: WidthManager.w20,
+      ),
+      decoration: BoxDecoration(
+        color: ColorsManager.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.zero,
+          topRight: Radius.circular(RadiusManager.r20),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: ColorsManager.black.withOpacity(0.15),
+            blurRadius: 10,
+            offset: const Offset(3, 3),
+          ),
+        ],
+      ),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            InfoTile(icon: Icons.email, label: 'Email', value: patient.email),
+            SizedBox(height: HeightManager.h16),
+
+            InfoTile(icon: Icons.phone, label: 'Phone', value: patient.phone),
+            SizedBox(height: HeightManager.h16),
+
+            InfoTile(icon: Icons.calendar_today, label: 'Age', value: '$age years'),
+            SizedBox(height: HeightManager.h16),
+
+            InfoTile(
+              icon: Icons.check_circle_outline,
+              label: 'Examined',
+              valueWidget: ExaminedStatusWidget(isExamined: patient.isExamined),
+            ),
+            SizedBox(height: HeightManager.h16),
+
+            if (patient.isExamined) ...[
+              InfoTile(
+                icon: Icons.health_and_safety,
+                label: 'Health Status',
+                valueWidget: HealthStatusWidget(status: patient.healthStatus),
+              ),
+              SizedBox(height: HeightManager.h16),
+
+              InfoTile(
+                icon: Icons.bloodtype,
+                label: 'Leukemia Type',
+                value: patient.leukemiaType,
+              ),
+              SizedBox(height: HeightManager.h16),
+
+              InfoTile(
+                icon: Icons.percent,
+                label: 'Disease Confidence',
+                value: '${patient.diseaseConfidence.toStringAsFixed(1)}%',
+              ),
+              SizedBox(height: HeightManager.h16),
+
+              InfoTile(
+                icon: Icons.medical_services_outlined,
+                label: 'Last Exam Date',
+                value: _formatDate(patient.lastExamDate!),
+              ),
+              SizedBox(height: HeightManager.h16),
+            ],
+
+            InfoTile(
+              icon: Icons.date_range,
+              label: 'Registration Date',
+              value: _formatDate(patient.registrationDate),
+            ),
+            SizedBox(height: HeightManager.h16),
+
+            InfoTile(
+              icon: patient.gender.toLowerCase() == 'male' ? Icons.male : Icons.female,
+              label: 'Gender',
+              value: patient.gender,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _formatDate(String dateString) {
+    try {
+      final date = DateTime.parse(dateString);
+      return DateFormat.yMMMMd().format(date);
+    } catch (_) {
+      return dateString;
+    }
+  }
+}
