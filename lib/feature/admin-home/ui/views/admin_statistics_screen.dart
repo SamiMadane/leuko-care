@@ -18,7 +18,16 @@ class AdminStatisticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text('Admin Statistics',style: getMediumTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue),),backgroundColor: ColorsManager.appBarColor,),
+      appBar: AppBar(
+        title: Text(
+          'Admin Statistics',
+          style: getMediumTextStyle(
+            fontSize: FontSizeManager.s20,
+            color: ColorsManager.darkBlue,
+          ),
+        ),
+        backgroundColor: ColorsManager.appBarColor,
+      ),
       body: BlocBuilder<AdminHomeCubit, AdminHomeState>(
         builder: (context, state) {
           switch (state) {
@@ -66,6 +75,17 @@ class AdminStatisticsScreen extends StatelessWidget {
           SizedBox(height: HeightManager.h20),
           HealthStatusBarChart(data: stats.healthStatusCounts),
           SizedBox(height: HeightManager.h20),
+          _buildSectionTitle("Diseases Detected:"),
+          SizedBox(height: HeightManager.h14),
+          ...stats.diseaseCounts.entries
+              .map(
+                (entry) => StatisticCard(
+                  text: "${entry.key}: ${entry.value} patients",
+                ),
+              )
+              .toList(),
+          SizedBox(height: HeightManager.h20),
+
           _buildSectionTitle("Patients Per Doctor:"),
           SizedBox(height: HeightManager.h14),
           PatientsPerDoctorList(data: stats.patientsPerDoctor),

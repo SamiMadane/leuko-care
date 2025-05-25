@@ -43,8 +43,10 @@ class PatientModel {
     required this.gender,
   });
 
-  factory PatientModel.fromJson(Map<String, dynamic> json) =>
-      _$PatientModelFromJson(json);
+  factory PatientModel.fromJson(Map<String, dynamic> json) {
+    return  _$PatientModelFromJson(json);
+  }
+    
 
   Map<String, dynamic> toJson() => _$PatientModelToJson(this);
 

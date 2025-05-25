@@ -1,10 +1,10 @@
-
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
 import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/data/repository/patient_repo.dart';
+import 'package:rxdart/rxdart.dart';
 
 class AdminHomeRepository {
   final DoctorRepository doctorRepository;
@@ -33,63 +33,61 @@ class AdminHomeRepository {
     return patientRepository.getPatientsByDoctorIdStream(doctorId);
   }
 
+  Stream<AdminStatisticsModel> getAllStatistics() {
+    return Rx.combineLatest2<
+      List<PatientModel>,
+      List<DoctorModel>,
+      AdminStatisticsModel
+    >(
+      patientRepository.getPatientsStream(),
+      doctorRepository.getDoctorsStream(),
+      (patients, doctors) {
+        int examined = 0;
+        int unexamined = 0;
+        final Map<String, int> healthStatusCounts = {};
+        final Map<String, int> patientsPerDoctor = {};
+        final Map<String, String> doctorNames = {
+          for (var doctor in doctors) doctor.id!: doctor.name,
+        };
+        final Map<String, int> diseaseCounts = {};
 
+        for (var doctor in doctors) {
+          patientsPerDoctor[doctor.name] = 0;
+        }
 
-Future<AdminStatisticsModel> getAllStatistics() async {
-  final patients = await patientRepository.getPatientsStream().first;
-  final doctors = await doctorRepository.getDoctorsStream().first;
+        for (var patient in patients) {
+          if (patient.isExamined) {
+            examined++;
+          } else {
+            unexamined++;
+          }
 
-  int examined = 0;
-  int unexamined = 0;
-  final Map<String, int> healthStatusCounts = {};
-  final Map<String, int> patientsPerDoctor = {};
-  final Map<String, String> doctorNames = {
-    for (var doctor in doctors) doctor.id!: doctor.name,
-  };
+          if (patient.isExamined) {
+            healthStatusCounts[patient.healthStatus] =
+                (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
+          }
 
-  // طباعة أسماء الدكاترة مع معرفاتهم
-  print('📋 All Doctors:');
-  for (var doctor in doctors) {
-    print(' - ${doctor.name} (${doctor.id})');
-    patientsPerDoctor[doctor.name] = 0; // Initialize with 0 for each doctor
+          final doctorName = doctorNames[patient.doctorId] ?? "Unknown Doctor";
+          patientsPerDoctor[doctorName] =
+              (patientsPerDoctor[doctorName] ?? 0) + 1;
+
+          if (patient.isExamined && patient.healthStatus == "sick") {
+            final leukemiaType = patient.leukemiaType;
+            diseaseCounts[leukemiaType] =
+                (diseaseCounts[leukemiaType] ?? 0) + 1;
+          }
+        }
+
+        return AdminStatisticsModel(
+          totalPatients: patients.length,
+          totalDoctors: doctors.length,
+          healthStatusCounts: healthStatusCounts,
+          patientsPerDoctor: patientsPerDoctor,
+          examinedCount: examined,
+          unexaminedCount: unexamined,
+          diseaseCounts: diseaseCounts,
+        );
+      },
+    );
   }
-
-  // معالجة المرضى
-  for (var patient in patients) {
-    // طباعة بيانات المريض
-    print('👤 Patient:');
-    print(' - doctorId: ${patient.doctorId}');
-    print(' - isExamined: ${patient.isExamined}');
-    print(' - healthStatus: ${patient.healthStatus}');
-
-    if (patient.isExamined) {
-      examined++;
-    } else {
-      unexamined++;
-    }
-
-    // عداد حالات المرض
-    final status = patient.healthStatus;
-    healthStatusCounts[status] = (healthStatusCounts[status] ?? 0) + 1;
-
-    // عداد المرضى حسب الدكتور
-    final doctorName = doctorNames[patient.doctorId];
-    if (doctorName == null) {
-      print('⚠️ Doctor ID ${patient.doctorId} not found in doctorNames!');
-    }
-
-    final resolvedDoctor = doctorName ?? "Unknown Doctor";
-    patientsPerDoctor[resolvedDoctor] = (patientsPerDoctor[resolvedDoctor] ?? 0) + 1;
-  }
-
-  return AdminStatisticsModel(
-    totalPatients: patients.length,
-    totalDoctors: doctors.length,
-    healthStatusCounts: healthStatusCounts,
-    patientsPerDoctor: patientsPerDoctor,
-    examinedCount: examined,
-    unexaminedCount: unexamined,
-  );
-}
-
 }
