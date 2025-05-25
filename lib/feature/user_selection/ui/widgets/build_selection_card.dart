@@ -39,9 +39,9 @@ Widget buildSelectionCard(
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black87,
-                  blurRadius: 8,
-                  offset: const Offset(4, 3),
+                  color: Colors.black.withOpacity(0.3),
+                  blurRadius: 4,
+                  offset: const Offset(3, 3),
                 ),
               ],
             ),
@@ -60,7 +60,7 @@ Widget buildSelectionCard(
         ),
         Positioned(
           right: positionedRight ?? WidthManager.w8,
-          bottom: positionedBottom ?? HeightManager.h6,
+          bottom: positionedBottom ?? HeightManager.h12,
           child: Image.asset(
             imagePath,
             height: imageHeight ?? HeightManager.h120,
