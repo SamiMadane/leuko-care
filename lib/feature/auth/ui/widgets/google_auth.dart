@@ -44,7 +44,7 @@ class GoogleAuth extends StatelessWidget {
               border: Border.all(color: ColorsManager.lightGray),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
+                  color: Colors.black.withValues(alpha: .04),
                   blurRadius: 4,
                   offset: const Offset(0, 2),
                 ),

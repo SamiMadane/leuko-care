@@ -42,7 +42,7 @@ class PatientDetailsAppBar extends StatelessWidget
                 horizontal: WidthManager.w8,
               ),
               decoration: BoxDecoration(
-                color: ColorsManager.red.withOpacity(0.1),
+                color: ColorsManager.red.withValues(alpha: .1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(

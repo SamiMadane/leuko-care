@@ -33,13 +33,13 @@ class SampleImageWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(RadiusManager.r16),
           boxShadow: [
             BoxShadow(
-              color: ColorsManager.primaryColor.withOpacity(0.2),
+              color: ColorsManager.primaryColor.withValues(alpha: .2),
               blurRadius: 5,
               offset: Offset(1, 1),
             ),
           ],
           border: Border.all(
-            color: ColorsManager.primaryColor.withOpacity(0.3),
+            color: ColorsManager.primaryColor.withValues(alpha: .3),
             width: 1,
           ),
         ),
@@ -67,7 +67,7 @@ class SampleImageWidget extends StatelessWidget {
                   errorWidget: (context, url, error) => Container(
                     width: 80,
                     height: 80,
-                    color: ColorsManager.primaryColor.withOpacity(0.1),
+                    color: ColorsManager.primaryColor.withValues(alpha: .1),
                     child: const Icon(
                       Icons.broken_image,
                       size: 40,
@@ -89,7 +89,7 @@ class SampleImageWidget extends StatelessWidget {
     return Container(
       width: 80,
       height: 80,
-      color: ColorsManager.primaryColor.withOpacity(0.1),
+      color: ColorsManager.primaryColor.withValues(alpha: .1),
     );
   }
 }

@@ -31,7 +31,7 @@ class PatientDetailsSection extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: ColorsManager.black.withOpacity(0.15),
+            color: ColorsManager.black.withValues(alpha: .15),
             blurRadius: 10,
             offset: const Offset(3, 3),
           ),

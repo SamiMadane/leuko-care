@@ -27,7 +27,7 @@ class DoctorDetailsSection extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: ColorsManager.black.withOpacity(0.2),
+            color: ColorsManager.black.withValues(alpha: .2),
             blurRadius: 10,
             offset: const Offset(3, 3),
           ),

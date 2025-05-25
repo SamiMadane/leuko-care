@@ -44,7 +44,7 @@ class HealthTipsWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(RadiusManager.r20),
               boxShadow: [
                 BoxShadow(
-                  color: primaryColor.withOpacity(0.2),
+                  color: primaryColor.withValues(alpha: .2),
                   blurRadius: 5,
                   offset: Offset(2, 2),
                 ),
@@ -88,7 +88,7 @@ class HealthTipsWidget extends StatelessWidget {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: gradientColors.last.withOpacity(0.4),
+                                    color: gradientColors.last.withValues(alpha: .4),
                                     blurRadius: 8,
                                     offset: Offset(0, 4),
                                   ),
@@ -122,7 +122,7 @@ class HealthTipsWidget extends StatelessWidget {
                             ),
                             child: Divider(
                               thickness: 1,
-                              color: primaryColor.withOpacity(0.1),
+                              color: primaryColor.withValues(alpha: .1),
                             ),
                           ),
                       ],

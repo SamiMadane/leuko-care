@@ -31,7 +31,7 @@ class MessageStatusCard extends StatelessWidget {
                 ),
               ],
               border: Border.all(
-                color: ColorsManager.primaryColor.withOpacity(0.3),
+                color: ColorsManager.primaryColor.withValues(alpha: .3),
                 width: 1,
               ),
             ),

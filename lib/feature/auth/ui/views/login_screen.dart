@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: ColorsManager.black.withOpacity(0.2),
+                      color: ColorsManager.black.withValues(alpha: .2),
                       blurRadius: 10,
                       offset: const Offset(3, 3),
                     ),
@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                       ).copyWith(
                         shadows: [
                           Shadow(
-                            color: ColorsManager.black.withOpacity(0.1),
+                            color: ColorsManager.black.withValues(alpha: .1),
                             blurRadius: 3,
                             offset: const Offset(2, 3),
                           ),

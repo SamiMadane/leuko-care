@@ -131,7 +131,7 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
         ),
         if (_isLoading)
           Container(
-            color: Colors.white.withOpacity(0.8),
+            color: Colors.white.withValues(alpha: .8),
             child: Center(
               child: CircularProgressIndicator(
                 color: ColorsManager.primaryColor,

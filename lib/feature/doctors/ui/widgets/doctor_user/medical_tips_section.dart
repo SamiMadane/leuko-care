@@ -51,7 +51,7 @@ class MedicalTipsSection extends StatelessWidget {
               child: TipCardWidget(
                 icon: tip["icon"] as IconData,
                 text: tip["text"] as String,
-                backgroundColor: (tip["color"] as Color).withOpacity(0.1),
+                backgroundColor: (tip["color"] as Color).withValues(alpha: .1),
                 iconColor: tip["color"] as Color,
               ),
             );
