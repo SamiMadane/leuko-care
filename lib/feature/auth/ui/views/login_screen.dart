@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                   imagePath: cubit.userTypeData[userType]!['image'],
                   title: cubit.userTypeData[userType]!['title'],
                 ),
-                SizedBox(height: HeightManager.h40),
+                SizedBox(height: HeightManager.h30),
                 EmailAndPassword(),
                 SizedBox(height: HeightManager.h50),
                 AppTextButton(
@@ -57,9 +57,8 @@ class LoginScreen extends StatelessWidget {
                     validateThenDoLogin(context, userType);
                   },
                 ),
-                SizedBox(height: HeightManager.h40),
+                SizedBox(height: HeightManager.h30),
                 GoogleAuth(userType: userType),
-                SizedBox(height: HeightManager.h36),
                 const LoginBlocListener(),
               ],
             ),

@@ -14,16 +14,16 @@ class AuthCubit extends Cubit<AuthState> {
 
   Map<String, Map<String, dynamic>> userTypeData = {
       'admin': {
-        'title': 'Admin Login',
-        'image': AssetsManager.adminLoginImage,
+        'title': 'Welcome, Admin',
+        'image': AssetsManager.loginAdminImage,
       },
       'doctor': {
-        'title': 'Doctor Login',
-        'image':  AssetsManager.doctorLoginImage,
+        'title': 'Welcome, Doctor',
+        'image':  AssetsManager.loginDoctorImage,
       },
       'patient': {
-        'title': 'Patient Login',
-        'image':  AssetsManager.patientLoginImage,
+        'title': 'Welcome, Patient',
+        'image':  AssetsManager.loginPatientImage,
       },
     };
 
