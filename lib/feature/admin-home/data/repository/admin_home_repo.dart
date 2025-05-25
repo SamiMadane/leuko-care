@@ -49,7 +49,11 @@ class AdminHomeRepository {
         final Map<String, String> doctorNames = {
           for (var doctor in doctors) doctor.id!: doctor.name,
         };
-        final Map<String, int> diseaseCounts = {};
+        // Initialize health status counts make it zero for each status 
+        final allLeukemiaTypes = ['AML', 'CML', 'ALL', 'CLL'];
+        final Map<String, int> diseaseCounts = {
+           for (var type in allLeukemiaTypes) type: 0,
+        };
 
         for (var doctor in doctors) {
           patientsPerDoctor[doctor.name] = 0;

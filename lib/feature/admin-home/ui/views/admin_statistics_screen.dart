@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/widgets/disease_statistics_table.dart';
 import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_state.dart';
@@ -59,8 +60,12 @@ class AdminStatisticsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StatisticCard(text: "Total Patients: ${stats.totalPatients}"),
-          StatisticCard(text: "Total Doctors: ${stats.totalDoctors}"),
+          Row(
+            children: [
+              Expanded(child: StatisticCard(text: "Total Patients: ${stats.totalPatients}", icon: Icons.people,)),
+              Expanded(child: StatisticCard(text: "Total Doctors: ${stats.totalDoctors}",icon: Icons.medical_services,)),
+            ],
+          ),
           SizedBox(height: HeightManager.h20),
           _buildSectionTitle("Examination Status:"),
           SizedBox(height: HeightManager.h14),
@@ -77,13 +82,9 @@ class AdminStatisticsScreen extends StatelessWidget {
           SizedBox(height: HeightManager.h20),
           _buildSectionTitle("Diseases Detected:"),
           SizedBox(height: HeightManager.h14),
-          ...stats.diseaseCounts.entries
-              .map(
-                (entry) => StatisticCard(
-                  text: "${entry.key}: ${entry.value} patients",
-                ),
-              )
-              .toList(),
+          DiseaseStatisticsTable(
+              diseaseCounts: stats.diseaseCounts,
+          ),
           SizedBox(height: HeightManager.h20),
 
           _buildSectionTitle("Patients Per Doctor:"),
