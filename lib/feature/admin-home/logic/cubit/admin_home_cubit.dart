@@ -73,10 +73,14 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
 
    Future<void> getAdminStatistics() async {
     try {
+      print('📊 Fetching Admin Statistics...');
       emit(GetStatisticsStateLoading());
       final statistics = await adminHomeRepository.getAllStatistics();
+      print('📊 Statistics fetched successfully: $statistics');
       emit(GetStatisticsStateSuccess(statistics));
-    } catch (e) {
+    } catch (e,stackTrace) {
+      print('❌ Error fetching statistics: $e');
+      print('🧵 Stack trace: $stackTrace');
       emit(GetStatisticsStateError(e.toString()));
     }
   }

@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -111,26 +109,26 @@ class PatientRepository {
 
 
 
-  Future<void> updateFcmTokenIfNeeded() async {
-  final user = FirebaseAuth.instance.currentUser;
-  if (user == null) return;
+//   Future<void> updateFcmTokenIfNeeded() async {
+//   final user = FirebaseAuth.instance.currentUser;
+//   if (user == null) return;
 
-  final token = await FirebaseMessaging.instance.getToken();
-  if (token == null) return;
+//   final token = await FirebaseMessaging.instance.getToken();
+//   if (token == null) return;
 
-  final docRef = _firestore.collection('patients').doc(user.uid);
+//   final docRef = _firestore.collection('patients').doc(user.uid);
 
-  // تأكد من التحديث فقط إذا تغير التوكن
-  final snapshot = await docRef.get();
-  final existingToken = snapshot.data()?['fcmToken'];
+//   // تأكد من التحديث فقط إذا تغير التوكن
+//   final snapshot = await docRef.get();
+//   final existingToken = snapshot.data()?['fcmToken'];
 
-  if (existingToken != token) {
-    await docRef.set({'fcmToken': token}, SetOptions(merge: true)); 
-    print('✅ FCM token updated for patient.');
-  } else {
-    print('ℹ️ FCM token already up to date.');
-  }
-}
+//   if (existingToken != token) {
+//     await docRef.set({'fcmToken': token}, SetOptions(merge: true)); 
+//     print('✅ FCM token updated for patient.');
+//   } else {
+//     print('ℹ️ FCM token already up to date.');
+//   }
+// }
 
 Stream<Map<String, ConversationModel>> getConversationsForPatientStream(String patientId) {
 

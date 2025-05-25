@@ -137,7 +137,7 @@ Future<void> getPatientAndDoctor(String patientId) async {
 
           final conversation = conversationMap[doctor.id];
 
-          _repository.updateFcmTokenIfNeeded();
+          // _repository.updateFcmTokenIfNeeded();
 
           emit(GetPatientAndDoctorStateSuccess(doctor, patient, conversation));
         } catch (e) {

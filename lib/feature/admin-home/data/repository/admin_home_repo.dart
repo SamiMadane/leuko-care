@@ -35,44 +35,61 @@ class AdminHomeRepository {
 
 
 
-  Future<AdminStatisticsModel> getAllStatistics() async {
-    final patients = await patientRepository.getPatientsStream().first;
-    final doctors = await doctorRepository.getDoctorsStream().first;
+Future<AdminStatisticsModel> getAllStatistics() async {
+  final patients = await patientRepository.getPatientsStream().first;
+  final doctors = await doctorRepository.getDoctorsStream().first;
 
-    int examined = 0;
-    int unexamined = 0;
-    final Map<String, int> healthStatusCounts = {};
-    final Map<String, int> patientsPerDoctor = {};
-    final Map<String, String> doctorNames = {
-      for (var doctor in doctors) doctor.id!: doctor.name,
-    };
-    // patients per doctor counts.
-    for (var doctor in doctors) {
-      patientsPerDoctor[doctor.name] = 0; // Initialize with 0 for each doctor
-    }
+  int examined = 0;
+  int unexamined = 0;
+  final Map<String, int> healthStatusCounts = {};
+  final Map<String, int> patientsPerDoctor = {};
+  final Map<String, String> doctorNames = {
+    for (var doctor in doctors) doctor.id!: doctor.name,
+  };
 
-    // examined and unexamined counts
-    for (var patient in patients) {
-      if (patient.isExamined) {
-        examined++;
-      } else {
-        unexamined++;
-      }
-
-      // health status counts.
-      healthStatusCounts[patient.healthStatus] =
-          (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
-
-      final doctorName = doctorNames[patient.doctorId] ?? "Unknown Doctor";
-      patientsPerDoctor[doctorName] = (patientsPerDoctor[doctorName] ?? 0) + 1;
-    }
-    return AdminStatisticsModel(
-      totalPatients: patients.length,
-      totalDoctors: doctors.length,
-      healthStatusCounts: healthStatusCounts,
-      patientsPerDoctor: patientsPerDoctor,
-      examinedCount: examined,
-      unexaminedCount: unexamined,
-    );
+  // طباعة أسماء الدكاترة مع معرفاتهم
+  print('📋 All Doctors:');
+  for (var doctor in doctors) {
+    print(' - ${doctor.name} (${doctor.id})');
+    patientsPerDoctor[doctor.name] = 0; // Initialize with 0 for each doctor
   }
+
+  // معالجة المرضى
+  for (var patient in patients) {
+    // طباعة بيانات المريض
+    print('👤 Patient:');
+    print(' - doctorId: ${patient.doctorId}');
+    print(' - isExamined: ${patient.isExamined}');
+    print(' - healthStatus: ${patient.healthStatus}');
+
+    if (patient.isExamined) {
+      examined++;
+    } else {
+      unexamined++;
+    }
+
+    // عداد حالات المرض
+    final status = patient.healthStatus;
+    healthStatusCounts[status] = (healthStatusCounts[status] ?? 0) + 1;
+
+    // عداد المرضى حسب الدكتور
+    final doctorName = doctorNames[patient.doctorId];
+    if (doctorName == null) {
+      print('⚠️ Doctor ID ${patient.doctorId} not found in doctorNames!');
+    }
+
+    final resolvedDoctor = doctorName ?? "Unknown Doctor";
+    patientsPerDoctor[resolvedDoctor] = (patientsPerDoctor[resolvedDoctor] ?? 0) + 1;
+  }
+
+  return AdminStatisticsModel(
+    totalPatients: patients.length,
+    totalDoctors: doctors.length,
+    healthStatusCounts: healthStatusCounts,
+    patientsPerDoctor: patientsPerDoctor,
+    examinedCount: examined,
+    unexaminedCount: unexamined,
+  );
+}
+
 }
