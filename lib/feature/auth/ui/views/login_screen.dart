@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
               ImageSection(imagePath: image),
               Container(
                 padding: EdgeInsets.only(
-                  top: HeightManager.h20,
+                  top: HeightManager.h30,
                   right: WidthManager.w20,
                   left: WidthManager.w20,
                   bottom: HeightManager.h100,
