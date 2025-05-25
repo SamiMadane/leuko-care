@@ -91,8 +91,7 @@ class PatientDetailsScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: HeightManager.h20),
-                        PatientDetailsSection(patient: patient),
-                      
+                        PatientDetailsSection(patient: patient, userType: userType),
                       ],
                     ),
                   );
