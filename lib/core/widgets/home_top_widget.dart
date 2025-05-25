@@ -10,7 +10,6 @@ import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
 import 'package:leuko_care/core/widgets/signout_bloc_listener.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:shimmer/shimmer.dart';
-
 class HomeTopWidget extends StatelessWidget {
   final String name;
   final String imageUrl;
@@ -30,26 +29,28 @@ class HomeTopWidget extends StatelessWidget {
     final cubit = context.read<AuthCubit>();
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _buildProfileImage(),
-            SizedBox(width: WidthManager.w12),
+            SizedBox(width: WidthManager.w20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hi, $name',
+                    'Hi, $name 👋',
                     style: getBoldTextStyle(
-                      fontSize: FontSizeManager.s20,
+                      fontSize: FontSizeManager.s18,
                       color: ColorsManager.darkBlue,
                     ),
                   ),
-                  SizedBox(height: HeightManager.h4),
+                  SizedBox(height: HeightManager.h6),
                   Text(
                     subMessage,
-                    style: getSemiBoldTextStyle(
+                    style: getMediumTextStyle(
                       fontSize: FontSizeManager.s13,
                       color: ColorsManager.gray,
                     ),
@@ -58,40 +59,33 @@ class HomeTopWidget extends StatelessWidget {
               ),
             ),
             if (showSignOut)
-              CircleAvatar(
-                radius: RadiusManager.r22,
-                backgroundColor: ColorsManager.moreLighterGray,
-                child: IconButton(
-                  icon: const Icon(Icons.exit_to_app),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => ConfirmationDialog(
-                        title: 'Confirm Sign Out',
-                        message: 'Are you sure you want to sign out?',
-                        confirmText: 'SignOut',
-                        onConfirmed: () {
-                          cubit.signOut();
-                          context.pop();
-                        },
-                      ),
-                    );
-                  },
-                ),
+              IconButton(
+                tooltip: 'Sign Out',
+                icon: Icon(Icons.logout_rounded, color: ColorsManager.darkBlue),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => ConfirmationDialog(
+                      title: 'Confirm Sign Out',
+                      message: 'Are you sure you want to sign out?',
+                      confirmText: 'Sign Out',
+                      onConfirmed: () {
+                        cubit.signOut();
+                        context.pop();
+                      },
+                    ),
+                  );
+                },
               ),
             const SignOutBlocListener(),
           ],
         ),
-        SizedBox(height: HeightManager.h6),
-        Padding(
-          padding: EdgeInsets.only(
-            left: WidthManager.w80,
-            right: WidthManager.w12,
-          ),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Divider(color: ColorsManager.lightGray, thickness: 1),
-          ),
+        SizedBox(height: HeightManager.h8),
+        Divider(
+          color: ColorsManager.lightGray,
+          thickness: 1,
+          indent: WidthManager.w76,
+          endIndent: WidthManager.w12,
         ),
       ],
     );
@@ -99,13 +93,12 @@ class HomeTopWidget extends StatelessWidget {
 
   Widget _buildProfileImage() {
     return Material(
-      elevation: 2,
+      elevation: 3,
       shape: const CircleBorder(),
-      shadowColor: ColorsManager.black87,
+      shadowColor: Colors.black26,
       child: CircleAvatar(
         radius: RadiusManager.r30,
-        backgroundColor: Colors.transparent,
-        backgroundImage: null,
+        backgroundColor: Colors.white,
         child: ClipOval(
           child: CachedNetworkImage(
             imageUrl: imageUrl,
@@ -113,8 +106,11 @@ class HomeTopWidget extends StatelessWidget {
             height: HeightManager.h60,
             fit: BoxFit.cover,
             placeholder: (_, __) => _buildShimmerLoading(),
-            errorWidget: (_, __, ___) =>
-                const Icon(Icons.error, color: Colors.red),
+            errorWidget: (_, __, ___) => Icon(
+              Icons.account_circle,
+              size: WidthManager.w60,
+              color: ColorsManager.gray,
+            ),
           ),
         ),
       ),
@@ -125,9 +121,13 @@ class HomeTopWidget extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
-      child: CircleAvatar(
-        radius: RadiusManager.r34,
-        backgroundColor: Colors.white,
+      child: Container(
+        width: WidthManager.w60,
+        height: HeightManager.h60,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+        ),
       ),
     );
   }

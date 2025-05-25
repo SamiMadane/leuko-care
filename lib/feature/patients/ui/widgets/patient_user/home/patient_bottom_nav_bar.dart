@@ -18,11 +18,15 @@ class PatientBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(RadiusManager.r24),
+          topRight: Radius.circular(RadiusManager.r24),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 5,
-            offset: const Offset(0, -2),
+            offset: const Offset(0, -1),
           ),
         ],
       ),

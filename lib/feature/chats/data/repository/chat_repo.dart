@@ -48,7 +48,7 @@ class ChatRepository {
       await conversationRef.update({
         'lastMessage': lastMessageContent,
         'lastMessageTime': message.timestamp,
-         'lastMessageSenderId': message.senderId,
+        'lastMessageSenderId': message.senderId,
         'hasUnreadMessagesByParticipant.${message.senderId}': false,
         'hasUnreadMessagesByParticipant.${message.receiverId}': true,
       });
@@ -78,22 +78,11 @@ class ChatRepository {
           .collection('messages')
           .add(message.toJson());
 
-    // بعد إضافة الرسالة، يتم تحديث الـ id في الرسالة
-    final updatedMessage = message.copyWith(id: docRef.id);
+      // بعد إضافة الرسالة، يتم تحديث الـ id في الرسالة
+      final updatedMessage = message.copyWith(id: docRef.id);
 
-    // تحديث الرسالة بـ id الجديد
-    await docRef.update(updatedMessage.toJson());
-
-      // تحديث بيانات المريض إذا كان المستقبل مريضًا
-      final receiverSnapshot =
-          await _firestore.collection('patients').doc(message.receiverId).get();
-
-      if (receiverSnapshot.exists) {
-        await _firestore.collection('patients').doc(message.receiverId).update({
-          'hasUnreadMessages': true,
-          'lastMessageTime': message.timestamp,
-        });
-      }
+      // تحديث الرسالة بـ id الجديد
+      await docRef.update(updatedMessage.toJson());
 
       await _updateOrCreateConversation(updatedMessage);
 
@@ -131,33 +120,33 @@ class ChatRepository {
       throw Exception('Failed to mark messages as read');
     }
   }
+
   Future<void> markMessagesAsReadByPatient(
-  String patientId,
-  String doctorId,
-) async {
-  final chatId = _getChatId(doctorId, patientId);
+    String patientId,
+    String doctorId,
+  ) async {
+    final chatId = _getChatId(doctorId, patientId);
 
-  try {
-    final conversationRef = _firestore
-        .collection('conversations')
-        .doc(chatId);
+    try {
+      final conversationRef = _firestore
+          .collection('conversations')
+          .doc(chatId);
 
-    final conversationSnapshot = await conversationRef.get();
-    if (!conversationSnapshot.exists) return;
+      final conversationSnapshot = await conversationRef.get();
+      if (!conversationSnapshot.exists) return;
 
-    await conversationRef.update({
-      'hasUnreadMessagesByParticipant.$patientId': false,
-    });
+      await conversationRef.update({
+        'hasUnreadMessagesByParticipant.$patientId': false,
+      });
 
-    print(
-      'Marked messages as read for patient $patientId in conversation $chatId',
-    );
-  } catch (e) {
-    print('Error marking messages as read: $e');
-    throw Exception('Failed to mark messages as read');
+      print(
+        'Marked messages as read for patient $patientId in conversation $chatId',
+      );
+    } catch (e) {
+      print('Error marking messages as read: $e');
+      throw Exception('Failed to mark messages as read');
+    }
   }
-}
-
 
   // توليد ID للمحادثة بين المرسل والمستقبل
   String _getChatId(String uid1, String uid2) {
@@ -215,44 +204,48 @@ class ChatRepository {
     }
   }
 
-Future<void> deleteMessage(
-  String senderId,
-  String receiverId,
-  String messageId,
-) async {
-  final chatId = _getChatId(senderId, receiverId);
-  final messagesRef = _firestore.collection('chats').doc(chatId).collection('messages');
+  Future<void> deleteMessage(
+    String senderId,
+    String receiverId,
+    String messageId,
+  ) async {
+    final chatId = _getChatId(senderId, receiverId);
+    final messagesRef = _firestore
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages');
 
-  try {
-    // حذف الرسالة
-    await messagesRef.doc(messageId).delete();
+    try {
+      // حذف الرسالة
+      await messagesRef.doc(messageId).delete();
 
-    // التحقق إن كان لا توجد أي رسائل بعد الحذف
-    final remainingMessages = await messagesRef.limit(1).get();
+      // التحقق إن كان لا توجد أي رسائل بعد الحذف
+      final remainingMessages = await messagesRef.limit(1).get();
 
-    if (remainingMessages.docs.isEmpty) {
-      // حذف المحادثة من conversations
-      await _firestore.collection('conversations').doc(chatId).delete();
-      print('Conversation deleted because it became empty');
-    } else {
-      // تحديث آخر رسالة في المحادثة
-      final lastMessageSnapshot = await messagesRef
-          .orderBy('timestamp', descending: true)
-          .limit(1)
-          .get();
+      if (remainingMessages.docs.isEmpty) {
+        // حذف المحادثة من conversations
+        await _firestore.collection('conversations').doc(chatId).delete();
+        print('Conversation deleted because it became empty');
+      } else {
+        // تحديث آخر رسالة في المحادثة
+        final lastMessageSnapshot =
+            await messagesRef
+                .orderBy('timestamp', descending: true)
+                .limit(1)
+                .get();
 
-      final lastMessage = lastMessageSnapshot.docs.first.data();
-      final isImage = (lastMessage['text'] ?? '').toString().trim().isEmpty;
+        final lastMessage = lastMessageSnapshot.docs.first.data();
+        final isImage = (lastMessage['text'] ?? '').toString().trim().isEmpty;
 
-      await _firestore.collection('conversations').doc(chatId).update({
-        'lastMessage': isImage ? lastMessage['attachmentUrl'] : lastMessage['text'],
-        'lastMessageTime': lastMessage['timestamp'],
-      });
+        await _firestore.collection('conversations').doc(chatId).update({
+          'lastMessage':
+              isImage ? lastMessage['attachmentUrl'] : lastMessage['text'],
+          'lastMessageTime': lastMessage['timestamp'],
+        });
+      }
+    } catch (e) {
+      print('Error deleting message: $e');
+      rethrow;
     }
-  } catch (e) {
-    print('Error deleting message: $e');
-    rethrow;
   }
-}
-
 }

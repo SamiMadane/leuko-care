@@ -110,10 +110,12 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
                     onChanged:
                         (value) => setState(() {
                           selectedPatient = value;
+                          _image = null;
                         }),
                   ),
                   SizedBox(height: HeightManager.h24),
-                  SampleImagePreview(image: _image),
+                  SampleImagePreview(image: _image, networkImageUrl: selectedPatient?.latestSampleImageUrl,
+),
                   SizedBox(height: HeightManager.h16),
                   ImagePickerButtons(onPick: _pickImage),
                   SizedBox(height: HeightManager.h24),
