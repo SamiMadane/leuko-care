@@ -58,7 +58,7 @@ class UserSelectionScreen extends StatelessWidget {
                         "User Selection",
                         style: getBoldTextStyle(
                           fontSize: FontSizeManager.s26,
-                          color: ColorsManager.black,
+                          color: ColorsManager.darkBlue,
                         ),
                       ),
                       SizedBox(height: HeightManager.h10),
@@ -66,7 +66,7 @@ class UserSelectionScreen extends StatelessWidget {
                         "Please select your role to continue",
                         style: getSemiBoldTextStyle(
                           fontSize: FontSizeManager.s16,
-                          color: Colors.black,
+                          color: ColorsManager.darkBlue,
                         ),
                       ),
                       SizedBox(height: HeightManager.h50),
