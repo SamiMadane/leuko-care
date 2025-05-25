@@ -41,11 +41,11 @@ class AddUpdateProfileImagePicker extends StatelessWidget {
             child: Stack(
               children: [
                 ClipOval(
-                  child:
-                      SizedBox(
-                        width: WidthManager.w160 ,
-                        height: HeightManager.h160,
-                        child: profileImageUrl!.startsWith('http')
+                  child: SizedBox(
+                    width: WidthManager.w160,
+                    height: HeightManager.h160,
+                    child:
+                        profileImageUrl!.startsWith('http')
                             ? CachedNetworkImage(
                               imageUrl: profileImageUrl!,
                               fit: BoxFit.cover,
@@ -75,18 +75,27 @@ class AddUpdateProfileImagePicker extends StatelessWidget {
                                     ),
                                   ),
                             ),
-                      ),
+                  ),
                 ),
 
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: CircleAvatar(
-                    radius: RadiusManager.r20,
-                    backgroundColor: ColorsManager.primaryColor,
-                    child: Icon(
-                      isEditMode ? Icons.edit : Icons.add,
+                  child: Container(
+                    padding: EdgeInsets.all(
+                      3,
+                    ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
                       color: Colors.white,
-                      size: IconSizeManager.s18,
+                    ),
+                    child: CircleAvatar(
+                      radius: RadiusManager.r20,
+                      backgroundColor: ColorsManager.primaryColor,
+                      child: Icon(
+                        isEditMode ? Icons.edit : Icons.add,
+                        color: Colors.white,
+                        size: IconSizeManager.s18,
+                      ),
                     ),
                   ),
                 ),
