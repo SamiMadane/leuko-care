@@ -74,9 +74,9 @@ class _DoctorCard extends StatelessWidget {
         final shouldOpenChat = await context.pushNamed(
           Routes.doctorDetailsScreenForPatient,
           arguments: {
-            'doctor'.tr(): doctor,
-            'patient'.tr(): patient,
-            'conversation'.tr(): conversation,
+            'doctor': doctor,
+            'patient': patient,
+            'conversation': conversation,
           },
         );
         if (shouldOpenChat == true) {
@@ -127,7 +127,8 @@ class _DoctorCard extends StatelessWidget {
           if (hasUnread)
             Positioned(
               top: HeightManager.h10,
-              right: WidthManager.w14,
+              left:context.locale.languageCode == 'ar'? WidthManager.w14 : null,
+              right: context.locale.languageCode == 'ar' ? null : WidthManager.w14,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -205,7 +206,7 @@ class _DoctorInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Dr. $name'.tr(),
+             tr('doctor_name', namedArgs: {'name': name}),
             style: getSemiBoldTextStyle(
               fontSize: FontSizeManager.s16,
               color: ColorsManager.darkBlue,

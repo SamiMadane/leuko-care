@@ -19,7 +19,7 @@ class ChatTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageUrl = patient?.profileImage ?? doctor?.profileImage;
-    final name = patient?.name ?? 'Dr. ${doctor?.name}'.tr();
+    final name = patient?.name ?? tr('doctor_name', namedArgs: {'name': doctor?.name ?? ''});
     final canPop = Navigator.canPop(context);
 
     return Container(

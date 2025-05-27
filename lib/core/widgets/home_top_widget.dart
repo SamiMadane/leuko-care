@@ -21,7 +21,7 @@ class HomeTopWidget extends StatelessWidget {
     super.key,
     required this.name,
     required this.imageUrl,
-    this.subMessage = 'Your health matters most.',
+    this.subMessage = 'Your health matters most',
     this.showSignOut = true,
   });
 
@@ -42,7 +42,7 @@ class HomeTopWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hi, $name 👋',
+                    tr('hi_with_name', namedArgs: {'name': name}),
                     style: getBoldTextStyle(
                       fontSize: FontSizeManager.s18,
                       color: ColorsManager.darkBlue,
@@ -50,7 +50,7 @@ class HomeTopWidget extends StatelessWidget {
                   ),
                   SizedBox(height: HeightManager.h6),
                   Text(
-                    subMessage,
+                    subMessage.tr(),
                     style: getMediumTextStyle(
                       fontSize: FontSizeManager.s13,
                       color: ColorsManager.gray,

@@ -49,7 +49,7 @@ class MessageStatusCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hasUnread ? 'You have unread messages from Dr.$doctorName'.tr() : 'All messages are read'.tr(),
+                    hasUnread ? tr('unread_messages_from_doctor',namedArgs:{'doctorName': doctorName} ) : 'All messages are read'.tr(),
                     style: getMediumTextStyle(
                       fontSize: FontSizeManager.s14,
                       color: ColorsManager.darkBlue,
@@ -57,7 +57,7 @@ class MessageStatusCard extends StatelessWidget {
                   ),
                   SizedBox(height: HeightManager.h4),
                   Text(
-                    'Last message: ${_formatDateTime(lastMessageTime)}'.tr(),
+                    tr('last_message_at', namedArgs: {'time': _formatDateTime(lastMessageTime)}),
                     style: getRegularTextStyle(
                       fontSize: FontSizeManager.s13,
                       color: ColorsManager.gray
@@ -76,19 +76,26 @@ String _formatDateTime(DateTime dateTime) {
   final now = DateTime.now();
   final difference = now.difference(dateTime);
 
+
   if (difference.inSeconds < 60) {
-    return 'just now'.tr();
+    return 'just_now'.tr();
   } else if (difference.inMinutes < 60) {
     final m = difference.inMinutes;
-    return '$m minute${m == 1 ? '.tr()' : '.tr()s'} ago'.tr();
+    return m == 1
+        ? 'minute_ago'.tr()
+        : 'minutes_ago'.tr(namedArgs: {'count': m.toString()});
   } else if (difference.inHours < 24) {
     final h = difference.inHours;
-    return '$h hour${h == 1 ? '.tr()' : '.tr()s'} ago'.tr();
+    return h == 1
+        ? 'hour_ago'.tr()
+        : 'hours_ago'.tr(namedArgs: {'count': h.toString()});
   } else if (difference.inDays == 1) {
     return 'yesterday'.tr();
   } else if (difference.inDays < 7) {
     final d = difference.inDays;
-    return '$d day${d == 1 ? '.tr()' : '.tr()s'} ago'.tr();
+    return d == 1
+        ? 'day_ago'.tr()
+        : 'days_ago'.tr(namedArgs: {'count': d.toString()});
   } else {
     return DateFormat('dd/MM/yyyy').format(dateTime);
   }
