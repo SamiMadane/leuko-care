@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -14,10 +16,10 @@ class DoctorListViewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (doctors.isEmpty) {
-      return const EmptyStateWidget(
+      return  EmptyStateWidget(
         icon: Icons.medical_information_outlined,
-        title: 'No matching doctors.',
-        message: 'Try adjusting your search or filter options.',
+        title: 'No matching doctors.'.tr(),
+        message: 'Try adjusting your search or filter options.'.tr(),
       );
     }
 

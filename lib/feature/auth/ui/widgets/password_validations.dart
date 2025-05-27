@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -23,20 +25,20 @@ class PasswordValidations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        buildValidationRow('At least 1 lowercase letter', hasLowerCase),
+        buildValidationRow('At least 1 lowercase letter'.tr(), hasLowerCase),
         SizedBox(height: HeightManager.h2),
-        buildValidationRow('At least 1 uppercase letter', hasUpperCase),
+        buildValidationRow('At least 1 uppercase letter'.tr(), hasUpperCase),
         SizedBox(height: HeightManager.h2),
         buildValidationRow(
-          'At least 1 special character',
+          'At least 1 special character'.tr(),
           hasSpecialCharacters,
         ),
         SizedBox(height: HeightManager.h2),
 
-        buildValidationRow('At least 1 number', hasNumber),
+        buildValidationRow('At least 1 number'.tr(), hasNumber),
         SizedBox(height: HeightManager.h2),
 
-        buildValidationRow('At least 8 characters long', hasMinLength),
+        buildValidationRow('At least 8 characters long'.tr(), hasMinLength),
       ],
     );
   }

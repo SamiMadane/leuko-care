@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 
@@ -13,8 +15,8 @@ class StatsCardsSection extends StatelessWidget {
       children: [
         Expanded(
           child: _StatCard(
-            label: "Total Patients",
-            value: "$total",
+            label: 'Total Patients'.tr(),
+            value: '$total'.tr(),
             icon: Icons.groups,
             color: ColorsManager.primaryColor,
           ),
@@ -22,8 +24,8 @@ class StatsCardsSection extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(
           child: _StatCard(
-            label: "Pending Samples",
-            value: "$pending",
+            label: 'Pending Samples'.tr(),
+            value: '$pending'.tr(),
             icon: Icons.hourglass_empty,
             color: Colors.orange,
           ),

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                     EmailAndPassword(),
                     SizedBox(height: HeightManager.h50),
                     AppTextButton(
-                      buttonText: "Login",
+                      buttonText: 'Login'.tr(),
                       textStyle: getSemiBoldTextStyle(
                         fontSize: FontSizeManager.s16,
                         color: ColorsManager.white,

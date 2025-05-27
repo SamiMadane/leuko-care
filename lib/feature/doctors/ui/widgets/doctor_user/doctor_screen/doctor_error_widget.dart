@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
@@ -12,14 +14,14 @@ class DoctorErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("Error loading data"),
+          Text('Error loading data'.tr()),
           ElevatedButton(
             onPressed: () {
               if (doctorId != null) {
                 context.read<DoctorCubit>().getDoctorAndPatients(doctorId!);
               }
             },
-            child: const Text("Retry"),
+            child: Text('Retry'.tr()),
           ),
         ],
       ),

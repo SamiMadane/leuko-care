@@ -1,3 +1,4 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../data/models/chat_model.dart';
 

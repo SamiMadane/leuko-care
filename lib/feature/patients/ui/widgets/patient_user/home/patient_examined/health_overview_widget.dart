@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -15,17 +17,17 @@ class HealthOverviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final healthItems = [
-      HealthInfoData(Icons.health_and_safety, "Health Status", patient.healthStatus),
-      HealthInfoData(Icons.biotech, "Leukemia Type", patient.leukemiaType),
-      HealthInfoData(Icons.check_circle_outline, "Diagnosis Confidence", "${patient.diseaseConfidence}%"),
-      HealthInfoData(Icons.date_range, "Last Exam Date", patient.lastExamDate ?? "N/A"),
+      HealthInfoData(Icons.health_and_safety, 'Health Status'.tr(), patient.healthStatus),
+      HealthInfoData(Icons.biotech, 'Leukemia Type'.tr(), patient.leukemiaType),
+      HealthInfoData(Icons.check_circle_outline, 'Diagnosis Confidence'.tr(), '${patient.diseaseConfidence}%'.tr()),
+      HealthInfoData(Icons.date_range, 'Last Exam Date'.tr(), patient.lastExamDate ?? "N/A"),
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Health Overview",
+          'Health Overview'.tr(),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,

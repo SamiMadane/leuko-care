@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/common_search_and_filter_bar.dart';
@@ -82,8 +83,8 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
     return widget.patients.isEmpty
         ? EmptyStateWidget(
           icon: Icons.group_outlined,
-          title: 'No patients found.',
-          message: widget.userType == 'doctor' ? 'There are no patients assigned to you yet.':'There are no patients added yet. Try adding a new patient.',
+          title: 'No patients found.'.tr(),
+          message: widget.userType == 'doctor' ? 'There are no patients assigned to you yet'.tr():'There are no patients added yet. Try adding a new patient'.tr(),
         )
         : SafeArea(
           bottom: true,

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -22,7 +24,7 @@ class PatientDropdown extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Select Patient',
+          'Select Patient'.tr(),
           style: getMediumTextStyle(
             fontSize: FontSizeManager.s16,
             color: ColorsManager.darkBlue,
@@ -31,7 +33,7 @@ class PatientDropdown extends StatelessWidget {
         DropdownButton<PatientModel>(
           isExpanded: true,
           value: selected,
-          hint: Text("Choose patient"),
+          hint: Text('Choose patient'.tr()),
           items: patients.map((patient) {
             return DropdownMenuItem(
               value: patient,
@@ -40,7 +42,7 @@ class PatientDropdown extends StatelessWidget {
                 children: [
                   Text(patient.name),
                   if (patient.isExamined == true)
-                    Text('Tested', style: TextStyle(color: Colors.green)),
+                    Text('Tested'.tr(), style: TextStyle(color: Colors.green)),
                 ],
               ),
             );

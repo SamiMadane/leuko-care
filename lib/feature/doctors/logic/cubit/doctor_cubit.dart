@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +93,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       await _repository.deleteDoctor(doctorId);
       emit(DeleteDoctorStateSuccess());
     } catch (e) {
-      emit(DeleteDoctorStateError('Error deleting doctor: $e'));
+      emit(DeleteDoctorStateError('Error deleting doctor: $e'.tr()));
     }
   }
 

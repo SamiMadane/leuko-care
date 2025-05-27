@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -28,7 +30,7 @@ class AboutBoxWidget extends StatelessWidget {
                 Icon(Icons.info_outline, color: ColorsManager.primaryColor, size: FontSizeManager.s18),
                 SizedBox(width: WidthManager.w8),
                 Text(
-                  'Description',
+                  'Description'.tr(),
                   style: getMediumTextStyle(
                     fontSize: FontSizeManager.s14,
                     color: ColorsManager.primaryColor,

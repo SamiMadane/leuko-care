@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,7 +29,7 @@ class PatientRepository {
           .doc(patient.id)
           .set(patient.toJson());
     } catch (e) {
-      throw Exception("Error saving patient data: ${e.toString()}");
+      throw Exception('Error saving patient data: ${e.toString()}'.tr());
     }
   }
 
@@ -38,7 +40,7 @@ class PatientRepository {
           .doc(patient.id)
           .update(patient.toJson());
     } catch (e) {
-      throw Exception("Error updating patient data: ${e.toString()}");
+      throw Exception('Error updating patient data: ${e.toString()}'.tr());
     }
   }
 
@@ -46,7 +48,7 @@ class PatientRepository {
     try {
       await _firestore.collection('patients').doc(patientId).delete();
     } catch (e) {
-      throw Exception('Error deleting patient: $e');
+      throw Exception('Error deleting patient: $e'.tr());
     }
   }
 
@@ -73,7 +75,7 @@ class PatientRepository {
     if (response.statusCode == 200) {
       return result['secure_url']; // رابط الصورة المرفوعة
     } else {
-      throw Exception('Error uploading image: ${result['error']}');
+      throw Exception('Error uploading image: ${result['error']}'.tr());
     }
   }
 
@@ -95,7 +97,7 @@ class PatientRepository {
           await _firestore.collection('doctors').doc(doctorId).get();
       return DoctorModel.fromJson(docSnapshot.data()!);
     } catch (e) {
-      throw Exception('Error fetching doctor: $e');
+      throw Exception('Error fetching doctor: $e'.tr());
     }
   }
 
@@ -116,14 +118,14 @@ class PatientRepository {
 //   final token = await FirebaseMessaging.instance.getToken();
 //   if (token == null) return;
 
-//   final docRef = _firestore.collection('patients').doc(user.uid);
+//   final docRef = _firestore.collection('patients'.tr()).doc(user.uid);
 
 //   // تأكد من التحديث فقط إذا تغير التوكن
 //   final snapshot = await docRef.get();
-//   final existingToken = snapshot.data()?['fcmToken'];
+//   final existingToken = snapshot.data()?['fcmToken'.tr()];
 
 //   if (existingToken != token) {
-//     await docRef.set({'fcmToken': token}, SetOptions(merge: true)); 
+//     await docRef.set({'fcmToken'.tr(): token}, SetOptions(merge: true)); 
 //     print('✅ FCM token updated for patient.');
 //   } else {
 //     print('ℹ️ FCM token already up to date.');

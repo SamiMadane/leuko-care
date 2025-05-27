@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,14 +56,14 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
     context.pushNamed(
       Routes.sampleResultScreen,
       arguments: {
-        'patient': selectedPatient!,
-        'doctor': widget.doctor,
-        'result': 'sick',
-        'diseaseType': 'Acute Lymphoblastic Leukemia',
-        'confidence': 92.5,
-        'aiMessage':
-            'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.',
-        'sampleImageUrl':
+        'patient'.tr(): selectedPatient!,
+        'doctor'.tr(): widget.doctor,
+        'result'.tr(): 'sick'.tr(),
+        'diseaseType'.tr(): 'Acute Lymphoblastic Leukemia'.tr(),
+        'confidence'.tr(): 92.5,
+        'aiMessage'.tr():
+            'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'.tr(),
+        'sampleImageUrl'.tr():
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
       },
     );
@@ -88,7 +90,7 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
                   SizedBox(width: WidthManager.w8),
 
                   Text(
-                    'Upload Blood Sample',
+                    'Upload Blood Sample'.tr(),
                     style: getMediumTextStyle(
                       fontSize: FontSizeManager.s20,
                       color: ColorsManager.darkBlue,

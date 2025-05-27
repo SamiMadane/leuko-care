@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -42,10 +44,10 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
   bool _hideButtons = false;
 
   String _getInitialDoctorMessage() {
-    if (widget.result == 'sick') {
-      return 'Important: Your test result shows signs of leukemia. Please visit the hospital for further examination as soon as possible.';
+    if (widget.result == 'sick'.tr()) {
+      return 'Important: Your test result shows signs of leukemia. Please visit the hospital for further examination as soon as possible.'.tr();
     } else {
-      return 'Congratulations! Your test result is clear. Please continue maintaining a healthy lifestyle.';
+      return 'Congratulations! Your test result is clear. Please continue maintaining a healthy lifestyle.'.tr();
     }
   }
 
@@ -75,7 +77,7 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
             SizedBox(width: WidthManager.w8),
 
             Text(
-              'Result for ${widget.patient.name}',
+              'Result for ${widget.patient.name}'.tr(),
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -139,7 +141,7 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
                 onPressed: _captureAndPreview,
                 icon: Icon(Icons.send, color: ColorsManager.white),
                 label: Text(
-                  "Send to Patient",
+                  'Send to Patient'.tr(),
                   style: getMediumTextStyle(
                     fontSize: FontSizeManager.s14,
                     color: ColorsManager.white,

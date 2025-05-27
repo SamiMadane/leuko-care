@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -26,7 +28,7 @@ class DoctorPatientsScreen extends StatelessWidget {
             SizedBox(width: WidthManager.w8),
 
             Text(
-              'Patients of Dr. ${doctor.name}',
+              'Patients of Dr. ${doctor.name}'.tr(),
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -41,7 +43,7 @@ class DoctorPatientsScreen extends StatelessWidget {
         patients: patients,
         doctorId: doctor.id!,
         doctorName: doctor.name,
-        userType: 'doctor',
+        userType: 'doctor'.tr(),
       ),
     );
   }

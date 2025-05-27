@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,10 +37,10 @@ class PatientCubit extends Cubit<PatientState> {
 
   Future<String> _getImageUrl(PatientModel patient) async {
     if (patient.profileImage.isEmpty) {
-      return patient.gender.toLowerCase() == 'male'
+      return patient.gender.toLowerCase() == 'male'.tr()
           ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png'
           : 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_image_nut3m4';
-    } else if (!patient.profileImage.contains('http')) {
+    } else if (!patient.profileImage.contains('http'.tr())) {
       return await _repository.uploadImageToCloudinary(patient.profileImage);
     }
     return patient.profileImage;
@@ -88,9 +90,11 @@ class PatientCubit extends Cubit<PatientState> {
     try {
       await _repository.deletePatient(patientId);
       getPatientsStream();
+
       emit(DeletePatientStateSuccess());
     } catch (e) {
-      emit(DeletePatientStateError('Error deleting patient: $e'));
+
+      emit(DeletePatientStateError('Error deleting patient: $e'.tr()));
     }
   }
 
@@ -106,7 +110,7 @@ class PatientCubit extends Cubit<PatientState> {
             emit(GetPatientsByDoctorIdStateSuccess(patients));
           },
           onError: (error) {
-            emit(GetPatientsByDoctorIdStateError("Failed to load patients"));
+            emit(GetPatientsByDoctorIdStateError('Failed to load patients'.tr()));
           },
         );
   }

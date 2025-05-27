@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -11,11 +13,13 @@ import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 class DeletePatientBlocListener extends StatelessWidget {
   final String doctorId;
   final String doctorName;
+  final Widget child;
 
   const DeletePatientBlocListener({
     super.key,
     required this.doctorId,
     required this.doctorName,
+    required this.child,
   });
 
   @override
@@ -36,12 +40,15 @@ class DeletePatientBlocListener extends StatelessWidget {
             );
           },
           deletePatientStateSuccess: () {
-            context.pop();
+            Navigator.of(
+              context,
+              rootNavigator: true,
+            ).pop(); // لإغلاق LoadingDialog
             showDialog(
               context: context,
               builder:
                   (context) => SuccessDialog(
-                    message: 'The patient has been deleted successfully.',
+                    message: 'The patient has been deleted successfully.'.tr(),
                     onSuccess: () {
                       context.pop();
                       context.pop();
@@ -59,7 +66,7 @@ class DeletePatientBlocListener extends StatelessWidget {
             );
           },
           deletePatientStateError: (message) {
-            context.pop();
+            Navigator.of(context, rootNavigator: true).pop();
             showDialog(
               context: context,
               builder: (context) => ErrorDialog(message: message),
@@ -67,7 +74,7 @@ class DeletePatientBlocListener extends StatelessWidget {
           },
         );
       },
-      child: const SizedBox.shrink(),
+      child: child,
     );
   }
 }

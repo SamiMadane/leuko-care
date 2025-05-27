@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -26,32 +28,33 @@ class PatientDetailsScreen extends StatelessWidget {
     required this.doctorName,
     this.userType,
   });
+@override
+Widget build(BuildContext context) {
+  final patientCubit = context.read<PatientCubit>();
 
-  @override
-  Widget build(BuildContext context) {
-    final patientCubit = context.read<PatientCubit>();
-
-    return Scaffold(
-      appBar: PatientDetailsAppBar(
-        patientName: 'Patient Details',
-        userType: userType,
-        onDeletePressed: () {
-          showDialog(
-            context: context,
-            builder:
-                (context) => ConfirmationDialog(
-                  title: 'Confirm Delete',
-                  message: 'Are you sure you want to delete this patient?',
-                  confirmText: 'Delete',
-                  icon: Icons.delete,
-                  onConfirmed: () {
-                    patientCubit.deletePatient(patientId);
-                  },
-                ),
-          );
-        },
-      ),
-      body: Padding(
+  return Scaffold(
+    appBar: PatientDetailsAppBar(
+      patientName: 'Patient Details'.tr(),
+      userType: userType,
+      onDeletePressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => ConfirmationDialog(
+            title: 'Confirm Delete'.tr(),
+            message: 'Are you sure you want to delete this patient?'.tr(),
+            confirmText: 'Delete'.tr(),
+            icon: Icons.delete,
+            onConfirmed: () {
+              patientCubit.deletePatient(patientId);
+            },
+          ),
+        );
+      },
+    ),
+    body: DeletePatientBlocListener( // ⬅️ انقله هنا
+      doctorId: doctorId,
+      doctorName: doctorName,
+      child: Padding(
         padding: EdgeInsets.symmetric(vertical: HeightManager.h20),
         child: Column(
           children: [
@@ -62,11 +65,9 @@ class PatientDetailsScreen extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return const Center(
-                      child: Text('Error loading patient data.'),
-                    );
+                    return Center(child: Text('Error loading patient data.'.tr()));
                   } else if (!snapshot.hasData) {
-                    return const Center(child: Text('Patient not found.'));
+                    return Center(child: Text('Patient not found.'.tr()));
                   }
 
                   final patient = snapshot.data!;
@@ -75,13 +76,7 @@ class PatientDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        DeletePatientBlocListener(
-                          doctorId: doctorId,
-                          doctorName: doctorName,
-                        ),
-                        ProfileImageWidget(
-                          profileImageUrl: patient.profileImage,
-                        ),
+                        ProfileImageWidget(profileImageUrl: patient.profileImage),
                         SizedBox(height: HeightManager.h20),
                         Text(
                           patient.name,
@@ -98,19 +93,19 @@ class PatientDetailsScreen extends StatelessWidget {
                 },
               ),
             ),
-            if (userType != 'doctor')
+            if (userType != 'doctor'.tr())
               StreamBuilder<PatientModel>(
                 stream: patientCubit.getPatientByIdStream(patientId),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) return const SizedBox.shrink();
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: WidthManager.w20,vertical: HeightManager.h10),
+                    padding: EdgeInsets.symmetric(horizontal: WidthManager.w20, vertical: HeightManager.h10),
                     child: Row(
                       children: [
                         Expanded(
                           child: PatientEditButton(
                             patient: snapshot.data!,
-                            userType: 'admin',
+                            userType: 'admin'.tr(),
                             doctorName: doctorName,
                           ),
                         ),
@@ -122,6 +117,7 @@ class PatientDetailsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
@@ -36,7 +38,7 @@ class DoctorsBlueContainer extends StatelessWidget {
               children: [
                 SizedBox(height: HeightManager.h6),
                 Text(
-                   'Admin Dashboard',
+                  'Admin Dashboard'.tr(),
                   style: getBoldTextStyle(
                     fontSize: FontSizeManager.s16,
                     color: ColorsManager.white,
@@ -44,7 +46,7 @@ class DoctorsBlueContainer extends StatelessWidget {
                 ),
                 SizedBox(height: HeightManager.h10),
                 Text(
-                  'Full access\nTo manage\nDoctors & Patients.',
+                  'admin_dashboard_description'.tr(),
                   style: getSemiBoldTextStyle(
                     fontSize: FontSizeManager.s15,
                     color: ColorsManager.white,
@@ -68,15 +70,21 @@ class DoctorsBlueContainer extends StatelessWidget {
                     context.pushNamed(Routes.adminStatisticsScreen);
                   },
                   child: Text(
-                    'View Statistics',
-                    style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkBlue),
+                    'View Statistics'.tr(),
+                    style: getMediumTextStyle(
+                      fontSize: FontSizeManager.s14,
+                      color: ColorsManager.darkBlue,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           Positioned(
-            right: WidthManager.wm4,
+            // عيّن الموضع حسب اتجاه اللغة
+            right:
+                context.locale.languageCode == 'ar' ? null : WidthManager.wm4,
+            left: context.locale.languageCode == 'ar' ? WidthManager.wm4 : null,
             top: HeightManager.h20,
             child: Image.asset(
               AssetsManager.homeAdminImage,

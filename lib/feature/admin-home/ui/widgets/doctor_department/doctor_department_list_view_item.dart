@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -78,7 +79,7 @@ class DoctorDepartmentListViewItem extends StatelessWidget {
                   ),
               SizedBox(height: HeightManager.h8),
               Text(
-                'Dr.${doctor.name}',
+                tr('doctor_name', namedArgs: {'name': doctor.name}),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style:

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -111,12 +113,12 @@ class PatientScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("Error loading data"),
+           Text('Error loading data'.tr()),
           ElevatedButton(
             onPressed: () {
               context.read<PatientCubit>().getPatientAndDoctor(patientId!);
             },
-            child: const Text("Retry"),
+            child:  Text('Retry'.tr()),
           ),
         ],
       ),

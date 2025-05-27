@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/widgets/common_search_and_filter_bar.dart';
@@ -49,8 +51,8 @@ class _AllDoctorsListViewState extends State<AllDoctorsListView> {
     return widget.doctors.isEmpty
         ? EmptyStateWidget(
           icon: Icons.medical_information_outlined,
-          title: 'No doctors available.',
-          message: 'Please add a doctor to get started.',
+          title: 'No doctors available.'.tr(),
+          message: 'Please add a doctor to get started.'.tr(),
         )
         : SafeArea(
           bottom: true,

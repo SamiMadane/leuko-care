@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -68,7 +70,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
     setState(() {
       _genderController.text = gender;
       profileImageUrl =
-          gender.toLowerCase() == 'male'
+          gender.toLowerCase() == 'male'.tr()
               ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_wnyo6c.png'
               : 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_femail_rq9yqv';
     });
@@ -77,14 +79,14 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
   @override
   Widget build(BuildContext context) {
     final isEditMode = widget.doctor != null;
-    final isDoctorUser = widget.userType == 'doctor';
+    final isDoctorUser = widget.userType == 'doctor'.tr();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           isEditMode
-              ? (isDoctorUser ? 'Edit Profile' : 'Edit Doctor')
-              : 'Add Doctor',
+              ? (isDoctorUser ? 'Edit Profile'.tr() : 'Edit Doctor'.tr())
+              : 'Add Doctor'.tr(),
               style: getMediumTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue),
         ),
         backgroundColor: ColorsManager.appBarColor,
@@ -120,8 +122,8 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
                 AppTextButton(
                   buttonText:
                       isEditMode
-                          ? (isDoctorUser ? 'Update Profile' : 'Update Doctor')
-                          : 'Add Doctor',
+                          ? (isDoctorUser ? 'Update Profile'.tr() : 'Update Doctor'.tr())
+                          : 'Add Doctor'.tr(),
                   textStyle: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
                     color: Colors.white,

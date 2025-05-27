@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -28,16 +30,16 @@ class DoctorBottomNavBar extends StatelessWidget {
           children: [
             Row(
               children: [
-                _buildNavIcon(AssetsManager.patientsIcon, 'Patients', 1),
+                _buildNavIcon(AssetsManager.patientsIcon, 'Patients'.tr(), 1),
                 const SizedBox(width: 20),
-                _buildNavIcon(AssetsManager.bloodTest, 'Upload', 2),
+                _buildNavIcon(AssetsManager.bloodTest, 'Upload'.tr(), 2),
               ],
             ),
             Row(
               children: [
-                _buildNavIcon(AssetsManager.chatIcon, 'Chat', 3),
+                _buildNavIcon(AssetsManager.chatIcon, 'Chat'.tr(), 3),
                 const SizedBox(width: 20),
-                _buildNavIcon(AssetsManager.doctorProfileIcon, 'Profile', 4),
+                _buildNavIcon(AssetsManager.doctorProfileIcon, 'Profile'.tr(), 4),
               ],
             ),
           ],

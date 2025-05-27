@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -61,7 +63,7 @@ class LoginBlocListener extends StatelessWidget {
       context: context,
       builder:
           (context) => AlertDialog(
-            icon: error == "Please verify your email. A verification link has been sent." || error == "Please verify your email. A verification link has already been sent." ? Icon(Icons.warning, color: Colors.amber, size: 32) : Icon(Icons.error, color: Colors.red, size: 32),
+            icon: error == 'Please verify your email. A verification link has been sent.'.tr() || error == 'Please verify your email. A verification link has already been sent.'.tr() ? Icon(Icons.warning, color: Colors.amber, size: 32) : Icon(Icons.error, color: Colors.red, size: 32),
             content: Text(
               error,
               style: getMediumTextStyle(
@@ -73,7 +75,7 @@ class LoginBlocListener extends StatelessWidget {
               TextButton(
                 onPressed: () => context.pop(),
                 child: Text(
-                  'Got it',
+                  'Got it'.tr(),
                   style: getSemiBoldTextStyle(
                     fontSize: FontSizeManager.s14,
                     color: ColorsManager.primaryColor,

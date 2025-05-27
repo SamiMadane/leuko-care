@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -33,7 +35,7 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
             context.pop();
             _showAddSuccessDialog(
               context,
-              'The doctor has been added successfully.',
+              'The doctor has been added successfully.'.tr(),
             );
           },
           updateDoctorStateSuccess: (doctor) {
@@ -41,8 +43,8 @@ class AddUpdateDoctorBlocListener extends StatelessWidget {
             _showUpdateSuccessDialog(
               context,
               (isDoctorUser!)
-                  ? 'Your information updated successfully'
-                  : 'Dr. updated successfully',
+                  ? 'Your information updated successfully'.tr()
+                  : 'Dr. updated successfully'.tr(),
               doctor,
             );
           },

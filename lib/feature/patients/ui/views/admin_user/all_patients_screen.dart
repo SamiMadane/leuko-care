@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -26,8 +28,6 @@ class _AllPatientsScreenState extends State<AllPatientsScreen> {
   @override
   void initState() {
     super.initState();
-    print ('sami in AllPatientsScreen');
-
     context.read<PatientCubit>().getPatientsByDoctorId(widget.doctorId);
   }
 
@@ -38,7 +38,7 @@ class _AllPatientsScreenState extends State<AllPatientsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Patients of Dr. ${widget.doctorName}',
+          tr('patients_of_doctor', namedArgs: {'name': widget.doctorName}),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s20,
             color: ColorsManager.darkBlue,

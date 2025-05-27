@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/widgets/home_top_widget.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
@@ -37,7 +39,7 @@ class PatientHomeScreen extends StatelessWidget {
               ),
               SizedBox(width: WidthManager.w8),
               Text(
-                "Current Health Status",
+                'Current Health Status'.tr(),
                 style: getBoldTextStyle(
                   fontSize: FontSizeManager.s18,
                   color: ColorsManager.darkBlue,

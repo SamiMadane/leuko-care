@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -48,7 +49,7 @@ class MessageStatusCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hasUnread ? 'You have unread messages from Dr.$doctorName' : 'All messages are read',
+                    hasUnread ? 'You have unread messages from Dr.$doctorName'.tr() : 'All messages are read'.tr(),
                     style: getMediumTextStyle(
                       fontSize: FontSizeManager.s14,
                       color: ColorsManager.darkBlue,
@@ -56,7 +57,7 @@ class MessageStatusCard extends StatelessWidget {
                   ),
                   SizedBox(height: HeightManager.h4),
                   Text(
-                    'Last message: ${_formatDateTime(lastMessageTime)}',
+                    'Last message: ${_formatDateTime(lastMessageTime)}'.tr(),
                     style: getRegularTextStyle(
                       fontSize: FontSizeManager.s13,
                       color: ColorsManager.gray
@@ -76,18 +77,18 @@ String _formatDateTime(DateTime dateTime) {
   final difference = now.difference(dateTime);
 
   if (difference.inSeconds < 60) {
-    return 'just now';
+    return 'just now'.tr();
   } else if (difference.inMinutes < 60) {
     final m = difference.inMinutes;
-    return '$m minute${m == 1 ? '' : 's'} ago';
+    return '$m minute${m == 1 ? '.tr()' : '.tr()s'} ago'.tr();
   } else if (difference.inHours < 24) {
     final h = difference.inHours;
-    return '$h hour${h == 1 ? '' : 's'} ago';
+    return '$h hour${h == 1 ? '.tr()' : '.tr()s'} ago'.tr();
   } else if (difference.inDays == 1) {
-    return 'yesterday';
+    return 'yesterday'.tr();
   } else if (difference.inDays < 7) {
     final d = difference.inDays;
-    return '$d day${d == 1 ? '' : 's'} ago';
+    return '$d day${d == 1 ? '.tr()' : '.tr()s'} ago'.tr();
   } else {
     return DateFormat('dd/MM/yyyy').format(dateTime);
   }

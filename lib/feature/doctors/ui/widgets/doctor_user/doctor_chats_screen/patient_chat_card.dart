@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 // patient_chat_card.dart
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +127,7 @@ class PatientChatCard extends StatelessWidget {
                         Icon(Icons.image, size: HeightManager.h16, color: ColorsManager.gray),
                         SizedBox(width: WidthManager.w4),
                         Text(
-                          'Photo',
+                          'Photo'.tr(),
                           style: TextStyle(
                             fontSize: FontSizeManager.s14,
                             fontWeight: hasUnreadForDoctor ? FontWeight.bold : FontWeight.normal,
@@ -190,16 +192,16 @@ class PatientChatCard extends StatelessWidget {
     if (diff.inDays > 7) {
       elapsed = '${time.day}/${time.month}/${time.year}';
     } else if (diff.inDays >= 1) {
-      elapsed = '${diff.inDays}d ago';
+      elapsed = '${diff.inDays}d ago'.tr();
     } else if (diff.inHours >= 1) {
-      elapsed = '${diff.inHours}h ago';
+      elapsed = '${diff.inHours}h ago'.tr();
     } else if (diff.inMinutes >= 1) {
-      elapsed = '${diff.inMinutes}m ago';
+      elapsed = '${diff.inMinutes}m ago'.tr();
     } else {
-      elapsed = 'now';
+      elapsed = 'now'.tr();
     }
 
-    final clock = '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-    return '$elapsed • $clock';
+    final clock = '${time.hour.toString().padLeft(2, '.tr()0')}:${time.minute.toString().padLeft(2, '.tr()0')}'.tr();
+    return '$elapsed • $clock'.tr();
   }
 }

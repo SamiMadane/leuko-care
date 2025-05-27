@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -21,7 +23,7 @@ class AdminStatisticsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Admin Statistics',
+          'Admin Statistics'.tr(),
           style: getMediumTextStyle(
             fontSize: FontSizeManager.s20,
             color: ColorsManager.darkBlue,
@@ -62,32 +64,32 @@ class AdminStatisticsScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: StatisticCard(text: "Total Patients: ${stats.totalPatients}", icon: Icons.people,)),
-              Expanded(child: StatisticCard(text: "Total Doctors: ${stats.totalDoctors}",icon: Icons.medical_services,)),
+              Expanded(child: StatisticCard( text: tr('total_patients', namedArgs: {'count': stats.totalPatients.toString()}), icon: Icons.people,)),
+              Expanded(child: StatisticCard(text: tr('total_doctors', namedArgs: {'count': stats.totalDoctors.toString()}),icon: Icons.medical_services,)),
             ],
           ),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Examination Status:"),
+          _buildSectionTitle('Examination Status:'.tr()),
           SizedBox(height: HeightManager.h14),
           ExaminedStatusProgressWidget(
             data: {
-              "Examined": stats.examinedCount,
-              "Unexamined": stats.unexaminedCount,
+              'Examined': stats.examinedCount,
+              'Unexamined': stats.unexaminedCount,
             },
           ),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Health Status Distribution:"),
+          _buildSectionTitle('Health Status Distribution:'.tr()),
           SizedBox(height: HeightManager.h20),
           HealthStatusBarChart(data: stats.healthStatusCounts),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Diseases Detected:"),
+          _buildSectionTitle('Diseases Detected:'.tr()),
           SizedBox(height: HeightManager.h14),
           DiseaseStatisticsTable(
               diseaseCounts: stats.diseaseCounts,
           ),
           SizedBox(height: HeightManager.h20),
 
-          _buildSectionTitle("Patients Per Doctor:"),
+          _buildSectionTitle('Patients Per Doctor:'.tr()),
           SizedBox(height: HeightManager.h14),
           PatientsPerDoctorList(data: stats.patientsPerDoctor),
         ],

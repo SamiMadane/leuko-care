@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -21,17 +23,17 @@ class PatientEditButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {
           context.pushNamed(Routes.addUpdatePatientScreen, arguments: {
-            'patientModel': patient,
-            'userType': userType,
-            'doctorId': patient.doctorId,
-            'doctorName':doctorName,
+            'patientModel'.tr(): patient,
+            'userType'.tr(): userType,
+            'doctorId'.tr(): patient.doctorId,
+            'doctorName'.tr():doctorName,
           });
         },
         icon: const Icon(Icons.edit, color: ColorsManager.white),
         label: Text(
-          userType == 'admin'
-              ? 'Edit Patient'
-              : 'Edit Profile',
+          userType == 'admin'.tr()
+              ? 'Edit Patient'.tr()
+              : 'Edit Profile'.tr(),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s14,
             color: Colors.white,

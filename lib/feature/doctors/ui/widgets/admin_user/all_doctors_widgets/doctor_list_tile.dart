@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +93,7 @@ class DoctorDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Dr. ${doctor.name}',
+            tr('doctor_name', namedArgs: {'name': doctor.name}),
             style: TextStyle(
               fontSize: FontSizeManager.s18,
               fontWeight: FontWeight.bold,
@@ -118,7 +120,7 @@ class DoctorDetails extends StatelessWidget {
             Icon(Icons.group, color: ColorsManager.primaryColor, size: IconSizeManager.s22),
             SizedBox(width: WidthManager.w4),
             Text(
-              'Number of patients: ${count ?? "..."}',
+              tr('number_of_patients', namedArgs: {'count': (count?.toString() ?? '...')}),
               style: getBoldTextStyle(fontSize: FontSizeManager.s15, color: ColorsManager.primaryColor)
             ),
           ],

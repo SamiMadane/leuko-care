@@ -1,3 +1,4 @@
+
 import 'package:json_annotation/json_annotation.dart';
 part 'doctor_model.g.dart';
 

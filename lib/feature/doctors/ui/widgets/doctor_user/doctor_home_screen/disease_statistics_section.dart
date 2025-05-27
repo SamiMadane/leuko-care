@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -14,7 +16,7 @@ class DiseaseStatisticsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Disease Statistics:",
+          'Disease Statistics:'.tr(),
           style: getBoldTextStyle(
             fontSize: IconSizeManager.s18,
             color: ColorsManager.darkBlue,

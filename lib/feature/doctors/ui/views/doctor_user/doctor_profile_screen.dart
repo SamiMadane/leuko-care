@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -25,7 +27,7 @@ class DoctorProfileScreen extends StatelessWidget {
           children: [
             SizedBox(width: WidthManager.w8),
             Text(
-              'My Profile',
+              'My Profile'.tr(),
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -42,7 +44,7 @@ class DoctorProfileScreen extends StatelessWidget {
             onPressed: () {
               context.pushNamed(
                 Routes.addUpdateDoctorScreen,
-                arguments: {'doctorModel': doctor, 'userType': 'doctor'},
+                arguments: {'doctorModel'.tr(): doctor, 'userType'.tr(): 'doctor'.tr()},
               );
             },
           ),
@@ -59,7 +61,7 @@ class DoctorProfileScreen extends StatelessWidget {
                   ProfileImageWidget(profileImageUrl: doctor.profileImage),
                   SizedBox(height: HeightManager.h12),
                   Text(
-                    'Dr. ${doctor.name}',
+                    'Dr. ${doctor.name}'.tr(),
                     style: getBoldTextStyle(
                       fontSize: FontSizeManager.s20,
                       color: ColorsManager.darkBlue,
@@ -71,35 +73,35 @@ class DoctorProfileScreen extends StatelessWidget {
             ),
 
             // Section: Contact Info
-            SectionTitle(title: 'Contact Info'),
+            SectionTitle(title: 'Contact Info'.tr()),
             ProfileInfoRow(
               icon: Icons.email,
-              title: 'Email',
+              title: 'Email'.tr(),
               value: doctor.email,
             ),
             ProfileInfoRow(
               icon: Icons.phone,
-              title: 'Phone',
+              title: 'Phone'.tr(),
               value: doctor.phone,
             ),
 
             // Section: Professional Info
-            SectionTitle(title: 'Professional Info'),
+            SectionTitle(title: 'Professional Info'.tr()),
             ProfileInfoRow(
               icon: Icons.work_outline,
-              title: 'Experience',
+              title: 'Experience'.tr(),
               value: doctor.experience,
             ),
             ProfileInfoRow(
-              icon: doctor.gender.toLowerCase() == 'male'
+              icon: doctor.gender.toLowerCase() == 'male'.tr()
                       ? Icons.male
                       : Icons.female,
-              title: 'Gender',
+              title: 'Gender'.tr(),
               value: doctor.gender,
             ),
 
             // Section: About
-            SectionTitle(title:'About'),
+            SectionTitle(title:'About'.tr()),
             AboutBoxWidget(description: doctor.description),
 
             SizedBox(height: HeightManager.h24),

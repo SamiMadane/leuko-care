@@ -13,6 +13,8 @@ Widget buildSelectionCard(
   double? positionedRight,
   double? positionedBottom,
 }) {
+  final isRtl = Directionality.of(context) == TextDirection.rtl;
+
   return SizedBox(
     height: HeightManager.h100,
     width: double.infinity,
@@ -24,7 +26,7 @@ Widget buildSelectionCard(
           onTap: onTap,
           borderRadius: BorderRadius.circular(RadiusManager.r30),
           child: Container(
-            margin: EdgeInsets.only(bottom: HeightManager.h12), // هامش لتفادي قطع الظل
+            margin: EdgeInsets.only(bottom: HeightManager.h12),
             width: double.infinity,
             height: HeightManager.h88,
             padding: EdgeInsets.symmetric(
@@ -39,14 +41,14 @@ Widget buildSelectionCard(
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: .3),
+                  color: Colors.black.withOpacity(0.3),
                   blurRadius: 4,
-                  offset: const Offset(3, 3),
+                  offset: Offset(isRtl ? -3 : 3, 3),
                 ),
               ],
             ),
             child: Align(
-              alignment: Alignment.centerLeft,
+              alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
               child: Text(
                 label,
                 style: TextStyle(
@@ -59,7 +61,8 @@ Widget buildSelectionCard(
           ),
         ),
         Positioned(
-          right: positionedRight ?? WidthManager.w8,
+          left: isRtl ? WidthManager.w10 : null,
+          right: !isRtl ? WidthManager.w10 : null,
           bottom: positionedBottom ?? HeightManager.h12,
           child: Image.asset(
             imagePath,

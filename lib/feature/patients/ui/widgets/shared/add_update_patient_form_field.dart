@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -43,7 +45,8 @@ class _AddUpdatePatientFormFieldsState
   bool _isConfirmPasswordVisible = false;
 
   // خيارات الجنس
-  String? _selectedGender = "Male"; // القيمة الافتراضية
+  String? _selectedGender = 'Male'; // القيمة الافتراضية
+  final genderOptions = {'Male': 'Male'.tr(), 'Female': 'Female'.tr()};
 
   @override
   void initState() {
@@ -67,13 +70,13 @@ class _AddUpdatePatientFormFieldsState
       children: [
         AppTextFormField(
           controller: widget.nameController,
-          labelText: 'Name',
+          labelText: 'Name'.tr(),
           validator:
               (value) =>
                   value == null || value.isEmpty
-                      ? 'Enter Name'
+                      ? 'Enter Name'.tr()
                       : !AppRegex.isNameValid(value)
-                      ? 'Name must be at least 3 letters and contain letters only'
+                      ? 'Name must be at least 3 letters and contain letters only'.tr()
                       : null,
         ),
 
@@ -81,13 +84,13 @@ class _AddUpdatePatientFormFieldsState
           SizedBox(height: HeightManager.h10),
           AppTextFormField(
             controller: widget.emailController,
-            labelText: 'Email',
+            labelText: 'Email'.tr(),
             validator:
                 (value) =>
                     value == null || value.isEmpty
-                        ? 'Enter Email'
+                        ? 'Enter Email'.tr()
                         : !AppRegex.isEmailValid(value)
-                        ? 'Invalid email format'
+                        ? 'Invalid email format'.tr()
                         : null,
           ),
         ],
@@ -97,7 +100,7 @@ class _AddUpdatePatientFormFieldsState
         if (!widget.isEditMode) ...[
           AppTextFormField(
             controller: widget.passwordController,
-            labelText: 'Password',
+            labelText: 'Password'.tr(),
             isObscureText: !_isPasswordVisible,
             suffixIcon: IconButton(
               icon: Icon(
@@ -112,16 +115,16 @@ class _AddUpdatePatientFormFieldsState
             validator:
                 (value) =>
                     value == null || value.isEmpty
-                        ? 'Password is required'
+                        ? 'Password is required'.tr()
                         : !AppRegex.isPasswordValid(value)
-                        ? 'Weak password (min 8 chars, A-Z, a-z, number, special)'
+                        ? 'Weak password (min 8 chars, A-Z, a-z, number, special)'.tr()
                         : null,
           ),
           SizedBox(height: HeightManager.h10),
 
           AppTextFormField(
             controller: _confirmPasswordController,
-            labelText: 'Confirm Password',
+            labelText: 'Confirm Password'.tr(),
             isObscureText: !_isConfirmPasswordVisible,
             suffixIcon: IconButton(
               icon: Icon(
@@ -138,9 +141,9 @@ class _AddUpdatePatientFormFieldsState
             validator:
                 (value) =>
                     value == null || value.isEmpty
-                        ? 'Please confirm password'
+                        ? 'Please confirm password'.tr()
                         : value != widget.passwordController.text
-                        ? 'Passwords do not match'
+                        ? 'Passwords do not match'.tr()
                         : null,
           ),
           SizedBox(height: HeightManager.h10),
@@ -148,13 +151,13 @@ class _AddUpdatePatientFormFieldsState
 
         AppTextFormField(
           controller: widget.phoneController,
-          labelText: 'Phone',
+          labelText: 'Phone'.tr(),
           validator:
               (value) =>
                   value == null || value.isEmpty
-                      ? 'Enter Phone'
+                      ? 'Enter Phone'.tr()
                       : !AppRegex.isPhoneNumberValid(value)
-                      ? 'Invalid phone number'
+                      ? 'Invalid phone number'.tr()
                       : null,
         ),
 
@@ -163,13 +166,12 @@ class _AddUpdatePatientFormFieldsState
           SizedBox(height: HeightManager.h10),
           AppDropdownFormField<String>(
             value: _selectedGender,
-            labelText: 'Gender',
-            items:
-                ['Male', 'Female']
+            labelText: 'Gender'.tr(),
+            items:genderOptions.entries
                     .map(
-                      (gender) => DropdownMenuItem<String>(
-                        value: gender,
-                        child: Text(gender),
+                      (entry) => DropdownMenuItem<String>(
+                        value: entry.key,
+                        child: Text(entry.value),
                       ),
                     )
                     .toList(),
@@ -180,7 +182,7 @@ class _AddUpdatePatientFormFieldsState
                 widget.onGenderChanged?.call(value);
               });
             },
-            validator: (value) => value == null ? 'Please select gender' : null,
+            validator: (value) => value == null ? 'Please select gender'.tr() : null,
           ),
 
           SizedBox(height: HeightManager.h10),
@@ -193,13 +195,13 @@ class _AddUpdatePatientFormFieldsState
             child: AbsorbPointer(
               child: AppTextFormField(
                 controller: widget.birthDateController,
-                labelText: 'Birth Date',
+                labelText: 'Birth Date'.tr(),
                 validator:
                     (value) =>
                         value == null || value.isEmpty
-                            ? 'Enter Birth Date'
+                            ? 'Enter Birth Date'.tr()
                             : !AppRegex.isBirthDateValid(value)
-                            ? 'Invalid Birth Date'
+                            ? 'Invalid Birth Date'.tr()
                             : null,
                 keyboardType: TextInputType.datetime,
                 suffixIcon: Icon(Icons.calendar_today, color: Colors.blue),

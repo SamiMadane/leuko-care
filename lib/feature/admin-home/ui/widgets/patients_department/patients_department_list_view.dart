@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
@@ -20,17 +22,17 @@ class PatientsDepartmentListView extends StatelessWidget {
       return Expanded(
         child:
             hasDoctors
-                ? const EmptyStateWidget(
+                ?  EmptyStateWidget(
                   icon: Icons.person_off,
-                  title: 'No patients assigned',
+                  title: 'No patients assigned'.tr(),
                   message:
-                      'There are currently no patients assigned to this doctor. You can add patients or select a different doctor.',
+                      'There are currently no patients assigned to this doctor. You can add patients or select a different doctor.'.tr(),
                 )
-                : const EmptyStateWidget(
+                :  EmptyStateWidget(
                   icon: Icons.medical_information_outlined,
-                  title: 'No doctors found',
+                  title: 'No doctors found'.tr(),
                   message:
-                      'You haven\'t added any doctors yet. Add a doctor to start managing patients.',
+                      'no doctors added message',
                 ),
       );
     }

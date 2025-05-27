@@ -1,7 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -74,7 +75,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
     setState(() {
       _genderController.text = gender;
       profileImageUrl =
-          gender.toLowerCase() == 'male'
+          gender.toLowerCase() == 'Male'.tr()
               ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png'
               : 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_image_nut3m4';
     });
@@ -105,8 +106,8 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
       appBar: AppBar(
         title: Text(
           isEditMode
-              ? (isPatientUser ? 'Edit Profile' : 'Edit Patient')
-              : 'Add Patient',
+              ? (isPatientUser ? 'Edit Profile'.tr() : 'Edit Patient'.tr())
+              : 'Add Patient'.tr(),
           style: getMediumTextStyle(
             fontSize: FontSizeManager.s20,
             color: ColorsManager.darkBlue,
@@ -149,9 +150,9 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                   buttonText:
                       isEditMode
                           ? (isPatientUser
-                              ? 'Update Profile'
-                              : 'Update Patient')
-                          : 'Add Patient',
+                              ? 'Update Profile'.tr()
+                              : 'Update Patient'.tr())
+                          : 'Add Patient'.tr(),
                   textStyle: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
                     color: Colors.white,

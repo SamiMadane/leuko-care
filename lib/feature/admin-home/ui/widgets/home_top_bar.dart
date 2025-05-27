@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -21,7 +23,7 @@ class HomeTopBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi, Admin!',
+              'Hi, Admin!'.tr(),
               style: getBoldTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -29,7 +31,7 @@ class HomeTopBar extends StatelessWidget {
             ),
             SizedBox(height: HeightManager.h6),
             Text(
-              'How Are you Today?',
+              'How Are you Today?'.tr(),
               style: getSemiBoldTextStyle(
                 fontSize: FontSizeManager.s12,
                 color: ColorsManager.gray,
@@ -47,9 +49,9 @@ class HomeTopBar extends StatelessWidget {
                 context: context,
                 builder:
                     (context) => ConfirmationDialog(
-                      title: 'Confirm Sign Out',
-                      message: 'Are you sure you want to sign out?',
-                      confirmText: 'SignOut',
+                      title: 'Confirm Sign Out'.tr(),
+                      message: 'Are you sure you want to sign out?'.tr(),
+                      confirmText: 'SignOut'.tr(),
                       onConfirmed: () {
                         cubit.signOut(); // ثم نسجل الخروج
                         context.pop(); // أولاً نغلق الـ Dialog
@@ -57,7 +59,7 @@ class HomeTopBar extends StatelessWidget {
                     ),
               );
             },
-            icon: Icon(Icons.exit_to_app),
+            icon: Icon(Icons.logout, color: ColorsManager.darkBlue,),
           ),
         ),
         SignOutBlocListener(),

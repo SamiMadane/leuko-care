@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
@@ -23,7 +25,7 @@ class SampleFAB extends StatelessWidget {
 
     return ClipOval(
       child: FloatingActionButton(
-          heroTag: 'upload_sample_fab',
+          heroTag: 'upload_sample_fab'.tr(),
 
         backgroundColor: ColorsManager.primaryColor,
         child: Image.asset(
@@ -36,14 +38,14 @@ class SampleFAB extends StatelessWidget {
           context.pushNamed(
             Routes.sampleResultScreen,
             arguments: {
-              'patient': patient!,
-              'doctor': doctor,
-              'result': 'sick',
-              'diseaseType': 'Acute Lymphoblastic Leukemia',
-              'confidence': 92.5,
-              'aiMessage':
-                  'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.',
-              'sampleImageUrl':
+              'patient'.tr(): patient!,
+              'doctor'.tr(): doctor,
+              'result'.tr(): 'sick'.tr(),
+              'diseaseType'.tr(): 'Acute Lymphoblastic Leukemia'.tr(),
+              'confidence'.tr(): 92.5,
+              'aiMessage'.tr():
+                  'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'.tr(),
+              'sampleImageUrl'.tr():
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
             },
           );

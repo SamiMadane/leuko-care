@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -89,7 +91,7 @@ class ChatRepository {
       print("Message sent with id: ${docRef.id}");
     } catch (e) {
       print('Error sending message: $e');
-      throw Exception('Failed to send message');
+      throw Exception('Failed to send message'.tr());
     }
   }
 
@@ -117,7 +119,7 @@ class ChatRepository {
       );
     } catch (e) {
       print('Error marking messages as read: $e');
-      throw Exception('Failed to mark messages as read');
+      throw Exception('Failed to mark messages as read'.tr());
     }
   }
 
@@ -144,7 +146,7 @@ class ChatRepository {
       );
     } catch (e) {
       print('Error marking messages as read: $e');
-      throw Exception('Failed to mark messages as read');
+      throw Exception('Failed to mark messages as read'.tr());
     }
   }
 
@@ -197,10 +199,10 @@ class ChatRepository {
       if (response.statusCode == 200) {
         return result['secure_url']; // رابط الصورة المرفوعة
       } else {
-        throw Exception('Error uploading image: ${result['error']}');
+        throw Exception('Error uploading image: ${result['error']}'.tr());
       }
     } else {
-      throw Exception('No valid image data provided');
+      throw Exception('No valid image data provided'.tr());
     }
   }
 

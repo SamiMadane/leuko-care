@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -39,7 +41,7 @@ class DoctorChatsScreen extends StatelessWidget {
           children: [
             SizedBox(width: WidthManager.w8),
             Text(
-              'Chat with Patients',
+              'Chat with Patients'.tr(),
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -54,7 +56,7 @@ class DoctorChatsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical:HeightManager.h10,horizontal: WidthManager.w16),
         child:
             patients.isEmpty
-                ? const Center(child: Text('No patients available for chat'))
+                ? Center(child: Text('No patients available for chat'.tr()))
                 : ListView.separated(
                   itemCount: sortedPatients.length,
                   separatorBuilder:
@@ -64,7 +66,7 @@ class DoctorChatsScreen extends StatelessWidget {
                     final conversation =
                         conversationsByPatientId[patient.id] ??
                         ConversationModel(
-                          lastMessage: 'Send your first message.',
+                          lastMessage: 'Send your first message.'.tr(),
                           lastMessageTime: Timestamp.fromDate(DateTime(1970)),
                           conversationId: '',
                           participantAId: '',

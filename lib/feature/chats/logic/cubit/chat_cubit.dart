@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,7 +23,7 @@ class ChatCubit extends Cubit<ChatState> {
             emit(ChatSuccess(messages));
           });
     } catch (e) {
-      emit(ChatError('Failed to load messages'));
+      emit(ChatError('Failed to load messages'.tr()));
     }
   }
 
@@ -60,7 +62,7 @@ class ChatCubit extends Cubit<ChatState> {
       getMessages(senderId: senderId, receiverId: receiverId);
       emit(ChatMessageSentSuccessfully());
     } catch (e) {
-      emit(ChatError('Failed to send message'));
+      emit(ChatError('Failed to send message'.tr()));
     }
   }
 

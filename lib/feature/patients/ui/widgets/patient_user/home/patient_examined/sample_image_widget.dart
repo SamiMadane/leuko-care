@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -49,7 +51,7 @@ class SampleImageWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  "Latest Sample Image",
+                  'Latest Sample Image'.tr(),
                   style: getSemiBoldTextStyle(
                     fontSize: FontSizeManager.s15,
                     color: ColorsManager.darkBlue,

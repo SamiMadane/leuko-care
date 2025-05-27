@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
@@ -10,10 +12,10 @@ void showPreviewDialog(BuildContext context, Uint8List image, DoctorModel doctor
   showDialog(
     context: context,
     builder: (_) => AlertDialog(
-      title: Text('Preview Before Sending'),
+      title: Text('Preview Before Sending'.tr()),
       content: Image.memory(image),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
+        TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel'.tr())),
         ElevatedButton.icon(
           onPressed: () {
             Navigator.pop(context);
@@ -34,7 +36,7 @@ void showPreviewDialog(BuildContext context, Uint8List image, DoctorModel doctor
             );
           },
           icon: Icon(Icons.send, color: Colors.white),
-          label: Text('Send', style: TextStyle(color: Colors.white)),
+          label: Text('Send'.tr(), style: TextStyle(color: Colors.white)),
           style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
         ),
       ],

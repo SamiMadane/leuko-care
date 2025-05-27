@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -18,7 +20,7 @@ class PatientsDepartmentSeeAll extends StatelessWidget {
     return Row(
       children: [
         Text(
-          'Patients\' Department',
+          'Patients Department'.tr(),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
@@ -36,7 +38,7 @@ class PatientsDepartmentSeeAll extends StatelessWidget {
             );
           },
           child: Text(
-            'See All',
+            'See All'.tr(),
             style: getRegularTextStyle(
               fontSize: FontSizeManager.s14,
               color: ColorsManager.primaryColor,

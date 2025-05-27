@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -20,10 +22,10 @@ class MessageBubble extends StatelessWidget {
       context: context,
       builder:
           (_) => ConfirmationDialog(
-            title: 'Delete Message',
+            title: 'Delete Message'.tr(),
             message:
-                'Are you sure you want to delete this message for everyone?',
-            confirmText: 'Delete',
+                'Are you sure you want to delete this message for everyone?'.tr(),
+            confirmText: 'Delete'.tr(),
             icon: Icons.delete,
             onConfirmed: () {
               context.read<ChatCubit>().deleteMessage(

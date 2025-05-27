@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -30,10 +32,10 @@ class DoctorDetailsScreen extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) => ConfirmationDialog(
-              title: 'Confirm Delete',
+              title: 'Confirm Delete'.tr(),
               message:
-                  'Are you sure you want to delete this doctor and all of their patients?',
-              confirmText: 'Delete',
+                  'Are you sure you want to delete this doctor and all of their patients?'.tr(),
+              confirmText: 'Delete'.tr(),
               icon: Icons.delete,
               onConfirmed: () async {
                 doctorCubit.deleteDoctor(doctor.id!);
@@ -57,7 +59,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                     ProfileImageWidget(profileImageUrl: doctor.profileImage),
                     SizedBox(height: HeightManager.h20),
                     Text(
-                      'Dr. ${doctor.name}',
+                      tr('doctor_name', namedArgs: {'name': doctor.name}),
                       style: getBoldTextStyle(
                         fontSize: FontSizeManager.s24,
                         color: ColorsManager.darkBlue,
@@ -91,7 +93,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.edit, color: ColorsManager.white),
                       label: Text(
-                        'Edit Doctor',
+                        'Edit Doctor'.tr(),
                         style: getSemiBoldTextStyle(
                           fontSize: FontSizeManager.s14,
                           color: ColorsManager.white,
@@ -121,7 +123,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.people, color: ColorsManager.white),
                       label: Text(
-                        'View Patients',
+                        'View Patients'.tr(),
                         style: getSemiBoldTextStyle(
                           fontSize: FontSizeManager.s14,
                           color: ColorsManager.white,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
@@ -14,15 +15,15 @@ class AuthCubit extends Cubit<AuthState> {
 
   Map<String, Map<String, dynamic>> userTypeData = {
       'admin': {
-        'title': 'Welcome, Admin',
+        'title': 'Welcome, Admin'.tr(),
         'image': AssetsManager.loginAdminImage,
       },
       'doctor': {
-        'title': 'Welcome, Doctor',
+        'title': 'Welcome, Doctor'.tr(),
         'image':  AssetsManager.loginDoctorImage,
       },
       'patient': {
-        'title': 'Welcome, Patient',
+        'title': 'Welcome, Patient'.tr(),
         'image':  AssetsManager.loginPatientImage,
       },
     };
@@ -34,7 +35,7 @@ class AuthCubit extends Cubit<AuthState> {
       success: (user) {
         user != null
             ? emit(LoginSuccess(user,userType))
-            : emit(LoginError("User not found"));
+            : emit(LoginError('User not found'.tr()));
       },
       failure: (error) => emit(LoginError(error)),
     );
@@ -48,7 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
           print ("signInWithGoogle success and user is $user"), 
             user != null
             ? emit(LoginSuccess(user,userType))
-            : emit(LoginError("Failed to sign in with Google"))
+            : emit(LoginError('Failed to sign in with Google'.tr()))
         },
         failure: (error) {
           print ("signInWithGoogle failure and error is $error");

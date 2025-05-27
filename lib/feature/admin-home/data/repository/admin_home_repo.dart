@@ -1,3 +1,4 @@
+
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
 import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -71,11 +72,11 @@ class AdminHomeRepository {
                 (healthStatusCounts[patient.healthStatus] ?? 0) + 1;
           }
 
-          final doctorName = doctorNames[patient.doctorId] ?? "Unknown Doctor";
+          final doctorName = doctorNames[patient.doctorId] ?? 'Unknown Doctor';
           patientsPerDoctor[doctorName] =
               (patientsPerDoctor[doctorName] ?? 0) + 1;
 
-          if (patient.isExamined && patient.healthStatus == "sick") {
+          if (patient.isExamined && patient.healthStatus == 'sick') {
             final leukemiaType = patient.leukemiaType;
             diseaseCounts[leukemiaType] =
                 (diseaseCounts[leukemiaType] ?? 0) + 1;

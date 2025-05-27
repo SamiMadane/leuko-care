@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/resources/colors_manager.dart';
@@ -21,6 +22,9 @@ class LeukoAi extends StatelessWidget {
           scaffoldBackgroundColor: ColorsManager.white,
         ),
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         initialRoute: Routes.navigationHandlerScreen,
         onGenerateRoute: appRouter.generateRoute,
       )

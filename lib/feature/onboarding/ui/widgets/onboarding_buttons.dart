@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -30,7 +32,7 @@ class OnboardingButtons extends StatelessWidget {
                 );
               },
               child: Text(
-                'Back',
+                'Back'.tr(),
                 style: getSemiBoldTextStyle(fontSize: FontSizeManager.s16, color: ColorsManager.primaryColor)
               ),
             ),
@@ -57,7 +59,7 @@ class OnboardingButtons extends StatelessWidget {
                 ),
               ),
               child: Text(
-                state.isLastPage ? 'Get Started' : 'Next',
+                state.isLastPage ? 'Get Started'.tr() : 'Next'.tr(),
                 style:getSemiBoldTextStyle(fontSize: FontSizeManager.s16, color: ColorsManager.white),
               ),
             ),

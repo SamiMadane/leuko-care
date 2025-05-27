@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -20,15 +22,15 @@ class DoctorEditButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {
           context.pushNamed(Routes.addUpdateDoctorScreen, arguments: {
-            'doctorModel': doctor,
-            'userType': userType,
+            'doctorModel'.tr(): doctor,
+            'userType'.tr(): userType,
           });
         },
         icon: const Icon(Icons.edit, color: ColorsManager.white),
         label: Text(
-          userType == 'admin'
-              ? 'Edit Doctor'
-              : 'Edit Profile',
+          userType == 'admin'.tr()
+              ? 'Edit Doctor'.tr()
+              : 'Edit Profile'.tr(),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s14,
             color: Colors.white,

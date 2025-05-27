@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -15,7 +17,7 @@ class ExaminationChartSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Examination Stats:",
+          'Examination Stats:'.tr(),
           style: getBoldTextStyle(
             fontSize: IconSizeManager.s18,
             color: ColorsManager.darkBlue,
@@ -24,8 +26,8 @@ class ExaminationChartSection extends StatelessWidget {
         SizedBox(height: HeightManager.h14),
         ExaminedStatusProgressWidget(
           data: {
-            "Examined": total - pending,
-            "Unexamined": pending,
+            'Examined'.tr(): total - pending,
+            'Unexamined'.tr(): pending,
           },
         ),
       ],

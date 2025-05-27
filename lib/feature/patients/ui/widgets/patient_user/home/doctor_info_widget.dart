@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +36,7 @@ class DoctorInfoWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Doctor Who Examined You",
+          'Doctor Who Examined You'.tr(),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
@@ -72,9 +74,9 @@ class _DoctorCard extends StatelessWidget {
         final shouldOpenChat = await context.pushNamed(
           Routes.doctorDetailsScreenForPatient,
           arguments: {
-            'doctor': doctor,
-            'patient': patient,
-            'conversation': conversation,
+            'doctor'.tr(): doctor,
+            'patient'.tr(): patient,
+            'conversation'.tr(): conversation,
           },
         );
         if (shouldOpenChat == true) {
@@ -133,11 +135,11 @@ class _DoctorCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
-                  children: const [
+                  children: [
                     Icon(Icons.mark_chat_unread, color: Colors.white, size: 12),
                     SizedBox(width: 4),
                     Text(
-                      "New",
+                      'New'.tr(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 10,
@@ -203,7 +205,7 @@ class _DoctorInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Dr. $name',
+            'Dr. $name'.tr(),
             style: getSemiBoldTextStyle(
               fontSize: FontSizeManager.s16,
               color: ColorsManager.darkBlue,

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -38,16 +40,16 @@ class DoctorDetailsSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InfoTile(icon: Icons.email, label: 'Email', value: doctor.email),
+            InfoTile(icon: Icons.email, label: 'Email'.tr(), value: doctor.email),
             SizedBox(height: HeightManager.h16),
 
-            InfoTile(icon: Icons.phone, label: 'Phone', value: doctor.phone),
+            InfoTile(icon: Icons.phone, label: 'Phone'.tr(), value: doctor.phone),
             SizedBox(height: HeightManager.h16),
 
             InfoTile(
               icon: Icons.work_history,
-              label: 'Experience',
-              value: '${doctor.experience} years',
+              label: 'Experience'.tr(),
+              value: '${doctor.experience} years'.tr(),
             ),
             SizedBox(height: HeightManager.h16),
 
@@ -56,7 +58,7 @@ class DoctorDetailsSection extends StatelessWidget {
 
             InfoTile(
               icon: Icons.info_outline,
-              label: 'Description',
+              label: 'Description'.tr(),
               value: doctor.description,
               isMultiLine: true,
             ),
@@ -64,10 +66,10 @@ class DoctorDetailsSection extends StatelessWidget {
 
             InfoTile(
               icon:
-                  doctor.gender.toLowerCase() == 'male'
+                  doctor.gender.toLowerCase() == 'male'.tr()
                       ? Icons.male
                       : Icons.female,
-              label: 'Gender',
+              label: 'Gender'.tr(),
               value: doctor.gender,
             ),
           ],
@@ -91,7 +93,7 @@ class DoctorDetailsSection extends StatelessWidget {
               const Icon(Icons.people, color: ColorsManager.primaryColor, size: 28),
               SizedBox(width: WidthManager.w16),
               Text(
-                'Patients Count',
+                'Patients Count'.tr(),
                 style: getSemiBoldTextStyle(
                   fontSize: FontSizeManager.s15,
                   color: ColorsManager.primaryColor,
@@ -99,7 +101,7 @@ class DoctorDetailsSection extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '$count',
+                '$count'.tr(),
                 style: getBoldTextStyle(
                   fontSize: FontSizeManager.s16,
                   color: ColorsManager.primaryColor,

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -13,7 +15,7 @@ class HealthTipsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isSick =
-        patient.isExamined && patient.healthStatus.toLowerCase() == "sick";
+        patient.isExamined && patient.healthStatus.toLowerCase() == 'sick'.tr();
     final tips = isSick ? _getLeukemiaTips() : _getGeneralTips();
 
     final primaryColor = isSick ? Colors.deepPurple : Colors.green.shade700;
@@ -26,7 +28,7 @@ class HealthTipsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Helpful Health Tips",
+          'Helpful Health Tips'.tr(),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
@@ -61,8 +63,8 @@ class HealthTipsWidget extends StatelessWidget {
                   /// العنوان داخل الكارد
                   Text(
                     isSick
-                        ? 'Tips for Managing Leukemia'
-                        : '🎉 Congratulations! Stay Healthy',
+                        ? 'Tips for Managing Leukemia'.tr()
+                        : '🎉 Congratulations! Stay Healthy'.tr(),
                     style: getBoldTextStyle(
                       fontSize: FontSizeManager.s16,
                       color: primaryColor,
@@ -139,13 +141,13 @@ class HealthTipsWidget extends StatelessWidget {
 
   List<HealthTipItem> _getGeneralTips() {
     return [
-      HealthTipItem(Icons.emoji_events, "You are healthy! Keep it up!"),
-      HealthTipItem(Icons.local_drink, "Drink plenty of water every day."),
+      HealthTipItem(Icons.emoji_events, 'You are healthy! Keep it up!'.tr()),
+      HealthTipItem(Icons.local_drink, 'Drink plenty of water every day.'.tr()),
       HealthTipItem(
         Icons.restaurant,
-        "Eat a balanced diet full of vegetables and fruits.",
+        'Eat a balanced diet full of vegetables and fruits.'.tr(),
       ),
-      HealthTipItem(Icons.directions_run, "Exercise regularly and sleep well."),
+      HealthTipItem(Icons.directions_run, 'Exercise regularly and sleep well.'.tr()),
     ];
   }
 
@@ -153,23 +155,23 @@ class HealthTipsWidget extends StatelessWidget {
     return [
       HealthTipItem(
         Icons.health_and_safety,
-        "Take your medications on time and avoid skipping doses.",
+        'Take your medications on time and avoid skipping doses.'.tr(),
       ),
       HealthTipItem(
         Icons.food_bank,
-        "Consume high-protein, high-calorie meals to maintain energy.",
+        'Consume high-protein, high-calorie meals to maintain energy.'.tr(),
       ),
       HealthTipItem(
         Icons.clean_hands,
-        "Wash your hands frequently to avoid infections.",
+        'Wash your hands frequently to avoid infections.'.tr(),
       ),
       HealthTipItem(
         Icons.masks,
-        "Avoid crowded areas and wear a mask when needed.",
+        'Avoid crowded areas and wear a mask when needed.'.tr(),
       ),
       HealthTipItem(
         Icons.support,
-        "Stay in contact with your doctor and report any new symptoms.",
+        'Stay in contact with your doctor and report any new symptoms.'.tr(),
       ),
     ];
   }

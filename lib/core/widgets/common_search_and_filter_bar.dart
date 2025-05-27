@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
@@ -12,7 +13,7 @@ class CommonSearchAndFilterBar extends StatelessWidget {
     required this.searchController,
     required this.onActionPressed,
     required this.actionIcon,
-    this.hintText = 'Search by name or email',
+    this.hintText = 'search_by_name_or_email',
   });
 
   @override
@@ -26,7 +27,7 @@ class CommonSearchAndFilterBar extends StatelessWidget {
               controller: searchController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: hintText,
+                hintText: hintText.tr(),
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: WidthManager.w16,
                   vertical: HeightManager.h12,

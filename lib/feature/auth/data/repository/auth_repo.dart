@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
@@ -49,14 +51,14 @@ class AuthRepository {
                 final correctType = doc['userType'] ?? type;
                 await FirebaseAuth.instance.signOut();
                 return OperationResult.failure(
-                  "You are trying to login in the wrong page. Go to the $correctType page.",
+                  'You are trying to login in the wrong page. Go to the $correctType page.'.tr(),
                 );
               }
             }
 
             await FirebaseAuth.instance.signOut();
             return OperationResult.failure(
-              "This user is not registered on our servers.",
+              'This user is not registered on our servers.'.tr(),
             );
           }
 
@@ -64,7 +66,7 @@ class AuthRepository {
           if (storedUserType != userType) {
             await FirebaseAuth.instance.signOut();
             return OperationResult.failure(
-              "You are trying to login in the wrong page. Go to the $storedUserType page.",
+              'You are trying to login in the wrong page. Go to the $storedUserType page.'.tr(),
             );
           }
 
@@ -76,13 +78,13 @@ class AuthRepository {
         }
       }
 
-      return OperationResult.failure("User not found.");
+      return OperationResult.failure('User not found.'.tr());
     } on FirebaseAuthException catch (e) {
       final errorMessage = FirebaseErrorHandler.handle(e);
       return OperationResult.failure(errorMessage);
     } catch (e) {
       return OperationResult.failure(
-        "An unexpected error occurred: ${e.toString()}",
+        'An unexpected error occurred: ${e.toString()}'.tr(),
       );
     }
   }
@@ -94,7 +96,7 @@ class AuthRepository {
 
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        return OperationResult.failure("User canceled the login");
+        return OperationResult.failure('User canceled the login'.tr());
       }
 
       final GoogleSignInAuthentication googleAuth =
@@ -132,22 +134,22 @@ class AuthRepository {
                 final correctType = doc['userType'] ?? type;
                 await FirebaseAuth.instance.signOut();
                 return OperationResult.failure(
-                  "You are trying to login in the wrong page. Go to the $correctType page.",
+                  'You are trying to login in the wrong page. Go to the $correctType page.'.tr(),
                 );
               }
             }
 
             await FirebaseAuth.instance.signOut();
             return OperationResult.failure(
-              "This user is not registered on our servers.",
+              'This user is not registered on our servers.'.tr(),
             );
           }
 
-          String storedUserType = userDoc["userType"] ?? "";
+          String storedUserType = userDoc['userType'] ?? "";
           if (storedUserType != userType) {
             await _auth.signOut();
             return OperationResult.failure(
-              "You are trying to login in the wrong page. Go to the $storedUserType page.",
+              'You are trying to login in the wrong page. Go to the $storedUserType page.'.tr(),
             );
           }
 
@@ -158,11 +160,11 @@ class AuthRepository {
           return _handleEmailVerification(user);
         }
       } else {
-        return OperationResult.failure("Failed to sign in with Google.");
+        return OperationResult.failure('Failed to sign in with Google.'.tr());
       }
     } catch (e) {
       return OperationResult.failure(
-        "An error occurred during Google sign-in: ${e.toString()}",
+        'An error occurred during Google sign-in: ${e.toString()}'.tr(),
       );
     }
   }
@@ -172,23 +174,23 @@ class AuthRepository {
       await FirebaseAuth.instance.signOut();
       await SharedPrefHelper.clearAllData();
     } catch (e) {
-      throw Exception("Error signing out: $e");
+      throw Exception('Error signing out: $e'.tr());
     }
   }
   
   Future<OperationResult<User?>> _handleEmailVerification(User user) async {
     final prefs = await SharedPreferences.getInstance();
-    bool emailSent = prefs.getBool('email_sent') ?? false;
+    bool emailSent = prefs.getBool('email_sent'.tr()) ?? false;
 
     if (!emailSent) {
       await user.sendEmailVerification();
-      await prefs.setBool('email_sent', true);
+      await prefs.setBool('email_sent'.tr(), true);
       return OperationResult.failure(
-        "Please verify your email. A verification link has been sent.",
+        'Please verify your email. A verification link has been sent.'.tr(),
       );
     } else {
       return OperationResult.failure(
-        "Please verify your email. A verification link has already been sent.",
+        'Please verify your email. A verification link has already been sent.'.tr(),
       );
     }
   }

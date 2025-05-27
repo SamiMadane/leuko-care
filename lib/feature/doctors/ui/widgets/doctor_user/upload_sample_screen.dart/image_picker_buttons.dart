@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -21,7 +23,7 @@ class ImagePickerButtons extends StatelessWidget {
           ),
           icon: Icon(Icons.image_outlined, color: ColorsManager.white),
           label: Text(
-            "From Gallery",
+            'From Gallery'.tr(),
             style: getMediumTextStyle(
               fontSize: FontSizeManager.s14,
               color: ColorsManager.white,
@@ -35,7 +37,7 @@ class ImagePickerButtons extends StatelessWidget {
           ),
           icon: Icon(Icons.camera_alt, color: ColorsManager.white),
           label: Text(
-            "Use Camera",
+            'Use Camera'.tr(),
             style: getMediumTextStyle(
               fontSize: FontSizeManager.s14,
               color: ColorsManager.white,

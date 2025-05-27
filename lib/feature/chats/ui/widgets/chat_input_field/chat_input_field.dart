@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -170,13 +172,13 @@ void _sendMessage() {
       context: context,
       builder:
           (_) => AlertDialog(
-            title: const Text('Choose an option'),
+            title:  Text('Choose an option'.tr()),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
                   leading: const Icon(Icons.camera_alt),
-                  title: const Text('Camera'),
+                  title:  Text('Camera'.tr()),
                   onTap: () {
                     Navigator.pop(context);
                     _pickImage(ImageSource.camera);
@@ -184,7 +186,7 @@ void _sendMessage() {
                 ),
                 ListTile(
                   leading: const Icon(Icons.image),
-                  title: const Text('Gallery'),
+                  title:  Text('Gallery'.tr()),
                   onTap: () {
                     Navigator.pop(context);
                     _pickImage(ImageSource.gallery);

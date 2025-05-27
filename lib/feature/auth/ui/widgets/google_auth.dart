@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
@@ -20,7 +22,7 @@ class GoogleAuth extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: WidthManager.w8),
               child: Text(
-                'Or login with',
+                'Or login with'.tr(),
                 style: getRegularTextStyle(
                   fontSize: FontSizeManager.s14,
                   color: ColorsManager.gray,
@@ -60,7 +62,7 @@ class GoogleAuth extends StatelessWidget {
                 ),
                 SizedBox(width: WidthManager.w10),
                 Text(
-                  'Sign in with Google',
+                  'Sign in with Google'.tr(),
                   style: getMediumTextStyle(
                     fontSize: FontSizeManager.s14,
                     color: ColorsManager.black,

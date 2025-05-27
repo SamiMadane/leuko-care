@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -33,7 +35,7 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
       backgroundColor: ColorsManager.white,
       appBar: AppBar(
         title: Text(
-          'Doctor Details',
+          'Doctor Details'.tr(),
           style: getMediumTextStyle(
             fontSize: FontSizeManager.s20,
             color: ColorsManager.darkBlue,
@@ -54,7 +56,7 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
                   ProfileImageWidget(profileImageUrl: doctor.profileImage),
                   SizedBox(height: HeightManager.h12),
                   Text(
-                    'Dr. ${doctor.name}',
+                    'Dr. ${doctor.name}'.tr(),
                     style: getBoldTextStyle(
                       fontSize: FontSizeManager.s20,
                       color: ColorsManager.darkBlue,
@@ -75,36 +77,36 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
               ),
 
             // Section: Contact Info
-            SectionTitle(title: 'Contact Info'),
+            SectionTitle(title: 'Contact Info'.tr()),
             ProfileInfoRow(
               icon: Icons.email,
-              title: 'Email',
+              title: 'Email'.tr(),
               value: doctor.email,
             ),
             ProfileInfoRow(
               icon: Icons.phone,
-              title: 'Phone',
+              title: 'Phone'.tr(),
               value: doctor.phone,
             ),
 
             // Section: Professional Info
-            SectionTitle(title: 'Professional Info'),
+            SectionTitle(title: 'Professional Info'.tr()),
             ProfileInfoRow(
               icon: Icons.work_outline,
-              title: 'Experience',
-              value: '${doctor.experience} years',
+              title: 'Experience'.tr(),
+              value: '${doctor.experience} years'.tr(),
             ),
             ProfileInfoRow(
               icon:
-                  doctor.gender.toLowerCase() == 'male'
+                  doctor.gender.toLowerCase() == 'male'.tr()
                       ? Icons.male
                       : Icons.female,
-              title: 'Gender',
+              title: 'Gender'.tr(),
               value: doctor.gender,
             ),
 
             // Section: About
-            SectionTitle(title: 'About'),
+            SectionTitle(title: 'About'.tr()),
             AboutBoxWidget(description: doctor.description),
 
             SizedBox(height: HeightManager.h24),

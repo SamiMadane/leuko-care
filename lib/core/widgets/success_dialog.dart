@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -26,7 +27,7 @@ class SuccessDialog extends StatelessWidget {
         TextButton(
           onPressed: onSuccess,
           child: Text(
-            'Got it',
+            'Got it'.tr(),
             style: getSemiBoldTextStyle(
               fontSize: FontSizeManager.s14,
               color: ColorsManager.primaryColor,

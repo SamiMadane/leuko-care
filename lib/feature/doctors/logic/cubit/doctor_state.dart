@@ -1,3 +1,4 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';

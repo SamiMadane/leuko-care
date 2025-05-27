@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -29,7 +30,7 @@ class DiseaseStatisticsTable extends StatelessWidget {
                     horizontal: WidthManager.w8,
                   ),
                   child: Text(
-                    'Leukemia Type',
+                    'Leukemia Type'.tr(),
                     style: getBoldTextStyle(
                       fontSize: FontSizeManager.s14,
                       color: ColorsManager.darkBlue,
@@ -41,11 +42,13 @@ class DiseaseStatisticsTable extends StatelessWidget {
                     vertical: HeightManager.h8,
                     horizontal: WidthManager.w8,
                   ),
-                  child: Text(
-                    'Number of cases',
-                    style: getBoldTextStyle(
-                      fontSize: FontSizeManager.s14,
-                      color: ColorsManager.darkBlue,
+                  child: Center(
+                    child: Text(
+                      'Number of cases'.tr(),
+                      style: getBoldTextStyle(
+                        fontSize: FontSizeManager.s14,
+                        color: ColorsManager.darkBlue,
+                      ),
                     ),
                   ),
                 ),

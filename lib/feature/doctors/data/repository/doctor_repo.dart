@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -48,23 +50,23 @@ class DoctorRepository {
   Future<void> addDoctor(DoctorModel doctor) async {
     try {
       // After click on add doctor we change userType for doctor.
-      doctor = doctor.copyWith(userType: "doctor");
+      doctor = doctor.copyWith(userType: 'doctor');
       await firestore.collection('doctors').doc(doctor.id).set(doctor.toJson());
     } catch (e) {
-      throw Exception("Error saving doctor data: ${e.toString()}");
+      throw Exception('Error saving doctor data: ${e.toString()}'.tr());
     }
   }
 
   Future<void> updateDoctor(DoctorModel doctor) async {
     try {
       // After click on update doctor we change userType for doctor.
-      doctor = doctor.copyWith(userType: "doctor");
+      doctor = doctor.copyWith(userType: 'doctor');
       await firestore
           .collection('doctors')
           .doc(doctor.id)
           .update(doctor.toJson());
     } catch (e) {
-      throw Exception("Error update doctor data: ${e.toString()}");
+      throw Exception('Error update doctor data: ${e.toString()}'.tr());
     }
   }
 
@@ -84,7 +86,7 @@ class DoctorRepository {
       }
       await doctorRef.delete();
     } catch (e) {
-      throw Exception('Error deleting doctor and patients: $e');
+      throw Exception('Error deleting doctor and patients: $e'.tr());
     }
   }
 
@@ -114,7 +116,7 @@ class DoctorRepository {
     if (response.statusCode == 200) {
       return result['secure_url']; // رابط الصورة المرفوعة
     } else {
-      throw Exception('Error uploading image: ${result['error']}');
+      throw Exception('Error uploading image: ${result['error']}'.tr());
     }
   }
 

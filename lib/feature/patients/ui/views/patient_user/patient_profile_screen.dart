@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -27,7 +29,7 @@ class PatientProfileScreen extends StatelessWidget {
           children: [
             SizedBox(width: WidthManager.w8),
             Text(
-              'My Profile',
+              'My Profile'.tr(),
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -44,10 +46,10 @@ class PatientProfileScreen extends StatelessWidget {
               context.pushNamed(
                 Routes.addUpdatePatientScreen,
                 arguments: {
-                  'patientModel': patient,
-                  'userType': 'patient',
-                  'doctorId': patient.doctorId,
-                  'doctorName': '',
+                  'patientModel'.tr(): patient,
+                  'userType'.tr(): 'patient'.tr(),
+                  'doctorId'.tr(): patient.doctorId,
+                  'doctorName'.tr(): '',
                 },
               );
             },
@@ -76,35 +78,35 @@ class PatientProfileScreen extends StatelessWidget {
               ),
             ),
 
-            SectionTitle(title: 'Contact Info'),
+            SectionTitle(title: 'Contact Info'.tr()),
             ProfileInfoRow(
               icon: Icons.email,
-              title: 'Email',
+              title: 'Email'.tr(),
               value: patient.email,
             ),
             ProfileInfoRow(
               icon: Icons.phone,
-              title: 'Phone',
+              title: 'Phone'.tr(),
               value: patient.phone,
             ),
 
-            SectionTitle( title: 'Personal Info',),
+            SectionTitle( title: 'Personal Info'.tr(),),
             ProfileInfoRow(
               icon: Icons.date_range,
-              title: 'Birth Date',
+              title: 'Birth Date'.tr(),
               value: patient.birthDate,
             ),
             ProfileInfoRow(
               icon: Icons.cake,
-              title: 'Age',
+              title: 'Age'.tr(),
               value: age.toString(),
             ),
             ProfileInfoRow(
               icon:
-                  patient.gender.toLowerCase() == 'male'
+                  patient.gender.toLowerCase() == 'male'.tr()
                       ? Icons.male
                       : Icons.female,
-              title: 'Gender',
+              title: 'Gender'.tr(),
               value: patient.gender,
             ),
 

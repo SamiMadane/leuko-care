@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/info_tile.dart';
@@ -38,24 +39,24 @@ class PatientDetailsSection extends StatelessWidget {
         ],
       ),
       child: SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: userType == 'doctor' ? MediaQuery.of(context).padding.bottom + HeightManager.h30 : 0),
+          padding: EdgeInsets.only(bottom: userType == 'doctor'.tr() ? MediaQuery.of(context).padding.bottom + HeightManager.h30 : 0),
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
         
-            InfoTile(icon: Icons.email, label: 'Email', value: patient.email),
+            InfoTile(icon: Icons.email, label: 'Email'.tr(), value: patient.email),
             SizedBox(height: HeightManager.h16),
         
-            InfoTile(icon: Icons.phone, label: 'Phone', value: patient.phone),
+            InfoTile(icon: Icons.phone, label: 'Phone'.tr(), value: patient.phone),
             SizedBox(height: HeightManager.h16),
         
-            InfoTile(icon: Icons.calendar_today, label: 'Age', value: '$age years'),
+            InfoTile(icon: Icons.calendar_today, label: 'Age'.tr(), value: '$age years'.tr()),
             SizedBox(height: HeightManager.h16),
         
             InfoTile(
               icon: Icons.check_circle_outline,
-              label: 'Examined',
+              label: 'Examined'.tr(),
               valueWidget: ExaminedStatusWidget(isExamined: patient.isExamined),
             ),
             SizedBox(height: HeightManager.h16),
@@ -63,28 +64,28 @@ class PatientDetailsSection extends StatelessWidget {
             if (patient.isExamined) ...[
               InfoTile(
                 icon: Icons.health_and_safety,
-                label: 'Health Status',
+                label: 'Health Status'.tr(),
                 valueWidget: HealthStatusWidget(status: patient.healthStatus),
               ),
               SizedBox(height: HeightManager.h16),
         
               InfoTile(
                 icon: Icons.bloodtype,
-                label: 'Leukemia Type',
+                label: 'Leukemia Type'.tr(),
                 value: patient.leukemiaType,
               ),
               SizedBox(height: HeightManager.h16),
         
               InfoTile(
                 icon: Icons.percent,
-                label: 'Disease Confidence',
-                value: '${patient.diseaseConfidence.toStringAsFixed(1)}%',
+                label: 'Disease Confidence'.tr(),
+                value: '${patient.diseaseConfidence.toStringAsFixed(1)}%'.tr(),
               ),
               SizedBox(height: HeightManager.h16),
         
               InfoTile(
                 icon: Icons.medical_services_outlined,
-                label: 'Last Exam Date',
+                label: 'Last Exam Date'.tr(),
                 value: _formatDate(patient.lastExamDate!),
               ),
               SizedBox(height: HeightManager.h16),
@@ -92,14 +93,14 @@ class PatientDetailsSection extends StatelessWidget {
         
             InfoTile(
               icon: Icons.date_range,
-              label: 'Registration Date',
+              label: 'Registration Date'.tr(),
               value: _formatDate(patient.registrationDate),
             ),
             SizedBox(height: HeightManager.h16),
         
             InfoTile(
-              icon: patient.gender.toLowerCase() == 'male' ? Icons.male : Icons.female,
-              label: 'Gender',
+              icon: patient.gender.toLowerCase() == 'male'.tr() ? Icons.male : Icons.female,
+              label: 'Gender'.tr(),
               value: patient.gender,
             ),
           ],

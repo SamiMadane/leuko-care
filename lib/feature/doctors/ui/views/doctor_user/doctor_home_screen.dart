@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/home_top_widget.dart';
@@ -23,7 +25,7 @@ class DoctorHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final totalPatients = patients.length;
     final pending = patients.where((p) => !p.isExamined).length;
-    final allLeukemiaTypes = ['AML', 'CML', 'ALL', 'CLL'];
+    final allLeukemiaTypes = ['AML'.tr(), 'CML'.tr(), 'ALL'.tr(), 'CLL'.tr()];
 
     final Map<String, int> diseaseCounts = {
       for (var type in allLeukemiaTypes) type: 0,
@@ -43,9 +45,9 @@ class DoctorHomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HomeTopWidget(
-              name: "Dr. ${doctor.name}",
+              name: 'Dr. ${doctor.name}'.tr(),
               imageUrl: doctor.profileImage,
-              subMessage: "Your patients at a glance.",
+              subMessage: 'Your patients at a glance.'.tr(),
             ),
             SizedBox(height: HeightManager.h24),
             StatsCardsSection(total: totalPatients, pending: pending),

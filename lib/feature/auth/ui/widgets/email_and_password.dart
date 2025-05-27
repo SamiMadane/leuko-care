@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
@@ -55,12 +57,12 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         children: [
           AppTextFormField(
             controller: context.read<AuthCubit>().emailController,
-            labelText: 'Email',
+            labelText: 'Email'.tr(),
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
                   !AppRegex.isEmailValid(value)) {
-                return 'Please enter a valid email';
+                return 'Please enter a valid email'.tr();
               }
               return null;
             },
@@ -68,7 +70,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           SizedBox(height: HeightManager.h18),
           AppTextFormField(
             controller: context.read<AuthCubit>().passwordController,
-            labelText: 'Password',
+            labelText: 'Password'.tr(),
             backgroundColor: ColorsManager.moreLightGray,
             isObscureText: isObscureText,
             suffixIcon: GestureDetector(
@@ -85,7 +87,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               if (value == null ||
                   value.isEmpty ||
                   !AppRegex.isPasswordValid(value)) {
-                return 'Please enter a valid password';
+                return 'Please enter a valid password'.tr();
               }
               return null;
             },

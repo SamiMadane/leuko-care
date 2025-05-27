@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
@@ -66,9 +67,9 @@ class HomeTopWidget extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (_) => ConfirmationDialog(
-                      title: 'Confirm Sign Out',
-                      message: 'Are you sure you want to sign out?',
-                      confirmText: 'Sign Out',
+                      title: 'Confirm Sign Out'.tr(),
+                      message: 'Are you sure you want to sign out?'.tr(),
+                      confirmText: 'Sign Out'.tr(),
                       onConfirmed: () {
                         cubit.signOut();
                         context.pop();
