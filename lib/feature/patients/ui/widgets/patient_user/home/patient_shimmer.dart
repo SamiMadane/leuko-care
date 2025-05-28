@@ -133,14 +133,6 @@ class HomeTopShimmer extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: WidthManager.w80,
-            right: WidthManager.w20,
-          ),
-
-          child: Divider(color: ColorsManager.lightGray, thickness: 1),
-        ),
       ],
     );
   }

@@ -28,7 +28,7 @@ class PatientHomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HomeTopWidget(name: patient.name, imageUrl: patient.profileImage),
+          HomeTopWidget(name: patient.name, imageUrl: patient.profileImage, subMessage: 'Your health matters most',),
           SizedBox(height: HeightManager.h20),
           Row(
             children: [

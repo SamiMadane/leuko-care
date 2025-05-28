@@ -21,7 +21,7 @@ class HealthInfoWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: HeightManager.h16,
-        horizontal: WidthManager.w16,
+        horizontal: WidthManager.w12,
       ),
       decoration: BoxDecoration(
         color: ColorsManager.white,

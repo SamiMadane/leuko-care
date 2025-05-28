@@ -46,7 +46,7 @@ class HealthOverviewWidget extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: HeightManager.h16,
-            crossAxisSpacing: WidthManager.w16,
+            crossAxisSpacing: WidthManager.w12,
             childAspectRatio: 1,
           ),
           itemBuilder: (context, index) {

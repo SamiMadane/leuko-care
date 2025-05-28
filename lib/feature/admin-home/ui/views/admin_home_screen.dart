@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/home_top_widget.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctor_department/doctor_department_bloc_builder.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department/patients_department_bloc_builder.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_blue_container.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/doctors_department_see_all.dart';
-import 'package:leuko_care/feature/admin-home/ui/widgets/home_top_bar.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department_see_all.dart';
 
 class AdminHomeScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class AdminHomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HomeTopBar(),
+              const HomeTopWidget(name: 'Admin', subMessage: 'How Are you Today?',),
               const DoctorsBlueContainer(),
               SizedBox(height: HeightManager.h24),
               const DoctorsDepartmentSeeAll(),

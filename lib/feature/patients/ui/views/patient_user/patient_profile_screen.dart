@@ -40,19 +40,24 @@ class PatientProfileScreen extends StatelessWidget {
         backgroundColor: ColorsManager.appBarColor,
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.edit, color: ColorsManager.primaryColor),
-            onPressed: () {
-              context.pushNamed(
-                Routes.addUpdatePatientScreen,
-                arguments: {
-                  'patientModel': patient,
-                  'userType': 'patient'.tr(),
-                  'doctorId': patient.doctorId,
-                  'doctorName': '',
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.edit, color: ColorsManager.primaryColor),
+                onPressed: () {
+                  context.pushNamed(
+                    Routes.addUpdatePatientScreen,
+                    arguments: {
+                      'patientModel': patient,
+                      'userType': 'patient'.tr(),
+                      'doctorId': patient.doctorId,
+                      'doctorName': '',
+                    },
+                  );
                 },
-              );
-            },
+              ),
+              SizedBox(width: WidthManager.w4,)
+            ],
           ),
         ],
       ),

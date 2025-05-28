@@ -31,5 +31,5 @@ String formatTimestampWithElapsed(DateTime time) {
   }
 
   final clock = '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-  return '${'last_message_was'.tr()} $elapsed • $clock';
+  return '$elapsed • $clock';
 }
