@@ -12,6 +12,7 @@ class MedicalTipsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     final tips = [
       {
         'icon': Icons.water_drop,

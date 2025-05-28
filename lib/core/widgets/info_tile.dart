@@ -62,6 +62,7 @@ class InfoTile extends StatelessWidget {
                       style: getRegularTextStyle(
                         fontSize: FontSizeManager.s13,
                         color: ColorsManager.black87,
+                        height: isMultiLine ? HeightManager.h1_3:0
                       ),
                       maxLines: isMultiLine ? null : 1,
                       overflow: isMultiLine

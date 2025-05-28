@@ -44,7 +44,7 @@ class HomeTopWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            tr('hi_with_name', namedArgs: {'name': name}),
+            tr('hi_with_name', namedArgs: {'name': tr(name)}),
             style: getBoldTextStyle(
               fontSize: FontSizeManager.s18,
               color: ColorsManager.darkBlue,
@@ -54,7 +54,7 @@ class HomeTopWidget extends StatelessWidget {
           ),
           SizedBox(height: HeightManager.h6),
           Text(
-            subMessage.tr(),
+            tr(subMessage),
             style: getMediumTextStyle(
               fontSize: FontSizeManager.s13,
               color: ColorsManager.gray,

@@ -14,13 +14,14 @@ class PatientsDepartmentSeeAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     // we use watch here to listen to the selectedDoctor state and rebuild the widget when it changes
     final selectedDoctor = context.watch<AdminHomeCubit>().selectedDoctor;
 
     return Row(
       children: [
         Text(
-          'Patients Department'.tr(),
+          tr('Patients_Department'),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
@@ -38,7 +39,7 @@ class PatientsDepartmentSeeAll extends StatelessWidget {
             );
           },
           child: Text(
-            'See All'.tr(),
+            tr('See_All'),
             style: getRegularTextStyle(
               fontSize: FontSizeManager.s14,
               color: ColorsManager.primaryColor,

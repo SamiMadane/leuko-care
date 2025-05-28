@@ -104,7 +104,7 @@ class PatientProfileScreen extends StatelessWidget {
             ProfileInfoRow(
               icon: Icons.cake,
               title: 'Age'.tr(),
-              value: age.toString(),
+              value: plural('years_count', age, namedArgs: {'count': age.toString()}),
             ),
             ProfileInfoRow(
               icon:

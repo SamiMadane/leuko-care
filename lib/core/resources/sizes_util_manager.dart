@@ -32,7 +32,7 @@ class RadiusManager {
 }
 
 class WidthManager {
-  static double wm4 = SizeUtil.setWidth(-4.0);
+  static double wm16 = SizeUtil.setWidth(-16.0);
   static double w0_9 = SizeUtil.setWidth(0.9);
   static double w1 = SizeUtil.setWidth(1.0);
   static double w1_5 = SizeUtil.setWidth(1.5);

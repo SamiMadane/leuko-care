@@ -19,7 +19,7 @@ class DoctorDetailsSection extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: HeightManager.h20,
-        horizontal: WidthManager.w20, 
+        horizontal: WidthManager.w20,
       ),
       decoration: BoxDecoration(
         color: ColorsManager.white,
@@ -40,16 +40,28 @@ class DoctorDetailsSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InfoTile(icon: Icons.email, label: 'Email'.tr(), value: doctor.email),
+            InfoTile(
+              icon: Icons.email,
+              label: 'Email'.tr(),
+              value: doctor.email,
+            ),
             SizedBox(height: HeightManager.h16),
 
-            InfoTile(icon: Icons.phone, label: 'Phone'.tr(), value: doctor.phone),
+            InfoTile(
+              icon: Icons.phone,
+              label: 'Phone'.tr(),
+              value: doctor.phone,
+            ),
             SizedBox(height: HeightManager.h16),
 
             InfoTile(
               icon: Icons.work_history,
               label: 'Experience'.tr(),
-              value: tr('years_experience', namedArgs: {'years': doctor.experience.toString()}),
+              value: plural(
+                'years_count',
+                doctor.experience,
+                namedArgs: {'count': doctor.experience.toString()},
+              ),
             ),
             SizedBox(height: HeightManager.h16),
 
@@ -70,27 +82,35 @@ class DoctorDetailsSection extends StatelessWidget {
                       ? Icons.male
                       : Icons.female,
               label: 'Gender'.tr(),
-              value: doctor.gender.toLowerCase().tr(),
+              value: doctor.gender.tr(),
             ),
           ],
         ),
       ),
     );
   }
- Widget _patientCountTile(BuildContext context, String doctorId) {
+
+  Widget _patientCountTile(BuildContext context, String doctorId) {
     return StreamBuilder<int>(
       stream: context.read<DoctorCubit>().getPatientsCountStream(doctorId),
       builder: (context, snapshot) {
         final count = snapshot.data ?? 0;
         return Container(
-          padding:  EdgeInsets.symmetric(vertical: HeightManager.h12, horizontal: WidthManager.w16),
+          padding: EdgeInsets.symmetric(
+            vertical: HeightManager.h12,
+            horizontal: WidthManager.w16,
+          ),
           decoration: BoxDecoration(
             color: ColorsManager.lightBlue,
             borderRadius: BorderRadius.circular(RadiusManager.r16),
           ),
           child: Row(
             children: [
-              const Icon(Icons.people, color: ColorsManager.primaryColor, size: 28),
+              const Icon(
+                Icons.people,
+                color: ColorsManager.primaryColor,
+                size: 28,
+              ),
               SizedBox(width: WidthManager.w16),
               Text(
                 'Patients Count'.tr(),

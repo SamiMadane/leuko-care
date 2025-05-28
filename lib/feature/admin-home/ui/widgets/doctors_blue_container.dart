@@ -83,8 +83,8 @@ class DoctorsBlueContainer extends StatelessWidget {
           Positioned(
             // عيّن الموضع حسب اتجاه اللغة
             right:
-                context.locale.languageCode == 'ar' ? null : WidthManager.wm4,
-            left: context.locale.languageCode == 'ar' ? WidthManager.wm4 : null,
+                context.locale.languageCode == 'ar' ? null : WidthManager.wm16,
+            left: context.locale.languageCode == 'ar' ? WidthManager.wm16 : null,
             top: HeightManager.h20,
             child: Image.asset(
               AssetsManager.homeAdminImage,

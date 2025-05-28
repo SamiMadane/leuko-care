@@ -13,10 +13,11 @@ class DoctorsDepartmentSeeAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     return Row(
       children: [
         Text(
-          'Doctors Department'.tr(),
+          tr('Doctors_Department'),
           style: getSemiBoldTextStyle(fontSize: FontSizeManager.s18, color: ColorsManager.darkBlue),
         ),
         const Spacer(),
@@ -25,7 +26,7 @@ class DoctorsDepartmentSeeAll extends StatelessWidget {
             context.pushNamed(Routes.allDoctorsScreen);
           },
           child: Text(
-            'See All'.tr(),
+            tr('See_All'),
             style: getRegularTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.primaryColor),
           ),
         ),

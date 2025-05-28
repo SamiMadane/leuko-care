@@ -12,7 +12,6 @@ class AdminHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -27,7 +26,7 @@ class AdminHomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HomeTopWidget(name: 'Admin', subMessage: 'How Are you Today?',),
+              HomeTopWidget(name: 'Admin', subMessage: 'How Are you Today?',),
               const DoctorsBlueContainer(),
               SizedBox(height: HeightManager.h24),
               const DoctorsDepartmentSeeAll(),
