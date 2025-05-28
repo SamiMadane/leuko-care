@@ -9,6 +9,7 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/user_selection/ui/widgets/build_selection_card.dart';
+import 'package:leuko_care/feature/user_selection/ui/widgets/language_switcher.dart';
 
 class UserSelectionScreen extends StatelessWidget {
   const UserSelectionScreen({super.key});
@@ -24,14 +25,14 @@ class UserSelectionScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: HeightManager.h20),
+              LanguageSwitcher(),
               Image.asset(
                 AssetsManager.logoImage,
-                height: HeightManager.h180,
-                width: WidthManager.w180,
+                height: HeightManager.h200,
+                width: WidthManager.w200,
                 fit: BoxFit.contain,
               ),
-              SizedBox(height: HeightManager.h20),
+              SizedBox(height: HeightManager.h10),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
@@ -71,7 +72,7 @@ class UserSelectionScreen extends StatelessWidget {
                           color: ColorsManager.darkBlue,
                         ),
                       ),
-                      SizedBox(height: HeightManager.h50),
+                      SizedBox(height: HeightManager.h40),
                       buildSelectionCard(
                         context,
                         imagePath: AssetsManager.userSelectionAdminImage,
@@ -105,7 +106,6 @@ class UserSelectionScreen extends StatelessWidget {
                             Routes.loginScreen,
                             arguments: 'patient',
                           );
-
                         },
                         positionedRight: WidthManager.w10,
                         positionedBottom: HeightManager.h4,

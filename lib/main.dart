@@ -21,7 +21,7 @@ void main() async{
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/lang', 
-      fallbackLocale: const Locale('ar'),
+      fallbackLocale: const Locale('en'),
       startLocale: startLocale,
       ignorePluralRules: false,
       child: LeukoAi(

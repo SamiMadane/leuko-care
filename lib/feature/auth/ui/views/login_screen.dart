@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                   top: HeightManager.h30,
                   right: WidthManager.w20,
                   left: WidthManager.w20,
-                  bottom: HeightManager.h100,
+                  bottom: HeightManager.h120,
                 ),
                 decoration: BoxDecoration(
                   color: ColorsManager.white,

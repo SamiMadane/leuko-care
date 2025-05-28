@@ -76,7 +76,7 @@ class SharedPrefHelper {
   /// Gets the app locale string (language code), returns 'ar' if not set
   static Future<String> getLocale() async {
     final locale = await getString(_keyLocale);
-    return locale.isEmpty ? 'ar' : locale;
+    return locale.isEmpty ? 'en' : locale;
   }
 
   /// Saves a [value] with a [key] in the FlutterSecureStorage.
