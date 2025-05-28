@@ -13,7 +13,11 @@ class PatientDetailsSection extends StatelessWidget {
   final PatientModel patient;
   final String? userType;
 
-  const PatientDetailsSection({super.key, required this.patient, this.userType});
+  const PatientDetailsSection({
+    super.key,
+    required this.patient,
+    this.userType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +43,45 @@ class PatientDetailsSection extends StatelessWidget {
         ],
       ),
       child: SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: userType == 'doctor'.tr() ? MediaQuery.of(context).padding.bottom + HeightManager.h30 : 0),
+        padding: EdgeInsets.only(
+          bottom:
+              userType == 'doctor'.tr()
+                  ? MediaQuery.of(context).padding.bottom + HeightManager.h30
+                  : 0,
+        ),
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-        
-            InfoTile(icon: Icons.email, label: 'Email'.tr(), value: patient.email),
+            InfoTile(
+              icon: Icons.email,
+              label: 'Email'.tr(),
+              value: patient.email,
+            ),
             SizedBox(height: HeightManager.h16),
-        
-            InfoTile(icon: Icons.phone, label: 'Phone'.tr(), value: patient.phone),
+
+            InfoTile(
+              icon: Icons.phone,
+              label: 'Phone'.tr(),
+              value: patient.phone,
+            ),
             SizedBox(height: HeightManager.h16),
-        
-            InfoTile(icon: Icons.calendar_today, label: 'Age'.tr(), value: '$age years'.tr()),
+
+            InfoTile(
+              icon: Icons.calendar_today,
+              label: 'Age'.tr(),
+              value: plural('years_count', age, namedArgs: {'count': age.toString()}),
+            ),
+
             SizedBox(height: HeightManager.h16),
-        
+
             InfoTile(
               icon: Icons.check_circle_outline,
               label: 'Examined'.tr(),
               valueWidget: ExaminedStatusWidget(isExamined: patient.isExamined),
             ),
             SizedBox(height: HeightManager.h16),
-        
+
             if (patient.isExamined) ...[
               InfoTile(
                 icon: Icons.health_and_safety,
@@ -68,40 +89,49 @@ class PatientDetailsSection extends StatelessWidget {
                 valueWidget: HealthStatusWidget(status: patient.healthStatus),
               ),
               SizedBox(height: HeightManager.h16),
-        
+
               InfoTile(
                 icon: Icons.bloodtype,
                 label: 'Leukemia Type'.tr(),
-                value: patient.leukemiaType,
+                value: patient.leukemiaType.tr(),
               ),
               SizedBox(height: HeightManager.h16),
-        
+
               InfoTile(
                 icon: Icons.percent,
                 label: 'Disease Confidence'.tr(),
                 value: '${patient.diseaseConfidence.toStringAsFixed(1)}%'.tr(),
               ),
               SizedBox(height: HeightManager.h16),
-        
+
               InfoTile(
                 icon: Icons.medical_services_outlined,
                 label: 'Last Exam Date'.tr(),
-                value: _formatDate(patient.lastExamDate!),
+                value: _formatDate(
+                  dateString: patient.lastExamDate!,
+                  context: context,
+                ),
               ),
               SizedBox(height: HeightManager.h16),
             ],
-        
+
             InfoTile(
               icon: Icons.date_range,
               label: 'Registration Date'.tr(),
-              value: _formatDate(patient.registrationDate),
+              value: _formatDate(
+                dateString: patient.registrationDate,
+                context: context,
+              ),
             ),
             SizedBox(height: HeightManager.h16),
-        
+
             InfoTile(
-              icon: patient.gender.toLowerCase() == 'male'.tr() ? Icons.male : Icons.female,
+              icon:
+                  patient.gender.toLowerCase() == 'male'.tr()
+                      ? Icons.male
+                      : Icons.female,
               label: 'Gender'.tr(),
-              value: patient.gender,
+              value: patient.gender.tr(),
             ),
           ],
         ),
@@ -109,10 +139,12 @@ class PatientDetailsSection extends StatelessWidget {
     );
   }
 
-  String _formatDate(String dateString) {
+  String _formatDate({required String dateString, BuildContext? context}) {
     try {
       final date = DateTime.parse(dateString);
-      return DateFormat.yMMMMd().format(date);
+      return context?.locale.languageCode == 'ar'
+          ? DateFormat.yMMMMd('ar').format(date)
+          : DateFormat.yMMMMd().format(date);
     } catch (_) {
       return dateString;
     }

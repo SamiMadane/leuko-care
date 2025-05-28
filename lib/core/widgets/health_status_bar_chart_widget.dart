@@ -109,7 +109,7 @@ class HealthStatusBarChart extends StatelessWidget {
           barGroups: filteredEntries.mapIndexed((index, entry) {
             final key = entry.key.toLowerCase();
             Color barColor;
-            if (key == 'sick') {
+            if (key == 'sick'.toLowerCase()) {
               barColor = Colors.redAccent;
             } else {
               barColor = Colors.green;
@@ -137,7 +137,7 @@ class HealthStatusBarChart extends StatelessWidget {
       case 'sick':
         return 'Sick'.tr();
       case 'healthy':
-        return 'healthy'.tr();
+        return 'Healthy'.tr();
       default:
         return key;
     }

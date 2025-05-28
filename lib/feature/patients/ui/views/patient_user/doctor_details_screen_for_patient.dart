@@ -94,7 +94,11 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
             ProfileInfoRow(
               icon: Icons.work_outline,
               title: 'Experience'.tr(),
-              value: '${doctor.experience} years'.tr(),
+              value: plural(
+                'years_count',
+                doctor.experience,
+                namedArgs: {'count': doctor.experience.toString()},
+              ),
             ),
             ProfileInfoRow(
               icon:
@@ -102,7 +106,7 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
                       ? Icons.male
                       : Icons.female,
               title: 'Gender'.tr(),
-              value: doctor.gender,
+              value: doctor.gender.tr(),
             ),
 
             // Section: About
@@ -130,7 +134,7 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
               top: 3,
               right: 3,
               child: Container(
-                padding:  EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   vertical: HeightManager.h6,
                   horizontal: WidthManager.w6,
                 ),
@@ -145,5 +149,4 @@ class DoctorDetailsScreenForPatient extends StatelessWidget {
       ),
     );
   }
-
 }

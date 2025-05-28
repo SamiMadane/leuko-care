@@ -38,6 +38,19 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
     _filteredPatients = widget.patients;
     _searchController.addListener(_filterPatients);
   }
+  @override
+void didUpdateWidget(covariant AllPaitentListView oldWidget) {
+  super.didUpdateWidget(oldWidget);
+  if (oldWidget.patients != widget.patients) {
+    _filteredPatients = PatientFilterHelper.filterPatients(
+      patients: widget.patients,
+      searchKeyword: _searchController.text,
+      filterBy: _filterBy,
+      selectedFilterValue: _selectedFilterValue,
+    );
+    setState(() {});
+  }
+}
 
   void _filterPatients() {
     final searchKeyword = _searchController.text;

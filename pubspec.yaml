@@ -49,8 +49,8 @@ dependencies:
   # An SVG rendering and widget library for Flutter, which allows painting 
   flutter_svg: ^2.0.17
   # Code generator (mainly used with cubit & retrofit)
-  freezed_annotation: ^3.0.0
-  freezed: ^3.0.6
+  freezed_annotation: ^2.4.1
+  freezed: ^2.4.6
   # for dependency injection
   get_it: ^8.0.3
   # localization
@@ -87,7 +87,6 @@ dependencies:
   screenshot: ^3.0.0
   rxdart: ^0.28.0
   flutter_launcher_icons: ^0.14.3
-  flutter_packages_remover: ^0.0.2
   flutter_en_json_extractor: ^0.0.4
   
 dev_dependencies:

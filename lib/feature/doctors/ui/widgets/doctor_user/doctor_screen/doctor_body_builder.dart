@@ -20,6 +20,8 @@ class DoctorBodyBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('🧩 DoctorBodyBuilder rebuilt with ${patients.length} patients');
+
     final cubit = context.read<DoctorCubit>();
 
     final pages = [

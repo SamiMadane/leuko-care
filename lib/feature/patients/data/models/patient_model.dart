@@ -96,13 +96,49 @@ class PatientModel {
   // Override equality to compare PatientModel objects by their ID only.
   // This is needed for DropdownButton in UploadSampleScreen to correctly
   // recognize the selected patient after navigating between screens.
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PatientModel &&
-          runtimeType == other.runtimeType &&
-          id == other.id;
+ @override
+bool operator ==(Object other) =>
+    identical(this, other) ||
+    other is PatientModel &&
+        runtimeType == other.runtimeType &&
+        id == other.id &&
+        name == other.name &&
+        email == other.email &&
+        phone == other.phone &&
+        profileImage == other.profileImage &&
+        doctorId == other.doctorId &&
+        userType == other.userType &&
+        isExamined == other.isExamined &&
+        registrationDate == other.registrationDate &&
+        healthStatus == other.healthStatus &&
+        birthDate == other.birthDate &&
+        leukemiaType == other.leukemiaType &&
+        diseaseConfidence == other.diseaseConfidence &&
+        aiNote == other.aiNote &&
+        latestSampleImageUrl == other.latestSampleImageUrl &&
+        lastExamDate == other.lastExamDate &&
+        gender == other.gender &&
+        fcmToken == other.fcmToken;
 
-  @override
-  int get hashCode => id.hashCode;
+@override
+int get hashCode =>
+    id.hashCode ^
+    name.hashCode ^
+    email.hashCode ^
+    phone.hashCode ^
+    profileImage.hashCode ^
+    doctorId.hashCode ^
+    userType.hashCode ^
+    isExamined.hashCode ^
+    registrationDate.hashCode ^
+    healthStatus.hashCode ^
+    birthDate.hashCode ^
+    leukemiaType.hashCode ^
+    diseaseConfidence.hashCode ^
+    (aiNote?.hashCode ?? 0) ^
+    (latestSampleImageUrl?.hashCode ?? 0) ^
+    (lastExamDate?.hashCode ?? 0) ^
+    gender.hashCode ^
+    (fcmToken?.hashCode ?? 0);
+
 }

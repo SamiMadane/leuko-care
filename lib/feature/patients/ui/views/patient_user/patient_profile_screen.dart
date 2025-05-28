@@ -46,10 +46,10 @@ class PatientProfileScreen extends StatelessWidget {
               context.pushNamed(
                 Routes.addUpdatePatientScreen,
                 arguments: {
-                  'patientModel'.tr(): patient,
-                  'userType'.tr(): 'patient'.tr(),
-                  'doctorId'.tr(): patient.doctorId,
-                  'doctorName'.tr(): '',
+                  'patientModel': patient,
+                  'userType': 'patient'.tr(),
+                  'doctorId': patient.doctorId,
+                  'doctorName': '',
                 },
               );
             },
@@ -107,7 +107,7 @@ class PatientProfileScreen extends StatelessWidget {
                       ? Icons.male
                       : Icons.female,
               title: 'Gender'.tr(),
-              value: patient.gender,
+              value: patient.gender.tr(),
             ),
 
             SizedBox(height: HeightManager.h24),

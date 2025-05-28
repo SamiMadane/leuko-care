@@ -23,6 +23,7 @@ void main() async{
       path: 'assets/lang', 
       fallbackLocale: const Locale('ar'),
       startLocale: startLocale,
+      ignorePluralRules: false,
       child: LeukoAi(
         appRouter: AppRouter(),
       ),

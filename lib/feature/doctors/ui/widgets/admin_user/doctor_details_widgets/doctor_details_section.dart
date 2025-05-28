@@ -49,7 +49,7 @@ class DoctorDetailsSection extends StatelessWidget {
             InfoTile(
               icon: Icons.work_history,
               label: 'Experience'.tr(),
-              value: '${doctor.experience} years'.tr(),
+              value: tr('years_experience', namedArgs: {'years': doctor.experience.toString()}),
             ),
             SizedBox(height: HeightManager.h16),
 
@@ -70,7 +70,7 @@ class DoctorDetailsSection extends StatelessWidget {
                       ? Icons.male
                       : Icons.female,
               label: 'Gender'.tr(),
-              value: doctor.gender,
+              value: doctor.gender.toLowerCase().tr(),
             ),
           ],
         ),

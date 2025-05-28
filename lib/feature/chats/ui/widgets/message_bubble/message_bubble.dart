@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
-
 import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/message_bubble/image_bubble.dart';
@@ -20,22 +18,20 @@ class MessageBubble extends StatelessWidget {
   void _showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder:
-          (_) => ConfirmationDialog(
-            title: 'Delete Message'.tr(),
-            message:
-                'Are you sure you want to delete this message for everyone?'.tr(),
-            confirmText: 'Delete'.tr(),
-            icon: Icons.delete,
-            onConfirmed: () {
-              context.read<ChatCubit>().deleteMessage(
+      builder: (_) => ConfirmationDialog(
+        title: 'Delete Message'.tr(),
+        message: 'Are you sure you want to delete this message for everyone?'.tr(),
+        confirmText: 'Delete'.tr(),
+        icon: Icons.delete,
+        onConfirmed: () {
+          context.read<ChatCubit>().deleteMessage(
                 senderId: message.senderId,
                 receiverId: message.receiverId,
                 messageId: message.id,
               );
-              Navigator.pop(context);
-            },
-          ),
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 
@@ -45,37 +41,41 @@ class MessageBubble extends StatelessWidget {
 
     return Align(
       alignment: alignment,
-      child: GestureDetector(
-        onLongPress: () {
-          if (isMe) _showDeleteDialog(context);
+      child: isMe
+          ? GestureDetector(
+              onLongPress: () => _showDeleteDialog(context),
+              child: _buildMessageContent(context),
+            )
+          : _buildMessageContent(context),
+    );
+  }
+
+  Widget _buildMessageContent(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        vertical: HeightManager.h6,
+        horizontal: WidthManager.w8,
+      ),
+      child: Builder(
+        builder: (_) {
+          if (message.text.isNotEmpty && message.attachmentUrl.isNotEmpty) {
+            return TextAndImageBubble(
+              message: message,
+              isMe: isMe,
+              onDelete: () => _showDeleteDialog(context),
+            );
+          } else if (message.text.isNotEmpty) {
+            return TextBubble(message: message, isMe: isMe);
+          } else if (message.attachmentUrl.isNotEmpty) {
+            return ImageBubble(
+              message: message,
+              isMe: isMe,
+              onDelete: () => _showDeleteDialog(context),
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
         },
-        child: Container(
-          margin: EdgeInsets.symmetric(
-            vertical: HeightManager.h6,
-            horizontal: WidthManager.w8,
-          ),
-          child: Builder(
-            builder: (_) {
-              if (message.text.isNotEmpty && message.attachmentUrl.isNotEmpty) {
-                return TextAndImageBubble(
-                  message: message,
-                  isMe: isMe,
-                  onDelete: () => _showDeleteDialog(context),
-                );
-              } else if (message.text.isNotEmpty) {
-                return TextBubble(message: message, isMe: isMe);
-              } else if (message.attachmentUrl.isNotEmpty) {
-                return ImageBubble(
-                  message: message,
-                  isMe: isMe,
-                  onDelete: () => _showDeleteDialog(context),
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
-          ),
-        ),
       ),
     );
   }

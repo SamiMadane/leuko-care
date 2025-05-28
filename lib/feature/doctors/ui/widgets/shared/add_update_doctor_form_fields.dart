@@ -192,14 +192,22 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
         AppTextFormField(
           controller: widget.experienceController,
           labelText: 'Experience'.tr(),
-          validator:
-              (value) =>
-                  value == null || value.isEmpty
-                      ? 'Enter Experience'.tr()
-                      : int.tryParse(value) == null
-                      ? 'Must be a number'.tr()
-                      : null,
+          keyboardType: TextInputType.number, // لإظهار لوحة مفاتيح الأرقام
+          validator: (value) {
+            if (value == null || value.trim().isEmpty) {
+              return 'Enter Experience'.tr();
+            }
+            final number = int.tryParse(value);
+            if (number == null) {
+              return 'Must be a number'.tr();
+            }
+            if (number < 0) {
+              return 'Experience cannot be negative'.tr(); // اختيارية
+            }
+            return null;
+          },
         ),
+
         SizedBox(height: HeightManager.h10),
         AppTextFormField(
           controller: widget.descriptionController,

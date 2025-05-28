@@ -6,7 +6,7 @@ part 'doctor_model.g.dart';
 class DoctorModel {
   final String? id;
   final String name;
-  final String experience;
+  final int experience;
   final String description;
   final String email;
   final String phone;
@@ -35,7 +35,7 @@ class DoctorModel {
   DoctorModel copyWith({
     String? id,
     String? name,
-    String? experience,
+    int? experience,
     String? description,
     String? email,
     String? phone,

@@ -19,7 +19,10 @@ class HealthInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(WidthManager.w16),
+      padding: EdgeInsets.symmetric(
+        vertical: HeightManager.h16,
+        horizontal: WidthManager.w16,
+      ),
       decoration: BoxDecoration(
         color: ColorsManager.white,
         borderRadius: BorderRadius.circular(RadiusManager.r16),

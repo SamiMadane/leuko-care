@@ -36,14 +36,14 @@ class ChatTopBar extends StatelessWidget {
           if (!canPop) SizedBox(width: WidthManager.w20),
 
           CircleAvatar(
-            radius: RadiusManager.r28,
+            radius: RadiusManager.r26,
             backgroundColor: Colors.transparent,
             backgroundImage: null,
             child: ClipOval(
               child: CachedNetworkImage(
                 imageUrl: imageUrl!,
-                width: WidthManager.w56,
-                height: HeightManager.h56,
+                width: WidthManager.w52,
+                height: HeightManager.h52,
                 fit: BoxFit.cover,
                 placeholder: (_, __) => _buildShimmerLoading(),
                 errorWidget:
@@ -72,7 +72,7 @@ class ChatTopBar extends StatelessWidget {
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(
-        radius: RadiusManager.r28,
+        radius: RadiusManager.r26,
         backgroundColor: Colors.white,
       ),
     );

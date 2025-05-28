@@ -25,7 +25,7 @@ class SampleFAB extends StatelessWidget {
 
     return ClipOval(
       child: FloatingActionButton(
-          heroTag: 'upload_sample_fab'.tr(),
+          heroTag: 'upload_sample_fab',
 
         backgroundColor: ColorsManager.primaryColor,
         child: Image.asset(
@@ -38,14 +38,14 @@ class SampleFAB extends StatelessWidget {
           context.pushNamed(
             Routes.sampleResultScreen,
             arguments: {
-              'patient'.tr(): patient!,
-              'doctor'.tr(): doctor,
-              'result'.tr(): 'sick'.tr(),
-              'diseaseType'.tr(): 'Acute Lymphoblastic Leukemia'.tr(),
-              'confidence'.tr(): 92.5,
-              'aiMessage'.tr():
+              'patient': patient!,
+              'doctor': doctor,
+              'result': 'sick'.tr(),
+              'diseaseType': 'Acute Lymphoblastic Leukemia'.tr(),
+              'confidence': 92.5,
+              'aiMessage':
                   'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'.tr(),
-              'sampleImageUrl'.tr():
+              'sampleImageUrl':
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
             },
           );

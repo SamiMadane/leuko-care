@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +17,8 @@ class DoctorCubit extends Cubit<DoctorState> {
   bool isAscending = false;
   int selectedIndex = 0;
   bool shouldInjectPatient = false;
+  StreamSubscription? _doctorAndPatientsSubscription;
+
 
   void getDoctorsStream() async {
     emit(GetDoctorStateLoading());
@@ -108,8 +109,10 @@ class DoctorCubit extends Cubit<DoctorState> {
     emit(DoctorBottomNavChanged(index));
   }
 
+
 void getDoctorAndPatients(String doctorId) {
   emit(const GetDoctorAndPatientsStateLoading());
+    _doctorAndPatientsSubscription?.cancel();
 
   try {
     // 1. جلب ستريم الدكتور
@@ -153,5 +156,11 @@ void getDoctorAndPatients(String doctorId) {
   }
 }
 
+@override
+Future<void> close() {
+  _doctorsSubscription?.cancel();
+  _doctorAndPatientsSubscription?.cancel();
+  return super.close();
+}
 
 }

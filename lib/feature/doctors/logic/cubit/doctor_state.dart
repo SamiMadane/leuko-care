@@ -42,6 +42,4 @@ const factory DoctorState.getDoctorAndPatientsStateSuccess({
   const factory DoctorState.doctorBottomNavChanged(int index) = DoctorBottomNavChanged;
 
 
-
-
 }

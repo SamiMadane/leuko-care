@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 // patient_chat_card.dart
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/helpers/time_formatter.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -157,51 +158,35 @@ class PatientChatCard extends StatelessWidget {
 
   Widget _buildTrailing(bool hasUnreadForDoctor, bool hasValidTime, DateTime? time) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+  crossAxisAlignment: CrossAxisAlignment.end,
+  children: [
+    Row(
       children: [
-        Row(
-          children: [
-            if (hasUnreadForDoctor)
-              Container(
-                width: 10,
-                height: 10,
-                margin: const EdgeInsets.only(right: 6),
-                decoration: const BoxDecoration(color: Colors.redAccent, shape: BoxShape.circle),
-              ),
-            SizedBox(width: WidthManager.w4),
-            Icon(Icons.arrow_forward_ios, size: HeightManager.h16, color: ColorsManager.gray),
-          ],
-        ),
-        SizedBox(height: HeightManager.h10),
+        if (hasUnreadForDoctor)
+          Container(
+            width: 10,
+            height: 10,
+            margin: const EdgeInsets.only(right: 6),
+            decoration: const BoxDecoration(color: Colors.redAccent, shape: BoxShape.circle),
+          ),
+          SizedBox(width: WidthManager.w8,),
         if (hasValidTime)
           Text(
-            _formatTimestampWithElapsed(time!),
+            formatTimestampWithElapsed(time!),
             style: getRegularTextStyle(
               fontSize: FontSizeManager.s12,
               color: ColorsManager.gray,
             ),
           ),
       ],
-    );
+    ),
+    SizedBox(height: HeightManager.h6),
+    Icon(Icons.arrow_forward_ios, size: HeightManager.h16, color: ColorsManager.gray),
+  ],
+);
+
   }
 
-  String _formatTimestampWithElapsed(DateTime time) {
-    final now = DateTime.now();
-    final diff = now.difference(time);
-    String elapsed;
-    if (diff.inDays > 7) {
-      elapsed = '${time.day}/${time.month}/${time.year}';
-    } else if (diff.inDays >= 1) {
-      elapsed = '${diff.inDays}d ago'.tr();
-    } else if (diff.inHours >= 1) {
-      elapsed = '${diff.inHours}h ago'.tr();
-    } else if (diff.inMinutes >= 1) {
-      elapsed = '${diff.inMinutes}m ago'.tr();
-    } else {
-      elapsed = 'now'.tr();
-    }
 
-    final clock = '${time.hour.toString().padLeft(2, '.tr()0')}:${time.minute.toString().padLeft(2, '.tr()0')}'.tr();
-    return '$elapsed • $clock'.tr();
-  }
+
 }

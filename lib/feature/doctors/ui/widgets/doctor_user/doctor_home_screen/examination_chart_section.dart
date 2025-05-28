@@ -26,8 +26,8 @@ class ExaminationChartSection extends StatelessWidget {
         SizedBox(height: HeightManager.h14),
         ExaminedStatusProgressWidget(
           data: {
-            'Examined'.tr(): total - pending,
-            'Unexamined'.tr(): pending,
+            'Examined': total - pending,
+            'Unexamined': pending,
           },
         ),
       ],

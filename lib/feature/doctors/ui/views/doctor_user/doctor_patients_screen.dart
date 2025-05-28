@@ -28,7 +28,7 @@ class DoctorPatientsScreen extends StatelessWidget {
             SizedBox(width: WidthManager.w8),
 
             Text(
-              'Patients of Dr. ${doctor.name}'.tr(),
+              tr('patients_of_doctor',namedArgs: {'name':doctor.name}),
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -43,7 +43,7 @@ class DoctorPatientsScreen extends StatelessWidget {
         patients: patients,
         doctorId: doctor.id!,
         doctorName: doctor.name,
-        userType: 'doctor'.tr(),
+        userType: 'doctor',
       ),
     );
   }

@@ -1,4 +1,3 @@
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'doctor_model.dart';
@@ -10,7 +9,7 @@ part of 'doctor_model.dart';
 DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
   id: json['id'] as String?,
   name: json['name'] as String,
-  experience: json['experience'] as String,
+  experience: (json['experience'] as num).toInt(),
   description: json['description'] as String,
   email: json['email'] as String,
   phone: json['phone'] as String,

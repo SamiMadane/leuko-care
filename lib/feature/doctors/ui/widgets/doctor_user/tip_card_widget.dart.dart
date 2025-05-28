@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 
 class TipCardWidget extends StatelessWidget {
@@ -19,19 +20,22 @@ class TipCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(
+        horizontal: WidthManager.w16,
+        vertical: HeightManager.h16,
+      ),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(RadiusManager.r12),
       ),
       child: Row(
         children: [
           Icon(icon, color: iconColor, size: 28),
-          const SizedBox(width: 16),
+          SizedBox(width: WidthManager.w16),
           Expanded(
             child: Text(
               text,
-              style: getRegularTextStyle(
+              style: getSemiBoldTextStyle(
                 fontSize: FontSizeManager.s14,
                 color: iconColor,
               ),

@@ -51,7 +51,7 @@ class HealthStatusWidget extends StatelessWidget {
       color = ColorsManager.darkOrange;
       icon = Icons.help_outline;
     } else if (status.toLowerCase() == 'healthy') {
-      displayText = 'Healthy';
+      displayText = 'Healthy'.tr();
       color = ColorsManager.darkGreen;
       icon = Icons.check_circle_outline; 
     } else {

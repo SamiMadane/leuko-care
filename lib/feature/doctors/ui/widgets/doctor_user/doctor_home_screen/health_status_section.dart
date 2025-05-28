@@ -14,8 +14,9 @@ class HealthStatusSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      final healthy = patients.where((p) => p.healthStatus == 'healthy'.tr()).length;
-    final sick = patients.where((p) => p.healthStatus == 'sick'.tr()).length;
+   
+    final healthy = patients.where((p) => p.isExamined && p.healthStatus.toLowerCase() == 'healthy').length;
+    final sick = patients.where((p) => p.isExamined && p.healthStatus.toLowerCase() == 'sick').length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,8 +30,8 @@ class HealthStatusSection extends StatelessWidget {
         SizedBox(height: HeightManager.h20),
         HealthStatusBarChart(
           data: {
-            'healthy'.tr(): healthy,
-            'sick'.tr(): sick,
+            'healthy': healthy,
+            'sick': sick,
           },
         ),
       ],

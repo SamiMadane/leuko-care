@@ -43,7 +43,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
       _nameController.text = widget.doctor!.name;
       _emailController.text = widget.doctor!.email;
       _phoneController.text = widget.doctor!.phone;
-      _experienceController.text = widget.doctor!.experience;
+      _experienceController.text = widget.doctor!.experience.toString(); 
       _descriptionController.text = widget.doctor!.description;
       _genderController.text = widget.doctor!.gender;
 
@@ -148,7 +148,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
         name: _nameController.text,
         email: _emailController.text,
         phone: _phoneController.text,
-        experience: _experienceController.text,
+        experience: int.tryParse(_experienceController.text) ?? 0,
         description: _descriptionController.text,
         profileImage: profileImageUrl ?? '',
         userType: '',

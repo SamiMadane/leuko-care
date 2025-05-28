@@ -14,24 +14,24 @@ class MedicalTipsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final tips = [
       {
-        'icon'.tr(): Icons.water_drop,
-        'text'.tr(): 'Drink enough water before taking a blood sample.'.tr(),
-        'color'.tr(): Colors.lightBlue,
+        'icon': Icons.water_drop,
+        'text': 'Drink enough water before taking a blood sample.'.tr(),
+        'color': Colors.lightBlue,
       },
       {
-        'icon'.tr(): Icons.bedtime,
-        'text'.tr(): 'Get proper sleep to improve immune function.'.tr(),
-        'color'.tr(): Colors.deepPurpleAccent,
+        'icon': Icons.bedtime,
+        'text': 'Get proper sleep to improve immune function.'.tr(),
+        'color': Colors.deepPurpleAccent,
       },
       {
-        'icon'.tr(): Icons.no_food,
-        'text'.tr(): 'Avoid eating heavy meals before blood tests.'.tr(),
-        'color'.tr(): Colors.orange,
+        'icon': Icons.no_food,
+        'text': 'Avoid eating heavy meals before blood tests.'.tr(),
+        'color': Colors.orange,
       },
       {
-        'icon'.tr(): Icons.fitness_center,
-        'text'.tr(): 'Encourage light exercise to boost circulation.'.tr(),
-        'color'.tr(): Colors.teal,
+        'icon': Icons.fitness_center,
+        'text': 'Encourage light exercise to boost circulation.'.tr(),
+        'color': Colors.teal,
       },
     ];
 
@@ -51,10 +51,10 @@ class MedicalTipsSection extends StatelessWidget {
             return Padding(
               padding:  EdgeInsets.only(bottom: HeightManager.h12),
               child: TipCardWidget(
-                icon: tip['icon'.tr()] as IconData,
-                text: tip['text'.tr()] as String,
-                backgroundColor: (tip['color'.tr()] as Color).withValues(alpha: .1),
-                iconColor: tip['color'.tr()] as Color,
+                icon: tip['icon'] as IconData,
+                text: tip['text'] as String,
+                backgroundColor: (tip['color'] as Color).withValues(alpha: .15),
+                iconColor: tip['color'] as Color,
               ),
             );
           }).toList(),

@@ -40,7 +40,12 @@ class DoctorScreen extends StatelessWidget {
                 final doctor = state.doctor;
                 final patients = state.patients;
                 final conversationsByPatientId = state.conversationsByPatientId;
-                return DoctorBodyBuilder(doctor: doctor, patients: patients , conversationsByPatientId: conversationsByPatientId);
+              
+                return DoctorBodyBuilder(
+                  doctor: doctor,
+                  patients: patients,
+                  conversationsByPatientId: conversationsByPatientId,
+                );
               } else {
                 return const SizedBox.shrink();
               }

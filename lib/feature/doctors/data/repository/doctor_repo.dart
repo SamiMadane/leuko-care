@@ -122,6 +122,7 @@ class DoctorRepository {
 
   // Doctor User
   Stream<DoctorModel> getDoctorByDoctorIdStream(String doctorId) {
+    print('iam in getDoctorByDoctorIdStream');
     return FirebaseFirestore.instance
         .collection('doctors')
         .doc(doctorId)
@@ -130,33 +131,40 @@ class DoctorRepository {
   }
 
   Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
-    return FirebaseFirestore.instance
-        .collection('patients')
-        .where('doctorId', isEqualTo: doctorId)
-        .snapshots()
-        .map(
-          (snapshot) =>
-              snapshot.docs
-                  .map((doc) => PatientModel.fromJson(doc.data()))
-                  .toList(),
-        );
-  }
+  final query = FirebaseFirestore.instance
+      .collection('patients')
+      .where('doctorId', isEqualTo: doctorId);
 
- Stream<Map<String, ConversationModel>> getConversationsForDoctorStream(String doctorId) {
-  final streamA = FirebaseFirestore.instance
-      .collection('conversations')
-      .where('participantAId', isEqualTo: doctorId)
-      .snapshots();
+  return query.snapshots().map((snapshot) {
+    return snapshot.docs
+    
+        .map((doc) => PatientModel.fromJson(doc.data()))
+        .toList();
+        
+  });
+}
 
-  final streamB = FirebaseFirestore.instance
-      .collection('conversations')
-      .where('participantBId', isEqualTo: doctorId)
-      .snapshots();
 
-  return Rx.combineLatest2<QuerySnapshot, QuerySnapshot, Map<String, ConversationModel>>(
-    streamA,
-    streamB,
-    (snapshotA, snapshotB) {
+  Stream<Map<String, ConversationModel>> getConversationsForDoctorStream(
+    String doctorId,
+  ) {
+    final streamA =
+        FirebaseFirestore.instance
+            .collection('conversations')
+            .where('participantAId', isEqualTo: doctorId)
+            .snapshots();
+
+    final streamB =
+        FirebaseFirestore.instance
+            .collection('conversations')
+            .where('participantBId', isEqualTo: doctorId)
+            .snapshots();
+
+    return Rx.combineLatest2<
+      QuerySnapshot,
+      QuerySnapshot,
+      Map<String, ConversationModel>
+    >(streamA, streamB, (snapshotA, snapshotB) {
       final allDocs = [...snapshotA.docs, ...snapshotB.docs];
 
       final Map<String, ConversationModel> map = {};
@@ -166,9 +174,10 @@ class DoctorRepository {
           final data = doc.data() as Map<String, dynamic>;
           final conv = ConversationModel.fromJson(data);
 
-          final patientId = conv.participantAId == doctorId
-              ? conv.participantBId
-              : conv.participantAId;
+          final patientId =
+              conv.participantAId == doctorId
+                  ? conv.participantBId
+                  : conv.participantAId;
 
           if (patientId.isNotEmpty) {
             map[patientId] = conv;
@@ -182,7 +191,6 @@ class DoctorRepository {
 
       print('Total conversations updated for doctor: ${map.length}');
       return map;
-    },
-  );
-}
+    });
+  }
 }

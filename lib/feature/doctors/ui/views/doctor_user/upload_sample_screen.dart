@@ -56,14 +56,14 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
     context.pushNamed(
       Routes.sampleResultScreen,
       arguments: {
-        'patient'.tr(): selectedPatient!,
-        'doctor'.tr(): widget.doctor,
-        'result'.tr(): 'sick'.tr(),
-        'diseaseType'.tr(): 'Acute Lymphoblastic Leukemia'.tr(),
-        'confidence'.tr(): 92.5,
-        'aiMessage'.tr():
+        'patient': selectedPatient!,
+        'doctor': widget.doctor,
+        'result': 'sick'.tr(),
+        'diseaseType': 'Acute Lymphoblastic Leukemia'.tr(),
+        'confidence': 92.5,
+        'aiMessage':
             'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'.tr(),
-        'sampleImageUrl'.tr():
+        'sampleImageUrl':
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
       },
     );

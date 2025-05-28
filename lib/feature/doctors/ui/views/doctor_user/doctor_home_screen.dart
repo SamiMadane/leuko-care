@@ -25,7 +25,7 @@ class DoctorHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final totalPatients = patients.length;
     final pending = patients.where((p) => !p.isExamined).length;
-    final allLeukemiaTypes = ['AML'.tr(), 'CML'.tr(), 'ALL'.tr(), 'CLL'.tr()];
+    final allLeukemiaTypes = ['AML', 'CML', 'ALL', 'CLL'];
 
     final Map<String, int> diseaseCounts = {
       for (var type in allLeukemiaTypes) type: 0,
@@ -45,7 +45,7 @@ class DoctorHomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HomeTopWidget(
-              name: 'Dr. ${doctor.name}'.tr(),
+              name: tr('doctor_name', namedArgs: {'name':doctor.name}),
               imageUrl: doctor.profileImage,
               subMessage: 'Your patients at a glance.'.tr(),
             ),

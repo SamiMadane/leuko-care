@@ -44,7 +44,7 @@ class DoctorProfileScreen extends StatelessWidget {
             onPressed: () {
               context.pushNamed(
                 Routes.addUpdateDoctorScreen,
-                arguments: {'doctorModel'.tr(): doctor, 'userType'.tr(): 'doctor'.tr()},
+                arguments: {'doctorModel': doctor, 'userType': 'doctor'},
               );
             },
           ),
@@ -61,7 +61,7 @@ class DoctorProfileScreen extends StatelessWidget {
                   ProfileImageWidget(profileImageUrl: doctor.profileImage),
                   SizedBox(height: HeightManager.h12),
                   Text(
-                    'Dr. ${doctor.name}'.tr(),
+                    tr('doctor_name', namedArgs: {'name': doctor.name}),
                     style: getBoldTextStyle(
                       fontSize: FontSizeManager.s20,
                       color: ColorsManager.darkBlue,
@@ -90,18 +90,23 @@ class DoctorProfileScreen extends StatelessWidget {
             ProfileInfoRow(
               icon: Icons.work_outline,
               title: 'Experience'.tr(),
-              value: doctor.experience,
+              value: plural(
+                'years_count',
+                doctor.experience,
+                namedArgs: {'count': doctor.experience.toString()},
+              ),
             ),
             ProfileInfoRow(
-              icon: doctor.gender.toLowerCase() == 'male'.tr()
+              icon:
+                  doctor.gender.toLowerCase() == 'male'.tr()
                       ? Icons.male
                       : Icons.female,
               title: 'Gender'.tr(),
-              value: doctor.gender,
+              value: doctor.gender.tr(),
             ),
 
             // Section: About
-            SectionTitle(title:'About'.tr()),
+            SectionTitle(title: 'About'.tr()),
             AboutBoxWidget(description: doctor.description),
 
             SizedBox(height: HeightManager.h24),
@@ -110,5 +115,4 @@ class DoctorProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 }
