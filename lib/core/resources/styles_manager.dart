@@ -8,9 +8,11 @@ TextStyle _getTextStyle(
   TextDecoration decoration,
   dynamic overflow,
   double height,
+  String? fontFamily,
 ) {
   return TextStyle(
     fontSize: fontSize,
+    fontFamily: fontFamily ?? FontFamilyManager.getFontFamily(),
     fontWeight: fontWeight,
     color: color,
     decoration: decoration,
@@ -19,10 +21,12 @@ TextStyle _getTextStyle(
   );
 }
 
+
 // Regular TextStyle
 TextStyle getRegularTextStyle({
   required double fontSize,
   required Color color,
+  String? fontFamily,
   dynamic overflow = TextOverflow.visible,
   TextDecoration decoration = TextDecoration.none,
   double? height,
@@ -34,13 +38,14 @@ TextStyle getRegularTextStyle({
     decoration,
     overflow,
     height ?? 1.0,
+    fontFamily,
   );
 }
 
-// Medium TextStyle
 TextStyle getMediumTextStyle({
   required double fontSize,
   required Color color,
+  String? fontFamily,
   TextDecoration decoration = TextDecoration.none,
   dynamic overflow = TextOverflow.visible,
   double? height,
@@ -52,13 +57,14 @@ TextStyle getMediumTextStyle({
     decoration,
     overflow,
     height ?? 1.0,
+    fontFamily,
   );
 }
 
-// SemiBold TextStyle
 TextStyle getSemiBoldTextStyle({
   required double fontSize,
   required Color color,
+  String? fontFamily,
   TextDecoration decoration = TextDecoration.none,
   dynamic overflow = TextOverflow.visible,
   double? height,
@@ -70,13 +76,14 @@ TextStyle getSemiBoldTextStyle({
     decoration,
     overflow,
     height ?? 1.0,
+    fontFamily,
   );
 }
 
-// Bold TextStyle
 TextStyle getBoldTextStyle({
   required double fontSize,
   required Color color,
+  String? fontFamily,
   TextDecoration decoration = TextDecoration.none,
   dynamic overflow = TextOverflow.visible,
   double? height,
@@ -88,8 +95,6 @@ TextStyle getBoldTextStyle({
     decoration,
     overflow,
     height ?? 1.0,
+    fontFamily,
   );
 }
-
-
-

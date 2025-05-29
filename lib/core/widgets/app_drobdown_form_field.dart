@@ -37,11 +37,8 @@ class AppDropdownFormField<T> extends StatelessWidget {
       items: items,
       onChanged: onChanged,
       validator: validator,
-      style: textStyle ??
-          getMediumTextStyle(
-            fontSize: IconSizeManager.s14,
-            color: ColorsManager.darkBlue,
-          ),
+      style: textStyle ?? getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkBlue), 
+          
       decoration: InputDecoration(
         isDense: true,
         contentPadding: contentPadding ??
