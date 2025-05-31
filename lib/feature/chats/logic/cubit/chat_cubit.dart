@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/chats/data/repository/chat_repo.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_session_manager.dart';
 import '../../data/models/chat_model.dart';
 import 'chat_state.dart';
 
@@ -13,12 +14,21 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this._chatRepository) : super(const ChatState.chatInitial());
 
-  void getMessages({required String senderId, required String receiverId}) {
+
+void setCurrentChatId(String chatId) {
+  ChatSessionManager().currentChatId = chatId;
+}
+
+   static String getChatId(String uid1, String uid2) {
+    return uid1.hashCode <= uid2.hashCode ? '${uid1}_$uid2' : '${uid2}_$uid1';
+  }
+
+  void getMessages({required String senderId, required String receiverId,String? chatIdFromNotification}) {
     emit(ChatLoading());
 
     try {
       _chatRepository
-          .getMessages(senderId: senderId, receiverId: receiverId)
+          .getMessages(senderId: senderId, receiverId: receiverId,chatIdFromNotification:chatIdFromNotification )
           .listen((messages) {
             emit(ChatSuccess(messages));
           });
@@ -96,14 +106,16 @@ class ChatCubit extends Cubit<ChatState> {
     getMessages(senderId: doctorId, receiverId: patientId);
     emit(MessagesMarkedAsReadSuccessfully());
   }
-  
-  Future<void> markMessagesAsReadForPatient(
-  String patientId,
-  String doctorId,
-) async {
-  await _chatRepository.markMessagesAsReadByPatient(patientId, doctorId);
-  getMessages(senderId: patientId, receiverId: doctorId); // أو العكس حسب الحاجة
-  emit(MessagesMarkedAsReadSuccessfully());
-}
 
+  Future<void> markMessagesAsReadForPatient(
+    String patientId,
+    String doctorId,
+  ) async {
+    await _chatRepository.markMessagesAsReadByPatient(patientId, doctorId);
+    getMessages(
+      senderId: patientId,
+      receiverId: doctorId,
+    ); // أو العكس حسب الحاجة
+    emit(MessagesMarkedAsReadSuccessfully());
+  }
 }

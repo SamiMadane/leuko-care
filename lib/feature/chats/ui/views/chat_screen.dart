@@ -17,6 +17,7 @@ class ChatScreen extends StatefulWidget {
   final String otherUserId;
   final DoctorModel? doctor;
   final PatientModel? patient;
+    final String? chatId;
   final String? initialMessage;
   final String? initialDoctorMessage;
   final Uint8List? initialDoctorImage;
@@ -27,7 +28,7 @@ class ChatScreen extends StatefulWidget {
     required this.otherUserId,
     this.doctor,
     this.initialMessage,
-    this.patient, this.initialDoctorImage, this.initialDoctorMessage,
+    this.patient, this.initialDoctorImage, this.initialDoctorMessage, this.chatId,
   });
 
   @override
@@ -38,9 +39,12 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+      final chatId = widget.chatId ?? ChatCubit.getChatId(widget.currentUserId, widget.otherUserId);
+  context.read<ChatCubit>().setCurrentChatId(chatId);
     context.read<ChatCubit>().getMessages(
       senderId: widget.currentUserId,
       receiverId: widget.otherUserId,
+      chatIdFromNotification: chatId
     );
   }
 

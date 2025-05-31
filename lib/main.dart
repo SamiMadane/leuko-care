@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
+import 'package:leuko_care/core/networking/notification_service.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:leuko_care/leuko_ai.dart';
@@ -13,8 +14,8 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-   await FontFamilyManager.init(); 
-  // await NotificationService.init();
+  await FontFamilyManager.init(); 
+  await NotificationService.init();
   await ScreenUtil.ensureScreenSize();  
   setupGetIt();
   final localeCode = await SharedPrefHelper.getLocale();

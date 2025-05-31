@@ -160,6 +160,8 @@
   "Healthy": "سليم",
   "select_filter": "اختر {filter}",
   "hi_with_name": "مرحبا, {name} 👋",
+  "new_message_from": "{} أرسل رسالة جديدة",
+  "image_message": "📷 صورة جديدة",
   "Your health matters most": "صحتك هي الأهم",
   "last_message_at": "آخر رسالة في {time}",
   "just_now": "الآن",

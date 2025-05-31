@@ -88,6 +88,9 @@ dependencies:
   rxdart: ^0.28.0
   flutter_launcher_icons: ^0.14.3
   flutter_en_json_extractor: ^0.0.4
+  # Displaying and scheduling local notifications for Flutter applications
+  flutter_local_notifications: ^19.2.1
+  googleapis_auth: ^2.0.0
   
 dev_dependencies:
   flutter_test:
@@ -125,6 +128,7 @@ flutter:
     - assets/icons/
     - assets/lang/en.json
     - assets/lang/ar.json
+    - assets/notifications_key/leukocare-6a1ec-8fb0476b0d89.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

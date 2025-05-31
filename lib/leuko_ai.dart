@@ -5,11 +5,11 @@ import 'core/resources/colors_manager.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/routes.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class LeukoAi extends StatelessWidget {
   final AppRouter appRouter;
   const LeukoAi({super.key, required this.appRouter});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -25,6 +25,7 @@ class LeukoAi extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
+        navigatorKey: navigatorKey,
         initialRoute: Routes.navigationHandlerScreen,
         onGenerateRoute: appRouter.generateRoute,
       )

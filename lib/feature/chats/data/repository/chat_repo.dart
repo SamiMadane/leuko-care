@@ -6,6 +6,8 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
+import 'package:leuko_care/core/networking/send_notification_services.dart';
 import '../models/chat_model.dart';
 
 class ChatRepository {
@@ -17,8 +19,9 @@ class ChatRepository {
   Stream<List<ChatModel>> getMessages({
     required String senderId,
     required String receiverId,
+    String? chatIdFromNotification,
   }) {
-    final chatId = _getChatId(senderId, receiverId);
+    final chatId = chatIdFromNotification ?? _getChatId(senderId, receiverId);
 
     return _firestore
         .collection('chats')
@@ -70,8 +73,38 @@ class ChatRepository {
     }
   }
 
+  Future<String> getSenderName(String senderId, String userType) async {
+    try {
+      final collection = userType == 'doctor' ? 'doctors' : 'patients';
+
+      final doc =
+          await FirebaseFirestore.instance
+              .collection(collection)
+              .doc(senderId)
+              .get();
+
+      if (doc.exists) {
+        final data = doc.data();
+        final name = data?['name'];
+        return name;
+      } else {
+        return '';
+      }
+    } catch (e) {
+      print('Error getting sender name: $e');
+      return '';
+    }
+  }
+
   Future<void> sendMessage(ChatModel message) async {
     final chatId = _getChatId(message.senderId, message.receiverId);
+    final userType = await SharedPrefHelper.getString('userType');
+    final senderName = await getSenderName(message.senderId, userType);
+    final isImageMessage = message.text.isEmpty;
+    final title = "new_message_from".tr(
+      args: [userType == 'doctor' ? "Dr. $senderName :" : '${senderName} :'],
+    );
+    final body = isImageMessage ? "image_message".tr() : message.text;
 
     try {
       final docRef = await _firestore
@@ -87,6 +120,34 @@ class ChatRepository {
       await docRef.update(updatedMessage.toJson());
 
       await _updateOrCreateConversation(updatedMessage);
+      final tokenDoc =
+          await _firestore
+              .collection('fcmTokens')
+              .doc(message.receiverId)
+              .get();
+
+      if (tokenDoc.exists) {
+        final tokens = List<String>.from(tokenDoc.data()?['tokens'] ?? []);
+
+        for (final token in tokens) {
+          if (token.isNotEmpty) {
+            await sendNotification(
+              token: token,
+              title: title,
+              body: body,
+              data: {
+                'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+                'senderId': message.senderId,
+                'receiverId': message.receiverId,
+                'type': 'chat',
+                'chatId': chatId,
+              },
+            );
+          }
+        }
+      } else {
+        print("No FCM tokens found for user ${message.receiverId}");
+      }
 
       print("Message sent with id: ${docRef.id}");
     } catch (e) {
