@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
+import 'package:leuko_care/feature/chats/logic/cubit/chat_session_manager.dart';
 import 'package:leuko_care/feature/chats/ui/views/chat_screen.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
@@ -57,6 +58,7 @@ class PatientScreen extends StatelessWidget {
                         otherUserId: state.doctor.id!,
                         doctor: state.doctor,
                         initialMessage: cubit.initialChatMessage,
+                        userType: 'patient',
                       ),
                       PatientProfileScreen(patient: state.patient),
                     ];
@@ -77,30 +79,26 @@ class PatientScreen extends StatelessWidget {
         bottomNavigationBar: BlocBuilder<PatientCubit, PatientState>(
           builder: (context, state) {
             final cubit = context.read<PatientCubit>();
-
-            // قيم افتراضية أو nullables
-            final patientId =
-                (state is GetPatientAndDoctorStateSuccess)
-                    ? state.patient.id
-                    : null;
-            final doctorId =
-                (state is GetPatientAndDoctorStateSuccess)
-                    ? state.doctor.id
-                    : null;
+            final patientId = cubit.patientId;
+            final doctorId = cubit.doctorId;
 
             return PatientBottomNavBar(
               currentIndex: cubit.selectedIndex,
               onTap: (index) {
                 cubit.changeSelectedIndex(index);
                 if (index == 1 && patientId != null && doctorId != null) {
+                  final chatId = ChatCubit.getChatId(patientId, doctorId);
+
+                  ChatSessionManager().currentChatId = chatId;
+
                   context.read<ChatCubit>().markMessagesAsReadForPatient(
                     patientId,
                     doctorId,
                   );
+                } else {
+                  ChatSessionManager().currentChatId = null;
                 }
               },
-              // يمكنك تعديل PatientBottomNavBar ليأخذ مثلاً enabled: patientId != null && doctorId != null
-              // ليعطل التفاعل إذا أردت.
             );
           },
         ),
@@ -113,12 +111,12 @@ class PatientScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-           Text('Error loading data'.tr()),
+          Text('Error loading data'.tr()),
           ElevatedButton(
             onPressed: () {
               context.read<PatientCubit>().getPatientAndDoctor(patientId!);
             },
-            child:  Text('Retry'.tr()),
+            child: Text('Retry'.tr()),
           ),
         ],
       ),

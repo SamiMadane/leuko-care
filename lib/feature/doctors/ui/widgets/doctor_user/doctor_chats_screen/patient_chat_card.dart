@@ -56,6 +56,7 @@ class PatientChatCard extends StatelessWidget {
                   currentUserId: doctor.id!,
                   otherUserId: patient.id!,
                   patient: patient,
+                  userType: 'doctor',
                 ),
               ),
             ),

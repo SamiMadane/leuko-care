@@ -14,6 +14,8 @@ class PatientCubit extends Cubit<PatientState> {
   StreamSubscription<List<DoctorModel>>? _doctorSubscription;
   StreamSubscription<PatientModel>? _onePatientSubscription;
   StreamSubscription? _conversationSubscription;
+    String? patientId;
+  String? doctorId;
 
   int selectedIndex = 0;
   String? initialChatMessage;
@@ -142,7 +144,8 @@ Future<void> getPatientAndDoctor(String patientId) async {
           final conversation = conversationMap[doctor.id];
 
           // _repository.updateFcmTokenIfNeeded();
-
+          this.patientId = patient.id;
+          this.doctorId = doctor.id;
           emit(GetPatientAndDoctorStateSuccess(doctor, patient, conversation));
         } catch (e) {
           emit(GetPatientAndDoctorStateError(e.toString()));

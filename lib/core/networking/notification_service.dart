@@ -104,10 +104,10 @@ class NotificationService {
             builder:
                 (_) => BlocProvider.value(
                   value: getIt<ChatCubit>(),
-                  child: ChatScreen(
-                    currentUserId: receiverId,
-                    otherUserId: senderId,
-                  ),
+                  // child: ChatScreen(
+                  //   currentUserId: receiverId,
+                  //   otherUserId: senderId,
+                  // ),
                 ),
           ),
         );
