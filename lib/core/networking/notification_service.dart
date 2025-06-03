@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:leuko_care/core/di/dependency_injection.dart';
+import 'package:get_it/get_it.dart';
+import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
+import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/auth/data/repository/auth_repo.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_session_manager.dart';
@@ -66,11 +70,22 @@ class NotificationService {
           iOS: DarwinInitializationSettings(),
         );
 
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      print('🔥 Opened app from terminated by notification');
+      _handleNotificationNavigation(initialMessage.data);
+    }
+
     await _localNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
         print('Notification payload: ${response.payload}');
-        // توجيه المستخدم حسب الـ payload هنا
+        if (response.payload == null) return;
+
+        final payloadMap = jsonDecode(response.payload!);
+        print ('Click in Notification in foreground');
+        _handleNotificationNavigation(payloadMap);
       },
     );
 
@@ -92,39 +107,25 @@ class NotificationService {
 
     // 6. التعامل مع فتح التطبيق من خلال إشعار
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('test onMessageOpenedApp');
-      final data = message.data;
-      final senderId = data['senderId'];
-      final receiverId = data['receiverId'];
-      final chatId = data['chatId'];
-
-      if (senderId != null && receiverId != null && chatId != null) {
-        navigatorKey.currentState?.push(
-          MaterialPageRoute(
-            builder:
-                (_) => BlocProvider.value(
-                  value: getIt<ChatCubit>(),
-                  // child: ChatScreen(
-                  //   currentUserId: receiverId,
-                  //   otherUserId: senderId,
-                  // ),
-                ),
-          ),
-        );
-      }
+      print('📲 Opened from background by tapping notification');
+      _handleNotificationNavigation(message.data);
     });
 
     // 7. الحصول على التوكن وتخزينه (يجب إضافة دالة الحفظ الخاصة بك)
     String? token = await _messaging.getToken();
     print('FCM Token: $token');
-    // TODO: استدعاء دالة حفظ التوكن في Firestore أو السيرفر الخاص بك
   }
 
   static Future<void> _showLocalNotification(RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
-    final chatId = message.data['chatId']; // تأكد إنك ترسل chatId في الداتا
+    final data = message.data;
+    print('🔔 Notification data: $data');
+
+    final chatId = data['chatId'];
     final currentChatId = ChatSessionManager().currentChatId;
+
+    print('➡️ chatId from message data: $chatId');
 
     if (chatId != null && chatId == currentChatId) {
       print('Skipping notification because user is already in the same chat.');
@@ -147,7 +148,52 @@ class NotificationService {
           ),
           iOS: DarwinNotificationDetails(),
         ),
-        payload: message.data['payload'] ?? '',
+        payload: jsonEncode({
+          'chatId': data['chatId'],
+          'senderId': data['senderId'],
+          'receiverId': data['receiverId'],
+          'type': data['type'],
+        }), // هنا تمرر كل البيانات التي تحتاجها
+      );
+    }
+  }
+
+  static Future<void> _handleNotificationNavigation(
+    Map<String, dynamic> data,
+  ) async {
+    final chatId = data['chatId'];
+    final senderId = data['senderId'];
+    final receiverId = data['receiverId'];
+    final type = data['type'];
+
+    if (chatId == null || chatId.isEmpty) {
+      print('❌ chatId is null or empty');
+      return;
+    }
+    print('iam in _handleNotificationNavigation');
+
+
+    final userType = await SharedPrefHelper.getString('userType');
+    ChatSessionManager().currentChatId = chatId;
+
+    if (userType == 'patient' && type == 'chat') {
+      navigatorKey.currentState?.pushReplacementNamed(
+        Routes.patientScreen,
+        arguments: 1,
+      );
+    } else if (userType == 'doctor' && type == 'chat') {
+      navigatorKey.currentState?.push(
+        MaterialPageRoute(
+          builder:
+              (_) => BlocProvider.value(
+                value: GetIt.instance<ChatCubit>(),
+                child: ChatScreen(
+                  currentUserId: receiverId,
+                  otherUserId: senderId,
+                  userType: 'doctor',
+                ),
+              ),
+        ),
       );
     }
   }

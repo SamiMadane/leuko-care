@@ -8,6 +8,7 @@ part 'patient_state.freezed.dart';
 
 @freezed
 class PatientState with _$PatientState {
+  
   const factory PatientState.patientStateInitial() = _PatientStateInitial;
 
   const factory PatientState.getPatientStateLoading() = GetPatientStateLoading;

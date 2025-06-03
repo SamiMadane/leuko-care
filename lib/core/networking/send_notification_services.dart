@@ -16,15 +16,18 @@ Future<String> getAccessToken() async {
 
   return client.credentials.accessToken.data;
 }
-
-Future<void> sendNotification(
-    {required String token,
-    required String title,
-    required String body,
-    required Map<String, String> data}) async {
+Future<void> sendNotification({
+  required String token,
+  required String title,
+  required String body,
+  required Map<String, dynamic> data, // لاحظ: dynamic بدلاً من String
+}) async {
   final String accessToken = await getAccessToken();
   final String fcmUrl =
       'https://fcm.googleapis.com/v1/projects/leukocare-6a1ec/messages:send';
+
+  // نحول القيم داخل data كلها إلى String:
+  final Map<String, String> stringifiedData = data.map((key, value) => MapEntry(key, value.toString()));
 
   final response = await http.post(
     Uri.parse(fcmUrl),
@@ -32,26 +35,27 @@ Future<void> sendNotification(
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $accessToken',
     },
-    body: jsonEncode(<String, dynamic>{
+    body: jsonEncode({
       'message': {
         'token': token,
         'notification': {
           'title': title,
           'body': body,
         },
-        'data': data, // Add custom data here
-
+        'data': stringifiedData,
         'android': {
           'notification': {
-            "sound": "custom_sound",
-            'click_action':
-                'FLUTTER_NOTIFICATION_CLICK', // Required for tapping to trigger response
-            'channel_id': 'high_importance_channel'
+            'sound': 'custom_sound',
+            'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+            'channel_id': 'high_importance_channel',
           },
         },
         'apns': {
           'payload': {
-            'aps': {"sound": "custom_sound.caf", 'content-available': 1},
+            'aps': {
+              'sound': 'custom_sound.caf',
+              'content-available': 1,
+            },
           },
         },
       },
@@ -59,8 +63,8 @@ Future<void> sendNotification(
   );
 
   if (response.statusCode == 200) {
-    print('Notification sent successfully');
+    print('✅ Notification sent successfully');
   } else {
-    print('Failed to send notification: ${response.body}');
+    print('❌ Failed to send notification: ${response.body}');
   }
 }

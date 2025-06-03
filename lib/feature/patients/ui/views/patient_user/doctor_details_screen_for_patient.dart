@@ -12,7 +12,7 @@ import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/core/widgets/profile_info_row.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_profile_screen/about_box_widget.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/message_status_card.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/patient_examined/message_status_card.dart';
 
 class DoctorDetailsScreenForPatient extends StatelessWidget {
   final DoctorModel doctor;

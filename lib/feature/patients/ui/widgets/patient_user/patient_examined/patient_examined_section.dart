@@ -3,9 +3,9 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/doctor_info_widget.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/health_overview_widget.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/health_tips_widget.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/doctor_info_widget.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/patient_examined/health_overview_widget.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/patient_examined/health_tips_widget.dart';
 
 class PatientExaminedSection extends StatelessWidget {
   final PatientModel patient;

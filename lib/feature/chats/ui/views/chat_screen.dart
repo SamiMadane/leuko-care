@@ -7,6 +7,7 @@ import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_session_manager.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_state.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/chat_top_bar.dart';
+import 'package:leuko_care/feature/chats/ui/widgets/chat_top_bar_shimmer.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/messages_shimmer.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -16,9 +17,7 @@ import '../widgets/messages_list.dart';
 class ChatScreen extends StatefulWidget {
   final String currentUserId;
   final String otherUserId;
-  final String userType;
-  final DoctorModel? doctor;
-  final PatientModel? patient;
+  final String userType; // 'doctor' or 'patient'
   final String? chatId;
   final String? initialMessage;
   final String? initialDoctorMessage;
@@ -28,12 +27,11 @@ class ChatScreen extends StatefulWidget {
     super.key,
     required this.currentUserId,
     required this.otherUserId,
-    this.doctor,
+    required this.userType,
     this.initialMessage,
-    this.patient,
-    this.initialDoctorImage,
     this.initialDoctorMessage,
-    this.chatId, required this.userType,
+    this.initialDoctorImage,
+    this.chatId,
   });
 
   @override
@@ -41,6 +39,9 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  DoctorModel? doctor;
+  PatientModel? patient;
+
   @override
   void initState() {
     super.initState();
@@ -48,12 +49,16 @@ class _ChatScreenState extends State<ChatScreen> {
         widget.chatId ??
         ChatCubit.getChatId(widget.currentUserId, widget.otherUserId);
     context.read<ChatCubit>().setCurrentChatId(chatId);
-    // The doctor sends me the patient's information. If it is empty, it means that the current user is not a doctor, but a patient.
-    
 
-    widget.userType == 'patient'
-        ? ChatSessionManager().currentChatId = null
-        : ChatSessionManager().currentChatId = chatId;
+    // تحديد الطرف الآخر وجلب بياناته
+    if (widget.userType == 'patient') {
+      context.read<ChatCubit>().getDoctorInfo(widget.otherUserId);
+      // in patient screen i will asign chat id  to current chat id
+      ChatSessionManager().currentChatId = null;
+    } else {
+      context.read<ChatCubit>().getPatientInfo(widget.otherUserId);
+      ChatSessionManager().currentChatId = chatId;
+    }
 
     context.read<ChatCubit>().getMessages(
       senderId: widget.currentUserId,
@@ -64,10 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
-    // حذف chatId عند الخروج من الشاشة
-
     ChatSessionManager().currentChatId = null;
-
     super.dispose();
   }
 
@@ -77,7 +79,25 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            ChatTopBar(doctor: widget.doctor, patient: widget.patient),
+            BlocBuilder<ChatCubit, ChatState>(
+              buildWhen:
+                  (prev, curr) =>
+                      curr is ChatDoctorInfoLoaded ||
+                      curr is ChatPatientInfoLoaded,
+              builder: (context, state) {
+                if (state is ChatDoctorInfoLoaded) doctor = state.doctor;
+                if (state is ChatPatientInfoLoaded) patient = state.patient;
+
+                // إذا لم تكن البيانات جاهزة بعد، نعرض نسخة شيمر
+                if ((widget.userType == 'patient' && doctor == null) ||
+                    (widget.userType == 'doctor' && patient == null)) {
+                  return  ChatTopBarShimmer();
+                }
+
+                return ChatTopBar(doctor: doctor, patient: patient);
+              },
+            ),
+
             Expanded(
               child: BlocBuilder<ChatCubit, ChatState>(
                 builder: (context, state) {

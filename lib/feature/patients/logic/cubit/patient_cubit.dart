@@ -14,7 +14,7 @@ class PatientCubit extends Cubit<PatientState> {
   StreamSubscription<List<DoctorModel>>? _doctorSubscription;
   StreamSubscription<PatientModel>? _onePatientSubscription;
   StreamSubscription? _conversationSubscription;
-    String? patientId;
+  String? patientId;
   String? doctorId;
 
   int selectedIndex = 0;
@@ -36,6 +36,7 @@ class PatientCubit extends Cubit<PatientState> {
       },
     );
   }
+
 
   Future<String> _getImageUrl(PatientModel patient) async {
     if (patient.profileImage.isEmpty) {
@@ -95,7 +96,6 @@ class PatientCubit extends Cubit<PatientState> {
 
       emit(DeletePatientStateSuccess());
     } catch (e) {
-
       emit(DeletePatientStateError('Error deleting patient: $e'.tr()));
     }
   }
@@ -112,7 +112,9 @@ class PatientCubit extends Cubit<PatientState> {
             emit(GetPatientsByDoctorIdStateSuccess(patients));
           },
           onError: (error) {
-            emit(GetPatientsByDoctorIdStateError('Failed to load patients'.tr()));
+            emit(
+              GetPatientsByDoctorIdStateError('Failed to load patients'.tr()),
+            );
           },
         );
   }
@@ -121,42 +123,48 @@ class PatientCubit extends Cubit<PatientState> {
     return _repository.getPatientByIdStream(patientId);
   }
 
+  Future<void> getPatientAndDoctor(String patientId) async {
+    emit(GetPatientAndDoctorStateLoading());
 
+    try {
+      // الاشتراك في Stream للمريض
+      _onePatientSubscription = _repository
+          .getPatientByIdStream(patientId)
+          .listen((patient) async {
+            // نبدأ بالاشتراك في Stream المحادثات
+            _conversationSubscription?.cancel(); // إلغاء أي اشتراك سابق
+            _conversationSubscription = _repository
+                .getConversationsForPatientStream(patientId)
+                .listen((conversationMap) async {
+                  try {
+                    final doctor = await _repository.getDoctorByDoctorId(
+                      patient.doctorId,
+                    );
 
-Future<void> getPatientAndDoctor(String patientId) async {
-  emit(GetPatientAndDoctorStateLoading());
+                    final conversation = conversationMap[doctor.id];
 
-  try {
-    // الاشتراك في Stream للمريض
-    _onePatientSubscription = _repository
-        .getPatientByIdStream(patientId)
-        .listen((patient) async {
-      // نبدأ بالاشتراك في Stream المحادثات
-      _conversationSubscription?.cancel(); // إلغاء أي اشتراك سابق
-      _conversationSubscription = _repository
-          .getConversationsForPatientStream(patientId)
-          .listen((conversationMap) async {
-        try {
-          final doctor = await _repository.getDoctorByDoctorId(
-            patient.doctorId,
-          );
+                    // _repository.updateFcmTokenIfNeeded();
+                    this.patientId = patient.id;
+                    this.doctorId = doctor.id;
+                    
+               
 
-          final conversation = conversationMap[doctor.id];
-
-          // _repository.updateFcmTokenIfNeeded();
-          this.patientId = patient.id;
-          this.doctorId = doctor.id;
-          emit(GetPatientAndDoctorStateSuccess(doctor, patient, conversation));
-        } catch (e) {
-          emit(GetPatientAndDoctorStateError(e.toString()));
-        }
-      });
-    });
-  } catch (e) {
-    emit(GetPatientAndDoctorStateError(e.toString()));
+                    emit(
+                      GetPatientAndDoctorStateSuccess(
+                        doctor,
+                        patient,
+                        conversation,
+                      ),
+                    );
+                  } catch (e) {
+                    emit(GetPatientAndDoctorStateError(e.toString()));
+                  }
+                });
+          });
+    } catch (e) {
+      emit(GetPatientAndDoctorStateError(e.toString()));
+    }
   }
-}
-
 
   @override
   Future<void> close() {
@@ -178,8 +186,10 @@ Future<void> getPatientAndDoctor(String patientId) async {
   }
 
   void changeSelectedIndex(int index) {
+    print('🔁 Changing selectedIndex to $index');
     selectedIndex = index;
-    emit(PatientBottomNavChanged(index));
+    emit(PatientBottomNavChanged(selectedIndex));
+    print('✅ تم بث الحالة الجديدة - selectedIndex: $selectedIndex');
   }
 
   void setInitialMessage(String message) {
@@ -197,8 +207,4 @@ Future<void> getPatientAndDoctor(String patientId) async {
       );
     }
   }
-
-
-
-
 }

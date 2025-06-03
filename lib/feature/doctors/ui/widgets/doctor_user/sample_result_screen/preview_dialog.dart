@@ -27,7 +27,6 @@ void showPreviewDialog(BuildContext context, Uint8List image, DoctorModel doctor
                   child: ChatScreen(
                     currentUserId: doctor.id!,
                     otherUserId: patient.id!,
-                    patient: patient,
                     initialDoctorMessage: initialDoctorMessage,
                     initialDoctorImage: image,
                     userType: 'patient',

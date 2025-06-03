@@ -9,8 +9,8 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/patient_examined_section.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_not_examined/examination_pending_widget.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/patient_examined/patient_examined_section.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/patient_not_examined/examination_pending_widget.dart';
 
 class PatientHomeScreen extends StatelessWidget {
   final PatientModel patient;

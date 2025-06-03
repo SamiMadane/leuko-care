@@ -6,8 +6,8 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/health_info_widget.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/sample_image_widget.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/patient_examined/health_info_widget.dart';
+import 'package:leuko_care/feature/patients/ui/widgets/patient_user/patient_examined/sample_image_widget.dart';
 
 class HealthOverviewWidget extends StatelessWidget {
   final PatientModel patient;

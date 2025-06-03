@@ -28,6 +28,8 @@ mixin _$ChatState {
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -39,6 +41,8 @@ mixin _$ChatState {
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -50,6 +54,8 @@ mixin _$ChatState {
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +72,9 @@ mixin _$ChatState {
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -80,6 +89,8 @@ mixin _$ChatState {
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -94,6 +105,8 @@ mixin _$ChatState {
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -170,6 +183,8 @@ class _$ChatInitialImpl implements _ChatInitial {
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return chatInitial();
   }
@@ -185,6 +200,8 @@ class _$ChatInitialImpl implements _ChatInitial {
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return chatInitial?.call();
   }
@@ -200,6 +217,8 @@ class _$ChatInitialImpl implements _ChatInitial {
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatInitial != null) {
@@ -223,6 +242,9 @@ class _$ChatInitialImpl implements _ChatInitial {
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return chatInitial(this);
   }
@@ -241,6 +263,8 @@ class _$ChatInitialImpl implements _ChatInitial {
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return chatInitial?.call(this);
   }
@@ -259,6 +283,8 @@ class _$ChatInitialImpl implements _ChatInitial {
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatInitial != null) {
@@ -324,6 +350,8 @@ class _$ChatLoadingImpl implements ChatLoading {
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return chatLoading();
   }
@@ -339,6 +367,8 @@ class _$ChatLoadingImpl implements ChatLoading {
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return chatLoading?.call();
   }
@@ -354,6 +384,8 @@ class _$ChatLoadingImpl implements ChatLoading {
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatLoading != null) {
@@ -377,6 +409,9 @@ class _$ChatLoadingImpl implements ChatLoading {
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return chatLoading(this);
   }
@@ -395,6 +430,8 @@ class _$ChatLoadingImpl implements ChatLoading {
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return chatLoading?.call(this);
   }
@@ -413,6 +450,8 @@ class _$ChatLoadingImpl implements ChatLoading {
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatLoading != null) {
@@ -512,6 +551,8 @@ class _$ChatSuccessImpl implements ChatSuccess {
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return chatSuccess(messages);
   }
@@ -527,6 +568,8 @@ class _$ChatSuccessImpl implements ChatSuccess {
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return chatSuccess?.call(messages);
   }
@@ -542,6 +585,8 @@ class _$ChatSuccessImpl implements ChatSuccess {
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatSuccess != null) {
@@ -565,6 +610,9 @@ class _$ChatSuccessImpl implements ChatSuccess {
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return chatSuccess(this);
   }
@@ -583,6 +631,8 @@ class _$ChatSuccessImpl implements ChatSuccess {
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return chatSuccess?.call(this);
   }
@@ -601,6 +651,8 @@ class _$ChatSuccessImpl implements ChatSuccess {
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatSuccess != null) {
@@ -701,6 +753,8 @@ class _$ChatErrorImpl implements ChatError {
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return chatError(message);
   }
@@ -716,6 +770,8 @@ class _$ChatErrorImpl implements ChatError {
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return chatError?.call(message);
   }
@@ -731,6 +787,8 @@ class _$ChatErrorImpl implements ChatError {
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatError != null) {
@@ -754,6 +812,9 @@ class _$ChatErrorImpl implements ChatError {
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return chatError(this);
   }
@@ -772,6 +833,8 @@ class _$ChatErrorImpl implements ChatError {
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return chatError?.call(this);
   }
@@ -790,6 +853,8 @@ class _$ChatErrorImpl implements ChatError {
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatError != null) {
@@ -864,6 +929,8 @@ class _$ChatMessageSentSuccessfullyImpl implements ChatMessageSentSuccessfully {
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return chatMessageSentSuccessfully();
   }
@@ -879,6 +946,8 @@ class _$ChatMessageSentSuccessfullyImpl implements ChatMessageSentSuccessfully {
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return chatMessageSentSuccessfully?.call();
   }
@@ -894,6 +963,8 @@ class _$ChatMessageSentSuccessfullyImpl implements ChatMessageSentSuccessfully {
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatMessageSentSuccessfully != null) {
@@ -917,6 +988,9 @@ class _$ChatMessageSentSuccessfullyImpl implements ChatMessageSentSuccessfully {
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return chatMessageSentSuccessfully(this);
   }
@@ -935,6 +1009,8 @@ class _$ChatMessageSentSuccessfullyImpl implements ChatMessageSentSuccessfully {
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return chatMessageSentSuccessfully?.call(this);
   }
@@ -953,6 +1029,8 @@ class _$ChatMessageSentSuccessfullyImpl implements ChatMessageSentSuccessfully {
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatMessageSentSuccessfully != null) {
@@ -1021,6 +1099,8 @@ class _$ChatMessageDeleteSuccessfullyImpl
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return chatMessageDeleteSuccessfully();
   }
@@ -1036,6 +1116,8 @@ class _$ChatMessageDeleteSuccessfullyImpl
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return chatMessageDeleteSuccessfully?.call();
   }
@@ -1051,6 +1133,8 @@ class _$ChatMessageDeleteSuccessfullyImpl
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatMessageDeleteSuccessfully != null) {
@@ -1074,6 +1158,9 @@ class _$ChatMessageDeleteSuccessfullyImpl
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return chatMessageDeleteSuccessfully(this);
   }
@@ -1092,6 +1179,8 @@ class _$ChatMessageDeleteSuccessfullyImpl
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return chatMessageDeleteSuccessfully?.call(this);
   }
@@ -1110,6 +1199,8 @@ class _$ChatMessageDeleteSuccessfullyImpl
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatMessageDeleteSuccessfully != null) {
@@ -1179,6 +1270,8 @@ class _$MessagesMarkedAsReadSuccessfullyImpl
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return messagesMarkedAsReadSuccessfully();
   }
@@ -1194,6 +1287,8 @@ class _$MessagesMarkedAsReadSuccessfullyImpl
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return messagesMarkedAsReadSuccessfully?.call();
   }
@@ -1209,6 +1304,8 @@ class _$MessagesMarkedAsReadSuccessfullyImpl
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (messagesMarkedAsReadSuccessfully != null) {
@@ -1232,6 +1329,9 @@ class _$MessagesMarkedAsReadSuccessfullyImpl
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return messagesMarkedAsReadSuccessfully(this);
   }
@@ -1250,6 +1350,8 @@ class _$MessagesMarkedAsReadSuccessfullyImpl
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return messagesMarkedAsReadSuccessfully?.call(this);
   }
@@ -1268,6 +1370,8 @@ class _$MessagesMarkedAsReadSuccessfullyImpl
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (messagesMarkedAsReadSuccessfully != null) {
@@ -1370,6 +1474,8 @@ class _$ChatConversationUpdatedImpl implements ChatConversationUpdated {
     required TResult Function() messagesMarkedAsReadSuccessfully,
     required TResult Function(Map<String, dynamic> data)
     chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
   }) {
     return chatConversationUpdated(data);
   }
@@ -1385,6 +1491,8 @@ class _$ChatConversationUpdatedImpl implements ChatConversationUpdated {
     TResult? Function()? chatMessageDeleteSuccessfully,
     TResult? Function()? messagesMarkedAsReadSuccessfully,
     TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
   }) {
     return chatConversationUpdated?.call(data);
   }
@@ -1400,6 +1508,8 @@ class _$ChatConversationUpdatedImpl implements ChatConversationUpdated {
     TResult Function()? chatMessageDeleteSuccessfully,
     TResult Function()? messagesMarkedAsReadSuccessfully,
     TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatConversationUpdated != null) {
@@ -1423,6 +1533,9 @@ class _$ChatConversationUpdatedImpl implements ChatConversationUpdated {
     messagesMarkedAsReadSuccessfully,
     required TResult Function(ChatConversationUpdated value)
     chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
   }) {
     return chatConversationUpdated(this);
   }
@@ -1441,6 +1554,8 @@ class _$ChatConversationUpdatedImpl implements ChatConversationUpdated {
     TResult? Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
   }) {
     return chatConversationUpdated?.call(this);
   }
@@ -1459,6 +1574,8 @@ class _$ChatConversationUpdatedImpl implements ChatConversationUpdated {
     TResult Function(MessagesMarkedAsReadSuccessfully value)?
     messagesMarkedAsReadSuccessfully,
     TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
     required TResult orElse(),
   }) {
     if (chatConversationUpdated != null) {
@@ -1478,5 +1595,419 @@ abstract class ChatConversationUpdated implements ChatState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChatConversationUpdatedImplCopyWith<_$ChatConversationUpdatedImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChatDoctorInfoLoadedImplCopyWith<$Res> {
+  factory _$$ChatDoctorInfoLoadedImplCopyWith(
+    _$ChatDoctorInfoLoadedImpl value,
+    $Res Function(_$ChatDoctorInfoLoadedImpl) then,
+  ) = __$$ChatDoctorInfoLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DoctorModel doctor});
+}
+
+/// @nodoc
+class __$$ChatDoctorInfoLoadedImplCopyWithImpl<$Res>
+    extends _$ChatStateCopyWithImpl<$Res, _$ChatDoctorInfoLoadedImpl>
+    implements _$$ChatDoctorInfoLoadedImplCopyWith<$Res> {
+  __$$ChatDoctorInfoLoadedImplCopyWithImpl(
+    _$ChatDoctorInfoLoadedImpl _value,
+    $Res Function(_$ChatDoctorInfoLoadedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? doctor = null}) {
+    return _then(
+      _$ChatDoctorInfoLoadedImpl(
+        null == doctor
+            ? _value.doctor
+            : doctor // ignore: cast_nullable_to_non_nullable
+                as DoctorModel,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ChatDoctorInfoLoadedImpl implements ChatDoctorInfoLoaded {
+  const _$ChatDoctorInfoLoadedImpl(this.doctor);
+
+  @override
+  final DoctorModel doctor;
+
+  @override
+  String toString() {
+    return 'ChatState.chatDoctorInfoLoaded(doctor: $doctor)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChatDoctorInfoLoadedImpl &&
+            (identical(other.doctor, doctor) || other.doctor == doctor));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, doctor);
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChatDoctorInfoLoadedImplCopyWith<_$ChatDoctorInfoLoadedImpl>
+  get copyWith =>
+      __$$ChatDoctorInfoLoadedImplCopyWithImpl<_$ChatDoctorInfoLoadedImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() chatInitial,
+    required TResult Function() chatLoading,
+    required TResult Function(List<ChatModel> messages) chatSuccess,
+    required TResult Function(String message) chatError,
+    required TResult Function() chatMessageSentSuccessfully,
+    required TResult Function() chatMessageDeleteSuccessfully,
+    required TResult Function() messagesMarkedAsReadSuccessfully,
+    required TResult Function(Map<String, dynamic> data)
+    chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
+  }) {
+    return chatDoctorInfoLoaded(doctor);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? chatInitial,
+    TResult? Function()? chatLoading,
+    TResult? Function(List<ChatModel> messages)? chatSuccess,
+    TResult? Function(String message)? chatError,
+    TResult? Function()? chatMessageSentSuccessfully,
+    TResult? Function()? chatMessageDeleteSuccessfully,
+    TResult? Function()? messagesMarkedAsReadSuccessfully,
+    TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
+  }) {
+    return chatDoctorInfoLoaded?.call(doctor);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? chatInitial,
+    TResult Function()? chatLoading,
+    TResult Function(List<ChatModel> messages)? chatSuccess,
+    TResult Function(String message)? chatError,
+    TResult Function()? chatMessageSentSuccessfully,
+    TResult Function()? chatMessageDeleteSuccessfully,
+    TResult Function()? messagesMarkedAsReadSuccessfully,
+    TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
+    required TResult orElse(),
+  }) {
+    if (chatDoctorInfoLoaded != null) {
+      return chatDoctorInfoLoaded(doctor);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChatInitial value) chatInitial,
+    required TResult Function(ChatLoading value) chatLoading,
+    required TResult Function(ChatSuccess value) chatSuccess,
+    required TResult Function(ChatError value) chatError,
+    required TResult Function(ChatMessageSentSuccessfully value)
+    chatMessageSentSuccessfully,
+    required TResult Function(ChatMessageDeleteSuccessfully value)
+    chatMessageDeleteSuccessfully,
+    required TResult Function(MessagesMarkedAsReadSuccessfully value)
+    messagesMarkedAsReadSuccessfully,
+    required TResult Function(ChatConversationUpdated value)
+    chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
+  }) {
+    return chatDoctorInfoLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChatInitial value)? chatInitial,
+    TResult? Function(ChatLoading value)? chatLoading,
+    TResult? Function(ChatSuccess value)? chatSuccess,
+    TResult? Function(ChatError value)? chatError,
+    TResult? Function(ChatMessageSentSuccessfully value)?
+    chatMessageSentSuccessfully,
+    TResult? Function(ChatMessageDeleteSuccessfully value)?
+    chatMessageDeleteSuccessfully,
+    TResult? Function(MessagesMarkedAsReadSuccessfully value)?
+    messagesMarkedAsReadSuccessfully,
+    TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
+  }) {
+    return chatDoctorInfoLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChatInitial value)? chatInitial,
+    TResult Function(ChatLoading value)? chatLoading,
+    TResult Function(ChatSuccess value)? chatSuccess,
+    TResult Function(ChatError value)? chatError,
+    TResult Function(ChatMessageSentSuccessfully value)?
+    chatMessageSentSuccessfully,
+    TResult Function(ChatMessageDeleteSuccessfully value)?
+    chatMessageDeleteSuccessfully,
+    TResult Function(MessagesMarkedAsReadSuccessfully value)?
+    messagesMarkedAsReadSuccessfully,
+    TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
+    required TResult orElse(),
+  }) {
+    if (chatDoctorInfoLoaded != null) {
+      return chatDoctorInfoLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChatDoctorInfoLoaded implements ChatState {
+  const factory ChatDoctorInfoLoaded(final DoctorModel doctor) =
+      _$ChatDoctorInfoLoadedImpl;
+
+  DoctorModel get doctor;
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChatDoctorInfoLoadedImplCopyWith<_$ChatDoctorInfoLoadedImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChatPatientInfoLoadedImplCopyWith<$Res> {
+  factory _$$ChatPatientInfoLoadedImplCopyWith(
+    _$ChatPatientInfoLoadedImpl value,
+    $Res Function(_$ChatPatientInfoLoadedImpl) then,
+  ) = __$$ChatPatientInfoLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PatientModel patient});
+}
+
+/// @nodoc
+class __$$ChatPatientInfoLoadedImplCopyWithImpl<$Res>
+    extends _$ChatStateCopyWithImpl<$Res, _$ChatPatientInfoLoadedImpl>
+    implements _$$ChatPatientInfoLoadedImplCopyWith<$Res> {
+  __$$ChatPatientInfoLoadedImplCopyWithImpl(
+    _$ChatPatientInfoLoadedImpl _value,
+    $Res Function(_$ChatPatientInfoLoadedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? patient = null}) {
+    return _then(
+      _$ChatPatientInfoLoadedImpl(
+        null == patient
+            ? _value.patient
+            : patient // ignore: cast_nullable_to_non_nullable
+                as PatientModel,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ChatPatientInfoLoadedImpl implements ChatPatientInfoLoaded {
+  const _$ChatPatientInfoLoadedImpl(this.patient);
+
+  @override
+  final PatientModel patient;
+
+  @override
+  String toString() {
+    return 'ChatState.chatPatientInfoLoaded(patient: $patient)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChatPatientInfoLoadedImpl &&
+            (identical(other.patient, patient) || other.patient == patient));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, patient);
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChatPatientInfoLoadedImplCopyWith<_$ChatPatientInfoLoadedImpl>
+  get copyWith =>
+      __$$ChatPatientInfoLoadedImplCopyWithImpl<_$ChatPatientInfoLoadedImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() chatInitial,
+    required TResult Function() chatLoading,
+    required TResult Function(List<ChatModel> messages) chatSuccess,
+    required TResult Function(String message) chatError,
+    required TResult Function() chatMessageSentSuccessfully,
+    required TResult Function() chatMessageDeleteSuccessfully,
+    required TResult Function() messagesMarkedAsReadSuccessfully,
+    required TResult Function(Map<String, dynamic> data)
+    chatConversationUpdated,
+    required TResult Function(DoctorModel doctor) chatDoctorInfoLoaded,
+    required TResult Function(PatientModel patient) chatPatientInfoLoaded,
+  }) {
+    return chatPatientInfoLoaded(patient);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? chatInitial,
+    TResult? Function()? chatLoading,
+    TResult? Function(List<ChatModel> messages)? chatSuccess,
+    TResult? Function(String message)? chatError,
+    TResult? Function()? chatMessageSentSuccessfully,
+    TResult? Function()? chatMessageDeleteSuccessfully,
+    TResult? Function()? messagesMarkedAsReadSuccessfully,
+    TResult? Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult? Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult? Function(PatientModel patient)? chatPatientInfoLoaded,
+  }) {
+    return chatPatientInfoLoaded?.call(patient);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? chatInitial,
+    TResult Function()? chatLoading,
+    TResult Function(List<ChatModel> messages)? chatSuccess,
+    TResult Function(String message)? chatError,
+    TResult Function()? chatMessageSentSuccessfully,
+    TResult Function()? chatMessageDeleteSuccessfully,
+    TResult Function()? messagesMarkedAsReadSuccessfully,
+    TResult Function(Map<String, dynamic> data)? chatConversationUpdated,
+    TResult Function(DoctorModel doctor)? chatDoctorInfoLoaded,
+    TResult Function(PatientModel patient)? chatPatientInfoLoaded,
+    required TResult orElse(),
+  }) {
+    if (chatPatientInfoLoaded != null) {
+      return chatPatientInfoLoaded(patient);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChatInitial value) chatInitial,
+    required TResult Function(ChatLoading value) chatLoading,
+    required TResult Function(ChatSuccess value) chatSuccess,
+    required TResult Function(ChatError value) chatError,
+    required TResult Function(ChatMessageSentSuccessfully value)
+    chatMessageSentSuccessfully,
+    required TResult Function(ChatMessageDeleteSuccessfully value)
+    chatMessageDeleteSuccessfully,
+    required TResult Function(MessagesMarkedAsReadSuccessfully value)
+    messagesMarkedAsReadSuccessfully,
+    required TResult Function(ChatConversationUpdated value)
+    chatConversationUpdated,
+    required TResult Function(ChatDoctorInfoLoaded value) chatDoctorInfoLoaded,
+    required TResult Function(ChatPatientInfoLoaded value)
+    chatPatientInfoLoaded,
+  }) {
+    return chatPatientInfoLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChatInitial value)? chatInitial,
+    TResult? Function(ChatLoading value)? chatLoading,
+    TResult? Function(ChatSuccess value)? chatSuccess,
+    TResult? Function(ChatError value)? chatError,
+    TResult? Function(ChatMessageSentSuccessfully value)?
+    chatMessageSentSuccessfully,
+    TResult? Function(ChatMessageDeleteSuccessfully value)?
+    chatMessageDeleteSuccessfully,
+    TResult? Function(MessagesMarkedAsReadSuccessfully value)?
+    messagesMarkedAsReadSuccessfully,
+    TResult? Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult? Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult? Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
+  }) {
+    return chatPatientInfoLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChatInitial value)? chatInitial,
+    TResult Function(ChatLoading value)? chatLoading,
+    TResult Function(ChatSuccess value)? chatSuccess,
+    TResult Function(ChatError value)? chatError,
+    TResult Function(ChatMessageSentSuccessfully value)?
+    chatMessageSentSuccessfully,
+    TResult Function(ChatMessageDeleteSuccessfully value)?
+    chatMessageDeleteSuccessfully,
+    TResult Function(MessagesMarkedAsReadSuccessfully value)?
+    messagesMarkedAsReadSuccessfully,
+    TResult Function(ChatConversationUpdated value)? chatConversationUpdated,
+    TResult Function(ChatDoctorInfoLoaded value)? chatDoctorInfoLoaded,
+    TResult Function(ChatPatientInfoLoaded value)? chatPatientInfoLoaded,
+    required TResult orElse(),
+  }) {
+    if (chatPatientInfoLoaded != null) {
+      return chatPatientInfoLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChatPatientInfoLoaded implements ChatState {
+  const factory ChatPatientInfoLoaded(final PatientModel patient) =
+      _$ChatPatientInfoLoadedImpl;
+
+  PatientModel get patient;
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChatPatientInfoLoadedImplCopyWith<_$ChatPatientInfoLoadedImpl>
   get copyWith => throw _privateConstructorUsedError;
 }

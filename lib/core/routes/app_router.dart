@@ -176,6 +176,7 @@ class AppRouter {
 
       case Routes.patientScreen:
         final patientId = FirebaseAuth.instance.currentUser?.uid;
+        final initialIndex = arguments as int? ;
         return MaterialPageRoute(
           builder:
               (_) => MultiBlocProvider(
@@ -189,7 +190,7 @@ class AppRouter {
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
                 ],
-                child: PatientScreen(),
+                child: PatientScreen(initialIndex: initialIndex,),
               ),
         );
 

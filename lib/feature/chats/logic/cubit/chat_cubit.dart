@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 
 import 'dart:typed_data';
@@ -6,29 +8,74 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/chats/data/repository/chat_repo.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_session_manager.dart';
+import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
+import 'package:leuko_care/feature/patients/data/repository/patient_repo.dart';
 import '../../data/models/chat_model.dart';
 import 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   final ChatRepository _chatRepository;
+  final DoctorRepository _doctorRepository;
+  final PatientRepository _patientRepository;
 
-  ChatCubit(this._chatRepository) : super(const ChatState.chatInitial());
+  ChatCubit(
+    this._chatRepository,
+    this._doctorRepository,
+    this._patientRepository,
+  ) : super(const ChatState.chatInitial());
 
+  StreamSubscription? _doctorSubscription;
+  StreamSubscription? _patientSubscription;
 
-void setCurrentChatId(String chatId) {
-  ChatSessionManager().currentChatId = chatId;
-}
+  void getDoctorInfo(String doctorId) {
+    _doctorSubscription?.cancel();
+    _doctorSubscription = _doctorRepository
+        .getDoctorByDoctorIdStream(doctorId)
+        .listen((doctor) {
+          emit(ChatDoctorInfoLoaded(doctor));
+        });
+  }
 
-   static String getChatId(String uid1, String uid2) {
+  void getPatientInfo(String patientId) {
+    _patientSubscription?.cancel();
+    _patientSubscription = _patientRepository
+        .getPatientByIdStream(patientId)
+        .listen((patient) {
+          emit(ChatPatientInfoLoaded(patient));
+        });
+  }
+
+  @override
+  Future<void> close() {
+    _doctorSubscription?.cancel();
+    _patientSubscription?.cancel();
+    return super.close();
+  }
+
+  void setCurrentChatId(String chatId) {
+    ChatSessionManager().currentChatId = chatId;
+  }
+
+  static String getChatId(String uid1, String uid2) {
     return uid1.hashCode <= uid2.hashCode ? '${uid1}_$uid2' : '${uid2}_$uid1';
   }
 
-  void getMessages({required String senderId, required String receiverId,String? chatIdFromNotification}) {
+  void getMessages({
+    required String senderId,
+    required String receiverId,
+    String? chatIdFromNotification,
+  }) {
+    print('iam in getMessages');
+
     emit(ChatLoading());
 
     try {
       _chatRepository
-          .getMessages(senderId: senderId, receiverId: receiverId,chatIdFromNotification:chatIdFromNotification )
+          .getMessages(
+            senderId: senderId,
+            receiverId: receiverId,
+            chatIdFromNotification: chatIdFromNotification,
+          )
           .listen((messages) {
             emit(ChatSuccess(messages));
           });

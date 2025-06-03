@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +18,9 @@ void main() async{
   await FontFamilyManager.init(); 
   await NotificationService.init();
   await ScreenUtil.ensureScreenSize();  
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.debug,
+  );
   setupGetIt();
   final localeCode = await SharedPrefHelper.getLocale();
   final startLocale = Locale(localeCode);

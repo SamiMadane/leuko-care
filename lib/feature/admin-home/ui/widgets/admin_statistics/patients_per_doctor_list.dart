@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
@@ -5,7 +6,6 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
-import 'package:leuko_care/feature/patients/ui/widgets/patient_user/home/patient_examined/health_tips_widget.dart';
 
 class PatientsPerDoctorList extends StatelessWidget {
   final Map<String, int> data;

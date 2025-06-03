@@ -4,6 +4,8 @@ class ChatSessionManager {
   ChatSessionManager._internal();
 
   String? currentChatId;
+  String? pendingChatIdToOpen;
+
 
   bool get isChatScreenActive => currentChatId != null;
 }

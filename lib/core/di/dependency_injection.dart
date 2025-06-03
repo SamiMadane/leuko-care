@@ -58,6 +58,6 @@ Future<void> setupGetIt() async {
     () => GetDoctorsOrderedByPatientsCountUseCase(getIt<PatientRepository>()),
   );
   getIt.registerLazySingleton(() => ChatRepository(getIt<FirebaseFirestore>()));
-  getIt.registerFactory(() => ChatCubit(getIt<ChatRepository>()));
+  getIt.registerFactory(() => ChatCubit(getIt<ChatRepository>(),getIt<DoctorRepository>(),getIt<PatientRepository>()));
 
 }

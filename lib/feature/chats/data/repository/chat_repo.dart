@@ -131,6 +131,7 @@ class ChatRepository {
 
         for (final token in tokens) {
           if (token.isNotEmpty) {
+            print('token i need to send him is $token');
             await sendNotification(
               token: token,
               title: title,
