@@ -10,7 +10,6 @@ import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
-import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
@@ -80,14 +79,10 @@ class _DoctorCard extends StatelessWidget {
           },
         );
         if (shouldOpenChat == true) {
-          context.read<ChatCubit>().markMessagesAsReadForPatient(
-            patient.id!,
-            doctor.id!,
-          );
           context.read<PatientCubit>().changeSelectedIndex(1);
         }
       },
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(RadiusManager.r16),
       child: Stack(
         children: [
           Container(

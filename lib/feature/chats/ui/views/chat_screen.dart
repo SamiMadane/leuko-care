@@ -45,26 +45,24 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+    var chatCubit =  context.read<ChatCubit>();
     final chatId =
         widget.chatId ??
         ChatCubit.getChatId(widget.currentUserId, widget.otherUserId);
-    context.read<ChatCubit>().setCurrentChatId(chatId);
+    chatCubit.setCurrentChatId(chatId);
 
     // تحديد الطرف الآخر وجلب بياناته
     if (widget.userType == 'patient') {
-      context.read<ChatCubit>().getDoctorInfo(widget.otherUserId);
+      chatCubit.getDoctorInfo(widget.otherUserId);
       // in patient screen i will asign chat id  to current chat id
       ChatSessionManager().currentChatId = null;
+      chatCubit.markMessagesAsReadForPatient(widget.currentUserId, widget.otherUserId);
     } else {
       context.read<ChatCubit>().getPatientInfo(widget.otherUserId);
       ChatSessionManager().currentChatId = chatId;
+      chatCubit.markMessagesAsReadForDoctor(widget.currentUserId, widget.otherUserId);
     }
 
-    context.read<ChatCubit>().getMessages(
-      senderId: widget.currentUserId,
-      receiverId: widget.otherUserId,
-      chatIdFromNotification: chatId,
-    );
   }
 
   @override

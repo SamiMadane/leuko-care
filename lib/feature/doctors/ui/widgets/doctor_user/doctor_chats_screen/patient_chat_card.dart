@@ -46,7 +46,6 @@ class PatientChatCard extends StatelessWidget {
   borderRadius: BorderRadius.circular(RadiusManager.r16),
       child: InkWell(
         onTap: () {
-          context.read<ChatCubit>().markMessagesAsReadForDoctor(doctor.id!, patient.id!);
           Navigator.push(
             context,
             MaterialPageRoute(

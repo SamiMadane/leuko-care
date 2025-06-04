@@ -124,10 +124,7 @@ class _PatientScreenState extends State<PatientScreen> {
                   final chatId = ChatCubit.getChatId(patientId, doctorId);
                   ChatSessionManager().currentChatId = chatId;
 
-                  context.read<ChatCubit>().markMessagesAsReadForPatient(
-                        patientId,
-                        doctorId,
-                      );
+                
                 } else {
                   ChatSessionManager().currentChatId = null;
                 }

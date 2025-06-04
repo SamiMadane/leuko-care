@@ -63,10 +63,7 @@ class ChatCubit extends Cubit<ChatState> {
   void getMessages({
     required String senderId,
     required String receiverId,
-    String? chatIdFromNotification,
   }) {
-    print('iam in getMessages');
-
     emit(ChatLoading());
 
     try {
@@ -74,7 +71,6 @@ class ChatCubit extends Cubit<ChatState> {
           .getMessages(
             senderId: senderId,
             receiverId: receiverId,
-            chatIdFromNotification: chatIdFromNotification,
           )
           .listen((messages) {
             emit(ChatSuccess(messages));

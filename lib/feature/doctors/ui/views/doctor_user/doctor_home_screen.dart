@@ -49,6 +49,7 @@ class DoctorHomeScreen extends StatelessWidget {
               imageUrl: doctor.profileImage,
               subMessage: 'Your patients at a glance.'.tr(),
             ),
+            
             SizedBox(height: HeightManager.h24),
             StatsCardsSection(total: totalPatients, pending: pending),
             SizedBox(height: HeightManager.h24),

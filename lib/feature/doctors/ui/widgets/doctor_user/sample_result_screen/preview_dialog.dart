@@ -29,7 +29,7 @@ void showPreviewDialog(BuildContext context, Uint8List image, DoctorModel doctor
                     otherUserId: patient.id!,
                     initialDoctorMessage: initialDoctorMessage,
                     initialDoctorImage: image,
-                    userType: 'patient',
+                    userType: 'doctor',
                   ),
                 ),
               ),

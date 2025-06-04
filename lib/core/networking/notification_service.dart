@@ -22,6 +22,8 @@ class NotificationService {
   static final FirebaseMessaging _messaging = FirebaseMessaging.instance;
   static final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  static Map<String, dynamic>? _pendingNotificationData;
+  static String? _pendingUserType;
 
   static void listenToTokenRefresh({
     required AuthRepository authRepository,
@@ -60,6 +62,8 @@ class NotificationService {
       print('User declined or has not accepted permission');
     }
 
+    final userType = await SharedPrefHelper.getString('userType');
+
     // 2. تهيئة flutter_local_notifications
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -70,13 +74,6 @@ class NotificationService {
           iOS: DarwinInitializationSettings(),
         );
 
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
-    if (initialMessage != null) {
-      print('🔥 Opened app from terminated by notification');
-      _handleNotificationNavigation(initialMessage.data);
-    }
-
     await _localNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
@@ -84,8 +81,12 @@ class NotificationService {
         if (response.payload == null) return;
 
         final payloadMap = jsonDecode(response.payload!);
-        print ('Click in Notification in foreground');
-        _handleNotificationNavigation(payloadMap);
+        print('Click in Notification in foreground');
+        handleNotificationNavigation(
+          navigatorKey.currentContext!,
+          payloadMap,
+          userType,
+        );
       },
     );
 
@@ -108,7 +109,11 @@ class NotificationService {
     // 6. التعامل مع فتح التطبيق من خلال إشعار
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('📲 Opened from background by tapping notification');
-      _handleNotificationNavigation(message.data);
+      handleNotificationNavigation(
+        navigatorKey.currentContext!,
+        message.data,
+        userType,
+      );
     });
 
     // 7. الحصول على التوكن وتخزينه (يجب إضافة دالة الحفظ الخاصة بك)
@@ -158,8 +163,10 @@ class NotificationService {
     }
   }
 
-  static Future<void> _handleNotificationNavigation(
+  static Future<void> handleNotificationNavigation(
+    BuildContext context,
     Map<String, dynamic> data,
+    String userType,
   ) async {
     final chatId = data['chatId'];
     final senderId = data['senderId'];
@@ -170,19 +177,15 @@ class NotificationService {
       print('❌ chatId is null or empty');
       return;
     }
-    print('iam in _handleNotificationNavigation');
 
-
-    final userType = await SharedPrefHelper.getString('userType');
     ChatSessionManager().currentChatId = chatId;
 
     if (userType == 'patient' && type == 'chat') {
-      navigatorKey.currentState?.pushReplacementNamed(
-        Routes.patientScreen,
-        arguments: 1,
-      );
+      Navigator.of(
+        context,
+      ).pushReplacementNamed(Routes.patientScreen, arguments: 1);
     } else if (userType == 'doctor' && type == 'chat') {
-      navigatorKey.currentState?.push(
+      Navigator.of(context).push(
         MaterialPageRoute(
           builder:
               (_) => BlocProvider.value(
@@ -195,6 +198,28 @@ class NotificationService {
               ),
         ),
       );
+    }
+  }
+
+  static void setPendingNotification(
+    Map<String, dynamic> data,
+    String? userType,
+  ) {
+    _pendingNotificationData = data;
+    _pendingUserType = userType;
+  }
+
+  static void processPendingNotificationIfNeeded() {
+    if (_pendingNotificationData != null &&
+        _pendingUserType != null &&
+        navigatorKey.currentContext != null) {
+      handleNotificationNavigation(
+        navigatorKey.currentContext!,
+        _pendingNotificationData!,
+        _pendingUserType!,
+      );
+      _pendingNotificationData = null;
+      _pendingUserType = null;
     }
   }
 }
