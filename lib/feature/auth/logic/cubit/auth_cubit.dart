@@ -14,50 +14,66 @@ class AuthCubit extends Cubit<AuthState> {
   final formKey = GlobalKey<FormState>();
 
   Map<String, Map<String, dynamic>> userTypeData = {
-      'admin': {
-        'title': 'Welcome, Admin'.tr(),
-        'image': AssetsManager.loginAdminImage,
-      },
-      'doctor': {
-        'title': 'Welcome, Doctor'.tr(),
-        'image':  AssetsManager.loginDoctorImage,
-      },
-      'patient': {
-        'title': 'Welcome, Patient'.tr(),
-        'image':  AssetsManager.loginPatientImage,
-      },
-    };
+    'admin': {
+      'title': 'Welcome, Admin'.tr(),
+      'image': AssetsManager.loginAdminImage,
+    },
+    'doctor': {
+      'title': 'Welcome, Doctor'.tr(),
+      'image': AssetsManager.loginDoctorImage,
+    },
+    'patient': {
+      'title': 'Welcome, Patient'.tr(),
+      'image': AssetsManager.loginPatientImage,
+    },
+  };
 
   void checkAdmin(String userType) async {
     emit(const LoginLoading());
-    final result = await loginRepository.login(emailController.text, passwordController.text,userType);
+    final result = await loginRepository.login(
+      emailController.text,
+      passwordController.text,
+      userType,
+    );
     result.when(
       success: (user) {
         user != null
-            ? emit(LoginSuccess(user,userType))
+            ? emit(LoginSuccess(user, userType))
             : emit(LoginError('User not found'.tr()));
       },
       failure: (error) => emit(LoginError(error)),
     );
   }
 
-    Future<void> signInWithGoogle(String userType) async {
-    emit(const LoginLoading());
-      final result = await loginRepository.signInWithGoogle(userType);
-      result.when(
-        success: (user) => {
-          print ("signInWithGoogle success and user is $user"), 
-            user != null
-            ? emit(LoginSuccess(user,userType))
-            : emit(LoginError('Failed to sign in with Google'.tr()))
-        },
-        failure: (error) {
-          print ("signInWithGoogle failure and error is $error");
-          emit(LoginError(error));
-        }
-      );
+  Future<void> updateLanguageInFirestore({
+    required String userId, 
+    required String userType, 
+  }) async {
+    print ('=========== iam in cubit of updateUserLanguage');
+      if (userType == 'admin') return;
+    
+      await loginRepository.updateUserLanguage(userId, userType);
   }
-    Future<void> signOut() async {
+
+  Future<void> signInWithGoogle(String userType) async {
+    emit(const LoginLoading());
+    final result = await loginRepository.signInWithGoogle(userType);
+    result.when(
+      success:
+          (user) => {
+            print("signInWithGoogle success and user is $user"),
+            user != null
+                ? emit(LoginSuccess(user, userType))
+                : emit(LoginError('Failed to sign in with Google'.tr())),
+          },
+      failure: (error) {
+        print("signInWithGoogle failure and error is $error");
+        emit(LoginError(error));
+      },
+    );
+  }
+
+  Future<void> signOut() async {
     emit(SignedOutStateLoading());
     try {
       await loginRepository.signOut();

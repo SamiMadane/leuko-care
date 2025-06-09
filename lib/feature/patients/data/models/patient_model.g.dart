@@ -24,6 +24,7 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
   latestSampleImageUrl: json['latestSampleImageUrl'] as String?,
   lastExamDate: json['lastExamDate'] as String?,
   fcmToken: json['fcmToken'] as String?,
+  language: json['language'] as String?,
   gender: json['gender'] as String,
 );
 
@@ -47,4 +48,5 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
       'lastExamDate': instance.lastExamDate,
       'gender': instance.gender,
       'fcmToken': instance.fcmToken,
+      'language': instance.language,
     };

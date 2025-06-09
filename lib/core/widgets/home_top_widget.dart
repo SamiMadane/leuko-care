@@ -12,11 +12,14 @@ import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
 import 'package:leuko_care/core/widgets/signout_bloc_listener.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:shimmer/shimmer.dart';
+
 class HomeTopWidget extends StatelessWidget {
   final String name;
   final String? imageUrl;
   final String subMessage;
   final bool showImage;
+  final String userType;
+  final String userId;
 
   const HomeTopWidget({
     super.key,
@@ -24,6 +27,8 @@ class HomeTopWidget extends StatelessWidget {
     this.imageUrl,
     required this.subMessage,
     this.showImage = true,
+    required this.userType,
+    required this.userId,
   });
 
   @override
@@ -33,47 +38,53 @@ class HomeTopWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      Row(
-  crossAxisAlignment: CrossAxisAlignment.center,
-  children: [
-    if (imageUrl != null && imageUrl!.isNotEmpty) _buildProfileImage(),
-    if (imageUrl != null && imageUrl!.isNotEmpty)
-      SizedBox(width: WidthManager.w20),
-    Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            tr('hi_with_name', namedArgs: {'name': tr(name)}),
-            style: getBoldTextStyle(
-              fontSize: FontSizeManager.s18,
-              color: ColorsManager.darkBlue,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (imageUrl != null && imageUrl!.isNotEmpty) _buildProfileImage(),
+            if (imageUrl != null && imageUrl!.isNotEmpty)
+              SizedBox(width: WidthManager.w20),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    tr('hi_with_name', namedArgs: {'name': tr(name)}),
+                    style: getBoldTextStyle(
+                      fontSize: FontSizeManager.s18,
+                      color: ColorsManager.darkBlue,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: HeightManager.h6),
+                  Text(
+                    tr(subMessage),
+                    style: getMediumTextStyle(
+                      fontSize: FontSizeManager.s13,
+                      color: ColorsManager.gray,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: HeightManager.h6),
-          Text(
-            tr(subMessage),
-            style: getMediumTextStyle(
-              fontSize: FontSizeManager.s13,
-              color: ColorsManager.gray,
+            CircleAvatar(
+              radius: RadiusManager.r24,
+              backgroundColor: ColorsManager.moreLighterGray,
+              child: IconButton(
+                icon: Icon(Icons.settings, color: ColorsManager.darkBlue),
+                onPressed:
+                    () => _showMoreOptionsBottomSheet(
+                      context,
+                      cubit,
+                      userType,
+                      userId,
+                    ),
+              ),
             ),
-          ),
-        ],
-      ),
-    ),
-    CircleAvatar(
-      radius: RadiusManager.r24,
-      backgroundColor: ColorsManager.moreLighterGray,
-      child: IconButton(
-        icon: Icon(Icons.settings, color: ColorsManager.darkBlue),
-        onPressed: () => _showMoreOptionsBottomSheet(context, cubit),
-      ),
-    ),
-    const SignOutBlocListener(),
-  ],
-),
+            const SignOutBlocListener(),
+          ],
+        ),
 
         SizedBox(height: HeightManager.h8),
       ],
@@ -85,7 +96,11 @@ class HomeTopWidget extends StatelessWidget {
       return CircleAvatar(
         radius: RadiusManager.r30,
         backgroundColor: ColorsManager.lightGray,
-        child: Icon(Icons.account_circle, size: WidthManager.w40, color: Colors.white),
+        child: Icon(
+          Icons.account_circle,
+          size: WidthManager.w40,
+          color: Colors.white,
+        ),
       );
     }
 
@@ -103,11 +118,12 @@ class HomeTopWidget extends StatelessWidget {
             height: HeightManager.h60,
             fit: BoxFit.cover,
             placeholder: (_, __) => _buildShimmerLoading(),
-            errorWidget: (_, __, ___) => Icon(
-              Icons.account_circle,
-              size: WidthManager.w60,
-              color: ColorsManager.gray,
-            ),
+            errorWidget:
+                (_, __, ___) => Icon(
+                  Icons.account_circle,
+                  size: WidthManager.w60,
+                  color: ColorsManager.gray,
+                ),
           ),
         ),
       ),
@@ -129,7 +145,13 @@ class HomeTopWidget extends StatelessWidget {
     );
   }
 }
-void _showMoreOptionsBottomSheet(BuildContext context, AuthCubit cubit) {
+
+void _showMoreOptionsBottomSheet(
+  BuildContext context,
+  AuthCubit cubit,
+  String userType,
+  String userId,
+) {
   showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(
@@ -151,7 +173,7 @@ void _showMoreOptionsBottomSheet(BuildContext context, AuthCubit cubit) {
                 color: ColorsManager.primaryColor,
               ),
               title: Text(
-                context.locale.languageCode == 'en' ? 'العربية' : 'English',
+                'switch_language'.tr(),
                 style: getMediumTextStyle(
                   fontSize: FontSizeManager.s16,
                   color: ColorsManager.darkBlue,
@@ -165,6 +187,10 @@ void _showMoreOptionsBottomSheet(BuildContext context, AuthCubit cubit) {
                         : const Locale('en');
                 context.setLocale(newLocale);
                 SharedPrefHelper.setLocale(newLocale.languageCode);
+                cubit.updateLanguageInFirestore(
+                  userId: userId,
+                  userType: userType,
+                );
                 Navigator.pop(context); // إغلاق الشيت
               },
             ),

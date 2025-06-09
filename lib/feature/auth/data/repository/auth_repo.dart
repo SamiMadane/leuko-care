@@ -19,7 +19,7 @@ class AuthRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<void> saveFcmToken(String uid, String userType, String token) async {
-      print('Saving FCM token for user: $uid token: $token');
+    print('Saving FCM token for user: $uid token: $token');
     final docRef = FirebaseFirestore.instance.collection('fcmTokens').doc(uid);
 
     try {
@@ -50,6 +50,25 @@ class AuthRepository {
       }
     } catch (e) {
       print("Failed to save FCM token: $e");
+    }
+  }
+
+  Future<void> updateUserLanguage(String uid, String userType) async {
+    try {
+      print('=========== iam in repo of updateUserLanguage');
+      final languageCode = await SharedPrefHelper.getLocale();
+      print('in repo languageCode = $languageCode');
+      print('in repo userType = $userType');
+      print('in repo uid = $uid');
+
+      final docRef = await FirebaseFirestore.instance
+          .collection(userType == 'doctor' ? 'doctors' : 'patients')
+          .doc(uid);
+      final docSnapshot = await docRef.get();
+      print('Document exists? ${docSnapshot.exists}');
+      docRef.update({'language': languageCode});
+    } catch (e) {
+      print('Error updating language for user: $e');
     }
   }
 
@@ -119,11 +138,14 @@ class AuthRepository {
             print('Saving FCM token after login: $token');
             await saveFcmToken(user.uid, storedUserType, token);
           }
+
           NotificationService.listenToTokenRefresh(
             authRepository: this,
             uid: user.uid,
             userType: storedUserType,
           );
+          await updateUserLanguage(user.uid, storedUserType);
+
           return OperationResult.success(user);
         } else {
           return _handleEmailVerification(user);
@@ -219,6 +241,7 @@ class AuthRepository {
             uid: user.uid,
             userType: storedUserType,
           );
+          await updateUserLanguage(user.uid, storedUserType);
 
           return OperationResult.success(user);
         } else {

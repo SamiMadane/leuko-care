@@ -14,6 +14,8 @@ class DoctorModel {
   final String userType;
   final String gender;
   final String? fcmToken;
+  final String? language;
+  
 
   DoctorModel({
     required this.id,
@@ -25,6 +27,7 @@ class DoctorModel {
     required this.profileImage,
     required this.userType,
     this.fcmToken,
+    this.language,
     required this.gender,
   });
 
@@ -43,6 +46,7 @@ class DoctorModel {
     String? userType,
     String? gender,
     String? fcmToken,
+    String? language
   }) {
     return DoctorModel(
       id: id ?? this.id,
@@ -55,6 +59,7 @@ class DoctorModel {
       userType: userType ?? this.userType,
       gender: gender ?? this.gender,
       fcmToken: fcmToken ?? this.fcmToken,
+      language: language ?? this.language,
     );
   }
 }

@@ -145,6 +145,7 @@
     "other": "منذ {count} دقيقة"
   },
   "Filter By": "تصفية حسب",
+  "switch_language":"English",
   "From Gallery": "من المعرض",
   "admin_dashboard_description": "وصول كامل\nلإدارة\nالأطباء والمرضى.",
   "Gallery": "المعرض",
@@ -160,7 +161,7 @@
   "Healthy": "سليم",
   "select_filter": "اختر {filter}",
   "hi_with_name": "مرحبا, {name} 👋",
-  "new_message_from": "{} أرسل رسالة جديدة",
+  "new_message_from": "رسالة جديدة من {name}",
   "image_message": "📷 صورة جديدة",
   "Your health matters most": "صحتك هي الأهم",
   "last_message_at": "آخر رسالة في {time}",

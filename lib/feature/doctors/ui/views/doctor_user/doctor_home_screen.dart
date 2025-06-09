@@ -45,11 +45,13 @@ class DoctorHomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HomeTopWidget(
-              name: tr('doctor_name', namedArgs: {'name':doctor.name}),
+              name: tr('doctor_name', namedArgs: {'name': doctor.name}),
               imageUrl: doctor.profileImage,
               subMessage: 'Your patients at a glance.'.tr(),
+              userId: doctor.id!,
+              userType: 'doctor',
             ),
-            
+
             SizedBox(height: HeightManager.h24),
             StatsCardsSection(total: totalPatients, pending: pending),
             SizedBox(height: HeightManager.h24),
@@ -57,9 +59,7 @@ class DoctorHomeScreen extends StatelessWidget {
             SizedBox(height: HeightManager.h24),
             HealthStatusSection(patients: patients),
             SizedBox(height: HeightManager.h24),
-            DiseaseStatisticsSection(
-              diseaseCounts: diseaseCounts,
-            ),
+            DiseaseStatisticsSection(diseaseCounts: diseaseCounts),
             SizedBox(height: HeightManager.h24),
             const MedicalTipsSection(),
           ],

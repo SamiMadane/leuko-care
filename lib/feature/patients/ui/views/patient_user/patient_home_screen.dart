@@ -16,7 +16,12 @@ class PatientHomeScreen extends StatelessWidget {
   final PatientModel patient;
   final DoctorModel doctor;
   final ConversationModel? conversation;
-  const PatientHomeScreen({super.key,  required this.patient, required this.doctor,  this.conversation});
+  const PatientHomeScreen({
+    super.key,
+    required this.patient,
+    required this.doctor,
+    this.conversation,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,13 @@ class PatientHomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HomeTopWidget(name: patient.name, imageUrl: patient.profileImage, subMessage: 'Your health matters most',),
+          HomeTopWidget(
+            name: patient.name,
+            imageUrl: patient.profileImage,
+            subMessage: 'Your health matters most',
+            userId: patient.id!,
+            userType: 'patient',
+          ),
           SizedBox(height: HeightManager.h20),
           Row(
             children: [
@@ -49,7 +60,11 @@ class PatientHomeScreen extends StatelessWidget {
           ),
           SizedBox(height: HeightManager.h20),
           patient.isExamined
-              ? PatientExaminedSection(patient: patient, doctor: doctor,conversation: conversation)
+              ? PatientExaminedSection(
+                patient: patient,
+                doctor: doctor,
+                conversation: conversation,
+              )
               : const ExaminationPendingWidget(),
           SizedBox(height: HeightManager.h20),
         ],

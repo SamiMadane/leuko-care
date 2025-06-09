@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import 'package:leuko_care/core/networking/send_notification_services.dart';
@@ -19,9 +20,8 @@ class ChatRepository {
   Stream<List<ChatModel>> getMessages({
     required String senderId,
     required String receiverId,
-    String? chatIdFromNotification,
   }) {
-    final chatId = chatIdFromNotification ?? _getChatId(senderId, receiverId);
+    final chatId =  _getChatId(senderId, receiverId);
 
     return _firestore
         .collection('chats')
@@ -96,15 +96,87 @@ class ChatRepository {
     }
   }
 
+  Future<String> getReceiverLanguage(
+    String receiverId,
+    String userType, {
+    String defaultLang = 'en',
+  }) async {
+    try {
+      final collection = userType == 'doctor' ? 'doctors' : 'patients';
+
+      final documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection(collection)
+              .doc(receiverId)
+              .get();
+
+      if (documentSnapshot.exists) {
+        final data = documentSnapshot.data();
+        final language = data?['language'] as String?;
+        print('getReceiverLanguage return me $language');
+        return language ?? defaultLang;
+      } else {
+        return defaultLang; // لو ما في مستند، نرجع القيمة الافتراضية
+      }
+    } catch (e) {
+      print('Error getting receiver language: $e');
+      return defaultLang; // لو صار خطأ، نرجع القيمة الافتراضية
+    }
+  }
+
+  Future<String> getLocalizedText({
+    required String key,
+    required String languageCode,
+    Map<String, String>? namedArgs,
+  }) async {
+    try {
+      final jsonString = await rootBundle.loadString(
+        'assets/lang/$languageCode.json',
+      );
+      final Map<String, dynamic> translations = json.decode(jsonString);
+
+      String? value = translations[key];
+      if (value == null) return key;
+
+      // استبدال الـ namedArgs إن وجدت
+      if (namedArgs != null) {
+        namedArgs.forEach((placeholder, replacement) {
+          value = value!.replaceAll('{$placeholder}', replacement);
+        });
+      }
+
+      return value!;
+    } catch (e) {
+      print("Error loading localized text: $e");
+      return key;
+    }
+  }
+
   Future<void> sendMessage(ChatModel message) async {
     final chatId = _getChatId(message.senderId, message.receiverId);
     final userType = await SharedPrefHelper.getString('userType');
     final senderName = await getSenderName(message.senderId, userType);
     final isImageMessage = message.text.isEmpty;
-    final title = "new_message_from".tr(
-      args: [userType == 'doctor' ? "Dr. $senderName :" : '${senderName} :'],
+    final receiverType = userType == 'doctor' ? 'patient' : 'doctor';
+    final language = await getReceiverLanguage(
+      message.receiverId,
+      receiverType,
     );
-    final body = isImageMessage ? "image_message".tr() : message.text;
+
+    final title = await getLocalizedText(
+      key: 'new_message_from',
+      languageCode: language,
+      namedArgs: {
+        'name': userType == 'doctor' ? "Dr. $senderName" : senderName,
+      },
+    );
+    final body =
+        isImageMessage
+            ? await getLocalizedText(
+              key: 'image_message',
+              languageCode: language,
+            )
+            : message.text;
 
     try {
       final docRef = await _firestore
@@ -312,5 +384,4 @@ class ChatRepository {
       rethrow;
     }
   }
-  
 }

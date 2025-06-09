@@ -16,6 +16,7 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
   profileImage: json['profileImage'] as String,
   userType: json['userType'] as String,
   fcmToken: json['fcmToken'] as String?,
+  language: json['language'] as String?,
   gender: json['gender'] as String,
 );
 
@@ -31,4 +32,5 @@ Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
       'userType': instance.userType,
       'gender': instance.gender,
       'fcmToken': instance.fcmToken,
+      'language': instance.language,
     };

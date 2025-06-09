@@ -26,7 +26,7 @@ class AdminHomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeTopWidget(name: 'Admin', subMessage: 'How Are you Today?',),
+              HomeTopWidget(name: 'Admin', subMessage: 'How Are you Today?',userId: '',userType: 'admin',),
               const DoctorsBlueContainer(),
               SizedBox(height: HeightManager.h24),
               const DoctorsDepartmentSeeAll(),

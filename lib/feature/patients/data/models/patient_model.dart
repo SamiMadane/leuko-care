@@ -22,6 +22,8 @@ class PatientModel {
   final String? lastExamDate;
   final String gender;
   final String? fcmToken;
+  final String? language;
+
 
   PatientModel({
     required this.id,
@@ -41,6 +43,7 @@ class PatientModel {
     this.latestSampleImageUrl,
     this.lastExamDate,
     this.fcmToken,
+    this.language,
     required this.gender,
   });
 
@@ -70,6 +73,7 @@ class PatientModel {
     String? lastExamDate,
     String? gender,
     String? fcmToken,
+    String? language
   }) {
     return PatientModel(
       id: id ?? this.id,
@@ -90,6 +94,7 @@ class PatientModel {
       lastExamDate: lastExamDate ?? this.lastExamDate,
       gender: gender ?? this.gender,
       fcmToken: fcmToken ?? this.fcmToken,
+      language: language ?? this.language,
     );
   }
 
