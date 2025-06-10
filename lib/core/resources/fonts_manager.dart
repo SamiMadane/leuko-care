@@ -18,8 +18,6 @@ class FontFamilyManager {
 
   static const String tajawal = 'Tajawal';
   static const String roboto = 'Roboto';
-  static const String comfortaa = 'Comfortaa';
-  static const String cairo = 'Cairo';
   static const String poppins = 'Poppins';
 }
 

@@ -144,17 +144,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Comfortaa
-      fonts:
-        - asset: assets/fonts/Comfortaa-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Comfortaa-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Comfortaa-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Comfortaa-Bold.ttf
-          weight: 700
-
+    
     - family: Tajawal
       fonts:
         - asset: assets/fonts/Tajawal-Regular.ttf
@@ -162,17 +152,6 @@ flutter:
         - asset: assets/fonts/Tajawal-Medium.ttf
           weight: 500
         - asset: assets/fonts/Tajawal-Bold.ttf
-          weight: 700
-
-    - family: Cairo
-      fonts:
-        - asset: assets/fonts/Cairo-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Cairo-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Cairo-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Cairo-Bold.ttf
           weight: 700
 
     - family: Roboto
