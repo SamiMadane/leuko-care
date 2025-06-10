@@ -12,7 +12,7 @@ class ImageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.symmetric(vertical: HeightManager.h20,horizontal: WidthManager.w10),
       child: Container(
         height: HeightManager.h220,
         width: double.infinity,

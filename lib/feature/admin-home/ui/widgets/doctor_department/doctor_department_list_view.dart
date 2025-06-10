@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -12,6 +13,8 @@ class DoctorsDepartmentListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return SizedBox(
       height: HeightManager.h100,
       child: ListView.builder(

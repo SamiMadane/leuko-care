@@ -75,7 +75,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
     setState(() {
       _genderController.text = gender;
       profileImageUrl =
-          gender.toLowerCase() == 'Male'.tr()
+          gender == 'Male'
               ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png'
               : 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_image_nut3m4';
     });

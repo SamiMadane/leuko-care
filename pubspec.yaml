@@ -90,7 +90,9 @@ dependencies:
   flutter_en_json_extractor: ^0.0.4
   # Displaying and scheduling local notifications for Flutter applications
   flutter_local_notifications: ^19.2.1
+  # for notifications
   googleapis_auth: ^2.0.0
+  image_cropper: ^9.1.0
   
 dev_dependencies:
   flutter_test:

@@ -2,13 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/add_update_profile_image_picker.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
+import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/shared/add_update_doctor_bloc_listener.dart';
@@ -54,23 +54,25 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
     }
   }
 
-  Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage = await picker.pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedImage != null) {
-      setState(() {
-        profileImageUrl = pickedImage.path;
-      });
-    }
+Future<void> _pickImage() async {
+  final croppedFile = await pickAndCropImage(context);
+  if (croppedFile != null) {
+    setState(() {
+      profileImageUrl = croppedFile.path;
+    });
+    debugPrint('✅ New image path: ${croppedFile.path}');
+  } else {
+    debugPrint('❌ No image selected or crop cancelled');
   }
+}
+
+
 
   void _handleGenderChanged(String gender) {
     setState(() {
       _genderController.text = gender;
       profileImageUrl =
-          gender.toLowerCase() == 'male'.tr()
+          gender == 'Male'
               ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_wnyo6c.png'
               : 'https://res.cloudinary.com/dmhmhyigi/image/upload/doctor_profile_femail_rq9yqv';
     });

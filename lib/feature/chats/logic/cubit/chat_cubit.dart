@@ -18,6 +18,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this._chatRepository) : super(const ChatState.chatInitial());
 
+
   StreamSubscription? _doctorSubscription;
   StreamSubscription? _patientSubscription;
 

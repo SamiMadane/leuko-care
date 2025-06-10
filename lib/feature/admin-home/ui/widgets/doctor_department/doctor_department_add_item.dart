@@ -13,6 +13,8 @@ class DoctorDepartmentAddItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return GestureDetector(
       onTap: () => context.pushNamed(Routes.addUpdateDoctorScreen),
       child: Padding(
