@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -55,7 +56,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
   }
 
 Future<void> _pickImage() async {
-  final croppedFile = await pickAndCropImage(context);
+  final croppedFile = await pickAndCropImage(context,ImageSource.gallery);
   if (croppedFile != null) {
     setState(() {
       profileImageUrl = croppedFile.path;

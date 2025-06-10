@@ -10,6 +10,7 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
@@ -37,14 +38,13 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
   File? _image;
   bool _isLoading = false;
   PatientModel? selectedPatient;
-  final ImagePicker _picker = ImagePicker();
 
-  Future<void> _pickImage(ImageSource source) async {
-    final picked = await _picker.pickImage(source: source);
-    if (picked != null) {
-      setState(() => _image = File(picked.path));
-    }
+ Future<void> _pickImage(ImageSource source) async {
+  final cropped = await pickAndCropImage(context, source);
+  if (cropped != null) {
+    setState(() => _image = cropped);
   }
+}
 
   Future<void> _processImage() async {
     if (_image == null || selectedPatient == null) return;

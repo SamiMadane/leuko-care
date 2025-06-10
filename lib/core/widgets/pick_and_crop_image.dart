@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
-
-Future<File?> pickAndCropImage(BuildContext context) async {
+Future<File?> pickAndCropImage(BuildContext context, ImageSource source) async {
   final picker = ImagePicker();
-
-  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  final pickedFile = await picker.pickImage(source: source);
 
   if (pickedFile == null) {
     debugPrint("❌ لم يتم اختيار صورة");
@@ -31,7 +29,6 @@ Future<File?> pickAndCropImage(BuildContext context) async {
           CropAspectRatioPreset.ratio3x2,
           CropAspectRatioPreset.ratio4x3,
           CropAspectRatioPreset.ratio16x9,
-          
         ],
       ),
       IOSUiSettings(
@@ -58,6 +55,5 @@ Future<File?> pickAndCropImage(BuildContext context) async {
   }
 
   debugPrint("✅ تم القص: ${croppedFile.path}");
-
   return File(croppedFile.path);
 }

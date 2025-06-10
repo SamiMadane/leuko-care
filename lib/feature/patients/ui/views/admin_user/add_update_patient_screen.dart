@@ -8,6 +8,7 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
+import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/shared/add_update_patient_bloc_listener.dart';
@@ -59,17 +60,17 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
     }
   }
 
-  Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage = await picker.pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedImage != null) {
-      setState(() {
-        profileImageUrl = pickedImage.path;
-      });
-    }
+Future<void> _pickImage() async {
+  final croppedFile = await pickAndCropImage(context,ImageSource.gallery);
+  if (croppedFile != null) {
+    setState(() {
+      profileImageUrl = croppedFile.path;
+    });
+    debugPrint('✅ New image path: ${croppedFile.path}');
+  } else {
+    debugPrint('❌ No image selected or crop cancelled');
   }
+}
 
   void _handleGenderChanged(String gender) {
     setState(() {

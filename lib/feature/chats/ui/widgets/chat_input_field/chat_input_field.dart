@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 
 import 'dart:typed_data';
@@ -9,6 +11,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/chat_input_field/image_preview_thumbnail.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/chat_input_field/message_text_field.dart';
@@ -46,12 +49,12 @@ void initState() {
 }
 
   
-  Future<void> _pickImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().pickImage(source: source);
-    if (pickedFile != null) {
-      setState(() => _selectedImagePath = pickedFile.path);
-    }
+ Future<void> _pickImage(ImageSource source) async {
+  final File? croppedImage = await pickAndCropImage(context, source);
+  if (croppedImage != null) {
+    setState(() => _selectedImagePath = croppedImage.path);
   }
+}
 
 void _sendMessage() {
   final text = _controller.text.trim();
