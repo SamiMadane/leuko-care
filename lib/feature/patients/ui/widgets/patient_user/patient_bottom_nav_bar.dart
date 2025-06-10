@@ -27,8 +27,8 @@ class PatientBottomNavBar extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
-            blurRadius: 5,
-            offset: const Offset(0, -1),
+            blurRadius: 3,
+            offset: const Offset(0, -0.5),
           ),
         ],
       ),
@@ -43,7 +43,7 @@ class PatientBottomNavBar extends StatelessWidget {
             highlightColor: Colors.transparent,
           ),
           child: BottomNavigationBar(
-            backgroundColor: ColorsManager.white,
+            backgroundColor: ColorsManager.moreLighterGray,
             currentIndex: currentIndex,
             onTap: onTap,
             type: BottomNavigationBarType.fixed,
@@ -79,13 +79,13 @@ class PatientBottomNavBar extends StatelessWidget {
 
  BottomNavigationBarItem _buildNavItem(String assetPath, String label, int index) {
   final isSelected = currentIndex == index;
-  final color = isSelected ? ColorsManager.primaryColor : ColorsManager.darkBlue;
+  final color = isSelected ? ColorsManager.primaryColor : ColorsManager.black;
 
   return BottomNavigationBarItem(
     icon: Container(
       padding: EdgeInsets.symmetric(
-        vertical: isSelected ? HeightManager.h8 : HeightManager.h4,
-        horizontal: isSelected ? WidthManager.w8 : WidthManager.w4,
+        vertical: HeightManager.h6 ,
+        horizontal: HeightManager.h6 ,
       ),  
       decoration: isSelected
           ? BoxDecoration(
