@@ -45,6 +45,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         hasSpecialCharacters = AppRegex.hasSpecialCharacter(text);
         hasNumber = AppRegex.hasNumber(text);
         hasMinLength = AppRegex.hasMinLength(text);
+        if (hasLowercase && hasUppercase &&hasSpecialCharacters && hasNumber &&hasMinLength){
+          showPasswordValidations = false;
+        }
+        
       });
     });
   }

@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import 'package:leuko_care/core/networking/firebase_error_handler.dart';
 import 'package:leuko_care/core/networking/firestore_service.dart';
@@ -109,8 +110,7 @@ class AuthRepository {
                 final correctType = doc['userType'] ?? type;
                 await FirebaseAuth.instance.signOut();
                 return OperationResult.failure(
-                  'You are trying to login in the wrong page. Go to the $correctType page.'
-                      .tr(),
+                  tr('login_in_the_wrong_page', namedArgs: {'correctPage': tr(correctType)}),
                 );
               }
             }
@@ -125,8 +125,7 @@ class AuthRepository {
           if (storedUserType != userType) {
             await FirebaseAuth.instance.signOut();
             return OperationResult.failure(
-              'You are trying to login in the wrong page. Go to the $storedUserType page.'
-                  .tr(),
+               tr('login_in_the_wrong_page', namedArgs: {'correctPage': tr(storedUserType)}),
             );
           }
 
@@ -165,6 +164,13 @@ class AuthRepository {
 
   Future<OperationResult<User?>> signInWithGoogle(String userType) async {
     try {
+      bool hasInternet = await InternetConnection().hasInternetAccess;
+      if (!hasInternet) {
+        return OperationResult.failure(
+          'error_network_request_failed'
+              .tr(),
+        );
+      }
       await _auth.signOut();
       await _googleSignIn.signOut();
 
@@ -208,8 +214,7 @@ class AuthRepository {
                 final correctType = doc['userType'] ?? type;
                 await FirebaseAuth.instance.signOut();
                 return OperationResult.failure(
-                  'You are trying to login in the wrong page. Go to the $correctType page.'
-                      .tr(),
+                   tr('login_in_the_wrong_page', namedArgs: {'correctPage': tr(correctType)}),
                 );
               }
             }
@@ -224,8 +229,7 @@ class AuthRepository {
           if (storedUserType != userType) {
             await _auth.signOut();
             return OperationResult.failure(
-              'You are trying to login in the wrong page. Go to the $storedUserType page.'
-                  .tr(),
+               tr('login_in_the_wrong_page', namedArgs: {'correctPage': tr(storedUserType)}),
             );
           }
 

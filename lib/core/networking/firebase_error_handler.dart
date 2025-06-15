@@ -1,26 +1,26 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 class FirebaseErrorHandler {
   static String handle(FirebaseAuthException error) {
     switch (error.code) {
       case 'user-not-found':
-        return "No user found for that email. Please check your email and try again.";
+        return "error_user_not_found".tr();
       case 'wrong-password':
-        return "Incorrect password. Please ensure your password is correct and try again.";
+        return "error_wrong_password".tr();
       case 'invalid-credential':
-        return "The credentials you entered are incorrect. Please check your email and password.";
+        return "error_invalid_credential".tr();
       case 'email-already-in-use':
-        return "This email is already in use. Please try another email or use 'Forgot Password' to reset it.";
+        return "error_email_already_in_use".tr();
       case 'operation-not-allowed':
-        return "This operation is not allowed. Please contact support.";
+        return "error_operation_not_allowed".tr();
       case 'weak-password':
-        return "The password you entered is too weak. Please choose a stronger password with at least 6 characters.";
+        return "error_weak_password".tr();
       case 'too-many-requests':
-        return "Too many requests. Please try again later.";
+        return "error_too_many_requests".tr();
       case 'network-request-failed':
-        return "Network error. Please check your internet connection and try again.";
+        return "error_network_request_failed".tr();
       default:
-        return "An error occurred. Please try again later. Error code: ${error.code}";
+        return "error_generic_with_code".tr(args: [error.code]);
     }
   }
 }

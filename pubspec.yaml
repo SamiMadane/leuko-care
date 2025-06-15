@@ -93,6 +93,7 @@ dependencies:
   # for notifications
   googleapis_auth: ^2.0.0
   image_cropper: ^9.1.0
+  internet_connection_checker_plus: ^2.7.2
   
 dev_dependencies:
   flutter_test:
