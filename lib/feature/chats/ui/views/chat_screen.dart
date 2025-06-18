@@ -45,7 +45,12 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    var chatCubit =  context.read<ChatCubit>();
+    var chatCubit = context.read<ChatCubit>();
+    chatCubit.getMessages(senderId: widget.currentUserId, receiverId: widget.otherUserId);
+    chatCubit.clearChatState();
+    chatCubit.monitorInternetAndDeletePendingMessages( widget.currentUserId, widget.otherUserId);
+    // chatCubit.clearLocalMessages( widget.currentUserId, widget.otherUserId);
+
     final chatId =
         widget.chatId ??
         ChatCubit.getChatId(widget.currentUserId, widget.otherUserId);
@@ -56,14 +61,20 @@ class _ChatScreenState extends State<ChatScreen> {
       chatCubit.getDoctorInfo(widget.otherUserId);
       // in patient screen i will asign chat id  to current chat id
       ChatSessionManager().currentChatId = null;
-      chatCubit.markMessagesAsReadForPatient(widget.currentUserId, widget.otherUserId);
+      chatCubit.markMessagesAsReadForPatient(
+        widget.currentUserId,
+        widget.otherUserId,
+      );
     } else {
       context.read<ChatCubit>().getPatientInfo(widget.otherUserId);
       ChatSessionManager().currentChatId = chatId;
-      chatCubit.markMessagesAsReadForDoctor(widget.currentUserId, widget.otherUserId);
+      chatCubit.markMessagesAsReadForDoctor(
+        widget.currentUserId,
+        widget.otherUserId,
+      );
     }
-
   }
+
 
   @override
   void dispose() {
@@ -83,13 +94,26 @@ class _ChatScreenState extends State<ChatScreen> {
                       curr is ChatDoctorInfoLoaded ||
                       curr is ChatPatientInfoLoaded,
               builder: (context, state) {
-                if (state is ChatDoctorInfoLoaded) doctor = state.doctor;
-                if (state is ChatPatientInfoLoaded) patient = state.patient;
+                if (state is ChatDoctorInfoLoaded && doctor == null) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() {
+                      doctor = state.doctor;
+                    });
+                  });
+                }
+
+                if (state is ChatPatientInfoLoaded && patient == null) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() {
+                      patient = state.patient;
+                    });
+                  });
+                }
 
                 // إذا لم تكن البيانات جاهزة بعد، نعرض نسخة شيمر
                 if ((widget.userType == 'patient' && doctor == null) ||
                     (widget.userType == 'doctor' && patient == null)) {
-                  return  ChatTopBarShimmer();
+                  return ChatTopBarShimmer();
                 }
 
                 return ChatTopBar(doctor: doctor, patient: patient);
@@ -106,7 +130,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       currentUserId: widget.currentUserId,
                     ),
                     ChatError(:final message) => Center(child: Text(message)),
-                    _ => const SizedBox(),
+                    _ => const MessagesShimmer(), // Default to shimmer
                   };
                 },
               ),

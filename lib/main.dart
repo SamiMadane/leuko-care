@@ -6,11 +6,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
+import 'package:leuko_care/feature/chats/data/models/hive_adapter/message_status_adapter.dart';
+import 'package:leuko_care/feature/chats/data/models/hive_adapter/timestamp_adapter.dart';
 import 'package:leuko_care/core/networking/notification_service.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/feature/chats/data/models/chat_model.dart';
 import 'package:leuko_care/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:leuko_care/leuko_ai.dart';
 import 'core/routes/app_router.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +28,10 @@ void main() async {
     androidProvider: AndroidProvider.debug,
   );
   setupGetIt();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ChatModelAdapter());
+   Hive.registerAdapter(TimestampAdapter());
+   Hive.registerAdapter(MessageStatusAdapter());
 
   final localeCode = await SharedPrefHelper.getLocale();
   final startLocale = Locale(localeCode);

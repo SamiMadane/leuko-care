@@ -12,8 +12,7 @@ part of 'auth_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AuthState<T> {
@@ -26,7 +25,8 @@ mixin _$AuthState<T> {
     required TResult Function() signedOutStateLoading,
     required TResult Function() signedOutStateSuccess,
     required TResult Function(String message) signedOutStateError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
@@ -36,7 +36,8 @@ mixin _$AuthState<T> {
     TResult? Function()? signedOutStateLoading,
     TResult? Function()? signedOutStateSuccess,
     TResult? Function(String message)? signedOutStateError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -47,7 +48,8 @@ mixin _$AuthState<T> {
     TResult Function()? signedOutStateSuccess,
     TResult Function(String message)? signedOutStateError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoginInitial<T> value) initial,
@@ -55,11 +57,12 @@ mixin _$AuthState<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoginInitial<T> value)? initial,
@@ -69,7 +72,8 @@ mixin _$AuthState<T> {
     TResult? Function(SignedOutStateLoading<T> value)? signedOutStateLoading,
     TResult? Function(SignedOutStateSuccess<T> value)? signedOutStateSuccess,
     TResult? Function(SignedOutStateError<T> value)? signedOutStateError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoginInitial<T> value)? initial,
@@ -80,15 +84,15 @@ mixin _$AuthState<T> {
     TResult Function(SignedOutStateSuccess<T> value)? signedOutStateSuccess,
     TResult Function(SignedOutStateError<T> value)? signedOutStateError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AuthStateCopyWith<T, $Res> {
   factory $AuthStateCopyWith(
-    AuthState<T> value,
-    $Res Function(AuthState<T>) then,
-  ) = _$AuthStateCopyWithImpl<T, $Res, AuthState<T>>;
+          AuthState<T> value, $Res Function(AuthState<T>) then) =
+      _$AuthStateCopyWithImpl<T, $Res, AuthState<T>>;
 }
 
 /// @nodoc
@@ -107,10 +111,9 @@ class _$AuthStateCopyWithImpl<T, $Res, $Val extends AuthState<T>>
 
 /// @nodoc
 abstract class _$$LoginInitialImplCopyWith<T, $Res> {
-  factory _$$LoginInitialImplCopyWith(
-    _$LoginInitialImpl<T> value,
-    $Res Function(_$LoginInitialImpl<T>) then,
-  ) = __$$LoginInitialImplCopyWithImpl<T, $Res>;
+  factory _$$LoginInitialImplCopyWith(_$LoginInitialImpl<T> value,
+          $Res Function(_$LoginInitialImpl<T>) then) =
+      __$$LoginInitialImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
@@ -118,9 +121,8 @@ class __$$LoginInitialImplCopyWithImpl<T, $Res>
     extends _$AuthStateCopyWithImpl<T, $Res, _$LoginInitialImpl<T>>
     implements _$$LoginInitialImplCopyWith<T, $Res> {
   __$$LoginInitialImplCopyWithImpl(
-    _$LoginInitialImpl<T> _value,
-    $Res Function(_$LoginInitialImpl<T>) _then,
-  ) : super(_value, _then);
+      _$LoginInitialImpl<T> _value, $Res Function(_$LoginInitialImpl<T>) _then)
+      : super(_value, _then);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -199,9 +201,9 @@ class _$LoginInitialImpl<T> implements _LoginInitial<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
   }) {
     return initial(this);
@@ -246,10 +248,9 @@ abstract class _LoginInitial<T> implements AuthState<T> {
 
 /// @nodoc
 abstract class _$$LoginLoadingImplCopyWith<T, $Res> {
-  factory _$$LoginLoadingImplCopyWith(
-    _$LoginLoadingImpl<T> value,
-    $Res Function(_$LoginLoadingImpl<T>) then,
-  ) = __$$LoginLoadingImplCopyWithImpl<T, $Res>;
+  factory _$$LoginLoadingImplCopyWith(_$LoginLoadingImpl<T> value,
+          $Res Function(_$LoginLoadingImpl<T>) then) =
+      __$$LoginLoadingImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
@@ -257,9 +258,8 @@ class __$$LoginLoadingImplCopyWithImpl<T, $Res>
     extends _$AuthStateCopyWithImpl<T, $Res, _$LoginLoadingImpl<T>>
     implements _$$LoginLoadingImplCopyWith<T, $Res> {
   __$$LoginLoadingImplCopyWithImpl(
-    _$LoginLoadingImpl<T> _value,
-    $Res Function(_$LoginLoadingImpl<T>) _then,
-  ) : super(_value, _then);
+      _$LoginLoadingImpl<T> _value, $Res Function(_$LoginLoadingImpl<T>) _then)
+      : super(_value, _then);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -338,9 +338,9 @@ class _$LoginLoadingImpl<T> implements LoginLoading<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
   }) {
     return loginLoading(this);
@@ -385,10 +385,9 @@ abstract class LoginLoading<T> implements AuthState<T> {
 
 /// @nodoc
 abstract class _$$LoginSuccessImplCopyWith<T, $Res> {
-  factory _$$LoginSuccessImplCopyWith(
-    _$LoginSuccessImpl<T> value,
-    $Res Function(_$LoginSuccessImpl<T>) then,
-  ) = __$$LoginSuccessImplCopyWithImpl<T, $Res>;
+  factory _$$LoginSuccessImplCopyWith(_$LoginSuccessImpl<T> value,
+          $Res Function(_$LoginSuccessImpl<T>) then) =
+      __$$LoginSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({User user, String userType});
 }
@@ -398,27 +397,27 @@ class __$$LoginSuccessImplCopyWithImpl<T, $Res>
     extends _$AuthStateCopyWithImpl<T, $Res, _$LoginSuccessImpl<T>>
     implements _$$LoginSuccessImplCopyWith<T, $Res> {
   __$$LoginSuccessImplCopyWithImpl(
-    _$LoginSuccessImpl<T> _value,
-    $Res Function(_$LoginSuccessImpl<T>) _then,
-  ) : super(_value, _then);
+      _$LoginSuccessImpl<T> _value, $Res Function(_$LoginSuccessImpl<T>) _then)
+      : super(_value, _then);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? user = null, Object? userType = null}) {
-    return _then(
-      _$LoginSuccessImpl<T>(
-        null == user
-            ? _value.user
-            : user // ignore: cast_nullable_to_non_nullable
-                as User,
-        null == userType
-            ? _value.userType
-            : userType // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? user = null,
+    Object? userType = null,
+  }) {
+    return _then(_$LoginSuccessImpl<T>(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      null == userType
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -457,9 +456,7 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
   @pragma('vm:prefer-inline')
   _$$LoginSuccessImplCopyWith<T, _$LoginSuccessImpl<T>> get copyWith =>
       __$$LoginSuccessImplCopyWithImpl<T, _$LoginSuccessImpl<T>>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -515,9 +512,9 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
   }) {
     return loginSuccess(this);
@@ -573,9 +570,8 @@ abstract class LoginSuccess<T> implements AuthState<T> {
 /// @nodoc
 abstract class _$$LoginErrorImplCopyWith<T, $Res> {
   factory _$$LoginErrorImplCopyWith(
-    _$LoginErrorImpl<T> value,
-    $Res Function(_$LoginErrorImpl<T>) then,
-  ) = __$$LoginErrorImplCopyWithImpl<T, $Res>;
+          _$LoginErrorImpl<T> value, $Res Function(_$LoginErrorImpl<T>) then) =
+      __$$LoginErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({String error});
 }
@@ -585,23 +581,22 @@ class __$$LoginErrorImplCopyWithImpl<T, $Res>
     extends _$AuthStateCopyWithImpl<T, $Res, _$LoginErrorImpl<T>>
     implements _$$LoginErrorImplCopyWith<T, $Res> {
   __$$LoginErrorImplCopyWithImpl(
-    _$LoginErrorImpl<T> _value,
-    $Res Function(_$LoginErrorImpl<T>) _then,
-  ) : super(_value, _then);
+      _$LoginErrorImpl<T> _value, $Res Function(_$LoginErrorImpl<T>) _then)
+      : super(_value, _then);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? error = null}) {
-    return _then(
-      _$LoginErrorImpl<T>(
-        null == error
-            ? _value.error
-            : error // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$LoginErrorImpl<T>(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -691,9 +686,9 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
   }) {
     return loginError(this);
@@ -747,9 +742,9 @@ abstract class LoginError<T> implements AuthState<T> {
 /// @nodoc
 abstract class _$$SignedOutStateLoadingImplCopyWith<T, $Res> {
   factory _$$SignedOutStateLoadingImplCopyWith(
-    _$SignedOutStateLoadingImpl<T> value,
-    $Res Function(_$SignedOutStateLoadingImpl<T>) then,
-  ) = __$$SignedOutStateLoadingImplCopyWithImpl<T, $Res>;
+          _$SignedOutStateLoadingImpl<T> value,
+          $Res Function(_$SignedOutStateLoadingImpl<T>) then) =
+      __$$SignedOutStateLoadingImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
@@ -757,9 +752,9 @@ class __$$SignedOutStateLoadingImplCopyWithImpl<T, $Res>
     extends _$AuthStateCopyWithImpl<T, $Res, _$SignedOutStateLoadingImpl<T>>
     implements _$$SignedOutStateLoadingImplCopyWith<T, $Res> {
   __$$SignedOutStateLoadingImplCopyWithImpl(
-    _$SignedOutStateLoadingImpl<T> _value,
-    $Res Function(_$SignedOutStateLoadingImpl<T>) _then,
-  ) : super(_value, _then);
+      _$SignedOutStateLoadingImpl<T> _value,
+      $Res Function(_$SignedOutStateLoadingImpl<T>) _then)
+      : super(_value, _then);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -839,9 +834,9 @@ class _$SignedOutStateLoadingImpl<T> implements SignedOutStateLoading<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
   }) {
     return signedOutStateLoading(this);
@@ -887,9 +882,9 @@ abstract class SignedOutStateLoading<T> implements AuthState<T> {
 /// @nodoc
 abstract class _$$SignedOutStateSuccessImplCopyWith<T, $Res> {
   factory _$$SignedOutStateSuccessImplCopyWith(
-    _$SignedOutStateSuccessImpl<T> value,
-    $Res Function(_$SignedOutStateSuccessImpl<T>) then,
-  ) = __$$SignedOutStateSuccessImplCopyWithImpl<T, $Res>;
+          _$SignedOutStateSuccessImpl<T> value,
+          $Res Function(_$SignedOutStateSuccessImpl<T>) then) =
+      __$$SignedOutStateSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
@@ -897,9 +892,9 @@ class __$$SignedOutStateSuccessImplCopyWithImpl<T, $Res>
     extends _$AuthStateCopyWithImpl<T, $Res, _$SignedOutStateSuccessImpl<T>>
     implements _$$SignedOutStateSuccessImplCopyWith<T, $Res> {
   __$$SignedOutStateSuccessImplCopyWithImpl(
-    _$SignedOutStateSuccessImpl<T> _value,
-    $Res Function(_$SignedOutStateSuccessImpl<T>) _then,
-  ) : super(_value, _then);
+      _$SignedOutStateSuccessImpl<T> _value,
+      $Res Function(_$SignedOutStateSuccessImpl<T>) _then)
+      : super(_value, _then);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -979,9 +974,9 @@ class _$SignedOutStateSuccessImpl<T> implements SignedOutStateSuccess<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
   }) {
     return signedOutStateSuccess(this);
@@ -1026,10 +1021,9 @@ abstract class SignedOutStateSuccess<T> implements AuthState<T> {
 
 /// @nodoc
 abstract class _$$SignedOutStateErrorImplCopyWith<T, $Res> {
-  factory _$$SignedOutStateErrorImplCopyWith(
-    _$SignedOutStateErrorImpl<T> value,
-    $Res Function(_$SignedOutStateErrorImpl<T>) then,
-  ) = __$$SignedOutStateErrorImplCopyWithImpl<T, $Res>;
+  factory _$$SignedOutStateErrorImplCopyWith(_$SignedOutStateErrorImpl<T> value,
+          $Res Function(_$SignedOutStateErrorImpl<T>) then) =
+      __$$SignedOutStateErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({String message});
 }
@@ -1038,24 +1032,23 @@ abstract class _$$SignedOutStateErrorImplCopyWith<T, $Res> {
 class __$$SignedOutStateErrorImplCopyWithImpl<T, $Res>
     extends _$AuthStateCopyWithImpl<T, $Res, _$SignedOutStateErrorImpl<T>>
     implements _$$SignedOutStateErrorImplCopyWith<T, $Res> {
-  __$$SignedOutStateErrorImplCopyWithImpl(
-    _$SignedOutStateErrorImpl<T> _value,
-    $Res Function(_$SignedOutStateErrorImpl<T>) _then,
-  ) : super(_value, _then);
+  __$$SignedOutStateErrorImplCopyWithImpl(_$SignedOutStateErrorImpl<T> _value,
+      $Res Function(_$SignedOutStateErrorImpl<T>) _then)
+      : super(_value, _then);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$SignedOutStateErrorImpl<T>(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$SignedOutStateErrorImpl<T>(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1089,11 +1082,8 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
   @override
   @pragma('vm:prefer-inline')
   _$$SignedOutStateErrorImplCopyWith<T, _$SignedOutStateErrorImpl<T>>
-  get copyWith =>
-      __$$SignedOutStateErrorImplCopyWithImpl<T, _$SignedOutStateErrorImpl<T>>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$SignedOutStateErrorImplCopyWithImpl<T,
+          _$SignedOutStateErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1149,9 +1139,9 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
     required TResult Function(SignedOutStateLoading<T> value)
-    signedOutStateLoading,
+        signedOutStateLoading,
     required TResult Function(SignedOutStateSuccess<T> value)
-    signedOutStateSuccess,
+        signedOutStateSuccess,
     required TResult Function(SignedOutStateError<T> value) signedOutStateError,
   }) {
     return signedOutStateError(this);
@@ -1200,5 +1190,5 @@ abstract class SignedOutStateError<T> implements AuthState<T> {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignedOutStateErrorImplCopyWith<T, _$SignedOutStateErrorImpl<T>>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -21,7 +21,7 @@ class ChatRepository {
     required String senderId,
     required String receiverId,
   }) {
-    final chatId =  _getChatId(senderId, receiverId);
+    final chatId = _getChatId(senderId, receiverId);
 
     return _firestore
         .collection('chats')
@@ -31,9 +31,10 @@ class ChatRepository {
         .snapshots()
         .map(
           (snapshot) =>
-              snapshot.docs
-                  .map((doc) => ChatModel.fromJson(doc.data()))
-                  .toList(),
+              snapshot.docs.map((doc) {
+                final msg = ChatModel.fromJson(doc.data());
+                return msg.copyWith(status: MessageStatus.sent);
+              }).toList(),
         );
   }
 
@@ -179,11 +180,14 @@ class ChatRepository {
             : message.text;
 
     try {
+      final data = message.toJson();
+      data.remove('id');
+
       final docRef = await _firestore
           .collection('chats')
           .doc(chatId)
           .collection('messages')
-          .add(message.toJson());
+          .add(data);
 
       // بعد إضافة الرسالة، يتم تحديث الـ id في الرسالة
       final updatedMessage = message.copyWith(id: docRef.id);

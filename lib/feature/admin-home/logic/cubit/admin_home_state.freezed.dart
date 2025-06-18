@@ -12,8 +12,7 @@ part of 'admin_home_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AdminHomeState {
@@ -25,13 +24,14 @@ mixin _$AdminHomeState {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? homeStateInitial,
@@ -43,9 +43,10 @@ mixin _$AdminHomeState {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? homeStateInitial,
@@ -57,31 +58,33 @@ mixin _$AdminHomeState {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
-  }) => throw _privateConstructorUsedError;
+        getStatisticsStateError,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_HomeStateInitial value)? homeStateInitial,
@@ -92,11 +95,12 @@ mixin _$AdminHomeState {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeStateInitial value)? homeStateInitial,
@@ -107,20 +111,20 @@ mixin _$AdminHomeState {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AdminHomeStateCopyWith<$Res> {
   factory $AdminHomeStateCopyWith(
-    AdminHomeState value,
-    $Res Function(AdminHomeState) then,
-  ) = _$AdminHomeStateCopyWithImpl<$Res, AdminHomeState>;
+          AdminHomeState value, $Res Function(AdminHomeState) then) =
+      _$AdminHomeStateCopyWithImpl<$Res, AdminHomeState>;
 }
 
 /// @nodoc
@@ -139,20 +143,18 @@ class _$AdminHomeStateCopyWithImpl<$Res, $Val extends AdminHomeState>
 
 /// @nodoc
 abstract class _$$HomeStateInitialImplCopyWith<$Res> {
-  factory _$$HomeStateInitialImplCopyWith(
-    _$HomeStateInitialImpl value,
-    $Res Function(_$HomeStateInitialImpl) then,
-  ) = __$$HomeStateInitialImplCopyWithImpl<$Res>;
+  factory _$$HomeStateInitialImplCopyWith(_$HomeStateInitialImpl value,
+          $Res Function(_$HomeStateInitialImpl) then) =
+      __$$HomeStateInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$HomeStateInitialImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$HomeStateInitialImpl>
     implements _$$HomeStateInitialImplCopyWith<$Res> {
-  __$$HomeStateInitialImplCopyWithImpl(
-    _$HomeStateInitialImpl _value,
-    $Res Function(_$HomeStateInitialImpl) _then,
-  ) : super(_value, _then);
+  __$$HomeStateInitialImplCopyWithImpl(_$HomeStateInitialImpl _value,
+      $Res Function(_$HomeStateInitialImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -186,11 +188,11 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return homeStateInitial();
@@ -208,7 +210,7 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return homeStateInitial?.call();
@@ -226,7 +228,7 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -241,22 +243,22 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return homeStateInitial(this);
   }
@@ -272,9 +274,9 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return homeStateInitial?.call(this);
@@ -291,9 +293,9 @@ class _$HomeStateInitialImpl implements _HomeStateInitial {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -311,9 +313,9 @@ abstract class _HomeStateInitial implements AdminHomeState {
 /// @nodoc
 abstract class _$$GetDoctorsStateLoadingImplCopyWith<$Res> {
   factory _$$GetDoctorsStateLoadingImplCopyWith(
-    _$GetDoctorsStateLoadingImpl value,
-    $Res Function(_$GetDoctorsStateLoadingImpl) then,
-  ) = __$$GetDoctorsStateLoadingImplCopyWithImpl<$Res>;
+          _$GetDoctorsStateLoadingImpl value,
+          $Res Function(_$GetDoctorsStateLoadingImpl) then) =
+      __$$GetDoctorsStateLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -321,9 +323,9 @@ class __$$GetDoctorsStateLoadingImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetDoctorsStateLoadingImpl>
     implements _$$GetDoctorsStateLoadingImplCopyWith<$Res> {
   __$$GetDoctorsStateLoadingImplCopyWithImpl(
-    _$GetDoctorsStateLoadingImpl _value,
-    $Res Function(_$GetDoctorsStateLoadingImpl) _then,
-  ) : super(_value, _then);
+      _$GetDoctorsStateLoadingImpl _value,
+      $Res Function(_$GetDoctorsStateLoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -358,11 +360,11 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getDoctorsStateLoading();
@@ -380,7 +382,7 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getDoctorsStateLoading?.call();
@@ -398,7 +400,7 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -413,22 +415,22 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getDoctorsStateLoading(this);
   }
@@ -444,9 +446,9 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getDoctorsStateLoading?.call(this);
@@ -463,9 +465,9 @@ class _$GetDoctorsStateLoadingImpl implements GetDoctorsStateLoading {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -483,9 +485,9 @@ abstract class GetDoctorsStateLoading implements AdminHomeState {
 /// @nodoc
 abstract class _$$GetDoctorsStateSuccessImplCopyWith<$Res> {
   factory _$$GetDoctorsStateSuccessImplCopyWith(
-    _$GetDoctorsStateSuccessImpl value,
-    $Res Function(_$GetDoctorsStateSuccessImpl) then,
-  ) = __$$GetDoctorsStateSuccessImplCopyWithImpl<$Res>;
+          _$GetDoctorsStateSuccessImpl value,
+          $Res Function(_$GetDoctorsStateSuccessImpl) then) =
+      __$$GetDoctorsStateSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<DoctorModel> doctors});
 }
@@ -495,23 +497,23 @@ class __$$GetDoctorsStateSuccessImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetDoctorsStateSuccessImpl>
     implements _$$GetDoctorsStateSuccessImplCopyWith<$Res> {
   __$$GetDoctorsStateSuccessImplCopyWithImpl(
-    _$GetDoctorsStateSuccessImpl _value,
-    $Res Function(_$GetDoctorsStateSuccessImpl) _then,
-  ) : super(_value, _then);
+      _$GetDoctorsStateSuccessImpl _value,
+      $Res Function(_$GetDoctorsStateSuccessImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? doctors = null}) {
-    return _then(
-      _$GetDoctorsStateSuccessImpl(
-        null == doctors
-            ? _value._doctors
-            : doctors // ignore: cast_nullable_to_non_nullable
-                as List<DoctorModel>,
-      ),
-    );
+  $Res call({
+    Object? doctors = null,
+  }) {
+    return _then(_$GetDoctorsStateSuccessImpl(
+      null == doctors
+          ? _value._doctors
+          : doctors // ignore: cast_nullable_to_non_nullable
+              as List<DoctorModel>,
+    ));
   }
 }
 
@@ -519,7 +521,7 @@ class __$$GetDoctorsStateSuccessImplCopyWithImpl<$Res>
 
 class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
   const _$GetDoctorsStateSuccessImpl(final List<DoctorModel> doctors)
-    : _doctors = doctors;
+      : _doctors = doctors;
 
   final List<DoctorModel> _doctors;
   @override
@@ -552,11 +554,8 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
   @override
   @pragma('vm:prefer-inline')
   _$$GetDoctorsStateSuccessImplCopyWith<_$GetDoctorsStateSuccessImpl>
-  get copyWith =>
-      __$$GetDoctorsStateSuccessImplCopyWithImpl<_$GetDoctorsStateSuccessImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$GetDoctorsStateSuccessImplCopyWithImpl<
+          _$GetDoctorsStateSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -567,11 +566,11 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getDoctorsStateSuccess(doctors);
@@ -589,7 +588,7 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getDoctorsStateSuccess?.call(doctors);
@@ -607,7 +606,7 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -622,22 +621,22 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getDoctorsStateSuccess(this);
   }
@@ -653,9 +652,9 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getDoctorsStateSuccess?.call(this);
@@ -672,9 +671,9 @@ class _$GetDoctorsStateSuccessImpl implements GetDoctorsStateSuccess {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -695,15 +694,14 @@ abstract class GetDoctorsStateSuccess implements AdminHomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetDoctorsStateSuccessImplCopyWith<_$GetDoctorsStateSuccessImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$GetDoctorsStateErrorImplCopyWith<$Res> {
-  factory _$$GetDoctorsStateErrorImplCopyWith(
-    _$GetDoctorsStateErrorImpl value,
-    $Res Function(_$GetDoctorsStateErrorImpl) then,
-  ) = __$$GetDoctorsStateErrorImplCopyWithImpl<$Res>;
+  factory _$$GetDoctorsStateErrorImplCopyWith(_$GetDoctorsStateErrorImpl value,
+          $Res Function(_$GetDoctorsStateErrorImpl) then) =
+      __$$GetDoctorsStateErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -712,24 +710,23 @@ abstract class _$$GetDoctorsStateErrorImplCopyWith<$Res> {
 class __$$GetDoctorsStateErrorImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetDoctorsStateErrorImpl>
     implements _$$GetDoctorsStateErrorImplCopyWith<$Res> {
-  __$$GetDoctorsStateErrorImplCopyWithImpl(
-    _$GetDoctorsStateErrorImpl _value,
-    $Res Function(_$GetDoctorsStateErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$GetDoctorsStateErrorImplCopyWithImpl(_$GetDoctorsStateErrorImpl _value,
+      $Res Function(_$GetDoctorsStateErrorImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$GetDoctorsStateErrorImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$GetDoctorsStateErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -763,11 +760,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
   @override
   @pragma('vm:prefer-inline')
   _$$GetDoctorsStateErrorImplCopyWith<_$GetDoctorsStateErrorImpl>
-  get copyWith =>
-      __$$GetDoctorsStateErrorImplCopyWithImpl<_$GetDoctorsStateErrorImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$GetDoctorsStateErrorImplCopyWithImpl<_$GetDoctorsStateErrorImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -778,11 +773,11 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getDoctorsStateError(message);
@@ -800,7 +795,7 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getDoctorsStateError?.call(message);
@@ -818,7 +813,7 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -833,22 +828,22 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getDoctorsStateError(this);
   }
@@ -864,9 +859,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getDoctorsStateError?.call(this);
@@ -883,9 +878,9 @@ class _$GetDoctorsStateErrorImpl implements GetDoctorsStateError {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -906,15 +901,15 @@ abstract class GetDoctorsStateError implements AdminHomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetDoctorsStateErrorImplCopyWith<_$GetDoctorsStateErrorImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$GetPatientsStateLoadingImplCopyWith<$Res> {
   factory _$$GetPatientsStateLoadingImplCopyWith(
-    _$GetPatientsStateLoadingImpl value,
-    $Res Function(_$GetPatientsStateLoadingImpl) then,
-  ) = __$$GetPatientsStateLoadingImplCopyWithImpl<$Res>;
+          _$GetPatientsStateLoadingImpl value,
+          $Res Function(_$GetPatientsStateLoadingImpl) then) =
+      __$$GetPatientsStateLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -922,9 +917,9 @@ class __$$GetPatientsStateLoadingImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetPatientsStateLoadingImpl>
     implements _$$GetPatientsStateLoadingImplCopyWith<$Res> {
   __$$GetPatientsStateLoadingImplCopyWithImpl(
-    _$GetPatientsStateLoadingImpl _value,
-    $Res Function(_$GetPatientsStateLoadingImpl) _then,
-  ) : super(_value, _then);
+      _$GetPatientsStateLoadingImpl _value,
+      $Res Function(_$GetPatientsStateLoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -959,11 +954,11 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getPatientsStateLoading();
@@ -981,7 +976,7 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getPatientsStateLoading?.call();
@@ -999,7 +994,7 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1014,22 +1009,22 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getPatientsStateLoading(this);
   }
@@ -1045,9 +1040,9 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getPatientsStateLoading?.call(this);
@@ -1064,9 +1059,9 @@ class _$GetPatientsStateLoadingImpl implements GetPatientsStateLoading {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1084,9 +1079,9 @@ abstract class GetPatientsStateLoading implements AdminHomeState {
 /// @nodoc
 abstract class _$$GetPatientsStateSuccessImplCopyWith<$Res> {
   factory _$$GetPatientsStateSuccessImplCopyWith(
-    _$GetPatientsStateSuccessImpl value,
-    $Res Function(_$GetPatientsStateSuccessImpl) then,
-  ) = __$$GetPatientsStateSuccessImplCopyWithImpl<$Res>;
+          _$GetPatientsStateSuccessImpl value,
+          $Res Function(_$GetPatientsStateSuccessImpl) then) =
+      __$$GetPatientsStateSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PatientModel> patients});
 }
@@ -1096,23 +1091,23 @@ class __$$GetPatientsStateSuccessImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetPatientsStateSuccessImpl>
     implements _$$GetPatientsStateSuccessImplCopyWith<$Res> {
   __$$GetPatientsStateSuccessImplCopyWithImpl(
-    _$GetPatientsStateSuccessImpl _value,
-    $Res Function(_$GetPatientsStateSuccessImpl) _then,
-  ) : super(_value, _then);
+      _$GetPatientsStateSuccessImpl _value,
+      $Res Function(_$GetPatientsStateSuccessImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? patients = null}) {
-    return _then(
-      _$GetPatientsStateSuccessImpl(
-        null == patients
-            ? _value._patients
-            : patients // ignore: cast_nullable_to_non_nullable
-                as List<PatientModel>,
-      ),
-    );
+  $Res call({
+    Object? patients = null,
+  }) {
+    return _then(_$GetPatientsStateSuccessImpl(
+      null == patients
+          ? _value._patients
+          : patients // ignore: cast_nullable_to_non_nullable
+              as List<PatientModel>,
+    ));
   }
 }
 
@@ -1120,7 +1115,7 @@ class __$$GetPatientsStateSuccessImplCopyWithImpl<$Res>
 
 class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
   const _$GetPatientsStateSuccessImpl(final List<PatientModel> patients)
-    : _patients = patients;
+      : _patients = patients;
 
   final List<PatientModel> _patients;
   @override
@@ -1153,9 +1148,8 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
   @override
   @pragma('vm:prefer-inline')
   _$$GetPatientsStateSuccessImplCopyWith<_$GetPatientsStateSuccessImpl>
-  get copyWith => __$$GetPatientsStateSuccessImplCopyWithImpl<
-    _$GetPatientsStateSuccessImpl
-  >(this, _$identity);
+      get copyWith => __$$GetPatientsStateSuccessImplCopyWithImpl<
+          _$GetPatientsStateSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1166,11 +1160,11 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getPatientsStateSuccess(patients);
@@ -1188,7 +1182,7 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getPatientsStateSuccess?.call(patients);
@@ -1206,7 +1200,7 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1221,22 +1215,22 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getPatientsStateSuccess(this);
   }
@@ -1252,9 +1246,9 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getPatientsStateSuccess?.call(this);
@@ -1271,9 +1265,9 @@ class _$GetPatientsStateSuccessImpl implements GetPatientsStateSuccess {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1294,15 +1288,15 @@ abstract class GetPatientsStateSuccess implements AdminHomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetPatientsStateSuccessImplCopyWith<_$GetPatientsStateSuccessImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$GetPatientsStateErrorImplCopyWith<$Res> {
   factory _$$GetPatientsStateErrorImplCopyWith(
-    _$GetPatientsStateErrorImpl value,
-    $Res Function(_$GetPatientsStateErrorImpl) then,
-  ) = __$$GetPatientsStateErrorImplCopyWithImpl<$Res>;
+          _$GetPatientsStateErrorImpl value,
+          $Res Function(_$GetPatientsStateErrorImpl) then) =
+      __$$GetPatientsStateErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -1311,24 +1305,23 @@ abstract class _$$GetPatientsStateErrorImplCopyWith<$Res> {
 class __$$GetPatientsStateErrorImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetPatientsStateErrorImpl>
     implements _$$GetPatientsStateErrorImplCopyWith<$Res> {
-  __$$GetPatientsStateErrorImplCopyWithImpl(
-    _$GetPatientsStateErrorImpl _value,
-    $Res Function(_$GetPatientsStateErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$GetPatientsStateErrorImplCopyWithImpl(_$GetPatientsStateErrorImpl _value,
+      $Res Function(_$GetPatientsStateErrorImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$GetPatientsStateErrorImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$GetPatientsStateErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1362,11 +1355,8 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
   @override
   @pragma('vm:prefer-inline')
   _$$GetPatientsStateErrorImplCopyWith<_$GetPatientsStateErrorImpl>
-  get copyWith =>
-      __$$GetPatientsStateErrorImplCopyWithImpl<_$GetPatientsStateErrorImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$GetPatientsStateErrorImplCopyWithImpl<
+          _$GetPatientsStateErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1377,11 +1367,11 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getPatientsStateError(message);
@@ -1399,7 +1389,7 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getPatientsStateError?.call(message);
@@ -1417,7 +1407,7 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1432,22 +1422,22 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getPatientsStateError(this);
   }
@@ -1463,9 +1453,9 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getPatientsStateError?.call(this);
@@ -1482,9 +1472,9 @@ class _$GetPatientsStateErrorImpl implements GetPatientsStateError {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1505,15 +1495,15 @@ abstract class GetPatientsStateError implements AdminHomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetPatientsStateErrorImplCopyWith<_$GetPatientsStateErrorImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$GetStatisticsStateLoadingImplCopyWith<$Res> {
   factory _$$GetStatisticsStateLoadingImplCopyWith(
-    _$GetStatisticsStateLoadingImpl value,
-    $Res Function(_$GetStatisticsStateLoadingImpl) then,
-  ) = __$$GetStatisticsStateLoadingImplCopyWithImpl<$Res>;
+          _$GetStatisticsStateLoadingImpl value,
+          $Res Function(_$GetStatisticsStateLoadingImpl) then) =
+      __$$GetStatisticsStateLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -1521,9 +1511,9 @@ class __$$GetStatisticsStateLoadingImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetStatisticsStateLoadingImpl>
     implements _$$GetStatisticsStateLoadingImplCopyWith<$Res> {
   __$$GetStatisticsStateLoadingImplCopyWithImpl(
-    _$GetStatisticsStateLoadingImpl _value,
-    $Res Function(_$GetStatisticsStateLoadingImpl) _then,
-  ) : super(_value, _then);
+      _$GetStatisticsStateLoadingImpl _value,
+      $Res Function(_$GetStatisticsStateLoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -1558,11 +1548,11 @@ class _$GetStatisticsStateLoadingImpl implements GetStatisticsStateLoading {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getStatisticsStateLoading();
@@ -1580,7 +1570,7 @@ class _$GetStatisticsStateLoadingImpl implements GetStatisticsStateLoading {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getStatisticsStateLoading?.call();
@@ -1598,7 +1588,7 @@ class _$GetStatisticsStateLoadingImpl implements GetStatisticsStateLoading {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1613,22 +1603,22 @@ class _$GetStatisticsStateLoadingImpl implements GetStatisticsStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getStatisticsStateLoading(this);
   }
@@ -1644,9 +1634,9 @@ class _$GetStatisticsStateLoadingImpl implements GetStatisticsStateLoading {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getStatisticsStateLoading?.call(this);
@@ -1663,9 +1653,9 @@ class _$GetStatisticsStateLoadingImpl implements GetStatisticsStateLoading {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1683,9 +1673,9 @@ abstract class GetStatisticsStateLoading implements AdminHomeState {
 /// @nodoc
 abstract class _$$GetStatisticsStateSuccessImplCopyWith<$Res> {
   factory _$$GetStatisticsStateSuccessImplCopyWith(
-    _$GetStatisticsStateSuccessImpl value,
-    $Res Function(_$GetStatisticsStateSuccessImpl) then,
-  ) = __$$GetStatisticsStateSuccessImplCopyWithImpl<$Res>;
+          _$GetStatisticsStateSuccessImpl value,
+          $Res Function(_$GetStatisticsStateSuccessImpl) then) =
+      __$$GetStatisticsStateSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AdminStatisticsModel statistics});
 }
@@ -1695,23 +1685,23 @@ class __$$GetStatisticsStateSuccessImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetStatisticsStateSuccessImpl>
     implements _$$GetStatisticsStateSuccessImplCopyWith<$Res> {
   __$$GetStatisticsStateSuccessImplCopyWithImpl(
-    _$GetStatisticsStateSuccessImpl _value,
-    $Res Function(_$GetStatisticsStateSuccessImpl) _then,
-  ) : super(_value, _then);
+      _$GetStatisticsStateSuccessImpl _value,
+      $Res Function(_$GetStatisticsStateSuccessImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? statistics = null}) {
-    return _then(
-      _$GetStatisticsStateSuccessImpl(
-        null == statistics
-            ? _value.statistics
-            : statistics // ignore: cast_nullable_to_non_nullable
-                as AdminStatisticsModel,
-      ),
-    );
+  $Res call({
+    Object? statistics = null,
+  }) {
+    return _then(_$GetStatisticsStateSuccessImpl(
+      null == statistics
+          ? _value.statistics
+          : statistics // ignore: cast_nullable_to_non_nullable
+              as AdminStatisticsModel,
+    ));
   }
 }
 
@@ -1746,9 +1736,8 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
   @override
   @pragma('vm:prefer-inline')
   _$$GetStatisticsStateSuccessImplCopyWith<_$GetStatisticsStateSuccessImpl>
-  get copyWith => __$$GetStatisticsStateSuccessImplCopyWithImpl<
-    _$GetStatisticsStateSuccessImpl
-  >(this, _$identity);
+      get copyWith => __$$GetStatisticsStateSuccessImplCopyWithImpl<
+          _$GetStatisticsStateSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1759,11 +1748,11 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getStatisticsStateSuccess(statistics);
@@ -1781,7 +1770,7 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getStatisticsStateSuccess?.call(statistics);
@@ -1799,7 +1788,7 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1814,22 +1803,22 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getStatisticsStateSuccess(this);
   }
@@ -1845,9 +1834,9 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getStatisticsStateSuccess?.call(this);
@@ -1864,9 +1853,9 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -1879,8 +1868,7 @@ class _$GetStatisticsStateSuccessImpl implements GetStatisticsStateSuccess {
 
 abstract class GetStatisticsStateSuccess implements AdminHomeState {
   const factory GetStatisticsStateSuccess(
-    final AdminStatisticsModel statistics,
-  ) = _$GetStatisticsStateSuccessImpl;
+      final AdminStatisticsModel statistics) = _$GetStatisticsStateSuccessImpl;
 
   AdminStatisticsModel get statistics;
 
@@ -1888,15 +1876,15 @@ abstract class GetStatisticsStateSuccess implements AdminHomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetStatisticsStateSuccessImplCopyWith<_$GetStatisticsStateSuccessImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$GetStatisticsStateErrorImplCopyWith<$Res> {
   factory _$$GetStatisticsStateErrorImplCopyWith(
-    _$GetStatisticsStateErrorImpl value,
-    $Res Function(_$GetStatisticsStateErrorImpl) then,
-  ) = __$$GetStatisticsStateErrorImplCopyWithImpl<$Res>;
+          _$GetStatisticsStateErrorImpl value,
+          $Res Function(_$GetStatisticsStateErrorImpl) then) =
+      __$$GetStatisticsStateErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -1906,23 +1894,23 @@ class __$$GetStatisticsStateErrorImplCopyWithImpl<$Res>
     extends _$AdminHomeStateCopyWithImpl<$Res, _$GetStatisticsStateErrorImpl>
     implements _$$GetStatisticsStateErrorImplCopyWith<$Res> {
   __$$GetStatisticsStateErrorImplCopyWithImpl(
-    _$GetStatisticsStateErrorImpl _value,
-    $Res Function(_$GetStatisticsStateErrorImpl) _then,
-  ) : super(_value, _then);
+      _$GetStatisticsStateErrorImpl _value,
+      $Res Function(_$GetStatisticsStateErrorImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AdminHomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$GetStatisticsStateErrorImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$GetStatisticsStateErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1956,9 +1944,8 @@ class _$GetStatisticsStateErrorImpl implements GetStatisticsStateError {
   @override
   @pragma('vm:prefer-inline')
   _$$GetStatisticsStateErrorImplCopyWith<_$GetStatisticsStateErrorImpl>
-  get copyWith => __$$GetStatisticsStateErrorImplCopyWithImpl<
-    _$GetStatisticsStateErrorImpl
-  >(this, _$identity);
+      get copyWith => __$$GetStatisticsStateErrorImplCopyWithImpl<
+          _$GetStatisticsStateErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1969,11 +1956,11 @@ class _$GetStatisticsStateErrorImpl implements GetStatisticsStateError {
     required TResult Function(String message) getDoctorsStateError,
     required TResult Function() getPatientsStateLoading,
     required TResult Function(List<PatientModel> patients)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(String message) getPatientsStateError,
     required TResult Function() getStatisticsStateLoading,
     required TResult Function(AdminStatisticsModel statistics)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(String message) getStatisticsStateError,
   }) {
     return getStatisticsStateError(message);
@@ -1991,7 +1978,7 @@ class _$GetStatisticsStateErrorImpl implements GetStatisticsStateError {
     TResult? Function(String message)? getPatientsStateError,
     TResult? Function()? getStatisticsStateLoading,
     TResult? Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(String message)? getStatisticsStateError,
   }) {
     return getStatisticsStateError?.call(message);
@@ -2009,7 +1996,7 @@ class _$GetStatisticsStateErrorImpl implements GetStatisticsStateError {
     TResult Function(String message)? getPatientsStateError,
     TResult Function()? getStatisticsStateLoading,
     TResult Function(AdminStatisticsModel statistics)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(String message)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -2024,22 +2011,22 @@ class _$GetStatisticsStateErrorImpl implements GetStatisticsStateError {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) homeStateInitial,
     required TResult Function(GetDoctorsStateLoading value)
-    getDoctorsStateLoading,
+        getDoctorsStateLoading,
     required TResult Function(GetDoctorsStateSuccess value)
-    getDoctorsStateSuccess,
+        getDoctorsStateSuccess,
     required TResult Function(GetDoctorsStateError value) getDoctorsStateError,
     required TResult Function(GetPatientsStateLoading value)
-    getPatientsStateLoading,
+        getPatientsStateLoading,
     required TResult Function(GetPatientsStateSuccess value)
-    getPatientsStateSuccess,
+        getPatientsStateSuccess,
     required TResult Function(GetPatientsStateError value)
-    getPatientsStateError,
+        getPatientsStateError,
     required TResult Function(GetStatisticsStateLoading value)
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     required TResult Function(GetStatisticsStateSuccess value)
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     required TResult Function(GetStatisticsStateError value)
-    getStatisticsStateError,
+        getStatisticsStateError,
   }) {
     return getStatisticsStateError(this);
   }
@@ -2055,9 +2042,9 @@ class _$GetStatisticsStateErrorImpl implements GetStatisticsStateError {
     TResult? Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult? Function(GetPatientsStateError value)? getPatientsStateError,
     TResult? Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult? Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult? Function(GetStatisticsStateError value)? getStatisticsStateError,
   }) {
     return getStatisticsStateError?.call(this);
@@ -2074,9 +2061,9 @@ class _$GetStatisticsStateErrorImpl implements GetStatisticsStateError {
     TResult Function(GetPatientsStateSuccess value)? getPatientsStateSuccess,
     TResult Function(GetPatientsStateError value)? getPatientsStateError,
     TResult Function(GetStatisticsStateLoading value)?
-    getStatisticsStateLoading,
+        getStatisticsStateLoading,
     TResult Function(GetStatisticsStateSuccess value)?
-    getStatisticsStateSuccess,
+        getStatisticsStateSuccess,
     TResult Function(GetStatisticsStateError value)? getStatisticsStateError,
     required TResult orElse(),
   }) {
@@ -2097,5 +2084,5 @@ abstract class GetStatisticsStateError implements AdminHomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetStatisticsStateErrorImplCopyWith<_$GetStatisticsStateErrorImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
