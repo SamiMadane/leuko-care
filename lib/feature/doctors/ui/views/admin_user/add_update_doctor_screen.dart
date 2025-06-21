@@ -3,12 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:leuko_care/core/helpers/network_helper.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/add_update_profile_image_picker.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
@@ -44,7 +46,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
       _nameController.text = widget.doctor!.name;
       _emailController.text = widget.doctor!.email;
       _phoneController.text = widget.doctor!.phone;
-      _experienceController.text = widget.doctor!.experience.toString(); 
+      _experienceController.text = widget.doctor!.experience.toString();
       _descriptionController.text = widget.doctor!.description;
       _genderController.text = widget.doctor!.gender;
 
@@ -55,19 +57,17 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
     }
   }
 
-Future<void> _pickImage() async {
-  final croppedFile = await pickAndCropImage(context,ImageSource.gallery);
-  if (croppedFile != null) {
-    setState(() {
-      profileImageUrl = croppedFile.path;
-    });
-    debugPrint('✅ New image path: ${croppedFile.path}');
-  } else {
-    debugPrint('❌ No image selected or crop cancelled');
+  Future<void> _pickImage() async {
+    final croppedFile = await pickAndCropImage(context, ImageSource.gallery);
+    if (croppedFile != null) {
+      setState(() {
+        profileImageUrl = croppedFile.path;
+      });
+      debugPrint('✅ New image path: ${croppedFile.path}');
+    } else {
+      debugPrint('❌ No image selected or crop cancelled');
+    }
   }
-}
-
-
 
   void _handleGenderChanged(String gender) {
     setState(() {
@@ -90,7 +90,10 @@ Future<void> _pickImage() async {
           isEditMode
               ? (isDoctorUser ? 'Edit Profile'.tr() : 'Edit Doctor'.tr())
               : 'Add Doctor'.tr(),
-              style: getMediumTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue),
+          style: getMediumTextStyle(
+            fontSize: FontSizeManager.s20,
+            color: ColorsManager.darkBlue,
+          ),
         ),
         backgroundColor: ColorsManager.appBarColor,
         elevation: 0,
@@ -125,7 +128,9 @@ Future<void> _pickImage() async {
                 AppTextButton(
                   buttonText:
                       isEditMode
-                          ? (isDoctorUser ? 'Update Profile'.tr() : 'Update Doctor'.tr())
+                          ? (isDoctorUser
+                              ? 'Update Profile'.tr()
+                              : 'Update Doctor'.tr())
                           : 'Add Doctor'.tr(),
                   textStyle: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
@@ -144,8 +149,18 @@ Future<void> _pickImage() async {
     );
   }
 
-  void _handleSubmit() {
+  void _handleSubmit() async {
     if (_formKey.currentState!.validate()) {
+      final hasConnection = await NetworkHelper.hasInternetConnection();
+      if (!hasConnection) {
+        showAnimatedStatusDialog(
+          context: context,
+          statusType: DialogStatusType.error,
+          title: 'No Internet'.tr(),
+          message: 'Please check your connection and try again.'.tr(),
+        );
+        return;
+      }
       final doctor = DoctorModel(
         id: widget.doctor?.id,
         name: _nameController.text,

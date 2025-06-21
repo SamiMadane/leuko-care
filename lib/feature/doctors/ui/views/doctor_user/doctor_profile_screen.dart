@@ -39,14 +39,28 @@ class DoctorProfileScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
         elevation: 0,
         actions: [
-          IconButton(
-            icon: Icon(Icons.edit, color: ColorsManager.primaryColor),
-            onPressed: () {
-              context.pushNamed(
-                Routes.addUpdateDoctorScreen,
-                arguments: {'doctorModel': doctor, 'userType': 'doctor'},
-              );
-            },
+          Padding(
+            padding: EdgeInsets.only(right: WidthManager.w12),
+            child: GestureDetector(
+              onTap: () {
+                context.pushNamed(
+                  Routes.addUpdateDoctorScreen,
+                  arguments: {'doctorModel': doctor, 'userType': 'doctor'},
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: ColorsManager.lightBlue,
+                  shape: BoxShape.circle,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: WidthManager.w8, vertical: HeightManager.h8),
+                child: Icon(
+                  Icons.edit,
+                  color: ColorsManager.primaryColor,
+                  size: 22,
+                ),
+              ),
+            ),
           ),
         ],
       ),

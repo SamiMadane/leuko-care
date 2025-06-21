@@ -264,6 +264,8 @@
   "Success":"نجاح",
   "Error":"فشل",
   "Warning":"تحذير",
+  "No Internet":"لا يوجد إنترنت",
+  "Please check your connection and try again.": "يرجى التحقق من اتصالك وحاول مرة أخرى.",
   "Stay in contact with your doctor and report any new symptoms.": "ابق على تواصل مع طبيبك وأبلغ عن أي أعراض جديدة.",
   "Still waiting? Send a message": "لا تزال تنتظر؟ أرسل رسالة",
   "Tailored experience for every role — manage, diagnose, and track with ease.": "تجربة مخصصة لكل دور — إدارة، تشخيص، وتتبع بسهولة.",

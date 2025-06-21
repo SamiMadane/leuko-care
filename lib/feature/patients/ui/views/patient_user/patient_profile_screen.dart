@@ -42,9 +42,8 @@ class PatientProfileScreen extends StatelessWidget {
         actions: [
           Row(
             children: [
-              IconButton(
-                icon: const Icon(Icons.edit, color: ColorsManager.primaryColor),
-                onPressed: () {
+              GestureDetector(
+                onTap: () {
                   context.pushNamed(
                     Routes.addUpdatePatientScreen,
                     arguments: {
@@ -55,8 +54,30 @@ class PatientProfileScreen extends StatelessWidget {
                     },
                   );
                 },
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: ColorsManager.lightBlue,
+                    boxShadow: [
+                      BoxShadow(
+                        color: ColorsManager.lightBlue,
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  padding:  EdgeInsets.symmetric(
+                    horizontal: WidthManager.w8,
+                    vertical: HeightManager.h8,
+                  ),
+                  child: const Icon(
+                    Icons.edit,
+                    color: ColorsManager.primaryColor,
+                    size: 20,
+                  ),
+                ),
               ),
-              SizedBox(width: WidthManager.w4,)
+              SizedBox(width: WidthManager.w12),
             ],
           ),
         ],
@@ -95,7 +116,7 @@ class PatientProfileScreen extends StatelessWidget {
               value: patient.phone,
             ),
 
-            SectionTitle( title: 'Personal Info'.tr(),),
+            SectionTitle(title: 'Personal Info'.tr()),
             ProfileInfoRow(
               icon: Icons.date_range,
               title: 'Birth Date'.tr(),
@@ -104,7 +125,11 @@ class PatientProfileScreen extends StatelessWidget {
             ProfileInfoRow(
               icon: Icons.cake,
               title: 'Age'.tr(),
-              value: plural('years_count', age, namedArgs: {'count': age.toString()}),
+              value: plural(
+                'years_count',
+                age,
+                namedArgs: {'count': age.toString()},
+              ),
             ),
             ProfileInfoRow(
               icon:

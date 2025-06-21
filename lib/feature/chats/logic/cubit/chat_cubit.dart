@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:leuko_care/core/helpers/network_helper.dart';
 import 'package:leuko_care/feature/chats/data/repository/chat_repo.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_session_manager.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
@@ -113,7 +114,7 @@ class ChatCubit extends Cubit<ChatState> {
 
     try {
       final cachedMessages = await getCachedMessages(senderId, receiverId);
-      bool hasInternet = await InternetConnection().hasInternetAccess;
+      bool hasInternet = await NetworkHelper.hasInternetConnection();
 
       if (cachedMessages.isNotEmpty) {
         // ✅ حتى بدون إنترنت، فلتر الرسائل المؤقتة لمنع التكرار
@@ -270,7 +271,7 @@ class ChatCubit extends Cubit<ChatState> {
         emit(ChatSuccess([tempMessage]));
       }
 
-      final hasInternet = await InternetConnection().hasInternetAccess;
+      bool hasInternet = await NetworkHelper.hasInternetConnection();
       if (!hasInternet) {
         final currentMessages = (state as ChatSuccess).messages;
         final updatedMessages =
@@ -336,7 +337,7 @@ class ChatCubit extends Cubit<ChatState> {
 
     try {
       // تحقق من وجود الإنترنت
-      final hasInternet = await InternetConnection().hasInternetAccess;
+      bool hasInternet = await NetworkHelper.hasInternetConnection();
 
       if (hasInternet) {
         // ✅ حذف من Firestore

@@ -3,12 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
+import 'package:leuko_care/core/helpers/network_helper.dart';
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/custom_confirmation_dialog.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/core/widgets/signout_bloc_listener.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:shimmer/shimmer.dart';
@@ -211,7 +213,19 @@ void _showMoreOptionsBottomSheet(
                   message: 'Are you sure you want to sign out?'.tr(),
                   confirmText: 'Sign Out'.tr(),
                   type: ConfirmationType.logout,
-                  onConfirmed: () {
+                  onConfirmed: () async {
+                    final hasConnection =
+                        await NetworkHelper.hasInternetConnection();
+                    if (!hasConnection) {
+                      showAnimatedStatusDialog(
+                        context: context,
+                        statusType: DialogStatusType.error,
+                        title: 'No Internet'.tr(),
+                        message:
+                            'Please check your connection and try again.'.tr(),
+                      );
+                      return;
+                    }
                     cubit.signOut();
                     context.pop();
                   },

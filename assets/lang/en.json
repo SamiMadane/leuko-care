@@ -379,6 +379,8 @@
   "patients": "patients",
   "Success":"Success",
   "Error":"Error",
+  "No Internet":"No Internet",
+  "Please check your connection and try again.":"Please check your connection and try again.",
   "Warning":"Warning",
   "Loading messages ...":"Loading messages ...",
   "phone": "phone",

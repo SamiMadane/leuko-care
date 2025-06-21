@@ -3,11 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:leuko_care/core/helpers/network_helper.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
@@ -174,8 +176,18 @@ Future<void> _pickImage() async {
     );
   }
 
-  void _handleSubmit() {
+  void _handleSubmit() async {
     if (_formKey.currentState!.validate()) {
+       final hasConnection = await NetworkHelper.hasInternetConnection();
+    if (!hasConnection) {
+      showAnimatedStatusDialog(
+        context: context,
+        statusType: DialogStatusType.error,
+        title: 'No Internet'.tr(),
+        message: 'Please check your connection and try again.'.tr(),
+      );
+      return;
+    }
       final patient = PatientModel(
         id: widget.patient?.id,
         name: _nameController.text,

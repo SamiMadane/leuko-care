@@ -58,12 +58,19 @@ void setUpErrorState(BuildContext context, String error) {
   final isWarning = error == 'Please verify your email. A verification link has been sent.'.tr() ||
       error == 'Please verify your email. A verification link has already been sent.'.tr();
 
+  final isNetworkError = error == 'error_network_request_failed'.tr();
+
   showAnimatedStatusDialog(
     context: context,
-    title: isWarning ? 'Warning'.tr() : 'Error'.tr(),
+    title: isWarning
+        ? 'Warning'.tr()
+        : isNetworkError
+            ? 'No Internet'.tr()
+            : 'Error'.tr(),
     message: error,
     statusType: isWarning ? DialogStatusType.warning : DialogStatusType.error,
     onConfirm: () => Navigator.of(context).pop(),
   );
 }
+
 }
