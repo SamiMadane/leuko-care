@@ -20,6 +20,7 @@
     "other": "{count} minutes"
   },
   "error_user_not_found": "We couldn't find an account with that email. Please check and try again.",
+  "Unable to sign out. Please check your internet connection and try again.": "Unable to sign out. Please check your internet connection and try again.",
   "error_wrong_password": "The password you entered is incorrect. Please try again.",
   "error_invalid_credential": "Invalid login credentials. Please verify your email and password.",
   "error_email_already_in_use": "This email is already registered. Try another email or reset your password.",

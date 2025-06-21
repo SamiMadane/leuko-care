@@ -265,6 +265,7 @@
   "Error":"فشل",
   "Warning":"تحذير",
   "No Internet":"لا يوجد إنترنت",
+  "Unable to sign out. Please check your internet connection and try again.": "تعذر تسجيل الخروج. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
   "Please check your connection and try again.": "يرجى التحقق من اتصالك وحاول مرة أخرى.",
   "Stay in contact with your doctor and report any new symptoms.": "ابق على تواصل مع طبيبك وأبلغ عن أي أعراض جديدة.",
   "Still waiting? Send a message": "لا تزال تنتظر؟ أرسل رسالة",

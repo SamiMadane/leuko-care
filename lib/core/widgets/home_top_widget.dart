@@ -222,7 +222,7 @@ void _showMoreOptionsBottomSheet(
                         statusType: DialogStatusType.error,
                         title: 'No Internet'.tr(),
                         message:
-                            'Please check your connection and try again.'.tr(),
+                            'Unable to sign out. Please check your internet connection and try again.'.tr(),
                       );
                       return;
                     }
