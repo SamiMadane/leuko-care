@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-import 'package:leuko_care/core/widgets/error_dialog.dart';
-import 'package:leuko_care/core/widgets/success_dialog.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
@@ -83,21 +82,19 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
   }
 
   void _showAddSuccessDialog(BuildContext context, String message) {
-    showDialog(
+    showAnimatedStatusDialog(
       context: context,
-      barrierDismissible: true,
-      builder:
-          (context) => SuccessDialog(
-            message: message,
-            onSuccess: () {
-              context.pop();
-              context.pop();
-              context.pushReplacementNamed(
-                Routes.allPatientsScreen,
-                arguments: {'doctorId': doctorId, 'doctorName': doctorName},
-              );
-            },
-          ),
+      title: 'Success'.tr(),
+      message: message,
+      statusType: DialogStatusType.success,
+      onConfirm: () {
+        context.pop();
+        context.pop();
+        context.pushReplacementNamed(
+          Routes.allPatientsScreen,
+          arguments: {'doctorId': doctorId, 'doctorName': doctorName},
+        );
+      },
     );
   }
 
@@ -106,38 +103,39 @@ class AddUpdatePatientBlocListener extends StatelessWidget {
     String message,
     PatientModel patient,
   ) {
-    showDialog(
+    showAnimatedStatusDialog(
       context: context,
-      barrierDismissible: true,
-      builder:
-          (context) => SuccessDialog(
-            message: message,
-            onSuccess: () {
-              if (!isPatientUser!) {
-                context.pop();
-                context.pop();
-                context.pushReplacementNamed(
-                  Routes.patientDetailsScreen,
-                  arguments: {
-                    'patientId': patient.id,
-                    'doctorId': doctorId,
-                    'doctorName': doctorName,
-                  },
-                );
-              } else {
-                context.pop();
-                context.pop();
-                context.pushReplacementNamed(Routes.patientScreen);
-              }
+      title: 'Success'.tr(),
+      message: message,
+      statusType: DialogStatusType.success,
+      onConfirm: () {
+        if (!isPatientUser!) {
+          context.pop();
+          context.pop();
+          context.pushReplacementNamed(
+            Routes.patientDetailsScreen,
+            arguments: {
+              'patientId': patient.id,
+              'doctorId': doctorId,
+              'doctorName': doctorName,
             },
-          ),
+          );
+        } else {
+          context.pop();
+          context.pop();
+          context.pushReplacementNamed(Routes.patientScreen);
+        }
+      },
     );
   }
 
   void _showErrorDialog(BuildContext context, String message) {
-    showDialog(
+    showAnimatedStatusDialog(
       context: context,
-      builder: (context) => ErrorDialog(message: message),
+      title: 'Error'.tr(),
+      message: message,
+      statusType: DialogStatusType.error,
+      onConfirm: () => Navigator.of(context).pop(),
     );
   }
 }

@@ -1,5 +1,6 @@
 const String imagesPath = 'assets/images';
 const String iconsPath = 'assets/icons';
+const String lottiePath = 'assets/lottie';
 
 
 class AssetsManager {
@@ -33,10 +34,17 @@ class AssetsManager {
   static const String patientsIcon = '$iconsPath/patients.png';
   static const String doctorProfileIcon = '$iconsPath/doctor_profile.png';
   static const String doctorProfileIconIcon = '$iconsPath/doctor_profile_icon.png';
-
   static const String bloodTest = '$iconsPath/blood_test.png';
   static const String chemicalAnalysisIcon = '$iconsPath/chemical_analysis.png';
   static const String medicalDevicesIcon = '$iconsPath/medical_devices.png';
+
+  // lottie
+  static const String successLottie = '$lottiePath/success.json';
+  static const String errorLottie = '$lottiePath/error.json';
+  static const String warningLottie = '$lottiePath/warning.json';
+  static const String deleteLottie = '$lottiePath/delete.json';
+  static const String logoutLottie = '$lottiePath/logout.json';
+
 
 
 

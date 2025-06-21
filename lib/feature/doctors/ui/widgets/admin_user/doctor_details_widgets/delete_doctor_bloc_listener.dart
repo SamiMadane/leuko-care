@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-import 'package:leuko_care/core/widgets/error_dialog.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/core/widgets/loading_dialog.dart';
-import 'package:leuko_care/core/widgets/success_dialog.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
 
@@ -31,25 +30,30 @@ class DeleteDoctorBlocListener extends StatelessWidget {
             );
           },
           deleteDoctorStateSuccess: () {
-            Navigator.pop(context);
-            showDialog(
+            Navigator.pop(context); // إغلاق أي dialog مفتوح مسبقًا
+            showAnimatedStatusDialog(
               context: context,
-              builder:
-                  (context) => SuccessDialog(
-                    message: 'The doctor and all of their patients have been deleted successfully.'.tr(),
-                    onSuccess: () {
-                      context.pop();
-                      context.pop();
-                      context.pushReplacementNamed(Routes.allDoctorsScreen);
-                    },
-                  ),
+              title: 'Success'.tr(),
+              message:
+                  'The doctor and all of their patients have been deleted successfully.'
+                      .tr(),
+              statusType: DialogStatusType.success,
+              onConfirm: () {
+                context.pop(); // إغلاق dialog الحالي
+                context.pop(); // إغلاق الشاشة السابقة
+                context.pushReplacementNamed(Routes.allDoctorsScreen);
+              },
             );
           },
+
           deleteDoctorStateError: (message) {
-            Navigator.pop(context);
-            showDialog(
+            Navigator.pop(context); // إغلاق أي dialog مفتوح مسبقًا
+            showAnimatedStatusDialog(
               context: context,
-              builder: (context) => ErrorDialog(message: message),
+              title: 'Error'.tr(),
+              message: message,
+              statusType: DialogStatusType.error,
+              onConfirm: () => Navigator.of(context).pop(),
             );
           },
         );

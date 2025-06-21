@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
-import 'package:leuko_care/core/widgets/confirmation_dialog.dart';
+import 'package:leuko_care/core/widgets/custom_confirmation_dialog.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/message_bubble/image_bubble.dart';
 import 'package:leuko_care/feature/chats/ui/widgets/message_bubble/text_and_image_bubble.dart';
@@ -18,25 +18,21 @@ class MessageBubble extends StatelessWidget {
   const MessageBubble({super.key, required this.message, required this.isMe});
 
   void _showDeleteDialog(BuildContext context) {
-    showDialog(
+    showAnimatedConfirmationDialog(
       context: context,
-      builder:
-          (_) => ConfirmationDialog(
-            title: 'Delete Message'.tr(),
-            message:
-                'Are you sure you want to delete this message for everyone?'
-                    .tr(),
-            confirmText: 'Delete'.tr(),
-            icon: Icons.delete,
-            onConfirmed: () {
-              context.read<ChatCubit>().deleteMessage(
-                senderId: message.senderId,
-                receiverId: message.receiverId,
-                messageId: message.id,
-              );
-              Navigator.pop(context);
-            },
-          ),
+      title: 'Delete Message'.tr(),
+      message:
+          'Are you sure you want to delete this message for everyone?'.tr(),
+      confirmText: 'Delete'.tr(),
+      type: ConfirmationType.delete,
+      onConfirmed: () {
+        context.read<ChatCubit>().deleteMessage(
+          senderId: message.senderId,
+          receiverId: message.receiverId,
+          messageId: message.id,
+        );
+        Navigator.pop(context); // لإغلاق الديالوج بعد التنفيذ
+      },
     );
   }
 
@@ -49,7 +45,9 @@ class MessageBubble extends StatelessWidget {
       alignment: alignment,
       child: Column(
         crossAxisAlignment:
-           isMe && currentLocale.toString() == 'en' ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            isMe && currentLocale.toString() == 'en'
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
         children: [
           Directionality(
             textDirection: flutterMaterial.TextDirection.ltr,
@@ -77,11 +75,15 @@ class MessageBubble extends StatelessWidget {
                                 retryingMessageId: message.id,
                               );
                         },
-                        child: Icon(Icons.refresh, color: Colors.blue, size: 18),
+                        child: Icon(
+                          Icons.refresh,
+                          color: Colors.blue,
+                          size: 18,
+                        ),
                       ),
                     ],
                   ),
-            
+
                 if (isMe && message.status == MessageStatus.sending)
                   Padding(
                     padding: EdgeInsets.only(
@@ -94,7 +96,7 @@ class MessageBubble extends StatelessWidget {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     ),
                   ),
-            
+
                 GestureDetector(
                   onLongPress: () => _showDeleteDialog(context),
                   child: _buildMessageContent(context),

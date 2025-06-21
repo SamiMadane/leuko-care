@@ -82,7 +82,7 @@ Future<void> _pickImage() async {
   @override
   Widget build(BuildContext context) {
     final isEditMode = widget.doctor != null;
-    final isDoctorUser = widget.userType == 'doctor'.tr();
+    final isDoctorUser = widget.userType == 'doctor';
 
     return Scaffold(
       appBar: AppBar(

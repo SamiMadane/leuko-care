@@ -98,6 +98,7 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.1
   path_provider: ^2.0.15
+  lottie: ^3.3.1
   
 dev_dependencies:
   flutter_test:
@@ -136,6 +137,7 @@ flutter:
     - assets/lang/en.json
     - assets/lang/ar.json
     - assets/notifications_key/leukocare-6a1ec-8fb0476b0d89.json
+    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

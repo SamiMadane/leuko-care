@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-import 'package:leuko_care/core/widgets/error_dialog.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/core/widgets/loading_dialog.dart';
-import 'package:leuko_care/core/widgets/success_dialog.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_state.dart';
 
@@ -43,33 +42,32 @@ class DeletePatientBlocListener extends StatelessWidget {
             Navigator.of(
               context,
               rootNavigator: true,
-            ).pop(); // لإغلاق LoadingDialog
-            showDialog(
+            ).pop(); // إغلاق LoadingDialog
+            showAnimatedStatusDialog(
               context: context,
-              builder:
-                  (context) => SuccessDialog(
-                    message: 'The patient has been deleted successfully.'.tr(),
-                    onSuccess: () {
-                      context.pop();
-                      context.pop();
-                      context.pop();
-
-                      context.pushReplacementNamed(
-                        Routes.allPatientsScreen,
-                        arguments: {
-                          'doctorId': doctorId,
-                          'doctorName': doctorName,
-                        },
-                      );
-                    },
-                  ),
+              title: 'Success'.tr(),
+              message: 'The patient has been deleted successfully.'.tr(),
+              statusType: DialogStatusType.success,
+              onConfirm: () {
+                context.pop();
+                context.pop();
+                context.pop();
+                context.pushReplacementNamed(
+                  Routes.allPatientsScreen,
+                  arguments: {'doctorId': doctorId, 'doctorName': doctorName},
+                );
+              },
             );
           },
+
           deletePatientStateError: (message) {
             Navigator.of(context, rootNavigator: true).pop();
-            showDialog(
+            showAnimatedStatusDialog(
               context: context,
-              builder: (context) => ErrorDialog(message: message),
+              title: 'Error'.tr(),
+              message: message,
+              statusType: DialogStatusType.error,
+              onConfirm: () => Navigator.of(context).pop(),
             );
           },
         );
