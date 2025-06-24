@@ -39,7 +39,7 @@ class DoctorProfileScreen extends StatelessWidget {
         scrolledUnderElevation: 0,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: WidthManager.w12),
+            padding: EdgeInsets.symmetric(horizontal: WidthManager.w12),
             child: GestureDetector(
               onTap: () {
                 context.pushNamed(
@@ -52,7 +52,10 @@ class DoctorProfileScreen extends StatelessWidget {
                   color: ColorsManager.lightBlue,
                   shape: BoxShape.circle,
                 ),
-                padding: EdgeInsets.symmetric(horizontal: WidthManager.w8, vertical: HeightManager.h8),
+                padding: EdgeInsets.symmetric(
+                  horizontal: WidthManager.w8,
+                  vertical: HeightManager.h8,
+                ),
                 child: Icon(
                   Icons.edit,
                   color: ColorsManager.primaryColor,

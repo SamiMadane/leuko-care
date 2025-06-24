@@ -20,6 +20,8 @@ class DoctorCubit extends Cubit<DoctorState> {
   bool shouldInjectPatient = false;
   StreamSubscription? _doctorAndPatientsSubscription;
   final PageController pageController = PageController(initialPage: 2);
+  PatientModel? preSelectedPatient;
+
 
   void goToPage(int index) {
     final currentPage = pageController.page?.round() ?? 0;
@@ -36,6 +38,11 @@ class DoctorCubit extends Cubit<DoctorState> {
       );
     }
   }
+
+  void setPreSelectedPatient(PatientModel patient) {
+  preSelectedPatient = patient;
+}
+
 
   void getDoctorsStream() async {
     emit(GetDoctorStateLoading());

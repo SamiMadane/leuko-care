@@ -14,6 +14,7 @@ import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+import 'package:leuko_care/feature/doctors/ui/views/doctor_user/analyzing_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/upload_sample_screen.dart/analyze_button.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/upload_sample_screen.dart/image_picker_buttons.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/upload_sample_screen.dart/patient_dropdown.dart';
@@ -36,22 +37,54 @@ class UploadSampleScreen extends StatefulWidget {
 
 class _UploadSampleScreenState extends State<UploadSampleScreen> {
   File? _image;
-  bool _isLoading = false;
   PatientModel? selectedPatient;
 
- Future<void> _pickImage(ImageSource source) async {
-  final cropped = await pickAndCropImage(context, source);
-  if (cropped != null) {
-    setState(() => _image = cropped);
+  Future<void> _pickImage(ImageSource source) async {
+    final cropped = await pickAndCropImage(context, source);
+    if (cropped != null) {
+      setState(() => _image = cropped);
+    }
   }
-}
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final cubit = context.read<DoctorCubit>();
+      final patient = cubit.preSelectedPatient;
+
+      if (patient != null) {
+        try {
+          final match = widget.patients.firstWhere(
+            (p) => p.equalsById(patient),
+            orElse: () => patient,
+          );
+          setState(() {
+            selectedPatient = match;
+          });
+        } catch (_) {
+          // في حال لم يكن المريض موجودًا في القائمة لأي سبب
+          setState(() {
+            selectedPatient = patient;
+          });
+        }
+        cubit.preSelectedPatient = null;
+      }
+    });
+  }
 
   Future<void> _processImage() async {
-    if (_image == null || selectedPatient == null) return;
+      if (_image == null && (selectedPatient?.latestSampleImageUrl == null || selectedPatient!.latestSampleImageUrl!.isEmpty)) {
+    return;
+  }
 
-    setState(() => _isLoading = true);
-    await Future.delayed(Duration(seconds: 3));
-    setState(() => _isLoading = false);
+
+
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const AnalyzingScreen()),
+    );
 
     context.pushNamed(
       Routes.sampleResultScreen,
@@ -62,7 +95,8 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
         'diseaseType': 'Acute Lymphoblastic Leukemia'.tr(),
         'confidence': 92.5,
         'aiMessage':
-            'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'.tr(),
+            'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'
+                .tr(),
         'sampleImageUrl':
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbGvhz9FycJFGdB6RGt49lL_T-tRULnYQTw&s',
       },
@@ -76,7 +110,7 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
         BlocListener<DoctorCubit, DoctorState>(
           listenWhen:
               (previous, current) =>
-                  current is DoctorBottomNavChanged && current.index != 2,
+                  current is DoctorBottomNavChanged && current.index != 1,
           listener: (context, state) {
             setState(() {
               selectedPatient = null;
@@ -116,8 +150,10 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
                         }),
                   ),
                   SizedBox(height: HeightManager.h20),
-                  SampleImagePreview(image: _image, networkImageUrl: selectedPatient?.latestSampleImageUrl,
-),
+                  SampleImagePreview(
+                    image: _image,
+                    networkImageUrl: selectedPatient?.latestSampleImageUrl,
+                  ),
                   SizedBox(height: HeightManager.h20),
                   ImagePickerButtons(onPick: _pickImage),
                   SizedBox(height: HeightManager.h20),
@@ -131,15 +167,6 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
             ),
           ),
         ),
-        if (_isLoading)
-          Container(
-            color: Colors.white.withValues(alpha: .8),
-            child: Center(
-              child: CircularProgressIndicator(
-                color: ColorsManager.primaryColor,
-              ),
-            ),
-          ),
       ],
     );
   }

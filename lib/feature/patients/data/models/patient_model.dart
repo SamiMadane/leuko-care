@@ -145,5 +145,9 @@ int get hashCode =>
     (lastExamDate?.hashCode ?? 0) ^
     gender.hashCode ^
     (fcmToken?.hashCode ?? 0);
+    
+bool equalsById(PatientModel other) {
+  return this.id == other.id;
+}
 
 }

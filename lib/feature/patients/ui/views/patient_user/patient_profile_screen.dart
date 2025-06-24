@@ -40,45 +40,43 @@ class PatientProfileScreen extends StatelessWidget {
         backgroundColor: ColorsManager.appBarColor,
         iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
         actions: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  context.pushNamed(
-                    Routes.addUpdatePatientScreen,
-                    arguments: {
-                      'patientModel': patient,
-                      'userType': 'patient'.tr(),
-                      'doctorId': patient.doctorId,
-                      'doctorName': '',
-                    },
-                  );
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: ColorsManager.lightBlue,
-                    boxShadow: [
-                      BoxShadow(
-                        color: ColorsManager.lightBlue,
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  padding:  EdgeInsets.symmetric(
-                    horizontal: WidthManager.w8,
-                    vertical: HeightManager.h8,
-                  ),
-                  child: const Icon(
-                    Icons.edit,
-                    color: ColorsManager.primaryColor,
-                    size: 20,
-                  ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: WidthManager.w12), // أو حسب الحاجة
+            child: GestureDetector(
+              onTap: () {
+                context.pushNamed(
+                  Routes.addUpdatePatientScreen,
+                  arguments: {
+                    'patientModel': patient,
+                    'userType': 'patient',
+                    'doctorId': patient.doctorId,
+                    'doctorName': '',
+                  },
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ColorsManager.lightBlue,
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorsManager.lightBlue,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: WidthManager.w8,
+                  vertical: HeightManager.h8,
+                ),
+                child: const Icon(
+                  Icons.edit,
+                  color: ColorsManager.primaryColor,
+                  size: 20,
                 ),
               ),
-              SizedBox(width: WidthManager.w12),
-            ],
+            ),
           ),
         ],
       ),

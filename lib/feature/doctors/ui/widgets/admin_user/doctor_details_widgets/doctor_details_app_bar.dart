@@ -27,6 +27,7 @@ class DoctorDetailsAppBar extends StatelessWidget
         ),
         overflow: TextOverflow.ellipsis,
       ),
+      scrolledUnderElevation: 0,
       backgroundColor: ColorsManager.appBarColor,
       actions: [
         Padding(

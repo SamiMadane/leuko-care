@@ -27,17 +27,9 @@ class SignOutBlocListener extends StatelessWidget {
           },
           // عندما يكون تسجيل الخروج ناجحًا
           signedOutStateSuccess: () {
-            showAnimatedStatusDialog(
-              context: context,
-              title: 'Success'.tr(),
-              message: 'You have signed out successfully'.tr(),
-              statusType: DialogStatusType.success,
-              onConfirm: () {
-                context.pushNamedAndRemoveUntil(
-                  Routes.userSelectionScreen,
-                  predicate: (route) => false,
-                );
-              },
+            context.pushNamedAndRemoveUntil(
+              Routes.userSelectionScreen,
+              predicate: (route) => false,
             );
           },
 

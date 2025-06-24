@@ -28,6 +28,7 @@ class PatientDetailsAppBar extends StatelessWidget
           color: ColorsManager.darkBlue,
         ),
       ),
+      scrolledUnderElevation: 0,
       actions: [
         userType == 'doctor'
             ? SizedBox.shrink()

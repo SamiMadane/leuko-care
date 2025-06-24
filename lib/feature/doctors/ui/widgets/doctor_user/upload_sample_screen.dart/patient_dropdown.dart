@@ -40,7 +40,7 @@ class PatientDropdown extends StatelessWidget {
           child: DropdownButton2<PatientModel>(
             underline: const SizedBox(),
             isExpanded: true,
-            value: selected,
+            value:  selected,
             hint: Text('Choose patient'.tr()),
             onChanged: onChanged,
             items:

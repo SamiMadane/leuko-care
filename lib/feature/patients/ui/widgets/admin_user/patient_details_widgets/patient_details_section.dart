@@ -45,7 +45,7 @@ class PatientDetailsSection extends StatelessWidget {
       child: SingleChildScrollView(
         padding: EdgeInsets.only(
           bottom:
-              userType == 'doctor'.tr()
+              userType == 'doctor'
                   ? MediaQuery.of(context).padding.bottom + HeightManager.h30
                   : 0,
         ),

@@ -50,6 +50,7 @@ class AssetsManager {
   static const String noChatLottie = '$lottiePath/no_chat.json';
   static const String noChat2Lottie = '$lottiePath/no_chat2.json';
   static const String pendingLottie = '$lottiePath/pending.json';
+  static const String aiLottie = '$lottiePath/ai.json';
 
 
 

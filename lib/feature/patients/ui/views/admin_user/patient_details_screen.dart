@@ -101,7 +101,7 @@ class PatientDetailsScreen extends StatelessWidget {
                   },
                 ),
               ),
-              if (userType != 'doctor'.tr())
+              if (userType != 'doctor')
                 StreamBuilder<PatientModel>(
                   stream: patientCubit.getPatientByIdStream(patientId),
                   builder: (context, snapshot) {
@@ -116,7 +116,7 @@ class PatientDetailsScreen extends StatelessWidget {
                           Expanded(
                             child: PatientEditButton(
                               patient: snapshot.data!,
-                              userType: 'admin'.tr(),
+                              userType: 'admin',
                               doctorName: doctorName,
                             ),
                           ),
@@ -129,6 +129,36 @@ class PatientDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton:
+          userType == 'doctor'
+              ? StreamBuilder<PatientModel>(
+                stream: context.read<PatientCubit>().getPatientByIdStream(
+                  patientId,
+                ),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const SizedBox.shrink();
+
+                  final patient = snapshot.data!;
+
+                  return ClipOval(
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.pop(
+                          context,
+                          patient,
+                        ); // ⬅️ نُرجع المريض بدل true
+                      },
+                      backgroundColor: ColorsManager.primaryColor,
+                      child: Icon(
+                        Icons.upload_file,                        
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                },
+              )
+              : null,
     );
   }
 }
