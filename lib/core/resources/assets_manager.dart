@@ -44,6 +44,12 @@ class AssetsManager {
   static const String warningLottie = '$lottiePath/warning.json';
   static const String deleteLottie = '$lottiePath/delete.json';
   static const String logoutLottie = '$lottiePath/logout.json';
+  static const String noPatientsLottie = '$lottiePath/no_patients.json';
+  static const String noDoctorsLottie = '$lottiePath/no_doctors.json';
+  static const String searchLottie = '$lottiePath/search.json';
+  static const String noChatLottie = '$lottiePath/no_chat.json';
+  static const String noChat2Lottie = '$lottiePath/no_chat2.json';
+  static const String pendingLottie = '$lottiePath/pending.json';
 
 
 

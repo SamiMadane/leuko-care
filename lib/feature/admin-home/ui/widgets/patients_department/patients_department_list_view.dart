@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/widgets/patients_department/patients_department_list_view_item.dart';
@@ -23,13 +23,13 @@ class PatientsDepartmentListView extends StatelessWidget {
         child:
             hasDoctors
                 ?  EmptyStateWidget(
-                  icon: Icons.person_off,
+                  lottiePath: AssetsManager.noPatientsLottie,
                   title: 'No patients assigned'.tr(),
                   message:
                       'There are currently no patients assigned to this doctor. You can add patients or select a different doctor.'.tr(),
                 )
                 :  EmptyStateWidget(
-                  icon: Icons.medical_information_outlined,
+                  lottiePath: AssetsManager.noDoctorsLottie,
                   title: 'No doctors found'.tr(),
                   message:
                       'no doctors added message',

@@ -37,10 +37,11 @@ class _PatientScreenState extends State<PatientScreen> {
       child: Scaffold(
         body: SafeArea(
           child: BlocBuilder<PatientCubit, PatientState>(
-            buildWhen: (previous, current) =>
-                current is GetPatientAndDoctorStateLoading ||
-                current is GetPatientAndDoctorStateError ||
-                current is GetPatientAndDoctorStateSuccess,
+            buildWhen:
+                (previous, current) =>
+                    current is GetPatientAndDoctorStateLoading ||
+                    current is GetPatientAndDoctorStateError ||
+                    current is GetPatientAndDoctorStateSuccess,
             builder: (context, state) {
               if (state is GetPatientAndDoctorStateLoading) {
                 return const PatientShimmer();
@@ -56,16 +57,16 @@ class _PatientScreenState extends State<PatientScreen> {
 
                   ChatSessionManager().currentChatId = chatId;
                   context.read<PatientCubit>().changeSelectedIndex(
-                        widget.initialIndex!,
-                      );
+                    widget.initialIndex!,
+                  );
 
                   hasHandledInitialIndex = true;
                 }
 
                 // ✅ عرض المحتوى حسب selectedIndex
                 return BlocBuilder<PatientCubit, PatientState>(
-                  buildWhen: (previous, current) =>
-                      current is PatientBottomNavChanged,
+                  buildWhen:
+                      (previous, current) => current is PatientBottomNavChanged,
                   builder: (context, _) {
                     final cubit = context.read<PatientCubit>();
                     final selectedIndex = cubit.selectedIndex;
@@ -76,8 +77,7 @@ class _PatientScreenState extends State<PatientScreen> {
                     if (selectedIndex == 1 &&
                         patientId != null &&
                         doctorId != null) {
-                      final chatId =
-                          ChatCubit.getChatId(patientId, doctorId);
+                      final chatId = ChatCubit.getChatId(patientId, doctorId);
                       ChatSessionManager().currentChatId = chatId;
                     } else {
                       ChatSessionManager().currentChatId = null;
@@ -93,12 +93,16 @@ class _PatientScreenState extends State<PatientScreen> {
                         currentUserId: state.patient.id!,
                         otherUserId: state.doctor.id!,
                         userType: 'patient',
+                        initialMessage: cubit.initialChatMessage,
                       ),
                       PatientProfileScreen(patient: state.patient),
                     ];
 
-                    return IndexedStack(
-                      index: selectedIndex,
+                    return PageView(
+                      controller: context.read<PatientCubit>().pageController,
+                      onPageChanged: (index) {
+                        context.read<PatientCubit>().changeSelectedIndex(index);
+                      },
                       children: pages,
                     );
                   },
@@ -119,12 +123,11 @@ class _PatientScreenState extends State<PatientScreen> {
               currentIndex: cubit.selectedIndex,
               onTap: (index) {
                 cubit.changeSelectedIndex(index);
+                context.read<PatientCubit>().goToPage(index);
 
                 if (index == 1 && patientId != null && doctorId != null) {
                   final chatId = ChatCubit.getChatId(patientId, doctorId);
                   ChatSessionManager().currentChatId = chatId;
-
-                
                 } else {
                   ChatSessionManager().currentChatId = null;
                 }

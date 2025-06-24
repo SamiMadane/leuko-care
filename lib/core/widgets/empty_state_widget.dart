@@ -1,41 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:lottie/lottie.dart';
 
 class EmptyStateWidget extends StatelessWidget {
-  final IconData icon;
   final String title;
   final String message;
+  final String? lottiePath;
+  final bool isFullScreen;
 
   const EmptyStateWidget({
     super.key,
-    required this.icon,
     required this.title,
     required this.message,
+    this.lottiePath,
+    this.isFullScreen = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: EdgeInsets.symmetric(horizontal: WidthManager.w20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: isFullScreen ? MainAxisSize.max : MainAxisSize.min,
           children: [
-            Icon(icon, size: 100, color: Colors.grey.shade400),
-            const SizedBox(height: 20),
+              Flexible(
+                child: Lottie.asset(lottiePath!, fit: BoxFit.contain),
+              ),
+            SizedBox(height: HeightManager.h16),
             Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.grey.shade600,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: getBoldTextStyle(
+                fontSize:
+                    isFullScreen ? FontSizeManager.s18 : FontSizeManager.s14,
+                color: ColorsManager.gray,
+              ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: HeightManager.h8),
             Text(
               message,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey.shade500,
-                  ),
+              style: getRegularTextStyle(
+                fontSize:
+                    isFullScreen ? FontSizeManager.s16 : FontSizeManager.s13,
+                color: ColorsManager.gray,
+                height: HeightManager.h1_3,
+              ),
               textAlign: TextAlign.center,
             ),
           ],

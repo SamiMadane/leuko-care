@@ -111,7 +111,6 @@ class ChatCubit extends Cubit<ChatState> {
     required String receiverId,
   }) async {
     emit(ChatLoading());
-
     try {
       final cachedMessages = await getCachedMessages(senderId, receiverId);
       bool hasInternet = await NetworkHelper.hasInternetConnection();

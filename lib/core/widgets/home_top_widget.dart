@@ -221,11 +221,16 @@ void _showMoreOptionsBottomSheet(
                         context: context,
                         statusType: DialogStatusType.error,
                         title: 'No Internet'.tr(),
+                        onConfirm: () {
+                          context.pop();
+                          context.pop();
+                        },
                         message:
                             'Unable to sign out. Please check your internet connection and try again.'.tr(),
                       );
                       return;
                     }
+                    
                     cubit.signOut();
                     context.pop();
                   },

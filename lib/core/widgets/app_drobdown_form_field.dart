@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -32,32 +33,69 @@ class AppDropdownFormField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<T>(
+    return DropdownButtonFormField2<T>(
       value: value,
       items: items,
       onChanged: onChanged,
       validator: validator,
-      style: textStyle ?? getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkBlue), 
-          
+      isExpanded: true,
+      style:
+          textStyle ??
+          getMediumTextStyle(
+            fontSize: FontSizeManager.s14,
+            color: ColorsManager.darkBlue,
+          ),
+
+      // القائمة المنسدلة
+      dropdownStyleData: DropdownStyleData(
+        maxHeight: 250,
+        offset: const Offset(0, 5),
+        padding: EdgeInsets.symmetric(vertical: HeightManager.h8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(RadiusManager.r12),
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+      ),
+     
+      // المدخل النصي (label + borders)
       decoration: InputDecoration(
         isDense: true,
-        contentPadding: contentPadding ??
+        labelText: labelText,
+        labelStyle: getMediumTextStyle(
+          fontSize: FontSizeManager.s14,
+          color: ColorsManager.primaryColor,
+        ),
+
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: backgroundColor ?? ColorsManager.moreLightGray,
+        filled: true,
+        contentPadding:
+            contentPadding ??
             EdgeInsets.symmetric(
               horizontal: WidthManager.w20,
-              vertical: HeightManager.h18,
+              vertical: HeightManager.h16,
             ),
-        focusedBorder: focusedBorder ??
+        enabledBorder:
+            enabledBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: ColorsManager.primaryColor,
+                color: ColorsManager.lighterGray,
                 width: 1.3,
               ),
               borderRadius: BorderRadius.circular(RadiusManager.r16),
             ),
-        enabledBorder: enabledBorder ??
+        focusedBorder:
+            focusedBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: ColorsManager.lighterGray,
+                color: ColorsManager.primaryColor,
                 width: 1.3,
               ),
               borderRadius: BorderRadius.circular(RadiusManager.r16),
@@ -70,17 +108,7 @@ class AppDropdownFormField<T> extends StatelessWidget {
           borderSide: const BorderSide(color: ColorsManager.red, width: 1.3),
           borderRadius: BorderRadius.circular(RadiusManager.r16),
         ),
-        labelText: labelText,
-        labelStyle: getMediumTextStyle(
-          fontSize: FontSizeManager.s14,
-          color: ColorsManager.primaryColor,
-        ),
-        fillColor: backgroundColor ?? ColorsManager.moreLightGray,
-        filled: true,
-        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
-      dropdownColor: Colors.white,
-      iconEnabledColor: ColorsManager.primaryColor,
     );
   }
 }

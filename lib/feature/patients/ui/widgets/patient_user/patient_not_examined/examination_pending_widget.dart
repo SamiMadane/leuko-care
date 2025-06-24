@@ -4,14 +4,16 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
+import 'package:lottie/lottie.dart';
 
 class ExaminationPendingWidget extends StatelessWidget {
-  const ExaminationPendingWidget({super.key});
+  const ExaminationPendingWidget({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +43,10 @@ class ExaminationPendingWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Your test result is still pending. Please wait while your doctor reviews your sample.'.tr(),
+                      'Your test result is still pending. Please wait while your doctor reviews your sample.'
+                          .tr(),
                       style: getMediumTextStyle(
-                        fontSize: FontSizeManager.s14,
+                        fontSize: FontSizeManager.s15,
                         color: ColorsManager.darkBlue,
                         height: HeightManager.h1_3,
                       ),
@@ -52,16 +55,17 @@ class ExaminationPendingWidget extends StatelessWidget {
                     TextButton.icon(
                       onPressed: () {
                         context.read<PatientCubit>().setInitialMessage(
-                          'Hello doctor, I’m still waiting for my test result. Could you please update me?'.tr(),
+                          'Hello doctor, I’m still waiting for my test result. Could you please update me?'
+                              .tr(),
                         );
-                        context.read<PatientCubit>().changeSelectedIndex(1);
+                        context.read<PatientCubit>().goToPage(1);
 
                       },
                       icon: Icon(Icons.chat, color: ColorsManager.primaryColor),
                       label: Text(
                         'Still waiting? Send a message'.tr(),
                         style: getMediumTextStyle(
-                          fontSize: FontSizeManager.s13,
+                          fontSize: FontSizeManager.s14,
                           color: ColorsManager.primaryColor,
                         ),
                       ),
@@ -74,10 +78,9 @@ class ExaminationPendingWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: HeightManager.h48),
-        Icon(
-          Icons.biotech,
-          size: HeightManager.h270,
-          color: ColorsManager.lightGray,
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.35,
+          child: Lottie.asset(AssetsManager.pendingLottie, fit: BoxFit.contain),
         ),
       ],
     );

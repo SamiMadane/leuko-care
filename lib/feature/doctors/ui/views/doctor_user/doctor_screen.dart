@@ -61,7 +61,8 @@ class DoctorScreen extends StatelessWidget {
             final cubit = context.watch<DoctorCubit>();
             return DoctorBottomNavBar(
               currentIndex: cubit.selectedIndex,
-              onTap: cubit.changeSelectedIndex,
+              isHomeSelected: cubit.selectedIndex == 2,
+              onTap:  cubit.goToPage,
             );
           },
         ),

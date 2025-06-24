@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/doctor_chats_screen/patient_chat_card.dart';
@@ -53,10 +55,21 @@ class DoctorChatsScreen extends StatelessWidget {
         backgroundColor: ColorsManager.appBarColor,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical:HeightManager.h10,horizontal: WidthManager.w16),
+        padding: EdgeInsets.symmetric(
+          vertical: HeightManager.h10,
+          horizontal: WidthManager.w16,
+        ),
         child:
             patients.isEmpty
-                ? Center(child: Text('No patients available for chat'.tr()))
+                ? EmptyStateWidget(
+                  title: 'No patients available for chat'.tr(),
+                  message:
+                      'You currently don\'t have any patients to chat with.'
+                          .tr(),
+                  lottiePath:
+                      AssetsManager.noChat2Lottie, // تأكد من إضافته في المسارات
+                  isFullScreen: true,
+                )
                 : ListView.separated(
                   itemCount: sortedPatients.length,
                   separatorBuilder:
@@ -71,18 +84,17 @@ class DoctorChatsScreen extends StatelessWidget {
                           conversationId: '',
                           participantAId: '',
                           participantBId: '',
-                          hasUnreadMessagesByParticipant: {}, lastMessageSenderId: '',
+                          hasUnreadMessagesByParticipant: {},
+                          lastMessageSenderId: '',
                         );
                     return PatientChatCard(
-                      patient:patient,
-                      conversation:conversation,
-                      doctor:doctor,
+                      patient: patient,
+                      conversation: conversation,
+                      doctor: doctor,
                     );
                   },
                 ),
       ),
     );
   }
-
-
 }

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/widgets/common_search_and_filter_bar.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
@@ -50,7 +51,8 @@ class _AllDoctorsListViewState extends State<AllDoctorsListView> {
 
     return widget.doctors.isEmpty
         ? EmptyStateWidget(
-          icon: Icons.medical_information_outlined,
+          isFullScreen: true,
+          lottiePath: AssetsManager.noDoctorsLottie,
           title: 'No doctors available.'.tr(),
           message: 'Please add a doctor to get started.'.tr(),
         )

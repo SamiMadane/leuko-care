@@ -9,11 +9,12 @@ import 'package:leuko_care/core/resources/assets_manager.dart';
 class DoctorBottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
+    final bool isHomeSelected;
 
   const DoctorBottomNavBar({
     super.key,
     required this.currentIndex,
-    required this.onTap,
+    required this.onTap, required this.isHomeSelected,
   });
 
   @override
@@ -30,9 +31,9 @@ class DoctorBottomNavBar extends StatelessWidget {
           children: [
             Row(
               children: [
-                _buildNavIcon(AssetsManager.patientsIcon, 'Patients'.tr(), 1),
+                _buildNavIcon(AssetsManager.patientsIcon, 'Patients'.tr(), 0),
                 const SizedBox(width: 20),
-                _buildNavIcon(AssetsManager.bloodTest, 'Upload'.tr(), 2),
+                _buildNavIcon(AssetsManager.bloodTest, 'Upload'.tr(), 1),
               ],
             ),
             Row(
@@ -50,8 +51,9 @@ class DoctorBottomNavBar extends StatelessWidget {
 
   Widget buildFloatingActionButton() {
     return FloatingActionButton(
-      onPressed: () => onTap(0), // Home
-      backgroundColor: ColorsManager.primaryColor,
+      onPressed: () => onTap(2), // Home
+       backgroundColor: isHomeSelected ? ColorsManager.primaryColor : Colors.grey.shade400,
+      elevation: isHomeSelected ? 10 : 4,
       child: Image.asset(
         AssetsManager.homeIcon,
         width: WidthManager.w26,

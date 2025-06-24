@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 
 class CommonSearchAndFilterBar extends StatelessWidget {
@@ -19,7 +20,10 @@ class CommonSearchAndFilterBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: WidthManager.w16, vertical: HeightManager.h16),
+      padding: EdgeInsets.symmetric(
+        horizontal: WidthManager.w16,
+        vertical: HeightManager.h16,
+      ),
       child: Row(
         children: [
           Expanded(
@@ -32,11 +36,23 @@ class CommonSearchAndFilterBar extends StatelessWidget {
                   horizontal: WidthManager.w16,
                   vertical: HeightManager.h12,
                 ),
+                filled: true,
+                fillColor: ColorsManager.moreLighterGray,
+
+                // ✅ الحدود العادية
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(RadiusManager.r16),
+                  borderSide: const BorderSide(color: Colors.transparent),
                 ),
-                filled: true,
-                fillColor: Colors.grey[100],
+
+                // ✅ عند التركيز (الضغط)
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(RadiusManager.r16),
+                  borderSide: const BorderSide(
+                    color: ColorsManager.primaryColor, // أو Colors.blue
+                    width: 1.8,
+                  ),
+                ),
               ),
             ),
           ),

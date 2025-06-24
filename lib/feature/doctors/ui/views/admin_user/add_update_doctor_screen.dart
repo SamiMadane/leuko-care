@@ -97,6 +97,7 @@ class _AddUpdateDoctorScreenState extends State<AddUpdateDoctorScreen> {
         ),
         backgroundColor: ColorsManager.appBarColor,
         elevation: 0,
+        scrolledUnderElevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),

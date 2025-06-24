@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -16,6 +17,7 @@ class PatientCubit extends Cubit<PatientState> {
   StreamSubscription? _conversationSubscription;
   String? patientId;
   String? doctorId;
+  final PageController pageController = PageController();
 
   int selectedIndex = 0;
   String? initialChatMessage;
@@ -23,6 +25,15 @@ class PatientCubit extends Cubit<PatientState> {
 
   PatientCubit(this._repository)
     : super(const PatientState.patientStateInitial());
+
+  void goToPage(int index) {
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+    changeSelectedIndex(index); // يحدث حالة الـ index في الكيوبت
+  }
 
   void getPatientsStream() {
     _patientsSubscription?.cancel();
@@ -36,7 +47,6 @@ class PatientCubit extends Cubit<PatientState> {
       },
     );
   }
-
 
   Future<String> _getImageUrl(PatientModel patient) async {
     if (patient.profileImage.isEmpty) {
@@ -146,8 +156,6 @@ class PatientCubit extends Cubit<PatientState> {
                     // _repository.updateFcmTokenIfNeeded();
                     this.patientId = patient.id;
                     this.doctorId = doctor.id;
-                    
-               
 
                     emit(
                       GetPatientAndDoctorStateSuccess(
@@ -171,6 +179,8 @@ class PatientCubit extends Cubit<PatientState> {
     _patientsSubscription?.cancel();
     _doctorSubscription?.cancel();
     _onePatientSubscription?.cancel();
+    pageController.dispose();
+
     return super.close();
   }
 

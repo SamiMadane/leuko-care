@@ -21,7 +21,6 @@ class DoctorProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.white,
       appBar: AppBar(
         title: Row(
           children: [
@@ -35,9 +34,9 @@ class DoctorProfileScreen extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor: ColorsManager.appBarColor,
-        iconTheme: const IconThemeData(color: ColorsManager.darkBlue),
         elevation: 0,
+        backgroundColor: ColorsManager.appBarColor,
+        scrolledUnderElevation: 0,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: WidthManager.w12),
@@ -67,7 +66,6 @@ class DoctorProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
             Container(
               padding: EdgeInsets.symmetric(vertical: HeightManager.h24),
               child: Column(

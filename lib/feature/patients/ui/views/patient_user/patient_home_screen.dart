@@ -65,7 +65,8 @@ class PatientHomeScreen extends StatelessWidget {
                 doctor: doctor,
                 conversation: conversation,
               )
-              : const ExaminationPendingWidget(),
+              :  ExaminationPendingWidget(
+              ),
           SizedBox(height: HeightManager.h20),
         ],
       ),

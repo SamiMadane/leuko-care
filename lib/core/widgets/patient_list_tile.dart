@@ -50,7 +50,7 @@ class PatientListTile extends StatelessWidget {
             },
             );
             if (shouldOpenChat == true) {
-              context.read<DoctorCubit>().changeSelectedIndex(2);
+              context.read<DoctorCubit>().goToPage(1);
             }
           },
         child: Padding(

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/common_search_and_filter_bar.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
@@ -95,7 +96,8 @@ void didUpdateWidget(covariant AllPaitentListView oldWidget) {
   Widget build(BuildContext context) {
     return widget.patients.isEmpty
         ? EmptyStateWidget(
-          icon: Icons.group_outlined,
+          lottiePath: AssetsManager.noPatientsLottie,
+          isFullScreen: true,
           title: 'No patients found.'.tr(),
           message: widget.userType == 'doctor' ? 'There are no patients assigned to you yet'.tr():'There are no patients added yet. Try adding a new patient'.tr(),
         )

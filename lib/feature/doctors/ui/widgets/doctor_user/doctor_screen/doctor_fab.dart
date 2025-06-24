@@ -11,7 +11,7 @@ class DoctorFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<DoctorCubit>();
-    final isHomeSelected = cubit.selectedIndex == 0;
+    final isHomeSelected = cubit.selectedIndex == 2;
 
     return AnimatedScale(
       scale: isHomeSelected ? 1.2 : 1.0,
@@ -20,7 +20,7 @@ class DoctorFab extends StatelessWidget {
       child: FloatingActionButton(
         onPressed: () {
           if (!isHomeSelected) {
-            cubit.changeSelectedIndex(0);
+            cubit.goToPage(2);
           }
         },
         backgroundColor:

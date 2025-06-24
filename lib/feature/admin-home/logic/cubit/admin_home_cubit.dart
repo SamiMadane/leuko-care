@@ -40,7 +40,6 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
   }
 
   Future<void> _filterPatientsByDoctor() async {
-    emit(GetPatientsStateLoading());
     if (selectedDoctor != null) {
       try {
         // استخدام Stream للمرضى الخاصين بالطبيب المحدد

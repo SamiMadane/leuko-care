@@ -79,7 +79,7 @@ class _DoctorCard extends StatelessWidget {
           },
         );
         if (shouldOpenChat == true) {
-          context.read<PatientCubit>().changeSelectedIndex(1);
+          context.read<PatientCubit>().goToPage(1);;
         }
       },
       borderRadius: BorderRadius.circular(RadiusManager.r16),

@@ -25,17 +25,20 @@ class DoctorBodyBuilder extends StatelessWidget {
     final cubit = context.read<DoctorCubit>();
 
     final pages = [
-      DoctorHomeScreen(doctor: doctor, patients: patients,),
       DoctorPatientsScreen(doctor: doctor,patients: patients,),
       UploadSampleScreen(patients: patients,doctor:doctor),
+      DoctorHomeScreen(doctor: doctor, patients: patients,),
       DoctorChatsScreen(doctor: doctor,patients: patients, conversationsByPatientId:conversationsByPatientId ,),
       DoctorProfileScreen(doctor: doctor,),
     ];
 
     return BlocBuilder<DoctorCubit, DoctorState>(
       builder: (context, state) {
-        return IndexedStack(
-          index: cubit.selectedIndex,
+        return PageView(
+          controller: cubit.pageController,
+      onPageChanged: (index) {
+        cubit.changeSelectedIndex(index);
+      },
           children: pages,
         );
       },
