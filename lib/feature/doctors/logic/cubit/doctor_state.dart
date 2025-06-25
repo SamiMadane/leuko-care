@@ -1,6 +1,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
+import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 part 'doctor_state.freezed.dart';
@@ -40,6 +41,15 @@ const factory DoctorState.getDoctorAndPatientsStateSuccess({
   const factory DoctorState.getDoctorAndPatientsStateError(String error) = GetDoctorAndPatientsStateError;
 
   const factory DoctorState.doctorBottomNavChanged(int index) = DoctorBottomNavChanged;
+
+
+  // Analyzing sample states
+  const factory DoctorState.analyzingSampleLoading() = AnalyzingSampleLoading;
+  const factory DoctorState.analyzingSampleSuccess(AnalysisResultModel result) = AnalyzingSampleSuccess;
+  const factory DoctorState.analyzingSampleError(String message) = AnalyzingSampleError;
+  const factory DoctorState.analyzingSampleCancelled() = AnalyzingSampleCancelled;  // <-- هنا
+
+
 
 
 }

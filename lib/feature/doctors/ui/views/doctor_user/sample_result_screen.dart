@@ -76,8 +76,6 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
       appBar: AppBar(
         title: Row(
           children: [
-            SizedBox(width: WidthManager.w8),
-
             Text(
               'Result for ${widget.patient.name}'.tr(),
               style: getMediumTextStyle(

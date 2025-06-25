@@ -13,36 +13,28 @@ class AnalyzingScreen extends StatefulWidget {
   @override
   State<AnalyzingScreen> createState() => _AnalyzingScreenState();
 }
-
 class _AnalyzingScreenState extends State<AnalyzingScreen> {
-    final player = AudioPlayer();
+  final player = AudioPlayer();
 
-@override
-void initState() {
-  super.initState();
-  playSoundAndNavigate();
-}
-
-Future<void> playSoundAndNavigate() async {
-  await player.setReleaseMode(ReleaseMode.stop);
-  await player.setSourceAsset(AssetsManager.aiSound);
-  await player.resume();
-  
-  // تأخير لإغلاق الشاشة بعد 3 ثواني
-  await Future.delayed(const Duration(seconds: 3));
-  if (mounted) {
-    await player.stop();
-    Navigator.pop(context);
+  @override
+  void initState() {
+    super.initState();
+    playSound();
   }
-}
-@override
-void dispose() {
-  player.stop();    // توقف الصوت فوراً
-  player.dispose(); // تنظف الموارد
-  super.dispose();
-}
 
-  
+  Future<void> playSound() async {
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.setSourceAsset(AssetsManager.aiSound);
+    await player.resume();
+  }
+
+  @override
+  void dispose() {
+    player.stop();    // توقف الصوت فوراً عند الخروج من الشاشة
+    player.dispose(); // تنظف الموارد
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

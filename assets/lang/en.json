@@ -166,6 +166,8 @@
   "doctor_name": "Dr. {name}",
   "patients_of_doctor": "Patients of Dr. {name}",
   "search_by_name_or_email": "Search by name or email",
+  "Please select a patient first.": "Please select a patient first.",
+  "Please select a sample image or choose a patient with an existing sample.":"Please select a sample image or choose a patient with an existing sample.",
   "You currently don\"t have any patients to chat with.": "You currently don\"t have any patients to chat with.",
   "Analyzing blood sample...": "Analyzing blood sample...",
   "patients_count": "{count} patients",

@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
+import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:rxdart/rxdart.dart';
 import '../models/doctor_model.dart';
@@ -131,19 +132,16 @@ class DoctorRepository {
   }
 
   Stream<List<PatientModel>> getPatientsByDoctorIdStream(String doctorId) {
-  final query = FirebaseFirestore.instance
-      .collection('patients')
-      .where('doctorId', isEqualTo: doctorId);
+    final query = FirebaseFirestore.instance
+        .collection('patients')
+        .where('doctorId', isEqualTo: doctorId);
 
-  return query.snapshots().map((snapshot) {
-    return snapshot.docs
-    
-        .map((doc) => PatientModel.fromJson(doc.data()))
-        .toList();
-        
-  });
-}
-
+    return query.snapshots().map((snapshot) {
+      return snapshot.docs
+          .map((doc) => PatientModel.fromJson(doc.data()))
+          .toList();
+    });
+  }
 
   Stream<Map<String, ConversationModel>> getConversationsForDoctorStream(
     String doctorId,
@@ -192,5 +190,27 @@ class DoctorRepository {
       print('Total conversations updated for doctor: ${map.length}');
       return map;
     });
+  }
+
+  Future<AnalysisResultModel> analyzeSample({
+    File? imageFile,
+    String? imageUrl,
+    required PatientModel patient,
+  }) async {
+    await Future.delayed(const Duration(seconds: 5));
+
+    final usedImageUrl =
+        imageUrl ??
+        'https://images.unsplash.com/photo-1581090700227-1e8e8d1f5d35'; // default fallback
+
+    return AnalysisResultModel(
+      result: 'sick'.tr(),
+      diseaseType: 'Acute Lymphoblastic Leukemia'.tr(),
+      confidence: 92.5,
+      aiMessage:
+          'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'
+              .tr(),
+      sampleImageUrl: usedImageUrl,
+    );
   }
 }

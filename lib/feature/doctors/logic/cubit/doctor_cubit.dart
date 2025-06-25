@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,7 +24,6 @@ class DoctorCubit extends Cubit<DoctorState> {
   final PageController pageController = PageController(initialPage: 2);
   PatientModel? preSelectedPatient;
 
-
   void goToPage(int index) {
     final currentPage = pageController.page?.round() ?? 0;
 
@@ -40,9 +41,8 @@ class DoctorCubit extends Cubit<DoctorState> {
   }
 
   void setPreSelectedPatient(PatientModel patient) {
-  preSelectedPatient = patient;
-}
-
+    preSelectedPatient = patient;
+  }
 
   void getDoctorsStream() async {
     emit(GetDoctorStateLoading());
@@ -190,4 +190,23 @@ class DoctorCubit extends Cubit<DoctorState> {
     pageController.dispose();
     return super.close();
   }
+
+Future<void> analyzeSample({
+  File? imageFile,
+  String? imageUrl,
+  required PatientModel patient,
+}) async {
+  emit(AnalyzingSampleLoading());
+  try {
+    final result = await _repository.analyzeSample(
+      imageFile: imageFile,
+      imageUrl: imageUrl,
+      patient: patient,
+    );
+    emit(AnalyzingSampleSuccess(result));
+  } catch (e) {
+    emit(AnalyzingSampleError(e.toString()));
+  }
+}
+
 }

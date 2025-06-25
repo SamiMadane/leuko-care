@@ -266,6 +266,8 @@
   "Warning":"تحذير",
   "No Internet":"لا يوجد إنترنت",
   "Analyzing blood sample...": "جارٍ تحليل عينة الدم...",
+  "Please select a patient first.": "يرجى اختيار مريض أولاً.",
+  "Please select a sample image or choose a patient with an existing sample.":" يرجى اختيار صورة عينة أو اختيار مريض لديه عينة موجودة.",
   "You currently don\"t have any patients to chat with.": "ليس لديك أي مرضى للدردشة معهم حاليًا.",
   "Unable to sign out. Please check your internet connection and try again.": "تعذر تسجيل الخروج. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
   "Please check your connection and try again.": "يرجى التحقق من اتصالك وحاول مرة أخرى.",
