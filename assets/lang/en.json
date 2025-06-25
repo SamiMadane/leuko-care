@@ -167,6 +167,7 @@
   "patients_of_doctor": "Patients of Dr. {name}",
   "search_by_name_or_email": "Search by name or email",
   "You currently don\"t have any patients to chat with.": "You currently don\"t have any patients to chat with.",
+  "Analyzing blood sample...": "Analyzing blood sample...",
   "patients_count": "{count} patients",
   "No patients found": "No patients found",
   "No matching patients": "No matching patients",

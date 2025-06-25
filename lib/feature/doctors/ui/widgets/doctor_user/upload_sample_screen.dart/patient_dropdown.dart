@@ -28,7 +28,7 @@ class PatientDropdown extends StatelessWidget {
         Text(
           'Select Patient'.tr(),
           style: getMediumTextStyle(
-            fontSize: FontSizeManager.s16,
+            fontSize: FontSizeManager.s18,
             color: ColorsManager.darkBlue,
           ),
         ),

@@ -45,9 +45,11 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
 
   String _getInitialDoctorMessage() {
     if (widget.result == 'sick'.tr()) {
-      return 'Important: Your test result shows signs of leukemia. Please visit the hospital for further examination as soon as possible.'.tr();
+      return 'Important: Your test result shows signs of leukemia. Please visit the hospital for further examination as soon as possible.'
+          .tr();
     } else {
-      return 'Congratulations! Your test result is clear. Please continue maintaining a healthy lifestyle.'.tr();
+      return 'Congratulations! Your test result is clear. Please continue maintaining a healthy lifestyle.'
+          .tr();
     }
   }
 
@@ -137,18 +139,31 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
                 },
               ),
               SizedBox(height: HeightManager.h20),
-              ElevatedButton.icon(
-                onPressed: _captureAndPreview,
-                icon: Icon(Icons.send, color: ColorsManager.white),
-                label: Text(
-                  'Send to Patient'.tr(),
-                  style: getMediumTextStyle(
-                    fontSize: FontSizeManager.s14,
-                    color: ColorsManager.white,
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: WidthManager.w14),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: HeightManager.h44,
+                  child: ElevatedButton.icon(
+                    onPressed: _captureAndPreview,
+                    icon: Icon(Icons.send, color: ColorsManager.white),
+                    label: Text(
+                      'Send to Patient'.tr(),
+                      style: getMediumTextStyle(
+                        fontSize: FontSizeManager.s14,
+                        color: ColorsManager.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorsManager.primaryColor,
+                      padding: EdgeInsets.symmetric(
+                        vertical: HeightManager.h12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(RadiusManager.r16),
+                      ),
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorsManager.primaryColor,
                 ),
               ),
             ],

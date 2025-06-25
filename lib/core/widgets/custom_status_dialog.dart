@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
@@ -31,7 +32,8 @@ class CustomStatusDialog extends StatelessWidget {
     final String animationPath = switch (statusType) {
       DialogStatusType.success => AssetsManager.successLottie,
       DialogStatusType.error => AssetsManager.errorLottie,
-      DialogStatusType.warning => AssetsManager.warningLottie, // <-- أضف هذا الملف
+      DialogStatusType.warning =>
+        AssetsManager.warningLottie, // <-- أضف هذا الملف
     };
 
     // تحديد اللون الرئيسي حسب الحالة
@@ -42,7 +44,9 @@ class CustomStatusDialog extends StatelessWidget {
     };
 
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RadiusManager.r20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(RadiusManager.r20),
+      ),
       elevation: 16,
       backgroundColor: Colors.white,
       child: Stack(
@@ -50,7 +54,12 @@ class CustomStatusDialog extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: HeightManager.h50, left: WidthManager.w16, right: WidthManager.w16, bottom: HeightManager.h16),
+            padding: EdgeInsets.only(
+              top: HeightManager.h50,
+              left: WidthManager.w16,
+              right: WidthManager.w16,
+              bottom: HeightManager.h16,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -58,7 +67,7 @@ class CustomStatusDialog extends StatelessWidget {
                 if (title != null) ...[
                   Text(
                     title!,
-                  textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
 
                     style: getSemiBoldTextStyle(
                       fontSize: FontSizeManager.s18,
@@ -73,18 +82,23 @@ class CustomStatusDialog extends StatelessWidget {
                   style: getMediumTextStyle(
                     fontSize: FontSizeManager.s15,
                     color: ColorsManager.darkBlue,
-                    height: HeightManager.h1_1
+                    height: HeightManager.h1_1,
                   ),
                 ),
-                 SizedBox(height: HeightManager.h20),
+                SizedBox(height: HeightManager.h20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: mainColor,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        padding: EdgeInsets.symmetric(horizontal: WidthManager.w24, vertical: HeightManager.h12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: WidthManager.w24,
+                          vertical: HeightManager.h12,
+                        ),
                       ),
                       onPressed: onConfirm,
                       child: Text(
@@ -122,10 +136,7 @@ class CustomStatusDialog extends StatelessWidget {
                   horizontal: WidthManager.w12,
                   vertical: HeightManager.h12,
                 ),
-                child: Lottie.asset(
-                  animationPath,
-                  repeat: true,
-                ),
+                child: Lottie.asset(animationPath, repeat: true),
               ),
             ),
           ),
@@ -134,6 +145,7 @@ class CustomStatusDialog extends StatelessWidget {
     );
   }
 }
+
 void showAnimatedStatusDialog({
   required BuildContext context,
   required DialogStatusType statusType,
@@ -141,7 +153,19 @@ void showAnimatedStatusDialog({
   String? title,
   String? buttonText,
   VoidCallback? onConfirm,
-}) {
+}) async {
+    final player = AudioPlayer();
+  final String sound = switch (statusType) {
+    DialogStatusType.success => AssetsManager.successSound,
+    DialogStatusType.error => AssetsManager.errorSound,
+    DialogStatusType.warning => AssetsManager.errorSound,
+  };
+
+  await player.setReleaseMode(ReleaseMode.stop);
+  await player.setSourceAsset(sound);
+  await player.resume();
+    await Future.delayed(const Duration(milliseconds: 500));
+
   showGeneralDialog(
     context: context,
     barrierDismissible: true,

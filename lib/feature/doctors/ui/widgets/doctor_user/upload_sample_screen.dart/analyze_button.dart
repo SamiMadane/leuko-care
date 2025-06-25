@@ -5,7 +5,6 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
-
 class AnalyzeButton extends StatelessWidget {
   final VoidCallback onPressed;
 
@@ -13,21 +12,25 @@ class AnalyzeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: ColorsManager.primaryColor,
-          padding: EdgeInsets.symmetric(
-            horizontal: WidthManager.w40,
-            vertical: HeightManager.h12,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: SizedBox(
+        width: double.infinity,
+        height: HeightManager.h44, // ارتفاع أكبر للزر
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorsManager.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(RadiusManager.r20),
+            ),
           ),
-        ),
-        child: Text(
-          'Analyze Sample'.tr(),
-          style: getMediumTextStyle(
-            fontSize: FontSizeManager.s14,
-            color: ColorsManager.white,
+          child: Text(
+            'Analyze Sample'.tr(),
+            style: getMediumTextStyle(
+              fontSize: FontSizeManager.s17,
+              color: ColorsManager.white,
+            ),
           ),
         ),
       ),

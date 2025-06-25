@@ -1,6 +1,7 @@
 const String imagesPath = 'assets/images';
 const String iconsPath = 'assets/icons';
 const String lottiePath = 'assets/lottie';
+const String soundsPath = 'assets/sounds';
 
 
 class AssetsManager {
@@ -53,7 +54,10 @@ class AssetsManager {
   static const String aiLottie = '$lottiePath/ai.json';
 
 
-
+  // sounds
+  static const String successSound = 'sounds/success.mp3';
+  static const String errorSound = 'sounds/error.mp3';
+  static const String aiSound = 'sounds/ai.mp3';
 
 
 

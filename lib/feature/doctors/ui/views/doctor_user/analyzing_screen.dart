@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
@@ -14,14 +15,33 @@ class AnalyzingScreen extends StatefulWidget {
 }
 
 class _AnalyzingScreenState extends State<AnalyzingScreen> {
+    final player = AudioPlayer();
 
-   @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pop(context);
-    });
+@override
+void initState() {
+  super.initState();
+  playSoundAndNavigate();
+}
+
+Future<void> playSoundAndNavigate() async {
+  await player.setReleaseMode(ReleaseMode.stop);
+  await player.setSourceAsset(AssetsManager.aiSound);
+  await player.resume();
+  
+  // تأخير لإغلاق الشاشة بعد 3 ثواني
+  await Future.delayed(const Duration(seconds: 3));
+  if (mounted) {
+    await player.stop();
+    Navigator.pop(context);
   }
+}
+@override
+void dispose() {
+  player.stop();    // توقف الصوت فوراً
+  player.dispose(); // تنظف الموارد
+  super.dispose();
+}
+
   
   @override
   Widget build(BuildContext context) {
