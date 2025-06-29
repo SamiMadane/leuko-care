@@ -162,9 +162,8 @@ class AuthRepository {
       final errorMessage = FirebaseErrorHandler.handle(e);
       return OperationResult.failure(errorMessage);
     } catch (e) {
-      return OperationResult.failure(
-        'An unexpected error occurred: ${e.toString()}'.tr(),
-      );
+      final errorMessage = FirebaseErrorHandler.handle(e);
+      return OperationResult.failure(errorMessage);
     }
   }
 
@@ -264,9 +263,8 @@ class AuthRepository {
         return OperationResult.failure('Failed to sign in with Google.'.tr());
       }
     } catch (e) {
-      return OperationResult.failure(
-        'An error occurred during Google sign-in: ${e.toString()}'.tr(),
-      );
+      final errorMessage = FirebaseErrorHandler.handle(e);
+      return OperationResult.failure(errorMessage);
     }
   }
 

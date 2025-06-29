@@ -56,9 +56,12 @@ class _PatientScreenState extends State<PatientScreen> {
                   );
 
                   ChatSessionManager().currentChatId = chatId;
-                  context.read<PatientCubit>().changeSelectedIndex(
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+
+                  context.read<PatientCubit>().goToPage(
                     widget.initialIndex!,
                   );
+                  });
 
                   hasHandledInitialIndex = true;
                 }

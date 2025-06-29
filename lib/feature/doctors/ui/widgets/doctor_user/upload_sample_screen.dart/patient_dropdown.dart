@@ -11,7 +11,7 @@ import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 class PatientDropdown extends StatelessWidget {
   final List<PatientModel> patients;
   final PatientModel? selected;
-  final ValueChanged<PatientModel?> onChanged;
+  final ValueChanged<String?> onChanged;
 
   const PatientDropdown({
     super.key,
@@ -37,16 +37,16 @@ class PatientDropdown extends StatelessWidget {
             horizontal: HeightManager.h2,
             vertical: HeightManager.h16,
           ),
-          child: DropdownButton2<PatientModel>(
+          child: DropdownButton2<String>(
             underline: const SizedBox(),
             isExpanded: true,
-            value:  selected,
+            value: selected?.id,
             hint: Text('Choose patient'.tr()),
             onChanged: onChanged,
             items:
                 patients.map((patient) {
-                  return DropdownMenuItem(
-                    value: patient,
+                  return DropdownMenuItem<String>(
+                    value: patient.id,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -54,7 +54,10 @@ class PatientDropdown extends StatelessWidget {
                         if (patient.isExamined == true)
                           Text(
                             'Tested'.tr(),
-                            style:  getSemiBoldTextStyle(fontSize: FontSizeManager.s14,color: ColorsManager.green),
+                            style: getSemiBoldTextStyle(
+                              fontSize: FontSizeManager.s14,
+                              color: ColorsManager.green,
+                            ),
                           ),
                       ],
                     ),
@@ -63,10 +66,12 @@ class PatientDropdown extends StatelessWidget {
             // ✅ التحكم بمكان القائمة المعروضة:
             dropdownStyleData: DropdownStyleData(
               offset: const Offset(0, 5), // المسافة من الزر إلى القائمة
-              padding: EdgeInsets.symmetric(horizontal: WidthManager.w12,vertical: HeightManager.h10),
+              padding: EdgeInsets.symmetric(
+                horizontal: WidthManager.w12,
+                vertical: HeightManager.h10,
+              ),
               width:
-                  MediaQuery.of(context).size.width *
-                  0.9, // تحكم بعرض القائمة
+                  MediaQuery.of(context).size.width * 0.9, // تحكم بعرض القائمة
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(RadiusManager.r12),
                 color: Colors.white,

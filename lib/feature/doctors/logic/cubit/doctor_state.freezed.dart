@@ -45,6 +45,9 @@ mixin _$DoctorState {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +78,9 @@ mixin _$DoctorState {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -105,6 +111,9 @@ mixin _$DoctorState {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -148,6 +157,12 @@ mixin _$DoctorState {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -176,6 +191,12 @@ mixin _$DoctorState {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -204,6 +225,12 @@ mixin _$DoctorState {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -298,6 +325,9 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return doctorStateInitial();
   }
@@ -331,6 +361,9 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return doctorStateInitial?.call();
   }
@@ -364,6 +397,9 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (doctorStateInitial != null) {
@@ -413,6 +449,12 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return doctorStateInitial(this);
   }
@@ -444,6 +486,12 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return doctorStateInitial?.call(this);
   }
@@ -475,6 +523,12 @@ class _$DoctorStateInitialImpl implements _DoctorStateInitial {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (doctorStateInitial != null) {
@@ -558,6 +612,9 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return getDoctorStateLoading();
   }
@@ -591,6 +648,9 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return getDoctorStateLoading?.call();
   }
@@ -624,6 +684,9 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorStateLoading != null) {
@@ -673,6 +736,12 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return getDoctorStateLoading(this);
   }
@@ -704,6 +773,12 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return getDoctorStateLoading?.call(this);
   }
@@ -735,6 +810,12 @@ class _$GetDoctorStateLoadingImpl implements GetDoctorStateLoading {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorStateLoading != null) {
@@ -852,6 +933,9 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return getDoctorStateSuccess(doctors);
   }
@@ -885,6 +969,9 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return getDoctorStateSuccess?.call(doctors);
   }
@@ -918,6 +1005,9 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorStateSuccess != null) {
@@ -967,6 +1057,12 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return getDoctorStateSuccess(this);
   }
@@ -998,6 +1094,12 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return getDoctorStateSuccess?.call(this);
   }
@@ -1029,6 +1131,12 @@ class _$GetDoctorStateSuccessImpl implements GetDoctorStateSuccess {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorStateSuccess != null) {
@@ -1147,6 +1255,9 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return getDoctorStateError(message);
   }
@@ -1180,6 +1291,9 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return getDoctorStateError?.call(message);
   }
@@ -1213,6 +1327,9 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorStateError != null) {
@@ -1262,6 +1379,12 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return getDoctorStateError(this);
   }
@@ -1293,6 +1416,12 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return getDoctorStateError?.call(this);
   }
@@ -1324,6 +1453,12 @@ class _$GetDoctorStateErrorImpl implements GetDoctorStateError {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorStateError != null) {
@@ -1416,6 +1551,9 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return addDoctorStateLoading();
   }
@@ -1449,6 +1587,9 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return addDoctorStateLoading?.call();
   }
@@ -1482,6 +1623,9 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (addDoctorStateLoading != null) {
@@ -1531,6 +1675,12 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return addDoctorStateLoading(this);
   }
@@ -1562,6 +1712,12 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return addDoctorStateLoading?.call(this);
   }
@@ -1593,6 +1749,12 @@ class _$AddDoctorStateLoadingImpl implements AddDoctorStateLoading {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (addDoctorStateLoading != null) {
@@ -1676,6 +1838,9 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return addDoctorStateSuccess();
   }
@@ -1709,6 +1874,9 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return addDoctorStateSuccess?.call();
   }
@@ -1742,6 +1910,9 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (addDoctorStateSuccess != null) {
@@ -1791,6 +1962,12 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return addDoctorStateSuccess(this);
   }
@@ -1822,6 +1999,12 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return addDoctorStateSuccess?.call(this);
   }
@@ -1853,6 +2036,12 @@ class _$AddDoctorStateSuccessImpl implements AddDoctorStateSuccess {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (addDoctorStateSuccess != null) {
@@ -1962,6 +2151,9 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return addDoctorStateError(message);
   }
@@ -1995,6 +2187,9 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return addDoctorStateError?.call(message);
   }
@@ -2028,6 +2223,9 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (addDoctorStateError != null) {
@@ -2077,6 +2275,12 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return addDoctorStateError(this);
   }
@@ -2108,6 +2312,12 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return addDoctorStateError?.call(this);
   }
@@ -2139,6 +2349,12 @@ class _$AddDoctorStateErrorImpl implements AddDoctorStateError {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (addDoctorStateError != null) {
@@ -2232,6 +2448,9 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return updateDoctorStateLoading();
   }
@@ -2265,6 +2484,9 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return updateDoctorStateLoading?.call();
   }
@@ -2298,6 +2520,9 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (updateDoctorStateLoading != null) {
@@ -2347,6 +2572,12 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return updateDoctorStateLoading(this);
   }
@@ -2378,6 +2609,12 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return updateDoctorStateLoading?.call(this);
   }
@@ -2409,6 +2646,12 @@ class _$UpdateDoctorStateLoadingImpl implements UpdateDoctorStateLoading {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (updateDoctorStateLoading != null) {
@@ -2520,6 +2763,9 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return updateDoctorStateSuccess(doctor);
   }
@@ -2553,6 +2799,9 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return updateDoctorStateSuccess?.call(doctor);
   }
@@ -2586,6 +2835,9 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (updateDoctorStateSuccess != null) {
@@ -2635,6 +2887,12 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return updateDoctorStateSuccess(this);
   }
@@ -2666,6 +2924,12 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return updateDoctorStateSuccess?.call(this);
   }
@@ -2697,6 +2961,12 @@ class _$UpdateDoctorStateSuccessImpl implements UpdateDoctorStateSuccess {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (updateDoctorStateSuccess != null) {
@@ -2817,6 +3087,9 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return updateDoctorStateError(message);
   }
@@ -2850,6 +3123,9 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return updateDoctorStateError?.call(message);
   }
@@ -2883,6 +3159,9 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (updateDoctorStateError != null) {
@@ -2932,6 +3211,12 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return updateDoctorStateError(this);
   }
@@ -2963,6 +3248,12 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return updateDoctorStateError?.call(this);
   }
@@ -2994,6 +3285,12 @@ class _$UpdateDoctorStateErrorImpl implements UpdateDoctorStateError {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (updateDoctorStateError != null) {
@@ -3087,6 +3384,9 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return deleteDoctorStateLoading();
   }
@@ -3120,6 +3420,9 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return deleteDoctorStateLoading?.call();
   }
@@ -3153,6 +3456,9 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (deleteDoctorStateLoading != null) {
@@ -3202,6 +3508,12 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return deleteDoctorStateLoading(this);
   }
@@ -3233,6 +3545,12 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return deleteDoctorStateLoading?.call(this);
   }
@@ -3264,6 +3582,12 @@ class _$DeleteDoctorStateLoadingImpl implements DeleteDoctorStateLoading {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (deleteDoctorStateLoading != null) {
@@ -3348,6 +3672,9 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return deleteDoctorStateSuccess();
   }
@@ -3381,6 +3708,9 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return deleteDoctorStateSuccess?.call();
   }
@@ -3414,6 +3744,9 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (deleteDoctorStateSuccess != null) {
@@ -3463,6 +3796,12 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return deleteDoctorStateSuccess(this);
   }
@@ -3494,6 +3833,12 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return deleteDoctorStateSuccess?.call(this);
   }
@@ -3525,6 +3870,12 @@ class _$DeleteDoctorStateSuccessImpl implements DeleteDoctorStateSuccess {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (deleteDoctorStateSuccess != null) {
@@ -3636,6 +3987,9 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return deleteDoctorStateError(message);
   }
@@ -3669,6 +4023,9 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return deleteDoctorStateError?.call(message);
   }
@@ -3702,6 +4059,9 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (deleteDoctorStateError != null) {
@@ -3751,6 +4111,12 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return deleteDoctorStateError(this);
   }
@@ -3782,6 +4148,12 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return deleteDoctorStateError?.call(this);
   }
@@ -3813,6 +4185,12 @@ class _$DeleteDoctorStateErrorImpl implements DeleteDoctorStateError {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (deleteDoctorStateError != null) {
@@ -3908,6 +4286,9 @@ class _$GetDoctorAndPatientsStateLoadingImpl
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateLoading();
   }
@@ -3941,6 +4322,9 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateLoading?.call();
   }
@@ -3974,6 +4358,9 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorAndPatientsStateLoading != null) {
@@ -4023,6 +4410,12 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateLoading(this);
   }
@@ -4054,6 +4447,12 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateLoading?.call(this);
   }
@@ -4085,6 +4484,12 @@ class _$GetDoctorAndPatientsStateLoadingImpl
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorAndPatientsStateLoading != null) {
@@ -4256,6 +4661,9 @@ class _$GetDoctorAndPatientsStateSuccessImpl
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateSuccess(doctor, patients,
         conversationsByPatientId, selectedPatientForSampleUpload);
@@ -4290,6 +4698,9 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateSuccess?.call(doctor, patients,
         conversationsByPatientId, selectedPatientForSampleUpload);
@@ -4324,6 +4735,9 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorAndPatientsStateSuccess != null) {
@@ -4374,6 +4788,12 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateSuccess(this);
   }
@@ -4405,6 +4825,12 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateSuccess?.call(this);
   }
@@ -4436,6 +4862,12 @@ class _$GetDoctorAndPatientsStateSuccessImpl
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorAndPatientsStateSuccess != null) {
@@ -4567,6 +4999,9 @@ class _$GetDoctorAndPatientsStateErrorImpl
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateError(error);
   }
@@ -4600,6 +5035,9 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateError?.call(error);
   }
@@ -4633,6 +5071,9 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorAndPatientsStateError != null) {
@@ -4682,6 +5123,12 @@ class _$GetDoctorAndPatientsStateErrorImpl
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateError(this);
   }
@@ -4713,6 +5160,12 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return getDoctorAndPatientsStateError?.call(this);
   }
@@ -4744,6 +5197,12 @@ class _$GetDoctorAndPatientsStateErrorImpl
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (getDoctorAndPatientsStateError != null) {
@@ -4865,6 +5324,9 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return doctorBottomNavChanged(index);
   }
@@ -4898,6 +5360,9 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return doctorBottomNavChanged?.call(index);
   }
@@ -4931,6 +5396,9 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (doctorBottomNavChanged != null) {
@@ -4980,6 +5448,12 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return doctorBottomNavChanged(this);
   }
@@ -5011,6 +5485,12 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return doctorBottomNavChanged?.call(this);
   }
@@ -5042,6 +5522,12 @@ class _$DoctorBottomNavChangedImpl implements DoctorBottomNavChanged {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (doctorBottomNavChanged != null) {
@@ -5135,6 +5621,9 @@ class _$AnalyzingSampleLoadingImpl implements AnalyzingSampleLoading {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return analyzingSampleLoading();
   }
@@ -5168,6 +5657,9 @@ class _$AnalyzingSampleLoadingImpl implements AnalyzingSampleLoading {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return analyzingSampleLoading?.call();
   }
@@ -5201,6 +5693,9 @@ class _$AnalyzingSampleLoadingImpl implements AnalyzingSampleLoading {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleLoading != null) {
@@ -5250,6 +5745,12 @@ class _$AnalyzingSampleLoadingImpl implements AnalyzingSampleLoading {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return analyzingSampleLoading(this);
   }
@@ -5281,6 +5782,12 @@ class _$AnalyzingSampleLoadingImpl implements AnalyzingSampleLoading {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return analyzingSampleLoading?.call(this);
   }
@@ -5312,6 +5819,12 @@ class _$AnalyzingSampleLoadingImpl implements AnalyzingSampleLoading {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleLoading != null) {
@@ -5423,6 +5936,9 @@ class _$AnalyzingSampleSuccessImpl implements AnalyzingSampleSuccess {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return analyzingSampleSuccess(result);
   }
@@ -5456,6 +5972,9 @@ class _$AnalyzingSampleSuccessImpl implements AnalyzingSampleSuccess {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return analyzingSampleSuccess?.call(result);
   }
@@ -5489,6 +6008,9 @@ class _$AnalyzingSampleSuccessImpl implements AnalyzingSampleSuccess {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleSuccess != null) {
@@ -5538,6 +6060,12 @@ class _$AnalyzingSampleSuccessImpl implements AnalyzingSampleSuccess {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return analyzingSampleSuccess(this);
   }
@@ -5569,6 +6097,12 @@ class _$AnalyzingSampleSuccessImpl implements AnalyzingSampleSuccess {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return analyzingSampleSuccess?.call(this);
   }
@@ -5600,6 +6134,12 @@ class _$AnalyzingSampleSuccessImpl implements AnalyzingSampleSuccess {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleSuccess != null) {
@@ -5719,6 +6259,9 @@ class _$AnalyzingSampleErrorImpl implements AnalyzingSampleError {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return analyzingSampleError(message);
   }
@@ -5752,6 +6295,9 @@ class _$AnalyzingSampleErrorImpl implements AnalyzingSampleError {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return analyzingSampleError?.call(message);
   }
@@ -5785,6 +6331,9 @@ class _$AnalyzingSampleErrorImpl implements AnalyzingSampleError {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleError != null) {
@@ -5834,6 +6383,12 @@ class _$AnalyzingSampleErrorImpl implements AnalyzingSampleError {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return analyzingSampleError(this);
   }
@@ -5865,6 +6420,12 @@ class _$AnalyzingSampleErrorImpl implements AnalyzingSampleError {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return analyzingSampleError?.call(this);
   }
@@ -5896,6 +6457,12 @@ class _$AnalyzingSampleErrorImpl implements AnalyzingSampleError {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleError != null) {
@@ -5989,6 +6556,9 @@ class _$AnalyzingSampleCancelledImpl implements AnalyzingSampleCancelled {
         analyzingSampleSuccess,
     required TResult Function(String message) analyzingSampleError,
     required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
   }) {
     return analyzingSampleCancelled();
   }
@@ -6022,6 +6592,9 @@ class _$AnalyzingSampleCancelledImpl implements AnalyzingSampleCancelled {
     TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult? Function(String message)? analyzingSampleError,
     TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
   }) {
     return analyzingSampleCancelled?.call();
   }
@@ -6055,6 +6628,9 @@ class _$AnalyzingSampleCancelledImpl implements AnalyzingSampleCancelled {
     TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
     TResult Function(String message)? analyzingSampleError,
     TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleCancelled != null) {
@@ -6104,6 +6680,12 @@ class _$AnalyzingSampleCancelledImpl implements AnalyzingSampleCancelled {
     required TResult Function(AnalyzingSampleError value) analyzingSampleError,
     required TResult Function(AnalyzingSampleCancelled value)
         analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
   }) {
     return analyzingSampleCancelled(this);
   }
@@ -6135,6 +6717,12 @@ class _$AnalyzingSampleCancelledImpl implements AnalyzingSampleCancelled {
     TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
   }) {
     return analyzingSampleCancelled?.call(this);
   }
@@ -6166,6 +6754,12 @@ class _$AnalyzingSampleCancelledImpl implements AnalyzingSampleCancelled {
     TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
     TResult Function(AnalyzingSampleError value)? analyzingSampleError,
     TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
     required TResult orElse(),
   }) {
     if (analyzingSampleCancelled != null) {
@@ -6177,4 +6771,906 @@ class _$AnalyzingSampleCancelledImpl implements AnalyzingSampleCancelled {
 
 abstract class AnalyzingSampleCancelled implements DoctorState {
   const factory AnalyzingSampleCancelled() = _$AnalyzingSampleCancelledImpl;
+}
+
+/// @nodoc
+abstract class _$$SavingAnalysisResultLoadingImplCopyWith<$Res> {
+  factory _$$SavingAnalysisResultLoadingImplCopyWith(
+          _$SavingAnalysisResultLoadingImpl value,
+          $Res Function(_$SavingAnalysisResultLoadingImpl) then) =
+      __$$SavingAnalysisResultLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SavingAnalysisResultLoadingImplCopyWithImpl<$Res>
+    extends _$DoctorStateCopyWithImpl<$Res, _$SavingAnalysisResultLoadingImpl>
+    implements _$$SavingAnalysisResultLoadingImplCopyWith<$Res> {
+  __$$SavingAnalysisResultLoadingImplCopyWithImpl(
+      _$SavingAnalysisResultLoadingImpl _value,
+      $Res Function(_$SavingAnalysisResultLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DoctorState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SavingAnalysisResultLoadingImpl implements SavingAnalysisResultLoading {
+  const _$SavingAnalysisResultLoadingImpl();
+
+  @override
+  String toString() {
+    return 'DoctorState.savingAnalysisResultLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SavingAnalysisResultLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() doctorStateInitial,
+    required TResult Function() getDoctorStateLoading,
+    required TResult Function(List<DoctorModel> doctors) getDoctorStateSuccess,
+    required TResult Function(String message) getDoctorStateError,
+    required TResult Function() addDoctorStateLoading,
+    required TResult Function() addDoctorStateSuccess,
+    required TResult Function(String message) addDoctorStateError,
+    required TResult Function() updateDoctorStateLoading,
+    required TResult Function(DoctorModel doctor) updateDoctorStateSuccess,
+    required TResult Function(String message) updateDoctorStateError,
+    required TResult Function() deleteDoctorStateLoading,
+    required TResult Function() deleteDoctorStateSuccess,
+    required TResult Function(String message) deleteDoctorStateError,
+    required TResult Function() getDoctorAndPatientsStateLoading,
+    required TResult Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)
+        getDoctorAndPatientsStateSuccess,
+    required TResult Function(String error) getDoctorAndPatientsStateError,
+    required TResult Function(int index) doctorBottomNavChanged,
+    required TResult Function() analyzingSampleLoading,
+    required TResult Function(AnalysisResultModel result)
+        analyzingSampleSuccess,
+    required TResult Function(String message) analyzingSampleError,
+    required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? doctorStateInitial,
+    TResult? Function()? getDoctorStateLoading,
+    TResult? Function(List<DoctorModel> doctors)? getDoctorStateSuccess,
+    TResult? Function(String message)? getDoctorStateError,
+    TResult? Function()? addDoctorStateLoading,
+    TResult? Function()? addDoctorStateSuccess,
+    TResult? Function(String message)? addDoctorStateError,
+    TResult? Function()? updateDoctorStateLoading,
+    TResult? Function(DoctorModel doctor)? updateDoctorStateSuccess,
+    TResult? Function(String message)? updateDoctorStateError,
+    TResult? Function()? deleteDoctorStateLoading,
+    TResult? Function()? deleteDoctorStateSuccess,
+    TResult? Function(String message)? deleteDoctorStateError,
+    TResult? Function()? getDoctorAndPatientsStateLoading,
+    TResult? Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)?
+        getDoctorAndPatientsStateSuccess,
+    TResult? Function(String error)? getDoctorAndPatientsStateError,
+    TResult? Function(int index)? doctorBottomNavChanged,
+    TResult? Function()? analyzingSampleLoading,
+    TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
+    TResult? Function(String message)? analyzingSampleError,
+    TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? doctorStateInitial,
+    TResult Function()? getDoctorStateLoading,
+    TResult Function(List<DoctorModel> doctors)? getDoctorStateSuccess,
+    TResult Function(String message)? getDoctorStateError,
+    TResult Function()? addDoctorStateLoading,
+    TResult Function()? addDoctorStateSuccess,
+    TResult Function(String message)? addDoctorStateError,
+    TResult Function()? updateDoctorStateLoading,
+    TResult Function(DoctorModel doctor)? updateDoctorStateSuccess,
+    TResult Function(String message)? updateDoctorStateError,
+    TResult Function()? deleteDoctorStateLoading,
+    TResult Function()? deleteDoctorStateSuccess,
+    TResult Function(String message)? deleteDoctorStateError,
+    TResult Function()? getDoctorAndPatientsStateLoading,
+    TResult Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)?
+        getDoctorAndPatientsStateSuccess,
+    TResult Function(String error)? getDoctorAndPatientsStateError,
+    TResult Function(int index)? doctorBottomNavChanged,
+    TResult Function()? analyzingSampleLoading,
+    TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
+    TResult Function(String message)? analyzingSampleError,
+    TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
+    required TResult orElse(),
+  }) {
+    if (savingAnalysisResultLoading != null) {
+      return savingAnalysisResultLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DoctorStateInitial value) doctorStateInitial,
+    required TResult Function(GetDoctorStateLoading value)
+        getDoctorStateLoading,
+    required TResult Function(GetDoctorStateSuccess value)
+        getDoctorStateSuccess,
+    required TResult Function(GetDoctorStateError value) getDoctorStateError,
+    required TResult Function(AddDoctorStateLoading value)
+        addDoctorStateLoading,
+    required TResult Function(AddDoctorStateSuccess value)
+        addDoctorStateSuccess,
+    required TResult Function(AddDoctorStateError value) addDoctorStateError,
+    required TResult Function(UpdateDoctorStateLoading value)
+        updateDoctorStateLoading,
+    required TResult Function(UpdateDoctorStateSuccess value)
+        updateDoctorStateSuccess,
+    required TResult Function(UpdateDoctorStateError value)
+        updateDoctorStateError,
+    required TResult Function(DeleteDoctorStateLoading value)
+        deleteDoctorStateLoading,
+    required TResult Function(DeleteDoctorStateSuccess value)
+        deleteDoctorStateSuccess,
+    required TResult Function(DeleteDoctorStateError value)
+        deleteDoctorStateError,
+    required TResult Function(GetDoctorAndPatientsStateLoading value)
+        getDoctorAndPatientsStateLoading,
+    required TResult Function(GetDoctorAndPatientsStateSuccess value)
+        getDoctorAndPatientsStateSuccess,
+    required TResult Function(GetDoctorAndPatientsStateError value)
+        getDoctorAndPatientsStateError,
+    required TResult Function(DoctorBottomNavChanged value)
+        doctorBottomNavChanged,
+    required TResult Function(AnalyzingSampleLoading value)
+        analyzingSampleLoading,
+    required TResult Function(AnalyzingSampleSuccess value)
+        analyzingSampleSuccess,
+    required TResult Function(AnalyzingSampleError value) analyzingSampleError,
+    required TResult Function(AnalyzingSampleCancelled value)
+        analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DoctorStateInitial value)? doctorStateInitial,
+    TResult? Function(GetDoctorStateLoading value)? getDoctorStateLoading,
+    TResult? Function(GetDoctorStateSuccess value)? getDoctorStateSuccess,
+    TResult? Function(GetDoctorStateError value)? getDoctorStateError,
+    TResult? Function(AddDoctorStateLoading value)? addDoctorStateLoading,
+    TResult? Function(AddDoctorStateSuccess value)? addDoctorStateSuccess,
+    TResult? Function(AddDoctorStateError value)? addDoctorStateError,
+    TResult? Function(UpdateDoctorStateLoading value)? updateDoctorStateLoading,
+    TResult? Function(UpdateDoctorStateSuccess value)? updateDoctorStateSuccess,
+    TResult? Function(UpdateDoctorStateError value)? updateDoctorStateError,
+    TResult? Function(DeleteDoctorStateLoading value)? deleteDoctorStateLoading,
+    TResult? Function(DeleteDoctorStateSuccess value)? deleteDoctorStateSuccess,
+    TResult? Function(DeleteDoctorStateError value)? deleteDoctorStateError,
+    TResult? Function(GetDoctorAndPatientsStateLoading value)?
+        getDoctorAndPatientsStateLoading,
+    TResult? Function(GetDoctorAndPatientsStateSuccess value)?
+        getDoctorAndPatientsStateSuccess,
+    TResult? Function(GetDoctorAndPatientsStateError value)?
+        getDoctorAndPatientsStateError,
+    TResult? Function(DoctorBottomNavChanged value)? doctorBottomNavChanged,
+    TResult? Function(AnalyzingSampleLoading value)? analyzingSampleLoading,
+    TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
+    TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
+    TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DoctorStateInitial value)? doctorStateInitial,
+    TResult Function(GetDoctorStateLoading value)? getDoctorStateLoading,
+    TResult Function(GetDoctorStateSuccess value)? getDoctorStateSuccess,
+    TResult Function(GetDoctorStateError value)? getDoctorStateError,
+    TResult Function(AddDoctorStateLoading value)? addDoctorStateLoading,
+    TResult Function(AddDoctorStateSuccess value)? addDoctorStateSuccess,
+    TResult Function(AddDoctorStateError value)? addDoctorStateError,
+    TResult Function(UpdateDoctorStateLoading value)? updateDoctorStateLoading,
+    TResult Function(UpdateDoctorStateSuccess value)? updateDoctorStateSuccess,
+    TResult Function(UpdateDoctorStateError value)? updateDoctorStateError,
+    TResult Function(DeleteDoctorStateLoading value)? deleteDoctorStateLoading,
+    TResult Function(DeleteDoctorStateSuccess value)? deleteDoctorStateSuccess,
+    TResult Function(DeleteDoctorStateError value)? deleteDoctorStateError,
+    TResult Function(GetDoctorAndPatientsStateLoading value)?
+        getDoctorAndPatientsStateLoading,
+    TResult Function(GetDoctorAndPatientsStateSuccess value)?
+        getDoctorAndPatientsStateSuccess,
+    TResult Function(GetDoctorAndPatientsStateError value)?
+        getDoctorAndPatientsStateError,
+    TResult Function(DoctorBottomNavChanged value)? doctorBottomNavChanged,
+    TResult Function(AnalyzingSampleLoading value)? analyzingSampleLoading,
+    TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
+    TResult Function(AnalyzingSampleError value)? analyzingSampleError,
+    TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
+    required TResult orElse(),
+  }) {
+    if (savingAnalysisResultLoading != null) {
+      return savingAnalysisResultLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavingAnalysisResultLoading implements DoctorState {
+  const factory SavingAnalysisResultLoading() =
+      _$SavingAnalysisResultLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$SavingAnalysisResultSuccessImplCopyWith<$Res> {
+  factory _$$SavingAnalysisResultSuccessImplCopyWith(
+          _$SavingAnalysisResultSuccessImpl value,
+          $Res Function(_$SavingAnalysisResultSuccessImpl) then) =
+      __$$SavingAnalysisResultSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SavingAnalysisResultSuccessImplCopyWithImpl<$Res>
+    extends _$DoctorStateCopyWithImpl<$Res, _$SavingAnalysisResultSuccessImpl>
+    implements _$$SavingAnalysisResultSuccessImplCopyWith<$Res> {
+  __$$SavingAnalysisResultSuccessImplCopyWithImpl(
+      _$SavingAnalysisResultSuccessImpl _value,
+      $Res Function(_$SavingAnalysisResultSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DoctorState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SavingAnalysisResultSuccessImpl implements SavingAnalysisResultSuccess {
+  const _$SavingAnalysisResultSuccessImpl();
+
+  @override
+  String toString() {
+    return 'DoctorState.savingAnalysisResultSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SavingAnalysisResultSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() doctorStateInitial,
+    required TResult Function() getDoctorStateLoading,
+    required TResult Function(List<DoctorModel> doctors) getDoctorStateSuccess,
+    required TResult Function(String message) getDoctorStateError,
+    required TResult Function() addDoctorStateLoading,
+    required TResult Function() addDoctorStateSuccess,
+    required TResult Function(String message) addDoctorStateError,
+    required TResult Function() updateDoctorStateLoading,
+    required TResult Function(DoctorModel doctor) updateDoctorStateSuccess,
+    required TResult Function(String message) updateDoctorStateError,
+    required TResult Function() deleteDoctorStateLoading,
+    required TResult Function() deleteDoctorStateSuccess,
+    required TResult Function(String message) deleteDoctorStateError,
+    required TResult Function() getDoctorAndPatientsStateLoading,
+    required TResult Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)
+        getDoctorAndPatientsStateSuccess,
+    required TResult Function(String error) getDoctorAndPatientsStateError,
+    required TResult Function(int index) doctorBottomNavChanged,
+    required TResult Function() analyzingSampleLoading,
+    required TResult Function(AnalysisResultModel result)
+        analyzingSampleSuccess,
+    required TResult Function(String message) analyzingSampleError,
+    required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? doctorStateInitial,
+    TResult? Function()? getDoctorStateLoading,
+    TResult? Function(List<DoctorModel> doctors)? getDoctorStateSuccess,
+    TResult? Function(String message)? getDoctorStateError,
+    TResult? Function()? addDoctorStateLoading,
+    TResult? Function()? addDoctorStateSuccess,
+    TResult? Function(String message)? addDoctorStateError,
+    TResult? Function()? updateDoctorStateLoading,
+    TResult? Function(DoctorModel doctor)? updateDoctorStateSuccess,
+    TResult? Function(String message)? updateDoctorStateError,
+    TResult? Function()? deleteDoctorStateLoading,
+    TResult? Function()? deleteDoctorStateSuccess,
+    TResult? Function(String message)? deleteDoctorStateError,
+    TResult? Function()? getDoctorAndPatientsStateLoading,
+    TResult? Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)?
+        getDoctorAndPatientsStateSuccess,
+    TResult? Function(String error)? getDoctorAndPatientsStateError,
+    TResult? Function(int index)? doctorBottomNavChanged,
+    TResult? Function()? analyzingSampleLoading,
+    TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
+    TResult? Function(String message)? analyzingSampleError,
+    TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? doctorStateInitial,
+    TResult Function()? getDoctorStateLoading,
+    TResult Function(List<DoctorModel> doctors)? getDoctorStateSuccess,
+    TResult Function(String message)? getDoctorStateError,
+    TResult Function()? addDoctorStateLoading,
+    TResult Function()? addDoctorStateSuccess,
+    TResult Function(String message)? addDoctorStateError,
+    TResult Function()? updateDoctorStateLoading,
+    TResult Function(DoctorModel doctor)? updateDoctorStateSuccess,
+    TResult Function(String message)? updateDoctorStateError,
+    TResult Function()? deleteDoctorStateLoading,
+    TResult Function()? deleteDoctorStateSuccess,
+    TResult Function(String message)? deleteDoctorStateError,
+    TResult Function()? getDoctorAndPatientsStateLoading,
+    TResult Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)?
+        getDoctorAndPatientsStateSuccess,
+    TResult Function(String error)? getDoctorAndPatientsStateError,
+    TResult Function(int index)? doctorBottomNavChanged,
+    TResult Function()? analyzingSampleLoading,
+    TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
+    TResult Function(String message)? analyzingSampleError,
+    TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
+    required TResult orElse(),
+  }) {
+    if (savingAnalysisResultSuccess != null) {
+      return savingAnalysisResultSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DoctorStateInitial value) doctorStateInitial,
+    required TResult Function(GetDoctorStateLoading value)
+        getDoctorStateLoading,
+    required TResult Function(GetDoctorStateSuccess value)
+        getDoctorStateSuccess,
+    required TResult Function(GetDoctorStateError value) getDoctorStateError,
+    required TResult Function(AddDoctorStateLoading value)
+        addDoctorStateLoading,
+    required TResult Function(AddDoctorStateSuccess value)
+        addDoctorStateSuccess,
+    required TResult Function(AddDoctorStateError value) addDoctorStateError,
+    required TResult Function(UpdateDoctorStateLoading value)
+        updateDoctorStateLoading,
+    required TResult Function(UpdateDoctorStateSuccess value)
+        updateDoctorStateSuccess,
+    required TResult Function(UpdateDoctorStateError value)
+        updateDoctorStateError,
+    required TResult Function(DeleteDoctorStateLoading value)
+        deleteDoctorStateLoading,
+    required TResult Function(DeleteDoctorStateSuccess value)
+        deleteDoctorStateSuccess,
+    required TResult Function(DeleteDoctorStateError value)
+        deleteDoctorStateError,
+    required TResult Function(GetDoctorAndPatientsStateLoading value)
+        getDoctorAndPatientsStateLoading,
+    required TResult Function(GetDoctorAndPatientsStateSuccess value)
+        getDoctorAndPatientsStateSuccess,
+    required TResult Function(GetDoctorAndPatientsStateError value)
+        getDoctorAndPatientsStateError,
+    required TResult Function(DoctorBottomNavChanged value)
+        doctorBottomNavChanged,
+    required TResult Function(AnalyzingSampleLoading value)
+        analyzingSampleLoading,
+    required TResult Function(AnalyzingSampleSuccess value)
+        analyzingSampleSuccess,
+    required TResult Function(AnalyzingSampleError value) analyzingSampleError,
+    required TResult Function(AnalyzingSampleCancelled value)
+        analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DoctorStateInitial value)? doctorStateInitial,
+    TResult? Function(GetDoctorStateLoading value)? getDoctorStateLoading,
+    TResult? Function(GetDoctorStateSuccess value)? getDoctorStateSuccess,
+    TResult? Function(GetDoctorStateError value)? getDoctorStateError,
+    TResult? Function(AddDoctorStateLoading value)? addDoctorStateLoading,
+    TResult? Function(AddDoctorStateSuccess value)? addDoctorStateSuccess,
+    TResult? Function(AddDoctorStateError value)? addDoctorStateError,
+    TResult? Function(UpdateDoctorStateLoading value)? updateDoctorStateLoading,
+    TResult? Function(UpdateDoctorStateSuccess value)? updateDoctorStateSuccess,
+    TResult? Function(UpdateDoctorStateError value)? updateDoctorStateError,
+    TResult? Function(DeleteDoctorStateLoading value)? deleteDoctorStateLoading,
+    TResult? Function(DeleteDoctorStateSuccess value)? deleteDoctorStateSuccess,
+    TResult? Function(DeleteDoctorStateError value)? deleteDoctorStateError,
+    TResult? Function(GetDoctorAndPatientsStateLoading value)?
+        getDoctorAndPatientsStateLoading,
+    TResult? Function(GetDoctorAndPatientsStateSuccess value)?
+        getDoctorAndPatientsStateSuccess,
+    TResult? Function(GetDoctorAndPatientsStateError value)?
+        getDoctorAndPatientsStateError,
+    TResult? Function(DoctorBottomNavChanged value)? doctorBottomNavChanged,
+    TResult? Function(AnalyzingSampleLoading value)? analyzingSampleLoading,
+    TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
+    TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
+    TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DoctorStateInitial value)? doctorStateInitial,
+    TResult Function(GetDoctorStateLoading value)? getDoctorStateLoading,
+    TResult Function(GetDoctorStateSuccess value)? getDoctorStateSuccess,
+    TResult Function(GetDoctorStateError value)? getDoctorStateError,
+    TResult Function(AddDoctorStateLoading value)? addDoctorStateLoading,
+    TResult Function(AddDoctorStateSuccess value)? addDoctorStateSuccess,
+    TResult Function(AddDoctorStateError value)? addDoctorStateError,
+    TResult Function(UpdateDoctorStateLoading value)? updateDoctorStateLoading,
+    TResult Function(UpdateDoctorStateSuccess value)? updateDoctorStateSuccess,
+    TResult Function(UpdateDoctorStateError value)? updateDoctorStateError,
+    TResult Function(DeleteDoctorStateLoading value)? deleteDoctorStateLoading,
+    TResult Function(DeleteDoctorStateSuccess value)? deleteDoctorStateSuccess,
+    TResult Function(DeleteDoctorStateError value)? deleteDoctorStateError,
+    TResult Function(GetDoctorAndPatientsStateLoading value)?
+        getDoctorAndPatientsStateLoading,
+    TResult Function(GetDoctorAndPatientsStateSuccess value)?
+        getDoctorAndPatientsStateSuccess,
+    TResult Function(GetDoctorAndPatientsStateError value)?
+        getDoctorAndPatientsStateError,
+    TResult Function(DoctorBottomNavChanged value)? doctorBottomNavChanged,
+    TResult Function(AnalyzingSampleLoading value)? analyzingSampleLoading,
+    TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
+    TResult Function(AnalyzingSampleError value)? analyzingSampleError,
+    TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
+    required TResult orElse(),
+  }) {
+    if (savingAnalysisResultSuccess != null) {
+      return savingAnalysisResultSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavingAnalysisResultSuccess implements DoctorState {
+  const factory SavingAnalysisResultSuccess() =
+      _$SavingAnalysisResultSuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$SavingAnalysisResultErrorImplCopyWith<$Res> {
+  factory _$$SavingAnalysisResultErrorImplCopyWith(
+          _$SavingAnalysisResultErrorImpl value,
+          $Res Function(_$SavingAnalysisResultErrorImpl) then) =
+      __$$SavingAnalysisResultErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$SavingAnalysisResultErrorImplCopyWithImpl<$Res>
+    extends _$DoctorStateCopyWithImpl<$Res, _$SavingAnalysisResultErrorImpl>
+    implements _$$SavingAnalysisResultErrorImplCopyWith<$Res> {
+  __$$SavingAnalysisResultErrorImplCopyWithImpl(
+      _$SavingAnalysisResultErrorImpl _value,
+      $Res Function(_$SavingAnalysisResultErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DoctorState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$SavingAnalysisResultErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SavingAnalysisResultErrorImpl implements SavingAnalysisResultError {
+  const _$SavingAnalysisResultErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'DoctorState.savingAnalysisResultError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SavingAnalysisResultErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of DoctorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SavingAnalysisResultErrorImplCopyWith<_$SavingAnalysisResultErrorImpl>
+      get copyWith => __$$SavingAnalysisResultErrorImplCopyWithImpl<
+          _$SavingAnalysisResultErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() doctorStateInitial,
+    required TResult Function() getDoctorStateLoading,
+    required TResult Function(List<DoctorModel> doctors) getDoctorStateSuccess,
+    required TResult Function(String message) getDoctorStateError,
+    required TResult Function() addDoctorStateLoading,
+    required TResult Function() addDoctorStateSuccess,
+    required TResult Function(String message) addDoctorStateError,
+    required TResult Function() updateDoctorStateLoading,
+    required TResult Function(DoctorModel doctor) updateDoctorStateSuccess,
+    required TResult Function(String message) updateDoctorStateError,
+    required TResult Function() deleteDoctorStateLoading,
+    required TResult Function() deleteDoctorStateSuccess,
+    required TResult Function(String message) deleteDoctorStateError,
+    required TResult Function() getDoctorAndPatientsStateLoading,
+    required TResult Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)
+        getDoctorAndPatientsStateSuccess,
+    required TResult Function(String error) getDoctorAndPatientsStateError,
+    required TResult Function(int index) doctorBottomNavChanged,
+    required TResult Function() analyzingSampleLoading,
+    required TResult Function(AnalysisResultModel result)
+        analyzingSampleSuccess,
+    required TResult Function(String message) analyzingSampleError,
+    required TResult Function() analyzingSampleCancelled,
+    required TResult Function() savingAnalysisResultLoading,
+    required TResult Function() savingAnalysisResultSuccess,
+    required TResult Function(String message) savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? doctorStateInitial,
+    TResult? Function()? getDoctorStateLoading,
+    TResult? Function(List<DoctorModel> doctors)? getDoctorStateSuccess,
+    TResult? Function(String message)? getDoctorStateError,
+    TResult? Function()? addDoctorStateLoading,
+    TResult? Function()? addDoctorStateSuccess,
+    TResult? Function(String message)? addDoctorStateError,
+    TResult? Function()? updateDoctorStateLoading,
+    TResult? Function(DoctorModel doctor)? updateDoctorStateSuccess,
+    TResult? Function(String message)? updateDoctorStateError,
+    TResult? Function()? deleteDoctorStateLoading,
+    TResult? Function()? deleteDoctorStateSuccess,
+    TResult? Function(String message)? deleteDoctorStateError,
+    TResult? Function()? getDoctorAndPatientsStateLoading,
+    TResult? Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)?
+        getDoctorAndPatientsStateSuccess,
+    TResult? Function(String error)? getDoctorAndPatientsStateError,
+    TResult? Function(int index)? doctorBottomNavChanged,
+    TResult? Function()? analyzingSampleLoading,
+    TResult? Function(AnalysisResultModel result)? analyzingSampleSuccess,
+    TResult? Function(String message)? analyzingSampleError,
+    TResult? Function()? analyzingSampleCancelled,
+    TResult? Function()? savingAnalysisResultLoading,
+    TResult? Function()? savingAnalysisResultSuccess,
+    TResult? Function(String message)? savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? doctorStateInitial,
+    TResult Function()? getDoctorStateLoading,
+    TResult Function(List<DoctorModel> doctors)? getDoctorStateSuccess,
+    TResult Function(String message)? getDoctorStateError,
+    TResult Function()? addDoctorStateLoading,
+    TResult Function()? addDoctorStateSuccess,
+    TResult Function(String message)? addDoctorStateError,
+    TResult Function()? updateDoctorStateLoading,
+    TResult Function(DoctorModel doctor)? updateDoctorStateSuccess,
+    TResult Function(String message)? updateDoctorStateError,
+    TResult Function()? deleteDoctorStateLoading,
+    TResult Function()? deleteDoctorStateSuccess,
+    TResult Function(String message)? deleteDoctorStateError,
+    TResult Function()? getDoctorAndPatientsStateLoading,
+    TResult Function(
+            DoctorModel doctor,
+            List<PatientModel> patients,
+            Map<String, ConversationModel> conversationsByPatientId,
+            PatientModel? selectedPatientForSampleUpload)?
+        getDoctorAndPatientsStateSuccess,
+    TResult Function(String error)? getDoctorAndPatientsStateError,
+    TResult Function(int index)? doctorBottomNavChanged,
+    TResult Function()? analyzingSampleLoading,
+    TResult Function(AnalysisResultModel result)? analyzingSampleSuccess,
+    TResult Function(String message)? analyzingSampleError,
+    TResult Function()? analyzingSampleCancelled,
+    TResult Function()? savingAnalysisResultLoading,
+    TResult Function()? savingAnalysisResultSuccess,
+    TResult Function(String message)? savingAnalysisResultError,
+    required TResult orElse(),
+  }) {
+    if (savingAnalysisResultError != null) {
+      return savingAnalysisResultError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DoctorStateInitial value) doctorStateInitial,
+    required TResult Function(GetDoctorStateLoading value)
+        getDoctorStateLoading,
+    required TResult Function(GetDoctorStateSuccess value)
+        getDoctorStateSuccess,
+    required TResult Function(GetDoctorStateError value) getDoctorStateError,
+    required TResult Function(AddDoctorStateLoading value)
+        addDoctorStateLoading,
+    required TResult Function(AddDoctorStateSuccess value)
+        addDoctorStateSuccess,
+    required TResult Function(AddDoctorStateError value) addDoctorStateError,
+    required TResult Function(UpdateDoctorStateLoading value)
+        updateDoctorStateLoading,
+    required TResult Function(UpdateDoctorStateSuccess value)
+        updateDoctorStateSuccess,
+    required TResult Function(UpdateDoctorStateError value)
+        updateDoctorStateError,
+    required TResult Function(DeleteDoctorStateLoading value)
+        deleteDoctorStateLoading,
+    required TResult Function(DeleteDoctorStateSuccess value)
+        deleteDoctorStateSuccess,
+    required TResult Function(DeleteDoctorStateError value)
+        deleteDoctorStateError,
+    required TResult Function(GetDoctorAndPatientsStateLoading value)
+        getDoctorAndPatientsStateLoading,
+    required TResult Function(GetDoctorAndPatientsStateSuccess value)
+        getDoctorAndPatientsStateSuccess,
+    required TResult Function(GetDoctorAndPatientsStateError value)
+        getDoctorAndPatientsStateError,
+    required TResult Function(DoctorBottomNavChanged value)
+        doctorBottomNavChanged,
+    required TResult Function(AnalyzingSampleLoading value)
+        analyzingSampleLoading,
+    required TResult Function(AnalyzingSampleSuccess value)
+        analyzingSampleSuccess,
+    required TResult Function(AnalyzingSampleError value) analyzingSampleError,
+    required TResult Function(AnalyzingSampleCancelled value)
+        analyzingSampleCancelled,
+    required TResult Function(SavingAnalysisResultLoading value)
+        savingAnalysisResultLoading,
+    required TResult Function(SavingAnalysisResultSuccess value)
+        savingAnalysisResultSuccess,
+    required TResult Function(SavingAnalysisResultError value)
+        savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DoctorStateInitial value)? doctorStateInitial,
+    TResult? Function(GetDoctorStateLoading value)? getDoctorStateLoading,
+    TResult? Function(GetDoctorStateSuccess value)? getDoctorStateSuccess,
+    TResult? Function(GetDoctorStateError value)? getDoctorStateError,
+    TResult? Function(AddDoctorStateLoading value)? addDoctorStateLoading,
+    TResult? Function(AddDoctorStateSuccess value)? addDoctorStateSuccess,
+    TResult? Function(AddDoctorStateError value)? addDoctorStateError,
+    TResult? Function(UpdateDoctorStateLoading value)? updateDoctorStateLoading,
+    TResult? Function(UpdateDoctorStateSuccess value)? updateDoctorStateSuccess,
+    TResult? Function(UpdateDoctorStateError value)? updateDoctorStateError,
+    TResult? Function(DeleteDoctorStateLoading value)? deleteDoctorStateLoading,
+    TResult? Function(DeleteDoctorStateSuccess value)? deleteDoctorStateSuccess,
+    TResult? Function(DeleteDoctorStateError value)? deleteDoctorStateError,
+    TResult? Function(GetDoctorAndPatientsStateLoading value)?
+        getDoctorAndPatientsStateLoading,
+    TResult? Function(GetDoctorAndPatientsStateSuccess value)?
+        getDoctorAndPatientsStateSuccess,
+    TResult? Function(GetDoctorAndPatientsStateError value)?
+        getDoctorAndPatientsStateError,
+    TResult? Function(DoctorBottomNavChanged value)? doctorBottomNavChanged,
+    TResult? Function(AnalyzingSampleLoading value)? analyzingSampleLoading,
+    TResult? Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
+    TResult? Function(AnalyzingSampleError value)? analyzingSampleError,
+    TResult? Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult? Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult? Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult? Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
+  }) {
+    return savingAnalysisResultError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DoctorStateInitial value)? doctorStateInitial,
+    TResult Function(GetDoctorStateLoading value)? getDoctorStateLoading,
+    TResult Function(GetDoctorStateSuccess value)? getDoctorStateSuccess,
+    TResult Function(GetDoctorStateError value)? getDoctorStateError,
+    TResult Function(AddDoctorStateLoading value)? addDoctorStateLoading,
+    TResult Function(AddDoctorStateSuccess value)? addDoctorStateSuccess,
+    TResult Function(AddDoctorStateError value)? addDoctorStateError,
+    TResult Function(UpdateDoctorStateLoading value)? updateDoctorStateLoading,
+    TResult Function(UpdateDoctorStateSuccess value)? updateDoctorStateSuccess,
+    TResult Function(UpdateDoctorStateError value)? updateDoctorStateError,
+    TResult Function(DeleteDoctorStateLoading value)? deleteDoctorStateLoading,
+    TResult Function(DeleteDoctorStateSuccess value)? deleteDoctorStateSuccess,
+    TResult Function(DeleteDoctorStateError value)? deleteDoctorStateError,
+    TResult Function(GetDoctorAndPatientsStateLoading value)?
+        getDoctorAndPatientsStateLoading,
+    TResult Function(GetDoctorAndPatientsStateSuccess value)?
+        getDoctorAndPatientsStateSuccess,
+    TResult Function(GetDoctorAndPatientsStateError value)?
+        getDoctorAndPatientsStateError,
+    TResult Function(DoctorBottomNavChanged value)? doctorBottomNavChanged,
+    TResult Function(AnalyzingSampleLoading value)? analyzingSampleLoading,
+    TResult Function(AnalyzingSampleSuccess value)? analyzingSampleSuccess,
+    TResult Function(AnalyzingSampleError value)? analyzingSampleError,
+    TResult Function(AnalyzingSampleCancelled value)? analyzingSampleCancelled,
+    TResult Function(SavingAnalysisResultLoading value)?
+        savingAnalysisResultLoading,
+    TResult Function(SavingAnalysisResultSuccess value)?
+        savingAnalysisResultSuccess,
+    TResult Function(SavingAnalysisResultError value)?
+        savingAnalysisResultError,
+    required TResult orElse(),
+  }) {
+    if (savingAnalysisResultError != null) {
+      return savingAnalysisResultError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavingAnalysisResultError implements DoctorState {
+  const factory SavingAnalysisResultError(final String message) =
+      _$SavingAnalysisResultErrorImpl;
+
+  String get message;
+
+  /// Create a copy of DoctorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SavingAnalysisResultErrorImplCopyWith<_$SavingAnalysisResultErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

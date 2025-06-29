@@ -110,62 +110,68 @@ class _UploadSampleScreenState extends State<UploadSampleScreen> {
       }
     });
   }
-  @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: Row(
-        children: [
-          SizedBox(width: WidthManager.w8),
-          Text(
-            'Upload Blood Sample'.tr(),
-            style: getMediumTextStyle(
-              fontSize: FontSizeManager.s20,
-              color: ColorsManager.darkBlue,
-            ),
-          ),
-        ],
-      ),
-      backgroundColor: ColorsManager.white,
-      elevation: 0,
-    ),
-    body: SingleChildScrollView(
-      padding: EdgeInsets.all(HeightManager.h16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PatientDropdown(
-            patients: widget.patients,
-            selected: selectedPatient,
-            onChanged: (value) => setState(() {
-              selectedPatient = value;
-              _image = null;
-            }),
-          ),
-          SizedBox(height: HeightManager.h20),
-          SampleImagePreview(
-            image: _image,
-            networkImageUrl: selectedPatient?.latestSampleImageUrl,
-          ),
-          SizedBox(height: HeightManager.h20),
-          ImagePickerButtons(onPick: _pickImage),
-          SizedBox(height: HeightManager.h20),
 
-          /// ✅ BlocListener يلتف فقط حول زر التحليل
-          AnalyzeBlocListener(
-            doctor: widget.doctor,
-            selectedPatient: selectedPatient, // يمكن أن تكون null وسندير ذلك داخل الـ BlocListener
-            child: AnalyzeButton(onPressed: _processImage),
-          ),
-        ],
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            SizedBox(width: WidthManager.w8),
+            Text(
+              'Upload Blood Sample'.tr(),
+              style: getMediumTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: ColorsManager.white,
+        elevation: 0,
       ),
-    ),
-    floatingActionButton: selectedPatient != null
-        ? SampleFAB(
-            patient: selectedPatient!,
-            doctor: widget.doctor,
-          )
-        : null,
-  );
-}
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(HeightManager.h16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PatientDropdown(
+              patients: widget.patients,
+              selected: selectedPatient,
+              onChanged: (String? id) {
+                final patient = widget.patients.firstWhere(
+                  (p) => p.id == id,
+                );
+                setState(() {
+                  selectedPatient = patient;
+                  _image = null;
+                });
+              },
+            ),
+
+            SizedBox(height: HeightManager.h20),
+            SampleImagePreview(
+              image: _image,
+              networkImageUrl: selectedPatient?.latestSampleImageUrl,
+            ),
+            SizedBox(height: HeightManager.h20),
+            ImagePickerButtons(onPick: _pickImage),
+            SizedBox(height: HeightManager.h20),
+
+            /// ✅ BlocListener يلتف فقط حول زر التحليل
+            AnalyzeBlocListener(
+              doctor: widget.doctor,
+              selectedPatient:
+                  selectedPatient, // يمكن أن تكون null وسندير ذلك داخل الـ BlocListener
+              child: AnalyzeButton(onPressed: _processImage),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton:
+          selectedPatient != null
+              ? SampleFAB(patient: selectedPatient!, doctor: widget.doctor)
+              : null,
+    );
+  }
 }

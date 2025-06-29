@@ -14,7 +14,6 @@ import 'package:leuko_care/feature/chats/data/models/chat_model.dart';
 import 'package:leuko_care/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:leuko_care/leuko_ai.dart';
 import 'core/routes/app_router.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
@@ -23,15 +22,17 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FontFamilyManager.init();
   await NotificationService.init();
+
   await ScreenUtil.ensureScreenSize();
   await FirebaseAppCheck.instance.activate(
     androidProvider: AndroidProvider.debug,
+    appleProvider: AppleProvider.debug,
   );
   setupGetIt();
   await Hive.initFlutter();
   Hive.registerAdapter(ChatModelAdapter());
-   Hive.registerAdapter(TimestampAdapter());
-   Hive.registerAdapter(MessageStatusAdapter());
+  Hive.registerAdapter(TimestampAdapter());
+  Hive.registerAdapter(MessageStatusAdapter());
 
   final localeCode = await SharedPrefHelper.getLocale();
   final startLocale = Locale(localeCode);

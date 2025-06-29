@@ -1,7 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 class FirebaseErrorHandler {
-  static String handle(FirebaseAuthException error) {
+  static String handle(Object error) {
+    if (error is FirebaseAuthException) {
+      return _handleAuthError(error);
+    } else if (error is FirebaseException &&
+        error.plugin == 'cloud_firestore') {
+      return _handleFirestoreError(error);
+    } else {
+      return 'error_unexpected'.tr(); // رسالة عامة عند خطأ غير معروف
+    }
+  }
+
+  static String _handleAuthError(FirebaseAuthException error) {
     switch (error.code) {
       case 'user-not-found':
         return "error_user_not_found".tr();
@@ -21,6 +33,19 @@ class FirebaseErrorHandler {
         return "error_network_request_failed".tr();
       default:
         return "error_generic_with_code".tr(args: [error.code]);
+    }
+  }
+
+  static String _handleFirestoreError(FirebaseException error) {
+    switch (error.code) {
+      case 'unavailable':
+        return 'error_firestore_unavailable'.tr();
+      case 'permission-denied':
+        return 'error_firestore_permission_denied'.tr();
+      case 'not-found':
+        return 'error_firestore_not_found'.tr();
+      default:
+        return 'error_firestore_generic'.tr(args: [error.code]);
     }
   }
 }

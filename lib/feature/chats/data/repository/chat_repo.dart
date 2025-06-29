@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:leuko_care/core/helpers/localization_helper.dart';
 import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import 'package:leuko_care/core/networking/send_notification_services.dart';
 import '../models/chat_model.dart';
@@ -125,33 +126,7 @@ class ChatRepository {
     }
   }
 
-  Future<String> getLocalizedText({
-    required String key,
-    required String languageCode,
-    Map<String, String>? namedArgs,
-  }) async {
-    try {
-      final jsonString = await rootBundle.loadString(
-        'assets/lang/$languageCode.json',
-      );
-      final Map<String, dynamic> translations = json.decode(jsonString);
 
-      String? value = translations[key];
-      if (value == null) return key;
-
-      // استبدال الـ namedArgs إن وجدت
-      if (namedArgs != null) {
-        namedArgs.forEach((placeholder, replacement) {
-          value = value!.replaceAll('{$placeholder}', replacement);
-        });
-      }
-
-      return value!;
-    } catch (e) {
-      print("Error loading localized text: $e");
-      return key;
-    }
-  }
 
   Future<void> sendMessage(ChatModel message) async {
     final chatId = _getChatId(message.senderId, message.receiverId);

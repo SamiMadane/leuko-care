@@ -168,36 +168,45 @@ class NotificationService {
     Map<String, dynamic> data,
     String userType,
   ) async {
-    final chatId = data['chatId'];
-    final senderId = data['senderId'];
-    final receiverId = data['receiverId'];
     final type = data['type'];
 
-    if (chatId == null || chatId.isEmpty) {
-      print('❌ chatId is null or empty');
-      return;
-    }
+    if (type == 'chat') {
+      final chatId = data['chatId'];
+      final senderId = data['senderId'];
+      final receiverId = data['receiverId'];
 
-    ChatSessionManager().currentChatId = chatId;
+      if (chatId == null || chatId.isEmpty) {
+        print('❌ chatId is null or empty');
+        return;
+      }
 
-    if (userType == 'patient' && type == 'chat') {
+      ChatSessionManager().currentChatId = chatId;
+
+      if (userType == 'patient') {
+        Navigator.of(
+          context,
+        ).pushReplacementNamed(Routes.patientScreen, arguments: 1);
+      } else if (userType == 'doctor') {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder:
+                (_) => BlocProvider.value(
+                  value: GetIt.instance<ChatCubit>(),
+                  child: ChatScreen(
+                    currentUserId: receiverId,
+                    otherUserId: senderId,
+                    userType: 'doctor',
+                  ),
+                ),
+          ),
+        );
+      }
+    } else if (type == 'exam_result') {
       Navigator.of(
         context,
-      ).pushReplacementNamed(Routes.patientScreen, arguments: 1);
-    } else if (userType == 'doctor' && type == 'chat') {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder:
-              (_) => BlocProvider.value(
-                value: GetIt.instance<ChatCubit>(),
-                child: ChatScreen(
-                  currentUserId: receiverId,
-                  otherUserId: senderId,
-                  userType: 'doctor',
-                ),
-              ),
-        ),
-      );
+      ).pushReplacementNamed(Routes.patientScreen, arguments: 0);
+    } else {
+      print('Unhandled notification type: $type');
     }
   }
 

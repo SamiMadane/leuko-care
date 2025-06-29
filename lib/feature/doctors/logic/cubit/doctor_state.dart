@@ -49,6 +49,11 @@ const factory DoctorState.getDoctorAndPatientsStateSuccess({
   const factory DoctorState.analyzingSampleError(String message) = AnalyzingSampleError;
   const factory DoctorState.analyzingSampleCancelled() = AnalyzingSampleCancelled;  // <-- هنا
 
+  // Saving analysis result states
+  const factory DoctorState.savingAnalysisResultLoading() = SavingAnalysisResultLoading;
+  const factory DoctorState.savingAnalysisResultSuccess() = SavingAnalysisResultSuccess;
+  const factory DoctorState.savingAnalysisResultError(String message) = SavingAnalysisResultError;
+
 
 
 

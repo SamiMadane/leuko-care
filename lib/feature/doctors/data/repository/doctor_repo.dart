@@ -5,6 +5,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:leuko_care/core/helpers/localization_helper.dart';
+import 'package:leuko_care/core/networking/send_notification_services.dart';
 import 'package:leuko_care/core/usecases/get_doctors_ordered_by_patients_count_usecase.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
@@ -212,5 +214,87 @@ class DoctorRepository {
               .tr(),
       sampleImageUrl: usedImageUrl,
     );
+  }
+
+  Future<void> confirmExamResultAndNotify({
+    required PatientModel oldPatient,
+    required AnalysisResultModel result,
+    required String doctorId,
+    required String doctorName,
+  }) async {
+    final updatedPatient = oldPatient.copyWith(
+      isExamined: true,
+      leukemiaType: result.diseaseType,
+      diseaseConfidence: result.confidence,
+      aiNote: result.aiMessage,
+      latestSampleImageUrl: result.sampleImageUrl,
+      lastExamDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+      healthStatus: result.result,
+    );
+
+    await firestore
+        .collection('patients')
+        .doc(updatedPatient.id)
+        .update(updatedPatient.toJson());
+
+    // استدعاء إرسال الإشعار بعد تحديث بيانات المريض
+    await sendExamResultNotification(
+      patientId: updatedPatient.id!,
+      doctorId: doctorId,
+      doctorName: doctorName,
+    );
+  }
+
+
+
+  Future<void> sendExamResultNotification({
+    required String patientId,
+    required String doctorId,
+    required String doctorName,
+  }) async {
+    try {
+      // جلب لغة المريض
+      final patientDoc =
+          await firestore.collection('patients').doc(patientId).get();
+      final language = (patientDoc.data()?['language'] as String?) ?? 'en';
+
+      // جلب النصوص المترجمة من ملفات اللغات
+      final title = await getLocalizedText(key: 'exam_result_ready', languageCode: language);
+      final body = await getLocalizedText(
+        key: 'exam_result_message',
+        languageCode: language,
+        namedArgs: {'doctorName': doctorName},
+      );
+
+      final tokenDoc =
+          await firestore.collection('fcmTokens').doc(patientId).get();
+
+      if (!tokenDoc.exists) {
+        print('No FCM tokens found for patient $patientId');
+        return;
+      }
+
+      final tokens = List<String>.from(tokenDoc.data()?['tokens'] ?? []);
+
+      for (final token in tokens) {
+        if (token.isNotEmpty) {
+          await sendNotification(
+            token: token,
+            title: title,
+            body: body,
+            data: {
+              'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+              'patientId': patientId,
+              'doctorId': doctorId,
+              'type': 'exam_result',
+            },
+          );
+        }
+      }
+
+      print('Exam result notification sent to patient $patientId');
+    } catch (e) {
+      print('Failed to send exam result notification: $e');
+    }
   }
 }

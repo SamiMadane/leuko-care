@@ -2,7 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/sample_result_screen/ai_analysis_widget.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/sample_result_screen/confirmation_buttons_widget.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/sample_result_screen/patient_info_widget.dart';
@@ -129,16 +132,29 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
             if (!_hideButtons) ...[
               SizedBox(height: HeightManager.h20),
               confirmationButtonsWidget(
-                () {
-                  // Update patient data
+                onConfirm: () {
+                  final resultModel = AnalysisResultModel(
+                    result: widget.result,
+                    diseaseType: widget.diseaseType,
+                    confidence: widget.confidence ?? 0,
+                    aiMessage: widget.aiMessage,
+                    sampleImageUrl: widget.sampleImageUrl,
+                  );
+
+                  context.read<DoctorCubit>().confirmAnalysisResult(
+                    widget.patient,
+                    resultModel,
+                    widget.doctor.id!,
+                    widget.doctor.name,
+                  );
                 },
-                () {
+                onCancel: () {
                   Navigator.pop(context);
                 },
               ),
               SizedBox(height: HeightManager.h20),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: WidthManager.w14),
+                padding: EdgeInsets.symmetric(horizontal: WidthManager.w14),
                 child: SizedBox(
                   width: double.infinity,
                   height: HeightManager.h44,

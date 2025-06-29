@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
+import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
@@ -208,5 +209,27 @@ Future<void> analyzeSample({
     emit(AnalyzingSampleError(e.toString()));
   }
 }
+
+Future<void> confirmAnalysisResult(
+  PatientModel oldPatient,
+  AnalysisResultModel result,
+  String doctorId,
+  String doctorName,
+) async {
+  emit(SavingAnalysisResultLoading());
+
+  try {
+    await _repository.confirmExamResultAndNotify(
+      oldPatient: oldPatient,
+      result: result,
+      doctorId: doctorId,
+      doctorName: doctorName,
+    );
+    emit(SavingAnalysisResultSuccess());
+  } catch (e) {
+    emit(SavingAnalysisResultError(e.toString()));
+  }
+}
+
 
 }

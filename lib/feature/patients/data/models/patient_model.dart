@@ -71,6 +71,7 @@ class PatientModel {
     String? aiNote,
     String? latestSampleImageUrl,
     String? lastExamDate,
+    String? leukemiaType,
     String? gender,
     String? fcmToken,
     String? language
