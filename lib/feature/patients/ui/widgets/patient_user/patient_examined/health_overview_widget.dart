@@ -17,8 +17,8 @@ class HealthOverviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final healthItems = [
-      HealthInfoData(Icons.health_and_safety, 'Health Status'.tr(), patient.healthStatus),
-      HealthInfoData(Icons.biotech, 'Leukemia Type'.tr(), patient.leukemiaType),
+      HealthInfoData(Icons.health_and_safety, 'Health Status'.tr(), patient.healthStatus.tr()),
+      HealthInfoData(Icons.biotech, 'Leukemia Type'.tr(), patient.leukemiaType.tr()),
       HealthInfoData(Icons.check_circle_outline, 'Diagnosis Confidence'.tr(), '${patient.diseaseConfidence}%'.tr()),
       HealthInfoData(Icons.date_range, 'Last Exam Date'.tr(), patient.lastExamDate ?? "N/A"),
     ];

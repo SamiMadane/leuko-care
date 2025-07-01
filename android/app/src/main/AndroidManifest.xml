@@ -63,4 +63,14 @@
         </intent>
     </queries>
 
+    <!-- دعم فتح الروابط الخارجية مثل WhatsApp و LinkedIn -->
+<queries>
+    <!-- لدعم روابط WhatsApp -->
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" />
+    </intent>
+</queries>
+
+
 </manifest>

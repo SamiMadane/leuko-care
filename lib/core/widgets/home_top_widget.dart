@@ -9,6 +9,7 @@ import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/routes/routes.dart';
 import 'package:leuko_care/core/widgets/custom_confirmation_dialog.dart';
 import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/core/widgets/signout_bloc_listener.dart';
@@ -226,15 +227,33 @@ void _showMoreOptionsBottomSheet(
                           context.pop();
                         },
                         message:
-                            'Unable to sign out. Please check your internet connection and try again.'.tr(),
+                            'Unable to sign out. Please check your internet connection and try again.'
+                                .tr(),
                       );
                       return;
                     }
-                    
+
                     cubit.signOut();
                     context.pop();
                   },
                 );
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.info_outline,
+                color: ColorsManager.primaryColor,
+              ),
+              title: Text(
+                'About Us'.tr(),
+                style: getMediumTextStyle(
+                  fontSize: FontSizeManager.s16,
+                  color: ColorsManager.darkBlue,
+                ),
+              ),
+              onTap: () {
+                context.pop();
+                context.pushNamed(Routes.aboutUsIntroScreen);
               },
             ),
           ],

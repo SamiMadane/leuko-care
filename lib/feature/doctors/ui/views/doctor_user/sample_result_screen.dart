@@ -80,7 +80,8 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
         title: Row(
           children: [
             Text(
-              'Result for ${widget.patient.name}'.tr(),
+              'result_for_patient'.tr(args: [widget.patient.name]),
+
               style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
@@ -119,10 +120,10 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
                   children: [
                     patientInfoWidget(widget.patient),
                     aiAnalysisWidget(
-                      widget.result,
-                      widget.diseaseType,
+                      widget.result.tr(),
+                      widget.diseaseType.tr(),
                       widget.confidence,
-                      widget.aiMessage,
+                      widget.aiMessage.tr(),
                     ),
                     sampleImageWidget(widget.sampleImageUrl),
                   ],

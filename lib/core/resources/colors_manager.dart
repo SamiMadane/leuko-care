@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorsManager {
   static const Color primaryColor = Color(0xFF247CFF);
-  static const Color lightBlue = Color(0xFFE3F2FD);
+  static const Color lightBlue = Color.fromRGBO(227, 242, 253, 1);
   static const Color lightBlueAccent = Color(0xFF40C4FF);
   static const Color gray = Color(0xFF757575);
   static const Color darkBlue = Color(0xFF242424);

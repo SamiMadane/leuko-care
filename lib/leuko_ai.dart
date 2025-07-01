@@ -15,6 +15,7 @@ class LeukoAi extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
+      splitScreenMode: true,
       child: MaterialApp(
         title: 'Leuko AI',
         theme: ThemeData(
@@ -28,8 +29,13 @@ class LeukoAi extends StatelessWidget {
         navigatorKey: navigatorKey,
         initialRoute: Routes.navigationHandlerScreen,
         onGenerateRoute: appRouter.generateRoute,
-      )
+      ),
+      builder: (context, widget) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
+          child: widget!,
+        );
+      },
     );
   }
 }
-

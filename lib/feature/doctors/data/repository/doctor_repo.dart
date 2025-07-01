@@ -206,12 +206,11 @@ class DoctorRepository {
         'https://images.unsplash.com/photo-1581090700227-1e8e8d1f5d35'; // default fallback
 
     return AnalysisResultModel(
-      result: 'sick'.tr(),
-      diseaseType: 'Acute Lymphoblastic Leukemia'.tr(),
+      result: 'sick',
+      diseaseType: 'Acute Lymphoblastic Leukemia',
       confidence: 92.5,
       aiMessage:
-          'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.'
-              .tr(),
+          'The AI model detected signs of Acute Lymphoblastic Leukemia with high confidence. Immediate medical attention is recommended.',
       sampleImageUrl: usedImageUrl,
     );
   }
@@ -228,7 +227,7 @@ class DoctorRepository {
       diseaseConfidence: result.confidence,
       aiNote: result.aiMessage,
       latestSampleImageUrl: result.sampleImageUrl,
-      lastExamDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+      lastExamDate: DateFormat('yyyy-MM-dd', 'en').format(DateTime.now()),
       healthStatus: result.result,
     );
 
@@ -245,8 +244,6 @@ class DoctorRepository {
     );
   }
 
-
-
   Future<void> sendExamResultNotification({
     required String patientId,
     required String doctorId,
@@ -259,7 +256,10 @@ class DoctorRepository {
       final language = (patientDoc.data()?['language'] as String?) ?? 'en';
 
       // جلب النصوص المترجمة من ملفات اللغات
-      final title = await getLocalizedText(key: 'exam_result_ready', languageCode: language);
+      final title = await getLocalizedText(
+        key: 'exam_result_ready',
+        languageCode: language,
+      );
       final body = await getLocalizedText(
         key: 'exam_result_message',
         languageCode: language,

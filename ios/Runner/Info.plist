@@ -53,5 +53,10 @@
 		<string>We use notifications to keep you updated.</string>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+  			<string>whatsapp</string>
+		</array>
+
 	</dict>
 </plist>

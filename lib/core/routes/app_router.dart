@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/feature/about_us/ui/about_us_intro_screen.dart';
+import 'package:leuko_care/feature/about_us/ui/about_us_screen.dart';
 import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
@@ -160,7 +162,7 @@ class AppRouter {
                   patient: patientModel,
                   doctorId: doctorId,
                   userType: userType,
-                  doctorName:doctorName,
+                  doctorName: doctorName,
                 ),
               ),
         );
@@ -176,7 +178,7 @@ class AppRouter {
 
       case Routes.patientScreen:
         final patientId = FirebaseAuth.instance.currentUser?.uid;
-        final initialIndex = arguments as int? ;
+        final initialIndex = arguments as int?;
         return MaterialPageRoute(
           builder:
               (_) => MultiBlocProvider(
@@ -190,7 +192,7 @@ class AppRouter {
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
                 ],
-                child: PatientScreen(initialIndex: initialIndex,),
+                child: PatientScreen(initialIndex: initialIndex),
               ),
         );
 
@@ -205,7 +207,9 @@ class AppRouter {
               (_) => BlocProvider(
                 create: (context) => getIt<PatientCubit>(),
                 child: DoctorDetailsScreenForPatient(
-                  doctor: doctor, patient: patient,conversation: conversation,
+                  doctor: doctor,
+                  patient: patient,
+                  conversation: conversation,
                 ),
               ),
         );
@@ -264,6 +268,10 @@ class AppRouter {
                 ),
               ),
         );
+      case Routes.aboutUsIntroScreen:
+        return MaterialPageRoute(builder: (_) => const AboutUsIntroScreen());
+      case Routes.aboutUsScreen:
+        return MaterialPageRoute(builder: (_) => const AboutUsScreen());
 
       default:
         return null;

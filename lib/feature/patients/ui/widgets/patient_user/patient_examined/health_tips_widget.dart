@@ -15,7 +15,7 @@ class HealthTipsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isSick =
-        patient.isExamined && patient.healthStatus.toLowerCase() == 'sick'.tr();
+        patient.isExamined && patient.healthStatus.toLowerCase() == 'sick';
     final tips = isSick ? _getLeukemiaTips() : _getGeneralTips();
 
     final primaryColor = isSick ? Colors.deepPurple : Colors.green.shade700;

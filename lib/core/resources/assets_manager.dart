@@ -25,6 +25,15 @@ class AssetsManager {
   static const String loginAdminImage = '$imagesPath/login_admin.png';
   static const String loginDoctorImage = '$imagesPath/login_doctor.png';
   static const String loginPatientImage = '$imagesPath/login_patient.png';
+  static const String ptcLogoImage = '$imagesPath/ptc_logo.png';
+  static const String whatsappLogoImage = '$imagesPath/whatsapp.png';
+  static const String linkedinLogoImage = '$imagesPath/linkedin.png';
+  static const String githubLogoImage = '$imagesPath/github.png';
+  static const String drSamiImage = '$imagesPath/dr_sami.png';
+  static const String samiImage = '$imagesPath/sami.png';
+  static const String ahmedImage = '$imagesPath/ahmed.png';
+  static const String manarImage = '$imagesPath/manar.png';
+  static const String shaimaaImage = '$imagesPath/shaimaa.png';
 
   
 
@@ -38,6 +47,7 @@ class AssetsManager {
   static const String bloodTest = '$iconsPath/blood_test.png';
   static const String chemicalAnalysisIcon = '$iconsPath/chemical_analysis.png';
   static const String medicalDevicesIcon = '$iconsPath/medical_devices.png';
+  static const String appIcon = '$iconsPath/app_icon.png';
 
   // lottie
   static const String successLottie = '$lottiePath/success.json';
@@ -52,6 +62,7 @@ class AssetsManager {
   static const String noChat2Lottie = '$lottiePath/no_chat2.json';
   static const String pendingLottie = '$lottiePath/pending.json';
   static const String aiLottie = '$lottiePath/ai.json';
+  static const String aboutUsLottie = '$lottiePath/about_us.json';
 
 
   // sounds
