@@ -18,16 +18,18 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await FontFamilyManager.init();
-  await NotificationService.init();
+ 
 
   await ScreenUtil.ensureScreenSize();
   await FirebaseAppCheck.instance.activate(
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.debug,
   );
+     
   setupGetIt();
   await Hive.initFlutter();
   Hive.registerAdapter(ChatModelAdapter());
@@ -37,11 +39,8 @@ void main() async {
   final localeCode = await SharedPrefHelper.getLocale();
   final startLocale = Locale(localeCode);
 
-  final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-  final userType = await SharedPrefHelper.getString('userType');
-  if (initialMessage != null) {
-    NotificationService.setPendingNotification(initialMessage.data, userType);
-  }
+  
+
 
   runApp(
     EasyLocalization(
@@ -53,4 +52,11 @@ void main() async {
       child: LeukoAi(appRouter: AppRouter()),
     ),
   );
+   
+    await NotificationService.init();
+     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+       final userType = await SharedPrefHelper.getString('userType');
+  if (initialMessage != null) {
+    NotificationService.setPendingNotification(initialMessage.data, userType);
+  }
 }

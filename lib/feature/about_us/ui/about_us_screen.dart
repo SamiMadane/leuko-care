@@ -192,7 +192,6 @@ class AboutUsScreen extends StatelessWidget {
         'name': 'Sami Al-Madani'.tr(),
         'role': 'team_sami_role'.tr(),
         'image': AssetsManager.samiImage,
-        'isDeveloper': true,
         'whatsapp': '972597017012',
         'linkedin': 'https://www.linkedin.com/in/samimadane/',
         'github': 'https://github.com/SamiMadane',
@@ -201,7 +200,6 @@ class AboutUsScreen extends StatelessWidget {
         'name': 'Ahmed Al-Kahlout'.tr(),
         'role': 'team_ahmad_role'.tr(),
         'image': AssetsManager.ahmedImage,
-        'isDeveloper': false,
         'whatsapp': '972594560325',
         'linkedin': 'https://www.linkedin.com/in/ahmed-al-kahlout-20/',
         'github': 'https://github.com/ahmedn01kahlout',
@@ -210,7 +208,6 @@ class AboutUsScreen extends StatelessWidget {
         'name': 'Shaimaa Abu Youcef'.tr(),
         'role': 'team_shimaa_role'.tr(),
         'image': AssetsManager.shaimaaImage,
-        'isDeveloper': false,
         'whatsapp': '970593470080',
         'linkedin': 'https://www.linkedin.com/in/shaimaa-abu-yousef-a62951234/',
         'github': 'https://github.com/samialmadani',
@@ -219,7 +216,6 @@ class AboutUsScreen extends StatelessWidget {
         'name': 'Manar Attalla'.tr(),
         'role': 'team_manar_role'.tr(),
         'image': AssetsManager.manarImage,
-        'isDeveloper': false,
         'whatsapp': '970599179927',
         'linkedin': 'https://www.linkedin.com/in/sami-almadani',
         'github': 'https://github.com/samialmadani',
@@ -236,8 +232,6 @@ class AboutUsScreen extends StatelessWidget {
       childAspectRatio: 0.7,
       children:
           teamMembers.map((member) {
-            final isDeveloper = member['isDeveloper'] as bool;
-
             Widget cardContent = Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
               child: Column(
@@ -303,61 +297,14 @@ class AboutUsScreen extends StatelessWidget {
                 ],
               ),
             );
-
-            if (isDeveloper) {
-              return InkWell(
+            return Card(
+              elevation: 2,
+              color: ColorsManager.moreLightGray,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                onTap: () {},
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Card(
-                        elevation: 4,
-                        color: ColorsManager.moreLightGray,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: cardContent,
-                      ),
-                    ),
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: ColorsManager.primaryColor,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: ColorsManager.primaryColor.withOpacity(
-                                0.6,
-                              ),
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.touch_app,
-                          size: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              return Card(
-                elevation: 2,
-                color: ColorsManager.moreLightGray,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: cardContent,
-              );
-            }
+              ),
+              child: cardContent,
+            );
           }).toList(),
     );
   }

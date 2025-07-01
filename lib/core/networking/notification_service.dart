@@ -147,7 +147,7 @@ class NotificationService {
             _channel.id,
             _channel.name,
             channelDescription: _channel.description,
-            icon: android.smallIcon,
+            icon: 'ic_notification',
             importance: Importance.high,
             priority: Priority.high,
           ),
