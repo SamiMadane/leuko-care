@@ -1,4 +1,4 @@
-# leuko_care
+# leuko_Ai
 
 ## 📖 Overview
 
@@ -50,10 +50,62 @@ leuko_care/
 ├── pubspec.yaml             # Dependencies and configurations
 ├── flutter_native_splash.yaml # Splash screen config
 └── README.md                # This file
+```
+## 🧑‍💻 Usage / How to Use
 
-## System Design 🎨
+Upon launching the app, the following flow is followed:
 
-![system design](https://github.com/user-attachments/assets/58875a89-7f3e-41f4-b723-fd22a3d4ecb2)
+1. **Splash Screen** – Displays the app logo briefly.  
+2. **Onboarding Screen** – Introduces the app's core features.  
+3. **User Selection** – User selects their role (**Admin**, **Doctor**, or **Patient**) before authentication.  
+4. **Login Screen** – Sign in via **email** or **Google**.  
+5. **Role-Based Dashboard** – The app navigates to the corresponding interface based on the selected role.
+
+---
+
+### 👑 Admin Panel
+
+Admins have full control over the system:
+
+- View, add, update, or delete **doctors and patients**
+- Monitor full application activity
+- Access a comprehensive **statistics dashboard**
+- Interface available in both **Arabic** and **English**
+
+---
+
+### 🧑‍⚕️ Doctor Dashboard
+
+Doctors can:
+
+- View statistics for **their assigned patients**
+- **Chat** with patients in real time
+- Upload **blood sample images** and submit **diagnosis results**
+- View and update **personal profile**
+- Access the **patient list** with detailed case information
+
+---
+
+### 🧑‍💼 Patient Dashboard
+
+Patients can:
+
+- View a personalized home screen:
+  - If diagnosed, the result is displayed
+  - If not yet diagnosed, a **Lottie animation** with a waiting message is shown
+- **Chat** directly with their assigned doctor
+- Edit **personal profile information**
+- Receive real-time **push notifications** when:
+  - A **new message** is received
+
+---
+
+### 🌐 Language and Notifications
+
+- Fully localized in **Arabic** and **English** using `easy_localization`
+- Push notifications powered by **Firebase Cloud Messaging (FCM)**:
+- Instant alerts for chat messages and medical results
+
 
 ### Commands we used 
 
@@ -76,3 +128,10 @@ dart run flutter_native_splash:create
 ```bash
    flutter pub run build_runner build --delete-conflicting-outputs
 ```
+## 📞 Contact & Support
+
+If you have any questions, encounter issues, or would like to contribute or suggest improvements, feel free to reach out:
+
+- 📧 **Email**: [samimadane23@gmail.com](mailto:samimadane23@gmail.com)  
+- 💼 **LinkedIn**: [linkedin.com/in/samimadane](https://www.linkedin.com/in/samimadane)  
+- 🐞 **Report Issues**: Feel free to open an issue in this GitHub repository to report bugs or request features.
