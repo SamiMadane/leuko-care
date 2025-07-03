@@ -63,6 +63,7 @@ class AssetsManager {
   static const String pendingLottie = '$lottiePath/pending.json';
   static const String aiLottie = '$lottiePath/ai.json';
   static const String aboutUsLottie = '$lottiePath/about_us.json';
+  static const String forgetPasswordLottie = '$lottiePath/forget_password.json';
 
 
   // sounds

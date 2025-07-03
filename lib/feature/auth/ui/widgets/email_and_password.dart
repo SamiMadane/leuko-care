@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/forget_password_dialog.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/password_validations.dart';
 
 class EmailAndPassword extends StatefulWidget {
@@ -45,10 +48,13 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         hasSpecialCharacters = AppRegex.hasSpecialCharacter(text);
         hasNumber = AppRegex.hasNumber(text);
         hasMinLength = AppRegex.hasMinLength(text);
-        if (hasLowercase && hasUppercase &&hasSpecialCharacters && hasNumber &&hasMinLength){
+        if (hasLowercase &&
+            hasUppercase &&
+            hasSpecialCharacters &&
+            hasNumber &&
+            hasMinLength) {
           showPasswordValidations = false;
         }
-        
       });
     });
   }
@@ -96,8 +102,28 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               return null;
             },
           ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder:
+                      (_) => ForgotPasswordDialog(
+                        prefilledEmail:
+                            context.read<AuthCubit>().emailController.text, authCubit: context.read<AuthCubit>(),
+                      ),
+                );
+              },
+              child: Text(
+                'forgot_password'.tr(),
+                style: getBoldTextStyle(fontSize: FontSizeManager.s13, color: ColorsManager.primaryColor)
+              ),
+            ),
+          ),
+
           if (showPasswordValidations) ...[
-            SizedBox(height: HeightManager.h24),
+            SizedBox(height: HeightManager.h16),
             PasswordValidations(
               hasLowerCase: hasLowercase,
               hasUpperCase: hasUppercase,

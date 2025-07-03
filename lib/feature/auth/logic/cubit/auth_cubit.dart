@@ -45,14 +45,29 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  Future<void> resetPassword(String email) async {
+    emit(const ResetPasswordLoading());
+
+    final result = await loginRepository.resetPassword(email);
+    result.when(
+      success: (_) {
+        emit(
+           ResetPasswordSuccess("reset_password_success".tr()),
+        );
+      },
+      failure: (error) {
+        emit(ResetPasswordFailure(error));
+      },
+    );
+  }
+
   Future<void> updateLanguageInFirestore({
-    required String userId, 
-    required String userType, 
+    required String userId,
+    required String userType,
   }) async {
-    print ('=========== iam in cubit of updateUserLanguage');
-      if (userType == 'admin') return;
-    
-      await loginRepository.updateUserLanguage(userId, userType);
+    if (userType == 'admin') return;
+
+    await loginRepository.updateUserLanguage(userId, userType);
   }
 
   Future<void> signInWithGoogle(String userType) async {

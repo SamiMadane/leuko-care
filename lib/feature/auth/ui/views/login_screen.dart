@@ -14,6 +14,7 @@ import 'package:leuko_care/feature/auth/ui/widgets/login_bloc_listener.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/email_and_password.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/google_auth.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/image_section.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/reset_password_bloc_listener.dart';
 
 class LoginScreen extends StatelessWidget {
   final String userType;
@@ -82,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: HeightManager.h20),
                     EmailAndPassword(),
-                    SizedBox(height: HeightManager.h50),
+                    SizedBox(height: HeightManager.h30),
                     AppTextButton(
                       buttonText: 'Login'.tr(),
                       textStyle: getSemiBoldTextStyle(
@@ -97,6 +98,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: HeightManager.h30),
                     GoogleAuth(userType: userType),
                     const LoginBlocListener(),
+                    const ResetPasswordBlocListener(),
                   ],
                 ),
               ),

@@ -45,7 +45,7 @@ class CustomConfirmationDialog extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              top: HeightManager.h50,
+              top: HeightManager.h64,
               left: WidthManager.w16,
               right: WidthManager.w16,
               bottom: HeightManager.h16,

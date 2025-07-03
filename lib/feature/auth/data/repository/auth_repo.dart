@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -70,6 +68,18 @@ class AuthRepository {
       docRef.update({'language': languageCode});
     } catch (e) {
       print('Error updating language for user: $e');
+    }
+  }
+
+  Future<OperationResult<void>> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return OperationResult.success(null);
+    } on FirebaseAuthException catch (e) {
+      final errorMessage = FirebaseErrorHandler.handle(e);
+      return OperationResult.failure(errorMessage);
+    } catch (e) {
+      return OperationResult.failure("An unexpected error occurred.".tr());
     }
   }
 

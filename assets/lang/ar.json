@@ -53,7 +53,7 @@
   "Confirm Password": "تأكيد كلمة المرور",
   "Confirm Sign Out": "تأكيد تسجيل الخروج",
   "Sign Out": "تسجيل الخروج",
-    "result_for_patient": "النتيجة الخاصة بـ {}",
+  "result_for_patient": "النتيجة الخاصة بـ {}",
   "Congratulations! Your test result is clear. Please continue maintaining a healthy lifestyle.": "تهانينا! نتيجة اختبارك سليمة. الرجاء الاستمرار في الحفاظ على نمط حياة صحي.",
   "Consume high-protein, high-calorie meals to maintain energy.": "تناول وجبات غنية بالبروتين والسعرات للحفاظ على الطاقة.",
   "Contact Info": "معلومات الاتصال",
@@ -413,7 +413,10 @@
   "Ahmed Al-Kahlout": "أحمد الكحلوت",
   "Shaimaa Abu Youcef": "شيماء أبو يوسف",
   "Manar Attalla": "منار عطالله",
-  "About Us":"من نحن ",
-  "about_us_intro_text": " تعرف علينا أكثر ..."
-
+  "About Us": "من نحن ",
+  "about_us_intro_text": " تعرف علينا أكثر ...",
+  "reset_password_success": "تم إرسال الرابط. تحقق من بريدك.",
+  "send_link": "إرسال الرابط",
+  "forgot_password": "هل نسيت كلمة المرور؟",
+  "enter_email_to_reset": "أدخل بريدك الإلكتروني لاستعادة كلمة المرور"
 }

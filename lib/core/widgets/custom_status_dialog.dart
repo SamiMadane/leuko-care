@@ -55,13 +55,12 @@ class CustomStatusDialog extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              top: HeightManager.h50,
+              top: HeightManager.h64,
               left: WidthManager.w16,
               right: WidthManager.w16,
               bottom: HeightManager.h16,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (title != null) ...[
@@ -78,38 +77,33 @@ class CustomStatusDialog extends StatelessWidget {
                 ],
                 Text(
                   message,
-                  textAlign: TextAlign.start,
+                  textAlign: TextAlign.center,
                   style: getMediumTextStyle(
-                    fontSize: FontSizeManager.s15,
+                    fontSize: FontSizeManager.s14,
                     color: ColorsManager.darkBlue,
                     height: HeightManager.h1_1,
                   ),
                 ),
                 SizedBox(height: HeightManager.h20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: mainColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: WidthManager.w24,
-                          vertical: HeightManager.h12,
-                        ),
-                      ),
-                      onPressed: onConfirm,
-                      child: Text(
-                        buttonText ?? 'Got it'.tr(),
-                        style: getSemiBoldTextStyle(
-                          fontSize: FontSizeManager.s14,
-                          color: Colors.white,
-                        ),
-                      ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: mainColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  ],
+                    padding: EdgeInsets.symmetric(
+                      horizontal: WidthManager.w24,
+                      vertical: HeightManager.h12,
+                    ),
+                  ),
+                  onPressed: onConfirm,
+                  child: Text(
+                    buttonText ?? 'Got it'.tr(),
+                    style: getSemiBoldTextStyle(
+                      fontSize: FontSizeManager.s14,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),
