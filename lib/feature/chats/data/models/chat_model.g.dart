@@ -25,13 +25,14 @@ class ChatModelAdapter extends TypeAdapter<ChatModel> {
       attachmentUrl: fields[5] as String,
       status: fields[6] as MessageStatus,
       pendingDelete: fields[7] as bool,
+      localImagePath: fields[8] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ChatModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class ChatModelAdapter extends TypeAdapter<ChatModel> {
       ..writeByte(6)
       ..write(obj.status)
       ..writeByte(7)
-      ..write(obj.pendingDelete);
+      ..write(obj.pendingDelete)
+      ..writeByte(8)
+      ..write(obj.localImagePath);
   }
 
   @override

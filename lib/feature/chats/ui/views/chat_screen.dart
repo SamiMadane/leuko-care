@@ -46,9 +46,16 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     var chatCubit = context.read<ChatCubit>();
-    chatCubit.getMessages(senderId: widget.currentUserId, receiverId: widget.otherUserId);
     chatCubit.clearChatState();
-    chatCubit.monitorInternetAndDeletePendingMessages( widget.currentUserId, widget.otherUserId);
+
+    chatCubit.getMessages(
+      senderId: widget.currentUserId,
+      receiverId: widget.otherUserId,
+    );
+    chatCubit.monitorInternetAndDeletePendingMessages(
+      widget.currentUserId,
+      widget.otherUserId,
+    );
     // chatCubit.clearLocalMessages( widget.currentUserId, widget.otherUserId);
 
     final chatId =
@@ -74,7 +81,6 @@ class _ChatScreenState extends State<ChatScreen> {
       );
     }
   }
-
 
   @override
   void dispose() {
@@ -119,22 +125,39 @@ class _ChatScreenState extends State<ChatScreen> {
                 return ChatTopBar(doctor: doctor, patient: patient);
               },
             ),
-
             Expanded(
               child: BlocBuilder<ChatCubit, ChatState>(
                 builder: (context, state) {
-                  return switch (state) {
-                    ChatLoading() => MessagesShimmer(),
-                    ChatSuccess(:final messages) => MessagesList(
-                      messages: messages,
-                      currentUserId: widget.currentUserId,
+                  Widget child;
+
+                  switch (state) {
+                    case ChatLoading():
+                      child = const MessagesShimmer();
+                    case ChatSuccess(:final messages):
+                      child = MessagesList(
+                        messages: messages,
+                        currentUserId: widget.currentUserId,
+                      );
+                    case ChatError(:final message):
+                      child = Center(child: Text(message));
+                    default:
+                      child = const SizedBox.shrink();
+                  }
+
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 400),
+                    switchInCurve: Curves.easeOut,
+                    switchOutCurve: Curves.easeIn,
+                    child: KeyedSubtree(
+                      // المفتاح مهم لكي يكتشف AnimatedSwitcher التغيير
+                      key: ValueKey(state.runtimeType.toString()),
+                      child: child,
                     ),
-                    ChatError(:final message) => Center(child: Text(message)),
-                    _ => const MessagesShimmer(), // Default to shimmer
-                  };
+                  );
                 },
               ),
             ),
+
             ChatInputField(
               currentUserId: widget.currentUserId,
               receiverId: widget.otherUserId,

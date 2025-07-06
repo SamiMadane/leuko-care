@@ -107,7 +107,7 @@ Patients can:
 - Instant alerts for chat messages and medical results
 
 
-### Commands we used 
+## Commands we used 
 
 1. To run my project structure script, use the following command: ✍️
 ```bash

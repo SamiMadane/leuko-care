@@ -1,10 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:leuko_care/core/helpers/timestamp_converter.dart';
 part 'chat_model.g.dart';
-
 
 enum MessageStatus { sending, sent, failed }
 
@@ -34,6 +32,10 @@ class ChatModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   final bool pendingDelete;
 
+  @HiveField(8)
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final String? localImagePath;
+
   ChatModel({
     required this.id,
     required this.senderId,
@@ -43,6 +45,7 @@ class ChatModel {
     required this.attachmentUrl,
     this.status = MessageStatus.sending,
     this.pendingDelete = false,
+    this.localImagePath
   });
 
   factory ChatModel.fromJson(Map<String, dynamic> json) =>
@@ -57,8 +60,10 @@ class ChatModel {
     String? text,
     Timestamp? timestamp,
     String? attachmentUrl,
-     MessageStatus? status,
-      bool? pendingDelete,
+    MessageStatus? status,
+    bool? pendingDelete,
+    String? localImagePath
+
   }) {
     return ChatModel(
       id: id ?? this.id,
@@ -69,6 +74,8 @@ class ChatModel {
       attachmentUrl: attachmentUrl ?? this.attachmentUrl,
       status: status ?? this.status,
       pendingDelete: pendingDelete ?? this.pendingDelete,
+      localImagePath: localImagePath ?? this.localImagePath,
+
     );
   }
 }

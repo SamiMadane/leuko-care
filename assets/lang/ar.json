@@ -41,7 +41,6 @@
   "ChatState.chatError(message: $message)": "حالة الدردشة: خطأ (الرسالة: $message)",
   "ChatState.chatInitial()": "حالة الدردشة: البداية",
   "ChatState.chatLoading()": "حالة الدردشة: جاري التحميل",
-  "ChatState.chatMessageDeleteSuccessfully()": "حالة الدردشة: تم حذف الرسالة بنجاح",
   "ChatState.chatMessageSentSuccessfully()": "حالة الدردشة: تم إرسال الرسالة بنجاح",
   "ChatState.chatSuccess(messages: $messages)": "حالة الدردشة: نجاح (الرسائل: $messages)",
   "ChatState.messagesMarkedAsReadSuccessfully()": "حالة الدردشة: تم تمييز الرسائل كمقروءة بنجاح",

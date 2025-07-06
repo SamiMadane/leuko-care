@@ -24,9 +24,10 @@ class ChatCubit extends Cubit<ChatState> {
   StreamSubscription? _doctorSubscription;
   StreamSubscription? _patientSubscription;
   StreamSubscription? _internetSubscription;
-
+  bool _hasLoadedInitialMessages = false;
 
   void clearChatState() {
+    _hasLoadedInitialMessages = false;
     emit(ChatState.chatInitial());
   }
 
@@ -110,7 +111,10 @@ class ChatCubit extends Cubit<ChatState> {
     required String senderId,
     required String receiverId,
   }) async {
-    emit(ChatLoading());
+    if (!_hasLoadedInitialMessages) {
+      emit(ChatLoading());
+      _hasLoadedInitialMessages = true;
+    }
     try {
       final cachedMessages = await getCachedMessages(senderId, receiverId);
       bool hasInternet = await NetworkHelper.hasInternetConnection();
@@ -149,7 +153,6 @@ class ChatCubit extends Cubit<ChatState> {
       }
 
       if (hasInternet) {
-          
         _chatRepository
             .getMessages(senderId: senderId, receiverId: receiverId)
             .listen((messages) async {
@@ -226,34 +229,24 @@ class ChatCubit extends Cubit<ChatState> {
         retryingMessageId ?? 'temp_${DateTime.now().millisecondsSinceEpoch}';
 
     try {
-      String imageUrl = '';
-
-      if (imagePath != null && imagePath.isNotEmpty) {
-        imageUrl = await _chatRepository.uploadImageToCloudinary(
-          imagePath: imagePath,
-        );
-      } else if (imageBytes != null) {
-        imageUrl = await _chatRepository.uploadImageToCloudinary(
-          imageBytes: imageBytes,
-        );
-      }
-
+      // أنشئ رسالة مؤقتة تظهر فوراً في الواجهة مع الصورة المحلية (إذا موجودة)
       final tempMessage = ChatModel(
         id: tempId,
         senderId: senderId,
         receiverId: receiverId,
         text: text?.trim() ?? '',
         timestamp: Timestamp.now(),
-        attachmentUrl: imageUrl,
+        attachmentUrl: '',
         status: MessageStatus.sending,
+        localImagePath: imagePath, // تمرير مسار الصورة المحلية للعرض الفوري
       );
 
       if (state is ChatSuccess) {
         final currentMessages = (state as ChatSuccess).messages;
 
-        // إذا إعادة إرسال رسالة فاشلة، حدثها فقط بدل إضافة جديدة
         List<ChatModel> updatedMessages;
         if (retryingMessageId != null) {
+          // إعادة إرسال رسالة فاشلة: حدثها فقط
           updatedMessages =
               currentMessages.map((msg) {
                 if (msg.id == retryingMessageId) {
@@ -262,6 +255,7 @@ class ChatCubit extends Cubit<ChatState> {
                 return msg;
               }).toList();
         } else {
+          // إضافة رسالة جديدة
           updatedMessages = [...currentMessages, tempMessage];
         }
         emit(ChatSuccess(updatedMessages));
@@ -272,41 +266,60 @@ class ChatCubit extends Cubit<ChatState> {
 
       bool hasInternet = await NetworkHelper.hasInternetConnection();
       if (!hasInternet) {
-        final currentMessages = (state as ChatSuccess).messages;
-        final updatedMessages =
-            currentMessages.map((msg) {
-              if (msg.id == tempId) {
-                return msg.copyWith(status: MessageStatus.failed);
-              }
-              return msg;
-            }).toList();
-        emit(ChatSuccess(updatedMessages));
-        await cacheMessages(senderId, receiverId, updatedMessages);
+        // في حالة عدم وجود إنترنت: عدّل حالة الرسالة إلى فاشلة
+        if (state is ChatSuccess) {
+          final currentMessages = (state as ChatSuccess).messages;
+          final updatedMessages =
+              currentMessages.map((msg) {
+                if (msg.id == tempId) {
+                  return msg.copyWith(status: MessageStatus.failed);
+                }
+                return msg;
+              }).toList();
+          emit(ChatSuccess(updatedMessages));
+          await cacheMessages(senderId, receiverId, updatedMessages);
+        }
         return;
       }
 
-      // إنشاء نسخة حقيقية من الرسالة مع id فارغ أو id حقيقي عند إرسالها إلى الريبو
-      final realMessage = tempMessage.copyWith(id: '');
+      // ارفع الصورة إلى السحابة
+      String imageUrl = '';
+      if (imagePath != null && imagePath.isNotEmpty) {
+        imageUrl = await _chatRepository.uploadImageToCloudinary(
+          imagePath: imagePath,
+        );
+      } else if (imageBytes != null) {
+        imageUrl = await _chatRepository.uploadImageToCloudinary(
+          imageBytes: imageBytes,
+        );
+      }
 
+      // أنشئ نسخة نهائية من الرسالة مع رابط الصورة النهائية
+      final realMessage = tempMessage.copyWith(
+        id: '',
+        attachmentUrl: imageUrl,
+        localImagePath: null, // حذف المسار المحلي لأنه لم يعد مطلوبًا
+      );
+
+      // أرسل الرسالة الحقيقية
       await _chatRepository.sendMessage(realMessage);
+
+      // أزل الرسالة المؤقتة من التخزين المحلي
       await removeTempMessageFromCache(
         senderId: senderId,
         receiverId: receiverId,
         tempId: tempId,
       );
 
-      // حذف الرسالة المؤقتة من الواجهة قبل جلب الرسائل الحقيقية
+      // حذف الرسالة المؤقتة من الواجهة
       if (state is ChatSuccess) {
         final currentMessages = (state as ChatSuccess).messages;
         final updatedMessages =
             currentMessages.where((msg) => msg.id != tempId).toList();
         emit(ChatSuccess(updatedMessages));
       }
-
-      // جلب الرسائل الحقيقية من Firestore
-      getMessages(senderId: senderId, receiverId: receiverId);
-      emit(ChatMessageSentSuccessfully());
     } catch (e) {
+      // عند الخطأ، عدّل حالة الرسالة إلى فاشلة
       if (state is ChatSuccess) {
         final currentMessages = (state as ChatSuccess).messages;
         final updatedMessages =
@@ -329,8 +342,6 @@ class ChatCubit extends Cubit<ChatState> {
     required String receiverId,
     required String messageId,
   }) async {
-    emit(ChatLoading());
-
     final boxName = 'chat_${senderId}_$receiverId';
     final box = await Hive.openBox<ChatModel>(boxName);
 
@@ -357,37 +368,44 @@ class ChatCubit extends Cubit<ChatState> {
 
       // تحديث الرسائل
       getMessages(senderId: senderId, receiverId: receiverId);
-      emit(ChatMessageDeleteSuccessfully());
     } catch (e) {
       print('❌ Error deleting message: $e');
       emit(ChatError(e.toString()));
     }
   }
 
-  void monitorInternetAndDeletePendingMessages(String senderId, String receiverId) {
-  _internetSubscription?.cancel();
-  _internetSubscription = InternetConnection().onStatusChange.listen((status) async {
-    if (status == InternetStatus.connected) {
-      final boxName = 'chat_${senderId}_$receiverId';
-      final box = await Hive.openBox<ChatModel>(boxName);
+  void monitorInternetAndDeletePendingMessages(
+    String senderId,
+    String receiverId,
+  ) {
+    _internetSubscription?.cancel();
+    _internetSubscription = InternetConnection().onStatusChange.listen((
+      status,
+    ) async {
+      if (status == InternetStatus.connected) {
+        final boxName = 'chat_${senderId}_$receiverId';
+        final box = await Hive.openBox<ChatModel>(boxName);
 
-      final pendingDeletes = box.values.where((msg) => msg.pendingDelete).toList();
+        final pendingDeletes =
+            box.values.where((msg) => msg.pendingDelete).toList();
 
-      for (var msg in pendingDeletes) {
-        try {
-          await _chatRepository.deleteMessage(senderId, receiverId, msg.id);
-          await box.delete(msg.id);
-          print('✅ Deleted pending message ${msg.id} after internet restored');
-        } catch (e) {
-          print('❌ Failed to delete pending message ${msg.id}: $e');
+        for (var msg in pendingDeletes) {
+          try {
+            await _chatRepository.deleteMessage(senderId, receiverId, msg.id);
+            await box.delete(msg.id);
+            print(
+              '✅ Deleted pending message ${msg.id} after internet restored',
+            );
+          } catch (e) {
+            print('❌ Failed to delete pending message ${msg.id}: $e');
+          }
         }
-      }
 
-      // تحديث الواجهة بعد حذف الرسائل
-      getMessages(senderId: senderId, receiverId: receiverId);
-    }
-  });
-}
+        // تحديث الواجهة بعد حذف الرسائل
+        getMessages(senderId: senderId, receiverId: receiverId);
+      }
+    });
+  }
 
   Future<void> markMessagesAsReadForDoctor(
     String doctorId,
