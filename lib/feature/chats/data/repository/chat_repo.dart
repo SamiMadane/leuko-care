@@ -17,7 +17,6 @@ class ChatRepository {
 
   ChatRepository(this._firestore);
 
-  // جلب الرسائل
   Stream<List<ChatModel>> getMessages({
     required String senderId,
     required String receiverId,
@@ -30,43 +29,107 @@ class ChatRepository {
         .collection('messages')
         .orderBy('timestamp')
         .snapshots()
-        .map(
-          (snapshot) =>
-              snapshot.docs.map((doc) {
-                final msg = ChatModel.fromJson(doc.data());
-                return msg.copyWith(status: MessageStatus.sent);
-              }).toList(),
+        .map((snapshot) => snapshot.docs.map((doc) {
+              final msg = ChatModel.fromJson(doc.data());
+              return msg.copyWith(status: MessageStatus.sent);
+            }).toList());
+  }
+
+  Future<void> sendMessage(ChatModel message) async {
+    try {
+      final chatId = _getChatId(message.senderId, message.receiverId);
+      final userType = await SharedPrefHelper.getString('userType');
+      final senderName = await getSenderName(message.senderId, userType);
+      final isImageMessage = message.text.isEmpty;
+      final receiverType = userType == 'doctor' ? 'patient' : 'doctor';
+      final language = await getReceiverLanguage(message.receiverId, receiverType);
+
+      final title = await _buildNotificationTitle(userType, senderName, language);
+      final body = isImageMessage
+          ? await getLocalizedText(key: 'image_message', languageCode: language)
+          : message.text;
+
+      final docRef = await _addMessageToFirestore(chatId, message);
+
+      final updatedMessage = message.copyWith(id: docRef.id);
+      await docRef.update(updatedMessage.toJson());
+
+      await _updateOrCreateConversation(updatedMessage);
+      await _sendFcmNotifications(updatedMessage, chatId, title, body);
+
+      print("Message sent with id: ${docRef.id}");
+    } catch (e) {
+      print('Error sending message: $e');
+      throw Exception('Failed to send message'.tr());
+    }
+  }
+
+  Future<DocumentReference<Map<String, dynamic>>> _addMessageToFirestore(String chatId, ChatModel message) async {
+    final data = message.toJson();
+    data.remove('id');
+    return await _firestore.collection('chats').doc(chatId).collection('messages').add(data);
+  }
+
+  Future<void> _sendFcmNotifications(ChatModel message, String chatId, String title, String body) async {
+    final tokenDoc = await _firestore.collection('fcmTokens').doc(message.receiverId).get();
+
+    if (!tokenDoc.exists) {
+      print("No FCM tokens found for user ${message.receiverId}");
+      return;
+    }
+
+    final tokens = List<String>.from(tokenDoc.data()?['tokens'] ?? []);
+    for (final token in tokens) {
+      if (token.isNotEmpty) {
+        print('Sending notification to token: $token');
+        await sendNotification(
+          token: token,
+          title: title,
+          body: body,
+          data: {
+            'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+            'senderId': message.senderId,
+            'receiverId': message.receiverId,
+            'type': 'chat',
+            'chatId': chatId,
+          },
         );
+      }
+    }
+  }
+
+  Future<String> _buildNotificationTitle(String userType, String senderName, String language) async {
+    final name = userType == 'doctor' ? "Dr. $senderName" : senderName;
+    return await getLocalizedText(
+      key: 'new_message_from',
+      languageCode: language,
+      namedArgs: {'name': name},
+    );
   }
 
   Future<void> _updateOrCreateConversation(ChatModel message) async {
     final conversationId = _getChatId(message.senderId, message.receiverId);
-    final conversationRef = _firestore
-        .collection('conversations')
-        .doc(conversationId);
-
+    final conversationRef = _firestore.collection('conversations').doc(conversationId);
     final isImageMessage = message.text.trim().isEmpty;
-
-    final lastMessageContent =
-        isImageMessage ? message.attachmentUrl : message.text;
+    final lastMessageContent = isImageMessage ? message.attachmentUrl : message.text;
     final conversationSnapshot = await conversationRef.get();
 
+    final updateData = {
+      'lastMessage': lastMessageContent,
+      'lastMessageTime': message.timestamp,
+      'lastMessageSenderId': message.senderId,
+      'hasUnreadMessagesByParticipant.${message.senderId}': false,
+      'hasUnreadMessagesByParticipant.${message.receiverId}': true,
+    };
+
     if (conversationSnapshot.exists) {
-      await conversationRef.update({
-        'lastMessage': lastMessageContent,
-        'lastMessageTime': message.timestamp,
-        'lastMessageSenderId': message.senderId,
-        'hasUnreadMessagesByParticipant.${message.senderId}': false,
-        'hasUnreadMessagesByParticipant.${message.receiverId}': true,
-      });
+      await conversationRef.update(updateData);
     } else {
       await conversationRef.set({
         'id': conversationId,
         'participantAId': message.senderId,
         'participantBId': message.receiverId,
-        'lastMessage': lastMessageContent,
-        'lastMessageTime': message.timestamp,
-        'lastMessageSenderId': message.senderId,
+        ...updateData,
         'hasUnreadMessagesByParticipant': {
           message.senderId: false,
           message.receiverId: true,
@@ -78,239 +141,62 @@ class ChatRepository {
   Future<String> getSenderName(String senderId, String userType) async {
     try {
       final collection = userType == 'doctor' ? 'doctors' : 'patients';
-
-      final doc =
-          await FirebaseFirestore.instance
-              .collection(collection)
-              .doc(senderId)
-              .get();
-
-      if (doc.exists) {
-        final data = doc.data();
-        final name = data?['name'];
-        return name;
-      } else {
-        return '';
-      }
+      final doc = await _firestore.collection(collection).doc(senderId).get();
+      return doc.exists ? (doc.data()?['name'] ?? '') : '';
     } catch (e) {
       print('Error getting sender name: $e');
       return '';
     }
   }
 
-  Future<String> getReceiverLanguage(
-    String receiverId,
-    String userType, {
-    String defaultLang = 'en',
-  }) async {
+  Future<String> getReceiverLanguage(String receiverId, String userType, {String defaultLang = 'en'}) async {
     try {
       final collection = userType == 'doctor' ? 'doctors' : 'patients';
-
-      final documentSnapshot =
-          await FirebaseFirestore.instance
-              .collection(collection)
-              .doc(receiverId)
-              .get();
-
-      if (documentSnapshot.exists) {
-        final data = documentSnapshot.data();
-        final language = data?['language'] as String?;
-        print('getReceiverLanguage return me $language');
-        return language ?? defaultLang;
-      } else {
-        return defaultLang; // لو ما في مستند، نرجع القيمة الافتراضية
-      }
+      final documentSnapshot = await _firestore.collection(collection).doc(receiverId).get();
+      return documentSnapshot.exists ? (documentSnapshot.data()?['language'] ?? defaultLang) : defaultLang;
     } catch (e) {
       print('Error getting receiver language: $e');
-      return defaultLang; // لو صار خطأ، نرجع القيمة الافتراضية
+      return defaultLang;
     }
   }
 
-
-
-  Future<void> sendMessage(ChatModel message) async {
-    final chatId = _getChatId(message.senderId, message.receiverId);
-    final userType = await SharedPrefHelper.getString('userType');
-    final senderName = await getSenderName(message.senderId, userType);
-    final isImageMessage = message.text.isEmpty;
-    final receiverType = userType == 'doctor' ? 'patient' : 'doctor';
-    final language = await getReceiverLanguage(
-      message.receiverId,
-      receiverType,
-    );
-
-    final title = await getLocalizedText(
-      key: 'new_message_from',
-      languageCode: language,
-      namedArgs: {
-        'name': userType == 'doctor' ? "Dr. $senderName" : senderName,
-      },
-    );
-    final body =
-        isImageMessage
-            ? await getLocalizedText(
-              key: 'image_message',
-              languageCode: language,
-            )
-            : message.text;
-
-    try {
-      final data = message.toJson();
-      data.remove('id');
-
-      final docRef = await _firestore
-          .collection('chats')
-          .doc(chatId)
-          .collection('messages')
-          .add(data);
-
-      // بعد إضافة الرسالة، يتم تحديث الـ id في الرسالة
-      final updatedMessage = message.copyWith(id: docRef.id);
-
-      // تحديث الرسالة بـ id الجديد
-      await docRef.update(updatedMessage.toJson());
-
-      await _updateOrCreateConversation(updatedMessage);
-      final tokenDoc =
-          await _firestore
-              .collection('fcmTokens')
-              .doc(message.receiverId)
-              .get();
-
-      if (tokenDoc.exists) {
-        final tokens = List<String>.from(tokenDoc.data()?['tokens'] ?? []);
-
-        for (final token in tokens) {
-          if (token.isNotEmpty) {
-            print('token i need to send him is $token');
-            await sendNotification(
-              token: token,
-              title: title,
-              body: body,
-              data: {
-                'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-                'senderId': message.senderId,
-                'receiverId': message.receiverId,
-                'type': 'chat',
-                'chatId': chatId,
-              },
-            );
-          }
-        }
-      } else {
-        print("No FCM tokens found for user ${message.receiverId}");
-      }
-
-      print("Message sent with id: ${docRef.id}");
-    } catch (e) {
-      print('Error sending message: $e');
-      throw Exception('Failed to send message'.tr());
-    }
-  }
-
-  Future<void> markMessagesAsReadByDoctor(
-    String doctorId,
-    String patientId,
-  ) async {
+  Future<void> markMessagesAsReadByDoctor(String doctorId, String patientId) async {
     final chatId = _getChatId(doctorId, patientId);
-
-    try {
-      final conversationRef = _firestore
-          .collection('conversations')
-          .doc(chatId);
-
-      // تحقق من وجود المحادثة أولاً
-      final conversationSnapshot = await conversationRef.get();
-      if (!conversationSnapshot.exists) return;
-
-      await conversationRef.update({
-        'hasUnreadMessagesByParticipant.$doctorId': false,
-      });
-
-      print(
-        'Marked messages as read for doctor $doctorId in conversation $chatId',
-      );
-    } catch (e) {
-      print('Error marking messages as read: $e');
-      throw Exception('Failed to mark messages as read'.tr());
+    final conversationRef = _firestore.collection('conversations').doc(chatId);
+    final snapshot = await conversationRef.get();
+    if (snapshot.exists) {
+      await conversationRef.update({ 'hasUnreadMessagesByParticipant.$doctorId': false });
     }
   }
 
-  Future<void> markMessagesAsReadByPatient(
-    String patientId,
-    String doctorId,
-  ) async {
+  Future<void> markMessagesAsReadByPatient(String patientId, String doctorId) async {
     final chatId = _getChatId(doctorId, patientId);
-
-    try {
-      final conversationRef = _firestore
-          .collection('conversations')
-          .doc(chatId);
-
-      final conversationSnapshot = await conversationRef.get();
-      if (!conversationSnapshot.exists) return;
-
-      await conversationRef.update({
-        'hasUnreadMessagesByParticipant.$patientId': false,
-      });
-
-      print(
-        'Marked messages as read for patient $patientId in conversation $chatId',
-      );
-    } catch (e) {
-      print('Error marking messages as read: $e');
-      throw Exception('Failed to mark messages as read'.tr());
+    final conversationRef = _firestore.collection('conversations').doc(chatId);
+    final snapshot = await conversationRef.get();
+    if (snapshot.exists) {
+      await conversationRef.update({ 'hasUnreadMessagesByParticipant.$patientId': false });
     }
   }
 
-  // توليد ID للمحادثة بين المرسل والمستقبل
-  String _getChatId(String uid1, String uid2) {
-    return uid1.hashCode <= uid2.hashCode ? '${uid1}_$uid2' : '${uid2}_$uid1';
-  }
-
-  Future<String> uploadImageToCloudinary({
-    String? imagePath,
-    Uint8List? imageBytes,
-  }) async {
-    final url = Uri.parse(
-      'https://api.cloudinary.com/v1_1/dmhmhyigi/image/upload',
-    );
-
-    final uploadRequest = http.MultipartRequest('POST', url);
-
-    // إعدادات Cloudinary
-    uploadRequest.fields['upload_preset'] = 'leuko_care';
+  Future<String> uploadImageToCloudinary({String? imagePath, Uint8List? imageBytes}) async {
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/dmhmhyigi/image/upload');
+    final uploadRequest = http.MultipartRequest('POST', url)..fields['upload_preset'] = 'leuko_care';
 
     http.MultipartFile? imageFile;
-
-    // إذا كانت الصورة من مسار الملف
     if (imagePath != null && imagePath.isNotEmpty) {
       final bytes = await File(imagePath).readAsBytes();
-      imageFile = http.MultipartFile.fromBytes(
-        'file',
-        bytes,
-        filename: 'chat_image.jpg', // يمكنك تخصيص الاسم حسب الحاجة
-      );
-    }
-    // إذا كانت الصورة من نوع Uint8List
-    else if (imageBytes != null) {
-      imageFile = http.MultipartFile.fromBytes(
-        'file',
-        imageBytes,
-        filename: 'chat_image.jpg', // يمكنك تخصيص الاسم حسب الحاجة
-      );
+      imageFile = http.MultipartFile.fromBytes('file', bytes, filename: 'chat_image.jpg');
+    } else if (imageBytes != null) {
+      imageFile = http.MultipartFile.fromBytes('file', imageBytes, filename: 'chat_image.jpg');
     }
 
     if (imageFile != null) {
       uploadRequest.files.add(imageFile);
-
-      // إرسال الطلب إلى Cloudinary
       final response = await uploadRequest.send();
       final responseData = await response.stream.toBytes();
       final result = json.decode(String.fromCharCodes(responseData));
-
       if (response.statusCode == 200) {
-        return result['secure_url']; // رابط الصورة المرفوعة
+        return result['secure_url'];
       } else {
         throw Exception('Error uploading image: ${result['error']}'.tr());
       }
@@ -319,42 +205,24 @@ class ChatRepository {
     }
   }
 
-  Future<void> deleteMessage(
-    String senderId,
-    String receiverId,
-    String messageId,
-  ) async {
+  Future<void> deleteMessage(String senderId, String receiverId, String messageId) async {
     final chatId = _getChatId(senderId, receiverId);
-    final messagesRef = _firestore
-        .collection('chats')
-        .doc(chatId)
-        .collection('messages');
+    final messagesRef = _firestore.collection('chats').doc(chatId).collection('messages');
 
     try {
-      // حذف الرسالة
       await messagesRef.doc(messageId).delete();
-
-      // التحقق إن كان لا توجد أي رسائل بعد الحذف
       final remainingMessages = await messagesRef.limit(1).get();
 
       if (remainingMessages.docs.isEmpty) {
-        // حذف المحادثة من conversations
         await _firestore.collection('conversations').doc(chatId).delete();
         print('Conversation deleted because it became empty');
       } else {
-        // تحديث آخر رسالة في المحادثة
-        final lastMessageSnapshot =
-            await messagesRef
-                .orderBy('timestamp', descending: true)
-                .limit(1)
-                .get();
-
+        final lastMessageSnapshot = await messagesRef.orderBy('timestamp', descending: true).limit(1).get();
         final lastMessage = lastMessageSnapshot.docs.first.data();
         final isImage = (lastMessage['text'] ?? '').toString().trim().isEmpty;
 
         await _firestore.collection('conversations').doc(chatId).update({
-          'lastMessage':
-              isImage ? lastMessage['attachmentUrl'] : lastMessage['text'],
+          'lastMessage': isImage ? lastMessage['attachmentUrl'] : lastMessage['text'],
           'lastMessageTime': lastMessage['timestamp'],
         });
       }
@@ -362,5 +230,9 @@ class ChatRepository {
       print('Error deleting message: $e');
       rethrow;
     }
+  }
+
+  String _getChatId(String uid1, String uid2) {
+    return uid1.hashCode <= uid2.hashCode ? '${uid1}_$uid2' : '${uid2}_$uid1';
   }
 }
