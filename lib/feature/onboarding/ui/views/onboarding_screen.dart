@@ -69,12 +69,11 @@ class OnboardingScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(height: HeightManager.h80),
                     OnboardingIndicator(
                       controller: _controller,
                       count: onboardingPages.length,
                     ),
-                    SizedBox(height: HeightManager.h40),
+                    SizedBox(height: HeightManager.h50),
                     OnboardingButtons(controller: _controller),
                   ],
                 ),
