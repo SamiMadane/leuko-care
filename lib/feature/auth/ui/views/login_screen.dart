@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -10,7 +13,8 @@ import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/login_bloc_listener.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/email_and_password.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/google_auth.dart';
-import 'package:leuko_care/feature/auth/ui/widgets/image_and_title.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/image_section.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/reset_password_bloc_listener.dart';
 
 class LoginScreen extends StatelessWidget {
   final String userType;
@@ -19,41 +23,86 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<AuthCubit>();
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: WidthManager.w20,
-            vertical: HeightManager.h20,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-               ImageAndTitle(
-                  imagePath: cubit.userTypeData[userType]!['image'],
-                  title: cubit.userTypeData[userType]!['title'],
-                ),
-                SizedBox(height: HeightManager.h30),
-                EmailAndPassword(),
-                SizedBox(height: HeightManager.h40),
-                AppTextButton(
-                  buttonText: "Login",
-                  textStyle: getSemiBoldTextStyle(
-                    fontSize: FontSizeManager.s16,
-                    color: ColorsManager.white,
-                  ),
-                  backgroundImage: AssetsManager.homeBluePatternImage,
+    String image = cubit.userTypeData[userType]!['image'];
+    String title = cubit.userTypeData[userType]!['title'];
 
-                  onPressed: () {
-                    validateThenDoLogin(context,userType);
-                  },
+    // ضبط لون أيقونات status bar (غامقة)
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, // شفاف لو تحب
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+
+    return Scaffold(
+      backgroundColor: ColorsManager.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ImageSection(imagePath: image),
+              Container(
+                padding: EdgeInsets.only(
+                  top: HeightManager.h30,
+                  right: WidthManager.w20,
+                  left: WidthManager.w20,
+                  bottom: HeightManager.h120,
                 ),
-                SizedBox(height: HeightManager.h40),
-                GoogleAuth(userType: userType),
-                SizedBox(height: HeightManager.h36),
-                const LoginBlocListener(),
-              ],
-            ),
+                decoration: BoxDecoration(
+                  color: ColorsManager.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.zero,
+                    topRight: Radius.circular(RadiusManager.r20),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorsManager.black.withValues(alpha: .2),
+                      blurRadius: 10,
+                      offset: const Offset(3, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: getSemiBoldTextStyle(
+                        fontSize: FontSizeManager.s22,
+                        color: ColorsManager.black,
+                      ).copyWith(
+                        shadows: [
+                          Shadow(
+                            color: ColorsManager.black.withValues(alpha: .1),
+                            blurRadius: 3,
+                            offset: const Offset(2, 3),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: HeightManager.h20),
+                    EmailAndPassword(),
+                    SizedBox(height: HeightManager.h30),
+                    AppTextButton(
+                      buttonText: 'Login'.tr(),
+                      textStyle: getSemiBoldTextStyle(
+                        fontSize: FontSizeManager.s16,
+                        color: ColorsManager.white,
+                      ),
+                      backgroundImage: AssetsManager.homeBluePatternImage,
+                      onPressed: () {
+                        validateThenDoLogin(context, userType);
+                      },
+                    ),
+                    SizedBox(height: HeightManager.h30),
+                    GoogleAuth(userType: userType),
+                    const LoginBlocListener(),
+                    const ResetPasswordBlocListener(),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -61,7 +110,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-void validateThenDoLogin(BuildContext context,String userType) {
+void validateThenDoLogin(BuildContext context, String userType) {
   if (context.read<AuthCubit>().formKey.currentState!.validate()) {
     context.read<AuthCubit>().checkAdmin(userType);
   }

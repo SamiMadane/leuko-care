@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 
 import '../util/size_util.dart';
+
+class FontFamilyManager {
+  static late final String _languageCode;
+
+  /// يُستدعى مرة واحدة فقط (مثلاً في main) لتحديد اللغة.
+  static Future<void> init() async {
+    final locale = await SharedPrefHelper.getLocale(); // هذه دالتك التي تُعيد Locale من sharedPrefs
+    _languageCode = locale;
+  }
+
+  static String getFontFamily() {
+    return _languageCode == 'ar' ? tajawal : roboto;
+  }
+
+  static const String tajawal = 'Tajawal';
+  static const String roboto = 'Roboto';
+  static const String poppins = 'Poppins';
+}
+
 
 class FontWeightManager {
   static const FontWeight regular = FontWeight.w400;

@@ -9,6 +9,8 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
   final AdminHomeRepository adminHomeRepository;
   StreamSubscription<List<PatientModel>>? _patientsSubscription;
   StreamSubscription? _doctorsSubscription;
+    StreamSubscription? _statisticsSubscription;
+
 
 
   List<DoctorModel> doctors = [];
@@ -38,7 +40,6 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
   }
 
   Future<void> _filterPatientsByDoctor() async {
-    emit(GetPatientsStateLoading());
     if (selectedDoctor != null) {
       try {
         // استخدام Stream للمرضى الخاصين بالطبيب المحدد
@@ -71,14 +72,14 @@ class AdminHomeCubit extends Cubit<AdminHomeState> {
 
 
 
-   Future<void> getAdminStatistics() async {
-    try {
-      emit(GetStatisticsStateLoading());
-      final statistics = await adminHomeRepository.getAllStatistics();
+   void getAdminStatistics() {
+    _statisticsSubscription?.cancel(); 
+    _statisticsSubscription =
+        adminHomeRepository.getAllStatistics().listen((statistics) {
       emit(GetStatisticsStateSuccess(statistics));
-    } catch (e) {
-      emit(GetStatisticsStateError(e.toString()));
-    }
+    }, onError: (error) {
+      emit(GetStatisticsStateError(error.toString()));
+    });
   }
 
   @override

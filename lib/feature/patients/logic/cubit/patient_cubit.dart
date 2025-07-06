@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
@@ -10,16 +13,27 @@ class PatientCubit extends Cubit<PatientState> {
   final PatientRepository _repository;
   StreamSubscription<List<PatientModel>>? _patientsSubscription;
   StreamSubscription<List<DoctorModel>>? _doctorSubscription;
-    StreamSubscription<PatientModel>? _onePatientSubscription;
+  StreamSubscription<PatientModel>? _onePatientSubscription;
+  StreamSubscription? _conversationSubscription;
+  String? patientId;
+  String? doctorId;
+  final PageController pageController = PageController();
 
   int selectedIndex = 0;
   String? initialChatMessage;
-bool shouldInjectInitialMessage = false;
-
+  bool shouldInjectInitialMessage = false;
 
   PatientCubit(this._repository)
     : super(const PatientState.patientStateInitial());
 
+  void goToPage(int index) {
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+    changeSelectedIndex(index); // يحدث حالة الـ index في الكيوبت
+  }
 
   void getPatientsStream() {
     _patientsSubscription?.cancel();
@@ -36,8 +50,10 @@ bool shouldInjectInitialMessage = false;
 
   Future<String> _getImageUrl(PatientModel patient) async {
     if (patient.profileImage.isEmpty) {
-      return 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png';
-    } else if (!patient.profileImage.contains('http')) {
+      return patient.gender.toLowerCase() == 'male'.tr()
+          ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png'
+          : 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_image_nut3m4';
+    } else if (!patient.profileImage.contains('http'.tr())) {
       return await _repository.uploadImageToCloudinary(patient.profileImage);
     }
     return patient.profileImage;
@@ -87,9 +103,10 @@ bool shouldInjectInitialMessage = false;
     try {
       await _repository.deletePatient(patientId);
       getPatientsStream();
+
       emit(DeletePatientStateSuccess());
     } catch (e) {
-      emit(DeletePatientStateError('Error deleting patient: $e'));
+      emit(DeletePatientStateError('Error deleting patient: $e'.tr()));
     }
   }
 
@@ -105,7 +122,9 @@ bool shouldInjectInitialMessage = false;
             emit(GetPatientsByDoctorIdStateSuccess(patients));
           },
           onError: (error) {
-            emit(GetPatientsByDoctorIdStateError("Failed to load patients"));
+            emit(
+              GetPatientsByDoctorIdStateError('Failed to load patients'.tr()),
+            );
           },
         );
   }
@@ -113,27 +132,55 @@ bool shouldInjectInitialMessage = false;
   Stream<PatientModel> getPatientByIdStream(String patientId) {
     return _repository.getPatientByIdStream(patientId);
   }
+
   Future<void> getPatientAndDoctor(String patientId) async {
     emit(GetPatientAndDoctorStateLoading());
 
     try {
-      // اشتراك في التحديثات المستمرة للمريض
+      // الاشتراك في Stream للمريض
       _onePatientSubscription = _repository
           .getPatientByIdStream(patientId)
           .listen((patient) async {
-            // عند الحصول على المريض، قم بجلب الطبيب المرتبط
-            final doctor = await _repository.getDoctorByDoctorId(patient.doctorId);
-            emit(GetPatientAndDoctorStateSuccess(doctor, patient));
+            // نبدأ بالاشتراك في Stream المحادثات
+            _conversationSubscription?.cancel(); // إلغاء أي اشتراك سابق
+            _conversationSubscription = _repository
+                .getConversationsForPatientStream(patientId)
+                .listen((conversationMap) async {
+                  try {
+                    final doctor = await _repository.getDoctorByDoctorId(
+                      patient.doctorId,
+                    );
+
+                    final conversation = conversationMap[doctor.id];
+
+                    // _repository.updateFcmTokenIfNeeded();
+                    this.patientId = patient.id;
+                    this.doctorId = doctor.id;
+
+                    emit(
+                      GetPatientAndDoctorStateSuccess(
+                        doctor,
+                        patient,
+                        conversation,
+                      ),
+                    );
+                  } catch (e) {
+                    emit(GetPatientAndDoctorStateError(e.toString()));
+                  }
+                });
           });
     } catch (e) {
       emit(GetPatientAndDoctorStateError(e.toString()));
     }
   }
+
   @override
   Future<void> close() {
     _patientsSubscription?.cancel();
     _doctorSubscription?.cancel();
     _onePatientSubscription?.cancel();
+    pageController.dispose();
+
     return super.close();
   }
 
@@ -148,24 +195,26 @@ bool shouldInjectInitialMessage = false;
     return age;
   }
 
-  
-void changeSelectedIndex(int index) {
-  selectedIndex = index;
-  emit(PatientBottomNavChanged(index));
-}
-
-void setInitialMessage(String message) {
-  initialChatMessage = message;
-  shouldInjectInitialMessage = true;
-
-  final currentState = state;
-  if (currentState is GetPatientAndDoctorStateSuccess) {
-    emit(GetPatientAndDoctorStateSuccess(
-      currentState.doctor,
-      currentState.patient,
-    ));
+  void changeSelectedIndex(int index) {
+    print('🔁 Changing selectedIndex to $index');
+    selectedIndex = index;
+    emit(PatientBottomNavChanged(selectedIndex));
+    print('✅ تم بث الحالة الجديدة - selectedIndex: $selectedIndex');
   }
-}
 
+  void setInitialMessage(String message) {
+    initialChatMessage = message;
+    shouldInjectInitialMessage = true;
 
+    final currentState = state;
+    if (currentState is GetPatientAndDoctorStateSuccess) {
+      emit(
+        GetPatientAndDoctorStateSuccess(
+          currentState.doctor,
+          currentState.patient,
+          currentState.conversation,
+        ),
+      );
+    }
+  }
 }

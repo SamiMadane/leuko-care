@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -108,7 +109,7 @@ class HealthStatusBarChart extends StatelessWidget {
           barGroups: filteredEntries.mapIndexed((index, entry) {
             final key = entry.key.toLowerCase();
             Color barColor;
-            if (key == 'sick') {
+            if (key == 'sick'.toLowerCase()) {
               barColor = Colors.redAccent;
             } else {
               barColor = Colors.green;
@@ -134,9 +135,9 @@ class HealthStatusBarChart extends StatelessWidget {
   String _formatLabel(String key) {
     switch (key.toLowerCase()) {
       case 'sick':
-        return 'Sick';
+        return 'Sick'.tr();
       case 'healthy':
-        return 'Healthy';
+        return 'Healthy'.tr();
       default:
         return key;
     }

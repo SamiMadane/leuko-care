@@ -59,5 +59,4 @@ Future<void> setupGetIt() async {
   );
   getIt.registerLazySingleton(() => ChatRepository(getIt<FirebaseFirestore>()));
   getIt.registerFactory(() => ChatCubit(getIt<ChatRepository>()));
-
 }

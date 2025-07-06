@@ -1,10 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
+import 'package:leuko_care/feature/auth/ui/widgets/forget_password_dialog.dart';
 import 'package:leuko_care/feature/auth/ui/widgets/password_validations.dart';
 
 class EmailAndPassword extends StatefulWidget {
@@ -21,8 +26,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool hasSpecialCharacters = false;
   bool hasNumber = false;
   bool hasMinLength = false;
+  bool showPasswordValidations = false; // ✅ نتحكم بالظهور هنا
 
   late TextEditingController passwordController;
+
   @override
   void initState() {
     super.initState();
@@ -32,14 +39,22 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   void setupPasswordControllerListener() {
     passwordController.addListener(() {
+      final text = passwordController.text;
+
       setState(() {
-        hasLowercase = AppRegex.hasLowerCase(passwordController.text);
-        hasUppercase = AppRegex.hasUpperCase(passwordController.text);
-        hasSpecialCharacters = AppRegex.hasSpecialCharacter(
-          passwordController.text,
-        );
-        hasNumber = AppRegex.hasNumber(passwordController.text);
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+        showPasswordValidations = text.isNotEmpty; // ✅ شرط العرض
+        hasLowercase = AppRegex.hasLowerCase(text);
+        hasUppercase = AppRegex.hasUpperCase(text);
+        hasSpecialCharacters = AppRegex.hasSpecialCharacter(text);
+        hasNumber = AppRegex.hasNumber(text);
+        hasMinLength = AppRegex.hasMinLength(text);
+        if (hasLowercase &&
+            hasUppercase &&
+            hasSpecialCharacters &&
+            hasNumber &&
+            hasMinLength) {
+          showPasswordValidations = false;
+        }
       });
     });
   }
@@ -52,19 +67,20 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         children: [
           AppTextFormField(
             controller: context.read<AuthCubit>().emailController,
-            labelText: 'Email',
+            labelText: 'Email'.tr(),
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
                   !AppRegex.isEmailValid(value)) {
-                return 'Please enter a valid email';
+                return 'Please enter a valid email'.tr();
               }
+              return null;
             },
           ),
           SizedBox(height: HeightManager.h18),
           AppTextFormField(
             controller: context.read<AuthCubit>().passwordController,
-            labelText: 'Password',
+            labelText: 'Password'.tr(),
             backgroundColor: ColorsManager.moreLightGray,
             isObscureText: isObscureText,
             suffixIcon: GestureDetector(
@@ -78,19 +94,44 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               ),
             ),
             validator: (value) {
-              if (value == null || value.isEmpty || !AppRegex.isPasswordValid(value)) {
-                return 'Please enter a valid password';
+              if (value == null ||
+                  value.isEmpty ||
+                  !AppRegex.isPasswordValid(value)) {
+                return 'Please enter a valid password'.tr();
               }
+              return null;
             },
           ),
-          SizedBox(height: HeightManager.h24),
-          PasswordValidations(
-            hasLowerCase: hasLowercase,
-            hasUpperCase: hasUppercase,
-            hasSpecialCharacters: hasSpecialCharacters,
-            hasNumber: hasNumber,
-            hasMinLength: hasMinLength,
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder:
+                      (_) => ForgotPasswordDialog(
+                        prefilledEmail:
+                            context.read<AuthCubit>().emailController.text, authCubit: context.read<AuthCubit>(),
+                      ),
+                );
+              },
+              child: Text(
+                'forgot_password'.tr(),
+                style: getBoldTextStyle(fontSize: FontSizeManager.s13, color: ColorsManager.primaryColor)
+              ),
+            ),
           ),
+
+          if (showPasswordValidations) ...[
+            SizedBox(height: HeightManager.h16),
+            PasswordValidations(
+              hasLowerCase: hasLowercase,
+              hasUpperCase: hasUppercase,
+              hasSpecialCharacters: hasSpecialCharacters,
+              hasNumber: hasNumber,
+              hasMinLength: hasMinLength,
+            ),
+          ],
         ],
       ),
     );

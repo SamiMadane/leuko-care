@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -20,7 +21,7 @@ class ExaminedStatusWidget extends StatelessWidget {
         ),
         SizedBox(width: WidthManager.w6),
         Text(
-          isExamined ? 'Examined' : 'Not examined yet',
+          isExamined ? 'Examined'.tr() : 'Not Examined'.tr(),
           style: getSemiBoldTextStyle(
             fontSize: FontSizeManager.s15,
             color: isExamined
@@ -50,7 +51,7 @@ class HealthStatusWidget extends StatelessWidget {
       color = ColorsManager.darkOrange;
       icon = Icons.help_outline;
     } else if (status.toLowerCase() == 'healthy') {
-      displayText = 'Healthy';
+      displayText = 'Healthy'.tr();
       color = ColorsManager.darkGreen;
       icon = Icons.check_circle_outline; 
     } else {

@@ -13,6 +13,8 @@ Widget buildSelectionCard(
   double? positionedRight,
   double? positionedBottom,
 }) {
+  final isRtl = Directionality.of(context) == TextDirection.rtl;
+
   return SizedBox(
     height: HeightManager.h100,
     width: double.infinity,
@@ -24,6 +26,7 @@ Widget buildSelectionCard(
           onTap: onTap,
           borderRadius: BorderRadius.circular(RadiusManager.r30),
           child: Container(
+            margin: EdgeInsets.only(bottom: HeightManager.h12),
             width: double.infinity,
             height: HeightManager.h88,
             padding: EdgeInsets.symmetric(
@@ -36,26 +39,34 @@ Widget buildSelectionCard(
                 image: AssetImage(AssetsManager.homeBluePatternImage),
                 fit: BoxFit.cover,
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.3),
+                  blurRadius: 4,
+                  offset: Offset(isRtl ? -3 : 3, 3),
+                ),
+              ],
             ),
             child: Align(
-              alignment: Alignment.centerLeft,
+              alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
               child: Text(
                 label,
                 style: TextStyle(
                   fontSize: FontSizeManager.s20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.black87,
                 ),
               ),
             ),
           ),
         ),
         Positioned(
-          right: positionedRight ?? WidthManager.w8, // لإخراج جزء من الصورة خارج الزر
-          bottom: positionedBottom ?? HeightManager.h6,
+          left: isRtl ? WidthManager.w10 : null,
+          right: !isRtl ? WidthManager.w10 : null,
+          bottom: positionedBottom ?? HeightManager.h12,
           child: Image.asset(
             imagePath,
-            height: imageHeight ?? HeightManager.h120, // تكبير الصورة
+            height: imageHeight ?? HeightManager.h120,
             width: imageWidth ?? WidthManager.w120,
             fit: BoxFit.fill,
           ),

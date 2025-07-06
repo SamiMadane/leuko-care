@@ -1,17 +1,21 @@
-import 'package:json_annotation/json_annotation.dart';
 
+import 'package:json_annotation/json_annotation.dart';
 part 'doctor_model.g.dart';
 
 @JsonSerializable()
 class DoctorModel {
   final String? id;
   final String name;
-  final String experience;
+  final int experience;
   final String description;
   final String email;
   final String phone;
   final String profileImage;
   final String userType;
+  final String gender;
+  final String? fcmToken;
+  final String? language;
+  
 
   DoctorModel({
     required this.id,
@@ -22,21 +26,27 @@ class DoctorModel {
     required this.phone,
     required this.profileImage,
     required this.userType,
-
+    this.fcmToken,
+    this.language,
+    required this.gender,
   });
 
-  factory DoctorModel.fromJson(Map<String, dynamic> json) => _$DoctorModelFromJson(json);
+  factory DoctorModel.fromJson(Map<String, dynamic> json) =>
+      _$DoctorModelFromJson(json);
   Map<String, dynamic> toJson() => _$DoctorModelToJson(this);
-  
-    DoctorModel copyWith({
+
+  DoctorModel copyWith({
     String? id,
     String? name,
-    String? experience,
+    int? experience,
     String? description,
     String? email,
     String? phone,
-    String? profileImage,  
+    String? profileImage,
     String? userType,
+    String? gender,
+    String? fcmToken,
+    String? language
   }) {
     return DoctorModel(
       id: id ?? this.id,
@@ -46,8 +56,10 @@ class DoctorModel {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       profileImage: profileImage ?? this.profileImage,
-      userType: userType?? this.userType,
-
+      userType: userType ?? this.userType,
+      gender: gender ?? this.gender,
+      fcmToken: fcmToken ?? this.fcmToken,
+      language: language ?? this.language,
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 
 class PatientFilterHelper {
@@ -16,21 +18,20 @@ class PatientFilterHelper {
 
       //Then, we filter by the selected filter criteria.
       bool matchesFilter = true;
-      if (filterBy == 'Health Status') {
+      if (filterBy == 'Health Status'.tr()) {
         matchesFilter =
-            selectedFilterValue == 'All' ||
-            (selectedFilterValue == 'Sick' &&
-                patient.healthStatus == 'sick' &&
+            selectedFilterValue == 'All'.tr() ||
+            (selectedFilterValue == 'Sick'.tr() &&
+                patient.healthStatus == 'sick'&&
                 patient.isExamined) ||
-            (selectedFilterValue == 'Healthy' &&
-                patient.healthStatus == 'healthy' &&
-                patient.isExamined) ||
-            (selectedFilterValue == 'Unknown' && !patient.isExamined);
-      } else if (filterBy == 'Examined Status') {
+            (selectedFilterValue == 'Healthy'.tr() &&
+                patient.healthStatus == 'healthy'&&
+                patient.isExamined) ;
+      } else if (filterBy == 'Examined Status'.tr()) {
         matchesFilter =
-            selectedFilterValue == 'All' ||
-            (selectedFilterValue == 'Examined' && patient.isExamined) ||
-            (selectedFilterValue == 'Not Examined' && !patient.isExamined);
+            selectedFilterValue == 'All'.tr() ||
+            (selectedFilterValue == 'Examined'.tr() && patient.isExamined) ||
+            (selectedFilterValue == 'Not Examined'.tr() && !patient.isExamined);
       }
       // Patients who match the search and filter will be kept on the list.
       return matchesSearch && matchesFilter;

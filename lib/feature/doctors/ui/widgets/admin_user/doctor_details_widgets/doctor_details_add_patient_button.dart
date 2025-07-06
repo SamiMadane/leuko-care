@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -17,7 +19,7 @@ class DoctorDetailsViewPatientsButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: AppTextButton(
-        buttonText: 'View Patient',
+        buttonText: 'View Patient'.tr(),
         textStyle: getSemiBoldTextStyle(
           fontSize: FontSizeManager.s14,
           color: Colors.white,
@@ -26,8 +28,8 @@ class DoctorDetailsViewPatientsButton extends StatelessWidget {
           context.pushNamed(
             Routes.allPatientsScreen,
             arguments: {
-              'doctorId': doctorId,
-              'doctorName': doctorName,
+              'doctorId'.tr(): doctorId,
+              'doctorName'.tr(): doctorName,
             },
           );
         },

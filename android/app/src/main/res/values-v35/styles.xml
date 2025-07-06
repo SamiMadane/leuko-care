@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Ucrop.CropTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">#000000</item> <!-- لون أسود -->
+    <item name="android:windowLightStatusBar">false</item> <!-- أيقونات بيضاء -->
+    <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>

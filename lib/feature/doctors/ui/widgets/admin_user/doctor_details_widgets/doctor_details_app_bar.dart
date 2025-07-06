@@ -1,4 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
+import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/resources/styles_manager.dart';
 
 class DoctorDetailsAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -13,10 +19,39 @@ class DoctorDetailsAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('Dr. ${doctorName}', overflow: TextOverflow.ellipsis),
-
+      title: Text(
+        tr('doctor_name', namedArgs: {'name': doctorName}),
+        style: getMediumTextStyle(
+          fontSize: FontSizeManager.s20,
+          color: ColorsManager.darkBlue,
+        ),
+        overflow: TextOverflow.ellipsis,
+      ),
+      scrolledUnderElevation: 0,
+      backgroundColor: ColorsManager.appBarColor,
       actions: [
-        IconButton(icon: const Icon(Icons.delete), onPressed: onDeletePressed),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: WidthManager.w12),
+          child: InkWell(
+            onTap: onDeletePressed,
+            borderRadius: BorderRadius.circular(RadiusManager.r30),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                vertical: HeightManager.h8,
+                horizontal: WidthManager.w8,
+              ),
+              decoration: BoxDecoration(
+                color: ColorsManager.red.withValues(alpha: .1),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.delete,
+                color: ColorsManager.red,
+                size: 24,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

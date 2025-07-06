@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 
 Widget sampleImageWidget(String sampleImageUrl) {
@@ -5,7 +7,7 @@ Widget sampleImageWidget(String sampleImageUrl) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Sample Image", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue)),
+        Text('Sample Image'.tr(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue)),
         SizedBox(height: 8),
         ClipRRect(
           borderRadius: BorderRadius.circular(12),

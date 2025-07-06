@@ -1,6 +1,7 @@
+
 // This class represents the full state of the Onboarding screen.
 // Instead of creating multiple separate states (like Loading, Success, Error),
-// we use a "Single State Class" approach, which is perfect for simple screens
+// we use a 'Single State Class'.tr() approach, which is perfect for simple screens
 // that only need to track a few variables.
 //
 // We use immutability and provide a `copyWith` method to easily create new instances

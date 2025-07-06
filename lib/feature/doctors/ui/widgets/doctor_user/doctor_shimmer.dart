@@ -108,18 +108,10 @@ class HomeTopShimmer extends StatelessWidget {
               Shimmer.fromColors(
                 baseColor: ColorsManager.lightGray,
                 highlightColor: Colors.white,
-                child: Icon(Icons.logout, color: Colors.grey, size: 28),
+                child: Icon(Icons.settings, color: Colors.grey, size: 28),
               ),
             ],
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: WidthManager.w80,
-            right: WidthManager.w20,
-          ),
-
-          child: Divider(color: ColorsManager.lightGray, thickness: 1),
         ),
       ],
     );

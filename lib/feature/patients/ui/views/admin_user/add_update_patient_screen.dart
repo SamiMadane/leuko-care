@@ -1,12 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:leuko_care/core/helpers/network_helper.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/core/widgets/app_text_button.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
+import 'package:leuko_care/core/widgets/pick_and_crop_image.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/feature/patients/logic/cubit/patient_cubit.dart';
 import 'package:leuko_care/feature/patients/ui/widgets/shared/add_update_patient_bloc_listener.dart';
@@ -38,6 +42,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
 
   String? profileImageUrl;
 
@@ -49,6 +54,7 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
       _emailController.text = widget.patient!.email;
       _phoneController.text = widget.patient!.phone;
       _birthDateController.text = widget.patient!.birthDate;
+      _genderController.text = widget.patient!.gender;
       profileImageUrl = widget.patient!.profileImage;
     } else {
       profileImageUrl =
@@ -56,16 +62,26 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
     }
   }
 
-  Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage = await picker.pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedImage != null) {
-      setState(() {
-        profileImageUrl = pickedImage.path;
-      });
-    }
+Future<void> _pickImage() async {
+  final croppedFile = await pickAndCropImage(context,ImageSource.gallery);
+  if (croppedFile != null) {
+    setState(() {
+      profileImageUrl = croppedFile.path;
+    });
+    debugPrint('✅ New image path: ${croppedFile.path}');
+  } else {
+    debugPrint('❌ No image selected or crop cancelled');
+  }
+}
+
+  void _handleGenderChanged(String gender) {
+    setState(() {
+      _genderController.text = gender;
+      profileImageUrl =
+          gender == 'Male'
+              ? 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_osluzn.png'
+              : 'https://res.cloudinary.com/dmhmhyigi/image/upload/patient_profile_image_nut3m4';
+    });
   }
 
   Future<void> _selectBirthDate() async {
@@ -93,15 +109,15 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
       appBar: AppBar(
         title: Text(
           isEditMode
-              ? (isPatientUser ? 'Edit Profile' : 'Edit Patient')
-              : 'Add Patient',
+              ? (isPatientUser ? 'Edit Profile'.tr() : 'Edit Patient'.tr())
+              : 'Add Patient'.tr(),
           style: getMediumTextStyle(
             fontSize: FontSizeManager.s20,
             color: ColorsManager.darkBlue,
           ),
         ),
         elevation: 0,
-        backgroundColor: isPatientUser ? Colors.white : null,
+        backgroundColor: ColorsManager.appBarColor,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -126,18 +142,20 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
                   phoneController: _phoneController,
                   passwordController: _passwordController,
                   birthDateController: _birthDateController,
+                  genderController: _genderController,
                   isEditMode: isEditMode,
                   selectBirthDate: _selectBirthDate,
                   isPatientUser: isPatientUser,
+                  onGenderChanged: _handleGenderChanged,
                 ),
                 SizedBox(height: HeightManager.h30),
                 AppTextButton(
                   buttonText:
                       isEditMode
                           ? (isPatientUser
-                              ? 'Update Profile'
-                              : 'Update Patient')
-                          : 'Add Patient',
+                              ? 'Update Profile'.tr()
+                              : 'Update Patient'.tr())
+                          : 'Add Patient'.tr(),
                   textStyle: getBoldTextStyle(
                     fontSize: FontSizeManager.s18,
                     color: Colors.white,
@@ -150,13 +168,26 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         ),
       ),
       bottomNavigationBar: AddUpdatePatientBlocListener(
+        doctorId: widget.doctorId,
+        doctorName: widget.doctorName,
+        patient: widget.patient,
         isPatientUser: isPatientUser,
       ),
     );
   }
 
-  void _handleSubmit() {
+  void _handleSubmit() async {
     if (_formKey.currentState!.validate()) {
+       final hasConnection = await NetworkHelper.hasInternetConnection();
+    if (!hasConnection) {
+      showAnimatedStatusDialog(
+        context: context,
+        statusType: DialogStatusType.error,
+        title: 'No Internet'.tr(),
+        message: 'Please check your connection and try again.'.tr(),
+      );
+      return;
+    }
       final patient = PatientModel(
         id: widget.patient?.id,
         name: _nameController.text,
@@ -172,6 +203,12 @@ class _AddUpdatePatientScreenState extends State<AddUpdatePatientScreen> {
         healthStatus: widget.patient?.healthStatus ?? 'unknown',
         birthDate: _birthDateController.text,
         leukemiaType: widget.patient?.leukemiaType ?? 'unknown',
+        diseaseConfidence: widget.patient?.diseaseConfidence ?? 0.0,
+        aiNote: widget.patient?.aiNote,
+        latestSampleImageUrl: widget.patient?.latestSampleImageUrl,
+        lastExamDate: widget.patient?.lastExamDate,
+        fcmToken: widget.patient?.fcmToken,
+        gender: _genderController.text,
       );
 
       if (widget.patient != null) {

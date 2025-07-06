@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/helpers/extensions.dart';
 import 'package:leuko_care/core/routes/routes.dart';
-import 'package:leuko_care/core/widgets/error_dialog.dart';
+import 'package:leuko_care/core/widgets/custom_status_dialog.dart';
 import 'package:leuko_care/core/widgets/loading_dialog.dart';
-import 'package:leuko_care/core/widgets/success_dialog.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_state.dart';
 
@@ -27,25 +27,19 @@ class SignOutBlocListener extends StatelessWidget {
           },
           // عندما يكون تسجيل الخروج ناجحًا
           signedOutStateSuccess: () {
-            showDialog(
-              context: context,
-              builder:
-                  (context) => SuccessDialog(
-                    message: 'You have signed out successfully.',
-                    onSuccess: () {
-                      context.pushNamedAndRemoveUntil(
-                        Routes.userSelectionScreen,
-                        predicate: (route) => false,
-                      );
-                    },
-                  ),
+            context.pushNamedAndRemoveUntil(
+              Routes.userSelectionScreen,
+              predicate: (route) => false,
             );
           },
-          // عند حدوث خطأ في عملية تسجيل الخروج
+
           signedOutStateError: (errorMessage) {
-            showDialog(
+            showAnimatedStatusDialog(
               context: context,
-              builder: (context) => ErrorDialog(message: errorMessage),
+              title: 'Error'.tr(),
+              message: errorMessage,
+              statusType: DialogStatusType.error,
+              onConfirm: () => Navigator.of(context).pop(),
             );
           },
         );
@@ -53,5 +47,4 @@ class SignOutBlocListener extends StatelessWidget {
       child: const SizedBox.shrink(), // لا حاجة لعرض أي شيء هنا
     );
   }
-
 }

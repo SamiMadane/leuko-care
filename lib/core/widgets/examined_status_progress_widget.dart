@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -20,8 +21,14 @@ class ExaminedStatusProgressWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Examined Patients (${(percent * 100).toStringAsFixed(0)}%)',
-          style: getBoldTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.darkGreen),
+          tr(
+            'examined_patients',
+            namedArgs: {'percent': (percent * 100).toStringAsFixed(0)},
+          ),
+          style: getBoldTextStyle(
+            fontSize: FontSizeManager.s14,
+            color: ColorsManager.darkGreen,
+          ),
         ),
         SizedBox(height: HeightManager.h8),
         ClipRRect(
@@ -35,8 +42,17 @@ class ExaminedStatusProgressWidget extends StatelessWidget {
         ),
         SizedBox(height: HeightManager.h6),
         Text(
-          '$examined examined • $unexamined unexamined',
-          style: getRegularTextStyle(fontSize: FontSizeManager.s13, color: ColorsManager.darkBlue),
+          tr(
+            'examined_unexamined',
+            namedArgs: {
+              'examined': examined.toString(),
+              'unexamined': unexamined.toString(),
+            },
+          ),
+          style: getRegularTextStyle(
+            fontSize: FontSizeManager.s13,
+            color: ColorsManager.darkBlue,
+          ),
         ),
       ],
     );

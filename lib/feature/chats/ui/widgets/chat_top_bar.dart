@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -17,11 +19,11 @@ class ChatTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageUrl = patient?.profileImage ?? doctor?.profileImage;
-    final name = patient?.name ?? 'Dr. ${doctor?.name}';
+    final name = patient?.name ?? tr('doctor_name', namedArgs: {'name': doctor?.name ?? ''});
     final canPop = Navigator.canPop(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: HeightManager.h10),
+      padding: EdgeInsets.symmetric(vertical: HeightManager.h8),
       child: Row(
         children: [
           if (canPop)
@@ -34,14 +36,14 @@ class ChatTopBar extends StatelessWidget {
           if (!canPop) SizedBox(width: WidthManager.w20),
 
           CircleAvatar(
-            radius: RadiusManager.r28,
+            radius: RadiusManager.r26,
             backgroundColor: Colors.transparent,
             backgroundImage: null,
             child: ClipOval(
               child: CachedNetworkImage(
                 imageUrl: imageUrl!,
-                width: WidthManager.w56,
-                height: HeightManager.h56,
+                width: WidthManager.w52,
+                height: HeightManager.h52,
                 fit: BoxFit.cover,
                 placeholder: (_, __) => _buildShimmerLoading(),
                 errorWidget:
@@ -53,7 +55,7 @@ class ChatTopBar extends StatelessWidget {
           Expanded(
             child: Text(
               name,
-              style: getSemiBoldTextStyle(
+              style: getMediumTextStyle(
                 fontSize: FontSizeManager.s20,
                 color: ColorsManager.darkBlue,
               ),
@@ -70,7 +72,7 @@ class ChatTopBar extends StatelessWidget {
       baseColor: ColorsManager.lightGray,
       highlightColor: Colors.white,
       child: CircleAvatar(
-        radius: RadiusManager.r28,
+        radius: RadiusManager.r26,
         backgroundColor: Colors.white,
       ),
     );

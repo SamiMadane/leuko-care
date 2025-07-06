@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/helpers/app_regex.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
+import 'package:leuko_care/core/widgets/app_drobdown_form_field.dart';
 import 'package:leuko_care/core/widgets/app_text_form_field.dart';
 
 class AddUpdateDoctorFormFields extends StatefulWidget {
@@ -12,6 +15,8 @@ class AddUpdateDoctorFormFields extends StatefulWidget {
   final TextEditingController passwordController;
   final bool isEditMode;
   final bool isDoctorUser;
+  final TextEditingController genderController;
+  final void Function(String)? onGenderChanged;
 
   const AddUpdateDoctorFormFields({
     super.key,
@@ -23,6 +28,8 @@ class AddUpdateDoctorFormFields extends StatefulWidget {
     required this.passwordController,
     required this.isEditMode,
     required this.isDoctorUser,
+    required this.genderController,
+    this.onGenderChanged,
   });
 
   @override
@@ -35,6 +42,19 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
       TextEditingController();
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
+  // خيارات الجنس
+  String? _selectedGender = 'Male'; // القيمة الافتراضية
+  final genderOptions = {'Male': 'Male'.tr(), 'Female': 'Female'.tr()};
+
+  @override
+  void initState() {
+    super.initState();
+
+    // ضبط القيمة الافتراضية في الـ Controller
+    if (!widget.isEditMode) {
+      widget.genderController.text = _selectedGender!;
+    }
+  }
 
   @override
   void dispose() {
@@ -48,26 +68,27 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
       children: [
         AppTextFormField(
           controller: widget.nameController,
-          labelText: 'Name',
+          labelText: 'Name'.tr(),
           validator:
               (value) =>
                   value == null || value.isEmpty
-                      ? 'Enter Name'
+                      ? 'Enter Name'.tr()
                       : !AppRegex.isNameValid(value)
                       ? 'Name must be at least 3 letters and contain letters only'
+                          .tr()
                       : null,
         ),
         if (!widget.isDoctorUser) ...[
           SizedBox(height: HeightManager.h10),
           AppTextFormField(
             controller: widget.emailController,
-            labelText: 'Email',
+            labelText: 'Email'.tr(),
             validator:
                 (value) =>
                     value == null || value.isEmpty
-                        ? 'Enter Email'
+                        ? 'Enter Email'.tr()
                         : !AppRegex.isEmailValid(value)
-                        ? 'Invalid email format'
+                        ? 'Invalid email format'.tr()
                         : null,
           ),
         ],
@@ -77,7 +98,7 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
         if (!widget.isEditMode) ...[
           AppTextFormField(
             controller: widget.passwordController,
-            labelText: 'Password',
+            labelText: 'Password'.tr(),
             isObscureText: !_isPasswordVisible,
             suffixIcon: IconButton(
               icon: Icon(
@@ -92,9 +113,10 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
             validator:
                 (value) =>
                     value == null || value.isEmpty
-                        ? 'Password is required'
+                        ? 'Password is required'.tr()
                         : !AppRegex.isPasswordValid(value)
                         ? 'Weak password (min 8 chars, A-Z, a-z, number, special)'
+                            .tr()
                         : null,
           ),
           SizedBox(height: HeightManager.h10),
@@ -102,7 +124,7 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
           // تأكيد كلمة المرور
           AppTextFormField(
             controller: _confirmPasswordController,
-            labelText: 'Confirm Password',
+            labelText: 'Confirm Password'.tr(),
             isObscureText: !_isConfirmPasswordVisible,
             suffixIcon: IconButton(
               icon: Icon(
@@ -119,9 +141,9 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
             validator:
                 (value) =>
                     value == null || value.isEmpty
-                        ? 'Please confirm password'
+                        ? 'Please confirm password'.tr()
                         : value != widget.passwordController.text
-                        ? 'Passwords do not match'
+                        ? 'Passwords do not match'.tr()
                         : null,
           ),
           SizedBox(height: HeightManager.h10),
@@ -129,38 +151,74 @@ class _AddUpdateDoctorFormFieldsState extends State<AddUpdateDoctorFormFields> {
 
         AppTextFormField(
           controller: widget.phoneController,
-          labelText: 'Phone',
+          labelText: 'Phone'.tr(),
           validator:
               (value) =>
                   value == null || value.isEmpty
-                      ? 'Enter Phone'
+                      ? 'Enter Phone'.tr()
                       : !AppRegex.isPhoneNumberValid(value)
-                      ? 'Invalid phone number'
+                      ? 'Invalid phone number'.tr()
                       : null,
         ),
         SizedBox(height: HeightManager.h10),
+        // إضافة حقل الجنس
+        if (!widget.isEditMode) ...[
+          SizedBox(height: HeightManager.h10),
+          AppDropdownFormField<String>(
+            value: _selectedGender,
+            labelText: 'Gender'.tr(),
+            items:
+                genderOptions.entries
+                    .map(
+                      (entry) => DropdownMenuItem<String>(
+                        value: entry.key,
+                        child: Text(entry.value),
+                      ),
+                    )
+                    .toList(),
+            onChanged: (value) {
+              setState(() {
+                _selectedGender = value;
+                widget.genderController.text = value!;
+                widget.onGenderChanged?.call(value);
+              });
+            },
+            validator:
+                (value) => value == null ? 'Please select gender'.tr() : null,
+          ),
+
+          SizedBox(height: HeightManager.h10),
+        ],
         AppTextFormField(
           controller: widget.experienceController,
-          labelText: 'Experience',
-          validator:
-              (value) =>
-                  value == null || value.isEmpty
-                      ? 'Enter Experience'
-                      : int.tryParse(value) == null
-                      ? 'Must be a number'
-                      : null,
+          labelText: 'Experience'.tr(),
+          keyboardType: TextInputType.number, // لإظهار لوحة مفاتيح الأرقام
+          validator: (value) {
+            if (value == null || value.trim().isEmpty) {
+              return 'Enter Experience'.tr();
+            }
+            final number = int.tryParse(value);
+            if (number == null) {
+              return 'Must be a number'.tr();
+            }
+            if (number < 0) {
+              return 'Experience cannot be negative'.tr(); // اختيارية
+            }
+            return null;
+          },
         ),
+
         SizedBox(height: HeightManager.h10),
         AppTextFormField(
           controller: widget.descriptionController,
-          labelText: 'Description',
+          labelText: 'Description'.tr(),
           maxLines: 4,
           validator:
               (value) =>
                   value == null || value.isEmpty
-                      ? 'Enter Description'
+                      ? 'Enter Description'.tr()
                       : value.length < 10
-                      ? 'Description too short'
+                      ? 'Description too short'.tr()
                       : null,
         ),
       ],

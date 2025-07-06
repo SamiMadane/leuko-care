@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 import 'package:leuko_care/core/widgets/patient_list_tile.dart';
@@ -19,10 +21,11 @@ class PatientListViewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (patients.isEmpty) {
-      return const EmptyStateWidget(
-        icon: Icons.person_outline_sharp,
-        title: 'No matching patients.',
-        message: 'Try adjusting your search or filter options.',
+      return EmptyStateWidget(
+        lottiePath:AssetsManager.searchLottie,
+        isFullScreen: true,
+        title: 'No matching patients'.tr(),
+        message: 'Try adjusting your search or filter options'.tr(),
       );
     }
 

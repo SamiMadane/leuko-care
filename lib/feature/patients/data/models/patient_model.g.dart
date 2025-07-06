@@ -7,19 +7,26 @@ part of 'patient_model.dart';
 // **************************************************************************
 
 PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
-  id: json['id'] as String?,
-  name: json['name'] as String,
-  email: json['email'] as String,
-  phone: json['phone'] as String,
-  profileImage: json['profileImage'] as String,
-  doctorId: json['doctorId'] as String,
-  userType: json['userType'] as String,
-  isExamined: json['isExamined'] as bool,
-  registrationDate: json['registrationDate'] as String,
-  healthStatus: json['healthStatus'] as String,
-  birthDate: json['birthDate'] as String,
-  leukemiaType: json['leukemiaType'] as String,
-);
+      id: json['id'] as String?,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      phone: json['phone'] as String,
+      profileImage: json['profileImage'] as String,
+      doctorId: json['doctorId'] as String,
+      userType: json['userType'] as String,
+      isExamined: json['isExamined'] as bool,
+      registrationDate: json['registrationDate'] as String,
+      healthStatus: json['healthStatus'] as String,
+      birthDate: json['birthDate'] as String,
+      leukemiaType: json['leukemiaType'] as String,
+      diseaseConfidence: (json['diseaseConfidence'] as num).toDouble(),
+      aiNote: json['aiNote'] as String?,
+      latestSampleImageUrl: json['latestSampleImageUrl'] as String?,
+      lastExamDate: json['lastExamDate'] as String?,
+      fcmToken: json['fcmToken'] as String?,
+      language: json['language'] as String?,
+      gender: json['gender'] as String,
+    );
 
 Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
     <String, dynamic>{
@@ -35,4 +42,11 @@ Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
       'healthStatus': instance.healthStatus,
       'birthDate': instance.birthDate,
       'leukemiaType': instance.leukemiaType,
+      'diseaseConfidence': instance.diseaseConfidence,
+      'aiNote': instance.aiNote,
+      'latestSampleImageUrl': instance.latestSampleImageUrl,
+      'lastExamDate': instance.lastExamDate,
+      'gender': instance.gender,
+      'fcmToken': instance.fcmToken,
+      'language': instance.language,
     };

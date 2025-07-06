@@ -1,7 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
+import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
+import 'package:leuko_care/core/widgets/disease_statistics_table.dart';
 import 'package:leuko_care/feature/admin-home/data/model/admin_statistics_model.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_state.dart';
@@ -17,7 +21,16 @@ class AdminStatisticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Admin Statistics')),
+      appBar: AppBar(
+        title: Text(
+          'Admin Statistics'.tr(),
+          style: getMediumTextStyle(
+            fontSize: FontSizeManager.s20,
+            color: ColorsManager.darkBlue,
+          ),
+        ),
+        backgroundColor: ColorsManager.appBarColor,
+      ),
       body: BlocBuilder<AdminHomeCubit, AdminHomeState>(
         builder: (context, state) {
           switch (state) {
@@ -49,23 +62,34 @@ class AdminStatisticsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StatisticCard(text: "Total Patients: ${stats.totalPatients}"),
-          StatisticCard(text: "Total Doctors: ${stats.totalDoctors}"),
+          Row(
+            children: [
+              Expanded(child: StatisticCard( text: tr('total_patients', namedArgs: {'count': stats.totalPatients.toString()}), icon: Icons.people,)),
+              Expanded(child: StatisticCard(text: tr('total_doctors', namedArgs: {'count': stats.totalDoctors.toString()}),icon: Icons.medical_services,)),
+            ],
+          ),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Examination Status:"),
+          _buildSectionTitle('Examination Status:'.tr()),
           SizedBox(height: HeightManager.h14),
           ExaminedStatusProgressWidget(
             data: {
-              "Examined": stats.examinedCount,
-              "Unexamined": stats.unexaminedCount,
+              'Examined': stats.examinedCount,
+              'Unexamined': stats.unexaminedCount,
             },
           ),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Health Status Distribution:"),
+          _buildSectionTitle('Health Status Distribution:'.tr()),
           SizedBox(height: HeightManager.h20),
           HealthStatusBarChart(data: stats.healthStatusCounts),
           SizedBox(height: HeightManager.h20),
-          _buildSectionTitle("Patients Per Doctor:"),
+          _buildSectionTitle('Diseases Detected:'.tr()),
+          SizedBox(height: HeightManager.h14),
+          DiseaseStatisticsTable(
+              diseaseCounts: stats.diseaseCounts,
+          ),
+          SizedBox(height: HeightManager.h20),
+
+          _buildSectionTitle('Patients Per Doctor:'.tr()),
           SizedBox(height: HeightManager.h14),
           PatientsPerDoctorList(data: stats.patientsPerDoctor),
         ],

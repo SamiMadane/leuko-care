@@ -22,6 +22,10 @@ class Routes {
   static const String doctorScreen = '/DoctorScreen';
   static const String sampleResultScreen = '/SampleResultScreen';
 
+  static const String aboutUsIntroScreen = '/AboutUsIntroScreen';
+  static const String aboutUsScreen = '/AboutUsScreen';
+
+
 
 
 }

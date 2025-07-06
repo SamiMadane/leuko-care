@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:leuko_care/core/resources/assets_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/widgets/common_search_and_filter_bar.dart';
 import 'package:leuko_care/core/widgets/empty_state_widget.dart';
@@ -37,6 +39,19 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
     _filteredPatients = widget.patients;
     _searchController.addListener(_filterPatients);
   }
+  @override
+void didUpdateWidget(covariant AllPaitentListView oldWidget) {
+  super.didUpdateWidget(oldWidget);
+  if (oldWidget.patients != widget.patients) {
+    _filteredPatients = PatientFilterHelper.filterPatients(
+      patients: widget.patients,
+      searchKeyword: _searchController.text,
+      filterBy: _filterBy,
+      selectedFilterValue: _selectedFilterValue,
+    );
+    setState(() {});
+  }
+}
 
   void _filterPatients() {
     final searchKeyword = _searchController.text;
@@ -81,9 +96,10 @@ class _AllPaitentListViewState extends State<AllPaitentListView> {
   Widget build(BuildContext context) {
     return widget.patients.isEmpty
         ? EmptyStateWidget(
-          icon: Icons.group_outlined,
-          title: 'No patients found.',
-          message: widget.userType == 'doctor' ? 'There are no patients assigned to you yet.':'There are no patients added yet. Try adding a new patient.',
+          lottiePath: AssetsManager.noPatientsLottie,
+          isFullScreen: true,
+          title: 'No patients found.'.tr(),
+          message: widget.userType == 'doctor' ? 'There are no patients assigned to you yet'.tr():'There are no patients added yet. Try adding a new patient'.tr(),
         )
         : SafeArea(
           bottom: true,

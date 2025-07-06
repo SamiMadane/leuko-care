@@ -1,9 +1,17 @@
+import 'dart:io';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
+import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/data/repository/doctor_repo.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_state.dart';
+import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
+import 'package:rxdart/rxdart.dart';
 
 class DoctorCubit extends Cubit<DoctorState> {
   final DoctorRepository _repository;
@@ -11,8 +19,31 @@ class DoctorCubit extends Cubit<DoctorState> {
 
   StreamSubscription? _doctorsSubscription;
   bool isAscending = false;
-  int selectedIndex = 0;
+  int selectedIndex = 2;
   bool shouldInjectPatient = false;
+  StreamSubscription? _doctorAndPatientsSubscription;
+  final PageController pageController = PageController(initialPage: 2);
+  PatientModel? preSelectedPatient;
+
+  void goToPage(int index) {
+    final currentPage = pageController.page?.round() ?? 0;
+
+    if ((index - currentPage).abs() > 1) {
+      // انتقال سريع بدون تمرير الصفحات الوسيطة
+      pageController.jumpToPage(index);
+    } else {
+      // انتقال متحرك سلس للصفحات المجاورة
+      pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void setPreSelectedPatient(PatientModel patient) {
+    preSelectedPatient = patient;
+  }
 
   void getDoctorsStream() async {
     emit(GetDoctorStateLoading());
@@ -88,7 +119,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       await _repository.deleteDoctor(doctorId);
       emit(DeleteDoctorStateSuccess());
     } catch (e) {
-      emit(DeleteDoctorStateError('Error deleting doctor: $e'));
+      emit(DeleteDoctorStateError('Error deleting doctor: $e'.tr()));
     }
   }
 
@@ -105,30 +136,44 @@ class DoctorCubit extends Cubit<DoctorState> {
 
   void getDoctorAndPatients(String doctorId) {
     emit(const GetDoctorAndPatientsStateLoading());
+    _doctorAndPatientsSubscription?.cancel();
 
     try {
-      // 1. جلب الدكتور الحالي باستخدام Stream
+      // 1. جلب ستريم الدكتور
       final doctorStream = _repository.getDoctorByDoctorIdStream(doctorId);
 
-      // 2. جلب المرضى المرتبطين به باستخدام Stream
+      // 2. جلب ستريم المرضى المرتبطين به
       final patientsStream = _repository.getPatientsByDoctorIdStream(doctorId);
 
-      // استخدام StreamSubscription للاستماع للتغييرات المستمرة
-      doctorStream.listen(
-        (doctor) {
-          patientsStream.listen(
-            (patients) {
-              emit(
-                GetDoctorAndPatientsStateSuccess(
-                  doctor: doctor,
-                  patients: patients,
-                ),
-              );
-            },
-            onError: (error) {
-              emit(GetDoctorAndPatientsStateError(error.toString()));
-            },
+      // 3. جلب ستريم المحادثات الخاصة به
+      final conversationsStream = _repository.getConversationsForDoctorStream(
+        doctorId,
+      );
+
+      // استخدام Rx.combineLatest3 للجمع بين الثلاثة Streams
+      Rx.combineLatest3(
+        doctorStream,
+        patientsStream,
+        conversationsStream,
+        (
+          DoctorModel doctor,
+          List<PatientModel> patients,
+          Map<String, ConversationModel> conversationsMap,
+        ) {
+          // يتم تنفيذ هذا عندما تتوفر القيم الثلاثة.
+          return GetDoctorAndPatientsStateSuccess(
+            doctor: doctor,
+            patients: patients,
+            conversationsByPatientId: conversationsMap,
           );
+        },
+        //final state = GetDoctorAndPatientsStateSuccess(...);
+        //  emit(state);
+      ).listen(
+        (state) {
+          emit(
+            state,
+          ); // this will emit the combined state getDoctorAndPatientsStateSuccess
         },
         onError: (error) {
           emit(GetDoctorAndPatientsStateError(error.toString()));
@@ -138,5 +183,53 @@ class DoctorCubit extends Cubit<DoctorState> {
       emit(GetDoctorAndPatientsStateError(e.toString()));
     }
   }
+
+  @override
+  Future<void> close() {
+    _doctorsSubscription?.cancel();
+    _doctorAndPatientsSubscription?.cancel();
+    pageController.dispose();
+    return super.close();
+  }
+
+Future<void> analyzeSample({
+  File? imageFile,
+  String? imageUrl,
+  required PatientModel patient,
+}) async {
+  emit(AnalyzingSampleLoading());
+  try {
+    final result = await _repository.analyzeSample(
+      imageFile: imageFile,
+      imageUrl: imageUrl,
+      patient: patient,
+    );
+    emit(AnalyzingSampleSuccess(result));
+  } catch (e) {
+    emit(AnalyzingSampleError(e.toString()));
+  }
+}
+
+Future<void> confirmAnalysisResult(
+  PatientModel oldPatient,
+  AnalysisResultModel result,
+  String doctorId,
+  String doctorName,
+) async {
+  emit(SavingAnalysisResultLoading());
+
+  try {
+    await _repository.confirmExamResultAndNotify(
+      oldPatient: oldPatient,
+      result: result,
+      doctorId: doctorId,
+      doctorName: doctorName,
+    );
+    emit(SavingAnalysisResultSuccess());
+  } catch (e) {
+    emit(SavingAnalysisResultError(e.toString()));
+  }
+}
+
 
 }

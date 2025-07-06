@@ -39,7 +39,13 @@ class DoctorScreen extends StatelessWidget {
               } else if (state is GetDoctorAndPatientsStateSuccess) {
                 final doctor = state.doctor;
                 final patients = state.patients;
-                return DoctorBodyBuilder(doctor: doctor, patients: patients);
+                final conversationsByPatientId = state.conversationsByPatientId;
+              
+                return DoctorBodyBuilder(
+                  doctor: doctor,
+                  patients: patients,
+                  conversationsByPatientId: conversationsByPatientId,
+                );
               } else {
                 return const SizedBox.shrink();
               }
@@ -55,7 +61,8 @@ class DoctorScreen extends StatelessWidget {
             final cubit = context.watch<DoctorCubit>();
             return DoctorBottomNavBar(
               currentIndex: cubit.selectedIndex,
-              onTap: cubit.changeSelectedIndex,
+              isHomeSelected: cubit.selectedIndex == 2,
+              onTap:  cubit.goToPage,
             );
           },
         ),

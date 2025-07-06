@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
 import 'package:leuko_care/core/resources/fonts_manager.dart';
@@ -22,37 +24,37 @@ class PatientFilterBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
              Text(
-              'Filter By',
+              'Filter By'.tr(),
               style:getBoldTextStyle(fontSize: FontSizeManager.s18, color: ColorsManager.darkBlue),
             ),
             SizedBox(height: HeightManager.h8),
             ListTile(
-              title: const Text('Examined Status'),
+              title:  Text('Examined Status'.tr()),
               leading: const Icon(Icons.check_circle_outline),
               onTap: () async {
                 final String? value = await _showFilterValues(
                   context,
-                  'Examined Status',
-                  ['All', 'Examined', 'Not Examined'],
+                  'Examined Status'.tr(),
+                  ['All'.tr(), 'Examined'.tr(), 'Not Examined'.tr()],
                 );
                 if (value != null) {
                   // store the selected value in the function parameter then in the parent widget we can use it to filter patients based on the selected value.
-                  onFilterSelected('Examined Status', value);
+                  onFilterSelected('Examined Status'.tr(), value);
                   Navigator.pop(context);
                 }
               },
             ),
             ListTile(
-              title: const Text('Health Status'),
+              title:  Text('Health Status'.tr()),
               leading: const Icon(Icons.health_and_safety_outlined),
               onTap: () async {
                 final String? value = await _showFilterValues(
                   context,
-                  'Health Status',
-                  ['All', 'Sick', 'Healthy', 'Unknown'],
+                  'Health Status'.tr(),
+                  ['All'.tr(), 'Sick'.tr(), 'Healthy'.tr()],
                 );
                 if (value != null) {
-                  onFilterSelected('Health Status', value);
+                  onFilterSelected('Health Status'.tr(), value);
                   Navigator.pop(context);
                 }
               },
@@ -80,7 +82,7 @@ class PatientFilterBottomSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Select $filterBy',
+                tr('select_filter', namedArgs: {'filter': filterBy}),
                 style: getBoldTextStyle(fontSize: FontSizeManager.s18, color: ColorsManager.darkBlue),
               ),
                SizedBox(height: HeightManager.h8),

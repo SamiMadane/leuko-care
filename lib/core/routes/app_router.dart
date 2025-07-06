@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/di/dependency_injection.dart';
 import 'package:leuko_care/core/routes/routes.dart';
+import 'package:leuko_care/feature/about_us/ui/about_us_intro_screen.dart';
+import 'package:leuko_care/feature/about_us/ui/about_us_screen.dart';
 import 'package:leuko_care/feature/admin-home/data/repository/admin_home_repo.dart';
 import 'package:leuko_care/feature/admin-home/logic/cubit/admin_home_cubit.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_home_screen.dart';
 import 'package:leuko_care/feature/admin-home/ui/views/admin_statistics_screen.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/chats/logic/cubit/chat_cubit.dart';
-import 'package:leuko_care/feature/chats/ui/views/image_preview_screen.dart';
+import 'package:leuko_care/core/widgets/image_preview_screen.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
-import 'package:leuko_care/feature/doctors/ui/views/shared/add_update_doctor_screen.dart';
+import 'package:leuko_care/feature/doctors/ui/views/admin_user/add_update_doctor_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/admin_user/all_doctors_screen.dart';
 import 'package:leuko_care/feature/doctors/ui/views/admin_user/doctor_details_screen.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
@@ -147,6 +150,8 @@ class AppRouter {
         final arguments = settings.arguments as Map?;
         final patientModel = arguments?['patientModel'] as PatientModel?;
         final doctorId = arguments?['doctorId'] as String?;
+        final doctorName = arguments?['doctorName'] as String?;
+
         final userType = arguments?['userType'] as String?;
 
         return MaterialPageRoute(
@@ -157,6 +162,7 @@ class AppRouter {
                   patient: patientModel,
                   doctorId: doctorId,
                   userType: userType,
+                  doctorName: doctorName,
                 ),
               ),
         );
@@ -172,6 +178,7 @@ class AppRouter {
 
       case Routes.patientScreen:
         final patientId = FirebaseAuth.instance.currentUser?.uid;
+        final initialIndex = arguments as int?;
         return MaterialPageRoute(
           builder:
               (_) => MultiBlocProvider(
@@ -185,19 +192,24 @@ class AppRouter {
                   BlocProvider(create: (_) => getIt<AuthCubit>()),
                   BlocProvider(create: (_) => getIt<ChatCubit>()),
                 ],
-                child: PatientScreen(),
+                child: PatientScreen(initialIndex: initialIndex),
               ),
         );
 
       case Routes.doctorDetailsScreenForPatient:
-        final doctorDetailsForPatientScreen = arguments as DoctorModel;
+        final arguments = settings.arguments as Map?;
+        final doctor = arguments?['doctor'] as DoctorModel;
+        final patient = arguments?['patient'] as PatientModel;
+        final conversation = arguments?['conversation'] as ConversationModel?;
 
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
                 create: (context) => getIt<PatientCubit>(),
                 child: DoctorDetailsScreenForPatient(
-                  doctor: doctorDetailsForPatientScreen,
+                  doctor: doctor,
+                  patient: patient,
+                  conversation: conversation,
                 ),
               ),
         );
@@ -256,6 +268,10 @@ class AppRouter {
                 ),
               ),
         );
+      case Routes.aboutUsIntroScreen:
+        return MaterialPageRoute(builder: (_) => const AboutUsIntroScreen());
+      case Routes.aboutUsScreen:
+        return MaterialPageRoute(builder: (_) => const AboutUsScreen());
 
       default:
         return null;

@@ -5,6 +5,7 @@ class AdminStatisticsModel {
   final Map<String, int> patientsPerDoctor;
   final int examinedCount;
   final int unexaminedCount;
+  final Map<String, int> diseaseCounts;
 
   AdminStatisticsModel({
     required this.totalPatients,
@@ -13,5 +14,6 @@ class AdminStatisticsModel {
     required this.patientsPerDoctor,
     required this.examinedCount,
     required this.unexaminedCount,
+    required this.diseaseCounts,
   });
 }

@@ -7,15 +7,18 @@ part of 'doctor_model.dart';
 // **************************************************************************
 
 DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
-  id: json['id'] as String?,
-  name: json['name'] as String,
-  experience: json['experience'] as String,
-  description: json['description'] as String,
-  email: json['email'] as String,
-  phone: json['phone'] as String,
-  profileImage: json['profileImage'] as String,
-  userType: json['userType'] as String,
-);
+      id: json['id'] as String?,
+      name: json['name'] as String,
+      experience: (json['experience'] as num).toInt(),
+      description: json['description'] as String,
+      email: json['email'] as String,
+      phone: json['phone'] as String,
+      profileImage: json['profileImage'] as String,
+      userType: json['userType'] as String,
+      fcmToken: json['fcmToken'] as String?,
+      language: json['language'] as String?,
+      gender: json['gender'] as String,
+    );
 
 Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
     <String, dynamic>{
@@ -27,4 +30,7 @@ Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
       'phone': instance.phone,
       'profileImage': instance.profileImage,
       'userType': instance.userType,
+      'gender': instance.gender,
+      'fcmToken': instance.fcmToken,
+      'language': instance.language,
     };

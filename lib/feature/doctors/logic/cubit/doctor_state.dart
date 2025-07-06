@@ -1,4 +1,7 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
+import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
 import 'package:leuko_care/feature/patients/data/models/patient_model.dart';
 part 'doctor_state.freezed.dart';
@@ -29,14 +32,27 @@ class DoctorState with _$DoctorState {
   const factory DoctorState.deleteDoctorStateError(String message) = DeleteDoctorStateError;
 
  const factory DoctorState.getDoctorAndPatientsStateLoading() = GetDoctorAndPatientsStateLoading;
-  const factory DoctorState.getDoctorAndPatientsStateSuccess({
-    required DoctorModel doctor,
-    required List<PatientModel> patients,
-    PatientModel? selectedPatientForSampleUpload,
-  }) = GetDoctorAndPatientsStateSuccess;
+const factory DoctorState.getDoctorAndPatientsStateSuccess({
+  required DoctorModel doctor,
+  required List<PatientModel> patients,
+  required Map<String, ConversationModel> conversationsByPatientId,
+  PatientModel? selectedPatientForSampleUpload,
+}) = GetDoctorAndPatientsStateSuccess;
   const factory DoctorState.getDoctorAndPatientsStateError(String error) = GetDoctorAndPatientsStateError;
 
   const factory DoctorState.doctorBottomNavChanged(int index) = DoctorBottomNavChanged;
+
+
+  // Analyzing sample states
+  const factory DoctorState.analyzingSampleLoading() = AnalyzingSampleLoading;
+  const factory DoctorState.analyzingSampleSuccess(AnalysisResultModel result) = AnalyzingSampleSuccess;
+  const factory DoctorState.analyzingSampleError(String message) = AnalyzingSampleError;
+  const factory DoctorState.analyzingSampleCancelled() = AnalyzingSampleCancelled;  // <-- هنا
+
+  // Saving analysis result states
+  const factory DoctorState.savingAnalysisResultLoading() = SavingAnalysisResultLoading;
+  const factory DoctorState.savingAnalysisResultSuccess() = SavingAnalysisResultSuccess;
+  const factory DoctorState.savingAnalysisResultError(String message) = SavingAnalysisResultError;
 
 
 

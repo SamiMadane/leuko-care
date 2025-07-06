@@ -1,8 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:leuko_care/feature/chats/data/models/conversation_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:rxdart/rxdart.dart';
 import '../models/patient_model.dart';
 
 class PatientRepository {
@@ -25,7 +29,7 @@ class PatientRepository {
           .doc(patient.id)
           .set(patient.toJson());
     } catch (e) {
-      throw Exception("Error saving patient data: ${e.toString()}");
+      throw Exception('Error saving patient data: ${e.toString()}'.tr());
     }
   }
 
@@ -36,7 +40,7 @@ class PatientRepository {
           .doc(patient.id)
           .update(patient.toJson());
     } catch (e) {
-      throw Exception("Error updating patient data: ${e.toString()}");
+      throw Exception('Error updating patient data: ${e.toString()}'.tr());
     }
   }
 
@@ -44,7 +48,7 @@ class PatientRepository {
     try {
       await _firestore.collection('patients').doc(patientId).delete();
     } catch (e) {
-      throw Exception('Error deleting patient: $e');
+      throw Exception('Error deleting patient: $e'.tr());
     }
   }
 
@@ -71,7 +75,7 @@ class PatientRepository {
     if (response.statusCode == 200) {
       return result['secure_url']; // رابط الصورة المرفوعة
     } else {
-      throw Exception('Error uploading image: ${result['error']}');
+      throw Exception('Error uploading image: ${result['error']}'.tr());
     }
   }
 
@@ -93,15 +97,81 @@ class PatientRepository {
           await _firestore.collection('doctors').doc(doctorId).get();
       return DoctorModel.fromJson(docSnapshot.data()!);
     } catch (e) {
-      throw Exception('Error fetching doctor: $e');
+      throw Exception('Error fetching doctor: $e'.tr());
     }
   }
 
   Stream<PatientModel> getPatientByIdStream(String patientId) {
-    return FirebaseFirestore.instance
+    return _firestore
         .collection('patients')
         .doc(patientId)
         .snapshots()
         .map((doc) => PatientModel.fromJson(doc.data()!));
   }
+
+
+
+//   Future<void> updateFcmTokenIfNeeded() async {
+//   final user = FirebaseAuth.instance.currentUser;
+//   if (user == null) return;
+
+//   final token = await FirebaseMessaging.instance.getToken();
+//   if (token == null) return;
+
+//   final docRef = _firestore.collection('patients'.tr()).doc(user.uid);
+
+//   // تأكد من التحديث فقط إذا تغير التوكن
+//   final snapshot = await docRef.get();
+//   final existingToken = snapshot.data()?['fcmToken'.tr()];
+
+//   if (existingToken != token) {
+//     await docRef.set({'fcmToken'.tr(): token}, SetOptions(merge: true)); 
+//     print('✅ FCM token updated for patient.');
+//   } else {
+//     print('ℹ️ FCM token already up to date.');
+//   }
+// }
+
+Stream<Map<String, ConversationModel>> getConversationsForPatientStream(String patientId) {
+
+  final streamA = FirebaseFirestore.instance
+      .collection('conversations')
+      .where('participantAId', isEqualTo: patientId)
+      .snapshots();
+
+  final streamB = FirebaseFirestore.instance
+      .collection('conversations')
+      .where('participantBId', isEqualTo: patientId)
+      .snapshots();
+
+  return Rx.combineLatest2<QuerySnapshot, QuerySnapshot, Map<String, ConversationModel>>(
+    streamA,
+    streamB,
+    (snapshotA, snapshotB) {
+      final allDocs = [...snapshotA.docs, ...snapshotB.docs];
+
+      final Map<String, ConversationModel> map = {};
+
+      for (final doc in allDocs) {
+        try {
+          final data = doc.data() as Map<String, dynamic>;
+          final conv = ConversationModel.fromJson(data);
+
+          final doctorId = conv.participantAId == patientId
+              ? conv.participantBId
+              : conv.participantAId;
+
+          if (doctorId.isNotEmpty) {
+            map[doctorId] = conv;
+          }
+        } catch (e) {
+          print('Error parsing conversation: $e');
+          continue;
+        }
+      }
+      return map;
+    },
+  );
+}
+
 }

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -61,7 +63,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
           maxLines: null,
           keyboardType: TextInputType.multiline,
           decoration: InputDecoration(
-            hintText: "Type a message...",
+            hintText: 'Type a message...'.tr(),
             hintStyle: TextStyle(color: ColorsManager.gray),
             filled: true,
             fillColor: ColorsManager.moreLighterGray,

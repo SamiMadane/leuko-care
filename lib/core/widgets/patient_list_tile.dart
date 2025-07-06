@@ -40,7 +40,7 @@ class PatientListTile extends StatelessWidget {
       color: ColorsManager.moreLighterGray,
       child: InkWell(
          onTap: () async{
-            final shouldOpenChat = await context.pushNamed(
+            final selectedPatient = await context.pushNamed(
               Routes.patientDetailsScreen,
               arguments: {
               'patientId': patient.id,
@@ -49,8 +49,9 @@ class PatientListTile extends StatelessWidget {
               'userType':userType,
             },
             );
-            if (shouldOpenChat == true) {
-              context.read<DoctorCubit>().changeSelectedIndex(2);
+            if (selectedPatient != null && selectedPatient is PatientModel) {
+                context.read<DoctorCubit>().setPreSelectedPatient(selectedPatient);
+              context.read<DoctorCubit>().goToPage(1);
             }
           },
         child: Padding(

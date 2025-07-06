@@ -1,6 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leuko_care/feature/doctors/data/models/analysis_result_model.dart';
 import 'package:leuko_care/feature/doctors/data/models/doctor_model.dart';
+import 'package:leuko_care/feature/doctors/logic/cubit/doctor_cubit.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/sample_result_screen/ai_analysis_widget.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/sample_result_screen/confirmation_buttons_widget.dart';
 import 'package:leuko_care/feature/doctors/ui/widgets/doctor_user/sample_result_screen/patient_info_widget.dart';
@@ -29,7 +34,8 @@ class SampleResultScreen extends StatefulWidget {
     required this.diseaseType,
     required this.confidence,
     required this.aiMessage,
-    required this.sampleImageUrl, required this.doctor,
+    required this.sampleImageUrl,
+    required this.doctor,
   });
 
   @override
@@ -41,10 +47,12 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
   bool _hideButtons = false;
 
   String _getInitialDoctorMessage() {
-    if (widget.result == 'sick') {
-      return 'Important: Your test result shows signs of leukemia. Please visit the hospital for further examination as soon as possible.';
+    if (widget.result == 'sick'.tr()) {
+      return 'Important: Your test result shows signs of leukemia. Please visit the hospital for further examination as soon as possible.'
+          .tr();
     } else {
-      return 'Congratulations! Your test result is clear. Please continue maintaining a healthy lifestyle.';
+      return 'Congratulations! Your test result is clear. Please continue maintaining a healthy lifestyle.'
+          .tr();
     }
   }
 
@@ -55,7 +63,13 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
     setState(() => _hideButtons = false);
 
     if (image != null) {
-      showPreviewDialog(context, image, widget.doctor, widget.patient, _getInitialDoctorMessage());
+      showPreviewDialog(
+        context,
+        image,
+        widget.doctor,
+        widget.patient,
+        _getInitialDoctorMessage(),
+      );
     }
   }
 
@@ -63,7 +77,18 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Result for ${widget.patient.name}', style: getBoldTextStyle(fontSize: FontSizeManager.s20, color: ColorsManager.darkBlue)),
+        title: Row(
+          children: [
+            Text(
+              'result_for_patient'.tr(args: [widget.patient.name]),
+
+              style: getMediumTextStyle(
+                fontSize: FontSizeManager.s20,
+                color: ColorsManager.darkBlue,
+              ),
+            ),
+          ],
+        ),
         backgroundColor: ColorsManager.white,
       ),
       body: SingleChildScrollView(
@@ -78,16 +103,28 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: ColorsManager.primaryColor, width: 2),
+                  border: Border.all(
+                    color: ColorsManager.primaryColor,
+                    width: 2,
+                  ),
                   boxShadow: [
-                    BoxShadow(color: Colors.grey.shade300, blurRadius: 8, offset: const Offset(0, 4)),
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     patientInfoWidget(widget.patient),
-                    aiAnalysisWidget(widget.result, widget.diseaseType, widget.confidence, widget.aiMessage),
+                    aiAnalysisWidget(
+                      widget.result.tr(),
+                      widget.diseaseType.tr(),
+                      widget.confidence,
+                      widget.aiMessage.tr(),
+                    ),
                     sampleImageWidget(widget.sampleImageUrl),
                   ],
                 ),
@@ -95,17 +132,54 @@ class _SampleResultScreenState extends State<SampleResultScreen> {
             ),
             if (!_hideButtons) ...[
               SizedBox(height: HeightManager.h20),
-              confirmationButtonsWidget(() {
-                // Update patient data
-              }, () {
-                Navigator.pop(context);
-              }),
+              confirmationButtonsWidget(
+                onConfirm: () {
+                  final resultModel = AnalysisResultModel(
+                    result: widget.result,
+                    diseaseType: widget.diseaseType,
+                    confidence: widget.confidence ?? 0,
+                    aiMessage: widget.aiMessage,
+                    sampleImageUrl: widget.sampleImageUrl,
+                  );
+
+                  context.read<DoctorCubit>().confirmAnalysisResult(
+                    widget.patient,
+                    resultModel,
+                    widget.doctor.id!,
+                    widget.doctor.name,
+                  );
+                },
+                onCancel: () {
+                  Navigator.pop(context);
+                },
+              ),
               SizedBox(height: HeightManager.h20),
-              ElevatedButton.icon(
-                onPressed: _captureAndPreview,
-                icon: Icon(Icons.send, color: ColorsManager.white),
-                label: Text("Send to Patient", style: getMediumTextStyle(fontSize: FontSizeManager.s14, color: ColorsManager.white)),
-                style: ElevatedButton.styleFrom(backgroundColor: ColorsManager.primaryColor),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: WidthManager.w14),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: HeightManager.h44,
+                  child: ElevatedButton.icon(
+                    onPressed: _captureAndPreview,
+                    icon: Icon(Icons.send, color: ColorsManager.white),
+                    label: Text(
+                      'Send to Patient'.tr(),
+                      style: getMediumTextStyle(
+                        fontSize: FontSizeManager.s14,
+                        color: ColorsManager.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorsManager.primaryColor,
+                      padding: EdgeInsets.symmetric(
+                        vertical: HeightManager.h12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(RadiusManager.r16),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ],

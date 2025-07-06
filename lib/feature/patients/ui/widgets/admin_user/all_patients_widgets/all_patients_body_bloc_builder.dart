@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leuko_care/core/resources/colors_manager.dart';
@@ -26,7 +28,7 @@ class AllPatientsBodyBlocBuilder extends StatelessWidget {
             return _buildPatientsLoadingWidget();
 
           case GetPatientsByDoctorIdStateSuccess():
-            return AllPaitentListView(patients: state.patients,doctorId: doctorId,doctorName: doctorName,);
+            return AllPaitentListView(patients: state.patients,doctorId: doctorId,doctorName: doctorName,userType: 'admin'.tr(),);
 
           case GetPatientsByDoctorIdStateError():
             return _buildPatientsErrorWidget(message: state.message);
