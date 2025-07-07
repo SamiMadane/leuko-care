@@ -6,7 +6,7 @@ import 'package:leuko_care/feature/onboarding/logic/onboarding_cubit.dart';
 import 'package:leuko_care/feature/onboarding/ui/views/onboarding_screen.dart';
 import 'package:leuko_care/core/routes/routes.dart';
 
-import '../test_helpers.dart';
+import '../../test_helpers.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 // Fake class to provide a fallback instance of Route<dynamic> for mocktail

@@ -55,62 +55,64 @@ class UserSelectionScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'User Selection'.tr(),
-                        style: getBoldTextStyle(
-                          fontSize: FontSizeManager.s26,
-                          color: ColorsManager.darkBlue,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          'User Selection'.tr(),
+                          style: getBoldTextStyle(
+                            fontSize: FontSizeManager.s26,
+                            color: ColorsManager.darkBlue,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: HeightManager.h10),
-                      Text(
-                        'Please select your role to continue'.tr(),
-                        style: getSemiBoldTextStyle(
-                          fontSize: FontSizeManager.s16,
-                          color: ColorsManager.darkBlue,
+                        SizedBox(height: HeightManager.h10),
+                        Text(
+                          'Please select your role to continue'.tr(),
+                          style: getSemiBoldTextStyle(
+                            fontSize: FontSizeManager.s16,
+                            color: ColorsManager.darkBlue,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: HeightManager.h40),
-                      buildSelectionCard(
-                        context,
-                        imagePath: AssetsManager.userSelectionAdminImage,
-                        label: 'ADMIN'.tr(),
-                        onTap: () {
-                          context.pushNamed(
-                            Routes.loginScreen,
-                            arguments: 'admin',
-                          );
-                        },
-                      ),
-                      SizedBox(height: HeightManager.h30),
-                      buildSelectionCard(
-                        context,
-                        imagePath: AssetsManager.doctorImage,
-                        label: 'DOCTOR'.tr(),
-                        onTap: () {
-                          context.pushNamed(
-                            Routes.loginScreen,
-                            arguments: 'doctor',
-                          );
-                        },
-                      ),
-                      SizedBox(height: HeightManager.h30),
-                      buildSelectionCard(
-                        context,
-                        imagePath: AssetsManager.patientImage,
-                        label: 'PATIENT'.tr(),
-                        onTap: () {
-                          context.pushNamed(
-                            Routes.loginScreen,
-                            arguments: 'patient',
-                          );
-                        },
-                        positionedRight: WidthManager.w10,
-                        positionedBottom: HeightManager.h4,
-                      ),
-                    ],
+                        SizedBox(height: HeightManager.h40),
+                        buildSelectionCard(
+                          context,
+                          imagePath: AssetsManager.userSelectionAdminImage,
+                          label: 'ADMIN'.tr(),
+                          onTap: () {
+                            context.pushNamed(
+                              Routes.loginScreen,
+                              arguments: 'admin',
+                            );
+                          },
+                        ),
+                        SizedBox(height: HeightManager.h30),
+                        buildSelectionCard(
+                          context,
+                          imagePath: AssetsManager.doctorImage,
+                          label: 'DOCTOR'.tr(),
+                          onTap: () {
+                            context.pushNamed(
+                              Routes.loginScreen,
+                              arguments: 'doctor',
+                            );
+                          },
+                        ),
+                        SizedBox(height: HeightManager.h30),
+                        buildSelectionCard(
+                          context,
+                          imagePath: AssetsManager.patientImage,
+                          label: 'PATIENT'.tr(),
+                          onTap: () {
+                            context.pushNamed(
+                              Routes.loginScreen,
+                              arguments: 'patient',
+                            );
+                          },
+                          positionedRight: WidthManager.w10,
+                          positionedBottom: HeightManager.h4,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

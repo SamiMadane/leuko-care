@@ -19,6 +19,7 @@ class LanguageSwitcher extends StatelessWidget {
           vertical: HeightManager.h10,
         ),
         child: GestureDetector(
+          key: const Key('language_switcher_gesture_detector'),
           onTap: () {
             final currentLocale = context.locale;
             final newLocale =
