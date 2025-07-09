@@ -112,6 +112,6 @@ class LoginScreen extends StatelessWidget {
 
 void validateThenDoLogin(BuildContext context, String userType) {
   if (context.read<AuthCubit>().formKey.currentState!.validate()) {
-    context.read<AuthCubit>().checkAdmin(userType);
+    context.read<AuthCubit>().login(userType);
   }
 }

@@ -28,8 +28,9 @@ class AuthCubit extends Cubit<AuthState> {
     },
   };
 
-  void checkAdmin(String userType) async {
-    emit(const LoginLoading());
+  void login(String userType) async {
+    emit(LoginLoading());
+
     final result = await loginRepository.login(
       emailController.text,
       passwordController.text,

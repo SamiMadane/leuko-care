@@ -7,6 +7,7 @@ import 'package:leuko_care/core/networking/operation_result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
+
 class MockUser extends Mock implements User {}
 
 void main() {
@@ -21,51 +22,42 @@ void main() {
   });
 
   test('initial state is LoginInitial', () {
-    // expect(cubit.state, isA<LoginInitial>());
+    expect(cubit.state, isA<LoginInitial>());
   });
 
-  group('checkAdmin', () {
+  group('login', () {
     test('emits LoginSuccess on successful login', () async {
-      when(() => mockRepository.login(any(), any(), any()))
-          .thenAnswer((_) async => OperationResult.success(mockUser));
+      when(
+        () => mockRepository.login(any(), any(), any()),
+      ).thenAnswer((_) async => OperationResult.success(mockUser));
 
       cubit.emailController.text = 'test@example.com';
       cubit.passwordController.text = 'password';
 
-      cubit.checkAdmin('doctor');
+      cubit.login('doctor');
 
-      await expectLater(
-        cubit.stream,
-        emitsInOrder([
-          isA<LoginLoading>(),
-          isA<LoginSuccess>(),
-        ]),
-      );
+      await expectLater(cubit.stream, emitsInOrder([isA<LoginSuccess>()]));
     });
 
     test('emits LoginError on login failure', () async {
-      when(() => mockRepository.login(any(), any(), any()))
-          .thenAnswer((_) async => OperationResult.failure('Error'));
+      when(
+        () => mockRepository.login(any(), any(), any()),
+      ).thenAnswer((_) async => OperationResult.failure('Error'));
 
       cubit.emailController.text = 'test@example.com';
       cubit.passwordController.text = 'wrongpassword';
 
-      cubit.checkAdmin('doctor');
+      cubit.login('doctor');
 
-      await expectLater(
-        cubit.stream,
-        emitsInOrder([
-          isA<LoginLoading>(),
-          isA<LoginError>(),
-        ]),
-      );
+      await expectLater(cubit.stream, emitsInOrder([isA<LoginError>()]));
     });
   });
 
   group('resetPassword', () {
     test('emits ResetPasswordSuccess on success', () async {
-      when(() => mockRepository.resetPassword(any()))
-          .thenAnswer((_) async => OperationResult.success(null));
+      when(
+        () => mockRepository.resetPassword(any()),
+      ).thenAnswer((_) async => OperationResult.success(null));
 
       await cubit.resetPassword('test@example.com');
 
@@ -73,8 +65,9 @@ void main() {
     });
 
     test('emits ResetPasswordFailure on failure', () async {
-      when(() => mockRepository.resetPassword(any()))
-          .thenAnswer((_) async => OperationResult.failure('Error'));
+      when(
+        () => mockRepository.resetPassword(any()),
+      ).thenAnswer((_) async => OperationResult.failure('Error'));
 
       await cubit.resetPassword('wrong@example.com');
 
@@ -84,8 +77,9 @@ void main() {
 
   group('signInWithGoogle', () {
     test('emits LoginSuccess on success', () async {
-      when(() => mockRepository.signInWithGoogle(any()))
-          .thenAnswer((_) async => OperationResult.success(mockUser));
+      when(
+        () => mockRepository.signInWithGoogle(any()),
+      ).thenAnswer((_) async => OperationResult.success(mockUser));
 
       await cubit.signInWithGoogle('doctor');
 
@@ -93,8 +87,9 @@ void main() {
     });
 
     test('emits LoginError on failure', () async {
-      when(() => mockRepository.signInWithGoogle(any()))
-          .thenAnswer((_) async => OperationResult.failure('Error'));
+      when(
+        () => mockRepository.signInWithGoogle(any()),
+      ).thenAnswer((_) async => OperationResult.failure('Error'));
 
       await cubit.signInWithGoogle('doctor');
 
@@ -104,7 +99,9 @@ void main() {
 
   group('signOut', () {
     test('emits SignedOutStateSuccess on success', () async {
-      when(() => mockRepository.signOut()).thenAnswer((_) async => Future.value());
+      when(
+        () => mockRepository.signOut(),
+      ).thenAnswer((_) async => Future.value());
 
       await cubit.signOut();
 
@@ -117,6 +114,25 @@ void main() {
       await cubit.signOut();
 
       expect(cubit.state, isA<SignedOutStateError>());
+    });
+  });
+
+  group('updateLanguageInFirestore', () {
+    test('should not call updateUserLanguage for admin', () async {
+      await cubit.updateLanguageInFirestore(userId: '123', userType: 'admin');
+      verifyNever(() => mockRepository.updateUserLanguage(any(), any()));
+    });
+
+    test('should call updateUserLanguage for doctor or patient', () async {
+      when(
+        () => mockRepository.updateUserLanguage(any(), any()),
+      ).thenAnswer((_) async => Future.value());
+
+      await cubit.updateLanguageInFirestore(userId: '123', userType: 'doctor');
+
+      verify(
+        () => mockRepository.updateUserLanguage('123', 'doctor'),
+      ).called(1);
     });
   });
 }

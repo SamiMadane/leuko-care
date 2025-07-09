@@ -4,7 +4,7 @@ part 'auth_state.freezed.dart';
 
 @freezed
 class AuthState<T> with _$AuthState<T> {
-  const factory AuthState.initial() = _LoginInitial;
+  const factory AuthState.initial() = LoginInitial;
 
   const factory AuthState.loginLoading() = LoginLoading;
   const factory AuthState.loginSuccess(User user, String userType) =
