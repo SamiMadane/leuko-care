@@ -13,13 +13,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthRepository {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirestoreService _firestoreService = FirestoreService();
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth;
+  final FirestoreService _firestoreService;
+  final GoogleSignIn _googleSignIn;
+  final FirebaseFirestore _firestore;
+  final FirebaseMessaging _firebaseMessaging;
+
+  AuthRepository({
+    FirebaseAuth? auth,
+    FirestoreService? firestoreService,
+    GoogleSignIn? googleSignIn,
+    FirebaseFirestore? firestore,
+    FirebaseMessaging? firebaseMessaging,
+  }) : _auth = auth ?? FirebaseAuth.instance,
+       _firestoreService = firestoreService ?? FirestoreService(),
+       _googleSignIn = googleSignIn ?? GoogleSignIn(),
+       _firestore = firestore ?? FirebaseFirestore.instance,
+       _firebaseMessaging = firebaseMessaging ?? FirebaseMessaging.instance;
 
   Future<void> saveFcmToken(String uid, String userType, String token) async {
     print('Saving FCM token for user: $uid token: $token');
-    final docRef = FirebaseFirestore.instance.collection('fcmTokens').doc(uid);
+    final docRef = _firestore.collection('fcmTokens').doc(uid);
 
     try {
       final docSnapshot = await docRef.get();
@@ -60,7 +74,7 @@ class AuthRepository {
       print('in repo userType = $userType');
       print('in repo uid = $uid');
 
-      final docRef = await FirebaseFirestore.instance
+      final docRef = await _firestore
           .collection(userType == 'doctor' ? 'doctors' : 'patients')
           .doc(uid);
       final docSnapshot = await docRef.get();
@@ -73,7 +87,7 @@ class AuthRepository {
 
   Future<OperationResult<void>> resetPassword(String email) async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await _auth.sendPasswordResetEmail(email: email);
       return OperationResult.success(null);
     } on FirebaseAuthException catch (e) {
       final errorMessage = FirebaseErrorHandler.handle(e);
@@ -118,7 +132,7 @@ class AuthRepository {
               );
               if (doc.exists) {
                 final correctType = doc['userType'] ?? type;
-                await FirebaseAuth.instance.signOut();
+                await _auth.signOut();
                 return OperationResult.failure(
                   tr(
                     'login_in_the_wrong_page',
@@ -128,15 +142,15 @@ class AuthRepository {
               }
             }
 
-            await FirebaseAuth.instance.signOut();
+            await _auth.signOut();
             return OperationResult.failure(
-              'This user is not registered on our servers.'.tr(),
+              'user_not_registered'.tr(),
             );
           }
 
           final storedUserType = userDoc['userType'] ?? '';
           if (storedUserType != userType) {
-            await FirebaseAuth.instance.signOut();
+            await _auth.signOut();
             return OperationResult.failure(
               tr(
                 'login_in_the_wrong_page',
@@ -148,7 +162,7 @@ class AuthRepository {
           await SharedPrefHelper.setData('userType', storedUserType);
           await SharedPrefHelper.setData('uid', user.uid);
           // حفظ التوكن فوراً بعد تسجيل الدخول
-          final token = await FirebaseMessaging.instance.getToken();
+          final token = await _firebaseMessaging.getToken();
           if (token != null) {
             print('Saving FCM token after login: $token');
             await saveFcmToken(user.uid, storedUserType, token);
@@ -158,6 +172,7 @@ class AuthRepository {
             authRepository: this,
             uid: user.uid,
             userType: storedUserType,
+            messaging: _firebaseMessaging,
           );
           await updateUserLanguage(user.uid, storedUserType);
 
@@ -171,7 +186,9 @@ class AuthRepository {
     } on FirebaseAuthException catch (e) {
       final errorMessage = FirebaseErrorHandler.handle(e);
       return OperationResult.failure(errorMessage);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('Unexpected error in login: $e');
+      print(stackTrace);
       final errorMessage = FirebaseErrorHandler.handle(e);
       return OperationResult.failure(errorMessage);
     }
@@ -224,7 +241,7 @@ class AuthRepository {
               );
               if (doc.exists) {
                 final correctType = doc['userType'] ?? type;
-                await FirebaseAuth.instance.signOut();
+                await _auth.signOut();
                 return OperationResult.failure(
                   tr(
                     'login_in_the_wrong_page',
@@ -234,7 +251,7 @@ class AuthRepository {
               }
             }
 
-            await FirebaseAuth.instance.signOut();
+            await _auth.signOut();
             return OperationResult.failure(
               'This user is not registered on our servers.'.tr(),
             );
@@ -253,7 +270,7 @@ class AuthRepository {
 
           await SharedPrefHelper.setData('userType', storedUserType);
           await SharedPrefHelper.setData('uid', user.uid);
-          final token = await FirebaseMessaging.instance.getToken();
+          final token = await _firebaseMessaging.getToken();
           if (token != null) {
             print('Saving FCM token after login: $token');
             await saveFcmToken(user.uid, storedUserType, token);
@@ -262,6 +279,7 @@ class AuthRepository {
             authRepository: this,
             uid: user.uid,
             userType: storedUserType,
+            messaging: _firebaseMessaging,
           );
           await updateUserLanguage(user.uid, storedUserType);
 
@@ -286,13 +304,10 @@ class AuthRepository {
 
       // ignore: unnecessary_null_comparison
       if (uid != null && uid.isNotEmpty) {
-        await FirebaseFirestore.instance
-            .collection('fcmTokens')
-            .doc(uid)
-            .delete();
+        await _firestore.collection('fcmTokens').doc(uid).delete();
       }
 
-      await FirebaseAuth.instance.signOut();
+      await _auth.signOut();
       await SharedPrefHelper.clearAllData();
     } catch (e) {
       throw Exception('Error signing out: $e'.tr());
@@ -301,18 +316,15 @@ class AuthRepository {
 
   Future<OperationResult<User?>> _handleEmailVerification(User user) async {
     final prefs = await SharedPreferences.getInstance();
-    bool emailSent = prefs.getBool('email_sent'.tr()) ?? false;
+    bool emailSent = prefs.getBool('email_sent') ?? false;
 
     if (!emailSent) {
       await user.sendEmailVerification();
-      await prefs.setBool('email_sent'.tr(), true);
-      return OperationResult.failure(
-        'Please verify your email. A verification link has been sent.'.tr(),
-      );
+      await prefs.setBool('email_sent', true);
+      return OperationResult.failure('error_email_verification_sent'.tr());
     } else {
       return OperationResult.failure(
-        'Please verify your email. A verification link has already been sent.'
-            .tr(),
+        'error_email_verification_already_sent'.tr(),
       );
     }
   }

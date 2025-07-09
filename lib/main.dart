@@ -53,7 +53,7 @@ void main() async {
     ),
   );
    
-    await NotificationService.init();
+    await NotificationService.init(messaging: FirebaseMessaging.instance);
      final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
        final userType = await SharedPrefHelper.getString('userType');
   if (initialMessage != null) {
