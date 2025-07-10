@@ -44,9 +44,7 @@ class FakeAuthCredential extends Fake implements AuthCredential {}
 
 class MockInternetConnection extends Mock implements InternetConnection {}
 
-extension TrMock on String {
-  String tr() => this;
-}
+
 
 void main() {
   setUpAll(() {
