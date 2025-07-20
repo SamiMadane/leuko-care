@@ -207,6 +207,8 @@
   "No doctors found": "No doctors found",
   "No matching doctors.": "No matching doctors.",
   "No patients assigned": "No patients assigned",
+  "error_email_verification_sent": "Please verify your email. A verification link has been sent.",
+  "error_email_verification_already_sent": "Please verify your email. A verification link has already been sent.",
   "No patients available for chat": "No patients available for chat",
   "No valid image data provided": "No valid image data provided",
   "Not Examined": "Not Examined",
@@ -237,8 +239,8 @@
   "Please enter a valid password": "Please enter a valid password",
   "Please select gender": "Please select gender",
   "Please select your role to continue": "Please select your role to continue",
-  "Please verify your email. A verification link has already been sent.": "Please verify your email. A verification link has already been sent.",
-  "Please verify your email. A verification link has been sent.": "Please verify your email. A verification link has been sent.",
+  "error_email_verification_already_sent.": "Please verify your email. A verification link has already been sent.",
+  "error_email_verification_sent.": "Please verify your email. A verification link has been sent.",
   "Preview Before Sending": "Preview Before Sending",
   "Professional Info": "Professional Info",
   "Profile": "Profile",
@@ -269,7 +271,7 @@
   "The patient has been added successfully.": "The patient has been added successfully.",
   "The patient has been deleted successfully.": "The patient has been deleted successfully.",
   "There are currently no patients assigned to this doctor. You can add patients or select a different doctor.": "There are currently no patients assigned to this doctor. You can add patients or select a different doctor.",
-  "This user is not registered on our servers.": "This user is not registered on our servers.",
+  "user_not_registered": "This user is not registered on our servers.",
   "Tips for Managing Leukemia": "Tips for Managing Leukemia",
   "There are no patients assigned to you yet": "There are no patients assigned to you yet",
   "There are no patients added yet. Try adding a new patient": "There are no patients added yet. Try adding a new patient",
@@ -443,5 +445,4 @@
   "send_link": "Send Link",
   "forgot_password": "Forgot Password?",
   "enter_email_to_reset": "Enter your email to get the reset link."
-
 }

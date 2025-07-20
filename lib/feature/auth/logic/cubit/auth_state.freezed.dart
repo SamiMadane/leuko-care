@@ -61,7 +61,7 @@ mixin _$AuthState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -80,7 +80,7 @@ mixin _$AuthState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -94,7 +94,7 @@ mixin _$AuthState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -151,7 +151,7 @@ class __$$LoginInitialImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$LoginInitialImpl<T> implements _LoginInitial<T> {
+class _$LoginInitialImpl<T> implements LoginInitial<T> {
   const _$LoginInitialImpl();
 
   @override
@@ -226,7 +226,7 @@ class _$LoginInitialImpl<T> implements _LoginInitial<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -248,7 +248,7 @@ class _$LoginInitialImpl<T> implements _LoginInitial<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -265,7 +265,7 @@ class _$LoginInitialImpl<T> implements _LoginInitial<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -284,8 +284,8 @@ class _$LoginInitialImpl<T> implements _LoginInitial<T> {
   }
 }
 
-abstract class _LoginInitial<T> implements AuthState<T> {
-  const factory _LoginInitial() = _$LoginInitialImpl<T>;
+abstract class LoginInitial<T> implements AuthState<T> {
+  const factory LoginInitial() = _$LoginInitialImpl<T>;
 }
 
 /// @nodoc
@@ -384,7 +384,7 @@ class _$LoginLoadingImpl<T> implements LoginLoading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -406,7 +406,7 @@ class _$LoginLoadingImpl<T> implements LoginLoading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -423,7 +423,7 @@ class _$LoginLoadingImpl<T> implements LoginLoading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -579,7 +579,7 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -601,7 +601,7 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -618,7 +618,7 @@ class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -774,7 +774,7 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -796,7 +796,7 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -813,7 +813,7 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -943,7 +943,7 @@ class _$SignedOutStateLoadingImpl<T> implements SignedOutStateLoading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -965,7 +965,7 @@ class _$SignedOutStateLoadingImpl<T> implements SignedOutStateLoading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -982,7 +982,7 @@ class _$SignedOutStateLoadingImpl<T> implements SignedOutStateLoading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -1104,7 +1104,7 @@ class _$SignedOutStateSuccessImpl<T> implements SignedOutStateSuccess<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -1126,7 +1126,7 @@ class _$SignedOutStateSuccessImpl<T> implements SignedOutStateSuccess<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -1143,7 +1143,7 @@ class _$SignedOutStateSuccessImpl<T> implements SignedOutStateSuccess<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -1290,7 +1290,7 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -1312,7 +1312,7 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -1329,7 +1329,7 @@ class _$SignedOutStateErrorImpl<T> implements SignedOutStateError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -1459,7 +1459,7 @@ class _$ResetPasswordLoadingImpl<T> implements ResetPasswordLoading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -1481,7 +1481,7 @@ class _$ResetPasswordLoadingImpl<T> implements ResetPasswordLoading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -1498,7 +1498,7 @@ class _$ResetPasswordLoadingImpl<T> implements ResetPasswordLoading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -1646,7 +1646,7 @@ class _$ResetPasswordSuccessImpl<T> implements ResetPasswordSuccess<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -1668,7 +1668,7 @@ class _$ResetPasswordSuccessImpl<T> implements ResetPasswordSuccess<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -1685,7 +1685,7 @@ class _$ResetPasswordSuccessImpl<T> implements ResetPasswordSuccess<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,
@@ -1842,7 +1842,7 @@ class _$ResetPasswordFailureImpl<T> implements ResetPasswordFailure<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoginInitial<T> value) initial,
+    required TResult Function(LoginInitial<T> value) initial,
     required TResult Function(LoginLoading<T> value) loginLoading,
     required TResult Function(LoginSuccess<T> value) loginSuccess,
     required TResult Function(LoginError<T> value) loginError,
@@ -1864,7 +1864,7 @@ class _$ResetPasswordFailureImpl<T> implements ResetPasswordFailure<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoginInitial<T> value)? initial,
+    TResult? Function(LoginInitial<T> value)? initial,
     TResult? Function(LoginLoading<T> value)? loginLoading,
     TResult? Function(LoginSuccess<T> value)? loginSuccess,
     TResult? Function(LoginError<T> value)? loginError,
@@ -1881,7 +1881,7 @@ class _$ResetPasswordFailureImpl<T> implements ResetPasswordFailure<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoginInitial<T> value)? initial,
+    TResult Function(LoginInitial<T> value)? initial,
     TResult Function(LoginLoading<T> value)? loginLoading,
     TResult Function(LoginSuccess<T> value)? loginSuccess,
     TResult Function(LoginError<T> value)? loginError,

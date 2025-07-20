@@ -19,17 +19,22 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class NotificationService {
-  static final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  
   static final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   static Map<String, dynamic>? _pendingNotificationData;
   static String? _pendingUserType;
 
+
+
   static void listenToTokenRefresh({
     required AuthRepository authRepository,
     required String uid,
     required String userType,
+        FirebaseMessaging? messaging,
+
   }) {
+       final _messaging = messaging ?? FirebaseMessaging.instance;
     _messaging.onTokenRefresh.listen((newToken) {
       print('FCM Token refreshed: $newToken');
       authRepository.saveFcmToken(uid, userType, newToken);
@@ -45,7 +50,8 @@ class NotificationService {
     importance: Importance.high,
   );
 
-  static Future<void> init() async {
+  static Future<void> init({FirebaseMessaging? messaging}) async {
+       final _messaging = messaging ?? FirebaseMessaging.instance;
     // 1. طلب الأذونات
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,

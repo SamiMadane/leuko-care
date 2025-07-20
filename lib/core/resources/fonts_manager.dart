@@ -4,7 +4,7 @@ import 'package:leuko_care/core/helpers/shared_pref_helper.dart';
 import '../util/size_util.dart';
 
 class FontFamilyManager {
-  static late final String _languageCode;
+  static String _languageCode = 'en';
 
   /// يُستدعى مرة واحدة فقط (مثلاً في main) لتحديد اللغة.
   static Future<void> init() async {
@@ -12,6 +12,9 @@ class FontFamilyManager {
     _languageCode = locale;
   }
 
+  static void setLanguageCodeForTest(String code) {
+    _languageCode = code;
+  }
   static String getFontFamily() {
     return _languageCode == 'ar' ? tajawal : roboto;
   }

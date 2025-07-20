@@ -8,6 +8,7 @@ import 'package:leuko_care/core/resources/fonts_manager.dart';
 import 'package:leuko_care/core/resources/sizes_util_manager.dart';
 import 'package:leuko_care/core/resources/styles_manager.dart';
 import 'package:leuko_care/feature/auth/logic/cubit/auth_cubit.dart';
+
 class GoogleAuth extends StatelessWidget {
   final String userType;
   const GoogleAuth({super.key, required this.userType});
@@ -39,6 +40,7 @@ class GoogleAuth extends StatelessWidget {
           },
           child: Container(
             height: HeightManager.h50,
+            width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: WidthManager.w16),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -52,23 +54,27 @@ class GoogleAuth extends StatelessWidget {
                 ),
               ],
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  AssetsManager.googleImage,
-                  width: WidthManager.w24,
-                  height: WidthManager.w24,
-                ),
-                SizedBox(width: WidthManager.w10),
-                Text(
-                  'Sign in with Google'.tr(),
-                  style: getMediumTextStyle(
-                    fontSize: FontSizeManager.s14,
-                    color: ColorsManager.black,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AssetsManager.googleImage,
+                    width: WidthManager.w24,
+                    height: WidthManager.w24,
                   ),
-                ),
-              ],
+                  SizedBox(width: WidthManager.w10),
+                  Text(
+                    'Sign in with Google'.tr(),
+                    style: getMediumTextStyle(
+                      fontSize: FontSizeManager.s14,
+                      color: ColorsManager.black,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
